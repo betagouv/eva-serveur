@@ -1,5 +1,7 @@
 module Sirene
   class Client
+    class Indisponible < StandardError; end
+
     BASE_URL = ENV.fetch("SIRENE_API_URL")
 
     def recherche(siret)
@@ -8,12 +10,11 @@ module Sirene
       url = "#{BASE_URL}/search?q=#{siret}"
       reponse = Typhoeus.get(url, headers: headers)
 
-      return nil unless reponse.success?
+      raise "réponse HTTP #{reponse.code}" unless reponse.success?
 
       JSON.parse(reponse.body)
-    rescue JSON::ParserError, StandardError => e
-      Rails.logger.error("Erreur lors de la recherche SIRET #{siret}: #{e.message}")
-      nil
+    rescue StandardError => e
+      raise Indisponible, e.message
     end
 
     private

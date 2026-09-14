@@ -104,23 +104,38 @@ describe Sirene::Client, type: :lib do
         ).and_return(tr)
       end
 
-      it "retourne nil" do
-        expect(client.recherche(siret)).to be_nil
+      it "lève Sirene::Client::Indisponible" do
+        expect { client.recherche(siret) }.to raise_error(Sirene::Client::Indisponible)
       end
     end
 
-    context "quand l'API timeout" do
+    context "quand l'API retourne une erreur 403" do
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive_messages(success?: false, timed_out?: true)
+        allow(tr).to receive_messages(success?: false, code: 403, body: "Forbidden")
         allow(Typhoeus).to receive(:get).with(
           url,
           hash_including(headers: hash_including("Accept" => "application/json"))
         ).and_return(tr)
       end
 
-      it "retourne nil" do
-        expect(client.recherche(siret)).to be_nil
+      it "lève Sirene::Client::Indisponible" do
+        expect { client.recherche(siret) }.to raise_error(Sirene::Client::Indisponible)
+      end
+    end
+
+    context "quand l'API timeout" do
+      before do
+        tr = Typhoeus::Response.new
+        allow(tr).to receive_messages(success?: false, timed_out?: true, code: 0)
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Accept" => "application/json"))
+        ).and_return(tr)
+      end
+
+      it "lève Sirene::Client::Indisponible" do
+        expect { client.recherche(siret) }.to raise_error(Sirene::Client::Indisponible)
       end
     end
 
@@ -134,9 +149,8 @@ describe Sirene::Client, type: :lib do
         ).and_return(tr)
       end
 
-      it "retourne nil et log l'erreur" do
-        expect(Rails.logger).to receive(:error).with(/Erreur lors de la recherche SIRET/)
-        expect(client.recherche(siret)).to be_nil
+      it "lève Sirene::Client::Indisponible" do
+        expect { client.recherche(siret) }.to raise_error(Sirene::Client::Indisponible)
       end
     end
 

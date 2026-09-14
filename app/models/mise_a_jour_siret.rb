@@ -10,6 +10,11 @@ class MiseAJourSiret
     siret_valide = verifie(donnees_api)
     met_a_jour(siret_valide, donnees_api)
     siret_valide
+  rescue Sirene::Client::Indisponible => e
+    Rails.logger.error("Vérification SIRET #{@structure.siret} indisponible: #{e.message}")
+    @structure.verification_siret_indisponible = true
+    met_a_jour(false, nil)
+    false
   end
 
   private

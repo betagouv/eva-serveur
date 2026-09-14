@@ -322,6 +322,49 @@ describe Structure, type: :model do
           expect(structure.statut_siret).to be false
         end
       end
+
+      context "quand l'API SIRENE est indisponible (réseau, timeout, 403...)" do
+        before do
+          allow(MiseAJourSiret).to receive(:new) do |structure|
+            mise_a_jour = instance_double(MiseAJourSiret)
+            allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
+              structure.statut_siret = false
+              structure.date_verification_siret = nil
+              structure.verification_siret_indisponible = true
+              false
+            end
+            mise_a_jour
+          end
+        end
+
+        context "pour un superadmin" do
+          before do
+            compte_superadmin = instance_double(Compte, superadmin?: true)
+            structure.current_ability = instance_double(Ability, compte: compte_superadmin)
+          end
+
+          it "n'ajoute pas d'erreur sur le SIRET" do
+            structure.save
+            expect(structure.errors[:siret]).to be_blank
+          end
+
+          it "permet la création malgré le SIRET non vérifiable" do
+            expect(structure.save).to be true
+          end
+        end
+
+        context "pour un utilisateur non superadmin" do
+          it "ajoute une erreur spécifique de vérification impossible sur le SIRET" do
+            structure.save
+            message_erreur = I18n.t("errors.attributes.siret.verification_indisponible")
+            expect(structure.errors[:siret]).to include(message_erreur)
+          end
+
+          it "ne permet pas la création de la structure" do
+            expect(structure.save).to be false
+          end
+        end
+      end
     end
 
     context "lors de la mise à jour d'une structure existante" do

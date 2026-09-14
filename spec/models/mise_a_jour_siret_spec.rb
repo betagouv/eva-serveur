@@ -329,6 +329,28 @@ RSpec.describe MiseAJourSiret, type: :model do
       end
     end
 
+    context "quand l'API SIRENE est indisponible (réseau, timeout, 403...)" do
+      before do
+        allow(client_sirene).to receive(:recherche)
+          .with("12345678901234")
+          .and_raise(Sirene::Client::Indisponible, "réponse HTTP 403")
+      end
+
+      it "met le statut SIRET à false" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.statut_siret).to be false
+      end
+
+      it "marque la structure comme non vérifiable" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.verification_siret_indisponible).to be true
+      end
+
+      it "retourne false" do
+        expect(mise_a_jour.verifie_et_met_a_jour).to be false
+      end
+    end
+
     context "quand le SIRET est vide" do
       let(:structure) { build(:structure, siret: nil) }
 

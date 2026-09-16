@@ -77,8 +77,9 @@ namespace :reviewapp do
     cree_les_comptes structure_eva
     cree_campagnes_socio
 
+    mot_de_passe_chiffre = ENV.fetch("MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE")
     Compte.find_each do |compte|
-      compte.encrypted_password = "$2a$11$TE.U8c5Rka9PqDk5uL31xePkHnlp0EYsY7RuDyuhJEODObxoNGq/y"
+      compte.encrypted_password = mot_de_passe_chiffre
       compte.save!(validate: false)
     end
   end

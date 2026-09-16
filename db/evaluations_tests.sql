@@ -82551,6 +82551,8 @@ INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, sessi
 
 
 
+
+
 --
 -- Data for Name: parcours_type; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -83964,12 +83966,66 @@ Fichiers PDF de 4 pages', 'https://eva.anlci.gouv.fr/centre-daide', 0, 2, '2026-
 
 
 --
+-- Data for Name: active_storage_blobs; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.active_storage_blobs (key, filename, content_type, metadata, byte_size, checksum, created_at, id, service_name) VALUES
+	('4cw8a02lkn5kb9278zw9gj6m3plh', 'Partenaire=AFDAS.png', 'image/png', '{"identified":true,"width":280,"height":90,"analyzed":true}', 8428, 'OhEr6FvLLyr/Q+5eWep/ug==', '2026-01-27 17:11:48', '5f41f3e9-ae23-47b9-93e5-3f5b0dd1f8a3', 'amazon'),
+	('e2wx002xj1y632tqeo794u8arc06', 'logo-anfh.png', 'image/png', '{"identified":true,"width":246,"height":90,"analyzed":true}', 5755, '2gzG//Wo3pDjBijW2NPxsA==', '2026-01-28 23:59:35', '78631f69-d85e-4244-988a-815cd304797e', 'amazon'),
+	('ko35roh21e8sv269eb2jma2p9ndg', 'Logo-CNFPT-2024-RVB.png', 'image/png', '{"identified":true,"width":4501,"height":3598,"analyzed":true}', 119574, '6saJnBPf6Zl9frsEuE1Upg==', '2026-02-09 10:57:28', '18f64ab0-85f4-472e-a2e3-60950422c12a', 'amazon'),
+	('0tfjyq2k8zwkyp5bedp4rtpb2p7x', 'Constructys logo transparent.png', 'image/png', '{"identified":true,"width":811,"height":442,"analyzed":true}', 70778, '7jAepEPlm9QytfpZ6Te6Bg==', '2026-04-22 13:08:37', '7e8c5fa8-196b-4547-8f20-e1c7867cfc70', 'amazon'),
+	('i37ek2bzp9iyk2m43p460uf20aa4', 'Capture d’écran 2026-03-19 à 08.33.51.png', 'image/png', '{"identified":true,"width":1251,"height":546,"analyzed":true}', 669279, 'KEBNedp/CA6du+3WI8UlsQ==', '2026-03-19 08:01:25', '4d9e9788-7e31-4dfe-a13a-fcc6d17759ff', 'amazon'),
+	('29fgayd62urvzdcofjnod0a6aaio', 'Partenaire=Ocapiat.png', 'image/png', '{"identified":true,"width":90,"height":90,"analyzed":true}', 6362, 'rF6Q08ajYWTKG3Gic0Spow==', '2026-02-16 19:51:38', 'dfcc7cf0-4083-4cce-868f-2877ffea1ec3', 'amazon'),
+	('f3g0663jcrk2r4bqu55ksuobidgr', 'logo-opco2i 1.png', 'image/png', '{"identified":true,"width":59,"height":90,"analyzed":true}', 5947, 'Lda87IHeHTgG614H+kDefw==', '2026-01-28 23:44:10', '8ad6df39-d160-4795-8036-241ac3c10558', 'amazon'),
+	('ccblsuv7ux3rdrfut5qqayq9c7un', 'atlas.jpg', 'image/jpeg', '{"identified":true,"width":800,"height":800,"analyzed":true}', 19277, 'Nw/DfjB6Bk8gMsmdxhTJtQ==', '2026-02-23 11:04:46', '1c9ca9c4-3ef1-4dfb-a594-7d8513881349', 'amazon'),
+	('omly3yu64u2wzbjbxc86w2l2285p', '1200x680.jpeg', 'image/jpeg', '{"identified":true,"width":1200,"height":680,"analyzed":true}', 97006, 'ERAJBdG07ltmKdDdefX4yg==', '2026-03-19 13:43:45', 'c1119336-4486-4cba-9da8-9913e894c8d2', 'amazon'),
+	('2j4lsp4ip429uggrvvd7bj8xbqcj', 'Partenaire=Opco EP.png', 'image/png', '{"identified":true,"width":166,"height":90,"analyzed":true}', 4823, 'ljwp/jMKbStzbxLJDVS4Xg==', '2026-01-27 17:21:55', 'a288ede1-0269-4d5c-b88e-b6a339eee875', 'amazon'),
+	('1ammqy6pcdsu0qo0o8a1rnt7g2ni', 'Partenaire=OPCO Mobilités.png', 'image/png', '{"identified":true,"width":130,"height":90,"analyzed":true}', 4361, 'j9gXz7TVTGgQe9ThneT5ow==', '2026-01-27 17:16:41', 'b40f9e6f-7be3-4043-90e3-995c88991254', 'amazon'),
+	('33iqc1b023t5362tziv3bss3p52j', 'Partenaire=OPCO Santé.png', 'image/png', '{"identified":true,"width":90,"height":90,"analyzed":true}', 3557, 'TjrMCr8l4NJODb4peow7xA==', '2026-01-27 17:08:02', 'fe39d308-9651-4ec1-a202-f2428167c30c', 'amazon'),
+	('peehdxkzptoggcpn6ph8m2y3fkul', 'logo_uniformation_opco.png', 'image/png', '{"identified":true,"width":2359,"height":736,"analyzed":true}', 51827, 'Vje48lJ1P4cDKTWOxYYVGg==', '2025-12-15 17:16:57', 'd2099b4c-b59b-4f45-ab0f-dc38d8653103', 'amazon'),
+	('manmw4jrkpophocgf4gs212i948s', 'akto.png', 'image/png', '{"identified":true,"width":800,"height":310,"analyzed":true}', 142653, 'KS2rr/CzGm1ouXBN60B1Dw==', '2026-09-16 17:11:09', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', 'amazon');
+
+
+--
+-- Data for Name: active_storage_attachments; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.active_storage_attachments (name, record_type, created_at, id, blob_id, record_id) VALUES
+	('logo', 'Opco', '2026-01-27 17:11:48', '0b471549-eab4-41d9-b586-70ffb96c1121', '5f41f3e9-ae23-47b9-93e5-3f5b0dd1f8a3', 'e3df7a76-3896-4ddf-b47c-ed50e9d596ee'),
+	('logo', 'Opco', '2026-01-28 23:59:35', '9f2d0531-82e4-41b9-8dd7-221ec4b3c44e', '78631f69-d85e-4244-988a-815cd304797e', '7cf51533-e810-48f5-9275-a47c9eca221a'),
+	('logo', 'Opco', '2026-02-09 10:57:28', '43129acb-55f2-48bf-8e0c-cca99a53961a', '18f64ab0-85f4-472e-a2e3-60950422c12a', '8be3dacc-8535-4736-96cb-860f0802ac3b'),
+	('logo', 'Opco', '2026-04-22 13:08:37', 'b4064552-8d64-42e6-b104-faa3314cd4a5', '7e8c5fa8-196b-4547-8f20-e1c7867cfc70', '02376289-5f56-4e49-9786-1eb3b1f695ef'),
+	('visuel_offre_services', 'Opco', '2026-03-19 08:01:25', '0f2aa7ca-a0bb-4f3e-8913-1a2378207b23', '4d9e9788-7e31-4dfe-a13a-fcc6d17759ff', '02376289-5f56-4e49-9786-1eb3b1f695ef'),
+	('logo', 'Opco', '2026-02-16 19:51:38', 'ee0d7c19-ec67-448a-a7b5-db181e09c23b', 'dfcc7cf0-4083-4cce-868f-2877ffea1ec3', 'e73ee497-5d03-4200-830b-07ecbe72b40d'),
+	('logo', 'Opco', '2026-01-28 23:44:10', '75405921-9be0-48ca-8ad7-429e34f6b9fc', '8ad6df39-d160-4795-8036-241ac3c10558', '25c31e0e-7ae0-4cb2-941e-ff0dd4222ed0'),
+	('logo', 'Opco', '2026-02-23 11:04:46', 'd48bf472-15eb-467f-a953-bc362db11697', '1c9ca9c4-3ef1-4dfb-a594-7d8513881349', 'd00b2d34-8aad-49c6-b2ed-3b836821f725'),
+	('visuel_offre_services', 'Opco', '2026-03-19 13:43:45', '3e3b6fdf-674e-490d-ab63-40e45927c0da', 'c1119336-4486-4cba-9da8-9913e894c8d2', 'd00b2d34-8aad-49c6-b2ed-3b836821f725'),
+	('logo', 'Opco', '2026-01-27 17:21:55', 'ece121d6-b4e6-4380-be66-6d309f9e3b10', 'a288ede1-0269-4d5c-b88e-b6a339eee875', '4e2b92d3-0df1-4f8f-b138-8d085268a3a1'),
+	('logo', 'Opco', '2026-01-27 17:16:41', 'e7e5291c-cb23-402b-a814-4564ee0dce8c', 'b40f9e6f-7be3-4043-90e3-995c88991254', '5567c165-744d-4b64-bd4e-4c5f73de51f3'),
+	('logo', 'Opco', '2026-01-27 17:08:02', '0474ceb5-c504-4f71-9c29-048620d60b25', 'fe39d308-9651-4ec1-a202-f2428167c30c', '25e2fdd0-a405-4b79-902e-3485af2ef8b0'),
+	('logo', 'Opco', '2025-12-15 17:16:57', 'e79d74ea-c527-468d-b5d4-0e6d91999a76', 'd2099b4c-b59b-4f45-ab0f-dc38d8653103', 'ff8d7757-e344-4c76-ba09-4d1575a60745'),
+	('logo', 'Opco', '2026-09-16 17:11:09', 'c1a5d0e7-3f6b-4b8a-9c1d-7e2f4a8b6d3c', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', '9f51af56-9a72-4e36-9691-79d7e38206fe');
+
+
+--
 -- Data for Name: opcos; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.opcos (id, nom, financeur, created_at, updated_at, idcc, telephone, url, email, url_contact, url_offre_services) VALUES
-	('ff8d7757-e344-4c76-ba09-4d1575a60745', 'Uniformation', 'false', '2025-10-10 08:52:59.74816', '2026-04-22 14:56:34.316722', '{0218,1031,1261,1278,1316,1420,1518,1588,1794,2128,2150,2190,2336,2526,2603,2666,2668,2727,2768,2793,2796,2797,2798,2847,2941,3016,3105,3220}', '', 'https://www.uniformation.fr', NULL, '', ''),
-	('9f51af56-9a72-4e36-9691-79d7e38206fe', 'Akto', 'false', '2025-10-10 08:50:36.74997', '2026-04-02 14:43:24.513651', '{0158,0275,0573,0635,0731,1266,1311,1351,1383,1391,1413,1501,1516,1671,1944,1979,2002,2060,2101,2147,2149,2378,2408,2583,2691,3043,3218,3219,7509,7520}', '', '', NULL, '', '');
+	('ff8d7757-e344-4c76-ba09-4d1575a60745', 'Uniformation', 'false', '2025-10-10 08:52:59.74816', '2026-04-22 14:56:34.316722', '{0218,1031,1261,1278,1316,1420,1518,1588,1794,2128,2150,2190,2336,2526,2603,2666,2668,2727,2768,2793,2796,2797,2798,2847,2941,3016,3105,3220}', '', 'https://www.uniformation.fr', 'laure.humbert+testtableau@captive.fr', '', ''),
+	('9f51af56-9a72-4e36-9691-79d7e38206fe', 'AKTO', 'false', '2025-10-10 08:50:36.74997', '2026-04-02 14:43:24.513651', '{0158,0275,0573,0635,0731,1266,1311,1351,1383,1391,1413,1501,1516,1671,1944,1979,2002,2060,2101,2147,2149,2378,2408,2583,2691,3043,3218,3219,7509,7520}', '', '', NULL, '', ''),
+	('e3df7a76-3896-4ddf-b47c-ed50e9d596ee', 'AFDAS', 'true', '2025-10-10 08:49:26', '2026-03-27 15:32:47', '{0086,0214,0306,0394,0509,0598,0693,0698,0716,0781,0892,1016,1018,1083,1194,1281,1285,1307,1480,1563,1618,1631,1734,1790,1874,1895,1909,1922,2021,2121,2148,2257,2372,2397,2411,2412,2511,2642,2683,2717,2770,3090,3097,3221,3225,3230}', '', '', '', '', ''),
+	('7cf51533-e810-48f5-9275-a47c9eca221a', 'ANFH', 'true', '2025-10-10 08:55:42', '2026-04-15 07:20:40', '{}', '01 44 75 68 00', 'https://www.anfh.fr', 'email@anfh.fr', 'https://www.anfh.fr/contacts/', ''),
+	('e300a2a6-8262-40b7-bf7c-5476b3ba7a95', 'Aucun OPCO de rattachement', 'false', '2025-12-24 10:08:21', '2026-04-02 14:43:15', '{}', '', '', '', '', ''),
+	('8be3dacc-8535-4736-96cb-860f0802ac3b', 'CNFPT', 'false', '2026-02-09 10:57:28', '2026-04-02 14:43:32', '{}', '03 88 15 03 47 ', 'https://www.cnfpt.fr/rechercher-formation', 'laure.humbert+testtableau@captive.fr', '', ''),
+	('02376289-5f56-4e49-9786-1eb3b1f695ef', 'Constructys', 'true', '2025-10-09 15:16:31', '2026-04-22 13:08:37', '{1596,1597,1702,1947,2420,2609,2614,3212,3216}', '01 82 83 95 00', 'https://www.constructys.fr/', 'iledefrance@constructys.fr', 'eva.anlci.gouv.fr/contacts-constructys', 'https://www.constructys.fr/constructys-provence-alpes-cote-azur-corse/presentation/'),
+	('e73ee497-5d03-4200-830b-07ecbe72b40d', 'OCAPIAT', 'false', '2025-10-10 08:53:13', '2026-03-27 13:27:24', '{0112,0200,0493,1077,1396,1405,1513,1534,1586,1659,1747,1930,1938,1987,2075,2494,2728,3109,3203,5619,7001,7002,7003,7004,7005,7006,7007,7008,7009,7010,7012,7013,7014,7017,7018,7019,7020,7021,7023,7501,7502,7503,7508,7513,7514,7515,8115,8435}', '0102030405', 'https://www.ocapiat.fr', 'contact@ocapiat.fr', '', ''),
+	('25c31e0e-7ae0-4cb2-941e-ff0dd4222ed0', 'OPCO 2i', 'false', '2025-10-10 08:53:53', '2026-04-02 10:26:38', '{0018,0044,0045,0083,0087,0135,0176,0207,0211,0247,0292,0303,0363,0489,0567,0637,0669,0700,0707,0715,0802,0832,0833,0925,0998,1044,1170,1256,1388,1411,1423,1492,1495,1555,1558,1580,1607,1821,2089,2528,3224,3227,5001,N.A.}', '01 73 29 42 00', 'https://www.opco2i.fr', '', '', ''),
+	('d00b2d34-8aad-49c6-b2ed-3b836821f725', 'OPCO ATLAS', 'false', '2025-10-10 08:50:21', '2026-07-11 12:16:05', '{0438,0478,0653,0787,1468,1486,1672,1679,1801,2120,2230,2247,2335,2357,2543,2622,2931,3210,3213,5005}', '01 02 03 04 05', 'https://www.opco-atlas.fr/', 'contact-atlas@gmail.com', 'https://www.opco-atlas.fr/contact.html', 'https://www.opco-atlas.fr/boite-outils.html'),
+	('4e2b92d3-0df1-4f8f-b138-8d085268a3a1', 'OPCO EP', 'true', '2025-10-10 08:54:22', '2026-02-23 11:02:55', '{0184,0240,0454,0614,0733,0759,0843,0915,0953,0959,0992,0993,1000,1043,1147,1267,1286,1404,1408,1412,1483,1499,1504,1512,1527,1589,1605,1611,1619,1621,1850,1875,1921,1951,1978,1982,1996,2098,2111,2205,2219,2272,2329,2332,2395,2564,2596,2697,2706,2785,2978,3013,3032,3127}', '', '', 'laure.humbert+testtableau@captive.fr', '', NULL),
+	('7a21fb30-f8aa-48bd-b04d-e10e6316dc68', 'OPCOMMERCE', 'false', '2025-10-10 08:54:47', '2026-04-02 15:19:24', '{0043,0468,0500,0675,0706,1314,1431,1487,1505,1517,1539,1557,1606,1686,1760,1880,2156,2198,2216,3168,3205}', '', '', '', '', ''),
+	('5567c165-744d-4b64-bd4e-4c5f73de51f3', 'OPCO Mobilités', 'true', '2025-10-10 08:54:11', '2026-04-02 15:13:38', '{0003,0016,0412,0538,0779,1090,1182,1424,1536,1710,1974,2174,2972,3017,3217,3223,3228,5521,5554,5555,5556,5557}', '', '', '', '', ''),
+	('25e2fdd0-a405-4b79-902e-3485af2ef8b0', 'OPCO Santé', 'true', '2025-10-10 08:54:33', '2026-01-27 17:08:03', '{0029,0405,0413,0783,0897,1001,2046,2104,2264}', NULL, NULL, NULL, NULL, NULL);
 
 
 --
@@ -85465,6 +85521,28 @@ INSERT INTO public.parcours_type (id, libelle, nom_technique, duree_moyenne, cre
 	('23124c1e-acd4-4213-8800-5fe14ae4fddd', 'EVAPRO - Diagnostic OPCO EP', 'eva-entreprise-opcoep', '30 min', '2026-02-25 15:56:00', '2026-03-10 15:50:58', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO EP.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('2be24743-069a-412d-9ce1-78d1e51520b0', 'EVAPRO - Diagnostic OPCO MOBILITÉS', 'eva-entreprise-opcomobilites', '30 min', '2026-02-25 15:57:08', '2026-03-10 16:03:27', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO MOBILITÉS.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('fd2392b3-0e98-4cf7-ad97-d1acafba29f9', 'EVAPRO - Diagnostic OPCO SANTÉ', 'eva-entreprise-opcosante', '30 min', '2026-02-25 15:58:11', '2026-07-07 15:00:57', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO Santé.', 'diagnostic_entreprise', NULL, 'false', NULL);
+
+
+--
+-- Data for Name: opcos_parcours_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.opcos_parcours_type (id, opco_id, parcours_type_id, created_at, updated_at) VALUES
+	('ef0bcf12-579e-43d7-812a-91e30a1e1daf', 'e3df7a76-3896-4ddf-b47c-ed50e9d596ee', '7dc3b30f-96b5-48a4-a7ba-5e230c14ee28', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('9f3eb553-ac62-44bc-a0aa-231416147b22', '9f51af56-9a72-4e36-9691-79d7e38206fe', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('ae9095c9-358c-4a56-98e0-3127b8d51187', '7cf51533-e810-48f5-9275-a47c9eca221a', 'c2d142c4-6937-4437-83fc-f3683ffb7dce', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('4ad33bbd-8e33-4973-af1f-d519cfd8e519', 'e300a2a6-8262-40b7-bf7c-5476b3ba7a95', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('866c7504-240b-4c63-9993-6ee6f5903fe8', '8be3dacc-8535-4736-96cb-860f0802ac3b', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('0c926319-c7fc-4b38-9b24-201371769284', '02376289-5f56-4e49-9786-1eb3b1f695ef', 'e428b9cb-b1bc-4feb-b005-43a915743e78', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('3dfe7260-8409-4f8a-b57c-0c02a92e31e8', '02376289-5f56-4e49-9786-1eb3b1f695ef', '30af67c1-3b04-4a70-b0b6-f9ec6d349092', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('619c3292-1688-47b2-84d2-f3b51734f155', 'e73ee497-5d03-4200-830b-07ecbe72b40d', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('ec09df52-d06f-4b8f-a8af-d68925265271', '25c31e0e-7ae0-4cb2-941e-ff0dd4222ed0', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('75d922a1-e612-4e65-b1cf-8e727f52b00d', 'd00b2d34-8aad-49c6-b2ed-3b836821f725', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('97859a46-b42f-4e30-9695-a374e70e1f98', '4e2b92d3-0df1-4f8f-b138-8d085268a3a1', '23124c1e-acd4-4213-8800-5fe14ae4fddd', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('b3ae1fc4-1541-4704-88fb-28a504b8b06a', '7a21fb30-f8aa-48bd-b04d-e10e6316dc68', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('516cd9a4-a83e-44e7-a272-f4e71fc70785', '5567c165-744d-4b64-bd4e-4c5f73de51f3', '2be24743-069a-412d-9ce1-78d1e51520b0', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('b7f5729c-59be-4157-9b4d-3bdc8a2d8043', '25e2fdd0-a405-4b79-902e-3485af2ef8b0', 'fd2392b3-0e98-4cf7-ad97-d1acafba29f9', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
+	('41dc4c16-a5f5-4e09-ba42-5c375799b171', 'ff8d7757-e344-4c76-ba09-4d1575a60745', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00');
 
 
 --

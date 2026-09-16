@@ -58,7 +58,10 @@ ActiveAdmin.register Beneficiaire do
     f.inputs do
       f.input :nom
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f)
+    end
   end
 
   show do

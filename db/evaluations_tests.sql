@@ -1249,7 +1249,9 @@ INSERT INTO public.comptes (email, encrypted_password, reset_password_token, res
 	('superadmin@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2023-10-05 08:06:39.002272', '2024-08-19 13:46:33.933606', 'superadmin', 'fbf17731-d66c-44ed-9598-d4841054217d', 'caacab3d-f925-47b4-bf0b-f5f4ccc93472', 1, 'admin', 'super', NULL, 3, '2024-08-19 13:46:32.373119', '2023-12-02 13:13:44.291752', '127.0.0.1', '127.0.0.1', NULL, 'kh42yHc8axJ4NwfeFR9C', '2023-10-05 08:07:08.208966', '2023-10-05 08:06:39.002403', NULL, NULL, true, true, NULL, true, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
 	('support@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2023-10-05 08:06:39.002272', '2024-08-19 13:46:33.933606', 'superadmin', 'fbf17731-d66c-44ed-9598-d4941054217d', 'caacab3d-f925-47b4-bf0b-f5f4ccc93472', 1, 'Bot', 'le support', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-05 08:07:08.208966', '2023-10-05 08:06:39.002403', NULL, NULL, true, true, NULL, false, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
 	('admin@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2024-10-02 14:44:56.424233', '2026-09-16 12:21:52.989487', 'admin', '316b47bd-e511-4038-837d-847bd8c7c555', '7008f10c-c8a2-48ad-88c4-a13ca664805a', 1, 'Admin', 'Alex', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'bd3MhsywzVxsmLuvrxGz', NULL, '2024-10-02 14:44:56.424338', NULL, NULL, true, false, NULL, NULL, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
-	('demo@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2024-10-02 14:45:37.771642', '2026-09-16 12:21:52.990768', 'conseiller', 'f80275a9-2f52-4784-bb1a-bbf0d2eda3ea', '7008f10c-c8a2-48ad-88c4-a13ca664805a', 1, 'Démo', 'Dominique', NULL, 1, '2024-10-02 14:45:57.7422', '2024-10-02 14:45:57.7422', '127.0.0.1', '127.0.0.1', NULL, 'tx_TD8v7E-4uwydWq4Ty', '2024-10-02 14:45:39.678162', '2024-10-02 14:45:37.771698', NULL, NULL, true, true, NULL, true, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL);
+	('demo@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2024-10-02 14:45:37.771642', '2026-09-16 12:21:52.990768', 'conseiller', 'f80275a9-2f52-4784-bb1a-bbf0d2eda3ea', '7008f10c-c8a2-48ad-88c4-a13ca664805a', 1, 'Démo', 'Dominique', NULL, 1, '2024-10-02 14:45:57.7422', '2024-10-02 14:45:57.7422', '127.0.0.1', '127.0.0.1', NULL, 'tx_TD8v7E-4uwydWq4Ty', '2024-10-02 14:45:39.678162', '2024-10-02 14:45:37.771698', NULL, NULL, true, true, NULL, true, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
+  ('rachel.rh@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, '2026-04-30 10:58:36.423159', NULL, '2026-03-23 16:50:32.758975', '2026-08-25 12:27:06.700039', 'conseiller', 'f4364e87-8d57-4ee4-bc3b-5eeace68a7d8', 'd9d61be1-0bd7-4df0-b642-2d44f698aa9a', '1', 'rh', 'rachel', NULL, '118', '2026-08-25 12:27:06.697683', '2026-08-11 12:32:44.144319', NULL, NULL, NULL, NULL, '2026-03-23 16:51:44.754294', '2026-03-23 16:50:32.759209', NULL, NULL, 'false', 'true', NULL, 'true', NULL, '53132862300149', '', NULL, 'complet', 'Eva: bénéficiaires', 'false', NULL),
+	('boss@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2026-04-20 16:48:57.122501', '2026-04-20 16:50:24.776712', 'admin', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'd9d61be1-0bd7-4df0-b642-2d44f698aa9a', '1', 'entreprise', 'boss', NULL, '1', '2026-04-20 16:48:57.171838', '2026-04-20 16:48:57.171838', NULL, NULL, NULL, NULL, NULL, '2026-04-20 16:48:57.122577', NULL, NULL, 'true', NULL, NULL, 'true', NULL, '10373572600012', '', NULL, 'complet', 'EVAPRO', 'false', NULL);
 
 
 --
@@ -84352,6 +84354,15 @@ Fichiers PDF de 4 pages', 'https://eva.anlci.gouv.fr/centre-daide', 0, 2, '2026-
 
 
 --
+-- Data for Name: opcos; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.opcos (id, nom, financeur, created_at, updated_at, idcc, telephone, url, email, url_contact, url_offre_services) VALUES
+	('ff8d7757-e344-4c76-ba09-4d1575a60745', 'Uniformation', 'false', '2025-10-10 08:52:59.74816', '2026-04-22 14:56:34.316722', '{0218,1031,1261,1278,1316,1420,1518,1588,1794,2128,2150,2190,2336,2526,2603,2666,2668,2727,2768,2793,2796,2797,2798,2847,2941,3016,3105,3220}', '', 'https://www.uniformation.fr', NULL, '', ''),
+	('9f51af56-9a72-4e36-9691-79d7e38206fe', 'Akto', 'false', '2025-10-10 08:50:36.74997', '2026-04-02 14:43:24.513651', '{0158,0275,0573,0635,0731,1266,1311,1351,1383,1391,1413,1501,1516,1671,1944,1979,2002,2060,2101,2147,2149,2378,2408,2583,2691,3043,3218,3219,7509,7520}', '', '', NULL, '', '');
+
+
+--
 -- Data for Name: structures; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -84360,7 +84371,8 @@ INSERT INTO public.structures (id, nom, code_postal, created_at, updated_at, typ
 	('b0178a18-3266-4d23-b1c7-93300106abed', 'Iles-de-France', NULL, '2023-02-21 13:49:58.837481', '2023-02-21 13:49:58.837481', NULL, NULL, NULL, 'StructureAdministrative', NULL, '/', NULL, false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
 	('caacab3d-f925-47b4-bf0b-f5f4ccc93472', 'eva', '75012', '2021-02-26 10:21:05.452499', '2023-02-21 13:50:20.337018', 'autre', 'Île-de-France', '2021-12-01 17:18:57.093046', 'StructureLocale', NULL, '/', NULL, false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
 	('4635540f-0f4b-48f0-ae1d-5d2f8d997af6', 'Structure exemple', '67200', '2020-03-30 14:52:14.518871', '2023-02-21 17:01:59.902001', 'mission_locale', 'Grand Est', '2021-12-01 17:18:57.087737', 'StructureLocale', NULL, '/', NULL, false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
-	('7008f10c-c8a2-48ad-88c4-a13ca664805a', 'Structure démo ANLCI', '69003', '2024-10-02 14:43:25.381202', '2024-10-02 14:43:25.381202', 'autre', 'Auvergne-Rhône-Alpes', NULL, 'StructureLocale', NULL, '/', '', false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL);
+	('7008f10c-c8a2-48ad-88c4-a13ca664805a', 'Structure démo ANLCI', '69003', '2024-10-02 14:43:25.381202', '2024-10-02 14:43:25.381202', 'autre', 'Auvergne-Rhône-Alpes', NULL, 'StructureLocale', NULL, '/', '', false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
+	('d9d61be1-0bd7-4df0-b642-2d44f698aa9a', 'entreprise', '75017', '2026-04-20 16:50:13.58797', '2026-04-20 16:50:13.58797', 'entreprise', 'Île-de-France', NULL, 'StructureLocale', NULL, '/', '10373572600012', 'true', 'EVAPRO', 'true', '2026-04-20 16:50:13.469507', '73.11Z', '{}', 'CAPTIVE', '6 RUE D''ARMAILLE 75017 PARIS', '9f51af56-9a72-4e36-9691-79d7e38206fe', NULL, NULL, '75056');
 
 
 --
@@ -85828,4 +85840,866 @@ ALTER TABLE ONLY public.mises_en_action
 
 ALTER TABLE ONLY public.evaluations
     ADD CONSTRAINT fk_rails_f9d1ace838 FOREIGN KEY (campagne_id) REFERENCES public.campagnes(id);
+
+
+--
+-- Data for Name: parcours_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.parcours_type (id, libelle, nom_technique, duree_moyenne, created_at, updated_at, description, type_de_programme, deleted_at, actif, "position") VALUES
+	('addf385f-0484-4642-bc09-e82d4a11d601', 'Diagnostic evapro', 'eva-entreprise', '30 minutes', '2025-10-01 15:38:57.593759', '2026-01-28 23:28:51.835681', 'Questionnaire générique pour tous types de structures.', 'diagnostic_entreprise', NULL, 'false', NULL);
+
+
+--
+-- Data for Name: campagnes; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.campagnes (libelle, code, created_at, updated_at, id, compte_id, affiche_competences_fortes, parcours_type_id, anonymise_le, deleted_at, active, privee) VALUES
+	('Diagnostic des risques : entreprise - Diagnostic evapro', 'STE75017', '2026-04-20 16:50:13.621768', '2026-04-20 16:50:13.621768', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'true', 'addf385f-0484-4642-bc09-e82d4a11d601', NULL, NULL, 'true', 'false');
+
+
+--
+-- Data for Name: beneficiaires; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
+	('e9dd83e8-5ebb-48b9-a8c3-6f1e736ee721', 'rachel rh', '2026-03-23 16:53:05.287938', '2026-03-23 16:53:05.287938', NULL, NULL, 'SUP79179', 'f4364e87-8d57-4ee4-bc3b-5eeace68a7d8');
+
+
+--
+-- Data for Name: questionnaires; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.questionnaires (libelle, created_at, updated_at, id, nom_technique, deleted_at) VALUES
+	('Diagnostic - EVA RH', '2025-09-10 07:42:38.571939', '2025-09-10 07:42:38.571939', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'diagnostic_eva-rh', NULL),
+	('EVAPRO Q1 RISQUES', '2026-01-28 15:33:34.698274', '2026-01-28 15:33:34.698274', '42495975-2921-4442-827b-1864d26391ef', 'evapro-Q1-risques', NULL),
+	('EVAPRO Q2 IMPACTS', '2025-09-22 10:12:03.810231', '2026-01-28 15:36:01.363556', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'eva-entreprise-impact', NULL);
+
+
+--
+-- Data for Name: situations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.situations (libelle, nom_technique, created_at, updated_at, id, questionnaire_id, questionnaire_entrainement_id, deleted_at, description) VALUES
+	('Diagnostic des risques', 'diag_risques_entreprise', '2025-09-19 10:52:29.779404', '2025-10-16 10:16:59.562128', '592ec5a0-2c81-4550-a9f5-eb26274753a3', 'de47df57-093b-4210-aee2-ce84c4c8cedb', NULL, NULL, ''),
+	('Évaluation des impacts', 'evaluation_impact_general', '2025-09-22 10:10:44.399238', '2026-01-28 23:29:09.568878', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', NULL, NULL, '');
+
+
+--
+-- Data for Name: situations_configurations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
+	('1', '2026-04-20 16:50:13.629866', '2026-04-20 16:50:13.629866', '365646d9-a83c-4159-8f9c-7075bf274ec8', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', NULL, NULL),
+	('2', '2026-04-20 16:50:13.632517', '2026-04-20 16:50:13.632517', 'c4968fab-f6a6-48d7-b64e-b11325a0147f', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', NULL, NULL);
+
+
+--
+-- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2025-09-18 10:03:30.449979', '2025-09-18 10:03:30.449979', 'QuestionQcm', 'Ma super description', NULL, NULL, 'eva-entreprises-test1', '93bb2a3c-b0af-4ebf-b3ff-aa5890605315', '0', 'eva-entreprises-test1', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-18 10:31:33.643119', '2025-09-18 10:32:33.771443', 'QuestionQcm', '', NULL, NULL, 'Eva RH - Q1/Taille de l''entreprise', 'c325e445-6546-4453-a90e-97150abce34e', '0', 'Q1PG01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:25:33.714863', '2026-01-28 15:25:33.739213', 'QuestionSaisie', NULL, NULL, NULL, 'EVAPRO - Q1IC04', '634d336e-e506-4298-88c9-92083fb4b1e1', '0', 'Q1IC04', NULL, '2', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-18 10:54:11.662661', '2025-09-18 10:54:50.770523', 'QuestionQcm', '', NULL, NULL, 'Eva RH - Q3/Secteur d''activité', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', '0', 'Q1PG03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:05.935201', '2026-01-28 15:27:05.935201', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1IC01', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', '0', 'Q1IC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.022813', '2026-01-28 15:27:06.022813', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1IC02', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', '0', 'Q1IC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.079388', '2026-01-28 15:27:06.079388', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1IC03', '6bf422f9-346c-4738-835c-61dc2294350b', '0', 'Q1IC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.191754', '2026-01-28 15:27:06.191754', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1IC05', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', '0', 'Q1IC05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.241495', '2026-01-28 15:27:06.241495', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1PC01', '98672d19-9244-48a9-bf43-75d154ac16de', '0', 'Q1PC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.291452', '2026-01-28 15:27:06.291452', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1PC02', '56554354-6dd7-40b5-b93c-ab394c5f72d4', '0', 'Q1PC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2026-01-28 15:27:06.35426', '2026-01-28 15:27:06.35426', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1PC03', '3e88b842-c607-4cbf-9b81-6e625153c179', '0', 'Q1PC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.409747', '2026-01-28 15:27:06.409747', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1GC01', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', '0', 'Q1GC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.517305', '2026-01-28 15:27:06.517305', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1GC03', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', '0', 'Q1GC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.565973', '2026-01-28 15:27:06.565973', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1GC04', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', '0', 'Q1GC04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.605954', '2026-01-28 15:27:06.605954', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1GC05', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', '0', 'Q1GC05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.665039', '2026-01-28 15:27:06.665039', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1GC06', '33b3ab0d-1590-44a9-b403-f358090a8f41', '0', 'Q1GC06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.711153', '2026-01-28 15:27:06.711153', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1PR01', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', '0', 'Q1PR01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.767236', '2026-01-28 15:27:06.767236', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1PR02', '30defdc7-4f2f-45b0-8514-e0898e0c0561', '0', 'Q1PR02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.811839', '2026-01-28 15:27:06.811839', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1TO01', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', '0', 'Q1TO01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.860291', '2026-01-28 15:27:06.860291', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1TO02', '8bdef706-7b40-4122-be15-bfd89c038c49', '0', 'Q1TO02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2026-01-28 15:27:06.906338', '2026-01-28 15:27:06.906338', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1TO03', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', '0', 'Q1TO03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.95265', '2026-01-28 15:27:06.95265', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q1TO04', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', '0', 'Q1TO04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-01-28 15:27:06.464076', '2026-07-29 12:25:12.939594', 'QuestionQcm', '', NULL, NULL, 'EVAPRO - Q1GC02', 'c779b91f-a270-4c69-8263-114b0fdebaf4', '0', 'Q1GC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-18 10:34:57.089339', '2025-09-18 10:35:54.988682', 'QuestionQcm', '', NULL, NULL, 'Eva RH - Q2/Age moyen salariés', 'd8e2cec3-0130-496c-a30d-8e63138a240d', '0', 'Q1PG02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:37:48.593293', '2025-09-24 14:59:43.28948', 'QuestionSaisie', '', '', '', 'Eva RH - Q4', '268a6edd-ea7a-4e89-a62a-f79cfc01c056', '0', 'Q1PG04', NULL, '2', NULL, NULL, '', 'false', '', NULL, 'false'),
+	('2025-09-24 14:47:55.65288', '2025-09-24 14:58:21.927516', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q5', '4e38efb7-6151-4ff3-8140-40b4dce21beb', '0', 'Q1PG05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.703491', '2025-09-24 14:58:21.959', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q6', '77552429-a8d7-4910-9aa7-78c022dcbc76', '0', 'Q1PG06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.753317', '2025-09-24 14:58:21.980538', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q7', '151b5ed4-2721-4907-b029-9ad3b018bf8f', '0', 'Q1PG07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.778904', '2025-09-24 14:58:21.997671', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q8', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', '0', 'Q1PG08', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.804582', '2025-09-24 14:58:22.025235', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q9', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', '0', 'Q1PG09', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2025-09-24 14:47:55.843336', '2025-09-24 14:58:22.055961', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q10', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', '0', 'Q1PG10', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.888012', '2025-09-24 14:58:22.081813', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q11', 'b1739b3d-ed79-4f80-b86a-d73361108f36', '0', 'Q1PG11', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.922748', '2025-09-24 14:58:22.115332', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q12', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', '0', 'Q1PG12', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.954713', '2025-09-24 14:58:22.143345', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q13', '7649d478-c190-4302-b24a-a46c277665e7', '0', 'Q1PG13', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:55.982399', '2025-09-24 14:58:22.166514', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q14', 'ba4968c5-53c5-415d-8be2-c662503b8832', '0', 'Q1PG14', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:56.006848', '2025-09-24 14:58:22.194147', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q15', '00557f47-9370-4d8a-a257-7fb9a2a680b6', '0', 'Q1PG15', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:56.031351', '2025-09-24 14:58:22.217985', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q16', 'ac370b51-b3f7-46fc-88b5-a526052730f0', '0', 'Q1PG16', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:56.068268', '2025-09-24 14:58:22.24117', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q17', '6442e6c4-ec47-42df-8273-34a217449819', '0', 'Q1PG17', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:56.094644', '2025-09-24 14:58:22.262653', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q18', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', '0', 'Q1PG18', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-24 14:47:56.118668', '2025-09-24 14:58:22.283223', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q19', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', '0', 'Q1PG19', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2025-09-24 14:47:56.137473', '2025-09-24 14:58:22.312546', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q20', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', '0', 'Q1PG20', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:59:40.822344', '2026-02-09 15:14:34.312602', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ05', '77346421-fe52-4202-b9a6-85d9ff05a3ea', '0', 'Q2SQ05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:01:13.901099', '2026-02-09 15:14:34.371922', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ07', '4389eda1-973d-42b0-bfcd-0344d8659106', '0', 'Q2SQ07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:16:54.869522', '2026-02-09 15:14:34.045278', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC01', '727257e5-5738-4917-a1c0-54cb14807530', '0', 'Q2PC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:17:55.798529', '2026-02-09 15:14:34.074433', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC02', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', '0', 'Q2PC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:18:46.251399', '2026-02-09 15:14:34.097637', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC03', '1a4074c1-5699-4842-98d4-141d566d12e1', '0', 'Q2PC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:21:48.33651', '2026-02-09 15:14:34.172674', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO03', '4b947690-2b17-4e37-ace4-1070a01f1170', '0', 'Q2AO03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:26:42.630255', '2026-02-09 15:14:34.195466', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO04', '1d510939-ec68-494c-87c7-a96ae726a766', '0', 'Q2AO04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:27:38.684956', '2026-02-09 15:14:34.218159', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ01', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', '0', 'Q2SQ01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:28:23.545142', '2026-02-09 15:14:34.240773', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ02', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', '0', 'Q2SQ02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2025-09-25 14:19:51.213391', '2026-02-09 15:14:34.120571', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO01', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', '0', 'Q2AO01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:20:50.409243', '2026-02-09 15:14:34.143442', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO02', '9bcde02d-582a-4443-9eb1-994293765103', '0', 'Q2AO02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:05:53.010849', '2026-02-09 15:14:34.474906', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP04', '39a0b25c-ace7-44e1-918c-28e78705ff1c', '0', 'Q2MP04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:06:52.196116', '2026-02-09 15:14:34.50766', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP05', 'c90828a1-6d94-4357-9e78-613ce70ab301', '0', 'Q2MP05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:08:16.369885', '2026-02-09 15:14:34.559352', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP07', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', '0', 'Q2MP07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:09:04.065986', '2026-02-09 15:14:34.583484', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP08', '994e25f6-b457-4b26-a8ae-cdcb891d8441', '0', 'Q2MP08', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:56:23.507674', '2026-02-09 15:14:34.264268', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ03', 'e3d4958b-8756-4cd9-84cf-5790375cf934', '0', 'Q2SQ03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:00:26.64501', '2026-02-09 15:14:34.347308', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ06', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', '0', 'Q2SQ06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:03:15.608956', '2026-02-09 15:14:34.396762', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP01', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', '0', 'Q2MP01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:04:12.671054', '2026-02-09 15:14:34.421111', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP02', '994dec60-d714-4634-b7f4-50674725e259', '0', 'Q2MP02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2025-09-25 15:04:56.110807', '2026-02-09 15:14:34.447528', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP03', '4b963f65-e208-4ed3-a745-dc05b0d86b85', '0', 'Q2MP03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:07:35.341401', '2026-02-09 15:14:34.534633', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP06', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', '0', 'Q2MP06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:58:54.332023', '2026-02-09 15:14:34.287655', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ04', 'afff1309-7bb6-49db-a1ed-5132914c3f69', '0', 'Q2SQ04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+
+--
+-- Data for Name: choix; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui, pour une partie', '0', '2025-09-24 14:47:56.014177', '2025-09-24 14:47:56.014177', '1', '3044aafe-6c91-4ea9-9682-854a4d65d415', '00557f47-9370-4d8a-a257-7fb9a2a680b6', 'Q1PG15R2', NULL),
+	('Non', '0', '2025-09-24 14:47:56.019503', '2025-09-24 14:47:56.019503', '2', '395b9635-b4de-45a4-8e0d-c3caa770e8ed', '00557f47-9370-4d8a-a257-7fb9a2a680b6', 'Q1PG15R3', NULL),
+	('Oui, en majorité', '0', '2025-09-24 14:47:56.00862', '2025-09-24 14:47:56.022495', '3', 'c3a4590b-da08-4dd9-905d-26aa89edad0b', '00557f47-9370-4d8a-a257-7fb9a2a680b6', 'Q1PG15R1', NULL),
+	('Non', '0', '2025-09-24 14:47:55.763369', '2025-09-24 14:47:55.763369', '1', '9af208fe-a4a8-4734-996f-0acb633f430c', '151b5ed4-2721-4907-b029-9ad3b018bf8f', 'Q1PG07R2', NULL),
+	('Oui', '0', '2025-09-24 14:47:55.755844', '2025-09-24 14:47:55.76702', '2', 'f73fcedd-be5a-42cd-9367-a3c1b1083c44', '151b5ed4-2721-4907-b029-9ad3b018bf8f', 'Q1PG07R1', NULL),
+	('Oui', '0', '2025-09-25 14:18:46.257224', '2025-11-27 16:23:14.64892', '1', '62825136-c113-46f9-8b3d-f23315db999b', '1a4074c1-5699-4842-98d4-141d566d12e1', 'Q2PC03R1', NULL),
+	('Non', '0', '2025-09-25 14:18:46.261037', '2025-11-27 16:23:14.651385', '2', '4080ec6a-5753-45cf-943e-b21f6a166e23', '1a4074c1-5699-4842-98d4-141d566d12e1', 'Q2PC03R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.887037', '2026-05-13 16:27:58.887037', '3', 'b62e939b-0f7a-42b8-ae06-541e569a65bd', '1a4074c1-5699-4842-98d4-141d566d12e1', 'Q2PC03R3', NULL),
+	('Oui', '0', '2025-09-25 15:00:26.649273', '2025-09-25 15:00:26.649273', '1', '33f9297e-5ef5-4b9f-a292-d6efd0a11a24', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', 'Q2SQ06R1', NULL),
+	('Non', '0', '2025-09-25 15:00:26.652427', '2025-09-25 15:00:26.652427', '2', '92264f9d-157b-4cd3-abdf-6e32dd9d7abb', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', 'Q2SQ06R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.010547', '2026-05-13 16:27:59.010547', '3', 'd27de885-980d-4791-8a10-360092a9fd63', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', 'Q2SQ06R3', NULL),
+	('Oui', '0', '2025-09-25 14:26:42.634971', '2025-09-25 14:26:42.634971', '1', 'a40452e8-14ea-4271-8eb2-73fedb1831c1', '1d510939-ec68-494c-87c7-a96ae726a766', 'Q2AO04R1', NULL),
+	('Non', '0', '2025-09-25 14:26:42.638824', '2025-09-25 14:26:42.638824', '2', '21aaa691-0b4c-40fc-9151-62dcbe71457e', '1d510939-ec68-494c-87c7-a96ae726a766', 'Q2AO04R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.935209', '2026-05-13 16:27:58.935209', '3', '8182634d-ce3d-4613-b4bc-f4bfd5fe3c08', '1d510939-ec68-494c-87c7-a96ae726a766', 'Q2AO04R3', NULL),
+	('Oui', '0', '2025-09-25 14:19:51.224878', '2025-09-25 14:19:51.224878', '1', 'c701245d-0b91-46eb-8721-df9daa60e263', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', 'Q2AO01R1', NULL),
+	('Non', '0', '2025-09-25 14:19:51.230546', '2025-09-25 14:19:51.230546', '2', 'f2acb5df-e281-4db2-aaf4-e7b4dd7724d1', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', 'Q2AO01R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.898141', '2026-05-13 16:27:58.898141', '3', 'e1d41fa1-cded-4156-9e48-0a7b473da83e', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', 'Q2AO01R3', NULL),
+	('Oui', '0', '2025-09-25 15:03:15.613879', '2025-09-25 15:03:15.613879', '1', 'ee4489fe-8220-4d76-baad-eb3f6917be78', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', 'Q2MP01R1', NULL),
+	('Non', '0', '2025-09-25 15:03:15.618801', '2025-09-25 15:03:15.618801', '2', '972dbc45-1054-4a57-ad14-2315b561798c', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', 'Q2MP01R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.030588', '2026-05-13 16:27:59.030588', '3', 'aca4606d-e436-4dad-a5f6-320e07c31a27', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', 'Q2MP01R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Non, certains postes ne nécessitant pas de niveau minimum requis ', '0', '2026-01-28 15:27:06.78757', '2026-01-28 15:27:06.78757', '1', '1ebd0bfa-b79d-4655-b86b-2778e211488d', '30defdc7-4f2f-45b0-8514-e0898e0c0561', 'Q1PR02R01', NULL),
+	('Non, on ne contrôle généralement pas le niveau ', '0', '2026-01-28 15:27:06.793344', '2026-01-28 15:27:06.793344', '2', '75d126cc-1f98-4ed1-aab5-a0c8354eedef', '30defdc7-4f2f-45b0-8514-e0898e0c0561', 'Q1PR02R02', NULL),
+	('Oui, pour tous les postes ', '0', '2026-01-28 15:27:06.798667', '2026-01-28 15:27:06.798667', '3', '362b3f8e-88b3-4984-ad1d-8a3e14982373', '30defdc7-4f2f-45b0-8514-e0898e0c0561', 'Q1PR02R03', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.791147', '2026-05-13 16:27:58.791147', '4', '0c7fbdea-8dad-431f-b0df-ac9386daa79c', '30defdc7-4f2f-45b0-8514-e0898e0c0561', 'Q1PR02R04', NULL),
+	('Oui ', '0', '2026-01-28 15:27:06.690581', '2026-01-28 15:27:06.690581', '1', 'c01a8670-92aa-4488-bc3f-d5b76ee865fc', '33b3ab0d-1590-44a9-b403-f358090a8f41', 'Q1GC06R01', NULL),
+	('Non ', '0', '2026-01-28 15:27:06.69587', '2026-01-28 15:27:06.69587', '2', 'f11926b4-52b0-4d04-b7f0-d125da83b6a6', '33b3ab0d-1590-44a9-b403-f358090a8f41', 'Q1GC06R02', NULL),
+	('En cours ', '0', '2026-01-28 15:27:06.700939', '2026-01-28 15:27:06.700939', '3', 'e7a907f4-6208-46eb-af4a-3742a717c4c1', '33b3ab0d-1590-44a9-b403-f358090a8f41', 'Q1GC06R03', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.765717', '2026-05-13 16:27:58.765717', '4', '7fdcb05d-b563-4d9f-802e-c252abf16161', '33b3ab0d-1590-44a9-b403-f358090a8f41', 'Q1GC06R04', NULL),
+	('Oui', '0', '2025-09-25 15:05:53.015407', '2025-09-25 15:05:53.015407', '1', '221b06fc-894d-4977-912c-d7f1bae60617', '39a0b25c-ace7-44e1-918c-28e78705ff1c', 'Q2MP04R1', NULL),
+	('Non', '0', '2025-09-25 15:05:53.018601', '2025-09-25 15:05:53.018601', '2', '7fa25061-479d-4167-82b7-5c3aac78a231', '39a0b25c-ace7-44e1-918c-28e78705ff1c', 'Q2MP04R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.063485', '2026-05-13 16:27:59.063485', '3', '14070ccb-2ece-4180-b46d-9ec3836f7ac0', '39a0b25c-ace7-44e1-918c-28e78705ff1c', 'Q2MP04R3', NULL),
+	('Oui, une majorité ', '0', '2026-01-28 15:27:06.375306', '2026-01-28 15:27:06.375306', '1', '41f39407-4c2a-4f1e-a228-cf5d7c851493', '3e88b842-c607-4cbf-9b81-6e625153c179', 'Q1PC03R01', NULL),
+	('Oui, une partie ', '0', '2026-01-28 15:27:06.382715', '2026-01-28 15:27:06.382715', '2', '5b1e6286-f2bd-4e61-9d9c-ca92defa1d90', '3e88b842-c607-4cbf-9b81-6e625153c179', 'Q1PC03R02', NULL),
+	('Non pas vraiment ', '0', '2026-01-28 15:27:06.390508', '2026-01-28 15:27:06.390508', '3', '1d715732-c6a2-4ab6-9404-795d98522dd4', '3e88b842-c607-4cbf-9b81-6e625153c179', 'Q1PC03R03', NULL),
+	('Non pas du tout ', '0', '2026-01-28 15:27:06.39484', '2026-01-28 15:27:06.39484', '4', '86809d02-1693-46af-bd43-0754132e7331', '3e88b842-c607-4cbf-9b81-6e625153c179', 'Q1PC03R04', NULL),
+	('Je ne sais pas ', '0', '2026-01-28 15:27:06.399414', '2026-01-28 15:27:06.399414', '5', '115375b2-fd5c-4c02-8006-043bc191cc18', '3e88b842-c607-4cbf-9b81-6e625153c179', 'Q1PC03R05', NULL),
+	('Oui, probablement', '0', '2025-09-24 14:47:55.931289', '2025-09-24 14:47:55.931289', '1', '199f8b7e-1664-4e1a-b68c-63a5a399137d', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', 'Q1PG12R2', NULL),
+	('Non, je ne crois pas', '0', '2025-09-24 14:47:55.936857', '2025-09-24 14:47:55.936857', '2', '44cf5bb4-374f-4111-8d11-5c9b2d60f0f2', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', 'Q1PG12R3', NULL),
+	('Non, c''est impossible', '0', '2025-09-24 14:47:55.942589', '2025-09-24 14:47:55.942589', '3', 'c999b1e3-cb2b-476f-9b76-47855f7d7cbd', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', 'Q1PG12R4', NULL),
+	('Oui, certainement', '0', '2025-09-24 14:47:55.924416', '2025-09-24 14:47:55.945698', '4', '8234051d-5e26-4dde-b600-b2b5a393508f', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', 'Q1PG12R1', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('50 ans et plus', '0', '2026-01-28 15:27:06.059523', '2026-01-28 15:27:06.059523', '1', '95e1d556-2515-4eef-98a2-c381a31cb4ee', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', 'Q1IC02R01', NULL),
+	('Entre 30 et 50 ans', '0', '2026-01-28 15:27:06.064269', '2026-01-28 15:27:06.064269', '2', 'ccb9f08a-7ccf-4a99-80f2-465ed8c74f7e', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', 'Q1IC02R02', NULL),
+	('Moins de 30 ans', '0', '2026-01-28 15:27:06.068821', '2026-01-28 15:27:06.068821', '3', '13a07188-8222-41a8-9356-dc79a928bbbc', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', 'Q1IC02R03', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.605725', '2026-05-13 16:27:58.605725', '4', '1aa7560c-5d5a-4b93-aaa4-e4659ffdb78b', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', 'Q1IC02R04', NULL),
+	('Oui', '0', '2025-09-25 15:01:13.944373', '2025-09-25 15:01:13.944373', '1', '6e4a7d02-a957-491d-b32f-d1b33571f099', '4389eda1-973d-42b0-bfcd-0344d8659106', 'Q2SQ07R1', NULL),
+	('Non', '0', '2025-09-25 15:01:13.957048', '2026-01-15 14:52:08.595442', '2', '8836b9e2-9a27-49df-9082-440dded7ab8a', '4389eda1-973d-42b0-bfcd-0344d8659106', 'Q2SQ07R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.020761', '2026-05-13 16:27:59.020761', '3', '7a6a51f7-0628-4b2e-8b76-2e1af8713931', '4389eda1-973d-42b0-bfcd-0344d8659106', 'Q2SQ07R3', NULL),
+	('Oui', '0', '2026-01-28 15:27:06.980574', '2026-01-28 15:27:06.980574', '1', '56472ff2-7cff-449c-a82f-9ade8fd45c0e', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', 'Q1TO04R01', NULL),
+	('Non', '0', '2026-01-28 15:27:06.990947', '2026-01-28 15:27:06.990947', '2', 'e0d55598-a112-40dc-a29e-1eef80bdcc1b', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', 'Q1TO04R02', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.842182', '2026-05-13 16:27:58.842182', '3', 'b3ee33a2-5688-4c39-a5f4-c9613c9c2156', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', 'Q1TO04R03', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2025-09-25 14:21:48.340652', '2025-09-25 14:21:48.340652', '1', '078b6198-d528-4c2f-92a5-887e69bfafe8', '4b947690-2b17-4e37-ace4-1070a01f1170', 'Q2AO03R1', NULL),
+	('Non', '0', '2025-09-25 14:21:48.344017', '2025-09-25 14:21:48.344017', '2', '788c9ba4-a752-44a9-b4d6-73b9d0e9da7f', '4b947690-2b17-4e37-ace4-1070a01f1170', 'Q2AO03R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.923108', '2026-05-13 16:27:58.923108', '3', 'a0a7ce1b-3ed3-4a2b-8ce2-5ada625d846e', '4b947690-2b17-4e37-ace4-1070a01f1170', 'Q2AO03R3', NULL),
+	('Oui', '0', '2025-09-25 15:04:56.116667', '2025-09-25 15:04:56.116667', '1', 'e70c04a3-de7f-4f08-8c50-7240f3c5455b', '4b963f65-e208-4ed3-a745-dc05b0d86b85', 'Q2MP03R1', NULL),
+	('Non', '0', '2025-09-25 15:04:56.120542', '2025-09-25 15:04:56.120542', '2', '4f72a58d-e85e-4264-b037-53e96d3ec80a', '4b963f65-e208-4ed3-a745-dc05b0d86b85', 'Q2MP03R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.052875', '2026-05-13 16:27:59.052875', '3', '441b67ce-9b89-471d-b3dd-6f4f5a73bee4', '4b963f65-e208-4ed3-a745-dc05b0d86b85', 'Q2MP03R3', NULL),
+	('Plus de 50 % à la population TAM/Cadres', '0', '2025-09-24 14:47:55.670907', '2025-09-24 14:47:55.670907', '1', 'c55af0ef-de01-4e8f-b47e-db60bfd92597', '4e38efb7-6151-4ff3-8140-40b4dce21beb', 'Q1PG05R2', NULL),
+	('Plus de 75 % à la population TAM/Cadres', '0', '2025-09-24 14:47:55.679076', '2025-09-24 14:47:55.679076', '2', '238c7544-af54-43ae-9e16-687663284c9d', '4e38efb7-6151-4ff3-8140-40b4dce21beb', 'Q1PG05R3', NULL),
+	('Je Ne sais pas', '0', '2025-09-24 14:47:55.686739', '2025-09-24 14:47:55.686739', '3', '274bede6-9c09-4195-afa7-a856d5b1d9bd', '4e38efb7-6151-4ff3-8140-40b4dce21beb', 'Q1PG05R4', NULL),
+	('Plus de 30 % à la population Technicien Agent de Maitrise (TAM)/Cadres', '0', '2025-09-24 14:47:55.656776', '2025-09-24 14:47:55.690746', '4', '1e91ace4-f77d-4e09-8c05-4f59451cf7d6', '4e38efb7-6151-4ff3-8140-40b4dce21beb', 'Q1PG05R1', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Des employés/agents de service', '0', '2025-09-24 14:47:55.813115', '2025-09-24 14:47:55.813115', '1', '139defde-3032-4a03-aff7-d1f1c2907b10', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', 'Q1PG09R2', NULL),
+	('Des techniciens', '0', '2025-09-24 14:47:55.819062', '2025-09-24 14:47:55.819062', '2', 'cfb210ed-2f90-4ed6-925d-c0ef05d95589', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', 'Q1PG09R3', NULL),
+	('Des cadres', '0', '2025-09-24 14:47:55.824837', '2025-09-24 14:47:55.824837', '3', '15c6d0b8-f8a4-4f32-bc7e-64884a13f9b6', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', 'Q1PG09R4', NULL),
+	('Je ne sais pas', '0', '2025-09-24 14:47:55.830402', '2025-09-24 14:47:55.830402', '4', '0d593bc3-ef16-4e1d-9eb7-bcca853efa8b', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', 'Q1PG09R5', NULL),
+	('Des ouvriers', '0', '2025-09-24 14:47:55.806595', '2025-09-24 14:47:55.833414', '5', '983badd3-a070-4855-84e3-27954c7232f0', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', 'Q1PG09R1', NULL),
+	('Oui, en majorité ', '0', '2026-01-28 15:27:06.832169', '2026-01-28 15:27:06.832169', '1', '9d8de646-1da4-49ce-8606-d435706e2510', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', 'Q1TO01R01', NULL),
+	('Oui, pour une partie ', '0', '2026-01-28 15:27:06.837675', '2026-01-28 15:27:06.837675', '2', 'c6dfc3be-fad5-404d-9469-424c5e3660ce', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', 'Q1TO01R02', NULL),
+	('Non ', '0', '2026-01-28 15:27:06.843619', '2026-01-28 15:27:06.843619', '3', 'fc809691-8c40-4267-b49d-34a4590f843b', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', 'Q1TO01R03', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.801911', '2026-05-13 16:27:58.801911', '4', 'acb3a503-d6d7-4c87-a0ed-604d871286c8', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', 'Q1TO01R04', NULL),
+	('Sans diplôme  ', '0', '2026-01-28 15:27:06.312139', '2026-01-28 15:27:06.312139', '1', '1bcb241e-099c-4199-817d-a3f7d35ea70e', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R01', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('CAP ou BEP (niveau 3) ', '0', '2026-01-28 15:27:06.318034', '2026-01-28 15:27:06.318034', '2', '1b5c859c-0256-4c26-97b7-b93ca50376b9', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R02', NULL),
+	('Bac ou bac pro (niveau 4) ', '0', '2026-01-28 15:27:06.326197', '2026-01-28 15:27:06.326197', '3', '88981b3c-6d42-4996-8763-5f96ab70ed31', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R03', NULL),
+	('Bac+2/3 (niveau 5/6) ', '0', '2026-01-28 15:27:06.333033', '2026-01-28 15:27:06.333033', '4', '94844d6d-3701-4002-b29d-8fb2fcc389d3', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R04', NULL),
+	('Bac+5 (niveau 7) ', '0', '2026-01-28 15:27:06.338671', '2026-01-28 15:27:06.338671', '5', '657d7cb7-3b6e-4f82-8d00-384694ae1ead', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R05', NULL),
+	('Je ne sais pas ', '0', '2026-01-28 15:27:06.343689', '2026-01-28 15:27:06.343689', '6', '9db3f1b9-171f-414c-9414-3941ad4ac584', '56554354-6dd7-40b5-b93c-ab394c5f72d4', 'Q1PC02R06', NULL),
+	('Oui', '0', '2025-09-25 14:27:38.69074', '2025-09-25 14:27:38.69074', '1', 'd9476cdb-9709-4cf6-9bae-dce1f17bbc5d', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', 'Q2SQ01R1', NULL),
+	('Non', '0', '2025-09-25 14:27:38.695714', '2025-09-25 14:27:38.695714', '2', 'e90bd060-3f82-41db-89de-cdf8f4a289dc', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', 'Q2SQ01R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.949219', '2026-05-13 16:27:58.949219', '3', 'a71c1c21-2356-492b-8fc5-410472530e0f', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', 'Q2SQ01R3', NULL),
+	('Non', '0', '2025-09-24 14:47:56.07602', '2025-09-24 14:47:56.07602', '1', '07f0a177-0ca9-4f63-921c-a4c851b29d1b', '6442e6c4-ec47-42df-8273-34a217449819', 'Q1PG17R2', NULL),
+	('En cours', '0', '2025-09-24 14:47:56.081682', '2025-09-24 14:47:56.081682', '2', '8435a07b-53c8-4b7c-809a-b3c664800885', '6442e6c4-ec47-42df-8273-34a217449819', 'Q1PG17R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2025-09-24 14:47:56.070056', '2025-09-24 14:47:56.084789', '3', '369e2665-aea3-4e7d-bf64-7d720c5827a4', '6442e6c4-ec47-42df-8273-34a217449819', 'Q1PG17R1', NULL),
+	('Non', '0', '2025-09-24 14:47:56.125973', '2025-09-24 14:47:56.125973', '1', '1a38b3a2-db54-4b10-b481-f0339db00c2c', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', 'Q1PG19R2', NULL),
+	('Oui', '0', '2025-09-24 14:47:56.120384', '2025-09-24 14:47:56.129137', '2', 'dfa9dfd9-d09f-46ac-93da-1f1c0b33b620', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', 'Q1PG19R1', NULL),
+	('Oui', '0', '2025-09-25 14:17:55.803556', '2025-09-25 14:17:55.803556', '1', '7c17bc6f-d23d-4cd9-9b96-b427d4fdefe1', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', 'Q2PC02R1', NULL),
+	('Non', '0', '2025-09-25 14:17:55.809977', '2025-09-25 14:17:55.809977', '2', 'afc8d864-b72e-41b7-b260-2cb58f0fd9b0', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', 'Q2PC02R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.874033', '2026-05-13 16:27:58.874033', '3', '0d5c70c2-fc89-4c6a-ba2c-44088d4a8c24', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', 'Q2PC02R3', NULL),
+	('Agriculture et pêche', '0', '2026-01-28 15:27:06.09785', '2026-01-28 15:27:06.09785', '1', '76736a3a-f694-4464-9ec7-d335e4b97bfb', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R01', NULL),
+	('Agro-alimentaire', '0', '2026-01-28 15:27:06.103348', '2026-01-28 15:27:06.103348', '2', '4e5056d6-244c-4cad-a280-fa0b29a47054', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R02', NULL),
+	('Aide à domicile', '0', '2026-01-28 15:27:06.108184', '2026-01-28 15:27:06.108184', '3', 'c2959cf8-c7e0-461a-bab9-adde32f353f6', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R03', NULL),
+	('Animation, loisirs et spectacles', '0', '2026-01-28 15:27:06.112981', '2026-01-28 15:27:06.112981', '4', 'fb9950ae-82f8-44a9-8e62-85a5fd90bafa', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R04', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('BTP ', '0', '2026-01-28 15:27:06.118406', '2026-01-28 15:27:06.118406', '5', 'b4e92c8d-b418-4adf-abd5-b624e18861f5', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R05', NULL),
+	('Collectivités', '0', '2026-01-28 15:27:06.122826', '2026-01-28 15:27:06.122826', '6', '1ae4e2c3-7f56-4841-abed-a4e009c405fa', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R06', NULL),
+	('Commerce ', '0', '2026-01-28 15:27:06.127414', '2026-01-28 15:27:06.127414', '7', '13aa3d83-9540-45d9-86bf-9e5f75c343ad', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R07', NULL),
+	('Entretien, maintenance, services techniques', '0', '2026-01-28 15:27:06.131959', '2026-01-28 15:27:06.131959', '8', '46ed81d1-8d1d-4def-b595-9478787ec67d', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R08', NULL),
+	('Espaces-verts', '0', '2026-01-28 15:27:06.137278', '2026-01-28 15:27:06.137278', '9', '03b0cd8a-e64b-4584-a9d1-f732ce397eb2', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R09', NULL),
+	('FPH', '0', '2026-01-28 15:27:06.143045', '2026-01-28 15:27:06.143045', '10', 'e17795d3-eb3d-45c6-9d4c-785105b802bd', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R10', NULL),
+	('Hôtellerie-restauration ', '0', '2026-01-28 15:27:06.149243', '2026-01-28 15:27:06.149243', '11', 'bacecc8e-1d97-42c8-82c1-d7cb571fcf94', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R11', NULL),
+	('Industrie (métallurgie, chimie, bois / papier, pharmacie, textile, automobile, etc.) ', '0', '2026-01-28 15:27:06.153915', '2026-01-28 15:27:06.153915', '12', 'b90d5d98-b57e-4300-9230-fd5038afd2a1', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R12', NULL),
+	('Propreté ', '0', '2026-01-28 15:27:06.160083', '2026-01-28 15:27:06.160083', '13', '286575a8-7b1a-45e3-a862-587fd0c2f940', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R13', NULL),
+	('Sanitaire social et médico-social', '0', '2026-01-28 15:27:06.165014', '2026-01-28 15:27:06.165014', '14', 'f563b535-b54e-45fe-9d53-12a53cfc0d80', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R14', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Sécurité ', '0', '2026-01-28 15:27:06.169526', '2026-01-28 15:27:06.169526', '15', 'a74db0cb-0d78-4afd-b5ad-0a54ccab3230', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R15', NULL),
+	('Transport/Logistique ', '0', '2026-01-28 15:27:06.175117', '2026-01-28 15:27:06.175117', '16', '8d6429e2-4c56-495d-a054-921ca6a1e100', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R16', NULL),
+	('Autre ', '0', '2026-01-28 15:27:06.17964', '2026-01-28 15:27:06.17964', '17', '28b00ec3-ecc0-49c5-ab6e-bb793492b55a', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R17', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.622083', '2026-05-13 16:27:58.622083', '18', 'a797d3d9-9a87-47d9-927b-f05b297a5fcc', '6bf422f9-346c-4738-835c-61dc2294350b', 'Q1IC03R018', NULL),
+	('Oui', '0', '2025-09-25 14:28:23.551227', '2025-09-25 14:28:23.551227', '1', '56bc6d36-a532-489f-9986-2d197c0e3df5', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', 'Q2SQ02R1', NULL),
+	('Non', '0', '2025-09-25 14:28:23.554669', '2025-09-25 14:28:23.554669', '2', 'd5db81f0-af45-4f12-9db5-632dcf0e3049', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', 'Q2SQ02R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.960664', '2026-05-13 16:27:58.960664', '3', '7c5ddd84-db44-4288-be6e-b98ed725f20c', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', 'Q2SQ02R3', NULL),
+	('Oui', '0', '2025-09-25 14:16:54.887681', '2025-09-25 14:16:54.887681', '1', '0fb6c3c1-07ca-4422-a7b2-d2ecb08d7e5d', '727257e5-5738-4917-a1c0-54cb14807530', 'Q2PC01R1', NULL),
+	('Non', '0', '2025-09-25 14:16:54.89733', '2025-09-25 14:16:54.89733', '2', 'b07cb7f0-48ac-4ce8-b469-82a388440a6d', '727257e5-5738-4917-a1c0-54cb14807530', 'Q2PC01R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.86335', '2026-05-13 16:27:58.86335', '3', '47f25f64-4923-4bd6-baf1-cf36d837818a', '727257e5-5738-4917-a1c0-54cb14807530', 'Q2PC01R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Non, certains postes ne nécessitant pas de niveau minimum requis ', '0', '2026-01-28 15:27:06.738469', '2026-01-28 15:27:06.738469', '1', '80f3f3df-11cf-421d-bb09-f15431a31b1c', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', 'Q1PR01R01', NULL),
+	('Non, on ne contrôle généralement pas le niveau ', '0', '2026-01-28 15:27:06.745225', '2026-01-28 15:27:06.745225', '2', '5ca13e36-9c52-448f-ba3a-18d2640b8700', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', 'Q1PR01R02', NULL),
+	('Oui, pour tous les postes ', '0', '2026-01-28 15:27:06.752902', '2026-01-28 15:27:06.752902', '3', '90d136a1-348c-4dd6-b285-82c5c6de6889', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', 'Q1PR01R03', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.78032', '2026-05-13 16:27:58.78032', '4', '2f7bedf8-0941-442d-b65e-7353aafb0430', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', 'Q1PR01R04', NULL),
+	('Non, on ne contrôle généralement pas le niveau', '0', '2025-09-24 14:47:55.962809', '2025-09-24 14:47:55.962809', '1', 'c62c84b0-bd6d-449e-8736-10244cdf23a2', '7649d478-c190-4302-b24a-a46c277665e7', 'Q1PG13R2', NULL),
+	('Oui, pour tous les postes', '0', '2025-09-24 14:47:55.968467', '2025-09-24 14:47:55.968467', '2', '5d6a1ed1-3329-4b06-998a-77e2471c4b39', '7649d478-c190-4302-b24a-a46c277665e7', 'Q1PG13R3', NULL),
+	('Non, certains postes ne nécessitant pas de niveau minimum requis', '0', '2025-09-24 14:47:55.956652', '2025-09-24 14:47:55.971501', '3', '7224f585-fb50-4fd7-aaf3-197aae0f5b8c', '7649d478-c190-4302-b24a-a46c277665e7', 'Q1PG13R1', NULL),
+	('Oui', '0', '2025-09-25 14:59:40.828261', '2025-09-25 14:59:40.828261', '1', '7d01dd17-8db5-4e35-be04-87ee0f13a6eb', '77346421-fe52-4202-b9a6-85d9ff05a3ea', 'Q2SQ05R1', NULL),
+	('Non', '0', '2025-09-25 14:59:40.83161', '2025-09-25 14:59:40.83161', '2', 'b299ce02-026b-48dd-b6e0-8887377079d1', '77346421-fe52-4202-b9a6-85d9ff05a3ea', 'Q2SQ05R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.995937', '2026-05-13 16:27:58.995937', '3', '21ecb638-5713-46f7-9db9-0f0be4f59e86', '77346421-fe52-4202-b9a6-85d9ff05a3ea', 'Q2SQ05R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Une culture de l''oral', '0', '2025-09-24 14:47:55.713104', '2025-09-24 14:47:55.713104', '1', '7481a142-b9bc-47c4-9274-546df6fa7af3', '77552429-a8d7-4910-9aa7-78c022dcbc76', 'Q1PG06R2', NULL),
+	('Une culture du numérique', '0', '2025-09-24 14:47:55.720177', '2025-09-24 14:47:55.720177', '2', '0c8c8542-5441-4897-89ad-08c8e8e7a54f', '77552429-a8d7-4910-9aa7-78c022dcbc76', 'Q1PG06R3', NULL),
+	('Un mixte', '0', '2025-09-24 14:47:55.728774', '2025-09-24 14:47:55.728774', '3', 'c52e8cd0-e92b-4c05-996b-13ed86769465', '77552429-a8d7-4910-9aa7-78c022dcbc76', 'Q1PG06R4', NULL),
+	('Une culture de l''écrit', '0', '2025-09-24 14:47:55.705557', '2025-09-24 14:47:55.732916', '4', '4f1a994a-5ac9-49e3-be94-fb21e6b9ec16', '77552429-a8d7-4910-9aa7-78c022dcbc76', 'Q1PG06R1', NULL),
+	('Oui ', '0', '2026-01-28 15:27:06.588872', '2026-01-28 15:27:06.588872', '1', '73fa2442-f505-44a2-bd2f-3b6ddc98099a', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', 'Q1GC04R01', NULL),
+	('Non ', '0', '2026-01-28 15:27:06.594743', '2026-01-28 15:27:06.594743', '2', 'f9319547-497c-4b22-880b-64f8ecf4f43e', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', 'Q1GC04R02', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.740088', '2026-05-13 16:27:58.740088', '3', 'c032802a-842e-4e37-8f82-03d0b7f9bd19', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', 'Q1GC04R03', NULL),
+	('Très avancée ', '0', '2026-01-28 15:27:06.881637', '2026-01-28 15:27:06.881637', '1', 'be45a175-6cb2-404b-a1f4-c0b9c8cb9a2d', '8bdef706-7b40-4122-be15-bfd89c038c49', 'Q1TO02R01', NULL),
+	('En cours ', '0', '2026-01-28 15:27:06.887419', '2026-01-28 15:27:06.887419', '2', 'fbaf62ec-828c-4393-8f67-f940615c5ddd', '8bdef706-7b40-4122-be15-bfd89c038c49', 'Q1TO02R02', NULL),
+	('A mettre en place ', '0', '2026-01-28 15:27:06.892556', '2026-01-28 15:27:06.892556', '3', '377f7590-3285-440c-9b48-44e201d463d9', '8bdef706-7b40-4122-be15-bfd89c038c49', 'Q1TO02R03', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.81706', '2026-05-13 16:27:58.81706', '4', 'dfacc09b-6831-4656-b31a-bd891e071435', '8bdef706-7b40-4122-be15-bfd89c038c49', 'Q1TO02R04', NULL),
+	('Oui', '0', '2025-09-25 15:07:35.346102', '2025-09-25 15:07:35.346102', '1', 'ab00e479-247a-422b-b58a-5492ffdd952b', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', 'Q2MP06R1', NULL),
+	('Non', '0', '2025-09-25 15:07:35.349447', '2025-09-25 15:07:35.349447', '2', '9452aded-d90d-4cc3-bb16-e79622c58c0c', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', 'Q2MP06R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.087442', '2026-05-13 16:27:59.087442', '3', '806b68b6-bca2-4d53-9929-198a572d7a61', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', 'Q2MP06R3', NULL),
+	('Des ouvriers ', '0', '2026-01-28 15:27:06.259672', '2026-01-28 15:27:06.259672', '1', '9e256d51-3cda-46fa-a95c-be622f0a1fb1', '98672d19-9244-48a9-bf43-75d154ac16de', 'Q1PC01R01', NULL),
+	('Des employés / agents de service ', '0', '2026-01-28 15:27:06.264052', '2026-01-28 15:27:06.264052', '2', 'be947535-7798-4bd3-9aad-f04ce98e6895', '98672d19-9244-48a9-bf43-75d154ac16de', 'Q1PC01R02', NULL),
+	('Des techniciens ', '0', '2026-01-28 15:27:06.269403', '2026-01-28 15:27:06.269403', '3', '16cbc3cd-7335-48ff-85c4-bdb31e2f076f', '98672d19-9244-48a9-bf43-75d154ac16de', 'Q1PC01R03', NULL),
+	('Des cadres ', '0', '2026-01-28 15:27:06.274511', '2026-01-28 15:27:06.274511', '4', '924ee2ba-6383-4e8d-be67-923af21ef457', '98672d19-9244-48a9-bf43-75d154ac16de', 'Q1PC01R04', NULL),
+	('Je ne sais pas ', '0', '2026-01-28 15:27:06.27971', '2026-01-28 15:27:06.27971', '5', '843741d7-2ce2-44f0-9c75-c033203ecb0c', '98672d19-9244-48a9-bf43-75d154ac16de', 'Q1PC01R05', NULL),
+	('Oui', '0', '2025-09-25 15:04:12.675351', '2025-09-25 15:04:12.675351', '1', '77f4e4f1-edc4-4ba7-a13c-fd069a5bac7e', '994dec60-d714-4634-b7f4-50674725e259', 'Q2MP02R1', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Non', '0', '2025-09-25 15:04:12.678772', '2025-09-25 15:04:12.678772', '2', '449762e5-c589-4dca-8158-cea91f239139', '994dec60-d714-4634-b7f4-50674725e259', 'Q2MP02R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.041961', '2026-05-13 16:27:59.041961', '3', '6be7371d-12f5-43c6-a021-386122af70d7', '994dec60-d714-4634-b7f4-50674725e259', 'Q2MP02R3', NULL),
+	('Oui', '0', '2025-09-25 15:09:04.070109', '2025-09-25 15:09:04.070109', '1', 'd4dd57f1-49b6-48a5-9b73-2027bff18a88', '994e25f6-b457-4b26-a8ae-cdcb891d8441', 'Q2MP08R1', NULL),
+	('Non', '0', '2025-09-25 15:09:04.073588', '2025-09-25 15:09:04.073588', '2', '2f998244-46be-4736-8256-4e42750758d3', '994e25f6-b457-4b26-a8ae-cdcb891d8441', 'Q2MP08R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.11274', '2026-05-13 16:27:59.11274', '3', '954cd6c2-26fd-46fd-85a9-3c546b10a519', '994e25f6-b457-4b26-a8ae-cdcb891d8441', 'Q2MP08R3', NULL),
+	('Oui', '0', '2026-01-28 15:27:06.930778', '2026-01-28 15:27:06.930778', '1', '80a2033b-9602-4d8b-a2d1-d5b64a0083d5', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', 'Q1TO03R01', NULL),
+	('Non', '0', '2026-01-28 15:27:06.936256', '2026-01-28 15:27:06.936256', '2', 'de6b009e-8bf8-4150-ad76-6c74efd8e472', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', 'Q1TO03R02', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.829321', '2026-05-13 16:27:58.829321', '3', 'dc2f51f6-5dc9-4597-b904-78ebb7bf8b3a', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', 'Q1TO03R03', NULL),
+	('Oui', '0', '2025-09-25 14:20:50.414341', '2025-09-25 14:20:50.414341', '1', 'f81166b6-d95b-4a60-90ec-918befaf03e2', '9bcde02d-582a-4443-9eb1-994293765103', 'Q2AO02R1', NULL),
+	('Non', '0', '2025-09-25 14:20:50.418436', '2025-09-25 14:20:50.418436', '2', '76380803-3401-4968-8648-3459970b608a', '9bcde02d-582a-4443-9eb1-994293765103', 'Q2AO02R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.91205', '2026-05-13 16:27:58.91205', '3', '7a906cfe-8098-49ac-84c7-2db25bf86839', '9bcde02d-582a-4443-9eb1-994293765103', 'Q2AO02R3', NULL),
+	('Une culture de l''écrit', '0', '2026-01-28 15:27:06.212136', '2026-01-28 15:27:06.212136', '1', 'bdebb5b6-4991-45ba-8f92-db23827595f4', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', 'Q1IC05R01', NULL),
+	('Une culture de l''oral ', '0', '2026-01-28 15:27:06.216852', '2026-01-28 15:27:06.216852', '2', 'e0416a83-e763-48da-a344-8b77395c65c4', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', 'Q1IC05R02', NULL),
+	('Une culture du numérique ', '0', '2026-01-28 15:27:06.223881', '2026-01-28 15:27:06.223881', '3', 'a546d201-c546-45ac-a08b-59cb9da853d0', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', 'Q1IC05R03', NULL),
+	('Un mixte ', '0', '2026-01-28 15:27:06.229889', '2026-01-28 15:27:06.229889', '4', '934fb501-d5f5-4f7c-a156-f8585fca4a55', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', 'Q1IC05R04', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.66238', '2026-05-13 16:27:58.66238', '5', '7ad9d9ea-8afc-414b-b3c4-e19e737ab7e0', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', 'Q1IC05R05', NULL),
+	('CAP ou BEP (niveau 3)', '0', '2025-09-24 14:47:55.851074', '2025-09-24 14:47:55.851074', '1', '8aa761b8-19c0-4798-a262-61be892de336', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R2', NULL),
+	('Bac ou bac pro (niveau 4)', '0', '2025-09-24 14:47:55.856998', '2025-09-24 14:47:55.856998', '2', 'dd16c09b-576d-4c11-a3c0-f4a9e6a643ce', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R3', NULL),
+	('Bac+2/3 (niveau 5/6)', '0', '2025-09-24 14:47:55.862828', '2025-09-24 14:47:55.862828', '3', '3334a650-4a3a-4544-b92f-ba2a841a4c66', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R4', NULL),
+	('Bac+5 (niveau 7)', '0', '2025-09-24 14:47:55.868534', '2025-09-24 14:47:55.868534', '4', '3b125ba6-9b3e-4598-877d-cc8c0ba1d056', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R5', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2025-09-24 14:47:55.874627', '2025-09-24 14:47:55.874627', '5', 'fa4cdca2-fa58-4b06-818a-b0ae1ffcaf85', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R6', NULL),
+	('Sans diplôme', '0', '2025-09-24 14:47:55.845177', '2025-09-24 14:47:55.877936', '6', '807b87eb-fbe2-42ca-8569-65e28cd55c17', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', 'Q1PG10R1', NULL),
+	('Oui, une partie', '0', '2025-09-24 14:47:56.038603', '2025-09-24 14:47:56.038603', '1', '5260d27d-4567-4707-91fa-cd5cf068fd30', 'ac370b51-b3f7-46fc-88b5-a526052730f0', 'Q1PG16R2', NULL),
+	('Non pas vraiment', '0', '2025-09-24 14:47:56.044231', '2025-09-24 14:47:56.044231', '2', 'fb36c997-51ce-4a11-85e3-d4a389fb48cd', 'ac370b51-b3f7-46fc-88b5-a526052730f0', 'Q1PG16R3', NULL),
+	('Non pas du tout', '0', '2025-09-24 14:47:56.049897', '2025-09-24 14:47:56.049897', '3', '90fb7a96-1f70-4478-b1c9-ea01b924942c', 'ac370b51-b3f7-46fc-88b5-a526052730f0', 'Q1PG16R4', NULL),
+	('Je ne sais pas', '0', '2025-09-24 14:47:56.055819', '2025-09-24 14:47:56.055819', '4', '7bc9670a-0ff5-4bc4-8573-057a2562b644', 'ac370b51-b3f7-46fc-88b5-a526052730f0', 'Q1PG16R5', NULL),
+	('Oui, une majorité', '0', '2025-09-24 14:47:56.03297', '2025-09-24 14:47:56.059037', '5', '02fd66f3-5d92-4db4-89b1-c290f243deb1', 'ac370b51-b3f7-46fc-88b5-a526052730f0', 'Q1PG16R1', NULL),
+	('Oui', '0', '2025-09-25 14:58:54.337163', '2025-09-25 14:58:54.337163', '1', 'c7e97ea3-f566-4680-ab07-aa8eaa71d35c', 'afff1309-7bb6-49db-a1ed-5132914c3f69', 'Q2SQ04R1', NULL),
+	('Non', '0', '2025-09-25 14:58:54.341915', '2025-09-25 14:58:54.341915', '2', '3b6bccfb-010b-4616-a9f2-2c63b49c17b8', 'afff1309-7bb6-49db-a1ed-5132914c3f69', 'Q2SQ04R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.985322', '2026-05-13 16:27:58.985322', '3', '217c21b3-d1b1-4737-8134-0efbb7fc0ad6', 'afff1309-7bb6-49db-a1ed-5132914c3f69', 'Q2SQ04R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Moins de 50 % à suivre une formation tous les ans', '0', '2025-09-24 14:47:55.896519', '2025-09-24 14:47:55.896519', '1', 'ff64775c-9ebf-49c8-98f7-9d17a182a367', 'b1739b3d-ed79-4f80-b86a-d73361108f36', 'Q1PG11R2', NULL),
+	('Moins de 85 % à suivre une formation tous les ans', '0', '2025-09-24 14:47:55.905028', '2025-09-24 14:47:55.905028', '2', '76140522-26dd-4c25-9d2e-c5d3e3c29cfa', 'b1739b3d-ed79-4f80-b86a-d73361108f36', 'Q1PG11R3', NULL),
+	('100 % des salariés suivent une formation au moins une fois par an', '0', '2025-09-24 14:47:55.91045', '2025-09-24 14:47:55.91045', '3', 'fd3dde7d-c9dd-4ba5-8783-b6207cdca185', 'b1739b3d-ed79-4f80-b86a-d73361108f36', 'Q1PG11R4', NULL),
+	('Moins de 30 % à suivre une formation tous les ans', '0', '2025-09-24 14:47:55.88996', '2025-09-24 14:47:55.913342', '4', 'e4898da6-e653-4c53-93f0-6f731a7d342d', 'b1739b3d-ed79-4f80-b86a-d73361108f36', 'Q1PG11R1', NULL),
+	('Agriculture et pêche', '0', '2025-09-18 10:54:11.669245', '2025-09-18 10:54:11.669245', '1', 'df5fd6a5-7dc8-4967-b177-b778290e69c0', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R1', NULL),
+	('Agro-alimentaire', '0', '2025-09-18 10:54:11.674786', '2025-09-18 10:54:11.674786', '2', '5e10cccd-4039-4d26-bf90-3fb76d82773a', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R2', NULL),
+	('Aide à domicile', '0', '2025-09-18 10:54:11.679369', '2025-09-18 10:54:11.679369', '3', 'c3b8d01c-d291-4220-ae70-b52c65641347', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R3', NULL),
+	('BTP', '0', '2025-09-18 10:54:11.683439', '2025-09-18 10:54:11.683439', '4', 'e19b16bc-9211-45d9-a2da-da2b6e979b1c', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R4', NULL),
+	('Collectivités', '0', '2025-09-18 10:54:11.687167', '2025-09-18 10:54:11.687167', '5', '5bd99c35-04cf-47c3-9c65-ea3d6d75762b', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R5', NULL),
+	('Commerce', '0', '2025-09-18 10:54:11.690637', '2025-09-18 10:54:11.690637', '6', 'ca1d9901-ba0d-49c4-b138-5777fa060ee0', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R6', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Entretien, maintenance, services civiques', '0', '2025-09-18 10:54:11.69439', '2025-09-18 10:54:11.69439', '7', '29ac0717-df66-4571-a1e0-ecbbde973736', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R7', NULL),
+	('Espaces verts', '0', '2025-09-18 10:54:11.697873', '2025-09-18 10:54:11.697873', '8', '77c4ee74-d3f9-4099-9060-2a45d26a2c47', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R8', NULL),
+	('FPH', '0', '2025-09-18 10:54:11.700933', '2025-09-18 10:54:11.700933', '9', '977960e2-a69f-4ed4-806d-88afc22238e3', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R9', NULL),
+	('Hôtellerie-restauration', '0', '2025-09-18 10:54:11.704883', '2025-09-18 10:54:11.704883', '10', '1bfbc88a-93e4-4797-9956-cb857ed19a65', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R10', NULL),
+	('Industrie (métallurgie, chimie, bois/papier, pharmacie, textile, automobile...)', '0', '2025-09-18 10:54:11.707848', '2025-09-18 10:54:11.707848', '11', '6a044807-4b89-463c-b165-b6b69cd3a022', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R11', NULL),
+	('Propreté', '0', '2025-09-18 10:54:11.710738', '2025-09-18 10:54:11.710738', '12', '1b4278d7-55af-4667-b42a-5bfa836e195e', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R12', NULL),
+	('Sanitaire social et médico-social', '0', '2025-09-18 10:54:11.713446', '2025-09-18 10:54:11.713446', '13', '884f7698-c13a-4291-946b-69467f593014', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R13', NULL),
+	('Sécurité', '0', '2025-09-18 10:54:11.716405', '2025-09-18 10:54:11.716405', '14', 'fda34da9-1520-4e2e-8036-75333f28e7e3', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R14', NULL),
+	('Transport/Logistique', '0', '2025-09-18 10:54:11.71923', '2025-09-18 10:54:11.71923', '15', 'f52cb569-8d40-4d8b-9367-2b9731237d53', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R15', NULL),
+	('Autre', '0', '2025-09-18 10:54:11.722119', '2025-09-18 10:54:11.722119', '16', 'd31d9ddf-e19e-4fbe-94bb-3f114a55a7bd', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', 'Q1PG03R16', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Non, on ne contrôle généralement pas le niveau', '0', '2025-09-24 14:47:55.9898', '2025-09-24 14:47:55.9898', '1', 'cc8d80ec-91d4-4ab9-b229-0c4670a089e0', 'ba4968c5-53c5-415d-8be2-c662503b8832', 'Q1PG14R2', NULL),
+	('Oui, pour tous les postes', '0', '2025-09-24 14:47:55.99508', '2025-09-24 14:47:55.99508', '2', '1582fa22-b11e-40a6-84ed-a61c040927f2', 'ba4968c5-53c5-415d-8be2-c662503b8832', 'Q1PG14R3', NULL),
+	('Non, certains postes ne nécessitant pas de niveau minimum requis', '0', '2025-09-24 14:47:55.984032', '2025-09-24 14:47:55.998135', '3', 'fe51b6d3-b1b7-440f-8be5-5ceb9afc4753', 'ba4968c5-53c5-415d-8be2-c662503b8832', 'Q1PG14R1', NULL),
+	('Oui, certainement ', '0', '2026-01-28 15:27:06.62835', '2026-01-28 15:27:06.62835', '1', 'bf7eb487-b176-4197-a9de-72e41092870d', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', 'Q1GC05R01', NULL),
+	('Oui, probablement ', '0', '2026-01-28 15:27:06.633654', '2026-01-28 15:27:06.633654', '2', '6a954b28-e380-45ae-aad0-21717f0a374d', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', 'Q1GC05R02', NULL),
+	('Non, je ne crois pas ', '0', '2026-01-28 15:27:06.645152', '2026-01-28 15:27:06.645152', '3', '71399e5c-1bd6-43ee-83ca-e3c53cf5a68b', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', 'Q1GC05R03', NULL),
+	('Non, c''est impossible ', '0', '2026-01-28 15:27:06.654467', '2026-01-28 15:27:06.654467', '4', '013edee7-1c2c-4a93-931b-e9e9a6305409', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', 'Q1GC05R04', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.754303', '2026-05-13 16:27:58.754303', '5', '0144bbf9-5bc8-4be1-b5c5-013e8999a559', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', 'Q1GC05R05', NULL),
+	('250 salariés et +', '0', '2025-09-18 10:31:33.648968', '2025-09-18 10:31:33.648968', '1', '36aad351-6f65-4695-9acf-a914e81e2238', 'c325e445-6546-4453-a90e-97150abce34e', 'Q1PG01R1', NULL),
+	('50 à 249 salariés', '0', '2025-09-18 10:31:33.65451', '2025-09-18 10:31:33.65451', '2', '4dbbb5da-3a7d-4d74-afac-fd82c88d7b43', 'c325e445-6546-4453-a90e-97150abce34e', 'Q1PG01R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('11 à 49 salariés/agents ', '0', '2025-09-18 10:31:33.658041', '2025-09-18 10:31:33.658041', '3', 'f5e70244-3a7f-48e7-9e42-75e156d1b674', 'c325e445-6546-4453-a90e-97150abce34e', 'Q1PG01R3', NULL),
+	('1 à 10 salariés/agents ', '0', '2025-09-18 10:31:33.661356', '2025-09-18 10:31:33.661356', '4', 'ccd7c28c-6e5d-496e-ba7b-57dbc042ecdc', 'c325e445-6546-4453-a90e-97150abce34e', 'Q1PG01R4', NULL),
+	('Moins de 30 % à suivre une formation tous les ans ', '0', '2026-01-28 15:27:06.485727', '2026-01-28 15:27:06.485727', '1', '553dd423-bc0a-4309-980f-d8f56629d59b', 'c779b91f-a270-4c69-8263-114b0fdebaf4', 'Q1GC02R01', NULL),
+	('Entre 30 et 50 % à suivre une formation tous les ans ', '0', '2026-01-28 15:27:06.491103', '2026-07-29 12:25:13.006954', '2', 'dcc52494-abf9-460e-8c44-56d3e1d8eae6', 'c779b91f-a270-4c69-8263-114b0fdebaf4', 'Q1GC02R02', NULL),
+	('Entre 50 et 85 % à suivre une formation tous les ans ', '0', '2026-01-28 15:27:06.495884', '2026-07-29 12:25:13.053354', '3', '6e150125-de08-48bf-841f-84cc5e6388af', 'c779b91f-a270-4c69-8263-114b0fdebaf4', 'Q1GC02R03', NULL),
+	('Plus de 85% suivent une formation au moins une fois par an ', '0', '2026-01-28 15:27:06.501299', '2026-07-29 12:25:13.057191', '4', '790de078-c01c-424d-afd2-b28ea89ffccc', 'c779b91f-a270-4c69-8263-114b0fdebaf4', 'Q1GC02R04', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.70728', '2026-05-13 16:27:58.70728', '5', '4cbb7e87-00b6-48b5-8172-e86e4118ae61', 'c779b91f-a270-4c69-8263-114b0fdebaf4', 'Q1GC02R05', NULL),
+	('Oui', '0', '2025-09-25 15:06:52.200172', '2025-09-25 15:06:52.200172', '1', '127edbba-90d8-44a1-8d1f-6b46e1b94c8a', 'c90828a1-6d94-4357-9e78-613ce70ab301', 'Q2MP05R1', NULL),
+	('Non', '0', '2025-09-25 15:06:52.203593', '2025-09-25 15:06:52.203593', '2', '625e3f03-f454-4504-8fce-1405541c83ff', 'c90828a1-6d94-4357-9e78-613ce70ab301', 'Q2MP05R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.076265', '2026-05-13 16:27:59.076265', '3', '53d47d3a-ad61-411b-bdc0-6b3ab0f162f2', 'c90828a1-6d94-4357-9e78-613ce70ab301', 'Q2MP05R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('250 salariés / agents et +', '0', '2026-01-28 15:27:05.97661', '2026-01-28 15:27:05.97661', '1', 'becf5612-1dcb-432a-bb66-dc7d7b099cd9', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', 'Q1IC01R01', NULL),
+	('50 à 249 salariés / agents', '0', '2026-01-28 15:27:05.9846', '2026-01-28 15:27:05.9846', '2', 'b4fb2bbc-dbd8-4048-8cfa-1cc312de3b5b', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', 'Q1IC01R02', NULL),
+	('11 à 49 salariés / agents ', '0', '2026-01-28 15:27:05.991964', '2026-01-28 15:27:05.991964', '3', '1ccb8b4a-7b49-4e01-a167-860b43d323af', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', 'Q1IC01R03', NULL),
+	('1 à 10 salariés / agents ', '0', '2026-01-28 15:27:06.001212', '2026-01-28 15:27:06.001212', '4', '85703dee-6d81-4235-93ea-ac6025adf326', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', 'Q1IC01R04', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.576418', '2026-05-13 16:27:58.576418', '5', '07d09341-a239-4c01-a33b-ebb1903d9736', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', 'Q1IC01R05', NULL),
+	('50 ans et plus', '0', '2025-09-18 10:34:57.094283', '2025-09-18 10:34:57.094283', '1', 'a4ed5a70-3493-4154-9273-aaf019c29a3b', 'd8e2cec3-0130-496c-a30d-8e63138a240d', 'Q1PG02R1', NULL),
+	('Entre 30 et 50 ans', '0', '2025-09-18 10:34:57.098722', '2025-09-18 10:34:57.098722', '2', 'd478fde3-8b32-4f34-830a-27317fde0eb5', 'd8e2cec3-0130-496c-a30d-8e63138a240d', 'Q1PG02R2', NULL),
+	('Moins de 30 ans', '0', '2025-09-18 10:34:57.102449', '2025-09-18 10:34:57.102449', '3', 'ed611921-8c9f-45fe-a0af-1b8db8843619', 'd8e2cec3-0130-496c-a30d-8e63138a240d', 'Q1PG02R3', NULL),
+	('Non', '0', '2025-09-24 14:47:56.144766', '2025-09-24 14:47:56.144766', '1', 'ae736af8-dfb1-47f3-b7a7-d6c2ef8c778d', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', 'Q1PG20R2', NULL),
+	('Oui', '0', '2025-09-24 14:47:56.139259', '2025-09-24 14:47:56.147921', '2', 'de2fa0ef-3111-4ac8-ba35-065423c747c8', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', 'Q1PG20R1', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2025-09-25 14:56:23.514172', '2025-09-25 14:56:23.514172', '1', 'a9274152-88a5-4e23-9925-551233d5418a', 'e3d4958b-8756-4cd9-84cf-5790375cf934', 'Q2SQ03R1', NULL),
+	('Non', '0', '2025-09-25 14:56:23.519561', '2025-09-25 14:56:23.519561', '2', 'dc357496-4f4d-4609-89b5-3825930f936d', 'e3d4958b-8756-4cd9-84cf-5790375cf934', 'Q2SQ03R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.973146', '2026-05-13 16:27:58.973146', '3', '3949582c-cb06-4b0c-9f5a-034c8e48a8be', 'e3d4958b-8756-4cd9-84cf-5790375cf934', 'Q2SQ03R3', NULL),
+	('Oui ', '0', '2026-01-28 15:27:06.543078', '2026-01-28 15:27:06.543078', '1', '6ad9f4e0-220f-4473-9ecd-9fc60825bfc8', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', 'Q1GC03R01', NULL),
+	('Non ', '0', '2026-01-28 15:27:06.549682', '2026-01-28 15:27:06.549682', '2', '6df67bb2-07c9-4cd8-b10f-bfc52e2579b1', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', 'Q1GC03R02', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:58.72981', '2026-05-13 16:27:58.72981', '3', 'd76ef174-76a7-464e-a494-e2aa5d6f2d28', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', 'Q1GC03R03', NULL),
+	('Oui', '0', '2025-09-25 15:08:16.374217', '2025-09-25 15:08:16.374217', '1', '3a99806d-686c-4a0e-9fe4-2356f16be39a', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', 'Q2MP07R1', NULL),
+	('Non', '0', '2025-09-25 15:08:16.37752', '2025-09-25 15:08:16.37752', '2', 'cd46b004-5444-4b17-8781-76fcf116a23d', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', 'Q2MP07R2', NULL),
+	('Je ne sais pas', '0', '2026-05-13 16:27:59.102006', '2026-05-13 16:27:59.102006', '3', '3b386e1a-2d3c-4d84-b317-e0ea85cfb98a', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', 'Q2MP07R3', NULL),
+	('En cours', '0', '2025-09-24 14:47:56.10251', '2025-09-24 14:47:56.10251', '1', 'c1ac2e61-5cc4-460b-bc1f-265546c94205', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', 'Q1PG18R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('A mettre en place', '0', '2025-09-24 14:47:56.10789', '2025-09-24 14:47:56.10789', '2', '0aebd084-b0a0-4dac-9422-568ef1ec6f81', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', 'Q1PG18R3', NULL),
+	('Très avancée', '0', '2025-09-24 14:47:56.096407', '2025-09-24 14:47:56.110748', '3', 'bf4727ab-c020-477a-9e19-67ccf13e9124', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', 'Q1PG18R1', NULL),
+	('Plus de 30 % à la population Technicien Agent de Maitrise (TAM) / Cadres ', '0', '2026-01-28 15:27:06.433367', '2026-01-28 15:27:06.433367', '1', '91beef61-747d-414d-8fb3-a3c4d2488fe2', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', 'Q1GC01R01', NULL),
+	('Plus de 50 % à la population TAM / Cadres ', '0', '2026-01-28 15:27:06.439622', '2026-01-28 15:27:06.439622', '2', 'f9cce5ab-cd36-4f66-8913-248d410721cb', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', 'Q1GC01R02', NULL),
+	('Plus de 75 % à la population TAM / Cadres ', '0', '2026-01-28 15:27:06.444746', '2026-01-28 15:27:06.444746', '3', 'f8cebcf8-df58-4390-a862-a6cc63ba2422', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', 'Q1GC01R03', NULL),
+	('Je ne sais pas ', '0', '2026-01-28 15:27:06.450231', '2026-01-28 15:27:06.450231', '4', 'dec957ee-6e39-41b0-afda-d43c59ffd454', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', 'Q1GC01R04', NULL),
+	('Non', '0', '2025-09-24 14:47:55.788025', '2025-09-24 14:47:55.788025', '1', 'aa2efb6b-d876-4ccb-9a0e-aadf3d34311c', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', 'Q1PG08R2', NULL),
+	('Oui', '0', '2025-09-24 14:47:55.781212', '2025-09-24 14:47:55.791724', '2', '362582ab-09af-4aae-9dc5-8aacd1410467', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', 'Q1PG08R1', NULL);
+
+
+--
+-- Data for Name: transcriptions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('b1659033-6060-4297-b259-3beb2f7f5049', NULL, '1', '727257e5-5738-4917-a1c0-54cb14807530', '2026-02-09 15:14:34.041983', '2026-02-09 15:14:34.041983'),
+	('6dc6f459-d07a-4214-b20b-6c66bf525995', NULL, '1', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', '2026-02-09 15:14:34.071771', '2026-02-09 15:14:34.071771'),
+	('710df011-b7da-4ef7-b05a-634e383c6772', NULL, '1', '1a4074c1-5699-4842-98d4-141d566d12e1', '2026-02-09 15:14:34.095208', '2026-02-09 15:14:34.095208'),
+	('b4e3776a-fc2b-4c4a-908e-f7b6d05676de', NULL, '1', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', '2026-02-09 15:14:34.118129', '2026-02-09 15:14:34.118129'),
+	('9e654773-164d-48bd-9a28-1f7631338031', NULL, '1', '9bcde02d-582a-4443-9eb1-994293765103', '2026-02-09 15:14:34.14095', '2026-02-09 15:14:34.14095'),
+	('7cc9defe-fd93-465d-96f1-9facb40f4072', NULL, '1', '4b947690-2b17-4e37-ace4-1070a01f1170', '2026-02-09 15:14:34.170174', '2026-02-09 15:14:34.170174'),
+	('2eda88d7-0503-4b8e-90cf-88158bf4d023', NULL, '1', '1d510939-ec68-494c-87c7-a96ae726a766', '2026-02-09 15:14:34.192988', '2026-02-09 15:14:34.192988'),
+	('ae29c5f2-cc46-49c8-8189-6395a2d138d1', NULL, '1', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', '2026-02-09 15:14:34.215778', '2026-02-09 15:14:34.215778'),
+	('25196d21-a0fe-4eaa-8806-7fea3b781160', NULL, '1', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', '2026-02-09 15:14:34.23841', '2026-02-09 15:14:34.23841'),
+	('8d751355-19fd-4810-a949-e74b3cb64e76', NULL, '1', 'e3d4958b-8756-4cd9-84cf-5790375cf934', '2026-02-09 15:14:34.261837', '2026-02-09 15:14:34.261837');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('b82f3e6f-93ec-495e-8d5b-7d8ca406ff86', NULL, '1', 'afff1309-7bb6-49db-a1ed-5132914c3f69', '2026-02-09 15:14:34.285249', '2026-02-09 15:14:34.285249'),
+	('c8ed7813-5c6d-46f0-8b0a-8dcca4d73ea4', NULL, '1', '77346421-fe52-4202-b9a6-85d9ff05a3ea', '2026-02-09 15:14:34.309753', '2026-02-09 15:14:34.309753'),
+	('bb3eba31-eb3b-4a25-83f3-4277e6f19702', NULL, '1', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', '2026-02-09 15:14:34.344764', '2026-02-09 15:14:34.344764'),
+	('942568aa-88ec-4fa2-987e-07c99b6e1259', NULL, '1', '4389eda1-973d-42b0-bfcd-0344d8659106', '2026-02-09 15:14:34.36947', '2026-02-09 15:14:34.36947'),
+	('2953bbde-d679-4ebd-ad93-db39bea67d91', NULL, '1', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', '2026-02-09 15:14:34.394295', '2026-02-09 15:14:34.394295'),
+	('397b47b5-2a87-4f0b-a7c0-ecb032a682f6', NULL, '1', '994dec60-d714-4634-b7f4-50674725e259', '2026-02-09 15:14:34.41865', '2026-02-09 15:14:34.41865'),
+	('1b8fc272-3b4a-4d3a-bf51-3fa0fd57e9a9', NULL, '1', '4b963f65-e208-4ed3-a745-dc05b0d86b85', '2026-02-09 15:14:34.445061', '2026-02-09 15:14:34.445061'),
+	('3b733c11-e25f-4785-8309-b38a648ac917', NULL, '1', '39a0b25c-ace7-44e1-918c-28e78705ff1c', '2026-02-09 15:14:34.471995', '2026-02-09 15:14:34.471995'),
+	('999e516f-1924-449f-8ae6-e5b3f9d051c8', NULL, '1', 'c90828a1-6d94-4357-9e78-613ce70ab301', '2026-02-09 15:14:34.50451', '2026-02-09 15:14:34.50451'),
+	('9d373e01-a2bd-4080-9a9a-d7d4d1471b2c', NULL, '1', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', '2026-02-09 15:14:34.532164', '2026-02-09 15:14:34.532164');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('02a8845f-9287-4434-9f68-c96f012b4672', NULL, '1', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', '2026-02-09 15:14:34.556705', '2026-02-09 15:14:34.556705'),
+	('09e84c8b-d2dc-4af4-8a78-3f1002c47794', NULL, '1', '994e25f6-b457-4b26-a8ae-cdcb891d8441', '2026-02-09 15:14:34.580851', '2026-02-09 15:14:34.580851'),
+	('ffb5ba93-0c83-4671-90d2-8b6aa3bba30a', 'Avez-vous déjà été surpris par la réaction (stress, refus, agressivité) de certains salariés/agents suite à l’annonce d’un changement (de service, de chef, de poste, de lieu de travail, d''outil de travail, …) ?', '0', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', '2025-09-25 14:19:51.221359', '2025-09-25 14:19:51.221359'),
+	('862063ca-b93b-420d-9c8c-5290ea4b38f3', 'Avez-vous des personnes dans vos effectifs qui peinent à modifier leurs habitudes de travail et à utiliser les outils numériques (tablettes, logiciels, scannettes, applications, …)', '0', '9bcde02d-582a-4443-9eb1-994293765103', '2025-09-25 14:20:50.412216', '2025-09-25 14:20:50.412216'),
+	('3f2ee04a-0b4d-4fb6-b6fb-e30c9d305a6d', 'Avez-vous déjà dû aménager un poste de travail pour l’adapter à un salarié/agent en difficulté avec les compétences de base (exemple : manque de compétences numériques) ?', '0', '4b947690-2b17-4e37-ace4-1070a01f1170', '2025-09-25 14:21:48.338729', '2025-09-25 14:21:48.338729'),
+	('4bd54dc7-a076-4d46-aafd-f7d9447f6567', 'Prénom', '0', '93bb2a3c-b0af-4ebf-b3ff-aa5890605315', '2025-09-18 10:03:30.453097', '2025-09-18 10:03:30.453097'),
+	('51e957f6-b138-4388-b248-9b2475abd79a', 'Quelle est la taille de votre entreprise/structure ? ', '0', 'c325e445-6546-4453-a90e-97150abce34e', '2025-09-18 10:31:33.64634', '2025-09-18 10:31:33.64634'),
+	('a29c5274-eaeb-441c-8d4d-ced5e75be4c8', 'Quel est l''âge moyen de vos salariés/agents ? ', '0', 'd8e2cec3-0130-496c-a30d-8e63138a240d', '2025-09-18 10:34:57.092265', '2025-09-18 10:34:57.092265'),
+	('85d87710-004a-42a2-b9a6-bc0f28ea8cdd', 'Quel est votre secteur d''activité ?', '0', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', '2025-09-18 10:54:11.667029', '2025-09-18 10:54:11.667029'),
+	('db402905-074b-4048-9d7b-0a64f72a5707', 'Globalement, votre plan de développement des compétences (plan de formation) bénéficie à :', '0', '4e38efb7-6151-4ff3-8140-40b4dce21beb', '2025-09-24 14:58:21.9148', '2025-09-24 14:58:21.9148');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('902822eb-f778-4daa-b960-b7b5da8dac66', 'Diriez-vous que dans votre entreprise/structure, vous avez plutôt :', '0', '77552429-a8d7-4910-9aa7-78c022dcbc76', '2025-09-24 14:58:21.945667', '2025-09-24 14:58:21.945667'),
+	('256c42b6-f669-40f1-befa-79adbe2b4464', 'Estimez-vous avoir une bonne vision du niveau de maîtrise des compétences de base (illettrisme) de vos collaborateurs ?', '0', '151b5ed4-2721-4907-b029-9ad3b018bf8f', '2025-09-24 14:58:21.970045', '2025-09-24 14:58:21.970045'),
+	('a85fffd7-8f1f-4746-8f71-77297e780319', 'Estimez-vous avoir une bonne vision du niveau de maîtrise des compétences numériques (illectronisme) de vos collaborateurs ?', '0', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', '2025-09-24 14:58:21.989872', '2025-09-24 14:58:21.989872'),
+	('c574348b-dca5-42e3-a78b-3b091995f5a3', 'La majorité de vos salariés/agents sont :', '0', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', '2025-09-24 14:58:22.007397', '2025-09-24 14:58:22.007397'),
+	('be1687b7-1d31-4995-b027-d92fe98bbef9', 'Quel est le niveau de diplôme le plus représenté :', '0', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', '2025-09-24 14:58:22.041917', '2025-09-24 14:58:22.041917'),
+	('69801cf0-ab65-4fb6-9613-18221d2d889a', 'Parmi la catégorie ouvriers/employés/agents de service, diriez-vous qu''ils sont :', '0', 'b1739b3d-ed79-4f80-b86a-d73361108f36', '2025-09-24 14:58:22.071381', '2025-09-24 14:58:22.071381'),
+	('1a4e1899-abcc-48b3-b8cc-54ec1cc11b3b', 'Parmi vos salariés/agents, diriez-vous qu''il est possible que certains ne soient jamais allés en formation ces cinq dernières années ?', '0', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', '2025-09-24 14:58:22.093474', '2025-09-24 14:58:22.093474'),
+	('44a66663-0f34-4022-95a7-18e0c59f9329', 'Votre processus de recrutement intègre-t-il systématiquement un test de niveau de maîtrise de l''expression écrite ?', '0', '7649d478-c190-4302-b24a-a46c277665e7', '2025-09-24 14:58:22.129605', '2025-09-24 14:58:22.129605'),
+	('99c18895-598e-4e1f-a401-76a4ef631cec', 'Votre processus de recrutement intègre-t-il systématiquement un test de niveau de maîtrise des compétences numériques de base ?', '0', 'ba4968c5-53c5-415d-8be2-c662503b8832', '2025-09-24 14:58:22.154618', '2025-09-24 14:58:22.154618'),
+	('016aa834-ecfe-4ea5-8c9b-202d60f5a717', 'Avez-vous dans votre entreprise/structure des postes qui n''ont pas évolué (missions, activités, environnement de travail, …) depuis 10 ans ou plus ?', '0', '00557f47-9370-4d8a-a257-7fb9a2a680b6', '2025-09-24 14:58:22.179421', '2025-09-24 14:58:22.179421');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('5355dd6e-d297-4031-b161-a88af4546ad8', 'Avez-vous, au sein de vos effectifs, connaissance de salariés/agents maîtrisant mal les compétences de base (lecture, écriture, calcul) ou les compétences numériques ?', '0', 'ac370b51-b3f7-46fc-88b5-a526052730f0', '2025-09-24 14:58:22.207032', '2025-09-24 14:58:22.207032'),
+	('2514f6f9-dce0-4b9d-91d5-4fd69f744b1f', 'Avez-vous mis en place des actions de formation pour développer les compétences de base de vos salariés ou avez-vous été accompagnés sur un tel projet ?', '0', '6442e6c4-ec47-42df-8273-34a217449819', '2025-09-24 14:58:22.229775', '2025-09-24 14:58:22.229775'),
+	('c4c2ae18-08ba-4757-bfc1-7e51f54f4a46', 'Aujourd’hui, vous estimez votre transition numérique est :', '0', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', '2025-09-24 14:58:22.252709', '2025-09-24 14:58:22.252709'),
+	('cc3cb059-80a3-47ba-b007-e36477fd037e', 'Avez-vous déjà digitalisé/robotisé vos activités de production / accompagnement ?', '0', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', '2025-09-24 14:58:22.273354', '2025-09-24 14:58:22.273354'),
+	('7b494735-fdd5-418b-8a4a-8e7269f361dd', 'Avez-vous déjà digitalisé/numérisé vos activités de services support (paie, gestion des frais, comptabilité, achats...) ?', '0', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', '2025-09-24 14:58:22.300527', '2025-09-24 14:58:22.300527'),
+	('9fdb6d95-d096-4e52-9e4a-8ad32e52bf80', 'A quelle branche votre structure est-elle rattachée ?', '0', '268a6edd-ea7a-4e89-a62a-f79cfc01c056', '2025-09-24 14:59:43.314603', '2025-09-24 14:59:43.314603'),
+	('e5b2fa90-c8dd-45dd-ad67-481236c25794', 'Avez-vous parfois l''impression de devoir prendre plus de temps que nécessaire pour vous assurer que vos collaborateurs ou collaboratrices ont bien compris certaines informations ?', '0', '727257e5-5738-4917-a1c0-54cb14807530', '2025-09-25 14:16:54.882427', '2025-09-25 14:16:54.882427'),
+	('ce382de6-f622-4eb9-a953-6ccfea21c162', 'Avez-vous des collègues, chefs, managers, qui estiment devoir prendre en charge une partie du travail de leurs collaborateurs ou collaboratrices (glissement de fonctions) pour pallier les difficultés avec les compétences de base (lire, écrire, compter, cliquer) ?', '0', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', '2025-09-25 14:17:55.801387', '2025-09-25 14:17:55.801387'),
+	('b4090bc4-1f52-44cb-83a2-f4673008ec74', 'Certains de vos salariés/agents font-ils appel à des personnes ressources afin de répondre à leurs besoins personnels ou professionnels (demande de congés, prise de rendez-vous, lecture de documents … par une tierce personne ( médecin du travail, infirmier, assistant(e), un collègue de service, un membre de la famille, …)) ?', '0', '1a4074c1-5699-4842-98d4-141d566d12e1', '2025-09-25 14:18:46.254388', '2025-09-25 14:18:46.254388'),
+	('82562542-0039-4e91-999a-61637645876c', 'Avez-vous l’impression que votre structure s’auto-censure sur des développements potentiels du fait d’un manque de compétences de certains collaborateurs ou de certaines collaboratrices ?
+', '0', '1d510939-ec68-494c-87c7-a96ae726a766', '2025-09-25 14:26:42.632866', '2025-09-25 14:26:42.632866');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('fd7fed05-e376-441d-bc8f-1f7842d434db', 'Avez-vous le sentiment d''avoir dans vos effectifs des salariés/agents qui n''utilisent pas les documents de travail ou ne respectent pas certaines consignes ?
+', '0', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', '2025-09-25 14:27:38.687983', '2025-09-25 14:27:38.687983'),
+	('bc472b4c-86b0-4191-872b-a678fa779739', 'Avez-vous, dans vos effectifs, des salariés/agents qui adaptent la documentation professionnelle en créant leurs propres supports visuels : pictogrammes, dessins, symboles, etc.?
+', '0', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', '2025-09-25 14:28:23.547549', '2025-09-25 14:28:23.547549'),
+	('26c114d6-6335-4f98-901b-eb4ddd215e90', 'Avez-vous déjà été amené à adapter ou simplifier vos process pour les rendre accessibles aux salariés ou agents en difficulté avec les compétences de base?', '0', 'e3d4958b-8756-4cd9-84cf-5790375cf934', '2025-09-25 14:56:23.511504', '2025-09-25 14:56:23.511504'),
+	('50aca899-6974-42bd-b0fc-6915c15f7161', 'Avez-vous des personnes dans vos effectifs qui ne réalisent jamais le reporting d’activité qui leur est demandé ?', '0', 'afff1309-7bb6-49db-a1ed-5132914c3f69', '2025-09-25 14:58:54.334885', '2025-09-25 14:58:54.334885'),
+	('27791019-d94b-4497-8ff9-31b164788695', 'Vous arrive-t-il d’avoir des clients insatisfaits à cause d’un produit/service défaillant à la suite d’une mauvaise application d’écrits (consignes, procédures, règles, …) ?', '0', '77346421-fe52-4202-b9a6-85d9ff05a3ea', '2025-09-25 14:59:40.824557', '2025-09-25 14:59:40.824557'),
+	('984cd501-6b4d-42e4-ad53-bc6a78af1cfb', 'Diriez-vous que votre organisation prend des risques sur des consignes de qualité ou de sécurité à cause d’un manque de compétences de certains de vos salariés/agents ?', '0', '4389eda1-973d-42b0-bfcd-0344d8659106', '2025-09-25 15:01:13.90424', '2025-09-25 15:01:13.90424'),
+	('83571c08-b61d-44e2-9841-89aae48517b1', 'Le changement de métiers/ modes d''intervention engendrés par la robotisation ou la digitalisation ont-elles occasionné des difficultés pour certains membres de vos effectifs (à changer de métier ou à profiter de mobilités internes) ?', '0', '39a0b25c-ace7-44e1-918c-28e78705ff1c', '2025-09-25 15:05:53.013451', '2025-09-25 15:05:53.013451'),
+	('43f388a0-e396-438a-98b1-3aaf3690bee5', 'Vous-arrive-t-il d’avoir un salarié / agent souffrant de douleurs de dos récurrentes qui, malgré une formation sur les gestes et postures, n’a pas modifié ses pratiques ?', '0', 'c90828a1-6d94-4357-9e78-613ce70ab301', '2025-09-25 15:06:52.198308', '2025-09-25 15:06:52.198308'),
+	('bc6df3a7-4799-4cf4-bd04-ec27a505afa9', 'Pensez-vous avoir des salariés qui refusent d’aller en formation par manque de maitrise des compétences de base, y compris numériques ?', '0', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', '2025-09-25 15:08:16.372157', '2025-09-25 15:08:16.372157'),
+	('878c0bee-4a41-43fe-868b-144cd503be1f', 'Avez-vous repéré des salariés, déclarés inaptes à leurs postes pour raisons de santé, qui se voient proposer un reclassement vers des postes administratifs et le refusent ?', '0', '994e25f6-b457-4b26-a8ae-cdcb891d8441', '2025-09-25 15:09:04.0682', '2025-09-25 15:09:04.0682');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('9b95778c-57b0-4e0d-9eb3-26e89ba0f5a3', 'Estimez-vous que votre entreprise prenne des risques dans la gestion et le traitement de ses données numériques du fait d’un manque de compétences de certains de vos salariés/agents?', '0', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', '2025-09-25 15:00:26.647326', '2025-09-25 15:00:26.647326'),
+	('bffabd61-b2c2-44da-a222-54d1ae95e704', 'Avez-vous, parmi vos salariés/agents, des personnes qui ne souhaitent pas évoluer ou changer de poste ?', '0', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', '2025-09-25 15:03:15.611645', '2025-09-25 15:03:15.611645'),
+	('02a544d0-108d-4fe1-b636-9381484472c7', 'Avez-vous l’impression que vos salariés/agents sont toujours en surcharge de travail, qu’il manque des effectifs et qu’il y a trop d’heures supplémentaires non justifiées par un surcroît d’activité ?', '0', '994dec60-d714-4634-b7f4-50674725e259', '2025-09-25 15:04:12.673463', '2025-09-25 15:04:12.673463'),
+	('d63ae4ef-8ce1-43bc-bf50-6917b9d5835e', 'Vous arrive-t-il de faire appel à du personnel intérimaire pour pallier un manque de compétences de vos équipes ?', '0', '4b963f65-e208-4ed3-a745-dc05b0d86b85', '2025-09-25 15:04:56.113289', '2025-09-25 15:04:56.113289'),
+	('6982ecd6-81c0-47b1-9b88-2c65618988df', 'Avez-vous repéré des absences possiblement dues à un manque de maitrise des compétences de base y compris numériques (absence en formation, lors d’un audit, lors d’une visite de personnalités externes, …) ?', '0', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', '2025-09-25 15:07:35.344067', '2025-09-25 15:07:35.344067'),
+	('bfd9af50-995c-44b7-a205-e8e742372397', 'A quelle branche votre structure est-elle rattachée ?', '0', '634d336e-e506-4298-88c9-92083fb4b1e1', '2026-01-28 15:25:33.719761', '2026-01-28 15:25:33.719761'),
+	('3157d8d0-1f13-4dd6-8ff7-5c4bd7e797ab', 'Quelle est la taille de votre organisation / de votre entreprise ? ', '0', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', '2026-01-28 15:27:05.939691', '2026-01-28 15:27:05.939691'),
+	('0214fe9d-4a9a-4218-acd1-9d91f1e78366', 'Quel est l''âge moyen de vos salariés / de vos agents ? ', '0', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', '2026-01-28 15:27:06.027376', '2026-01-28 15:27:06.027376'),
+	('ca3e32f1-e0c5-43f8-980c-c988d3e21dc5', 'Quel est votre secteur d''activité ?', '0', '6bf422f9-346c-4738-835c-61dc2294350b', '2026-01-28 15:27:06.081915', '2026-01-28 15:27:06.081915'),
+	('88cec173-6f88-4fc2-948a-0966ef1d7edf', 'Diriez-vous que dans votre organisation / votre entreprise, vous avez plutôt :', '0', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', '2026-01-28 15:27:06.196039', '2026-01-28 15:27:06.196039');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('9d46c564-19a4-4342-9aee-9eb6e93a0e0f', 'La majorité de vos salariés / vos agents sont :', '0', '98672d19-9244-48a9-bf43-75d154ac16de', '2026-01-28 15:27:06.244098', '2026-01-28 15:27:06.244098'),
+	('6d80c950-a29c-4215-9318-5c40319cd4ad', 'Quel est le niveau de diplôme le plus représenté :', '0', '56554354-6dd7-40b5-b93c-ab394c5f72d4', '2026-01-28 15:27:06.294296', '2026-01-28 15:27:06.294296'),
+	('09eed018-87b4-4a11-8568-60c9736ef56b', 'Avez-vous, au sein de vos effectifs, connaissance de salariés / agents maîtrisant mal les compétences de base (lecture, écriture, calcul) ou les compétences numériques ?', '0', '3e88b842-c607-4cbf-9b81-6e625153c179', '2026-01-28 15:27:06.356943', '2026-01-28 15:27:06.356943'),
+	('8953b810-8dce-4f9a-8d65-d81b7e17e321', 'Globalement, votre plan de développement des compétences (plan de formation) bénéficie à :', '0', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', '2026-01-28 15:27:06.412579', '2026-01-28 15:27:06.412579'),
+	('5ab77e9f-30a9-4821-9cf9-9aa00b3b5ce3', 'La non maîtrise des compétences de base (lecture, écriture, calcul, raisonnement) est-elle un frein à la réalisation des tâches professionnelles de vos salariés / vos agents ?', '0', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', '2026-01-28 15:27:06.522092', '2026-01-28 15:27:06.522092'),
+	('46077017-0432-4c85-82b4-076661e59fec', 'La non maîtrise des compétences numériques de base est-elle un frein à la réalisation des tâches professionnelles de vos salariés / vos agents ?', '0', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', '2026-01-28 15:27:06.569619', '2026-01-28 15:27:06.569619'),
+	('50e0347b-58bc-46d6-bd58-e3a9161d8817', 'Parmi vos salariés / vos agents, diriez-vous qu''il est possible que certains ne soient jamais allés en formation ces cinq dernières années ?', '0', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', '2026-01-28 15:27:06.608863', '2026-01-28 15:27:06.608863'),
+	('6e9bdc71-83a7-443d-b2d1-067aaf47d50a', 'Avez-vous mis en place des actions de formation pour développer les compétences de base de vos salariés / vos agents ou avez-vous été accompagnés sur un tel projet ?', '0', '33b3ab0d-1590-44a9-b403-f358090a8f41', '2026-01-28 15:27:06.668052', '2026-01-28 15:27:06.668052'),
+	('ebae852b-e5c0-4dec-9a7c-249b0248f289', 'Votre processus de recrutement intègre-t-il systématiquement un test de niveau de maîtrise de l''expression écrite ?', '0', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', '2026-01-28 15:27:06.714033', '2026-01-28 15:27:06.714033'),
+	('2aeb4353-c84d-4636-a3dc-35b4af2ed284', 'Votre processus de recrutement intègre-t-il systématiquement un test de niveau de maîtrise des compétences numériques de base ?', '0', '30defdc7-4f2f-45b0-8514-e0898e0c0561', '2026-01-28 15:27:06.770496', '2026-01-28 15:27:06.770496');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('7f4d5565-687b-431f-8904-b3d32104cb4b', 'Avez-vous dans votre organisation / votre entreprise des postes qui n''ont pas évolué (missions, activités, environnement de travail, etc.) depuis 10 ans ou plus ?', '0', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', '2026-01-28 15:27:06.81527', '2026-01-28 15:27:06.81527'),
+	('9bddc92a-c168-4e13-aa47-f5fa7f334c9b', ' A l''échelle de votre service, diriez-vous que les ouvriers/ employés/ agents de service sont : ', '0', 'c779b91f-a270-4c69-8263-114b0fdebaf4', '2026-01-28 15:27:06.4674', '2026-07-29 12:25:12.944653'),
+	('54dcb21a-c273-4c24-a5df-34452c130df2', 'Aujourd’hui, vous estimez que votre transition numérique est :', '0', '8bdef706-7b40-4122-be15-bfd89c038c49', '2026-01-28 15:27:06.863793', '2026-01-28 15:27:06.863793'),
+	('4a4ab737-8825-401c-818f-acccf4fdb8e3', 'Avez-vous déjà digitalisé ou robotisé vos activités de production ou d''accompagnement ?', '0', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', '2026-01-28 15:27:06.909281', '2026-01-28 15:27:06.909281'),
+	('e3f13890-8024-4358-b373-bc041c8176dd', 'Avez-vous déjà digitalisé ou numérisé vos activités de services support (paie, gestion des frais, comptabilité, achats, etc.) ?', '0', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', '2026-01-28 15:27:06.960766', '2026-01-28 15:27:06.960766');
+
+
+--
+-- Data for Name: questionnaires_questions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('1', '2026-01-28 15:33:34.70054', '2026-01-28 15:33:34.70054', '69b8cb2b-3405-4fef-92f1-e0aa6d423e2f', '42495975-2921-4442-827b-1864d26391ef', 'cb3b3ae8-f528-4773-9215-dab9faa4ed19', NULL),
+	('2', '2026-01-28 15:33:34.704476', '2026-01-28 15:33:34.704476', '428e1bca-2eae-4574-a36e-991c9bf7db72', '42495975-2921-4442-827b-1864d26391ef', '428b9fe5-6cb7-4e7e-a0af-5c790df0f7d2', NULL),
+	('3', '2026-01-28 15:33:34.707241', '2026-01-28 15:33:34.707241', 'fa5b5a74-5cc6-4142-afbd-848f3869ca58', '42495975-2921-4442-827b-1864d26391ef', '6bf422f9-346c-4738-835c-61dc2294350b', NULL),
+	('4', '2026-01-28 15:33:34.710066', '2026-01-28 15:33:34.710066', '213241a2-9f82-4a9a-ac76-83d00130ed2b', '42495975-2921-4442-827b-1864d26391ef', '634d336e-e506-4298-88c9-92083fb4b1e1', NULL),
+	('5', '2026-01-28 15:33:34.712966', '2026-01-28 15:33:34.712966', 'd19a8d00-5717-4cb7-bee1-ec681407f696', '42495975-2921-4442-827b-1864d26391ef', '9f8f123c-166b-4c06-92e0-be45ffa88e9c', NULL),
+	('6', '2026-01-28 15:33:34.715753', '2026-01-28 15:33:34.715753', 'ae21816d-919d-4dd6-afbe-b1cdd52b9481', '42495975-2921-4442-827b-1864d26391ef', '98672d19-9244-48a9-bf43-75d154ac16de', NULL),
+	('7', '2026-01-28 15:33:34.718307', '2026-01-28 15:33:34.718307', 'a691d120-25fc-42f5-aaec-aab6422b6c5c', '42495975-2921-4442-827b-1864d26391ef', '56554354-6dd7-40b5-b93c-ab394c5f72d4', NULL),
+	('8', '2026-01-28 15:33:34.725523', '2026-01-28 15:33:34.725523', '3d1292d1-db9a-4caf-9179-6add686fafdd', '42495975-2921-4442-827b-1864d26391ef', '3e88b842-c607-4cbf-9b81-6e625153c179', NULL),
+	('9', '2026-01-28 15:33:34.727986', '2026-01-28 15:33:34.727986', '2ee6033c-e1c7-4035-badd-5da52fb3b946', '42495975-2921-4442-827b-1864d26391ef', 'fd94109d-f5fa-42d8-b9f6-46fe088198cb', NULL),
+	('10', '2026-01-28 15:33:34.730511', '2026-01-28 15:33:34.730511', '8680fa8f-628c-4530-9065-2adb1b6875c3', '42495975-2921-4442-827b-1864d26391ef', 'c779b91f-a270-4c69-8263-114b0fdebaf4', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('11', '2026-01-28 15:33:34.732899', '2026-01-28 15:33:34.732899', '5dddcd19-5f85-44f9-a09e-df67c7a05192', '42495975-2921-4442-827b-1864d26391ef', 'ef58ac01-2fa1-462e-b28a-7a61da7c0fe7', NULL),
+	('12', '2026-01-28 15:33:34.735739', '2026-01-28 15:33:34.735739', '2f43c629-ebe6-4a80-90cc-7bd469878391', '42495975-2921-4442-827b-1864d26391ef', '84c09e5f-e4d7-4d91-b7c4-2d518f5eef70', NULL),
+	('13', '2026-01-28 15:33:34.738816', '2026-01-28 15:33:34.738816', '92fe9853-a39d-41c5-97e4-98e3723aa3b6', '42495975-2921-4442-827b-1864d26391ef', 'c26242d8-f67b-4e23-8b92-930ab37bf6a3', NULL),
+	('14', '2026-01-28 15:33:34.741999', '2026-01-28 15:33:34.741999', '672d9d7b-8245-4ed8-a7f7-b6050eaf394d', '42495975-2921-4442-827b-1864d26391ef', '33b3ab0d-1590-44a9-b403-f358090a8f41', NULL),
+	('15', '2026-01-28 15:33:34.745046', '2026-01-28 15:33:34.745046', '7fb28b50-a2d5-49ac-8b1b-874435b89bea', '42495975-2921-4442-827b-1864d26391ef', '754c0f60-c93a-496a-9dfd-fd0c39636ac6', NULL),
+	('16', '2026-01-28 15:33:34.747785', '2026-01-28 15:33:34.747785', '78c13513-1421-4cde-ae3d-03ce886ad3a6', '42495975-2921-4442-827b-1864d26391ef', '30defdc7-4f2f-45b0-8514-e0898e0c0561', NULL),
+	('17', '2026-01-28 15:33:34.750483', '2026-01-28 15:33:34.750483', 'cc113970-f6da-44f8-b36c-5b5af3ab8512', '42495975-2921-4442-827b-1864d26391ef', '55f3f37a-45f4-4249-950b-ae4e09dd3d80', NULL),
+	('18', '2026-01-28 15:33:34.753572', '2026-01-28 15:33:34.753572', '0d5b6ac2-2ca2-4e97-bc63-8414de478b06', '42495975-2921-4442-827b-1864d26391ef', '8bdef706-7b40-4122-be15-bfd89c038c49', NULL),
+	('19', '2026-01-28 15:33:34.756269', '2026-01-28 15:33:34.756269', 'dcb1072c-953b-498e-86e0-029d174c63e2', '42495975-2921-4442-827b-1864d26391ef', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', NULL),
+	('20', '2026-01-28 15:33:34.758735', '2026-01-28 15:33:34.758735', 'cd57eb6a-93c9-4f12-8f9b-c78aef735659', '42495975-2921-4442-827b-1864d26391ef', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('1', '2025-09-25 15:14:21.107915', '2025-09-25 15:14:21.107915', '477ebffe-1662-4dc1-b11b-9f5e040e7b19', '6ee95685-291e-4c75-a406-12f2e03f7a28', '727257e5-5738-4917-a1c0-54cb14807530', NULL),
+	('2', '2025-09-25 15:14:21.112506', '2025-09-25 15:14:21.112506', '6ba20154-f618-4a22-8550-a0e38fbca36f', '6ee95685-291e-4c75-a406-12f2e03f7a28', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', NULL),
+	('3', '2025-09-25 15:14:21.115537', '2025-09-25 15:14:21.115537', '48c52ab6-7f65-4ca9-8249-83afab978dac', '6ee95685-291e-4c75-a406-12f2e03f7a28', '1a4074c1-5699-4842-98d4-141d566d12e1', NULL),
+	('4', '2025-09-25 15:14:21.119206', '2025-09-25 15:14:21.119206', '09f8e08b-0808-4efa-a6e1-e1b089b070d0', '6ee95685-291e-4c75-a406-12f2e03f7a28', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', NULL),
+	('5', '2025-09-25 15:14:21.122612', '2025-09-25 15:14:21.122612', '39366aae-54cf-4d77-be21-35b776b53145', '6ee95685-291e-4c75-a406-12f2e03f7a28', '9bcde02d-582a-4443-9eb1-994293765103', NULL),
+	('6', '2025-09-25 15:14:21.126348', '2025-09-25 15:14:21.126348', '729ae4d2-654a-400e-be64-c8f9ae6f02e3', '6ee95685-291e-4c75-a406-12f2e03f7a28', '4b947690-2b17-4e37-ace4-1070a01f1170', NULL),
+	('7', '2025-09-25 15:14:21.130022', '2025-09-25 15:14:21.130022', '07715069-4bc3-47de-8646-9d8d1f6fd387', '6ee95685-291e-4c75-a406-12f2e03f7a28', '1d510939-ec68-494c-87c7-a96ae726a766', NULL),
+	('8', '2025-09-25 15:14:21.132785', '2025-09-25 15:14:21.132785', '9ddeeb50-54e3-45d3-9e73-f1baa514b6cc', '6ee95685-291e-4c75-a406-12f2e03f7a28', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', NULL),
+	('9', '2025-09-25 15:14:21.135544', '2025-09-25 15:14:21.135544', 'b3a6451c-4112-447b-8eae-1b83ab5f2d85', '6ee95685-291e-4c75-a406-12f2e03f7a28', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', NULL),
+	('10', '2025-09-25 15:14:21.138236', '2025-09-25 15:14:21.138236', '4a606e4e-309d-47f9-b9c2-f33588443ffa', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'e3d4958b-8756-4cd9-84cf-5790375cf934', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('11', '2025-09-25 15:14:21.140905', '2025-09-25 15:14:21.140905', '02907853-bba9-4b49-83b1-3ff8b65c953e', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'afff1309-7bb6-49db-a1ed-5132914c3f69', NULL),
+	('12', '2025-09-25 15:14:21.14367', '2025-09-25 15:14:21.14367', 'f96a3289-c819-43f3-9099-2d8c705e1fec', '6ee95685-291e-4c75-a406-12f2e03f7a28', '77346421-fe52-4202-b9a6-85d9ff05a3ea', NULL),
+	('13', '2025-09-25 15:14:21.146412', '2025-09-25 15:14:21.146412', '9ff7295e-0a18-4e65-9cbd-d6777ecf9f7f', '6ee95685-291e-4c75-a406-12f2e03f7a28', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', NULL),
+	('14', '2025-09-25 15:14:21.149202', '2025-09-25 15:14:21.149202', 'f2a7678c-826b-4723-9790-00de078b14ce', '6ee95685-291e-4c75-a406-12f2e03f7a28', '4389eda1-973d-42b0-bfcd-0344d8659106', NULL),
+	('15', '2025-09-25 15:14:21.152101', '2025-09-25 15:14:21.152101', 'e0b82f48-d108-4224-a06f-b6f2b389c7c2', '6ee95685-291e-4c75-a406-12f2e03f7a28', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', NULL),
+	('16', '2025-09-25 15:14:21.15473', '2025-09-25 15:14:21.15473', '59c62b0e-a6c8-4dac-ac66-148c074ab922', '6ee95685-291e-4c75-a406-12f2e03f7a28', '994dec60-d714-4634-b7f4-50674725e259', NULL),
+	('17', '2025-09-25 15:14:21.157558', '2025-09-25 15:14:21.157558', 'f9dabf9d-3eb3-4e83-9673-f873ccf79bd8', '6ee95685-291e-4c75-a406-12f2e03f7a28', '4b963f65-e208-4ed3-a745-dc05b0d86b85', NULL),
+	('18', '2025-09-25 15:14:21.160372', '2025-09-25 15:14:21.160372', '52c411ae-1793-4754-8f07-84689b2a9f75', '6ee95685-291e-4c75-a406-12f2e03f7a28', '39a0b25c-ace7-44e1-918c-28e78705ff1c', NULL),
+	('19', '2025-09-25 15:14:21.162983', '2025-09-25 15:14:21.162983', '87937956-dc1c-47e1-b590-ef206c761c80', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'c90828a1-6d94-4357-9e78-613ce70ab301', NULL),
+	('20', '2025-09-25 15:14:21.165687', '2025-09-25 15:14:21.165687', '08ac5652-d15c-4b93-a3a5-d55043aa8f7f', '6ee95685-291e-4c75-a406-12f2e03f7a28', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('21', '2025-09-25 15:14:21.168736', '2025-09-25 15:14:21.168736', '3601011d-3206-4d5b-85b0-ae50daa002f0', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', NULL),
+	('22', '2025-09-25 15:14:21.171826', '2025-09-25 15:14:21.171826', '588d3ec6-56e7-4a5c-b702-0578383bcf21', '6ee95685-291e-4c75-a406-12f2e03f7a28', '994e25f6-b457-4b26-a8ae-cdcb891d8441', NULL),
+	('1', '2025-09-18 10:32:05.432293', '2025-09-18 10:36:17.078541', '594f66eb-bfa5-44cc-8d14-9fc79939b203', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'c325e445-6546-4453-a90e-97150abce34e', NULL),
+	('1', '2025-09-18 10:03:41.847514', '2025-09-18 10:36:17.070117', 'd03f0b4c-3e68-451b-bda8-74f2a9da7aad', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '93bb2a3c-b0af-4ebf-b3ff-aa5890605315', '2025-09-18 10:36:17.070102'),
+	('2', '2025-09-18 10:35:38.307986', '2025-09-18 10:36:17.078541', '16778d2d-e4c0-4362-8551-326e8361337b', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'd8e2cec3-0130-496c-a30d-8e63138a240d', NULL),
+	('3', '2025-09-18 10:54:35.84137', '2025-09-18 10:54:35.84137', '099e9bcb-a636-4e99-8172-ad968b8c8450', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'b75a9617-2c3f-49cb-a392-578d6cc6725c', NULL),
+	('4', '2025-09-24 15:00:58.638667', '2025-09-24 15:00:58.638667', '0f983ce0-5945-4a3c-a5f0-1cbb03d9df51', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '268a6edd-ea7a-4e89-a62a-f79cfc01c056', NULL),
+	('5', '2025-09-24 15:00:58.642301', '2025-09-24 15:00:58.642301', '648f24d7-86e7-4cbc-82c2-6d357e275dab', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '4e38efb7-6151-4ff3-8140-40b4dce21beb', NULL),
+	('6', '2025-09-24 15:00:58.644916', '2025-09-24 15:00:58.644916', '2a59e0a0-6012-4d87-b551-6b2270b31a2a', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '77552429-a8d7-4910-9aa7-78c022dcbc76', NULL),
+	('7', '2025-09-24 15:00:58.647265', '2025-09-24 15:00:58.647265', '5ff0638a-27d9-4ff1-8648-bf5852d419bf', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '151b5ed4-2721-4907-b029-9ad3b018bf8f', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('8', '2025-09-24 15:00:58.649731', '2025-09-24 15:00:58.649731', '71e20954-e3e9-46cc-be06-1b0310afaae1', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', NULL),
+	('9', '2025-09-24 15:00:58.652165', '2025-09-24 15:00:58.652165', 'e5fce67b-3f49-4d8b-8569-74df36d70356', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '538a58fc-4587-468b-b4af-a4c7c62f0b3e', NULL),
+	('10', '2025-09-24 15:00:58.654389', '2025-09-24 15:00:58.654389', '597987e4-daa0-4cb7-99e9-a0b94f022c91', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'a8abbec6-f129-426f-9f70-be8e88f9a4c0', NULL),
+	('11', '2025-09-24 15:00:58.656802', '2025-09-24 15:00:58.656802', '260afa15-ac1a-43ea-a0c6-f11367d57dff', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'b1739b3d-ed79-4f80-b86a-d73361108f36', NULL),
+	('12', '2025-09-24 15:00:58.659193', '2025-09-24 15:00:58.659193', '4eb8d2b3-0a51-44b9-be12-cdd2cd57ccc0', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '4187b8f6-0a04-4b52-8a7c-1c1a700b627a', NULL),
+	('13', '2025-09-24 15:00:58.661633', '2025-09-24 15:00:58.661633', '974b606d-2515-47fa-9e33-965414cbf9a3', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '7649d478-c190-4302-b24a-a46c277665e7', NULL),
+	('14', '2025-09-24 15:00:58.663965', '2025-09-24 15:00:58.663965', 'ddbe371c-e3f6-45cb-ae95-4909b2a4ddbe', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'ba4968c5-53c5-415d-8be2-c662503b8832', NULL),
+	('15', '2025-09-24 15:00:58.666195', '2025-09-24 15:00:58.666195', 'cdb1ae5a-a871-4d64-96ca-3a62285d907b', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '00557f47-9370-4d8a-a257-7fb9a2a680b6', NULL),
+	('16', '2025-09-24 15:00:58.668492', '2025-09-24 15:00:58.668492', 'eb9cdd84-6f70-498f-a2cd-1922520bb1fb', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'ac370b51-b3f7-46fc-88b5-a526052730f0', NULL),
+	('17', '2025-09-24 15:00:58.670955', '2025-09-24 15:00:58.670955', '31c78ea2-aa00-4a77-b0ab-8908184052c4', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '6442e6c4-ec47-42df-8273-34a217449819', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('18', '2025-09-24 15:00:58.673302', '2025-09-24 15:00:58.673302', 'e3b254c0-9744-4ae4-88df-ed00357be205', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', NULL),
+	('19', '2025-09-24 15:00:58.675884', '2025-09-24 15:00:58.675884', 'da209692-5d84-4a52-92e3-a818d0bd1759', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', NULL),
+	('20', '2025-09-24 15:00:58.678317', '2025-09-24 15:00:58.678317', '8d97a315-4524-4443-bba3-ead35c44e2c2', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', NULL);
+
+
+--
+-- Data for Name: evaluations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.evaluations (created_at, updated_at, id, campagne_id, terminee_le, debutee_le, synthese_competences_de_base, niveau_cefr, niveau_cnef, niveau_anlci_litteratie, niveau_anlci_numeratie, completude, beneficiaire_id, deleted_at, statut, responsable_suivi_id, positionnement_niveau_litteratie, positionnement_niveau_numeratie, redactions, type) VALUES
+	('2026-05-18 12:09:11.399102', '2026-05-18 12:10:00.065055', '3368b69f-e63e-449d-b655-1ad574eb257d', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', NULL, '2026-05-18 12:09:10.73', NULL, NULL, NULL, NULL, NULL, 'complete', 'e9dd83e8-5ebb-48b9-a8c3-6f1e736ee721', NULL, '0', NULL, NULL, NULL, NULL, 'EvaluationEvapro'),
+	('2026-05-28 13:10:29.436998', '2026-05-28 13:14:23.015266', 'e5306ac0-d318-4fcb-ae42-fff432bddc1a', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', NULL, '2026-05-28 13:10:28.796', NULL, NULL, NULL, NULL, NULL, 'complete', 'e9dd83e8-5ebb-48b9-a8c3-6f1e736ee721', NULL, '0', NULL, NULL, NULL, NULL, 'EvaluationEvapro');
+
+
+--
+-- Data for Name: parties; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, evaluation_id, situation_id, deleted_at, synthese, competences, competences_de_base) VALUES
+	('7f191cd5-9f10-4b94-99af-9e339dec5604', '1fa038a9-d93c-483a-898f-62708ea2a438', '{}', '2026-05-18 12:09:11.711419', '2026-05-18 12:09:47.252734', '3368b69f-e63e-449d-b655-1ad574eb257d', '592ec5a0-2c81-4550-a9f5-eb26274753a3', NULL, '{"pourcentage_risque": 50}', '{}', '{}'),
+	('6e3ac92e-49a7-4969-be9f-fcbf6b2a6fa1', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '{}', '2026-05-18 12:09:42.339493', '2026-05-18 12:09:59.999519', '3368b69f-e63e-449d-b655-1ad574eb257d', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', NULL, '{"score_cout": "fort", "score_numerique": "tres_fort", "score_strategie": "tres_fort", "securite_qualite": "fort", "performance_collective": "fort", "mobilite_professionnelle": "fort", "agilite_organisationnelle": "tres_fort"}', '{}', '{}'),
+	('66f0bbe4-8697-4d8f-9d7c-a024f742c149', '3330c5db-0850-476d-aff0-1f7e87362574', '{}', '2026-05-28 13:10:29.806254', '2026-05-28 13:13:56.271644', 'e5306ac0-d318-4fcb-ae42-fff432bddc1a', '592ec5a0-2c81-4550-a9f5-eb26274753a3', NULL, '{"pourcentage_risque": 25}', '{}', '{}'),
+	('d3433811-34e1-4e2a-a2e8-a9b2aaf0bf00', '47a3ef26-8005-4804-8a81-c09134cc07ac', '{}', '2026-05-28 13:13:56.001203', '2026-05-28 13:14:22.980653', 'e5306ac0-d318-4fcb-ae42-fff432bddc1a', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', NULL, '{"score_cout": "tres_fort", "score_numerique": "tres_fort", "score_strategie": "tres_fort", "securite_qualite": "fort", "performance_collective": "fort", "mobilite_professionnelle": "tres_fort", "agilite_organisationnelle": "tres_fort"}', '{}', '{}');
+
+
+--
+-- Data for Name: conditions_passations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.conditions_passations (id, materiel_utilise, modele_materiel, nom_navigateur, version_navigateur, evaluation_id, created_at, updated_at, user_agent, hauteur_fenetre_navigation, largeur_fenetre_navigation, deleted_at) VALUES
+	('83280642-b120-45f6-8fb0-45b4ed9d0516', 'desktop', NULL, 'Chrome', '148.0.0.0', '3368b69f-e63e-449d-b655-1ad574eb257d', '2026-05-18 12:09:11.404559', '2026-05-18 12:09:11.404559', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '1262', '2221', NULL),
+	('11d8b577-fc8b-42f0-a111-e6fb722fe722', 'desktop', NULL, 'Chrome', '148.0.0.0', 'e5306ac0-d318-4fcb-ae42-fff432bddc1a', '2026-05-28 13:10:29.440816', '2026-05-28 13:10:29.440816', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '1323', '2560', NULL);
+
+
+--
+-- Data for Name: evenements; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('demarrage', '"{}"', '2026-05-18 12:09:11.679', '2026-05-18 12:09:11.719681', '2026-05-18 12:09:11.719681', '1fa038a9-d93c-483a-898f-62708ea2a438', '37511350-e6af-4356-8a94-9e03ec160ba8', '0', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1IC01R05", "intitule": "Je ne sais pas", "question": "Q1IC01", "scoreMax": 0, "nom_technique": "Q1IC01R05"}', '2026-05-18 12:09:16.431', '2026-05-18 12:09:16.449506', '2026-05-18 12:09:16.449506', '1fa038a9-d93c-483a-898f-62708ea2a438', 'a6d9e995-5570-45ed-ad97-0a23e039b967', '1', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC02"}', '2026-05-18 12:09:16.545', '2026-05-18 12:09:16.561925', '2026-05-18 12:09:16.561925', '1fa038a9-d93c-483a-898f-62708ea2a438', 'd4c1c080-8069-4473-b56d-9ef3a6b7bd0d', '2', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1IC02R04", "intitule": "Je ne sais pas", "question": "Q1IC02", "scoreMax": 2, "nom_technique": "Q1IC02R04"}', '2026-05-18 12:09:17.48', '2026-05-18 12:09:17.502158', '2026-05-18 12:09:17.502158', '1fa038a9-d93c-483a-898f-62708ea2a438', 'adc7340a-0a79-4a18-bdb6-ef9d4e7a409c', '3', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC03"}', '2026-05-18 12:09:17.59', '2026-05-18 12:09:17.607484', '2026-05-18 12:09:17.607484', '1fa038a9-d93c-483a-898f-62708ea2a438', '8eb99fe3-88d6-44fb-bbdb-f78e936a08a3', '4', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1IC03R06", "intitule": "Collectivités", "question": "Q1IC03", "scoreMax": 2, "nom_technique": "Q1IC03R06"}', '2026-05-18 12:09:20.33', '2026-05-18 12:09:20.34912', '2026-05-18 12:09:20.34912', '1fa038a9-d93c-483a-898f-62708ea2a438', '2287a668-d5b5-4980-9afb-af69955624ad', '5', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC04"}', '2026-05-18 12:09:20.361', '2026-05-18 12:09:20.378564', '2026-05-18 12:09:20.378564', '1fa038a9-d93c-483a-898f-62708ea2a438', '84de165d-4c14-4ec8-adf5-f09b36165aa2', '6', NULL),
+	('reponse', '{"reponse": ":;,", "question": "Q1IC04", "scoreMax": 0}', '2026-05-18 12:09:23.047', '2026-05-18 12:09:23.06553', '2026-05-18 12:09:23.06553', '1fa038a9-d93c-483a-898f-62708ea2a438', 'de4a92cb-f945-4ad2-baca-58ba748b471f', '7', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC05"}', '2026-05-18 12:09:23.072', '2026-05-18 12:09:23.088086', '2026-05-18 12:09:23.088086', '1fa038a9-d93c-483a-898f-62708ea2a438', '9614783b-0cc7-4c67-b9e2-194c27c5f888', '8', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1IC05R05", "intitule": "Je ne sais pas", "question": "Q1IC05", "scoreMax": 1, "nom_technique": "Q1IC05R05"}', '2026-05-18 12:09:24.131', '2026-05-18 12:09:24.152578', '2026-05-18 12:09:24.152578', '1fa038a9-d93c-483a-898f-62708ea2a438', 'c20defb5-6d81-4ac8-ae21-832a343a302d', '9', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('affichageQuestionQCM', '{"question": "Q1PC01"}', '2026-05-18 12:09:24.157', '2026-05-18 12:09:24.17278', '2026-05-18 12:09:24.17278', '1fa038a9-d93c-483a-898f-62708ea2a438', '25750fec-72f8-491b-8acc-9abc2c3a7f24', '10', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1PC01R05", "intitule": "Je ne sais pas", "question": "Q1PC01", "scoreMax": 2, "nom_technique": "Q1PC01R05"}', '2026-05-18 12:09:25.114', '2026-05-18 12:09:25.129248', '2026-05-18 12:09:25.129248', '1fa038a9-d93c-483a-898f-62708ea2a438', 'e065cd4a-2675-4c69-9b90-eda07bf60c09', '11', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PC02"}', '2026-05-18 12:09:25.135', '2026-05-18 12:09:25.150852', '2026-05-18 12:09:25.150852', '1fa038a9-d93c-483a-898f-62708ea2a438', '12a8ea25-45a7-46e6-9856-2d5149ac5b34', '12', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1PC02R04", "intitule": "Bac+2/3 (niveau 5/6)", "question": "Q1PC02", "scoreMax": 3, "nom_technique": "Q1PC02R04"}', '2026-05-18 12:09:28.246', '2026-05-18 12:09:28.272213', '2026-05-18 12:09:28.272213', '1fa038a9-d93c-483a-898f-62708ea2a438', '52f51c49-af44-4cc1-bab7-726a843d06a6', '13', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PC03"}', '2026-05-18 12:09:28.278', '2026-05-18 12:09:28.293601', '2026-05-18 12:09:28.293601', '1fa038a9-d93c-483a-898f-62708ea2a438', '9b59a0fb-9b0a-418d-addf-d5f06f34aefd', '14', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1PC03R05", "intitule": "Je ne sais pas", "question": "Q1PC03", "scoreMax": 3, "nom_technique": "Q1PC03R05"}', '2026-05-18 12:09:29.43', '2026-05-18 12:09:29.448808', '2026-05-18 12:09:29.448808', '1fa038a9-d93c-483a-898f-62708ea2a438', '36b934c8-3032-4087-9b5c-4cc24a77e19b', '15', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC01"}', '2026-05-18 12:09:29.455', '2026-05-18 12:09:29.471399', '2026-05-18 12:09:29.471399', '1fa038a9-d93c-483a-898f-62708ea2a438', '8b007282-bea2-4222-9970-d182d5d36ecf', '16', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1GC01R04", "intitule": "Je ne sais pas", "question": "Q1GC01", "scoreMax": 2, "nom_technique": "Q1GC01R04"}', '2026-05-18 12:09:30.514', '2026-05-18 12:09:30.532625', '2026-05-18 12:09:30.532625', '1fa038a9-d93c-483a-898f-62708ea2a438', 'b222b709-1445-4a4b-8bfc-50d2e7ce5e63', '17', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC02"}', '2026-05-18 12:09:30.539', '2026-05-18 12:09:30.556017', '2026-05-18 12:09:30.556017', '1fa038a9-d93c-483a-898f-62708ea2a438', '4e020313-fec7-4979-90d5-6afa8f97f1b2', '18', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1GC02R05", "intitule": "Je ne sais pas", "question": "Q1GC02", "scoreMax": 3, "nom_technique": "Q1GC02R05"}', '2026-05-18 12:09:31.414', '2026-05-18 12:09:31.430712', '2026-05-18 12:09:31.430712', '1fa038a9-d93c-483a-898f-62708ea2a438', '4b1f44cc-e210-4b37-9a40-640af5c82b64', '19', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('affichageQuestionQCM', '{"question": "Q1GC03"}', '2026-05-18 12:09:31.441', '2026-05-18 12:09:31.457394', '2026-05-18 12:09:31.457394', '1fa038a9-d93c-483a-898f-62708ea2a438', 'fb58f36b-0f63-48a1-9480-0055668efcaf', '20', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1GC03R03", "intitule": "Je ne sais pas", "question": "Q1GC03", "scoreMax": 2, "nom_technique": "Q1GC03R03"}', '2026-05-18 12:09:32.647', '2026-05-18 12:09:32.663851', '2026-05-18 12:09:32.663851', '1fa038a9-d93c-483a-898f-62708ea2a438', 'b39eca8a-65a7-4f5d-882b-b3f96d9b51f8', '21', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC04"}', '2026-05-18 12:09:32.671', '2026-05-18 12:09:32.686033', '2026-05-18 12:09:32.686033', '1fa038a9-d93c-483a-898f-62708ea2a438', '3853c244-c330-48f4-bb35-d817ec8be21a', '22', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1GC04R03", "intitule": "Je ne sais pas", "question": "Q1GC04", "scoreMax": 2, "nom_technique": "Q1GC04R03"}', '2026-05-18 12:09:33.713', '2026-05-18 12:09:33.731998', '2026-05-18 12:09:33.731998', '1fa038a9-d93c-483a-898f-62708ea2a438', '923608c0-244c-4e6a-89fa-79659330b7d0', '23', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC05"}', '2026-05-18 12:09:33.737', '2026-05-18 12:09:33.754667', '2026-05-18 12:09:33.754667', '1fa038a9-d93c-483a-898f-62708ea2a438', 'ce7da419-2120-42ad-b981-5ae6f63da541', '24', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1GC05R05", "intitule": "Je ne sais pas", "question": "Q1GC05", "scoreMax": 2, "nom_technique": "Q1GC05R05"}', '2026-05-18 12:09:35.28', '2026-05-18 12:09:35.299597', '2026-05-18 12:09:35.299597', '1fa038a9-d93c-483a-898f-62708ea2a438', '9963e937-429d-4f0f-a311-1db954d5c4d5', '25', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC06"}', '2026-05-18 12:09:35.305', '2026-05-18 12:09:35.319407', '2026-05-18 12:09:35.319407', '1fa038a9-d93c-483a-898f-62708ea2a438', 'c55127f6-6a0b-401a-bc94-bc909f1c3683', '26', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1GC06R04", "intitule": "Je ne sais pas", "question": "Q1GC06", "scoreMax": 0, "nom_technique": "Q1GC06R04"}', '2026-05-18 12:09:36.381', '2026-05-18 12:09:36.473617', '2026-05-18 12:09:36.473617', '1fa038a9-d93c-483a-898f-62708ea2a438', 'bb2958bb-889d-464b-afde-96b217ce2a96', '27', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PR01"}', '2026-05-18 12:09:36.479', '2026-05-18 12:09:36.494935', '2026-05-18 12:09:36.494935', '1fa038a9-d93c-483a-898f-62708ea2a438', 'df52cf84-732f-4008-ac92-96b9792bcedb', '28', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1PR01R04", "intitule": "Je ne sais pas", "question": "Q1PR01", "scoreMax": 3, "nom_technique": "Q1PR01R04"}', '2026-05-18 12:09:37.397', '2026-05-18 12:09:37.415267', '2026-05-18 12:09:37.415267', '1fa038a9-d93c-483a-898f-62708ea2a438', '0b88ba13-1cd7-4a9c-803c-82db2c1a0c96', '29', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('affichageQuestionQCM', '{"question": "Q1PR02"}', '2026-05-18 12:09:37.423', '2026-05-18 12:09:37.522691', '2026-05-18 12:09:37.522691', '1fa038a9-d93c-483a-898f-62708ea2a438', '76d331b7-b483-43d6-ac84-4953209a65da', '30', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1PR02R04", "intitule": "Je ne sais pas", "question": "Q1PR02", "scoreMax": 3, "nom_technique": "Q1PR02R04"}', '2026-05-18 12:09:38.364', '2026-05-18 12:09:38.38151', '2026-05-18 12:09:38.38151', '1fa038a9-d93c-483a-898f-62708ea2a438', 'fba9ce99-f357-4fb5-bd3d-639d3e2ce876', '31', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO01"}', '2026-05-18 12:09:38.387', '2026-05-18 12:09:38.404604', '2026-05-18 12:09:38.404604', '1fa038a9-d93c-483a-898f-62708ea2a438', 'd7d4e2d9-91dd-4999-be8c-4048326a36fc', '32', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1TO01R04", "intitule": "Je ne sais pas", "question": "Q1TO01", "scoreMax": 3, "nom_technique": "Q1TO01R04"}', '2026-05-18 12:09:39.397', '2026-05-18 12:09:39.416624', '2026-05-18 12:09:39.416624', '1fa038a9-d93c-483a-898f-62708ea2a438', 'b19e14ef-3c0e-4b70-a735-6873457bdd10', '33', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO02"}', '2026-05-18 12:09:39.424', '2026-05-18 12:09:39.441657', '2026-05-18 12:09:39.441657', '1fa038a9-d93c-483a-898f-62708ea2a438', 'a78f48aa-f03c-44bc-97a2-16d4c8283c05', '34', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1TO02R04", "intitule": "Je ne sais pas", "question": "Q1TO02", "scoreMax": 0, "nom_technique": "Q1TO02R04"}', '2026-05-18 12:09:40.363', '2026-05-18 12:09:40.384273', '2026-05-18 12:09:40.384273', '1fa038a9-d93c-483a-898f-62708ea2a438', '8f6fc4cb-7b82-4e42-934b-15c8ea957f1b', '35', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO03"}', '2026-05-18 12:09:40.393', '2026-05-18 12:09:40.408121', '2026-05-18 12:09:40.408121', '1fa038a9-d93c-483a-898f-62708ea2a438', '7d103ec4-4661-4d81-b771-48b367b45f39', '36', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1TO03R03", "intitule": "Je ne sais pas", "question": "Q1TO03", "scoreMax": 0, "nom_technique": "Q1TO03R03"}', '2026-05-18 12:09:41.33', '2026-05-18 12:09:41.348115', '2026-05-18 12:09:41.348115', '1fa038a9-d93c-483a-898f-62708ea2a438', 'f834f72f-57b9-4ca2-934a-8e97d8fef2b4', '37', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO04"}', '2026-05-18 12:09:41.354', '2026-05-18 12:09:41.369947', '2026-05-18 12:09:41.369947', '1fa038a9-d93c-483a-898f-62708ea2a438', '0422f9fe-894f-490c-92df-e58406997256', '38', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1TO04R03", "intitule": "Je ne sais pas", "question": "Q1TO04", "scoreMax": 0, "nom_technique": "Q1TO04R03"}', '2026-05-18 12:09:42.23', '2026-05-18 12:09:42.249656', '2026-05-18 12:09:42.249656', '1fa038a9-d93c-483a-898f-62708ea2a438', '63fd6cdc-cc91-4a83-9afe-38f597c45bd1', '39', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('finSituation', '"{}"', '2026-05-18 12:09:42.259', '2026-05-18 12:09:42.277141', '2026-05-18 12:09:42.277141', '1fa038a9-d93c-483a-898f-62708ea2a438', '883577eb-6f28-45b7-9dc2-79102da9d3c8', '40', NULL),
+	('demarrage', '"{}"', '2026-05-28 13:10:29.768', '2026-05-28 13:10:29.813981', '2026-05-28 13:10:29.813981', '3330c5db-0850-476d-aff0-1f7e87362574', 'ddecb6a6-5e30-42fa-b914-8ed958d63f6f', '0', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1IC01R05", "intitule": "Je ne sais pas", "question": "Q1IC01", "scoreMax": 0, "nom_technique": "Q1IC01R05"}', '2026-05-28 13:12:40.68', '2026-05-28 13:12:40.74409', '2026-05-28 13:12:40.74409', '3330c5db-0850-476d-aff0-1f7e87362574', '591c6ac2-bcec-4ec6-9e0d-48b3c4d24a10', '1', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC02"}', '2026-05-28 13:12:40.753', '2026-05-28 13:12:40.770065', '2026-05-28 13:12:40.770065', '3330c5db-0850-476d-aff0-1f7e87362574', 'cc10863e-0b98-4cb9-8661-2c6365e59de0', '2', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1IC02R02", "intitule": "Entre 30 et 50 ans", "question": "Q1IC02", "scoreMax": 2, "nom_technique": "Q1IC02R02"}', '2026-05-28 13:12:41.764', '2026-05-28 13:12:41.784863', '2026-05-28 13:12:41.784863', '3330c5db-0850-476d-aff0-1f7e87362574', '50c44f60-9bb0-42ab-b6a4-e09235322410', '3', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC03"}', '2026-05-28 13:12:41.794', '2026-05-28 13:12:41.810967', '2026-05-28 13:12:41.810967', '3330c5db-0850-476d-aff0-1f7e87362574', '8ef248fd-7fc6-4a69-a41f-ff64c1d46994', '4', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1IC03R06", "intitule": "Collectivités", "question": "Q1IC03", "scoreMax": 2, "nom_technique": "Q1IC03R06"}', '2026-05-28 13:12:44.462', '2026-05-28 13:12:44.481335', '2026-05-28 13:12:44.481335', '3330c5db-0850-476d-aff0-1f7e87362574', '7832d176-6c3a-4311-bfd6-980f17c9d819', '5', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC04"}', '2026-05-28 13:12:44.49', '2026-05-28 13:12:44.50833', '2026-05-28 13:12:44.50833', '3330c5db-0850-476d-aff0-1f7e87362574', '0de2befd-dfc8-4b71-b288-2d39dd3c83fa', '6', NULL),
+	('reponse', '{"reponse": "bonjour", "question": "Q1IC04", "scoreMax": 0}', '2026-05-28 13:13:31.346', '2026-05-28 13:13:31.363769', '2026-05-28 13:13:31.363769', '3330c5db-0850-476d-aff0-1f7e87362574', '2dbffdfb-c346-4915-ab74-f5d4d1924f30', '7', NULL),
+	('affichageQuestionQCM', '{"question": "Q1IC05"}', '2026-05-28 13:13:31.372', '2026-05-28 13:13:31.385334', '2026-05-28 13:13:31.385334', '3330c5db-0850-476d-aff0-1f7e87362574', 'a4ab5cab-7e36-4495-b81b-b061de4ad28d', '8', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"score": 1, "reponse": "Q1IC05R05", "intitule": "Je ne sais pas", "question": "Q1IC05", "scoreMax": 1, "nom_technique": "Q1IC05R05"}', '2026-05-28 13:13:33.997', '2026-05-28 13:13:34.10889', '2026-05-28 13:13:34.10889', '3330c5db-0850-476d-aff0-1f7e87362574', 'ada13c1f-19a7-4852-84bc-680888a05417', '9', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PC01"}', '2026-05-28 13:13:34.12', '2026-05-28 13:13:34.137646', '2026-05-28 13:13:34.137646', '3330c5db-0850-476d-aff0-1f7e87362574', '26f6a538-3d86-4ef4-8af7-0a2164c710b6', '10', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1PC01R02", "intitule": "Des employés/agents de service", "question": "Q1PC01", "scoreMax": 2, "nom_technique": "Q1PC01R02"}', '2026-05-28 13:13:35.097', '2026-05-28 13:13:35.161109', '2026-05-28 13:13:35.161109', '3330c5db-0850-476d-aff0-1f7e87362574', 'a8a5ecd0-58ce-4287-9081-2dd0677f5e2c', '11', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PC02"}', '2026-05-28 13:13:35.169', '2026-05-28 13:13:35.189145', '2026-05-28 13:13:35.189145', '3330c5db-0850-476d-aff0-1f7e87362574', '15b2ff66-fee0-4600-9407-6191a4b4b444', '12', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1PC02R04", "intitule": "Bac+2/3 (niveau 5/6)", "question": "Q1PC02", "scoreMax": 3, "nom_technique": "Q1PC02R04"}', '2026-05-28 13:13:37.63', '2026-05-28 13:13:37.949984', '2026-05-28 13:13:37.949984', '3330c5db-0850-476d-aff0-1f7e87362574', '3a967328-0105-4130-8b6f-73090e3a17b0', '13', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PC03"}', '2026-05-28 13:13:37.96', '2026-05-28 13:13:37.979265', '2026-05-28 13:13:37.979265', '3330c5db-0850-476d-aff0-1f7e87362574', '17599d3b-df17-4e9e-91d4-c499af754797', '14', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1PC03R03", "intitule": "Non pas vraiment", "question": "Q1PC03", "scoreMax": 3, "nom_technique": "Q1PC03R03"}', '2026-05-28 13:13:39.496', '2026-05-28 13:13:39.515915', '2026-05-28 13:13:39.515915', '3330c5db-0850-476d-aff0-1f7e87362574', '2c0f5ed1-b0da-49ae-b25c-13f7bc24a764', '15', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC01"}', '2026-05-28 13:13:39.527', '2026-05-28 13:13:39.545967', '2026-05-28 13:13:39.545967', '3330c5db-0850-476d-aff0-1f7e87362574', '5412abbe-596e-44a6-a32f-dcd53e74b03e', '16', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1GC01R03", "intitule": "Plus de 75 % à la population TAM/Cadres", "question": "Q1GC01", "scoreMax": 2, "nom_technique": "Q1GC01R03"}', '2026-05-28 13:13:40.664', '2026-05-28 13:13:40.68504', '2026-05-28 13:13:40.68504', '3330c5db-0850-476d-aff0-1f7e87362574', 'ac85af2c-0fb8-4220-9838-21f4f54f8e97', '17', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC02"}', '2026-05-28 13:13:40.693', '2026-05-28 13:13:40.708755', '2026-05-28 13:13:40.708755', '3330c5db-0850-476d-aff0-1f7e87362574', 'f2bffaee-60b9-4ce7-8ae4-dde545b18944', '18', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"score": 1, "reponse": "Q1GC02R05", "intitule": "Je ne sais pas", "question": "Q1GC02", "scoreMax": 3, "nom_technique": "Q1GC02R05"}', '2026-05-28 13:13:41.931', '2026-05-28 13:13:41.972249', '2026-05-28 13:13:41.972249', '3330c5db-0850-476d-aff0-1f7e87362574', 'd2c8069a-b281-44c2-8db5-88645336f7d3', '19', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC03"}', '2026-05-28 13:13:41.982', '2026-05-28 13:13:41.998426', '2026-05-28 13:13:41.998426', '3330c5db-0850-476d-aff0-1f7e87362574', 'b5107a2d-5f92-460d-b97b-d7ca628bc002', '20', NULL),
+	('reponse', '{"score": 2, "reponse": "Q1GC03R03", "intitule": "Je ne sais pas", "question": "Q1GC03", "scoreMax": 2, "nom_technique": "Q1GC03R03"}', '2026-05-28 13:13:44.864', '2026-05-28 13:13:44.883697', '2026-05-28 13:13:44.883697', '3330c5db-0850-476d-aff0-1f7e87362574', 'c5cd6ec2-e1a5-4a00-bb81-b86ff8bb1519', '21', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC04"}', '2026-05-28 13:13:44.892', '2026-05-28 13:13:44.907882', '2026-05-28 13:13:44.907882', '3330c5db-0850-476d-aff0-1f7e87362574', 'a7e540ad-727e-4e29-aac7-87fbcd785493', '22', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1GC04R02", "intitule": "Non", "question": "Q1GC04", "scoreMax": 2, "nom_technique": "Q1GC04R02"}', '2026-05-28 13:13:45.731', '2026-05-28 13:13:45.749653', '2026-05-28 13:13:45.749653', '3330c5db-0850-476d-aff0-1f7e87362574', 'a859202e-828f-4f0b-a006-6eefca65e2d2', '23', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC05"}', '2026-05-28 13:13:45.759', '2026-05-28 13:13:45.776155', '2026-05-28 13:13:45.776155', '3330c5db-0850-476d-aff0-1f7e87362574', '4fc8fe22-405d-4260-a3c6-aae8a030198f', '24', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1GC05R04", "intitule": "Non, c''est impossible", "question": "Q1GC05", "scoreMax": 2, "nom_technique": "Q1GC05R04"}', '2026-05-28 13:13:47.18', '2026-05-28 13:13:47.213872', '2026-05-28 13:13:47.213872', '3330c5db-0850-476d-aff0-1f7e87362574', '175fbc1b-8335-43c4-9935-0637dab86c73', '25', NULL),
+	('affichageQuestionQCM', '{"question": "Q1GC06"}', '2026-05-28 13:13:47.222', '2026-05-28 13:13:47.237376', '2026-05-28 13:13:47.237376', '3330c5db-0850-476d-aff0-1f7e87362574', '93cd4533-2d22-4188-8bc3-cf4d3779761f', '26', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1GC06R01", "intitule": "Oui", "question": "Q1GC06", "scoreMax": 0, "nom_technique": "Q1GC06R01"}', '2026-05-28 13:13:48.48', '2026-05-28 13:13:48.49604', '2026-05-28 13:13:48.49604', '3330c5db-0850-476d-aff0-1f7e87362574', '77d503ca-95df-4e28-84fc-ea3164a1984a', '27', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PR01"}', '2026-05-28 13:13:48.505', '2026-05-28 13:13:48.522659', '2026-05-28 13:13:48.522659', '3330c5db-0850-476d-aff0-1f7e87362574', '6c0ca8af-b95f-4a66-b4ad-961ddf552917', '28', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"score": 2, "reponse": "Q1PR01R04", "intitule": "Je ne sais pas", "question": "Q1PR01", "scoreMax": 3, "nom_technique": "Q1PR01R04"}', '2026-05-28 13:13:49.447', '2026-05-28 13:13:49.463491', '2026-05-28 13:13:49.463491', '3330c5db-0850-476d-aff0-1f7e87362574', '5046e05a-b67e-4c44-ab86-b80a07f778e0', '29', NULL),
+	('affichageQuestionQCM', '{"question": "Q1PR02"}', '2026-05-28 13:13:49.472', '2026-05-28 13:13:49.48997', '2026-05-28 13:13:49.48997', '3330c5db-0850-476d-aff0-1f7e87362574', '1fdc0aa7-38f0-4c31-b87b-a089f27584f5', '30', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1PR02R03", "intitule": "Oui, pour tous les postes", "question": "Q1PR02", "scoreMax": 3, "nom_technique": "Q1PR02R03"}', '2026-05-28 13:13:50.896', '2026-05-28 13:13:50.91409', '2026-05-28 13:13:50.91409', '3330c5db-0850-476d-aff0-1f7e87362574', '40e71d30-8c40-41da-80f1-caaca9292d55', '31', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO01"}', '2026-05-28 13:13:50.928', '2026-05-28 13:13:50.945649', '2026-05-28 13:13:50.945649', '3330c5db-0850-476d-aff0-1f7e87362574', 'd5e7af03-7c0a-4450-b7f9-39d9b1b666e5', '32', NULL),
+	('reponse', '{"score": 1, "reponse": "Q1TO01R02", "intitule": "Oui, pour une partie", "question": "Q1TO01", "scoreMax": 3, "nom_technique": "Q1TO01R02"}', '2026-05-28 13:13:52.063', '2026-05-28 13:13:52.08249', '2026-05-28 13:13:52.08249', '3330c5db-0850-476d-aff0-1f7e87362574', 'c4c59b7b-9329-4721-bfbf-bdce0a1ff20c', '33', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO02"}', '2026-05-28 13:13:52.09', '2026-05-28 13:13:52.110176', '2026-05-28 13:13:52.110176', '3330c5db-0850-476d-aff0-1f7e87362574', 'f6240165-902b-49ca-b17c-267ba52a7fa1', '34', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1TO02R04", "intitule": "Je ne sais pas", "question": "Q1TO02", "scoreMax": 0, "nom_technique": "Q1TO02R04"}', '2026-05-28 13:13:53.247', '2026-05-28 13:13:53.26511', '2026-05-28 13:13:53.26511', '3330c5db-0850-476d-aff0-1f7e87362574', 'dfe552bd-ae37-400a-9588-0d03f05c0cdb', '35', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO03"}', '2026-05-28 13:13:53.275', '2026-05-28 13:13:53.292231', '2026-05-28 13:13:53.292231', '3330c5db-0850-476d-aff0-1f7e87362574', 'a7b18259-a9bf-451d-8312-65e312f1458c', '36', NULL),
+	('reponse', '{"score": 0, "reponse": "Q1TO03R02", "intitule": "Non", "question": "Q1TO03", "scoreMax": 0, "nom_technique": "Q1TO03R02"}', '2026-05-28 13:13:54.314', '2026-05-28 13:13:54.333517', '2026-05-28 13:13:54.333517', '3330c5db-0850-476d-aff0-1f7e87362574', 'ec8b0c30-d367-4af8-9582-aab23015d19a', '37', NULL),
+	('affichageQuestionQCM', '{"question": "Q1TO04"}', '2026-05-28 13:13:54.344', '2026-05-28 13:13:54.363191', '2026-05-28 13:13:54.363191', '3330c5db-0850-476d-aff0-1f7e87362574', '02efe5ce-5075-4f90-b56b-a28b299d0649', '38', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"score": 0, "reponse": "Q1TO04R02", "intitule": "Non", "question": "Q1TO04", "scoreMax": 0, "nom_technique": "Q1TO04R02"}', '2026-05-28 13:13:55.864', '2026-05-28 13:13:55.883615', '2026-05-28 13:13:55.883615', '3330c5db-0850-476d-aff0-1f7e87362574', '48a937d9-2c8a-4a77-ae16-4318c76dbf89', '39', NULL),
+	('finSituation', '"{}"', '2026-05-28 13:13:55.897', '2026-05-28 13:13:55.941561', '2026-05-28 13:13:55.941561', '3330c5db-0850-476d-aff0-1f7e87362574', '78e91a44-b077-464d-8b52-c04dc4486355', '40', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP06"}', '2026-05-28 13:13:55.969', '2026-05-28 13:13:56.009679', '2026-05-28 13:13:56.009679', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'bfe6f137-a520-48ec-ac33-1d238a101ba3', '0', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC01"}', '2026-05-28 13:13:55.97', '2026-05-28 13:13:56.03996', '2026-05-28 13:13:56.03996', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'e94b2fef-e04a-4b2b-83ba-06d0616db7ac', '1', NULL),
+	('reponse', '{"reponse": "Q2PC01R2", "intitule": "Non", "question": "Q2PC01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2PC01R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:13:57.48', '2026-05-28 13:13:57.509916', '2026-05-28 13:13:57.509916', '47a3ef26-8005-4804-8a81-c09134cc07ac', '34f237ac-609a-420d-a276-8cbcef57b866', '2', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC02"}', '2026-05-28 13:13:57.518', '2026-05-28 13:13:57.53623', '2026-05-28 13:13:57.53623', '47a3ef26-8005-4804-8a81-c09134cc07ac', '8bc3dfcc-2693-41d8-9183-5e09f47b6385', '3', NULL),
+	('reponse', '{"reponse": "Q2PC02R1", "intitule": "Oui", "question": "Q2PC02", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2PC02R1", "score_numerique": 0, "score_strategies": 3}', '2026-05-28 13:13:58.497', '2026-05-28 13:13:58.51795', '2026-05-28 13:13:58.51795', '47a3ef26-8005-4804-8a81-c09134cc07ac', '793991c0-5e8a-476b-b420-6bf73c7ba718', '4', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC03"}', '2026-05-28 13:13:58.525', '2026-05-28 13:13:58.566333', '2026-05-28 13:13:58.566333', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'c1614ebd-1441-463e-89af-c02c0ab30882', '5', NULL),
+	('reponse', '{"reponse": "Q2PC03R3", "intitule": "Je ne sais pas", "question": "Q2PC03", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2PC03R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-28 13:14:00.581', '2026-05-28 13:14:00.602966', '2026-05-28 13:14:00.602966', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'd91c4a01-aa83-469d-9c4e-21d554b0e1b2', '6', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO01"}', '2026-05-28 13:14:00.61', '2026-05-28 13:14:00.634075', '2026-05-28 13:14:00.634075', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'c7352dd9-7522-44b2-8192-c031bf18187a', '7', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2AO01R2", "intitule": "Non", "question": "Q2AO01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2AO01R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:02.048', '2026-05-28 13:14:02.080173', '2026-05-28 13:14:02.080173', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'e474757e-09bf-4661-af37-2c0949e13a12', '8', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO02"}', '2026-05-28 13:14:02.092', '2026-05-28 13:14:02.115677', '2026-05-28 13:14:02.115677', '47a3ef26-8005-4804-8a81-c09134cc07ac', '81561acf-3dd9-4800-91aa-f984978f7e27', '9', NULL),
+	('reponse', '{"reponse": "Q2AO02R3", "intitule": "Je ne sais pas", "question": "Q2AO02", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2AO02R3", "score_numerique": 4, "score_strategies": 0}', '2026-05-28 13:14:04.346', '2026-05-28 13:14:04.363895', '2026-05-28 13:14:04.363895', '47a3ef26-8005-4804-8a81-c09134cc07ac', '309f9b20-e7ed-4f66-b5c8-f5bc18733370', '10', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO03"}', '2026-05-28 13:14:04.382', '2026-05-28 13:14:04.402175', '2026-05-28 13:14:04.402175', '47a3ef26-8005-4804-8a81-c09134cc07ac', '1255efb5-c579-4c9b-8c1f-1c8f2f96f414', '11', NULL),
+	('reponse', '{"reponse": "Q2AO03R1", "intitule": "Oui", "question": "Q2AO03", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2AO03R1", "score_numerique": 3, "score_strategies": 0}', '2026-05-28 13:14:05.246', '2026-05-28 13:14:05.266153', '2026-05-28 13:14:05.266153', '47a3ef26-8005-4804-8a81-c09134cc07ac', '0477f757-6d16-4fb5-942c-2b579c8efae6', '12', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO04"}', '2026-05-28 13:14:05.274', '2026-05-28 13:14:05.292495', '2026-05-28 13:14:05.292495', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'b79cf95a-7fa4-42ab-84d2-630109bc5307', '13', NULL),
+	('reponse', '{"reponse": "Q2AO04R1", "intitule": "Oui", "question": "Q2AO04", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2AO04R1", "score_numerique": 2, "score_strategies": 0}', '2026-05-28 13:14:06.746', '2026-05-28 13:14:06.765698', '2026-05-28 13:14:06.765698', '47a3ef26-8005-4804-8a81-c09134cc07ac', '32a8f120-0a16-4557-b976-e8e2d98a175b', '14', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ01"}', '2026-05-28 13:14:06.774', '2026-05-28 13:14:06.791491', '2026-05-28 13:14:06.791491', '47a3ef26-8005-4804-8a81-c09134cc07ac', '028c7fd5-ce60-4343-aa97-3f877b94880b', '15', NULL),
+	('reponse', '{"reponse": "Q2SQ01R2", "intitule": "Non", "question": "Q2SQ01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ01R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:08.03', '2026-05-28 13:14:08.049017', '2026-05-28 13:14:08.049017', '47a3ef26-8005-4804-8a81-c09134cc07ac', '2eac7fe7-b103-4511-bc53-7557c3aa62ae', '16', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ02"}', '2026-05-28 13:14:08.058', '2026-05-28 13:14:08.08108', '2026-05-28 13:14:08.08108', '47a3ef26-8005-4804-8a81-c09134cc07ac', '1745027c-2357-4bd1-bd63-9545a8f065b7', '17', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2SQ02R2", "intitule": "Non", "question": "Q2SQ02", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ02R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:09.147', '2026-05-28 13:14:09.237475', '2026-05-28 13:14:09.237475', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'fa35be17-17cb-40bf-8205-1c71cd7aed90', '18', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ03"}', '2026-05-28 13:14:09.247', '2026-05-28 13:14:09.264376', '2026-05-28 13:14:09.264376', '47a3ef26-8005-4804-8a81-c09134cc07ac', '434e92f7-1a4c-4347-8b74-1ed0a01bc2c0', '19', NULL),
+	('reponse', '{"reponse": "Q2SQ03R1", "intitule": "Oui", "question": "Q2SQ03", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2SQ03R1", "score_numerique": 2, "score_strategies": 0}', '2026-05-28 13:14:10.447', '2026-05-28 13:14:10.463227', '2026-05-28 13:14:10.463227', '47a3ef26-8005-4804-8a81-c09134cc07ac', '9a6a9ee0-6865-4e1b-9d8a-e50ecc6332bb', '20', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ04"}', '2026-05-28 13:14:10.472', '2026-05-28 13:14:10.492637', '2026-05-28 13:14:10.492637', '47a3ef26-8005-4804-8a81-c09134cc07ac', '7e6fdba3-9105-4d8e-9d0f-023a1cc64254', '21', NULL),
+	('reponse', '{"reponse": "Q2SQ04R3", "intitule": "Je ne sais pas", "question": "Q2SQ04", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2SQ04R3", "score_numerique": 2, "score_strategies": 3}', '2026-05-28 13:14:11.713', '2026-05-28 13:14:11.729679', '2026-05-28 13:14:11.729679', '47a3ef26-8005-4804-8a81-c09134cc07ac', '04cc51af-7d16-4bb2-a8c1-fb3a930d976d', '22', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ05"}', '2026-05-28 13:14:11.738', '2026-05-28 13:14:11.753247', '2026-05-28 13:14:11.753247', '47a3ef26-8005-4804-8a81-c09134cc07ac', '7ae30b55-9a98-45fd-afb8-eba3d1efe3d1', '23', NULL),
+	('reponse', '{"reponse": "Q2SQ05R1", "intitule": "Oui", "question": "Q2SQ05", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2SQ05R1", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:12.63', '2026-05-28 13:14:12.651776', '2026-05-28 13:14:12.651776', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'c1d692e7-72cb-4a2a-a678-ced74c48d7fa', '24', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ06"}', '2026-05-28 13:14:12.662', '2026-05-28 13:14:12.678595', '2026-05-28 13:14:12.678595', '47a3ef26-8005-4804-8a81-c09134cc07ac', '242584b9-804e-463a-b121-886cbeaa359b', '25', NULL),
+	('reponse', '{"reponse": "Q2SQ06R3", "intitule": "Je ne sais pas", "question": "Q2SQ06", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2SQ06R3", "score_numerique": 4, "score_strategies": 0}', '2026-05-28 13:14:13.513', '2026-05-28 13:14:13.532997', '2026-05-28 13:14:13.532997', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'acb42ee8-19e0-4e50-83e4-8b65f9a8f106', '26', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ07"}', '2026-05-28 13:14:13.541', '2026-05-28 13:14:13.559066', '2026-05-28 13:14:13.559066', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'ffe5924c-5320-4520-9f64-a5d3ca13c0fb', '27', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2SQ07R2", "intitule": "Non", "question": "Q2SQ07", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ07R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:14.28', '2026-05-28 13:14:14.300761', '2026-05-28 13:14:14.300761', '47a3ef26-8005-4804-8a81-c09134cc07ac', '362e5a29-d91f-42f5-a725-d07567b105a8', '28', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP01"}', '2026-05-28 13:14:14.311', '2026-05-28 13:14:14.326594', '2026-05-28 13:14:14.326594', '47a3ef26-8005-4804-8a81-c09134cc07ac', '11a76a14-d7e7-40d2-a4fa-597b924230f3', '29', NULL),
+	('reponse', '{"reponse": "Q2MP01R3", "intitule": "Je ne sais pas", "question": "Q2MP01", "scoreMax": null, "score_cout": 3, "nom_technique": "Q2MP01R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-28 13:14:15.297', '2026-05-28 13:14:15.314674', '2026-05-28 13:14:15.314674', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'c8652f3e-4e42-4d09-985a-b5489180c79a', '30', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP02"}', '2026-05-28 13:14:15.32', '2026-05-28 13:14:15.336446', '2026-05-28 13:14:15.336446', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'f7cde06d-9a84-46fe-96f9-717ed3fb00ea', '31', NULL),
+	('reponse', '{"reponse": "Q2MP02R1", "intitule": "Oui", "question": "Q2MP02", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2MP02R1", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:16.314', '2026-05-28 13:14:16.331336', '2026-05-28 13:14:16.331336', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'd11307d7-d51f-4404-9e96-a35effa23d96', '32', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP03"}', '2026-05-28 13:14:16.339', '2026-05-28 13:14:16.354188', '2026-05-28 13:14:16.354188', '47a3ef26-8005-4804-8a81-c09134cc07ac', '41c93a1e-32b9-431c-98b0-829f4c77b1df', '33', NULL),
+	('reponse', '{"reponse": "Q2MP03R3", "intitule": "Je ne sais pas", "question": "Q2MP03", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2MP03R3", "score_numerique": 2, "score_strategies": 0}', '2026-05-28 13:14:17.83', '2026-05-28 13:14:17.848592', '2026-05-28 13:14:17.848592', '47a3ef26-8005-4804-8a81-c09134cc07ac', 'e5579c1e-6bb7-485f-abab-aef24ed687d3', '34', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP04"}', '2026-05-28 13:14:17.856', '2026-05-28 13:14:17.871974', '2026-05-28 13:14:17.871974', '47a3ef26-8005-4804-8a81-c09134cc07ac', '44544fd2-64a6-4857-b7e3-d01d6ca2bc7c', '35', NULL),
+	('reponse', '{"reponse": "Q2MP04R2", "intitule": "Non", "question": "Q2MP04", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2MP04R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:18.93', '2026-05-28 13:14:18.947519', '2026-05-28 13:14:18.947519', '47a3ef26-8005-4804-8a81-c09134cc07ac', '256d26b8-4d24-4c9e-a7d3-730b69255249', '36', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP05"}', '2026-05-28 13:14:18.955', '2026-05-28 13:14:18.97746', '2026-05-28 13:14:18.97746', '47a3ef26-8005-4804-8a81-c09134cc07ac', '59a0c80d-1f87-4870-a56b-304af1728191', '37', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2MP05R2", "intitule": "Non", "question": "Q2MP05", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2MP05R2", "score_numerique": 0, "score_strategies": 0}', '2026-05-28 13:14:20.28', '2026-05-28 13:14:20.298118', '2026-05-28 13:14:20.298118', '47a3ef26-8005-4804-8a81-c09134cc07ac', '8f863d5d-e3cd-445d-a190-f1aff7e53fb7', '38', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP06"}', '2026-05-28 13:14:20.305', '2026-05-28 13:14:20.322444', '2026-05-28 13:14:20.322444', '47a3ef26-8005-4804-8a81-c09134cc07ac', '3024c1e0-d73e-4e0f-b025-7668d2f0752d', '39', NULL),
+	('reponse', '{"reponse": "Q2MP06R3", "intitule": "Je ne sais pas", "question": "Q2MP06", "scoreMax": null, "score_cout": 3, "nom_technique": "Q2MP06R3", "score_numerique": 3, "score_strategies": 3}', '2026-05-28 13:14:21.047', '2026-05-28 13:14:21.062836', '2026-05-28 13:14:21.062836', '47a3ef26-8005-4804-8a81-c09134cc07ac', '4c8e1c5f-1995-415a-9a01-a8dfa7afa638', '40', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP07"}', '2026-05-28 13:14:21.071', '2026-05-28 13:14:21.089054', '2026-05-28 13:14:21.089054', '47a3ef26-8005-4804-8a81-c09134cc07ac', '04e8907c-efd2-4f03-a4a4-fe861c9df758', '41', NULL),
+	('reponse', '{"reponse": "Q2MP07R3", "intitule": "Je ne sais pas", "question": "Q2MP07", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2MP07R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-28 13:14:21.747', '2026-05-28 13:14:21.817158', '2026-05-28 13:14:21.817158', '47a3ef26-8005-4804-8a81-c09134cc07ac', '2fae13dd-019c-4067-9e54-bfd242dc64e0', '42', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP08"}', '2026-05-28 13:14:21.833', '2026-05-28 13:14:21.849278', '2026-05-28 13:14:21.849278', '47a3ef26-8005-4804-8a81-c09134cc07ac', '5edc6e2f-47d8-4a81-b550-f0ed9269dceb', '43', NULL),
+	('reponse', '{"reponse": "Q2MP08R1", "intitule": "Oui", "question": "Q2MP08", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2MP08R1", "score_numerique": 2, "score_strategies": 3}', '2026-05-28 13:14:22.914', '2026-05-28 13:14:22.936173', '2026-05-28 13:14:22.936173', '47a3ef26-8005-4804-8a81-c09134cc07ac', '143bc88d-e31e-4700-b8e4-fefdf9faf02a', '44', NULL),
+	('finSituation', '"{}"', '2026-05-28 13:14:22.942', '2026-05-28 13:14:22.956643', '2026-05-28 13:14:22.956643', '47a3ef26-8005-4804-8a81-c09134cc07ac', '1c1c1a25-7862-41da-89e9-f0fab08d0913', '45', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP06"}', '2026-05-18 12:09:42.308', '2026-05-18 12:09:42.354323', '2026-05-18 12:09:42.354323', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '7e5e9590-8fb5-45e5-b35a-e0f1e20fd2a2', '0', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC01"}', '2026-05-18 12:09:42.308', '2026-05-18 12:09:42.345932', '2026-05-18 12:09:42.345932', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '34b6277d-af5b-4722-ab16-14831770c3dd', '1', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2PC01R3", "intitule": "Je ne sais pas", "question": "Q2PC01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2PC01R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:43.13', '2026-05-18 12:09:43.149028', '2026-05-18 12:09:43.149028', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '6a991f31-cf29-49a4-8de5-bdd1a385671e', '2', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC02"}', '2026-05-18 12:09:43.154', '2026-05-18 12:09:43.171542', '2026-05-18 12:09:43.171542', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '6d63d0fe-d777-4815-bdda-a2d70b005c8a', '3', NULL),
+	('reponse', '{"reponse": "Q2PC02R3", "intitule": "Je ne sais pas", "question": "Q2PC02", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2PC02R3", "score_numerique": 0, "score_strategies": 3}', '2026-05-18 12:09:43.83', '2026-05-18 12:09:43.848241', '2026-05-18 12:09:43.848241', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '23f4c5f4-060b-4f4c-89fb-d564985dcd9c', '4', NULL),
+	('affichageQuestionQCM', '{"question": "Q2PC03"}', '2026-05-18 12:09:43.854', '2026-05-18 12:09:43.868933', '2026-05-18 12:09:43.868933', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '7afb2ee3-1457-4d56-88e0-219e438c965a', '5', NULL),
+	('reponse', '{"reponse": "Q2PC03R3", "intitule": "Je ne sais pas", "question": "Q2PC03", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2PC03R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-18 12:09:45.13', '2026-05-18 12:09:45.153814', '2026-05-18 12:09:45.153814', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '2ce8de64-18aa-439b-8493-7d2997afefce', '6', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO01"}', '2026-05-18 12:09:45.159', '2026-05-18 12:09:45.17719', '2026-05-18 12:09:45.17719', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '11957a06-6186-4301-b1cf-cc6199b5ec97', '7', NULL),
+	('reponse', '{"reponse": "Q2AO01R3", "intitule": "Je ne sais pas", "question": "Q2AO01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2AO01R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:46.28', '2026-05-18 12:09:46.296481', '2026-05-18 12:09:46.296481', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'dcadb87e-8bfe-43d1-ae14-b181fa6faa7a', '8', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO02"}', '2026-05-18 12:09:46.301', '2026-05-18 12:09:46.31647', '2026-05-18 12:09:46.31647', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'cf052d21-80fa-4a8e-9712-cb10fe519d26', '9', NULL),
+	('reponse', '{"reponse": "Q2AO02R3", "intitule": "Je ne sais pas", "question": "Q2AO02", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2AO02R3", "score_numerique": 4, "score_strategies": 0}', '2026-05-18 12:09:47.13', '2026-05-18 12:09:47.147182', '2026-05-18 12:09:47.147182', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '320270af-3b59-485f-9e56-c49742599ca5', '10', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO03"}', '2026-05-18 12:09:47.152', '2026-05-18 12:09:47.17047', '2026-05-18 12:09:47.17047', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '6a51b580-9325-4d85-a58d-9ab90453e614', '11', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2AO03R3", "intitule": "Je ne sais pas", "question": "Q2AO03", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2AO03R3", "score_numerique": 3, "score_strategies": 0}', '2026-05-18 12:09:47.747', '2026-05-18 12:09:47.76398', '2026-05-18 12:09:47.76398', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'fa834654-961d-4375-9828-80472393b210', '12', NULL),
+	('affichageQuestionQCM', '{"question": "Q2AO04"}', '2026-05-18 12:09:47.769', '2026-05-18 12:09:47.784519', '2026-05-18 12:09:47.784519', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '054cfa9b-1409-4a0f-ae0a-872886e729da', '13', NULL),
+	('reponse', '{"reponse": "Q2AO04R3", "intitule": "Je ne sais pas", "question": "Q2AO04", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2AO04R3", "score_numerique": 2, "score_strategies": 0}', '2026-05-18 12:09:48.247', '2026-05-18 12:09:48.263051', '2026-05-18 12:09:48.263051', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'e62ebd8b-6c30-4df9-aa49-f11446296a8b', '14', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ01"}', '2026-05-18 12:09:48.268', '2026-05-18 12:09:48.282004', '2026-05-18 12:09:48.282004', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'ae92890f-bf22-4697-8baa-a3ba44e8f838', '15', NULL),
+	('reponse', '{"reponse": "Q2SQ01R3", "intitule": "Je ne sais pas", "question": "Q2SQ01", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ01R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:48.697', '2026-05-18 12:09:48.717721', '2026-05-18 12:09:48.717721', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '2cc76c07-635a-4276-8884-e4ddea679412', '16', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ02"}', '2026-05-18 12:09:48.723', '2026-05-18 12:09:48.738808', '2026-05-18 12:09:48.738808', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'bc385ca0-960a-464f-b2c8-6a240883d427', '17', NULL),
+	('reponse', '{"reponse": "Q2SQ02R3", "intitule": "Je ne sais pas", "question": "Q2SQ02", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2SQ02R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-18 12:09:49.081', '2026-05-18 12:09:49.098202', '2026-05-18 12:09:49.098202', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'bdc2958d-b605-420c-8c05-5a40903444cb', '18', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ03"}', '2026-05-18 12:09:49.103', '2026-05-18 12:09:49.117698', '2026-05-18 12:09:49.117698', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '447a4b12-c6d1-41d2-ae15-591f0a925027', '19', NULL),
+	('reponse', '{"reponse": "Q2SQ03R3", "intitule": "Je ne sais pas", "question": "Q2SQ03", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ03R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:49.48', '2026-05-18 12:09:49.579143', '2026-05-18 12:09:49.579143', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '2e9e0c46-06d2-41e6-8617-b1ff14e5ed2a', '20', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ04"}', '2026-05-18 12:09:49.584', '2026-05-18 12:09:49.600314', '2026-05-18 12:09:49.600314', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'cf4d4537-8de4-420d-b17f-5de1faa7c9f5', '21', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2SQ04R3", "intitule": "Je ne sais pas", "question": "Q2SQ04", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2SQ04R3", "score_numerique": 2, "score_strategies": 3}', '2026-05-18 12:09:51.097', '2026-05-18 12:09:51.151054', '2026-05-18 12:09:51.151054', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '4999ca6f-8ab6-40ba-8772-fa54fb27ed54', '22', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ05"}', '2026-05-18 12:09:51.157', '2026-05-18 12:09:51.174716', '2026-05-18 12:09:51.174716', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '2dfb831c-5192-45dd-bc2d-b86db971572f', '23', NULL),
+	('reponse', '{"reponse": "Q2SQ05R3", "intitule": "Je ne sais pas", "question": "Q2SQ05", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2SQ05R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:51.664', '2026-05-18 12:09:51.681856', '2026-05-18 12:09:51.681856', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '53c787f1-cc09-4bb7-a10b-94024cc156c2', '24', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ06"}', '2026-05-18 12:09:51.688', '2026-05-18 12:09:51.704149', '2026-05-18 12:09:51.704149', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '0297819c-7d4f-4fdc-9554-6e1b9d2eab6b', '25', NULL),
+	('reponse', '{"reponse": "Q2SQ06R3", "intitule": "Je ne sais pas", "question": "Q2SQ06", "scoreMax": null, "score_cout": 2, "nom_technique": "Q2SQ06R3", "score_numerique": 4, "score_strategies": 0}', '2026-05-18 12:09:52.08', '2026-05-18 12:09:52.096371', '2026-05-18 12:09:52.096371', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'cc9640b5-d407-4f91-ac16-b47d7a97900e', '26', NULL),
+	('affichageQuestionQCM', '{"question": "Q2SQ07"}', '2026-05-18 12:09:52.186', '2026-05-18 12:09:52.202684', '2026-05-18 12:09:52.202684', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'de926ffc-1b89-47e2-87bf-c105b072b054', '27', NULL),
+	('reponse', '{"reponse": "Q2SQ07R3", "intitule": "Je ne sais pas", "question": "Q2SQ07", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2SQ07R3", "score_numerique": 2, "score_strategies": 0}', '2026-05-18 12:09:52.947', '2026-05-18 12:09:52.966509', '2026-05-18 12:09:52.966509', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '0072de43-5582-4f99-b836-2754a6000c7f', '28', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP01"}', '2026-05-18 12:09:52.971', '2026-05-18 12:09:52.986474', '2026-05-18 12:09:52.986474', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'e0498f2d-b8f3-43d9-af6a-85906d8f60f5', '29', NULL),
+	('reponse', '{"reponse": "Q2MP01R3", "intitule": "Je ne sais pas", "question": "Q2MP01", "scoreMax": null, "score_cout": 3, "nom_technique": "Q2MP01R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-18 12:09:54.097', '2026-05-18 12:09:54.117417', '2026-05-18 12:09:54.117417', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '82b7dbde-6c67-4f7f-88d2-8b23cd5fc0fb', '30', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP02"}', '2026-05-18 12:09:54.123', '2026-05-18 12:09:54.14007', '2026-05-18 12:09:54.14007', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'bb04b2e6-7b13-465c-a84d-089d2de2332d', '31', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2MP02R3", "intitule": "Je ne sais pas", "question": "Q2MP02", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2MP02R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:54.547', '2026-05-18 12:09:54.563349', '2026-05-18 12:09:54.563349', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '66a05269-2ccd-4a34-b9d7-67000cbf7259', '32', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP03"}', '2026-05-18 12:09:54.569', '2026-05-18 12:09:54.584944', '2026-05-18 12:09:54.584944', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '157ada49-d238-463c-8cd6-dbaaa26b7bab', '33', NULL),
+	('reponse', '{"reponse": "Q2MP03R3", "intitule": "Je ne sais pas", "question": "Q2MP03", "scoreMax": null, "score_cout": 4, "nom_technique": "Q2MP03R3", "score_numerique": 2, "score_strategies": 0}', '2026-05-18 12:09:54.98', '2026-05-18 12:09:54.997514', '2026-05-18 12:09:54.997514', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'bf0b9b35-9f30-4742-b7a5-5386460bb9a8', '34', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP04"}', '2026-05-18 12:09:55.002', '2026-05-18 12:09:55.018787', '2026-05-18 12:09:55.018787', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '1ed07dc5-229f-4d61-b27e-564b9abf8397', '35', NULL),
+	('reponse', '{"reponse": "Q2MP04R3", "intitule": "Je ne sais pas", "question": "Q2MP04", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2MP04R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:56.23', '2026-05-18 12:09:56.252758', '2026-05-18 12:09:56.252758', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '93eae462-ab7f-4ce6-af74-0f0476ec260c', '36', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP05"}', '2026-05-18 12:09:56.259', '2026-05-18 12:09:56.275487', '2026-05-18 12:09:56.275487', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '03b0aedc-fb98-46d8-ae1c-779d4a29a1fd', '37', NULL),
+	('reponse', '{"reponse": "Q2MP05R3", "intitule": "Je ne sais pas", "question": "Q2MP05", "scoreMax": null, "score_cout": 0, "nom_technique": "Q2MP05R3", "score_numerique": 0, "score_strategies": 0}', '2026-05-18 12:09:57.597', '2026-05-18 12:09:57.616915', '2026-05-18 12:09:57.616915', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'e09f95c9-6fa9-4c6f-94d9-44c3b4ce8527', '38', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP06"}', '2026-05-18 12:09:57.627', '2026-05-18 12:09:57.643623', '2026-05-18 12:09:57.643623', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '63598de1-ff1c-4bc1-a776-b5df3440087b', '39', NULL),
+	('reponse', '{"reponse": "Q2MP06R3", "intitule": "Je ne sais pas", "question": "Q2MP06", "scoreMax": null, "score_cout": 3, "nom_technique": "Q2MP06R3", "score_numerique": 3, "score_strategies": 3}', '2026-05-18 12:09:57.98', '2026-05-18 12:09:57.999432', '2026-05-18 12:09:57.999432', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '9ed163cb-4e64-4d76-81b1-ad6cdd4feba4', '40', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP07"}', '2026-05-18 12:09:58.007', '2026-05-18 12:09:58.024452', '2026-05-18 12:09:58.024452', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '8bf73be8-59eb-4a29-987a-1aafa0e844b0', '41', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('reponse', '{"reponse": "Q2MP07R3", "intitule": "Je ne sais pas", "question": "Q2MP07", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2MP07R3", "score_numerique": 2, "score_strategies": 4}', '2026-05-18 12:09:59.28', '2026-05-18 12:09:59.302456', '2026-05-18 12:09:59.302456', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '8c749ae5-3df6-4185-a69c-2d1fd708a106', '42', NULL),
+	('affichageQuestionQCM', '{"question": "Q2MP08"}', '2026-05-18 12:09:59.308', '2026-05-18 12:09:59.324611', '2026-05-18 12:09:59.324611', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', '1e6ec148-e70e-4c52-95ca-3369811b7efd', '43', NULL),
+	('reponse', '{"reponse": "Q2MP08R3", "intitule": "Je ne sais pas", "question": "Q2MP08", "scoreMax": null, "score_cout": 1, "nom_technique": "Q2MP08R3", "score_numerique": 2, "score_strategies": 3}', '2026-05-18 12:09:59.93', '2026-05-18 12:09:59.948218', '2026-05-18 12:09:59.948218', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'fc734ed0-b0bb-4649-86db-f38a15067177', '44', NULL),
+	('finSituation', '"{}"', '2026-05-18 12:09:59.955', '2026-05-18 12:09:59.969631', '2026-05-18 12:09:59.969631', '86c8008a-03df-4717-a7cf-0f382d1dc4d7', 'edf1b9e9-ecb4-434f-8a72-c16d696f48dd', '45', NULL);
 

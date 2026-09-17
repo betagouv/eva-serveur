@@ -4,6 +4,6 @@ fr:
       actualites:
         action:
           lire: Lire
-          modifer: Modifier
+          modifier: Modifier
           supprimer: Supprimer
           supprimer-confirmation: Êtes-vous sûr de vouloir supprimer cette actualité ?

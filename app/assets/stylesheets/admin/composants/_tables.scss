@@ -1,5 +1,6 @@
 .index_as_table {
-  overflow-x: auto;
+  overflow: auto clip;
+
   // Ceci est un hack pour éviter que les shadow des éléments enfants soient éffacées à cause de l'overflow-x ⬆️
   padding: 0.5rem;
   margin: -0.5rem;

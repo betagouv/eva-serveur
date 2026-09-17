@@ -1,10 +1,12 @@
 div class: "actualites" do
+  badges_couleur_categorie = {
+    "assistance" => "fr-badge--pink-macaron",
+    "blog" => "fr-badge--yellow-tournesol",
+    "evolution" => "fr-badge--green-emeraude"
+  }
+
   actualites.each do |actualite|
     contenu = safe_join([
-      Tag.new(
-        t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
-        classes: "tag-categorie #{actualite.categorie}"
-      ).render_in(helpers),
       content_tag(:h3, class: "titre fr-card__title") do
         link_to actualite.titre, admin_actualite_path(actualite), id: actualite.id
       end,
@@ -41,7 +43,14 @@ div class: "actualites" do
         image_url: (cdn_for(actualite.illustration) if actualite.illustration.attached?),
         image_alt: "",
         size: :sm,
-        classes: [ "actualite-card" ]
+        classes: [ "actualite-card" ],
+        badges: [
+          {
+            contenu: t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
+            class_couleur: badges_couleur_categorie[actualite.categorie],
+            taille: "sm"
+          }
+        ]
       ).with_content(contenu)
     )
   end

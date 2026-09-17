@@ -542,6 +542,13 @@ CREATE TABLE public.questions (
     passable boolean DEFAULT false
 );
 
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
 
 --
 -- Name: situations; Type: TABLE; Schema: public; Owner: -
@@ -84697,6 +84704,14 @@ ALTER TABLE ONLY public.questionnaires_questions
 
 ALTER TABLE ONLY public.questions
     ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --

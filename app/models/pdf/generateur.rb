@@ -31,9 +31,9 @@ module Pdf
       end
 
       begin
-        Pdf::Navigateur.reset!
+        Pdf::Navigateur.close!
       rescue => e
-        Rails.logger.debug("Échec reset navigateur après erreur: #{e.message}")
+        Rails.logger.debug("Échec fermeture navigateur après erreur: #{e.message}")
       end
     end
 

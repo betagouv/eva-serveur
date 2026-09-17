@@ -4,5 +4,5 @@
 # fermer le processus Chrome sous-jacent, qui reste alors orphelin.
 # On le ferme explicitement juste avant que la classe ne soit déchargée.
 Rails.autoloaders.main.on_unload("Pdf::Navigateur") do |klass, _abspath|
-  klass.reset!
+  klass.close!
 end

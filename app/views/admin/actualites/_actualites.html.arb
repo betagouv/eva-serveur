@@ -7,39 +7,13 @@ div class: "actualites" do
 
   actualites.each do |actualite|
     contenu = safe_join([
-      content_tag(:h3, class: "titre fr-card__title") do
-        link_to actualite.titre, admin_actualite_path(actualite), id: actualite.id
-      end,
       content_tag(:span, l(actualite.created_at, format: :sans_heure), class: "date"),
-      if can?(:manage, Actualite)
-        safe_join([
-          content_tag(:span, class: "menu-actions") do
-            content_tag(:div, class: "table_actions") do
-              safe_join([
-                link_to(t(".action.lire"), admin_actualite_path(actualite),
-                        aria: { describedby: actualite.id }),
-                link_to(t(".action.modifier"), edit_admin_actualite_path(actualite),
-                        aria: { describedby: actualite.id }),
-                link_to(t(".action.supprimer"), admin_actualite_path(actualite),
-                        method: :delete,
-                        data: { confirm: t(".action.supprimer-confirmation") },
-                        aria: { describedby: actualite.id })
-              ])
-            end
-          end,
-          helpers.render(partial: "components/bouton_menu_actions")
-        ])
-      else
-        content_tag(:span, class: "action") do
-          link_to t(".action.lire"), admin_actualite_path(actualite),
-                  class: "action-simple",
-                  aria: { describedby: actualite.id }
-        end
-      end
     ])
 
     render(
       CardComponent.new(
+        titre: actualite.titre,
+        url: admin_actualite_path(actualite),
         image_url: (cdn_for(actualite.illustration) if actualite.illustration.attached?),
         image_alt: "",
         size: :sm,

@@ -7,8 +7,7 @@ module Pdf
 
     def genere(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
-      browser_ref = Pdf::Navigateur.instance
-      page = prepare_page(browser_ref, html_content)
+      page = prepare_page(Pdf::Navigateur.instance, html_content)
 
       page.pdf(**pdf_options(filename: filename))
       page.close
@@ -16,7 +15,7 @@ module Pdf
     rescue => e
       Rails.logger.error("Chromium crash: #{e.message}")
       Rollbar.error(e)
-      retablissement_apres_crash(browser_ref, page)
+      retablissement_apres_crash(page)
       false
     end
 
@@ -24,16 +23,18 @@ module Pdf
       new.genere(html_content)
     end
 
-    def retablissement_apres_crash(browser, page)
-      if browser&.connected?
-        action = "fermeture page"
+    def retablissement_apres_crash(page)
+      begin
         page&.close
-      else
-        action = "reset navigateur"
-        Pdf::Navigateur.reset!
+      rescue => e
+        Rails.logger.debug("Échec fermeture page après erreur: #{e.message}")
       end
-    rescue => e
-      Rails.logger.debug("Échec #{action} après erreur: #{e.message}")
+
+      begin
+        Pdf::Navigateur.reset!
+      rescue => e
+        Rails.logger.debug("Échec reset navigateur après erreur: #{e.message}")
+      end
     end
 
     def prepare_page(browser, html_content)

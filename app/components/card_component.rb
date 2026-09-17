@@ -16,7 +16,8 @@ class CardComponent < ViewComponent::Base
     bouton_attributes: {},
     size: :md,
     html_attributes: {},
-    classes: []
+    classes: [],
+    badges: []
   )
     @url = url
     @titre = titre
@@ -29,6 +30,7 @@ class CardComponent < ViewComponent::Base
     @size = size
     @html_attributes = html_attributes
     @classes = classes
+    @badges = Array(badges)
   end
 
   def card_classes
@@ -42,6 +44,12 @@ class CardComponent < ViewComponent::Base
   def has_image?
     @image_url.present?
   end
+
+  def has_badges?
+    @badges.any?
+  end
+
+  attr_reader :badges
 
   def has_bouton?
     @bouton_label.present? && @bouton_url.present?

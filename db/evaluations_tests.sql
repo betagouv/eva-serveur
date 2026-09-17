@@ -83983,7 +83983,19 @@ INSERT INTO public.active_storage_blobs (key, filename, content_type, metadata, 
 	('1ammqy6pcdsu0qo0o8a1rnt7g2ni', 'Partenaire=OPCO Mobilités.png', 'image/png', '{"identified":true,"width":130,"height":90,"analyzed":true}', 4361, 'j9gXz7TVTGgQe9ThneT5ow==', '2026-01-27 17:16:41', 'b40f9e6f-7be3-4043-90e3-995c88991254', 'amazon'),
 	('33iqc1b023t5362tziv3bss3p52j', 'Partenaire=OPCO Santé.png', 'image/png', '{"identified":true,"width":90,"height":90,"analyzed":true}', 3557, 'TjrMCr8l4NJODb4peow7xA==', '2026-01-27 17:08:02', 'fe39d308-9651-4ec1-a202-f2428167c30c', 'amazon'),
 	('peehdxkzptoggcpn6ph8m2y3fkul', 'logo_uniformation_opco.png', 'image/png', '{"identified":true,"width":2359,"height":736,"analyzed":true}', 51827, 'Vje48lJ1P4cDKTWOxYYVGg==', '2025-12-15 17:16:57', 'd2099b4c-b59b-4f45-ab0f-dc38d8653103', 'amazon'),
-	('manmw4jrkpophocgf4gs212i948s', 'akto.png', 'image/png', '{"identified":true,"width":800,"height":310,"analyzed":true}', 142653, 'KS2rr/CzGm1ouXBN60B1Dw==', '2026-09-16 17:11:09', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', 'amazon');
+	('manmw4jrkpophocgf4gs212i948s', 'akto.png', 'image/png', '{"identified":true,"width":800,"height":310,"analyzed":true}', 142653, 'KS2rr/CzGm1ouXBN60B1Dw==', '2026-09-16 17:11:09', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', 'amazon'),
+	('2j2dqnhia0kohtdnirqbuj01jd35', 'bienvenu2.png', 'image/png', '{"identified":true,"analyzed":true}', 38136, 'yycTJ4HZAU0EsLlemOF3Qw==', '2022-12-02 15:47:50', '1feeab98-6f50-4952-a25e-10d5e7d84b9c', 'amazon'),
+	('yenxdyxsoz9z0ek64drqhrdb3fcg', 'batiment-cafe_de_la_place.png', 'image/png', '{"identified":true,"analyzed":true}', 58051, 'zOZ4XHjOreu4R4aUSyzTqw==', '2022-12-07 08:41:52', 'ef8a7532-ee64-4f04-9435-716bdf0d45e9', 'amazon'),
+	('zxde8kf88p2fdb49sdgnfatufp2z', 'batiment-controle.png', 'image/png', '{"identified":true,"analyzed":true}', 57344, 'u6X6x/3wLQl6mnIm1Kej7A==', '2022-12-02 15:55:55', 'c130a8dd-79d1-4e63-8add-6cc55177cb0c', 'amazon'),
+	('f9rrxwjttze31r06op3kmce2rqo0', 'batiment-inventaire.png', 'image/png', '{"identified":true,"analyzed":true}', 65491, '2aWL6ZzeVelXs5ogE9JIFA==', '2022-12-02 15:55:26', '62461092-006e-449e-a266-fa06428efe60', 'amazon'),
+	('zbxtca5x46ts0ihyudooivflbp9g', 'batiment-livraison.png', 'image/png', '{"identified":true,"analyzed":true}', 24596, 'UCOMdRQkXZGj622pxsV+fA==', '2022-12-02 15:56:11', '6513f9cc-5d20-4d3d-af95-dec0f96293ab', 'amazon'),
+	('nc3rwiltz1v9ejsg3mtwftc400tv', 'wp3ttzech9qql7cgnbhryeortwjh.png', 'image/png', '{"identified":true,"analyzed":true}', 66097, 'IqDPFqyFVxUy6+AOKwCuAg==', '2022-12-05 13:56:04', '6ae43467-caea-4e6b-b0f1-ee4140bf1b20', 'amazon'),
+	('qxvonhxq2wpgld3qhod24wktf3ib', 'batiment-objets_trouves.png', 'image/png', '{"identified":true,"analyzed":true}', 71015, 'LfuKAVBchuh0zL0/AEc98A==', '2022-12-02 15:56:35', 'd2521506-9fef-4b05-9d8d-443dc6a54c58', 'amazon'),
+	('ulrlyl3tjwitfmtvhkrroqbfq07u', 'image situation_pdm.jpg', 'image/jpeg', '{"identified":true,"width":4032,"height":2264,"analyzed":true}', 1881470, 'Rvn0lvL+0qgo8Tp2TyhqiQ==', '2025-03-20 09:32:20', '8b6f29aa-d3ec-43e9-89a1-cb6c990f130e', 'amazon'),
+	('utcwfc6r2ehezvd7sld4zrx48bd1', 'Capture d’écran 2022-12-05 à 11.53.39.png', 'image/png', '{"identified":true,"analyzed":true}', 106402, 'gaBnSXNeFligtEW+zNdXjw==', '2022-12-05 16:14:45', '377ddd30-5ab8-4f88-ac7d-8f487f23c11f', 'amazon'),
+	('ck6ipe19pg02rrorp8tpnuto9yuj', 'batiment-prevention.png', 'image/png', '{"identified":true,"analyzed":true}', 34746, 'wP00q7A+v+bSx2tRFcZACQ==', '2022-12-02 15:56:48', 'ab8ac082-2bd6-4f45-9d60-ddb21d5ad37c', 'amazon'),
+	('bartdc3ahka11sfcwq2tvkr4daui', 'batiment-securite.png', 'image/png', '{"identified":true,"analyzed":true}', 102839, 'HgwGK9XqXmL6ucAodpExvw==', '2022-12-02 15:55:03', 'c05271f1-860c-4e22-8525-eda392f6afc2', 'amazon'),
+	('xb70bzfp3pd62stwwrerp14gzlqd', 'batiment-tri.png', 'image/png', '{"identified":true,"analyzed":true}', 54293, 'xoCH8EVJYIB2yPta+5+RTg==', '2022-12-02 15:56:22', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', 'amazon');
 
 
 --
@@ -84004,7 +84016,19 @@ INSERT INTO public.active_storage_attachments (name, record_type, created_at, id
 	('logo', 'Opco', '2026-01-27 17:16:41', 'e7e5291c-cb23-402b-a814-4564ee0dce8c', 'b40f9e6f-7be3-4043-90e3-995c88991254', '5567c165-744d-4b64-bd4e-4c5f73de51f3'),
 	('logo', 'Opco', '2026-01-27 17:08:02', '0474ceb5-c504-4f71-9c29-048620d60b25', 'fe39d308-9651-4ec1-a202-f2428167c30c', '25e2fdd0-a405-4b79-902e-3485af2ef8b0'),
 	('logo', 'Opco', '2025-12-15 17:16:57', 'e79d74ea-c527-468d-b5d4-0e6d91999a76', 'd2099b4c-b59b-4f45-ab0f-dc38d8653103', 'ff8d7757-e344-4c76-ba09-4d1575a60745'),
-	('logo', 'Opco', '2026-09-16 17:11:09', 'c1a5d0e7-3f6b-4b8a-9c1d-7e2f4a8b6d3c', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', '9f51af56-9a72-4e36-9691-79d7e38206fe');
+	('logo', 'Opco', '2026-09-16 17:11:09', 'c1a5d0e7-3f6b-4b8a-9c1d-7e2f4a8b6d3c', '2aea3c1f-79f5-4656-a1fe-10b4075007c6', '9f51af56-9a72-4e36-9691-79d7e38206fe'),
+	('illustration', 'Situation', '2022-12-02 15:47:50', '12f1e3fc-8f6d-469d-b9b0-71a7c706232b', '1feeab98-6f50-4952-a25e-10d5e7d84b9c', '2d154cbd-a422-43bf-8534-1538b6d1b8c5'),
+	('illustration', 'Situation', '2022-12-07 08:41:52', 'c36fc1ed-45f6-400c-ab54-ba785baf93df', 'ef8a7532-ee64-4f04-9435-716bdf0d45e9', 'b6c10f31-2212-43b8-8121-7dc5a8937698'),
+	('illustration', 'Situation', '2022-12-02 15:55:55', '70797662-a842-401a-a284-9f9f884b9e4e', 'c130a8dd-79d1-4e63-8add-6cc55177cb0c', '8cf7d02b-4806-4d2c-ac05-ee5828ef19ef'),
+	('illustration', 'Situation', '2022-12-02 15:55:26', '51e72d46-ba53-48ec-a345-fc55ed15e423', '62461092-006e-449e-a266-fa06428efe60', 'cd8bbc27-62e6-4a4f-b383-a5bcc2cd5d7a'),
+	('illustration', 'Situation', '2022-12-02 15:56:11', '94223ec2-8297-41b9-8999-e9c628355cbc', '6513f9cc-5d20-4d3d-af95-dec0f96293ab', '569cdc17-554d-4227-acfe-1d5d3a4afdbc'),
+	('illustration', 'Situation', '2022-12-05 13:56:04', '9fef9543-12b2-4565-b2f5-96cf22eb1c10', '6ae43467-caea-4e6b-b0f1-ee4140bf1b20', '0cdbc5b9-aa48-4587-844d-86965dc67709'),
+	('illustration', 'Situation', '2022-12-02 15:56:35', '3079e055-0700-438f-945c-56f68ac15d97', 'd2521506-9fef-4b05-9d8d-443dc6a54c58', '50d7cdae-46de-43d5-8f20-73912ee5c6d8'),
+	('illustration', 'Situation', '2025-03-20 09:32:20', '1383ea17-6173-433c-8ae2-6cae7d7327dd', '8b6f29aa-d3ec-43e9-89a1-cb6c990f130e', 'aaf3af21-06d6-491e-8d7f-83a8afd72770'),
+	('illustration', 'Situation', '2022-12-05 16:14:45', '635af3c9-eec5-450d-9c00-8ae6a9344da4', '377ddd30-5ab8-4f88-ac7d-8f487f23c11f', 'e74239ba-7fd1-41d0-9dc4-436c27165ff0'),
+	('illustration', 'Situation', '2022-12-02 15:56:48', '07552731-5ab4-40f4-b023-207aa546747b', 'ab8ac082-2bd6-4f45-9d60-ddb21d5ad37c', '40c3b25b-6d5b-45e6-a645-7026b3db3ed5'),
+	('illustration', 'Situation', '2022-12-02 15:55:03', 'e918f29f-7e0a-4d60-8b7d-01505997bfe2', 'c05271f1-860c-4e22-8525-eda392f6afc2', 'e05619a7-ea29-49ba-8aeb-962c01b34d3b'),
+	('illustration', 'Situation', '2022-12-02 15:56:22', '1b32d419-0a8c-47b3-9471-35debd26981d', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', '56950c03-d386-4918-bc41-11800078fd8e');
 
 
 --

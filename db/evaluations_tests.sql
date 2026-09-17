@@ -83996,7 +83996,8 @@ INSERT INTO public.active_storage_blobs (key, filename, content_type, metadata, 
 	('utcwfc6r2ehezvd7sld4zrx48bd1', 'Capture d’écran 2022-12-05 à 11.53.39.png', 'image/png', '{"identified":true,"analyzed":true}', 106402, 'gaBnSXNeFligtEW+zNdXjw==', '2022-12-05 16:14:45', '377ddd30-5ab8-4f88-ac7d-8f487f23c11f', 'amazon'),
 	('ck6ipe19pg02rrorp8tpnuto9yuj', 'batiment-prevention.png', 'image/png', '{"identified":true,"analyzed":true}', 34746, 'wP00q7A+v+bSx2tRFcZACQ==', '2022-12-02 15:56:48', 'ab8ac082-2bd6-4f45-9d60-ddb21d5ad37c', 'amazon'),
 	('bartdc3ahka11sfcwq2tvkr4daui', 'batiment-securite.png', 'image/png', '{"identified":true,"analyzed":true}', 102839, 'HgwGK9XqXmL6ucAodpExvw==', '2022-12-02 15:55:03', 'c05271f1-860c-4e22-8525-eda392f6afc2', 'amazon'),
-	('xb70bzfp3pd62stwwrerp14gzlqd', 'batiment-tri.png', 'image/png', '{"identified":true,"analyzed":true}', 54293, 'xoCH8EVJYIB2yPta+5+RTg==', '2022-12-02 15:56:22', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', 'amazon');
+	('xb70bzfp3pd62stwwrerp14gzlqd', 'batiment-tri.png', 'image/png', '{"identified":true,"analyzed":true}', 54293, 'xoCH8EVJYIB2yPta+5+RTg==', '2022-12-02 15:56:22', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', 'amazon'),
+	('l9ccyqpxo3do4xjqdbj5j0x19llh', 'actu_campagne.png', 'image/png', '{"identified":true,"width":755,"height":310,"analyzed":true}', 14522, 'Hrbpa3EeNZginOxxwxc2+g==', '2026-09-17 07:37:32', 'c3f1cf73-a3c0-41d0-b031-8093fbb196e0', 'amazon');
 
 
 --
@@ -84030,7 +84031,8 @@ INSERT INTO public.active_storage_attachments (name, record_type, created_at, id
 	('illustration', 'Situation', '2022-12-05 16:14:45', '635af3c9-eec5-450d-9c00-8ae6a9344da4', '377ddd30-5ab8-4f88-ac7d-8f487f23c11f', 'e74239ba-7fd1-41d0-9dc4-436c27165ff0'),
 	('illustration', 'Situation', '2022-12-02 15:56:48', '07552731-5ab4-40f4-b023-207aa546747b', 'ab8ac082-2bd6-4f45-9d60-ddb21d5ad37c', '40c3b25b-6d5b-45e6-a645-7026b3db3ed5'),
 	('illustration', 'Situation', '2022-12-02 15:55:03', 'e918f29f-7e0a-4d60-8b7d-01505997bfe2', 'c05271f1-860c-4e22-8525-eda392f6afc2', 'e05619a7-ea29-49ba-8aeb-962c01b34d3b'),
-	('illustration', 'Situation', '2022-12-02 15:56:22', '1b32d419-0a8c-47b3-9471-35debd26981d', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', '56950c03-d386-4918-bc41-11800078fd8e');
+	('illustration', 'Situation', '2022-12-02 15:56:22', '1b32d419-0a8c-47b3-9471-35debd26981d', 'e03d3eef-ce00-4b19-bcc2-e242f5d9b974', '56950c03-d386-4918-bc41-11800078fd8e'),
+	('illustration', 'Actualite', '2026-09-17 07:37:32', 'd4e8f1a2-6b3c-4f95-8d7e-1a2b3c4d5e6f', 'c3f1cf73-a3c0-41d0-b031-8093fbb196e0', 'f9229368-7c0e-4329-97f3-33fce9d50ee5');
 
 
 --

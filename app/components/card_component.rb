@@ -17,7 +17,8 @@ class CardComponent < ViewComponent::Base
     size: :md,
     html_attributes: {},
     classes: [],
-    badges: []
+    badges: [],
+    detail_start: nil
   )
     @url = url
     @titre = titre
@@ -31,6 +32,7 @@ class CardComponent < ViewComponent::Base
     @html_attributes = html_attributes
     @classes = classes
     @badges = Array(badges)
+    @detail_start = detail_start
   end
 
   def card_classes
@@ -50,6 +52,16 @@ class CardComponent < ViewComponent::Base
   end
 
   attr_reader :badges
+
+  def has_detail_start?
+    @detail_start.present?
+  end
+
+  attr_reader :detail_start
+
+  def has_start?
+    has_badges? || has_detail_start?
+  end
 
   def has_bouton?
     @bouton_label.present? && @bouton_url.present?

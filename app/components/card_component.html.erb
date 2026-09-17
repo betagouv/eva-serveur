@@ -1,13 +1,19 @@
 <div class="<%= card_classes %>" <%= tag.attributes(@html_attributes) %>>
   <div class="fr-card__body">
     <div class="fr-card__content">
-      <% if has_badges? %>
+      <% if has_start? %>
         <div class="fr-card__start">
-          <ul class="fr-badges-group">
-            <% badges.each do |badge| %>
-              <li><%= render BadgeComponent.new(**badge) %></li>
-            <% end %>
-          </ul>
+          <% if has_badges? %>
+            <ul class="fr-badges-group">
+              <% badges.each do |badge| %>
+                <li><%= render BadgeComponent.new(**badge, sans_marge_basse: false) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
+          <% if has_detail_start? %>
+            <p class="fr-card__detail"><%= detail_start %></p>
+          <% end %>
         </div>
       <% end %>
 

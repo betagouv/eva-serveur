@@ -93,6 +93,33 @@
     </div>
   </div>
 
+  <h2>Card avec détail en zone de départ (detailStart)</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        url: "#",
+        detail_start: "25 sept 2026"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card avec badges et détail en zone de départ</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        url: "#",
+        badges: [
+          { contenu: "Nouveau", class_couleur: "fr-badge--new" }
+        ],
+        detail_start: "25 sept 2026"
+      ) %>
+    </div>
+  </div>
+
   <h2>Variantes de taille</h2>
 
   <h3>Card SM (petite)</h3>

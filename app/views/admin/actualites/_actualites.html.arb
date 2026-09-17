@@ -6,10 +6,6 @@ div class: "actualites" do
   }
 
   actualites.each do |actualite|
-    contenu = safe_join([
-      content_tag(:span, l(actualite.created_at, format: :sans_heure), class: "date"),
-    ])
-
     render(
       CardComponent.new(
         titre: actualite.titre,
@@ -21,11 +17,11 @@ div class: "actualites" do
         badges: [
           {
             contenu: t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
-            class_couleur: badges_couleur_categorie[actualite.categorie],
-            taille: "sm"
+            class_couleur: badges_couleur_categorie[actualite.categorie]
           }
-        ]
-      ).with_content(contenu)
+        ],
+        detail_start: l(actualite.created_at, format: :sans_heure)
+      )
     )
   end
 end

@@ -40,3 +40,8 @@
       class: RedimensionneIllustrationsJob
       description: Redimensionne les illustrations des questions
       enabled: true
+    recyclage_navigateur_pdf_job:
+      cron: "0 4 * * *"
+      class: Pdf::RecyclageNavigateurJob
+      description: Redémarre le navigateur Chromium partagé de génération PDF chaque nuit, pour éviter une dérive mémoire sur workerpdf
+      enabled: true

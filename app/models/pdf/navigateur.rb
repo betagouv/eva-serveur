@@ -12,12 +12,17 @@ module Pdf
       MUTEX.synchronize { @browser ||= Puppeteer.launch(**puppeteer_options) }
     end
 
-    def self.reset!
+    def self.close!
       MUTEX.synchronize do
         @browser&.close
       ensure
         @browser = nil
       end
+    end
+
+    def self.redemarre!
+      close!
+      instance
     end
 
     def self.puppeteer_options

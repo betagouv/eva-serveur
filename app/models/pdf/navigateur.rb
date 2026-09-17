@@ -4,6 +4,7 @@ module Pdf
   class Navigateur
     A4_VIEWPORT = Puppeteer::Viewport.new(width: 1008, height: 1488)
     A4_WINDOW_SIZE = "--window-size=1008,1488"
+    PROTOCOL_TIMEOUT = 30_000
 
     MUTEX = Mutex.new
 
@@ -22,6 +23,7 @@ module Pdf
     def self.puppeteer_options
       options = {
         headless: "new",
+        protocol_timeout: PROTOCOL_TIMEOUT,
         args: [
           "--no-sandbox",
           "--disable-setuid-sandbox",

@@ -6,45 +6,9 @@
       gap: 1.25rem;
     }
     .actualite-card {
-      .fr-card__content {
-        position: relative;
-      }
-      .titre {
-        margin-bottom: 1.75rem;
-        font-size: 1rem;
-        a {
-          background-image: none;
-          color: $couleur-texte;
-        }
-      }
       .date {
         font-size: 0.875rem;
         color: $eva_dark_blue_grey;
-      }
-      .menu-actions {
-        @include menu-actions;
-        .table_actions {
-          left: 9rem;
-          top: 1.5rem;
-        }
-      }
-      .bouton-menu {
-        position: absolute;
-        right: 1rem;
-        bottom: 0.5rem;
-      }
-      .action {
-        position: absolute;
-        right: 1rem;
-        bottom: 1rem;
-        width: 1.25rem;
-
-        .action-simple {
-          @include bouton-secondaire;
-          @include petit-bouton;
-
-          margin-left: -1.5rem;
-        }
       }
     }
   }

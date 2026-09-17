@@ -1,9 +1,0 @@
-fr:
-  admin:
-    actualites:
-      actualites:
-        action:
-          lire: Lire
-          modifier: Modifier
-          supprimer: Supprimer
-          supprimer-confirmation: Êtes-vous sûr de vouloir supprimer cette actualité ?

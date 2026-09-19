@@ -108,7 +108,8 @@ Rails.application.routes.draw do
   scope '(pro)' do
     namespace :api do
       resources :beneficiaires, only: :show, param: :code_beneficiaire
-      resources :campagnes, only: :show, param: :code_campagne
+      resources :campagnes, only: :show, param: :code_campagne,
+        constraints: { code_campagne: /[^\/]+/ }, format: false
       resources :evaluations, only: [:show, :create, :update] do
         resource :fin, only: [:create], controller: 'evaluations/fins'
         resource :collections_evenements, only: [:create],

@@ -33,14 +33,14 @@ module Restitution
       def ids_situations_ct
         @ids_situations_ct ||= SituationConfiguration.ids_situations(
           @evaluation.campagne_id,
-          EvaluationEva::SITUATION_COMPETENCES_TRANSVERSALES
+          Situation::SITUATIONS_COMPETENCES_TRANSVERSALES
         )
       end
 
       def ids_situations_cdb
         @ids_situations_cdb ||= SituationConfiguration.ids_situations(
           @evaluation.campagne_id,
-          EvaluationEva::SITUATION_COMPETENCES_BASE
+          Situation::SITUATIONS_DIAGNOSTIC + Situation::SITUATIONS_POSITIONNEMENT
         )
       end
 

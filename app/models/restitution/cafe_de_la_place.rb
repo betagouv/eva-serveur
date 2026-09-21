@@ -48,7 +48,7 @@ module Restitution
       super
     end
 
-    def complete?
+    def termine?
       evenements.any?(&:fin_situation?)
     end
 

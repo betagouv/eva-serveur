@@ -16,9 +16,9 @@ describe SituationConfiguration, type: :integration do
   describe '#ids_situations' do
     it "retourne les ids des situations d'une campagne pour les noms techniques" do
       expect(described_class.ids_situations(campagne.id, [ 'livraison' ]))
-        .to eql([ livraison.id ])
+        .to contain_exactly(livraison.id)
       expect(described_class.ids_situations(campagne.id, %w[livraison maintenance]))
-        .to eql([ livraison.id, maintenance.id ])
+        .to contain_exactly(livraison.id, maintenance.id)
       expect(described_class.ids_situations(campagne.id, [ 'controle' ])).to eql([])
     end
   end

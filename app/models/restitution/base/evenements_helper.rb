@@ -2,7 +2,6 @@ module Restitution
   class Base
     class EvenementsHelper
       EVENEMENT = {
-        FIN_SITUATION: "finSituation",
         REJOUE_CONSIGNE: "rejoueConsigne",
         ABANDON: "abandon"
       }.freeze
@@ -33,7 +32,7 @@ module Restitution
       end
 
       def termine?
-        dernier_evenement.nom == EVENEMENT[:FIN_SITUATION]
+        dernier_evenement.fin_situation?
       end
 
       def premier_evenement

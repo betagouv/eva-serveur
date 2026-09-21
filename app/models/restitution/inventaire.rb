@@ -3,7 +3,6 @@ module Restitution
     EVENEMENT = {
       OUVERTURE_CONTENANT: "ouvertureContenant",
       SAISIE_INVENTAIRE: "saisieInventaire",
-      FIN_SITUATION: "finSituation",
       DEMARRAGE: "demarrage"
     }.freeze
     VERSION_2 = "2"
@@ -69,7 +68,7 @@ module Restitution
     end
 
     def essais
-      evenements_sans_la_fin = evenements.to_a.reject { |e| e.nom == EVENEMENT[:FIN_SITUATION] }
+      evenements_sans_la_fin = evenements.to_a.reject(&:fin_situation?)
       evenements_par_essais = evenements_sans_la_fin.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end

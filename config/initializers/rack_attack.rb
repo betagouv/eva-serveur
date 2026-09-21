@@ -38,7 +38,7 @@ class Rack::Attack
   # faisait qu'ignorer le rapport d'erreur sans empêcher la requête de
   # s'exécuter ; ici on bloque avant même que Rails ne la voie.
   blocklist('block wordpress/exchange bot scan paths') do |req|
-    req.path.match?(%r{\A/(wp(?:-(?:admin|includes|content|login|json))?|wordpress|owa|ecp|autodiscover)(?:/|\z|\?)}i)
+    req.path.match?(%r{\A/(wp(?:-(?:admin|includes|content|login|json))?|wordpress|owa|ecp|autodiscover|blog)(?:/|\z|\?)}i)
   end
 
   # Bloque les chemins d'icônes DSFR forgés. La seule route légitime pour ces

@@ -6,35 +6,19 @@ describe Restitution::Eva::Completude do
   end
 
   describe '#calcule' do
-    let(:bienvenue) { Situation.new id: SecureRandom.uuid }
-    let(:plan_de_la_ville) { Situation.new id: SecureRandom.uuid }
-    let(:controle) { Situation.new id: SecureRandom.uuid }
-    let(:livraison) { Situation.new id: SecureRandom.uuid }
-    let(:maintenance) { Situation.new id: SecureRandom.uuid }
-    let(:objets_trouves) { Situation.new id: SecureRandom.uuid }
+    let(:bienvenue) { create(:situation_bienvenue) }
+    let(:plan_de_la_ville) { create(:situation_plan_de_la_ville) }
+    let(:controle) { create(:situation_controle) }
+    let(:livraison) { create(:situation_livraison) }
+    let(:maintenance) { create(:situation_maintenance) }
+    let(:objets_trouves) { create(:situation_objets_trouves) }
+    let(:place_du_marche) { create(:situation_place_du_marche) }
     let(:evaluation) { create(:evaluation, :eva) }
-
-    before do
-      allow(SituationConfiguration)
-        .to receive(:ids_situations).with(evaluation.campagne_id,
-                                          EvaluationEva::SITUATION_COMPETENCES_TRANSVERSALES)
-                                    .and_return([])
-      allow(SituationConfiguration)
-        .to receive(:ids_situations).with(evaluation.campagne_id,
-                                          EvaluationEva::SITUATION_COMPETENCES_BASE)
-                                    .and_return([])
-    end
 
     describe 'quand la campagne est complete' do
       before do
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_TRANSVERSALES)
-            .and_return([ controle.id ])
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_BASE)
-            .and_return([ livraison.id ])
+        create(:situation_configuration, campagne_id: evaluation.campagne_id, situation: controle)
+        create(:situation_configuration, campagne_id: evaluation.campagne_id, situation: livraison)
       end
 
       context "quand aucune situations n'a été complétée" do
@@ -126,18 +110,11 @@ describe Restitution::Eva::Completude do
 
     describe 'quand la campagne est avec competences de base seulement' do
       before do
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_TRANSVERSALES)
-            .and_return([])
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_BASE)
-            .and_return([
-              livraison.id,
-              maintenance.id,
-              objets_trouves.id
-            ])
+        create(:situation_configuration, campagne_id: evaluation.campagne_id, situation: livraison)
+        create(:situation_configuration,
+               campagne_id: evaluation.campagne_id, situation: maintenance)
+        create(:situation_configuration,
+               campagne_id: evaluation.campagne_id, situation: objets_trouves)
       end
 
       context 'quand toutes les situations de la campagne ont été complétées' do
@@ -167,16 +144,7 @@ describe Restitution::Eva::Completude do
 
     describe 'quand la campagne est avec competences transversales seulement' do
       before do
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_TRANSVERSALES)
-            .and_return([
-              controle.id
-            ])
-        allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-            EvaluationEva::SITUATION_COMPETENCES_BASE)
-            .and_return([])
+        create(:situation_configuration, campagne_id: evaluation.campagne_id, situation: controle)
       end
 
       context 'quand toutes les situations de la campagne ont été complétées' do
@@ -197,6 +165,33 @@ describe Restitution::Eva::Completude do
         end
 
         it { expect(completude.calcule).to eq :incomplete }
+      end
+    end
+
+    describe 'quand la campagne est un positionnement' do
+      before do
+        create(:situation_configuration,
+               campagne_id: evaluation.campagne_id, situation: place_du_marche)
+      end
+
+      context "quand la situation de positionnement n'a pas été complétée" do
+        let(:restitutions) do
+          [
+            double(situation: place_du_marche, termine?: false)
+          ]
+        end
+
+        it { expect(completude.calcule).to eq :incomplete }
+      end
+
+      context 'quand la situation de positionnement a été complétée' do
+        let(:restitutions) do
+          [
+            double(situation: place_du_marche, termine?: true)
+          ]
+        end
+
+        it { expect(completude.calcule).to eq :complete }
       end
     end
   end

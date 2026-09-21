@@ -20,6 +20,26 @@ namespace :evaluations do
     logger.info "C'est fini"
   end
 
+  desc "recalcule la complétude des évaluations ayant une situation de positionnement"
+  task recalcule_completude_positionnement: :environment do
+    logger = RakeLogger.logger
+
+    evaluations = EvaluationEva.where(
+      id: Partie.joins(:situation)
+                .where(situations: { nom_technique: Situation::SITUATIONS_POSITIONNEMENT })
+                .select(:evaluation_id)
+    )
+
+    nombre_eval = evaluations.count
+    logger.info "Nombre d'évaluation : #{nombre_eval}"
+    evaluations.find_each do |evaluation|
+      FabriqueRestitution.restitution_globale(evaluation).persiste
+      nombre_eval -= 1
+      logger.info "reste #{nombre_eval}"
+    end
+    logger.info "C'est fini"
+  end
+
   desc "Persiste les réponses aux exercice de rédactions dans évaluations"
   task persiste_redactions: :environment do
     logger = RakeLogger.logger

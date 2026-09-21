@@ -1,4 +1,6 @@
 class Evenement < ApplicationRecord
+  FIN_SITUATION = "finSituation"
+
   validates :nom, :date, :session_id, presence: true
   # rubocop:disable Rails/UniqueValidationWithoutIndex
   validates :position, uniqueness: { scope: :session_id }
@@ -28,7 +30,7 @@ class Evenement < ApplicationRecord
   end
 
   def fin_situation?
-    nom == "finSituation"
+    nom == FIN_SITUATION
   end
 
   def reponse?

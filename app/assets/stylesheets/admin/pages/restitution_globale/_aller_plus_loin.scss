@@ -39,7 +39,7 @@
 
 .focus-incontournable__media {
   display: flex;
-  width: var(--Grille-3-colonnes, 282px);
+  width: $dsfr-grille-3-colonnes;
   padding: $dsfr-spacing-3w;
   flex-direction: column;
   align-items: flex-start;

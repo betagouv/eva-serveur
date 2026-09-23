@@ -7,6 +7,7 @@
 
   @include corps-de-texte-sm-regular;
 }
+
 .evaluation-bilan-evapro__contenu {
   display: flex;
   flex-direction: column;
@@ -75,7 +76,7 @@
   flex-direction: row;
   align-items: center;
   gap: $dsfr-spacing-3w;
-  width: var(--Grille-4-colonnes, 23.875rem);
+  width: $dsfr-grille-4-colonnes;
   flex-shrink: 0;
 }
 
@@ -90,7 +91,8 @@
   height: 4rem;
 }
 
-.evaluation-bilan-evapro__opco-financeur-details p, .evaluation-bilan-evapro__opco-financeur-details a {
+.evaluation-bilan-evapro__opco-financeur-details p,
+.evaluation-bilan-evapro__opco-financeur-details a {
   color: $couleur-texte;
 
   @include corps-de-texte-sm-regular;

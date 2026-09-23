@@ -1,50 +1,9 @@
 body.logged_out {
-  .nouvelle-session {
-    display: flex;
-    align-items: stretch;
-    align-self: stretch;
-    width: 100%;
-  }
-
-  @media (max-width: 48em) {
-
-    body.logged_out.page_connexion_v2 .nouvelle-session,
-    body.logged_out .nouvelle-session {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      align-self: stretch;
-      width: 100%;
-    }
-
-    body.logged_out.page_connexion_v2 .nouvelle-session__connexion,
-    body.logged_out.page_connexion_v2,
-    body.logged_out .nouvelle-session__connexion,
-    body.logged_out {
-      width: 100%;
-      max-width: 100%;
-      flex: 0 0 auto;
-      padding-bottom: $dsfr-spacing-5w;
-    }
-
-    body.logged_out.page_connexion_v2 .nouvelle-session__connexion-container,
-    body.logged_out.page_connexion_v2 .nouvelle-session__demonstration-container,
-    body.logged_out .nouvelle-session__connexion-container,
-    body.logged_out .nouvelle-session__demonstration-container {
-      max-width: none;
-      width: 100%;
-      padding: $dsfr-spacing-3v;
-    }
-  }
-
-
-
   .nouvelle-session__connexion {
     display: flex;
     padding: 0 $dsfr-spacing-3v;
     flex-direction: column;
     align-items: flex-end;
-    flex: 1 0 0;
 
     .flashes {
       margin: 0 !important;
@@ -55,7 +14,7 @@ body.logged_out {
 
   .nouvelle-session__connexion-container {
     display: flex;
-    max-width: 588px;
+    max-width: $dsfr-grille-6-colonnes;
     padding: $dsfr-spacing-12w 6.375rem;
     flex-direction: column;
     align-items: flex-start;
@@ -154,7 +113,7 @@ body.logged_out {
     text-align: center;
   }
 
-  body.logged_out button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+  button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
     appearance: none;
     background-image: none !important;
   }
@@ -162,18 +121,18 @@ body.logged_out {
   // Sur la page de connexion, certains styles legacy d'ActiveAdmin
   // peuvent écraser le rendu DSFR des <button>. On réapplique ici
   // explicitement le style DSFR pour le bouton primaire de soumission.
-  body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
     background-color: var(--background-action-high-blue-france) !important;
     border-radius: 0;
     box-shadow: inset 0 -2px 0 0 var(--border-action-high-blue-france);
     color: var(--text-inverted-blue-france) !important;
   }
 
-  body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):hover {
+  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):hover {
     background-color: var(--background-action-high-blue-france-hover) !important;
   }
 
-  body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):active {
+  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):active {
     background-color: var(--background-action-high-blue-france-active) !important;
   }
 
@@ -183,5 +142,30 @@ body.logged_out {
 
   .no-padding-top {
     padding-top: 0 !important;
+  }
+
+  @media (max-width: 61.98em) {
+    & {
+      width: 100%;
+      max-width: 100%;
+      flex: 0 0 auto;
+      padding-bottom: $dsfr-spacing-5w;
+    }
+
+    .nouvelle-session__connexion {
+      padding-bottom: $dsfr-spacing-5w;
+    }
+
+    .nouvelle-session__connexion-container {
+      width: 100%;
+      padding: $dsfr-spacing-3v;
+    }
+  }
+
+  @media (max-width: 61.98em) {
+    .nouvelle-session__connexion-container {
+      padding: $dsfr-spacing-6w $dsfr-spacing-8w;
+      align-self: center;
+    }
   }
 }

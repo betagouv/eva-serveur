@@ -1,4 +1,4 @@
-<div class="nouvelle-session__demonstration">
+<div class="fr-col-12 fr-col-lg-6 nouvelle-session__demonstration">
   <div class="nouvelle-session__demonstration-container">
     <div class="nouvelle-session__demonstration-vagues"> </div>
     <div class="nouvelle-session__demonstration-body">
@@ -8,7 +8,7 @@
         <p class="fr-m-0 fr-text--sm"><%= t(".eva") %></p>
         <p class="fr-m-0 fr-text--sm"><%= t(".evapro") %></p>
         <div class="fr-grid-row fr-grid-row--gutters fr-mb-12v">
-          <div class="fr-col-12 fr-col-sm-6 fr-col-lg-12">
+          <div class="fr-col-5 fr-col-sm-4 fr-col-md-12">
             <%= render CardComponent.new(
               titre: t(".titre-carte-eva"),
               image_url: image_path("logo/eva-card.svg"),
@@ -18,7 +18,7 @@
               url: demo_path
             ) %>
           </div>
-          <div class="fr-col-12 fr-col-sm-6 fr-col-lg-12">
+          <div class="fr-col-5 fr-col-sm-4 fr-col-md-12">
             <%= render CardComponent.new(
               titre: t(".titre-carte-evapro"),
               image_url: image_path("logo/evapro-card.svg"),

@@ -5,13 +5,12 @@ body.logged_out {
     padding: 0 $dsfr-spacing-3v;
     flex-direction: column;
     align-items: flex-start;
-    flex: 1 0 0;
     position: relative;
   }
 
   .nouvelle-session__demonstration-container {
     display: flex;
-    max-width: var(--Grille-6-colonnes, 36.75rem);
+    max-width: $dsfr-grille-6-colonnes;
     padding-top: $dsfr-spacing-12w;
     flex-direction: column;
     align-items: center;
@@ -22,7 +21,7 @@ body.logged_out {
 
   .nouvelle-session__demonstration-body {
     display: flex;
-    width: var(--Grille-4-colonnes, 23.875rem);
+    width: $dsfr-grille-4-colonnes;
     flex-direction: column;
     align-items: center;
     gap: $dsfr-spacing-5w;
@@ -30,7 +29,7 @@ body.logged_out {
 
   .nouvelle-session__demonstration-content {
     display: flex;
-    width: 23.875rem;
+    width: $dsfr-grille-4-colonnes;
     flex-direction: column;
     gap: 1.5rem;
   }
@@ -62,9 +61,14 @@ body.logged_out {
     background-position: top;
   }
 
-  @media (max-width: 48em) {
+  // Même padding que la section connexion quand tout est sur une colonne.
+  @media (max-width: 61.98em) {
+    .nouvelle-session__demonstration {
+      padding-bottom: $dsfr-spacing-5w;
+    }
+
     .nouvelle-session__demonstration-body {
-      padding: $dsfr-spacing-3v;
+      width: 100%;
     }
 
     .nouvelle-session__demonstration-content {
@@ -72,16 +76,13 @@ body.logged_out {
     }
 
     .nouvelle-session__demonstration-vagues {
-      position: relative;
-      bottom: auto;
-      right: auto;
-      width: 100vw;
-      height: 24rem;
+      display: none;
     }
 
     .nouvelle-session__demonstration-container {
-      padding-bottom: 0 !important;
+      width: 100%;
+      align-self: center;
+      padding: $dsfr-spacing-6w $dsfr-spacing-8w;
     }
-
   }
 }

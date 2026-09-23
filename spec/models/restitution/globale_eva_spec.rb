@@ -230,28 +230,49 @@ describe Restitution::GlobaleEva do
   end
 
   describe '#persiste' do
+    let(:evaluation) { create :evaluation, :eva, completude: :incomplete }
     let(:restitutions) { [] }
     let(:redactions) { [ "Elle est tombée", "Elle a glissé puis est tombée" ] }
-    let(:champs_persistes) { {
-      synthese_competences_de_base: 'illettrisme_potentiel',
-      completude: :complete,
-      redactions: redactions
-    } }
-    let(:completude) { double }
+    let(:completude) { double(calcule: :complete) }
 
     before do
-      allow(evaluation).to receive(:id).and_return("un id")
       allow(restitution_globale).to receive(:interpretations)
         .and_return({ synthese_competences_de_base: 'illettrisme_potentiel' })
-      allow(completude).to receive(:calcule).and_return(:complete)
       allow(Restitution::Eva::Completude).to receive(:new).and_return(completude)
       allow(Evaluation).to receive(:reponses_redaction_pour_evaluations)
         .with([ evaluation.id ]).and_return({ evaluation.id => redactions })
     end
 
-    it do
-      expect(evaluation).to receive(:update).with(champs_persistes)
+    it "persiste les interprétations, les rédactions et la complétude" do
       restitution_globale.persiste
+
+      evaluation.reload
+      expect(evaluation.synthese_competences_de_base).to eq('illettrisme_potentiel')
+      expect(evaluation.redactions).to eq(redactions)
+      expect(evaluation.completude).to eq('complete')
+    end
+  end
+
+  describe '#persiste_completude' do
+    let(:evaluation) do
+      create :evaluation, :eva, completude: :complete, synthese_competences_de_base: nil
+    end
+    let(:restitutions) { [] }
+    let(:completude) { double(calcule: :competences_de_base_incompletes) }
+
+    before do
+      allow(Restitution::Eva::Completude).to receive(:new)
+        .with(evaluation, restitutions).and_return(completude)
+    end
+
+    it "ne met à jour que la complétude" do
+      expect(restitution_globale).not_to receive(:interpretations)
+
+      restitution_globale.persiste_completude
+
+      evaluation.reload
+      expect(evaluation.completude).to eq('competences_de_base_incompletes')
+      expect(evaluation.synthese_competences_de_base).to be_nil
     end
   end
 

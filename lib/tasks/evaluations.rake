@@ -24,16 +24,19 @@ namespace :evaluations do
   task recalcule_completude_positionnement: :environment do
     logger = RakeLogger.logger
 
-    evaluations = EvaluationEva.where(
-      id: Partie.joins(:situation)
-                .where(situations: { nom_technique: Situation::SITUATIONS_POSITIONNEMENT })
-                .select(:evaluation_id)
-    )
+    campagnes_positionnement = SituationConfiguration
+                               .joins(:situation)
+                               .where(situations: {
+                                 nom_technique: Situation::SITUATIONS_POSITIONNEMENT
+                               })
+                               .select(:campagne_id)
+    evaluations = EvaluationEva.competences_de_base_completes
+                               .where(campagne_id: campagnes_positionnement)
 
     nombre_eval = evaluations.count
     logger.info "Nombre d'évaluation : #{nombre_eval}"
     evaluations.find_each do |evaluation|
-      FabriqueRestitution.restitution_globale(evaluation).persiste
+      FabriqueRestitution.restitution_globale(evaluation).persiste_completude
       nombre_eval -= 1
       logger.info "reste #{nombre_eval}"
     end

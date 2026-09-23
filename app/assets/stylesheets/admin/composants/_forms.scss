@@ -43,7 +43,10 @@
     @include asterisk
   }
 }
-label { @include label }
+
+label {
+  @include label
+}
 
 @mixin inline-errors() {
   color: $eva_red;
@@ -67,6 +70,7 @@ label { @include label }
     width: var(--icon-size);
   }
 }
+
 .inline-errors {
   @include inline-errors;
 }
@@ -86,12 +90,12 @@ form .panel fieldset.inputs {
 form {
   fieldset {
     padding: 0;
-    
+
     &.inputs,
     legend span {
       box-shadow: none;
     }
-    
+
     &.inputs {
       max-width: 600px;
       background: transparent;
@@ -321,4 +325,3 @@ form:not(.filter_form) .select2-container {
     cursor: not-allowed;
   }
 }
-

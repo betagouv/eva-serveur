@@ -32,7 +32,7 @@
 
 .indicateur-impact__details--titre-et-score {
   display: flex;
-  width: var(--Grille-2-colonnes, 180px);
+  width: $dsfr-grille-2-colonnes;
   flex-direction: column;
   align-items: flex-start;
   gap: $dsfr-spacing-1v;

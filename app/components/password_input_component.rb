@@ -12,7 +12,7 @@ class PasswordInputComponent < BaseInputComponent
 
   def input_attributes
     attrs = {
-      class: "fr-password__input fr-input",
+      class: input_classes("fr-password__input"),
       id: input_id,
       type: "password",
       autocapitalize: "off",

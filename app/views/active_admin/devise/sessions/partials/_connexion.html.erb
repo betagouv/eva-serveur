@@ -34,8 +34,6 @@
 
         <% scope = Devise::Mapping.find_scope!(resource_name) %>
         <%= semantic_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f| %>
-          <%= f.semantic_errors *f.object.errors.messages.keys %>
-
           <%= f.inputs do %>
             <div class="fr-grid-row fr-grid-row--gutters">
               <div class="fr-col-12 connexion_v2__inputs-group">

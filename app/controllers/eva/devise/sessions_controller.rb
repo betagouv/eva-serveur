@@ -5,6 +5,17 @@ module Eva
 
       before_action :check_compte_confirmation, only: :create
 
+      ECHECS_IDENTIFIANTS = %i[invalid not_found_in_database].freeze
+
+      def new
+        super do |compte|
+          next unless ECHECS_IDENTIFIANTS.include?(request.env.dig("warden.options", :message))
+
+          compte.errors.add(:email, flash.now[:alert])
+          compte.errors.add(:password, flash.now[:alert])
+        end
+      end
+
       def create
         self.resource = warden.authenticate!(auth_options)
         return unless est_mot_de_passe_conforme(resource)

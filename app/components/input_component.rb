@@ -86,19 +86,25 @@ class InputComponent < BaseInputComponent
 
   def input_attributes
     attrs = {
-      class: "fr-input",
+      class: input_classes,
       id: input_id,
       type: @type,
       "aria-describedby" => messages_id
     }
-    attrs[:name] = @name if @name.present?
-    attrs[:value] = @value if @value.present?
-    attrs[:placeholder] = @placeholder if @placeholder.present?
-    attrs[:required] = true if @required
-    attrs[:pattern] = @pattern if @pattern.present?
-    attrs[:autocomplete] = @autocomplete if @autocomplete.present?
+    attrs.merge!(input_attributes_optionnels)
     attrs.merge!(@input_html)
     attrs
+  end
+
+  def input_attributes_optionnels
+    {
+      name: @name.presence,
+      value: @value.presence,
+      placeholder: @placeholder.presence,
+      required: (true if @required),
+      pattern: @pattern.presence,
+      autocomplete: @autocomplete.presence
+    }.compact
   end
 
   def form_builder_method

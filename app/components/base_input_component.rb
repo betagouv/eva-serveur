@@ -70,6 +70,12 @@ class BaseInputComponent < ViewComponent::Base
     safe_join([ " ", tag.abbr("*", title: "required") ])
   end
 
+  def input_classes(*classes)
+    classes << "fr-input"
+    classes << "fr-input--error" if has_errors?
+    classes.join(" ")
+  end
+
   def label_classes
     classes = [ "fr-label" ]
     classes << "fr-label--error" if has_errors?

@@ -21,6 +21,26 @@ describe 'Session', type: :feature do
       end
     end
 
+    context 'quand le mot de passe est incorrect' do
+      let!(:compte) { create :compte }
+
+      before do
+        connecte_email email: compte.email, password: 'mauvais-mot-de-passe'
+      end
+
+      it "affiche l'erreur sous les champs email et mot de passe et dans le message flash" do
+        expect(page).to have_css('#compte_email-messages .fr-message--error',
+                                 text: 'Email ou mot de passe incorrect')
+        expect(page).to have_css('#compte_password-messages .fr-message--error',
+                                 text: 'Email ou mot de passe incorrect')
+        expect(page).to have_css('.flashes .fr-alert', text: 'Email ou mot de passe incorrect')
+      end
+
+      it "conserve l'email saisi" do
+        expect(page).to have_field('compte_email', with: compte.email)
+      end
+    end
+
     context 'quand mon compte anlci a un mot de passe faible car les règles ont été remforcées' do
       let!(:compte) do
         compte = create :compte, role: :superadmin

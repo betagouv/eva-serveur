@@ -12,14 +12,21 @@ body.logged_out {
     }
   }
 
-  .nouvelle-session__connexion-container {
+  .nouvelle-session__container {
     display: flex;
     max-width: $dsfr-grille-6-colonnes;
-    padding: $dsfr-spacing-12w 6.375rem;
+    padding: $dsfr-spacing-12w;
     flex-direction: column;
-    align-items: flex-start;
     gap: $dsfr-spacing-3w;
-    align-self: flex-end
+    align-items: center;
+    flex: 1 0 0;
+
+    .nouvelle-session__body {
+      display: flex;
+      max-width: $dsfr-grille-4-colonnes;
+      flex-direction: column;
+      gap: $dsfr-spacing-3w;
+    }
   }
 
   .nouvelle-session__logo {
@@ -156,16 +163,13 @@ body.logged_out {
       padding-bottom: $dsfr-spacing-5w;
     }
 
-    .nouvelle-session__connexion-container {
-      width: 100%;
-      padding: $dsfr-spacing-3v;
-    }
-  }
-
-  @media (max-width: 61.98em) {
-    .nouvelle-session__connexion-container {
+    .nouvelle-session__container {
       padding: $dsfr-spacing-6w $dsfr-spacing-8w;
       align-self: center;
+
+      .nouvelle-session__body {
+        max-width: $dsfr-grille-5-colonnes;
+      }
     }
   }
 }

@@ -1,30 +1,11 @@
 body.logged_out {
   .nouvelle-session__demonstration {
-    background-color: var(--color-background-alt-blue, #F5F5FE);
+    background-color: $blue-france-975;
     display: flex;
     padding: 0 $dsfr-spacing-3v;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     position: relative;
-  }
-
-  .nouvelle-session__demonstration-container {
-    display: flex;
-    max-width: $dsfr-grille-6-colonnes;
-    padding-top: $dsfr-spacing-12w;
-    flex-direction: column;
-    align-items: center;
-    gap: $dsfr-spacing-3w;
-    flex: 1 0 0;
-    align-self: stretch;
-  }
-
-  .nouvelle-session__demonstration-body {
-    display: flex;
-    width: $dsfr-grille-4-colonnes;
-    flex-direction: column;
-    align-items: center;
-    gap: $dsfr-spacing-5w;
   }
 
   .nouvelle-session__demonstration-content {
@@ -61,28 +42,13 @@ body.logged_out {
     background-position: top;
   }
 
-  // Même padding que la section connexion quand tout est sur une colonne.
   @media (max-width: 61.98em) {
-    .nouvelle-session__demonstration {
-      padding-bottom: $dsfr-spacing-5w;
-    }
-
-    .nouvelle-session__demonstration-body {
-      width: 100%;
-    }
-
     .nouvelle-session__demonstration-content {
       width: 100%;
     }
 
     .nouvelle-session__demonstration-vagues {
       display: none;
-    }
-
-    .nouvelle-session__demonstration-container {
-      width: 100%;
-      align-self: center;
-      padding: $dsfr-spacing-6w $dsfr-spacing-8w;
     }
   }
 }

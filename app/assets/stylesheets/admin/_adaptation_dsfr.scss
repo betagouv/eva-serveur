@@ -317,6 +317,22 @@ form input[type="button"].fr-btn:not(.disabled):hover {
   }
 }
 
+// Couleur DSFR au clic : sans cette règle, le hover ci-dessus l'emporte
+// aussi pendant le clic. Même spécificité que le hover, donc placée après.
+button.fr-btn:not(.disabled):active,
+input[type="submit"].fr-btn:not(.disabled):active,
+input[type="button"].fr-btn:not(.disabled):active,
+form button.fr-btn:not(.disabled):active,
+form input[type="submit"].fr-btn:not(.disabled):active,
+form input[type="button"].fr-btn:not(.disabled):active {
+
+  &.fr-btn--primary,
+  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--close) {
+    background: $blue-france-sun-113-active;
+    border-color: $blue-france-sun-113-active;
+  }
+}
+
 .fr-btn--secondary,
 .fr-btn--tertiary {
   color: var(--text-action-high-blue-france);

@@ -2,7 +2,11 @@
 <% content_for :titre, t("active_admin.devise.login.titre") %>
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
-<div class="fr-grid-row">
-  <%= render partial: "active_admin/devise/sessions/partials/connexion" %>
-  <%= render partial: "active_admin/devise/sessions/partials/demonstration" %>
+<div class="nouvelle-session">
+  <div class="fr-container">
+    <div class="fr-grid-row">
+      <%= render partial: "active_admin/devise/sessions/partials/connexion" %>
+      <%= render partial: "active_admin/devise/sessions/partials/demonstration" %>
+    </div>
+  </div>
 </div>

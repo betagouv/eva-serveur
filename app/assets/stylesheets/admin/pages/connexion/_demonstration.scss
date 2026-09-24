@@ -1,11 +1,20 @@
 body.logged_out {
+
+  // Contexte de positionnement de la vague : pleine largeur de la fenêtre.
+  .nouvelle-session {
+    position: relative;
+  }
+
+  // Le fond bleu déborde jusqu'au bord droit de la fenêtre (full-bleed) :
+  // l'ombre prolonge le fond, le clip-path ne la laisse dépasser qu'à droite.
   .nouvelle-session__demonstration {
     background-color: $blue-france-975;
+    box-shadow: 0 0 0 100vmax $blue-france-975;
+    clip-path: inset(0 -100vmax 0 0);
     display: flex;
     padding: 0 $dsfr-spacing-3v;
     flex-direction: column;
-    align-items: stretch;
-    position: relative;
+    align-items: flex-end;
   }
 
   .nouvelle-session__demonstration-content {
@@ -30,12 +39,14 @@ body.logged_out {
     margin: 0;
   }
 
+  // Positionnée par rapport à .nouvelle-session : de la moitié de la page
+  // (début de la colonne démonstration) jusqu'au bord droit de la fenêtre.
   .nouvelle-session__demonstration-vagues {
     position: absolute;
     bottom: 0;
+    left: 50%;
     right: 0;
     height: 24rem;
-    width: 100%;
     background-image: url("vagues-demo.svg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,6 +54,12 @@ body.logged_out {
   }
 
   @media (max-width: 61.98em) {
+
+    // En une colonne, le fond bleu déborde des deux côtés.
+    .nouvelle-session__demonstration {
+      clip-path: inset(0 -100vmax);
+    }
+
     .nouvelle-session__demonstration-content {
       width: 100%;
     }

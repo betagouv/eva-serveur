@@ -1,9 +1,16 @@
 body.logged_out {
+
+  // Les colonnes et leurs conteneurs ont déjà leurs propres marges.
+  .nouvelle-session .fr-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .nouvelle-session__connexion {
     display: flex;
     padding: 0 $dsfr-spacing-3v;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
 
     .flashes {
       margin: 0 !important;
@@ -122,6 +129,15 @@ body.logged_out {
       .nouvelle-session__body {
         max-width: $dsfr-grille-5-colonnes;
       }
+    }
+  }
+
+  // Deux colonnes étroites : on réduit la marge latérale des conteneurs
+  // pour que le contenu des deux colonnes ne se touche pas.
+  @media (min-width: 62em) and (max-width: 70em) {
+    .nouvelle-session__container {
+      padding-left: $dsfr-spacing-8w;
+      padding-right: $dsfr-spacing-8w;
     }
   }
 }

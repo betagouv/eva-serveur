@@ -8,7 +8,7 @@
   align-items: flex-start;
   gap: $dsfr-spacing-7w;
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     padding: 0 !important;
     flex-direction: column;
     align-items: center;

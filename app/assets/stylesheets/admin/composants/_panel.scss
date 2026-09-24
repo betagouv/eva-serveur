@@ -82,7 +82,7 @@ body.logged_out #content_wrapper #active_admin_content {
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .introduction-image {
     display: none;
   }

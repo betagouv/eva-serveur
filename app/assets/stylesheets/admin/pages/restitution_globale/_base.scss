@@ -288,7 +288,7 @@
     }
   }
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     .synthese-illettrisme {
       margin-left: 2rem;
       margin-right: 2rem;

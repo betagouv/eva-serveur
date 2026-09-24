@@ -117,7 +117,7 @@ body.logged_out {
     text-align: center;
   }
 
-  @media (max-width: 61.98em) {
+  @media (max-width: $dsfr-breakpoint-lg-max) {
     .nouvelle-session__connexion {
       padding-bottom: $dsfr-spacing-5w;
     }
@@ -134,7 +134,7 @@ body.logged_out {
 
   // Deux colonnes étroites : on réduit la marge latérale des conteneurs
   // pour que le contenu des deux colonnes ne se touche pas.
-  @media (min-width: 62em) and (max-width: 70em) {
+  @media (min-width: $dsfr-breakpoint-lg) and (max-width: 70em) {
     .nouvelle-session__container {
       padding-left: $dsfr-spacing-8w;
       padding-right: $dsfr-spacing-8w;

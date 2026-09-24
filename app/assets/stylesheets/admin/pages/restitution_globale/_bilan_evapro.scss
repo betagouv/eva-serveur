@@ -29,7 +29,7 @@
   align-items: flex-start;
   padding: $dsfr-spacing-2w;
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     flex-direction: column;
     gap: $dsfr-spacing-3w;
   }
@@ -42,7 +42,7 @@
   flex: 1 1 0;
   min-width: 0;
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     max-width: 100%;
   }
 }

@@ -44,7 +44,7 @@
       gap: $dsfr-spacing-3w;
       align-self: stretch;
 
-      @media (max-width: 48em) {
+      @media (max-width: $dsfr-breakpoint-md-max) {
         flex-direction: column;
       }
     }
@@ -82,7 +82,7 @@
       width: 100%;
     }
 
-    @media (max-width: 48em) {
+    @media (max-width: $dsfr-breakpoint-md-max) {
       .cinq-dernieres-evaluations__tableau {
         .fr-table .fr-table__content table {
 
@@ -136,7 +136,7 @@
       max-width: 1200px;
     }
 
-    @media (max-width: 48em) {
+    @media (max-width: $dsfr-breakpoint-md-max) {
       flex-direction: column;
 
       .tableau-bord-sidebar {
@@ -146,7 +146,7 @@
       }
     }
 
-    @media (max-width: 48em) {
+    @media (max-width: $dsfr-breakpoint-md-max) {
       .tableau-bord-sidebar {
         padding-bottom: 0;
       }
@@ -453,7 +453,7 @@
     }
   }
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     .tableau-bord-layout {
       display: flex;
       padding: $dsfr-spacing-2w $dsfr-spacing-2w $dsfr-spacing-5w $dsfr-spacing-2w;
@@ -508,7 +508,7 @@
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .admin_dashboard .tableau-bord-sidebar-container {
     padding-left: 0;
   }

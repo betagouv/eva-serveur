@@ -147,7 +147,7 @@ body.logged_in.evapro_admin {
   z-index: 9999;
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .fr-modal>.fr-container {
     pointer-events: none;
     position: fixed;
@@ -451,7 +451,7 @@ body.logged_in h2.fr-footer__partners-title {
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .fr-footer__top .fr-grid-row {
     flex-direction: column;
   }
@@ -485,7 +485,7 @@ body.logged_in h2.fr-footer__partners-title {
 
 // En mobile : éviter tout dépassement horizontal (header + contenu)
 // Forcer toute la chaîne de conteneurs de la page en pleine largeur
-@media (max-width: 62em) {
+@media (max-width: $dsfr-breakpoint-lg) {
   body {
     overflow-x: hidden;
   }

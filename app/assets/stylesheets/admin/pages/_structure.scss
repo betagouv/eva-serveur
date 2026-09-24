@@ -7,7 +7,7 @@
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);
 
-    @media (max-width: 48em) {
+    @media (max-width: $dsfr-breakpoint-md-max) {
       margin: 0;
     }
   }
@@ -153,13 +153,13 @@
   flex-direction: column;
   gap: 1rem;
 
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     padding: 0 1rem;
   }
 }
 
 .bloc-mes-campagnes__table {
-  @media (max-width: 48em) {
+  @media (max-width: $dsfr-breakpoint-md-max) {
     display: block;
     overflow-x: auto;
   }

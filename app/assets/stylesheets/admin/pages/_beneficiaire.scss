@@ -18,7 +18,7 @@
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .page-beneficiaire {
     padding: 0 1rem;
     gap: $dsfr-spacing-4v;

@@ -52,7 +52,7 @@
   text-decoration: none; // désactive le style d'activeadmin
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   #title_bar #titlebar_left #page_title {
     max-width: 100%;
     padding: 0;

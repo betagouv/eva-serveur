@@ -1,0 +1,10 @@
+// -- Points de rupture DSFR, à utiliser en min-width (« à partir de »)
+$dsfr-breakpoint-sm: 36em; // 576px
+$dsfr-breakpoint-md: 48em; // 768px
+$dsfr-breakpoint-lg: 62em; // 992px
+$dsfr-breakpoint-xl: 78em; // 1248px
+
+// -- Bornes hautes, à utiliser en max-width (« jusqu'à ») : 1px sous le
+// point de rupture, pour ne pas chevaucher les min-width du DSFR.
+$dsfr-breakpoint-md-max: calc(#{$dsfr-breakpoint-md} - 1px); // 767px
+$dsfr-breakpoint-lg-max: calc(#{$dsfr-breakpoint-lg} - 1px); // 991px

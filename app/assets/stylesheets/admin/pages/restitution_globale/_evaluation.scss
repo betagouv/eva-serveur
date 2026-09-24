@@ -179,7 +179,7 @@
   }
 }
 
-@media (max-width: 48em) {
+@media (max-width: $dsfr-breakpoint-md-max) {
   .evaluation-evapro {
     display: flex;
     padding: 0 $dsfr-spacing-1w;

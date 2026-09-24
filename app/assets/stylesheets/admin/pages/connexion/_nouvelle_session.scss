@@ -29,16 +29,6 @@ body.logged_out {
     }
   }
 
-  .nouvelle-session__logo {
-    width: 47px;
-    height: 40px;
-  }
-
-  .nouvelle-session__logo-evapro {
-    height: 34px;
-    margin-top: 0.7rem;
-  }
-
   .nouvelle-session__connexion-content {
     display: flex;
     flex-direction: column;
@@ -108,57 +98,19 @@ body.logged_out {
       @include corps-de-texte-sm-regular;
 
       font-weight: 700;
-      color: #3A3A3A;
+      color: $grey-200;
       margin: 0;
     }
   }
 
   .connexion_v2__bouton-full-width,
   a.connexion_v2__bouton-full-width {
-    width: 100% !important;
+    width: 100%;
     justify-content: center;
     text-align: center;
   }
 
-  button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
-    appearance: none;
-    background-image: none !important;
-  }
-
-  // Sur la page de connexion, certains styles legacy d'ActiveAdmin
-  // peuvent écraser le rendu DSFR des <button>. On réapplique ici
-  // explicitement le style DSFR pour le bouton primaire de soumission.
-  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
-    background-color: var(--background-action-high-blue-france) !important;
-    border-radius: 0;
-    box-shadow: inset 0 -2px 0 0 var(--border-action-high-blue-france);
-    color: var(--text-inverted-blue-france) !important;
-  }
-
-  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):hover {
-    background-color: var(--background-action-high-blue-france-hover) !important;
-  }
-
-  &.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):active {
-    background-color: var(--background-action-high-blue-france-active) !important;
-  }
-
-  .no-padding-bottom {
-    padding-bottom: 0 !important;
-  }
-
-  .no-padding-top {
-    padding-top: 0 !important;
-  }
-
   @media (max-width: 61.98em) {
-    & {
-      width: 100%;
-      max-width: 100%;
-      flex: 0 0 auto;
-      padding-bottom: $dsfr-spacing-5w;
-    }
-
     .nouvelle-session__connexion {
       padding-bottom: $dsfr-spacing-5w;
     }

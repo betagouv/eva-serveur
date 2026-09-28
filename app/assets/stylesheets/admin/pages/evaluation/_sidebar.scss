@@ -1,18 +1,3 @@
-.admin_evaluations.index.evapro_admin #active_admin_content.with_sidebar #sidebar {
-  width: 305px;
-
-  @media screen and (max-width: 854px) {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .sidebar_section {
-    @media screen and (max-width: 854px) {
-      display: block;
-    }
-  }
-}
-
 .sidebar .sidebar_section.panel.evaluation-evapro,
 #_sidebar_section.sidebar_section.panel {
   padding: 0;
@@ -21,17 +6,6 @@
 
   >h3 {
     display: none;
-  }
-}
-
-body.admin_evaluation_evapros.show {
-  .sidebar {
-    border-left: 1px solid var(--border-default-grey);
-    width: 305px !important;
-
-    .sidebar_section.panel {
-      margin-left: $dsfr-spacing-3w;
-    }
   }
 }
 

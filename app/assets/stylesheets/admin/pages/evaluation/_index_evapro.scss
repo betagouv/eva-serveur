@@ -1,39 +1,3 @@
-body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wrapper #main_content {
-  gap: 0;
-  margin-right: 13.5rem;
-
-  @media screen and (max-width: 854px) {
-    margin-right: 0;
-  }
-}
-
-.admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
-  width: 100%;
-
-  @media (max-width: $dsfr-breakpoint-md-max) {
-    .fr-table .fr-table__content table {
-      thead tr th:nth-child(n + 3):not(:last-child),
-      tbody tr td:nth-child(n + 3):not(:last-child) {
-        display: none !important;
-      }
-    }
-  }
-}
-
 .index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
   width: 100%;
-}
-
-@media (max-width: $dsfr-breakpoint-md-max) {
-  .admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-.admin_evaluations.index.evapro_admin #active_admin_content #sidebar {
-  margin-left: -11.938rem;
-}
-
-.admin_evaluations.index.evapro_admin #active_admin_content #sidebar #filters_sidebar_section {
-  display: none;
 }

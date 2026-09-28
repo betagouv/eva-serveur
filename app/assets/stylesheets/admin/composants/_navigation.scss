@@ -2,8 +2,6 @@
   // Isoler la navigation DSFR des styles legacy ActiveAdmin appliqués aux listes du #header.
   .fr-nav__list,
   .fr-menu__list {
-    margin: 0;
-    padding: 0;
     list-style: none;
     float: none;
   }

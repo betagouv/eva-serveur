@@ -3,13 +3,6 @@
   border: none;
 }
 
-// EvaPro admin: ajustements des marges entre le Header et le Footer pour index évaluations
-// qui utilise la sidebar ActiveAdmin.
-body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
 table.index_table {
   td.evaluation__colonne_action {
     text-wrap: nowrap;
@@ -84,17 +77,5 @@ table.index_table {
   th.evaluation__col-campagne--sans-structure,
   td.evaluation__col-campagne--sans-structure {
     @include colonne-fixe(418px);
-  }
-}
-
-@media (max-width: 854px) {
-  body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
-    #title_bar #titlebar_left {
-      padding: 1rem 1.5rem;
-    }
-
-    #active_admin_content.with_sidebar #main_content_wrapper #main_content {
-      padding: 1rem 1.5rem;
-    }
   }
 }

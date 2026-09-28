@@ -9,8 +9,14 @@
                   type="button"
                   aria-expanded="false"
                   aria-controls="<%= menu_id %>"
+                  <% if link[:icon] %>title="<%= link[:label] %>"<% end %>
                   <%= "aria-current=\"#{group_current}\"".html_safe if group_current %>>
-            <%= link[:label] %>
+            <% if link[:icon] %>
+              <span class="<%= link[:icon] %>" aria-hidden="true"></span>
+              <span class="fr-nav__btn-libelle"><%= link[:label] %></span>
+            <% else %>
+              <%= link[:label] %>
+            <% end %>
           </button>
           <div class="fr-collapse fr-menu" id="<%= menu_id %>">
             <ul class="fr-menu__list">

@@ -15,7 +15,7 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).not_to have_link("Evapro", visible: :all)
       expect(page).to have_link("Comptes")
       expect(page).to have_link("Aide")
-      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_button("Référentiels")
       expect(page).not_to have_link("Sources d'aide", visible: :all)
     end
   end
@@ -38,13 +38,12 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Aide")
       expect(page).to have_link("Actualités")
       expect(page).not_to have_link("Sources d'aide", visible: :all)
-      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_button("Référentiels")
       expect(page).not_to have_link("Évaluations")
       expect(page).not_to have_link("Comptes")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")
       expect(page).not_to have_link("Annonces générales", visible: :all)
-      expect(page).not_to have_button("Parcours")
       expect(page).not_to have_button("Structures")
     end
   end
@@ -52,12 +51,12 @@ RSpec.describe NavigationComponent, type: :component do
   context "quand le compte est charge_mission_regionale" do
     let(:compte) { create(:compte_charge_mission_regionale, :acceptee, :structure_avec_admin) }
 
-    it "affiche le lien Aide mais pas le menu Accompagnement" do
+    it "affiche le lien Aide mais pas le menu Référentiels" do
       render_inline(component)
 
       expect(page).to have_link("Tableau de bord", href: "/admin")
       expect(page).to have_link("Aide")
-      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_button("Référentiels")
       expect(page).not_to have_link("Sources d'aide", visible: :all)
     end
   end
@@ -78,23 +77,38 @@ RSpec.describe NavigationComponent, type: :component do
         expect(page).to have_link("Bénéficiaires")
       end
 
-      it "affiche les liens de navigation Accompagnement" do
-        expect(page).to have_button("Accompagnement")
-        expect(page).to have_link("Sources d'aide", visible: :all)
-        expect(page).to have_link("Annonces générales", visible: :all)
+      it "regroupe accompagnement et parcours dans le menu Référentiels, après Structures" do
+        expect(page).not_to have_button("Accompagnement")
+        expect(page).not_to have_button("Parcours")
+        expect(page.all("button.fr-nav__btn").map { |bouton| bouton[:"aria-controls"] })
+          .to eq(%w[header-menu-evaluations header-menu-structures header-menu-referentiels])
       end
 
-      it "affiche les liens de navigation Parcours" do
-        expect(page).to have_button("Parcours")
-        expect(page).to have_link("Parcours", visible: :all)
-        expect(page).to have_link("Questionnaires", visible: :all)
-        expect(page).to have_link("Questions QCM", visible: :all)
-        expect(page).to have_link("Questions clic dans image", visible: :all)
-        expect(page).to have_link("Questions clic dans texte", visible: :all)
-        expect(page).to have_link("Questions glisser déposer", visible: :all)
-        expect(page).to have_link("Questions saisie", visible: :all)
-        expect(page).to have_link("Questions sous consigne", visible: :all)
-        expect(page).to have_link("Situations", visible: :all)
+      it "affiche le menu Référentiels sous forme de roue crantée avec un nom accessible" do
+        bouton = page.find("button.fr-nav__btn[aria-controls='header-menu-referentiels']")
+        expect(bouton[:title]).to eq("Référentiels")
+        expect(bouton).to have_css(".fr-icon-settings-5-line[aria-hidden='true']")
+        expect(bouton).to have_css(".fr-nav__btn-libelle", text: "Référentiels")
+      end
+
+      it "affiche les liens d'accompagnement puis de parcours dans le menu Référentiels" do
+        menu = page.find("#header-menu-referentiels", visible: :all)
+        expect(menu.all("a", visible: :all).map { |lien| lien.text(:all).strip }).to eq(
+          [
+            "Annonces générales",
+            "Opérateurs de compétences",
+            "Parcours type",
+            "Questionnaires",
+            "Questions QCM",
+            "Questions clic dans image",
+            "Questions clic dans texte",
+            "Questions glisser déposer",
+            "Questions saisie",
+            "Questions sous consigne",
+            "Situations",
+            "Sources d'aide"
+          ]
+        )
       end
 
       it "affiche les liens de navigation Structures" do
@@ -102,7 +116,6 @@ RSpec.describe NavigationComponent, type: :component do
         expect(page).to have_link("Structures locales", visible: :all)
         expect(page).to have_link("Structures administratives", visible: :all)
         expect(page).to have_link("Structures opérateurs de compétences", visible: :all)
-        expect(page).to have_link("Opérateurs de compétences", visible: :all)
       end
     end
   end
@@ -123,8 +136,7 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).not_to have_link(href: "/admin/evaluations_evapro")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")
-      expect(page).not_to have_button("Accompagnement")
-      expect(page).not_to have_button("Parcours")
+      expect(page).not_to have_button("Référentiels")
       expect(page).not_to have_button("Structures")
     end
   end

@@ -25,11 +25,10 @@ class NavigationComponent < ViewComponent::Base
       actualites_link,
       campagnes_link,
       evaluations_group,
-      accompagnement_group,
       beneficiaires_link,
       comptes_link,
-      parcours_group,
       structures_group,
+      referentiels_group,
       aide_link
     ].compact
   end
@@ -136,23 +135,12 @@ class NavigationComponent < ViewComponent::Base
       current: current_page?(helpers.admin_aide_path) }
   end
 
-  def accompagnement_group
+  def referentiels_group
     return if en_attente_restreint?
 
     links = [
-      source_aides_link,
       annonce_generales_link,
-      opcos_link
-    ].compact
-    return if links.empty?
-
-    group_link("Accompagnement", "accompagnement", links)
-  end
-
-  def parcours_group
-    return if en_attente_restreint?
-
-    links = [
+      opcos_link,
       parcours_types_link,
       questionnaires_link,
       questions_qcm_link,
@@ -161,11 +149,12 @@ class NavigationComponent < ViewComponent::Base
       questions_glisser_deposer_link,
       questions_saisie_link,
       questions_sous_consigne_link,
-      situations_link
+      situations_link,
+      source_aides_link
     ].compact
     return if links.empty?
 
-    group_link("Parcours", "parcours", links)
+    group_link("Référentiels", "referentiels", links, icon: "fr-icon-settings-5-line")
   end
 
   def structures_group
@@ -342,10 +331,11 @@ class NavigationComponent < ViewComponent::Base
       current: current_page?(helpers.admin_opcos_path) || controller_matches?("admin/opcos") }
   end
 
-  def group_link(label, key, links)
+  def group_link(label, key, links, icon: nil)
     {
       label: label,
       key: key,
+      icon: icon,
       links: links,
       current: links.any? { |link| link[:current] }
     }

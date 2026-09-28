@@ -44,19 +44,8 @@ body.logged_in.dsfr-dropdown-open #title_bar {
   .fr-header__menu-links {
     padding-left: 1rem;
   }
-
-  .fr-header__logo .fr-logo {
-    margin: 0;
-  }
-
-  .fr-header__navbar {
-    margin-right: 0;
-  }
-
-  .fr-header__body-row {
-    margin: 0 !important;
-  }
 }
+
 // En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
 // Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.
 // Quand la modale n’est pas ouverte, il faut annuler position/inset/z-index de .fr-modal

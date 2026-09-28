@@ -48,13 +48,6 @@ a.pas-souligne {
 
 // Evapro admin: ajustements layout DSFR dans ActiveAdmin
 body.logged_in.evapro_admin {
-
-  .fr-header .fr-container {
-    width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
-  }
-
   // Annule la contrainte de largeur du header AA
   .header {
     max-width: none;
@@ -486,8 +479,6 @@ body.logged_in h2.fr-footer__partners-title {
   .fr-header__body .fr-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
     box-sizing: border-box;
   }
 

@@ -18,6 +18,7 @@ class NettoyageComptesStructureDemoJob < ApplicationJob
 
   def supprime_compte(compte)
     ActiveRecord::Base.transaction { vide_compte compte }
+    Beneficiaire.with_deleted.where(compte: compte).find_each(&:really_destroy!)
     Evaluation.with_deleted.where(responsable_suivi_id: compte.id)
               .update_all(responsable_suivi_id: nil)
     Invitation.where(invitant: compte).or(Invitation.where(compte: compte)).delete_all

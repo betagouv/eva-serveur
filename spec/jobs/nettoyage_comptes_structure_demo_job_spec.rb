@@ -74,6 +74,25 @@ describe NettoyageComptesStructureDemoJob, type: :job do
     expect(Evaluation.with_deleted.find(evaluation_supprimee.id).responsable_suivi_id).to be_nil
   end
 
+  it "Supprime le bénéficiaire du compte en attente et ses évaluations" do
+    structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
+    autre_compte = create :compte_admin, structure: structure
+    compte_en_attente = create :compte_conseiller,
+                               structure: structure,
+                               statut_validation: :en_attente
+    campagne = create :campagne, compte: autre_compte
+    beneficiaire = create :beneficiaire, compte: compte_en_attente
+    create :evaluation, campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, campagne: campagne, beneficiaire: beneficiaire,
+                        deleted_at: Time.zone.now
+
+    described_class.perform_now
+
+    expect(Compte.with_deleted.where(id: compte_en_attente.id).count).to eq(0)
+    expect(Beneficiaire.with_deleted.where(id: beneficiaire.id).count).to eq(0)
+    expect(Evaluation.with_deleted.count).to eq(0)
+  end
+
   it 'Ne supprime pas le compte nouveau.anlci@yopmail.fr' do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
     create :compte_admin, structure: structure

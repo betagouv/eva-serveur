@@ -10,9 +10,17 @@ class NettoyageComptesStructureDemoJob < ApplicationJob
     Compte.where(structure: structure_demo, statut_validation: :en_attente).find_each do |compte|
       next if compte.email == Eva::EMAIL_DEMO_EN_ATTENTE
 
-      ActiveRecord::Base.transaction { vide_compte compte }
-      Invitation.where(invitant: compte).or(Invitation.where(compte: compte)).delete_all
-      compte.really_destroy!
+      supprime_compte compte
     end
+  end
+
+  private
+
+  def supprime_compte(compte)
+    ActiveRecord::Base.transaction { vide_compte compte }
+    Evaluation.with_deleted.where(responsable_suivi_id: compte.id)
+              .update_all(responsable_suivi_id: nil)
+    Invitation.where(invitant: compte).or(Invitation.where(compte: compte)).delete_all
+    compte.really_destroy!
   end
 end

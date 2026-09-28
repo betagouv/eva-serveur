@@ -35,17 +35,12 @@
   }
 
   .fr-modal__content {
-    margin-left: 3.15rem;
+    margin: 0 auto;
     width: 500px;
     max-width: 100%;
     background-color: #fff;
-    margin-bottom: 0;
     padding-left: 0;
     padding-right: 0;
-
-    @media (max-width: 854px) {
-      margin-left: 0;
-    }
   }
 
 

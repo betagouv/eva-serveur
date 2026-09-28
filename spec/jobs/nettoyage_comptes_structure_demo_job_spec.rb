@@ -54,6 +54,26 @@ describe NettoyageComptesStructureDemoJob, type: :job do
     expect(Compte.with_deleted.where(id: compte_en_attente.id).count).to eq(0)
   end
 
+  it "Détache le compte en attente des évaluations dont il est responsable de suivi" do
+    structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
+    autre_compte = create :compte_admin, structure: structure
+    compte_en_attente = create :compte_conseiller,
+                               structure: structure,
+                               statut_validation: :en_attente
+    campagne = create :campagne, compte: autre_compte
+    evaluation = create :evaluation, campagne: campagne,
+                                     responsable_suivi_id: compte_en_attente.id
+    evaluation_supprimee = create :evaluation, campagne: campagne,
+                                               responsable_suivi_id: compte_en_attente.id,
+                                               deleted_at: Time.zone.now
+
+    described_class.perform_now
+
+    expect(Compte.with_deleted.where(id: compte_en_attente.id).count).to eq(0)
+    expect(evaluation.reload.responsable_suivi_id).to be_nil
+    expect(Evaluation.with_deleted.find(evaluation_supprimee.id).responsable_suivi_id).to be_nil
+  end
+
   it 'Ne supprime pas le compte nouveau.anlci@yopmail.fr' do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
     create :compte_admin, structure: structure

@@ -1,31 +1,27 @@
+#active_admin_content {
+  padding: .5rem 0;
+
+  #main_content_wrapper {
+    max-width: 100vw;
+  }
+}
+
 body.logged_in {
   #wrapper {
     position: relative;
   }
 
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 64px;
-    position: absolute;
-    left: 0;
-  }
-
-  &::before {
-    top: 0;
-    background-color: $eva_main_blue;
-  }
-
-  &::after {
-    top: 64px;
-    background-color: $eva_bluegrey;
-  }
-
   #active_admin_content {
-    max-width: $container;
+    display: flex;
+    align-items: stretch;
     margin: 0 auto 3.5rem;
+  }
+
+  #title_bar,
+  #active_admin_content {
+    max-width: calc(#{$container} + 2 * #{$dsfr-spacing-2w});
+    padding-left: $dsfr-spacing-2w;
+    padding-right: $dsfr-spacing-2w;
   }
 }
 
@@ -33,7 +29,6 @@ body.logged_in {
   body.logged_in {
     #title_bar {
       margin-top: 1rem;
-      padding: 0 1rem;
     }
   }
 }

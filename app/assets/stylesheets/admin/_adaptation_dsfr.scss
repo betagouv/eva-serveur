@@ -46,14 +46,6 @@ a.pas-souligne {
   z-index: 99; // nécessaire pour positionner au dessus du breadcumb en version mobile
 }
 
-body.logged_in {
-
-  &::before,
-  &::after {
-    display: none !important;
-  }
-}
-
 // Evapro admin: ajustements layout DSFR dans ActiveAdmin
 body.logged_in.evapro_admin {
 

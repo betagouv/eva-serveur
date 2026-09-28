@@ -1,4 +1,5 @@
 .fr-header--logged-in {
+
   // Isoler la navigation DSFR des styles legacy ActiveAdmin appliqués aux listes du #header.
   .fr-nav__list,
   .fr-menu__list {
@@ -7,7 +8,7 @@
   }
 
   .fr-nav__item,
-  .fr-menu__list > li {
+  .fr-menu__list>li {
     float: none;
     position: static;
     top: auto;
@@ -49,6 +50,30 @@
   .fr-nav__btn:not(.disabled):active {
     background-image: none;
     box-shadow: none;
+  }
+
+  .fr-nav__btn [class*="fr-icon-"]::before {
+    --icon-size: 1.2rem;
+  }
+
+  @media (max-width: $dsfr-breakpoint-lg-max) {
+    .fr-nav__btn [class*="fr-icon-"] {
+      display: none;
+    }
+  }
+
+  @media (min-width: $dsfr-breakpoint-lg) {
+    .fr-nav__btn-libelle {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
   }
 
   .fr-menu__list .fr-nav__link {

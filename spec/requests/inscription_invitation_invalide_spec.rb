@@ -32,15 +32,8 @@ RSpec.describe "Invitation invalide ou déjà utilisée", type: :request do
     expect(response).to redirect_to(inscription_invitation_invalide_path)
   end
 
-  it "redirige aussi vers la page dédiée depuis le flux devise" do
-    post compte_registration_path, params: {
-      invitation_token: "token-inconnu",
-      compte: {
-        email: "invite@example.com",
-        password: "Password78901$",
-        password_confirmation: "Password78901$"
-      }
-    }
+  it "redirige aussi vers la page dédiée depuis l'ancien lien devise" do
+    get new_compte_registration_path(invitation_token: "token-inconnu")
 
     expect(response).to redirect_to(
       inscription_nouveau_compte_path(invitation_token: "token-inconnu")

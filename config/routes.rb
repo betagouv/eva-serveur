@@ -7,12 +7,13 @@ Rails.application.routes.draw do
     skip: [:registrations]
   )
   devise_for :comptes, active_admin_devise_config
-  # Des routes d'inscription de Devise, seules restent celles qui redirigent
-  # les anciens liens vers inscription/nouveau_compte. La modification et la
-  # suppression de son propre compte passent par admin/comptes.
+  # Les routes d'inscription de Devise sont ignorées par le skip ci-dessus.
+  # La modification et la suppression de son propre compte passent par
+  # admin/comptes.
+  # Il faut créer à la main sign_up, déjà envoyé par email.
+  # On redirige vers inscription/nouveau_compte.
   devise_scope :compte do
     get '/admin/sign_up', to: 'eva/devise/registrations#new', as: :new_compte_registration
-    post '/admin', to: 'eva/devise/registrations#create', as: :compte_registration
   end
   get '/admin', to: redirect('/admin/dashboard')
 

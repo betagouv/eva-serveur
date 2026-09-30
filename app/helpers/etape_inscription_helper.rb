@@ -7,15 +7,15 @@ module EtapeInscriptionHelper
 
   def etape_inscription_path(etape)
     case etape
-    when "nouveau"
-      new_compte_registration_path
     when "preinscription"
       inscription_informations_compte_path
     when "recherche_structure"
       inscription_recherche_structure_path
     when "assignation_structure"
       inscription_structure_path
-    when "complet"
+    # Un compte à l'étape "nouveau" est déjà connecté, il n'a donc pas à repasser
+    # par la création de compte (inscription/nouveau_compte le renverrait ici).
+    when "nouveau", "complet"
       admin_dashboard_path
     end
   end

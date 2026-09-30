@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :active_admin_devise_controller?
   helper_method :annulation_formulaire
 
   def current_ability
@@ -21,10 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[structure_id prenom nom telephone])
-  end
 
   def active_admin_devise_controller?
     is_a? ActiveAdmin::Devise::Controller

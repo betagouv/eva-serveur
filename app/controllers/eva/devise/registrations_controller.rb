@@ -21,7 +21,10 @@ module Eva
       end
 
       def compte_parametres
-        params.require(:compte).permit!.to_h
+        params.require(:compte).permit(
+          :prenom, :nom, :telephone, :email, :password, :password_confirmation,
+          :fonction, :service_departement, :cgu_acceptees, :structure_id
+        ).to_h
       end
 
       private

@@ -1,7 +1,13 @@
 ActiveAdmin.register Compte do
-  permit_params :email, :password, :password_confirmation, :role, :structure_id,
-                :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel,
-                :cgu_acceptees, :usage, :fonction, :service_departement
+  permit_params do
+    attributs = %i[email prenom nom telephone mode_tutoriel cgu_acceptees usage fonction
+                   service_departement]
+    attributs += %i[password password_confirmation] if mot_de_passe_modifiable?
+    attributs << :role if role_modifiable?
+    attributs << :statut_validation if statut_validation_modifiable?
+    attributs << :structure_id if structure_modifiable?
+    attributs
+  end
 
   before_create do |compte|
     if compte.structure.nil?
@@ -188,7 +194,9 @@ ActiveAdmin.register Compte do
     end
 
     def met_a_jour_role
-      resource.update(role: params[:role]) if params[:role].present?
+      return unless can?(:edit_role, resource) && roles_attribuables.include?(params[:role])
+
+      resource.update(role: params[:role])
     end
 
     def roles_avec_description
@@ -196,8 +204,45 @@ ActiveAdmin.register Compte do
     end
 
     def collection_roles
-      roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE
-      roles.map { |role| [ Compte.human_enum_name(:role, role), role ] }
+      roles_attribuables.map { |role| [ Compte.human_enum_name(:role, role), role ] }
+    end
+
+    def roles_attribuables
+      current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE
+    end
+
+    # Ne pas utiliser `resource` à la création : il se construit à partir des
+    # paramètres autorisés, que ces méthodes servent justement à déterminer.
+    def compte_en_edition
+      resource if params[:id].present?
+    end
+
+    def mot_de_passe_modifiable?
+      compte_en_edition.nil? || compte_en_edition == current_compte || can?(:manage, Compte)
+    end
+
+    def role_modifiable?
+      cible = compte_en_edition || Compte.new(structure_id: structure_id_autorisee)
+      can?(:edit_role, cible) && roles_attribuables.include?(params.dig(:compte, :role))
+    end
+
+    def statut_validation_modifiable?
+      current_compte.au_moins_admin? && compte_en_edition != current_compte
+    end
+
+    def structure_modifiable?
+      can?(:manage, Compte) || structure_id_autorisee.present?
+    end
+
+    def structure_id_autorisee
+      structure_id = params.dig(:compte, :structure_id).presence
+      structure_id if structures_attribuables_ids.include?(structure_id)
+    end
+
+    def structures_attribuables_ids
+      ids = [ (compte_en_edition || current_compte).structure_id ]
+      ids += structures_filles.map(&:id) if current_compte.administratif?
+      ids.compact
     end
 
     def trouve_comptes

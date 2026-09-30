@@ -1,54 +1,15 @@
 require Rails.root.join("lib/rake_logger")
 
-COMPTES = {
-  "superadmin@eva.anlci.gouv.fr" => { prenom: "super", nom: "admin", role: "superadmin" },
-  "admin@eva.anlci.gouv.fr" => { prenom: "admin", nom: "admin", role: "admin" },
-  "conseiller@eva.anlci.gouv.fr" => { prenom: "conseiller", nom: "conseiller", role: "conseiller" }
-}.freeze
-
 namespace :reviewapp do
-  def cree_les_comptes(structure_eva)
-    COMPTES.each do |email, data|
-      Compte.where(email: email).first_or_create do |compte|
-        compte.prenom = data[:prenom]
-        compte.nom = data[:nom]
-        compte.role = data[:role]
-        compte.statut_validation = "acceptee"
-        compte.structure = structure_eva
-        compte.password = "bidon123456"
-      end
-    end
-  end
-
-  def configure_questionnaire(campagne, nom_technique)
-    q = Questionnaire.find_by(nom_technique: nom_technique)
-    premiere_situation_configuration = campagne.situations_configurations.first
-    premiere_situation_configuration.situation = Situation.find_by(nom_technique: "bienvenue")
-    premiere_situation_configuration.questionnaire = q
-    premiere_situation_configuration.save
-  end
-
-  def cree_campagne(code, libelle, questionnaire)
-    campagne = Campagne.find_or_create_by(code: code,
-                                          libelle: libelle) do |c|
-        c.compte = Compte.find_by(email: "superadmin@eva.anlci.gouv.fr")
-        c.parcours_type = ParcoursType.find_by(nom_technique: "competences_de_base")
-        c.type_programme = "test"
-    end
-    configure_questionnaire(campagne, questionnaire)
-  end
-
-  def cree_campagnes_socio
-    cree_campagne("SOCIOAUTO",
-                  "sociodémographie et autopositionnement",
-                  "sociodemographique_autopositionnement")
-    cree_campagne("SOCIO",
-                  "sociodémographie",
-                  "sociodemographique")
+  # APP est le nom de l'application, injecté par Scalingo dans chaque conteneur
+  def interdit_en_production(tache)
+    abort "#{tache.name} ne doit jamais être exécuté en production" if ENV["APP"] == "eva-serveur"
   end
 
   desc "Ignore migrations"
-  task ignore_migrations: :environment do |_t, args|
+  task ignore_migrations: :environment do |tache, args|
+    interdit_en_production(tache)
+
     logger = RakeLogger.logger
     ActiveRecord::Base.transaction do
       args.extras.each do |migration|
@@ -60,7 +21,9 @@ namespace :reviewapp do
   end
 
   desc "init db"
-  task initdb: :environment do
+  task initdb: :environment do |tache|
+    interdit_en_production(tache)
+
     contenu = File.read("db/evaluations_tests.sql")
     requettes = contenu.split(/;$/)
     requettes.pop ## retire la dernière requette qui est vide
@@ -72,10 +35,8 @@ namespace :reviewapp do
   end
 
   desc "initialise les données pour les applications de revues"
-  task seed: :environment do
-    structure_eva = Structure.find_by(nom: "eva")
-    cree_les_comptes structure_eva
-    cree_campagnes_socio
+  task seed: :environment do |tache|
+    interdit_en_production(tache)
 
     mot_de_passe_chiffre = ENV.fetch("MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE")
     Compte.find_each do |compte|

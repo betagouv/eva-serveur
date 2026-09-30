@@ -32,8 +32,7 @@ RSpec.describe "Routes Devise de gestion de son propre compte", type: :request d
     expect(response).to have_http_status(:not_found)
   end
 
-  it "conserve les routes qui redirigent l'ancienne inscription" do
+  it "conserve la route qui redirige les anciens liens d'inscription" do
     expect(new_compte_registration_path).to eq "/admin/sign_up"
-    expect(compte_registration_path).to eq "/admin"
   end
 end

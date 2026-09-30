@@ -2,81 +2,28 @@ module Eva
   module Devise
     class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
       def new
-        if params[:invitation_token].present?
-          redirect_to inscription_nouveau_compte_path(invitation_token: params[:invitation_token]),
-                      status: :see_other
-        elsif params[:structure_id].present?
-          redirect_to inscription_nouveau_compte_path(structure_id: params[:structure_id])
-        else
-          redirect_to inscription_nouveau_compte_path
-        end
+        redirige_vers_nouveau_compte
       end
 
+      # L'inscription se fait uniquement par inscription/nouveau_compte
       def create
-        if params[:invitation_token].present?
-          create_avec_invitation
-        else
-          create_sans_invitation
-        end
-      end
-
-      def compte_parametres
-        params.require(:compte).permit(
-          :prenom, :nom, :telephone, :email, :password, :password_confirmation,
-          :fonction, :service_departement, :cgu_acceptees, :structure_id
-        ).to_h
+        redirige_vers_nouveau_compte
       end
 
       private
 
-      def charge_et_valide_invitation
-        @invitation = Invitation.find_by(token: params[:invitation_token])
-        return if @invitation&.utilisable?
-
-        redirect_to inscription_invitation_invalide_path
+      def redirige_vers_nouveau_compte
+        redirect_to inscription_nouveau_compte_path(parametres_nouveau_compte), status: :see_other
       end
 
-      def create_avec_invitation
-        charge_et_valide_invitation
-        return if performed?
-
-        resultat = CreationCompteDepuisInvitationService.new(
-          invitation: @invitation,
-          parametres_compte: compte_parametres
-        ).appeler
-
-        if resultat.succes
-          @compte = resultat.compte
-          sign_in_et_redirige_inscription
+      def parametres_nouveau_compte
+        if params[:invitation_token].present?
+          { invitation_token: params[:invitation_token] }
+        elsif params[:structure_id].present?
+          { structure_id: params[:structure_id] }
         else
-          self.resource = resultat.compte
-          render :new
+          {}
         end
-      end
-
-      def create_sans_invitation
-        @compte = Compte.new(compte_parametres)
-        @compte.assigne_role_admin_si_pas_d_admin
-        if enregistre_compte?
-          sign_in_et_redirige
-        else
-          render :new
-        end
-      end
-
-      def enregistre_compte?
-        verify_recaptcha(model: @compte) && @compte.save
-      end
-
-      def sign_in_et_redirige
-        sign_in @compte
-        redirect_to admin_dashboard_path, notice: I18n.t("devise.registrations.signed_up")
-      end
-
-      def sign_in_et_redirige_inscription
-        sign_in @compte
-        redirect_to inscription_informations_compte_path,
-                    notice: I18n.t("devise.registrations.signed_up")
       end
     end
   end

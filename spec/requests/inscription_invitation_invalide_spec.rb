@@ -42,6 +42,10 @@ RSpec.describe "Invitation invalide ou déjà utilisée", type: :request do
       }
     }
 
+    expect(response).to redirect_to(
+      inscription_nouveau_compte_path(invitation_token: "token-inconnu")
+    )
+    follow_redirect!
     expect(response).to redirect_to(inscription_invitation_invalide_path)
   end
 end

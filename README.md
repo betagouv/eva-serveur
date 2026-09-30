@@ -74,6 +74,8 @@ Sans les variables, le projet ne se lancera pas correctement en local.
 <SECRET_METABASE> se trouve sur metabase https://metabase.eva.anlci.gouv.fr/admin/settings/embedding-in-other-applications/standalone
 Demander le <SECRET_IC> à l'équipe
 
+Les mots de passe et secrets utilisés par l'application suivent la règle décrite dans [docs/mots_de_passe_de_service.md](docs/mots_de_passe_de_service.md).
+
 ## API
 
 L'api est accessible au point `/api`

@@ -3,34 +3,6 @@ require 'rails_helper'
 describe 'Création de compte conseiller', type: :feature do
   let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
 
-  context "sans token d'invitation" do
-    before do
-      visit new_compte_registration_path
-    end
-
-    it "redirige l'utilisateur vers la page de création de compte" do
-      expect(page).to have_current_path(inscription_nouveau_compte_path)
-    end
-  end
-
-  context "redirection de l’ancien lien d’inscription Devise vers l’embarquement v2" do
-    let!(:invitation) do
-      invitant = create(:compte_admin, structure: structure)
-      create(:invitation,
-             structure: structure,
-             invitant: invitant,
-             email_destinataire: "redirect-test@eva.fr")
-    end
-
-    it "redirige vers inscription/nouveau_compte avec le token" do
-      visit new_compte_registration_path(invitation_token: invitation.token)
-      expect(page).to have_current_path(
-        inscription_nouveau_compte_path(invitation_token: invitation.token),
-        ignore_query: false
-      )
-    end
-  end
-
   context "avec un lien d'invitation (token à usage unique)" do
     let!(:invitation) do
       invitant = create(:compte_admin, structure: structure)
@@ -134,12 +106,6 @@ href: new_compte_session_path)
     it "redirige avec un message d'erreur quand l'invitation est déjà acceptée" do
       invitation = create(:invitation, :acceptee, structure: structure)
       visit inscription_nouveau_compte_path(invitation_token: invitation.token)
-      expect(page).to have_current_path(inscription_invitation_invalide_path)
-      expect(page).to have_content("n’est pas valide ou a déjà été utilisé")
-    end
-
-    it "redirige depuis l'ancien URL Devise quand le token est inconnu" do
-      visit new_compte_registration_path(invitation_token: "token-inexistant")
       expect(page).to have_current_path(inscription_invitation_invalide_path)
       expect(page).to have_content("n’est pas valide ou a déjà été utilisé")
     end

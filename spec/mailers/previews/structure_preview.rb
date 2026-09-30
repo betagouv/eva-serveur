@@ -1,12 +1,5 @@
 # Preview all emails at http://localhost:3000/rails/mailers/structure
 class StructurePreview < ActionMailer::Preview
-  def nouvelle_structure
-    structure = Structure.first
-    compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
-
-    StructureMailer.with(structure: structure, compte: compte).nouvelle_structure
-  end
-
   def invitation_structure
     structure = Structure.first
     invitant = Compte.where(structure: structure).first

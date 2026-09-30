@@ -2,37 +2,56 @@
 
 require "rails_helper"
 
-RSpec.describe "Routes Devise de gestion de son propre compte", type: :request do
-  let(:compte) { create(:compte_admin) }
+RSpec.describe "Routes Devise d'inscription et de gestion de son propre compte", type: :request do
+  context "sans être connecté" do
+    it "n'affiche plus l'ancienne page d'inscription" do
+      get "/admin/sign_up"
+      expect(response).to have_http_status(:not_found)
 
-  before { sign_in compte }
+      get "/admin/sign_up", params: { invitation_token: create(:invitation).token }
+      expect(response).to have_http_status(:not_found)
+    end
 
-  it "ne permet plus de supprimer son compte" do
-    delete "/admin"
+    it "ne permet plus de créer un compte" do
+      parametres = { compte: { email: "nouveau@exemple.fr", password: "Password78901$",
+                               password_confirmation: "Password78901$" } }
 
-    expect(response).to have_http_status(:not_found)
-    expect(Compte.exists?(compte.id)).to be true
+      expect do
+        post "/admin", params: parametres
+      end.not_to change(Compte, :count)
+
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
-  it "ne permet plus de modifier son compte" do
-    parametres = { compte: { email: "nouveau@exemple.fr", current_password: compte.password } }
+  context "en étant connecté" do
+    let(:compte) { create(:compte_admin) }
 
-    patch "/admin", params: parametres
-    expect(response).to have_http_status(:not_found)
+    before { sign_in compte }
 
-    put "/admin", params: parametres
-    expect(response).to have_http_status(:not_found)
-  end
+    it "ne permet plus de supprimer son compte" do
+      delete "/admin"
 
-  it "n'affiche plus les pages Devise de modification et d'annulation" do
-    get "/admin/edit"
-    expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(:not_found)
+      expect(Compte.exists?(compte.id)).to be true
+    end
 
-    get "/admin/cancel"
-    expect(response).to have_http_status(:not_found)
-  end
+    it "ne permet plus de modifier son compte" do
+      parametres = { compte: { email: "nouveau@exemple.fr", current_password: compte.password } }
 
-  it "conserve la route qui redirige les anciens liens d'inscription" do
-    expect(new_compte_registration_path).to eq "/admin/sign_up"
+      patch "/admin", params: parametres
+      expect(response).to have_http_status(:not_found)
+
+      put "/admin", params: parametres
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "n'affiche plus les pages Devise de modification et d'annulation" do
+      get "/admin/edit"
+      expect(response).to have_http_status(:not_found)
+
+      get "/admin/cancel"
+      expect(response).to have_http_status(:not_found)
+    end
   end
 end

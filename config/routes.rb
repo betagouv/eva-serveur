@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
   active_admin_devise_config = ActiveAdmin::Devise.config.deep_merge(
     controllers: {
-      registrations: 'eva/devise/registrations',
       sessions: 'eva/devise/sessions',
       passwords: 'eva/devise/passwords'
-    }
+    },
+    skip: [:registrations]
   )
   devise_for :comptes, active_admin_devise_config
+  # Des routes d'inscription de Devise, seules restent celles qui redirigent
+  # les anciens liens vers inscription/nouveau_compte. La modification et la
+  # suppression de son propre compte passent par admin/comptes.
+  devise_scope :compte do
+    get '/admin/sign_up', to: 'eva/devise/registrations#new', as: :new_compte_registration
+    post '/admin', to: 'eva/devise/registrations#create', as: :compte_registration
+  end
   get '/admin', to: redirect('/admin/dashboard')
 
   get "pro_connect/logout" => "pro_connect#logout"

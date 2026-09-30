@@ -53,15 +53,46 @@ class Rack::Attack
   THROTTLE_PAR_SESSION_PATHS =
     %r{\A/api/(evenements|evaluations/[^/]+/collections_evenements)\z}.freeze
 
-  def self.session_id_depuis_le_corps(req)
+  # Le routeur accepte aussi /admin/login.json et /admin/login/
+  CHEMIN_CONNEXION = %r{\A/admin/login(\.[^/]*)?/?\z}.freeze
+  LIMITE_CONNEXIONS_PAR_EMAIL = 10
+  PERIODE_CONNEXIONS_PAR_EMAIL = 10.minutes
+  LIMITE_CONNEXIONS_PAR_IP = 30
+  PERIODE_CONNEXIONS_PAR_IP = 5.minutes
+  THROTTLES_CONNEXION = [ 'connexions par email', 'connexions par ip' ].freeze
+
+  def self.corps_json(req)
     body = req.body.read
     req.body.rewind
     return nil if body.blank?
 
     json = JSON.parse(body)
-    return nil unless json.is_a?(Hash)
+    json if json.is_a?(Hash)
+  rescue StandardError
+    nil
+  end
+
+  def self.session_id_depuis_le_corps(req)
+    json = corps_json(req)
+    return nil if json.nil?
 
     json['session_id'] || json.dig('evenements', 0, 'session_id')
+  rescue StandardError
+    nil
+  end
+
+  def self.connexion?(req)
+    req.post? && req.path.match?(CHEMIN_CONNEXION)
+  end
+
+  # Normalisé comme le fait Devise (casse et espaces) pour que les variantes
+  # d'un même email partagent le même compteur.
+  def self.email_de_connexion(req)
+    compte = req.params['compte']
+    compte = corps_json(req)&.dig('compte') unless compte.is_a?(Hash)
+    return nil unless compte.is_a?(Hash)
+
+    compte['email'].to_s.strip.downcase.presence
   rescue StandardError
     nil
   end
@@ -87,6 +118,40 @@ class Rack::Attack
     next unless req.post? && req.path.match?(THROTTLE_PAR_SESSION_PATHS)
 
     Rack::Attack.session_id_depuis_le_corps(req) || req.ip
+  end
+
+  # Tentatives de connexion : freine la recherche d'un mot de passe par essais
+  # successifs. Les connexions réussies comptent aussi, Rack::Attack ne
+  # connaissant pas l'issue de la requête.
+  # Par email : protège un compte visé, d'où que viennent les essais.
+  throttle('connexions par email', limit: LIMITE_CONNEXIONS_PAR_EMAIL,
+                                   period: PERIODE_CONNEXIONS_PAR_EMAIL) do |req|
+    Rack::Attack.email_de_connexion(req) if Rack::Attack.connexion?(req)
+  end
+
+  # Par IP : freine l'essai d'un même mot de passe sur beaucoup de comptes.
+  # Plus large que la limite par email, car les conseillers d'une même
+  # structure partagent souvent une adresse IP.
+  throttle('connexions par ip', limit: LIMITE_CONNEXIONS_PAR_IP,
+                                period: PERIODE_CONNEXIONS_PAR_IP) do |req|
+    req.ip if Rack::Attack.connexion?(req)
+  end
+
+  # La personne bloquée à la connexion voit cette réponse dans son navigateur :
+  # message en français. Les autres throttles gardent la réponse par défaut.
+  reponse_throttle_par_defaut = throttled_responder
+  self.throttled_responder = lambda do |req|
+    unless THROTTLES_CONNEXION.include?(req.env['rack.attack.matched'])
+      next reponse_throttle_par_defaut.call(req)
+    end
+
+    donnees = req.env['rack.attack.match_data']
+    attente = donnees[:period] - (donnees[:epoch_time] % donnees[:period])
+    [
+      429,
+      { 'content-type' => 'text/plain; charset=utf-8', 'retry-after' => attente.to_s },
+      [ "Trop de tentatives de connexion. Veuillez réessayer dans quelques minutes.\n" ]
+    ]
   end
 
   # Log des requêtes bloquées/throttlées (pour le debugging et le monitoring)

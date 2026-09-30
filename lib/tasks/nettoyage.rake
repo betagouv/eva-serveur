@@ -10,7 +10,7 @@ namespace :nettoyage do
   def anonymise_comptes
     puts "\n-- anonymise les comptes --"
     Compte.find_each do |compte|
-      next if compte.superadmin?
+      next if compte.superadmin? || compte.email == eva.EMAIL_SUPPORT
 
       print "."
       Anonymisation::Compte.new(compte).anonymise
@@ -36,7 +36,7 @@ namespace :nettoyage do
 
   desc "Anonymise la base de données en entier"
   task anonymise: :environment do
-    return if Rails.env.production?
+    next if Rails.env.production?
 
     anonymise_comptes
     anonymise_campagnes

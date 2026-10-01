@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FooterComponent < ViewComponent::Base
   def initialize(avec_partenaires: true, partenaires: [], liens_navigation: nil, description: nil)
     @avec_partenaires = avec_partenaires

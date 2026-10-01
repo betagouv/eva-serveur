@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ActiveAdminEvaproAdminClass
   def body_classes
     classes = super

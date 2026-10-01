@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EvaluationsEvapro
   class RisquesPresenter
     SEUILS_PALIERS_RISQUE = {

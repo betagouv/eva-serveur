@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 describe 'admin/evaluations_evapro/_aller_plus_loin.html.erb' do

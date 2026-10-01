@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IncontournablesEtapeCardComponent < ViewComponent::Base
   def initialize(
     numero:,

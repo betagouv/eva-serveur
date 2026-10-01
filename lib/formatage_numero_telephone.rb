@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FormatageNumeroTelephone
   # Formate un numéro français en (+33) X XX XX XX XX à partir de chiffres bruts.
   # Accepte 0122334455, +33122334455, (+33)122334455, etc.

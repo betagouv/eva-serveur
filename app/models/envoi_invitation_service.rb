@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EnvoiInvitationService
   Result = Struct.new(:success?, :invitation, :error, keyword_init: true) do
     def email

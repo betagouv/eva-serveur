@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BaseInputComponent < ViewComponent::Base
   def initialize(
     id:,

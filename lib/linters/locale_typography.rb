@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Linters
   # Verifie les regles typographiques francaises dans les fichiers de traduction YAML :
   # rubocop:disable Style/AsciiComments

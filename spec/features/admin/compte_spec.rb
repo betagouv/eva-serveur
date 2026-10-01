@@ -237,6 +237,15 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
+    describe 'champs mot de passe' do
+      it "propose d'afficher le mot de passe et sa confirmation" do
+        visit edit_admin_compte_path(compte_connecte)
+
+        expect(page).to have_field('compte_password-show', type: 'checkbox')
+        expect(page).to have_field('compte_password_confirmation-show', type: 'checkbox')
+      end
+    end
+
     describe 'mise à jour du statut de validation' do
       it 'ne voit pas les champs Statut et Rôle' do
         visit edit_admin_compte_path(compte_connecte)

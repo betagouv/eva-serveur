@@ -14,8 +14,27 @@ active_admin_form_for [ :admin, resource ] do |f|
       f.input :statut_validation, as: :radio
     end
     if peut_modifier_mot_de_passe?
-      f.input :password, hint: resource.persisted? ? t(".aide_mot_de_passe") : ""
-      f.input :password_confirmation
+      li class: "input password" do
+        render PasswordInputComponent.new(
+          id: "compte_password",
+          label: Compte.human_attribute_name(:password),
+          hint: resource.persisted? ? t(".aide_mot_de_passe") : nil,
+          form: f.form_builder,
+          method: :password,
+          required: resource.new_record?,
+          autocomplete: "new-password"
+        )
+      end
+      li class: "input password" do
+        render PasswordInputComponent.new(
+          id: "compte_password_confirmation",
+          label: Compte.human_attribute_name(:password_confirmation),
+          form: f.form_builder,
+          method: :password_confirmation,
+          required: resource.new_record?,
+          autocomplete: "new-password"
+        )
+      end
     end
   end
   f.actions do

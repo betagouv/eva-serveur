@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Linters
   # Vérifie l'absence du mot "OPCO" dans les fichiers de traduction YAML
   # Le mot "OPCO" doit être remplacé par "Opérateur de Compétences"

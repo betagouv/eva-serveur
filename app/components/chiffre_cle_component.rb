@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ChiffreCleComponent < ViewComponent::Base
   def initialize(palier:, chiffre:, prefixe: nil, suffixe: nil)
     @palier = palier

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe "Inscription - Étape structure, selon l'étape du compte", type: :request do

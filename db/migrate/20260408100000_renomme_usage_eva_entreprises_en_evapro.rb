@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RenommeUsageEvaEntreprisesEnEvapro < ActiveRecord::Migration[7.2]
   ANCIEN_USAGE = "Eva: entreprises"
   NOUVEL_USAGE = "EVAPRO"

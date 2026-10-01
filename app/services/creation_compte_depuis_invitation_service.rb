@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreationCompteDepuisInvitationService
   Resultat = Struct.new(:compte, :succes, keyword_init: true)
 

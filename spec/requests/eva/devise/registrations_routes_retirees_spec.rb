@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe "Routes Devise d'inscription et de gestion de son propre compte", type: :request do

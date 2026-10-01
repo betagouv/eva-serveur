@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Invitation < ApplicationRecord
   STATUTS = %w[en_cours acceptee annulee].freeze
   ROLES = Compte::ROLES_STRUCTURE

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SelectInput < Formtastic::Inputs::SelectInput
   def initialize(builder, template, object, object_name, method, options)
     super

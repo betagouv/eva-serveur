@@ -12,7 +12,6 @@ class Inscription::NouveauxComptesController < ApplicationController
     verifie_current_compte
     return if performed?
 
-    @structure = Structure.find(params[:structure_id]) if params[:structure_id].present?
     @compte = Compte.new(email: @invitation&.email_destinataire)
   end
 
@@ -48,8 +47,7 @@ class Inscription::NouveauxComptesController < ApplicationController
   end
 
   def create_sans_invitation
-    @compte = Compte.new(compte_parametres.merge(role: :conseiller, statut_validation: :en_attente,
-                                                 structure_id: params[:structure_id].presence))
+    @compte = Compte.new(compte_parametres.merge(role: :conseiller, statut_validation: :en_attente))
     @compte.assigne_preinscription
     if @compte.save
       sign_in(@compte)

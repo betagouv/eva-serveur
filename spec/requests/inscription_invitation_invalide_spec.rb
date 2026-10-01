@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe "Invitation invalide ou déjà utilisée", type: :request do
@@ -29,16 +27,6 @@ RSpec.describe "Invitation invalide ou déjà utilisée", type: :request do
 
     get inscription_nouveau_compte_path(invitation_token: invitation.token)
 
-    expect(response).to redirect_to(inscription_invitation_invalide_path)
-  end
-
-  it "redirige aussi vers la page dédiée depuis l'ancien lien devise" do
-    get new_compte_registration_path(invitation_token: "token-inconnu")
-
-    expect(response).to redirect_to(
-      inscription_nouveau_compte_path(invitation_token: "token-inconnu")
-    )
-    follow_redirect!
     expect(response).to redirect_to(inscription_invitation_invalide_path)
   end
 end

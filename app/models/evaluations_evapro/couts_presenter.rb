@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EvaluationsEvapro
   class CoutsPresenter
     def initialize(synthese:, i18n:)

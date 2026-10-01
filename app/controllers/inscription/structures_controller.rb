@@ -1,5 +1,5 @@
 class Inscription::StructuresController < ApplicationController
-  before_action :set_compte_and_structure, :verifie_compte_connecte
+  before_action :set_compte_and_structure, :verifie_compte_connecte, :verifie_etape_assignation
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
@@ -40,11 +40,19 @@ class Inscription::StructuresController < ApplicationController
   def set_compte_and_structure
     @compte = current_compte
     @structure = @compte&.structure
+    # Un compte invité arrive avec la structure de son invitation déjà associée
+    @structure_invitation = @structure if @compte&.cree_via_invitation_acceptee?
+  end
+
+  def verifie_etape_assignation
+    return if @compte.etape_inscription == "assignation_structure"
+
+    redirige_vers_etape_inscription(@compte)
   end
 
   def prepare_structure_si_necessaire
     return if @compte.siret.blank?
-    return if @compte.cree_via_invitation_acceptee? && @compte.structure.present?
+    return if @structure_invitation.present?
 
     recherche_et_assigne_structure
     affilie_et_prepare_opcos
@@ -79,7 +87,9 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def redirige_vers_recherche_structure
-    @compte.update(structure_id: nil, etape_inscription: :recherche_structure)
+    # La validation donnée par une invitation ne vaut que pour la structure invitante
+    @compte.update(structure_id: nil, etape_inscription: :recherche_structure,
+                   role: :conseiller, statut_validation: :en_attente)
     redirige_vers_etape_inscription(@compte)
   end
 
@@ -97,6 +107,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def structure_selectionnee
+    return @structure_invitation if @structure_invitation.present?
     return nil if @structure.blank?
 
     structure_meme_siret = StructureLocale.pour_inscription(@structure.siret)
@@ -233,9 +244,13 @@ class Inscription::StructuresController < ApplicationController
 
   def prepare_show_context
     prepare_structure_si_necessaire
-    if @structure.present?
-      @structures_meme_siret = StructureLocale.pour_inscription(@structure.siret)
-    end
+    @structures_meme_siret = structures_proposees
+  end
+
+  def structures_proposees
+    return Structure.where(id: @structure_invitation.id) if @structure_invitation.present?
+
+    StructureLocale.pour_inscription(@structure.siret) if @structure.present?
   end
 
   def etape_usage_sans_session?

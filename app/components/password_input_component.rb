@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PasswordInputComponent < BaseInputComponent
   def initialize(id:, label:, hint: nil, form: nil, method: nil, required: false, autocomplete: nil)
     super(id: id, label: label, hint: hint, form: form, method: method,

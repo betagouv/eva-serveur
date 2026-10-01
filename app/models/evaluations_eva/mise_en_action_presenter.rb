@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EvaluationsEva
   class MiseEnActionPresenter
     def initialize(evaluation)

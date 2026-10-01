@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CardDiagnostiqueComponent < ViewComponent::Base
   # Rails `truncate` compte la longueur totale incluant l'omission.
   OMISSION = "…"

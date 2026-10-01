@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ResetPassword
   class PageContext
     include Rails.application.routes.url_helpers

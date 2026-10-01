@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
@@ -13,6 +11,7 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
     create(:invitation,
            structure: structure_invitee,
            invitant: create(:compte_admin, structure: structure_invitee),
+           role: "admin",
            email_destinataire: "invite.autre.structure@eva.fr")
   end
 
@@ -39,6 +38,7 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
 
     compte = Compte.find_by!(email: "invite.autre.structure@eva.fr")
     expect(compte.etape_inscription).to eq("assignation_structure")
+    expect(compte).to be_validation_acceptee
 
     patch inscription_structure_path, params: { action_type: "recherche" }
 
@@ -48,6 +48,9 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
     compte.reload
     expect(compte.etape_inscription).to eq("recherche_structure")
     expect(compte.structure_id).to be_nil
+    # La validation de l'invitation ne valait que pour la structure invitante
+    expect(compte).to be_validation_en_attente
+    expect(compte.role).to eq("conseiller")
 
     patch inscription_recherche_structure_path, params: {
       compte: { siret: autre_structure.siret.to_s }
@@ -73,6 +76,7 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
     compte.reload
     expect(compte.etape_inscription).to eq("complet")
     expect(compte.structure).to eq(autre_structure)
+    expect(compte).to be_validation_en_attente
   end
   # rubocop:enable RSpec/ExampleLength
 end

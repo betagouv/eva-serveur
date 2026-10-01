@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MigreStructureOpcosVersStructuresOpcoId < ActiveRecord::Migration[7.2]
   def up
     return unless table_exists?(:structure_opcos)

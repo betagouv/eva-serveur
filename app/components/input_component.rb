@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class InputComponent < BaseInputComponent
   def initialize(
     id:,

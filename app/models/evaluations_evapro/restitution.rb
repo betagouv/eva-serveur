@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EvaluationsEvapro
   class Restitution
     def initialize(restitution_globale:)

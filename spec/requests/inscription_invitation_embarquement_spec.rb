@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rails_helper"
 
 RSpec.describe "Parcours d'embarquement après invitation", type: :request do
@@ -101,6 +99,36 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
     compte.reload
     expect(compte.etape_inscription).to eq("complet")
     expect(compte.structure_id).to eq(structure.id)
+    expect(compte.structure).to eq(structure)
+  end
+
+  it "ne propose que la structure d'invitation, même si une autre fiche partage le SIRET" do
+    autre_fiche = create(:structure_locale, nom: "Autre fiche historique doublon SIRET",
+                                           siret: 999_999_999_999_99)
+    autre_fiche.update_columns(siret: structure.siret)
+
+    post inscription_nouveau_compte_path, params: {
+      invitation_token: invitation.token,
+      compte: { password: "Pass5678", password_confirmation: "Pass5678" }
+    }
+    follow_redirect!
+
+    patch inscription_informations_compte_path, params: {
+      compte: { nom: "Martin", prenom: "Claire", email: "invite.embarquement@eva.fr",
+                cgu_acceptees: "1" }
+    }
+    follow_redirect!
+
+    expect(response.body).to include("Structure invitante")
+    expect(response.body).not_to include("Autre fiche historique doublon SIRET".upcase)
+
+    patch inscription_structure_path, params: {
+      compte: { structure_id: autre_fiche.id, structure_confirmee: "1" },
+      commit: I18n.t("inscription.structures.show.rejoindre")
+    }
+
+    compte = Compte.find_by!(email: "invite.embarquement@eva.fr")
+    expect(compte.etape_inscription).to eq("complet")
     expect(compte.structure).to eq(structure)
   end
 end

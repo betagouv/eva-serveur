@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SiretInputComponent < ViewComponent::Base
   # Utilise le lien Annuaire des Entreprises par défaut si link_url non fourni.
   def initialize(

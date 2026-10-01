@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvaProScoreItemComponent < ViewComponent::Base
   LETTERS = %w[A B C D].freeze
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EmailInputComponent < ViewComponent::Base
   def initialize(
     id:,

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Champ d'exemption pour la restriction d'accès des comptes en attente (EVA-817).
 # Ce champ pourra peut-être être supprimé plus tard, une fois que tous les comptes
 # alors exemptés auront été traités (approbation ou clôture).

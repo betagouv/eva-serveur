@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Pdf::HeaderEvaproComponent < ViewComponent::Base
   include StorageHelper
   renders_one :service_image

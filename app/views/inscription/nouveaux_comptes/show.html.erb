@@ -59,7 +59,6 @@
 
       <%= semantic_form_for @compte, url: inscription_nouveau_compte_path, html: { id: "nouveau-compte-form" } do |compte| %>
         <%= hidden_field_tag :invitation_token, @invitation.token if @invitation.present? %>
-        <%= hidden_field_tag :structure_id, params[:structure_id] if params[:structure_id].present? %>
         <%= compte.semantic_errors *champs_non_affiches(
           compte.object.errors.messages.keys,
           [ :prenom, :nom, :email, :telephone, :password, :password_confirmation, :fonction, :service_departement ]

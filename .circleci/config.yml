@@ -25,7 +25,7 @@ executors:
           PGHOST: 127.0.0.1
           PGUSER: circleci-demo-ruby
           RAILS_ENV: test
-      - image: cimg/postgres:13.18
+      - image: cimg/postgres:15.17
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog

@@ -1,5 +1,5 @@
 class Inscription::StructuresController < ApplicationController
-  before_action :set_compte_and_structure, :verifie_compte_connecte
+  before_action :set_compte_and_structure, :verifie_compte_connecte, :verifie_etape_assignation
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
@@ -40,6 +40,12 @@ class Inscription::StructuresController < ApplicationController
   def set_compte_and_structure
     @compte = current_compte
     @structure = @compte&.structure
+  end
+
+  def verifie_etape_assignation
+    return if @compte.etape_inscription == "assignation_structure"
+
+    redirige_vers_etape_inscription(@compte)
   end
 
   def prepare_structure_si_necessaire

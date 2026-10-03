@@ -52,11 +52,11 @@ Un secret est régénéré, en suivant la même règle :
 | `RECAPTCHA_SECRET_KEY` | Généré par Google |
 | `METABASE_SECRET_KEY` | Généré par Metabase |
 | `RAILS_MASTER_KEY` / `SECRET_KEY_BASE` | Générés par `bin/rails secret` |
-| `MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE` | Choisi par l'équipe (voir ci-dessous) |
+| `MOT_DE_PASS_COMPTES_PREPROD` | Choisi par l'équipe (voir ci-dessous) |
 
-`MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE` est l'empreinte bcrypt du mot de passe
-appliqué à tous les comptes des review apps. C'est ce mot de passe d'origine
-qui doit respecter la règle.
+`MOT_DE_PASS_COMPTES_PREPROD` est le mot de passe appliqué à tous les comptes des
+review apps (la tâche `reviewapp:seed` le chiffre avec bcrypt). Il doit respecter
+la règle.
 
 ## Comptes applicatifs non humains
 

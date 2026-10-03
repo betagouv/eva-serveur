@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'reviewapp:seed' do
   include_context 'rake'
 
-  let(:mot_de_passe_chiffre) { '$2a$11$abcdefghijklmnopqrstuuJ8Zc1Yk3n5o7q9s1u3w5y7A9C1E3G5I' }
+  let(:mot_de_passe) { 'mot-de-passe-preprod' }
   let!(:compte) { create :compte }
   let!(:mot_de_passe_initial) { compte.encrypted_password }
 
@@ -11,8 +11,8 @@ describe 'reviewapp:seed' do
     allow(ENV).to receive(:[]).and_call_original
     allow(ENV).to receive(:[]).with('APP').and_return(app)
     allow(ENV).to receive(:fetch).and_call_original
-    allow(ENV).to receive(:fetch).with('MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE')
-                                 .and_return(mot_de_passe_chiffre)
+    allow(ENV).to receive(:fetch).with('MOT_DE_PASS_COMPTES_PREPROD')
+                                 .and_return(mot_de_passe)
   end
 
   context 'en production' do
@@ -30,7 +30,7 @@ describe 'reviewapp:seed' do
 
     it 'remplace les mots de passe' do
       subject.invoke
-      expect(compte.reload.encrypted_password).to eq mot_de_passe_chiffre
+      expect(compte.reload.valid_password?(mot_de_passe)).to be true
     end
   end
 
@@ -39,7 +39,7 @@ describe 'reviewapp:seed' do
 
     it 'remplace les mots de passe' do
       subject.invoke
-      expect(compte.reload.encrypted_password).to eq mot_de_passe_chiffre
+      expect(compte.reload.valid_password?(mot_de_passe)).to be true
     end
   end
 end

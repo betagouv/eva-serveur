@@ -38,7 +38,8 @@ namespace :reviewapp do
   task seed: :environment do |tache|
     interdit_en_production(tache)
 
-    mot_de_passe_chiffre = ENV.fetch("MOT_DE_PASS_COMPTES_PREPROD_ENCRYPTE")
+    mot_de_passe = ENV.fetch("MOT_DE_PASS_COMPTES_PREPROD")
+    mot_de_passe_chiffre = Devise::Encryptor.digest(Compte, mot_de_passe)
     Compte.find_each do |compte|
       compte.encrypted_password = mot_de_passe_chiffre
       compte.save!(validate: false)

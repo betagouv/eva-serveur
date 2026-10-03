@@ -33,15 +33,28 @@ Le redimentionnement des images est dépendant d'une librairie système : vips
 voir [libvips install instructions](https://www.libvips.org/install.html)
 
 
-### Création de la base  
+### Création de la base
 `rake db:create`
 
-### Initialisation de la base  
-`rake db:migrate` && `rake db:seed`
+### Initialisation de la base en développement
 
-Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campagne avec l'interface d'administration décrite ci-dessous.
+```
+bundle exec rake db:drop db:create
+./bin/reviewappdeploy.sh
+```
 
-**Note :** Si vous avez utilisé la base de donnée de preprod, vous devez supprimer (localement) les assets afin de pouvoir lancer le jeu en local à l'aide de la commande : `rake active_storage:destroy_attachments`
+Cette commande créera les comptes suivants :
+
+superadmin@eva.anlci.gouv.fr
+admin@eva.anlci.gouv.fr
+conseiller@eva.anlci.gouv.fr
+cmr@eva.anlci.gouv.fr
+boss@eva.anlci.gouv.fr
+rachel.rh@eva.anlci.gouv.fr
+
+Le mot de passe de ses comptes est défini avec la valeur de la variable d'env suivante à ajouter dans votre `.env`
+
+MOT_DE_PASS_COMPTES_PREPROD
 
 ### Lancer les tests
 `bundle exec rake spec` ou `guard`
@@ -64,7 +77,7 @@ Règle importante : **il est interdit d’utiliser des valeurs en `px` pour les 
 Utiliser à la place les variables de spacing existantes (en `rem` ou issues du DSFR).
 
 ### Espace d'administration
-accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
+accessible à l'url `/admin`.
 
 ### Variables d'environnement
 

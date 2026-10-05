@@ -2,7 +2,7 @@ class Inscription::InformationsComptesController < ApplicationController
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
-  before_action :set_compte, :verifie_compte_connecte
+  before_action :verifie_compte_connecte, :set_compte
 
   def show
   end

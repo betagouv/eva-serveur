@@ -1,5 +1,5 @@
 class Inscription::RechercheStructuresController < ApplicationController
-  before_action :set_compte, :verifie_compte_connecte, :verifie_etape_inscription
+  before_action :verifie_compte_connecte, :set_compte, :verifie_etape_inscription
 
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
@@ -42,7 +42,7 @@ class Inscription::RechercheStructuresController < ApplicationController
   end
 
   def verifie_etape_inscription
-    return if @compte&.etape_inscription == "recherche_structure"
+    return if @compte.etape_inscription == "recherche_structure"
 
     redirect_to admin_dashboard_path
   end

@@ -76,7 +76,7 @@ CREATE TABLE public.active_admin_comments (
 CREATE TABLE public.active_storage_attachments (
     name character varying NOT NULL,
     record_type character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     blob_id uuid,
     record_id uuid
@@ -94,7 +94,7 @@ CREATE TABLE public.active_storage_blobs (
     metadata text,
     byte_size bigint NOT NULL,
     checksum character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     service_name character varying NOT NULL
 );
@@ -207,13 +207,13 @@ CREATE TABLE public.campagne_compte_autorisations (
 CREATE TABLE public.campagnes (
     libelle character varying,
     code character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     compte_id uuid,
     affiche_competences_fortes boolean DEFAULT true,
     parcours_type_id uuid,
-    anonymise_le timestamp without time zone,
+    anonymise_le timestamp(6) without time zone,
     deleted_at timestamp(6) without time zone,
     active boolean DEFAULT true,
     privee boolean DEFAULT false
@@ -227,8 +227,8 @@ CREATE TABLE public.campagnes (
 CREATE TABLE public.choix (
     intitule character varying,
     type_choix integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     "position" integer,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     question_id uuid,
@@ -245,10 +245,10 @@ CREATE TABLE public.comptes (
     email character varying DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    reset_password_sent_at timestamp(6) without time zone,
+    remember_created_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     role character varying DEFAULT 'conseiller'::character varying,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     structure_id uuid,
@@ -257,14 +257,14 @@ CREATE TABLE public.comptes (
     prenom character varying,
     telephone character varying,
     sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
+    current_sign_in_at timestamp(6) without time zone,
+    last_sign_in_at timestamp(6) without time zone,
     current_sign_in_ip character varying,
     last_sign_in_ip character varying,
-    anonymise_le timestamp without time zone,
+    anonymise_le timestamp(6) without time zone,
     confirmation_token character varying,
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
+    confirmed_at timestamp(6) without time zone,
+    confirmation_sent_at timestamp(6) without time zone,
     unconfirmed_email character varying,
     deleted_at timestamp(6) without time zone,
     mode_tutoriel boolean DEFAULT true,
@@ -341,12 +341,12 @@ CREATE TABLE public.donnees_sociodemographiques (
 --
 
 CREATE TABLE public.evaluations (
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     campagne_id uuid,
-    terminee_le timestamp without time zone,
-    debutee_le timestamp without time zone,
+    terminee_le timestamp(6) without time zone,
+    debutee_le timestamp(6) without time zone,
     synthese_competences_de_base character varying,
     niveau_cefr character varying,
     niveau_cnef character varying,
@@ -371,9 +371,9 @@ CREATE TABLE public.evaluations (
 CREATE TABLE public.evenements (
     nom character varying,
     donnees jsonb DEFAULT '"{}"'::jsonb NOT NULL,
-    date timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    date timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     session_id character varying,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     "position" integer,
@@ -493,8 +493,8 @@ CREATE TABLE public.parties (
 
 CREATE TABLE public.questionnaires (
     libelle character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     nom_technique character varying,
     deleted_at timestamp(6) without time zone
@@ -507,8 +507,8 @@ CREATE TABLE public.questionnaires (
 
 CREATE TABLE public.questionnaires_questions (
     "position" integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
+    created_at timestamp(6) without time zone,
+    updated_at timestamp(6) without time zone,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     questionnaire_id uuid,
     question_id uuid,
@@ -521,8 +521,8 @@ CREATE TABLE public.questionnaires_questions (
 --
 
 CREATE TABLE public.questions (
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     type character varying,
     description character varying,
     reponse_placeholder character varying,
@@ -557,8 +557,8 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.situations (
     libelle character varying,
     nom_technique character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     questionnaire_id uuid,
     questionnaire_entrainement_id uuid,
@@ -573,8 +573,8 @@ CREATE TABLE public.situations (
 
 CREATE TABLE public.situations_configurations (
     "position" integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     campagne_id uuid,
     situation_id uuid,
@@ -613,7 +613,7 @@ CREATE TABLE public.structures (
     updated_at timestamp(6) without time zone NOT NULL,
     type_structure character varying,
     region character varying,
-    anonymise_le timestamp without time zone,
+    anonymise_le timestamp(6) without time zone,
     type character varying,
     deleted_at timestamp(6) without time zone,
     ancestry character varying NOT NULL COLLATE pg_catalog."C",

@@ -21,8 +21,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
     t.text "body"
     t.string "resource_type"
     t.string "author_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "resource_id"
     t.uuid "author_id"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -71,8 +71,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
   create_table "annonce_generales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "texte"
     t.boolean "afficher"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "beneficiaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -219,8 +219,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
   end
 
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "campagne_id"
     t.datetime "terminee_le"
     t.datetime "debutee_le"
@@ -320,8 +320,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
     t.string "libelle"
     t.string "nom_technique"
     t.string "duree_moyenne"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "description"
     t.string "type_de_programme"
     t.datetime "deleted_at"
@@ -333,8 +333,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
   create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_id"
     t.jsonb "metriques", default: {}, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "evaluation_id"
     t.uuid "situation_id"
     t.datetime "deleted_at"
@@ -359,8 +359,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
 
   create_table "questionnaires_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.uuid "questionnaire_id"
     t.uuid "question_id"
     t.datetime "deleted_at"
@@ -370,8 +370,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
   end
 
   create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "type"
     t.string "description"
     t.string "reponse_placeholder"
@@ -430,19 +430,19 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
     t.string "url"
     t.integer "categorie"
     t.integer "type_document"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position", default: 0
   end
 
   create_table "structures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.string "code_postal"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "type_structure"
     t.string "region"
-    t.datetime "anonymise_le", precision: nil
+    t.datetime "anonymise_le"
     t.string "type"
     t.datetime "deleted_at"
     t.string "ancestry", null: false, collation: "C"

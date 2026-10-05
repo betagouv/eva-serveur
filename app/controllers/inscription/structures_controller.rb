@@ -1,5 +1,5 @@
 class Inscription::StructuresController < ApplicationController
-  before_action :set_compte_and_structure, :verifie_compte_connecte, :verifie_etape_assignation
+  before_action :verifie_compte_connecte, :set_compte_and_structure, :verifie_etape_assignation
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
@@ -39,9 +39,9 @@ class Inscription::StructuresController < ApplicationController
 
   def set_compte_and_structure
     @compte = current_compte
-    @structure = @compte&.structure
+    @structure = @compte.structure
     # Un compte invité arrive avec la structure de son invitation déjà associée
-    @structure_invitation = @structure if @compte&.cree_via_invitation_acceptee?
+    @structure_invitation = @structure if @compte.cree_via_invitation_acceptee?
   end
 
   def verifie_etape_assignation

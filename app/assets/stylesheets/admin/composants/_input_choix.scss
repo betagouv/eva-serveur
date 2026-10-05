@@ -1,11 +1,11 @@
 .input-choix {
-  /* reset style */
   li.radio {
     fieldset ol {
       padding: 0;
       margin: 0;
       width: 100%;
     }
+
     &.error {
       .choix-item {
         border-color: $eva_red;
@@ -13,11 +13,11 @@
     }
   }
 
-  /* fin reset style */
+  input {
+    display: none;
+  }
 
-  input { display: none; }
-
-  > ol > li {
+  >ol>li {
     display: flex;
     flex-direction: column;
   }
@@ -35,15 +35,17 @@
 
     label {
       padding: 0;
+      height: 100%;
     }
 
-    input + .choix-item {
+    input+.choix-item {
       &:hover {
         box-shadow: 0 0 0 2px $eva_main_blue;
         border-color: transparent;
       }
     }
-    input:not(:checked) + .choix-item {
+
+    input:not(:checked)+.choix-item {
       &:hover {
         .choix-item__titre {
           color: $eva_main_blue;
@@ -59,7 +61,7 @@
     @include carte-avec-bordure;
 
     cursor: pointer;
-    transition: background-color,border-color,box-shadow, color .2s;
+    transition: background-color, border-color, box-shadow, color .2s;
     user-select: none;
     display: flex;
     flex-direction: column;
@@ -71,31 +73,39 @@
       line-height: 1.125rem;
       margin-bottom: .625rem;
     }
-    &__duree, &__description {
+
+    &__duree,
+    &__description {
       @include corps-de-texte-xs-regular;
 
       font-weight: normal;
       margin: 0;
+
       p {
         @include corps-de-texte-xs-regular;
       }
+
       ul {
         list-style: disc;
         padding-left: 1rem;
       }
     }
+
     &__duree {
       font-style: italic;
     }
   }
 
-  input + .choix-item {
+  input+.choix-item {
     .choix-item__icone {
       .icone-loupe {
-        path, rect {
+
+        path,
+        rect {
           fill: $eva_main_blue;
         }
       }
+
       .icone-pin {
         path {
           stroke: $eva_main_blue;
@@ -104,16 +114,19 @@
     }
   }
 
-  input:checked + .choix-item {
+  input:checked+.choix-item {
     border-color: $couleur-texte;
     background-color: $eva_main_blue;
 
     .choix-item__icone {
       .icone-loupe {
-        path, rect {
+
+        path,
+        rect {
           fill: $eva_light;
         }
       }
+
       .icone-pin {
         path {
           stroke: $eva_light;
@@ -121,7 +134,12 @@
       }
     }
 
-    &, div, span, p, ul li, .choix-item__titre {
+    &,
+    div,
+    span,
+    p,
+    ul li,
+    .choix-item__titre {
       color: $eva_light;
     }
   }

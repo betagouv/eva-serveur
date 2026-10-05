@@ -156,6 +156,12 @@ class Compte < ApplicationRecord
     Invitation.acceptee.exists?(compte_id: id)
   end
 
+  def rattache_a_structure_invitation?
+    return false if structure_id_in_database.blank?
+
+    Invitation.acceptee.exists?(compte_id: id, structure_id: structure_id_in_database)
+  end
+
   private
 
   def verifie_etat_si_structure_manquante

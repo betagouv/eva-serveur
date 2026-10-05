@@ -40,8 +40,6 @@ class Inscription::StructuresController < ApplicationController
   def set_compte_and_structure
     @compte = current_compte
     @structure = @compte.structure
-    # Un compte invité arrive avec la structure de son invitation déjà associée
-    @structure_invitation = @structure if @compte.cree_via_invitation_acceptee?
   end
 
   def verifie_etape_assignation
@@ -52,7 +50,7 @@ class Inscription::StructuresController < ApplicationController
 
   def prepare_structure_si_necessaire
     return if @compte.siret.blank?
-    return if @structure_invitation.present?
+    return if @compte.rattache_a_structure_invitation?
 
     recherche_et_assigne_structure
     affilie_et_prepare_opcos
@@ -106,7 +104,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def structure_selectionnee
-    return @structure_invitation if @structure_invitation.present?
+    return @structure if @compte.rattache_a_structure_invitation?
     return nil if @structure.blank?
 
     structure_meme_siret = StructureLocale.pour_inscription(@structure.siret)
@@ -247,7 +245,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def structures_proposees
-    return Structure.where(id: @structure_invitation.id) if @structure_invitation.present?
+    return Structure.where(id: @structure.id) if @compte.rattache_a_structure_invitation?
 
     StructureLocale.pour_inscription(@structure.siret) if @structure.present?
   end

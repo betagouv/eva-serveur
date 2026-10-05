@@ -95,6 +95,43 @@ describe Compte do
     end
   end
 
+  describe "#rattache_a_structure_invitation?" do
+    let(:structure_invitation) { create(:structure_locale) }
+    let(:compte) do
+      create(:compte, structure: nil, etape_inscription: "assignation_structure")
+    end
+
+    before do
+      create(:invitation, :acceptee, compte: compte, structure: structure_invitation,
+             invitant: create(:compte_admin))
+    end
+
+    it "retourne vrai lorsque le compte est rattaché à la structure de son invitation" do
+      compte.update!(structure: structure_invitation)
+      expect(compte).to be_rattache_a_structure_invitation
+    end
+
+    it "retourne false lorsque le compte est rattaché à une autre structure" do
+      compte.update!(structure: create(:structure_locale))
+      expect(compte).not_to be_rattache_a_structure_invitation
+    end
+
+    it "retourne false lorsque le compte n'est rattaché à aucune structure" do
+      expect(compte).not_to be_rattache_a_structure_invitation
+    end
+
+    it "ignore une structure assignée sans être enregistrée" do
+      compte.structure = structure_invitation
+      expect(compte).not_to be_rattache_a_structure_invitation
+    end
+
+    it "retourne false sans invitation acceptée" do
+      Invitation.update_all(statut: "annulee")
+      compte.update!(structure: structure_invitation)
+      expect(compte).not_to be_rattache_a_structure_invitation
+    end
+  end
+
   it do
     expect(described_class.new(email: "pepa@france5.fr").display_name)
       .to eql("pepa@france5.fr")

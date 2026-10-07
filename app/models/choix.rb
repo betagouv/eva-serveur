@@ -16,7 +16,7 @@ class Choix < ApplicationRecord
   acts_as_list scope: :question_id
 
   def as_json(_options = nil)
-    slice(:id, :intitule, :type_choix, :nom_technique)
+    slice(:id, :intitule, :type_choix, :nom_technique, :score)
   end
 
   def audio_type

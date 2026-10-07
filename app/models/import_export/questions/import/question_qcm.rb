@@ -24,6 +24,7 @@ module ImportExport
             nom_technique: data["nom_technique"],
             type_choix: data["type_choix"]
           )
+          choix.update!(score: data["score"])
           attache_fichier(choix.audio, data["audio_url"], data["nom_technique"])
           attache_fichier(choix.illustration, data["illustration_url"], data["nom_technique"])
         end

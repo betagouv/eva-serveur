@@ -5,7 +5,8 @@ fr:
         created_at: Crée le
         updated_at: Mis à jour le
         intitule: Intitulé
-        type_choix: Bon/Mauvais/Abstention?
+        type_choix: Qualité de ce choix
+        score: Score
         position_client: Position de la proposition
         nom_technique: Nom technique
     errors:

@@ -6,7 +6,7 @@ ActiveAdmin.register QuestionQcm do
                 :supprimer_audio_intitule,
                 :demarrage_audio_modalite_reponse,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne,
-                choix_attributes: %i[id intitule audio type_choix _destroy nom_technique],
+                choix_attributes: %i[id intitule audio type_choix score _destroy nom_technique],
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle
@@ -44,7 +44,9 @@ ActiveAdmin.register QuestionQcm do
 
   controller do
     def find_resource
-      scoped_collection.includes(choix: :audio_attachment).where(id: params[:id]).first!
+      collection = scoped_collection
+      collection = collection.includes(choix: :audio_attachment) if action_name == "show"
+      collection.where(id: params[:id]).first!
     end
 
     def set_question

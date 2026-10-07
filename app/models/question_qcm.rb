@@ -62,7 +62,7 @@ class QuestionQcm < Question
   def question_choix
     choix.map do |choix|
       audio_url = cdn_for(choix.audio) if choix&.audio&.attached?
-      choix.slice(:id, :nom_technique, :intitule, :type_choix, :position).merge(
+      choix.slice(:id, :nom_technique, :intitule, :type_choix, :score, :position).merge(
         "audio_url" => audio_url
       )
     end

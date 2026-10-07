@@ -103,6 +103,22 @@ describe 'Admin - Question QCM', type: :feature do
     end
   end
 
+  describe 'affichage' do
+    let!(:question) { create :question_qcm }
+
+    before do
+      create :choix, :bon, question_id: question.id, intitule: 'Oui', score: 7
+      visit admin_question_qcm_path(question)
+    end
+
+    it 'affiche le score des choix' do
+      within('.panel', text: 'Choix') do
+        expect(page).to have_content 'Score'
+        expect(page).to have_content '7'
+      end
+    end
+  end
+
   describe 'modification' do
     let!(:question) do
       create :question_qcm,
@@ -121,6 +137,20 @@ describe 'Admin - Question QCM', type: :feature do
 
     let!(:consigne) do
       create :transcription, :avec_audio, question_id: question.id, categorie: :consigne
+    end
+
+    context "quand l'admin renseigne le score d'un choix" do
+      let!(:choix) { create :choix, :bon, question_id: question.id }
+
+      before do
+        visit edit_admin_question_qcm_path(question)
+        fill_in :question_qcm_choix_attributes_0_score, with: '3'
+      end
+
+      it 'enregistre le score' do
+        click_on 'Enregistrer'
+        expect(choix.reload.score).to eq 3
+      end
     end
 
     context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do

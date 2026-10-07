@@ -38,6 +38,7 @@ panel "Choix" do
   reorderable_table_for question_qcm.choix do
     column :intitule
     column :type_choix
+    column :score, class: "text-right"
     column :audio do |transcription|
       tag_audio(transcription)
     end

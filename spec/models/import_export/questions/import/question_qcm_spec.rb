@@ -23,7 +23,7 @@ describe ImportExport::Questions::Import::QuestionQcm do
     expect(choix1.intitule).to eq 'Choix1'
     expect(choix1.nom_technique).to eq 'Choix1'
     expect(choix1.type_choix).to eq 'bon'
-    expect(choix1.score).to eq 2
+    expect(choix1.score).to eq('cout' => 3, 'strategies' => 0, 'numerique' => 2)
     expect(choix1.audio.attached?).to be true
     expect(choix1.illustration.attached?).to be true
     choix2 = choix.last

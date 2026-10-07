@@ -61,7 +61,8 @@ describe QuestionQcm, type: :model do
     it 'serialise les champs' do
       intitule = create(:transcription, :avec_audio, question_id: question_qcm.id,
                                                      ecrit: 'Mon Intitulé')
-      choix = create(:choix, :bon, :avec_audio, question_id: question_qcm.id, score: 2)
+      choix = create(:choix, :bon, :avec_audio, question_id: question_qcm.id,
+                                                score: { 'risques' => 2 })
 
       json = question_qcm.as_json
       expect(json.keys)
@@ -79,7 +80,7 @@ describe QuestionQcm, type: :model do
       expect(json['choix'][0]['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                                      choix.audio
                                                    ))
-      expect(json['choix'][0]['score']).to eq(2)
+      expect(json['choix'][0]['score']).to eq('risques' => 2)
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
     end
   end

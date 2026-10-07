@@ -33,6 +33,31 @@ RSpec.describe Choix, type: :model do
       expect(choix.audio).not_to be_attached
     end
 
+    it 'accepte un score saisi en JSON' do
+      choix.score = '{"cout": 3, "numerique": 2}'
+      expect(choix.valid?).to be(true)
+      expect(choix.score).to eq('cout' => 3, 'numerique' => 2)
+    end
+
+    it 'vide le score quand la saisie est vide' do
+      choix.score = ''
+      expect(choix.valid?).to be(true)
+      expect(choix.score).to be_nil
+    end
+
+    it "refuse un score qui n'est pas un objet JSON" do
+      [ 'risques: 3', '3' ].each do |saisie|
+        choix.score = saisie
+        expect(choix.valid?).to be(false)
+        expect(choix.errors[:score]).to include("n'est pas un objet JSON valide")
+      end
+    end
+
+    it 'conserve la saisie invalide pour la réafficher' do
+      choix.score = 'risques: 3'
+      expect(choix.score_json).to eq 'risques: 3'
+    end
+
     it 'valide un audio de type mp3' do
       choix.audio.attach(io: Rails.root.join('spec/support/alcoolique.mp3').open,
                          filename: 'alcoolique.mp3')

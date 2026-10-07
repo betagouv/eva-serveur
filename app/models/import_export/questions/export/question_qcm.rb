@@ -17,7 +17,7 @@ module ImportExport
           columns.each_with_index do |col, i|
             colonne = col_debut + (index * columns.size) + i
             @onglet.set_valeur(0, colonne, "choix_#{index + 1}_#{col}")
-            @onglet.set_valeur(@ligne, colonne, choix.send(col))
+            @onglet.set_valeur(@ligne, colonne, choix.send(col == "score" ? :score_json : col))
           end
         end
       end

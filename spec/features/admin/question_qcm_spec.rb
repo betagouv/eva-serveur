@@ -107,14 +107,15 @@ describe 'Admin - Question QCM', type: :feature do
     let!(:question) { create :question_qcm }
 
     before do
-      create :choix, :bon, question_id: question.id, intitule: 'Oui', score: 7
+      create :choix, :bon, question_id: question.id, intitule: 'Oui',
+                            score: { 'risques' => 7 }
       visit admin_question_qcm_path(question)
     end
 
     it 'affiche le score des choix' do
       within('.panel', text: 'Choix') do
         expect(page).to have_content 'Score'
-        expect(page).to have_content '7'
+        expect(page).to have_content '{"risques":7}'
       end
     end
   end
@@ -140,16 +141,28 @@ describe 'Admin - Question QCM', type: :feature do
     end
 
     context "quand l'admin renseigne le score d'un choix" do
-      let!(:choix) { create :choix, :bon, question_id: question.id }
+      let!(:choix) do
+        create :choix, :bon, question_id: question.id, score: { 'risques' => 1 }
+      end
 
-      before do
-        visit edit_admin_question_qcm_path(question)
-        fill_in :question_qcm_choix_attributes_0_score, with: '3'
+      before { visit edit_admin_question_qcm_path(question) }
+
+      it 'affiche le score actuel en JSON' do
+        expect(page).to have_field(:question_qcm_choix_attributes_0_score, with: '{"risques":1}')
       end
 
       it 'enregistre le score' do
+        fill_in :question_qcm_choix_attributes_0_score, with: '{"risques": 3}'
         click_on 'Enregistrer'
-        expect(choix.reload.score).to eq 3
+        expect(choix.reload.score).to eq('risques' => 3)
+      end
+
+      it "refuse un score qui n'est pas du JSON" do
+        fill_in :question_qcm_choix_attributes_0_score, with: 'risques: 3'
+        click_on 'Enregistrer'
+        expect(page).to have_content "n'est pas un objet JSON valide"
+        expect(page).to have_field(:question_qcm_choix_attributes_0_score, with: 'risques: 3')
+        expect(choix.reload.score).to eq('risques' => 1)
       end
     end
 

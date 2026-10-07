@@ -23,7 +23,7 @@ active_admin_form_for [ :admin, resource ] do |f|
                     input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(",") }
     c.input :nom_technique
     c.input :type_choix
-    c.input :score
+    c.input :score, as: :string, input_html: { value: c.object.score_json }
   end
 
   f.actions do

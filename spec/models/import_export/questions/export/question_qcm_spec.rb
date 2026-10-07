@@ -6,7 +6,7 @@ describe ImportExport::Questions::Export::QuestionQcm do
   let(:type) { 'QuestionQcm' }
   let(:question) { create(:question_qcm, nom_technique: 'N1Poa2') }
   let!(:reponse) do
-    create(:choix, :bon, :avec_illustration, question_id: question.id, score: 2)
+    create(:choix, :bon, :avec_illustration, question_id: question.id, score: { 'risques' => 2 })
   end
   let!(:reponse2) { create(:choix, :mauvais, :avec_illustration, question_id: question.id) }
 
@@ -31,7 +31,7 @@ describe ImportExport::Questions::Export::QuestionQcm do
     expect(ligne[10]).to eq(reponse.intitule)
     expect(ligne[11]).to eq(reponse.nom_technique)
     expect(ligne[12]).to eq(reponse.type_choix)
-    expect(ligne[13]).to eq(2)
+    expect(ligne[13]).to eq('{"risques":2}')
     expect(ligne[14]).to eq(reponse.audio_url)
     expect(ligne[15]).to eq(reponse.illustration_url)
     expect(ligne[16]).to eq(reponse2.intitule)

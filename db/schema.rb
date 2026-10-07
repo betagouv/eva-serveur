@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_07_150000) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_07_160000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -127,7 +127,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_07_150000) do
     t.uuid "question_id"
     t.string "nom_technique"
     t.integer "position_client"
-    t.integer "score"
+    t.jsonb "score"
     t.index ["nom_technique", "question_id"], name: "index_choix_on_nom_technique_and_question_id", unique: true
     t.index ["question_id"], name: "index_choix_on_question_id"
   end

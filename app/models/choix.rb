@@ -10,6 +10,7 @@ class Choix < ApplicationRecord
   has_one_attached :audio
 
   validate :audio_type
+  validate :score_objet_json
 
   AUDIOS_CONTENT_TYPES = [ "audio/mpeg", "audio/mp4" ].freeze
 
@@ -17,6 +18,25 @@ class Choix < ApplicationRecord
 
   def as_json(_options = nil)
     slice(:id, :intitule, :type_choix, :nom_technique, :score)
+  end
+
+  def score=(valeur)
+    @score_saisi_invalide = nil
+    valeur = valeur.presence && JSON.parse(valeur) if valeur.is_a?(String)
+    super
+  rescue JSON::ParserError
+    @score_saisi_invalide = valeur
+    super(nil)
+  end
+
+  def score_json
+    @score_saisi_invalide || score&.to_json
+  end
+
+  def score_objet_json
+    return unless @score_saisi_invalide || !(score.nil? || score.is_a?(Hash))
+
+    errors.add(:score, :invalid_json)
   end
 
   def audio_type

@@ -52,3 +52,7 @@ node_modules/
 .DS_Store
 
 *.pgsql
+
+.claude/worktrees/
+.claude/todos/
+.claude/settings.local.json

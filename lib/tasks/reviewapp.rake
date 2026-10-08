@@ -20,6 +20,17 @@ namespace :reviewapp do
     end
   end
 
+  desc "Vide entièrement la base de préproduction"
+  task videdb: :environment do |tache|
+    if ENV["APP"] != "eva-serveur-preprod"
+      abort "#{tache.name} ne doit être exécuté que sur eva-serveur-preprod"
+    end
+
+    connexion = ActiveRecord::Base.connection
+    tables = connexion.tables.map { |table| connexion.quote_table_name(table) }
+    connexion.execute("DROP TABLE #{tables.join(', ')} CASCADE") if tables.any?
+  end
+
   desc "init db"
   task initdb: :environment do |tache|
     interdit_en_production(tache)

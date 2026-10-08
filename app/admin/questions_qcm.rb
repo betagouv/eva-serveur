@@ -21,7 +21,7 @@ ActiveAdmin.register QuestionQcm do
   end
 
   action_item :exporter_question, only: :show do
-    link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
+    link_to "Exporter la question en XLS", export_xls_admin_question_path(params[:id])
   end
 
   index dsfr_table: proc { true } do
@@ -43,6 +43,8 @@ ActiveAdmin.register QuestionQcm do
   end
 
   controller do
+    include ExportQuestionsXls
+
     def find_resource
       collection = scoped_collection
       collection = collection.includes(choix: :audio_attachment) if action_name == "show"

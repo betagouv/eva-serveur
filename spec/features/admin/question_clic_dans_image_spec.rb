@@ -24,9 +24,7 @@ describe 'Admin - Question Clic dans Image', type: :feature do
     it "affiche le bouton d'export" do
       expect(page).to have_link 'Exporter la question en XLS'
       find(
-        "#action_items_sidebar_section a[href='#{admin_question_export_xls_path(
-          question_id: question.id
-        )}']"
+        "#action_items_sidebar_section a[href='#{export_xls_admin_question_path(question)}']"
       ).click
       expect(page.response_headers['Content-Type']).to eq 'application/vnd.ms-excel'
     end

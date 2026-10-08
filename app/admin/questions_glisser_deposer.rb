@@ -21,7 +21,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
   end
 
   action_item :exporter_question, only: :show do
-    link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
+    link_to "Exporter la question en XLS", export_xls_admin_question_path(params[:id])
   end
 
   index dsfr_table: proc { true } do
@@ -40,6 +40,8 @@ ActiveAdmin.register QuestionGlisserDeposer do
   end
 
   controller do
+    include ExportQuestionsXls
+
     def set_question
       @question = Question.includes(transcriptions: :audio_attachment).find(params[:id])
     end

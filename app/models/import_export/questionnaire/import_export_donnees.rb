@@ -12,8 +12,16 @@ module ImportExport
         {
           xls: export.to_xls,
           content_type: export.content_type_xls,
-          filename: export.nom_du_fichier(@type)
+          filename: export.nom_du_fichier(titre_fichier)
         }
+      end
+
+      private
+
+      def titre_fichier
+        return "questionnaires" unless @questionnaires.one?
+
+        "questionnaire-#{@questionnaires.first.nom_technique}"
       end
     end
   end

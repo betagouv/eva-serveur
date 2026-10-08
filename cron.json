@@ -1,0 +1,7 @@
+{
+  "jobs": [
+    {
+      "command": "0 5 * * 5 bin/reinitialise_preprod.sh"
+    }
+  ]
+}

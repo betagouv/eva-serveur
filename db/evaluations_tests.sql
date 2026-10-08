@@ -1259,7 +1259,8 @@ INSERT INTO public.comptes (email, encrypted_password, reset_password_token, res
 	('demo@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2024-10-02 14:45:37.771642', '2026-09-16 12:21:52.990768', 'conseiller', 'f80275a9-2f52-4784-bb1a-bbf0d2eda3ea', '7008f10c-c8a2-48ad-88c4-a13ca664805a', 1, 'Démo', 'Dominique', NULL, 1, '2024-10-02 14:45:57.7422', '2024-10-02 14:45:57.7422', '127.0.0.1', '127.0.0.1', NULL, 'tx_TD8v7E-4uwydWq4Ty', '2024-10-02 14:45:39.678162', '2024-10-02 14:45:37.771698', NULL, NULL, true, true, NULL, true, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
 	('didier.conseiller@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2026-10-05 12:00:00', '2026-10-05 12:00:00', 'conseiller', 'a114389e-cb07-40a2-acb3-efb011c28a66', '7008f10c-c8a2-48ad-88c4-a13ca664805a', 1, 'Conseiller', 'Didier', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2026-10-05 12:00:00', '2026-10-05 12:00:00', NULL, NULL, true, true, NULL, true, NULL, NULL, NULL, NULL, 'complet', NULL, false, NULL),
   ('rachel.rh@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, '2026-04-30 10:58:36.423159', NULL, '2026-03-23 16:50:32.758975', '2026-08-25 12:27:06.700039', 'conseiller', 'f4364e87-8d57-4ee4-bc3b-5eeace68a7d8', 'd9d61be1-0bd7-4df0-b642-2d44f698aa9a', '1', 'rh', 'Rachel', NULL, '118', '2026-08-25 12:27:06.697683', '2026-08-11 12:32:44.144319', NULL, NULL, NULL, NULL, '2026-03-23 16:51:44.754294', '2026-03-23 16:50:32.759209', NULL, NULL, 'false', 'true', NULL, 'true', NULL, '53132862300149', '', NULL, 'complet', 'Eva: bénéficiaires', 'false', NULL),
-	('boss@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2026-04-20 16:48:57.122501', '2026-04-20 16:50:24.776712', 'admin', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'd9d61be1-0bd7-4df0-b642-2d44f698aa9a', '1', 'entreprise', 'boss', NULL, '1', '2026-04-20 16:48:57.171838', '2026-04-20 16:48:57.171838', NULL, NULL, NULL, NULL, '2026-04-20 16:48:57.122577', '2026-04-20 16:48:57.122577', NULL, NULL, 'true', 'true', NULL, 'true', NULL, '10373572600012', '', NULL, 'complet', 'EVAPRO', 'false', NULL);
+	('boss@eva.anlci.gouv.fr', '------------------------------------------------------------', NULL, NULL, NULL, '2026-04-20 16:48:57.122501', '2026-04-20 16:50:24.776712', 'admin', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'd9d61be1-0bd7-4df0-b642-2d44f698aa9a', '1', 'entreprise', 'boss', NULL, '1', '2026-04-20 16:48:57.171838', '2026-04-20 16:48:57.171838', NULL, NULL, NULL, NULL, '2026-04-20 16:48:57.122577', '2026-04-20 16:48:57.122577', NULL, NULL, 'true', 'true', NULL, 'true', NULL, '10373572600012', '', NULL, 'complet', 'EVAPRO', 'false', NULL),
+	('benoit.btp@entreprise-btp.com', '------------------------------------------------------------', NULL, NULL, NULL, '2026-10-08 14:00:00', '2026-10-08 14:00:00', 'admin', '796ae46b-cd4a-4e9e-a8d9-0c6fdc5d5982', 'c8aeb0cf-2e99-4edc-8f55-1231da12a688', '1', 'BTP', 'Benoit', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, '2026-10-08 14:00:00', '2026-10-08 14:00:00', NULL, NULL, 'true', 'true', NULL, 'true', NULL, '83868958600017', '', NULL, 'complet', 'EVAPRO', 'false', NULL);
 
 
 --
@@ -84054,7 +84055,7 @@ INSERT INTO public.opcos (id, nom, financeur, created_at, updated_at, idcc, tele
 	('7cf51533-e810-48f5-9275-a47c9eca221a', 'ANFH', 'true', '2025-10-10 08:55:42', '2026-04-15 07:20:40', '{}', '01 44 75 68 00', 'https://www.anfh.fr', 'email@anfh.fr', 'https://www.anfh.fr/contacts/', ''),
 	('e300a2a6-8262-40b7-bf7c-5476b3ba7a95', 'Aucun OPCO de rattachement', 'false', '2025-12-24 10:08:21', '2026-04-02 14:43:15', '{}', '', '', '', '', ''),
 	('8be3dacc-8535-4736-96cb-860f0802ac3b', 'CNFPT', 'false', '2026-02-09 10:57:28', '2026-04-02 14:43:32', '{}', '03 88 15 03 47 ', 'https://www.cnfpt.fr/rechercher-formation', 'laure.humbert+testtableau@captive.fr', '', ''),
-	('02376289-5f56-4e49-9786-1eb3b1f695ef', 'Constructys', 'true', '2025-10-09 15:16:31', '2026-04-22 13:08:37', '{1596,1597,1702,1947,2420,2609,2614,3212,3216}', '01 82 83 95 00', 'https://www.constructys.fr/', 'iledefrance@constructys.fr', 'eva.anlci.gouv.fr/contacts-constructys', 'https://www.constructys.fr/constructys-provence-alpes-cote-azur-corse/presentation/'),
+	('02376289-5f56-4e49-9786-1eb3b1f695ef', 'CONSTRUCTYS (BTP)', 'true', '2025-11-27 13:39:54.877', '2026-04-28 14:04:40.772', '{0627,0749,0771,1049,1596,1597,1843,2328,2389,2420,2609,2870,3107,3128,3144,3204,5633,1702,2614,3212}', '0 800 940 999 (du lundi au vendredi, 8h00-12h30 / 13h30-17h00)', 'https://www.constructys.fr/contacts/', '', '', 'https://eva.anlci.gouv.fr/ods-constructys-btp'),
 	('e73ee497-5d03-4200-830b-07ecbe72b40d', 'OCAPIAT', 'false', '2025-10-10 08:53:13', '2026-03-27 13:27:24', '{0112,0200,0493,1077,1396,1405,1513,1534,1586,1659,1747,1930,1938,1987,2075,2494,2728,3109,3203,5619,7001,7002,7003,7004,7005,7006,7007,7008,7009,7010,7012,7013,7014,7017,7018,7019,7020,7021,7023,7501,7502,7503,7508,7513,7514,7515,8115,8435}', '0102030405', 'https://www.ocapiat.fr', 'contact@ocapiat.fr', '', ''),
 	('25c31e0e-7ae0-4cb2-941e-ff0dd4222ed0', 'OPCO 2i', 'false', '2025-10-10 08:53:53', '2026-04-02 10:26:38', '{0018,0044,0045,0083,0087,0135,0176,0207,0211,0247,0292,0303,0363,0489,0567,0637,0669,0700,0707,0715,0802,0832,0833,0925,0998,1044,1170,1256,1388,1411,1423,1492,1495,1555,1558,1580,1607,1821,2089,2528,3224,3227,5001,N.A.}', '01 73 29 42 00', 'https://www.opco2i.fr', '', '', ''),
 	('d00b2d34-8aad-49c6-b2ed-3b836821f725', 'OPCO ATLAS', 'false', '2025-10-10 08:50:21', '2026-07-11 12:16:05', '{0438,0478,0653,0787,1468,1486,1672,1679,1801,2120,2230,2247,2335,2357,2543,2622,2931,3210,3213,5005}', '01 02 03 04 05', 'https://www.opco-atlas.fr/', 'contact-atlas@gmail.com', 'https://www.opco-atlas.fr/contact.html', 'https://www.opco-atlas.fr/boite-outils.html'),
@@ -84074,7 +84075,8 @@ INSERT INTO public.structures (id, nom, code_postal, created_at, updated_at, typ
 	('caacab3d-f925-47b4-bf0b-f5f4ccc93472', 'ANLCI', '75012', '2021-02-26 10:21:05.452499', '2023-02-21 13:50:20.337018', 'autre', 'Île-de-France', '2021-12-01 17:18:57.093046', 'StructureLocale', NULL, '/', NULL, false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
 	('4635540f-0f4b-48f0-ae1d-5d2f8d997af6', 'Structure exemple', '67200', '2020-03-30 14:52:14.518871', '2023-02-21 17:01:59.902001', 'mission_locale', 'Grand Est', '2021-12-01 17:18:57.087737', 'StructureLocale', NULL, '/', NULL, false, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
 	('7008f10c-c8a2-48ad-88c4-a13ca664805a', 'Structure démo ANLCI', '69003', '2024-10-02 14:43:25.381202', '2024-10-02 14:43:25.381202', 'autre', 'Auvergne-Rhône-Alpes', NULL, 'StructureLocale', NULL, '/', '', true, 'Eva: bénéficiaires', NULL, NULL, NULL, '{}', NULL, NULL, NULL, NULL, NULL, NULL),
-	('d9d61be1-0bd7-4df0-b642-2d44f698aa9a', 'entreprise', '75017', '2026-04-20 16:50:13.58797', '2026-04-20 16:50:13.58797', 'entreprise', 'Île-de-France', NULL, 'StructureLocale', NULL, '/', '10373572600012', 'true', 'EVAPRO', 'true', '2026-04-20 16:50:13.469507', '73.11Z', '{}', 'CAPTIVE', '6 RUE D''ARMAILLE 75017 PARIS', '9f51af56-9a72-4e36-9691-79d7e38206fe', NULL, NULL, '75056');
+	('d9d61be1-0bd7-4df0-b642-2d44f698aa9a', 'entreprise', '75017', '2026-04-20 16:50:13.58797', '2026-04-20 16:50:13.58797', 'entreprise', 'Île-de-France', NULL, 'StructureLocale', NULL, '/', '10373572600012', 'true', 'EVAPRO', 'true', '2026-04-20 16:50:13.469507', '73.11Z', '{}', 'CAPTIVE', '6 RUE D''ARMAILLE 75017 PARIS', '9f51af56-9a72-4e36-9691-79d7e38206fe', NULL, NULL, '75056'),
+	('c8aeb0cf-2e99-4edc-8f55-1231da12a688', 'Entreprise BTP', '75009', '2026-10-08 14:00:00', '2026-10-08 14:00:00', 'entreprise', 'Île-de-France', NULL, 'StructureLocale', NULL, '/', '83868958600017', 'true', 'EVAPRO', 'true', '2026-10-08 14:00:00', '43.91B', '{1597,2420,2609}', 'TOITURE PARISIENNE', '42 RUE DE MAUBEUGE 75009 PARIS', '02376289-5f56-4e49-9786-1eb3b1f695ef', NULL, NULL, '75056');
 
 
 --
@@ -85561,7 +85563,6 @@ INSERT INTO public.parcours_type (id, libelle, nom_technique, duree_moyenne, cre
 	('7dc3b30f-96b5-48a4-a7ba-5e230c14ee28', 'EVAPRO - Diagnostic AFDAS', 'eva-entreprise-afdas', '30 min', '2026-02-25 15:49:28', '2026-03-10 16:06:02', 'Questionnaire personnalisé pour les structures qui dépendent de l''AFDAS.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('c2d142c4-6937-4437-83fc-f3683ffb7dce', 'EVAPRO - Diagnostic ANFH', 'eva-entreprise-anfh', '30 min', '2026-02-25 15:51:33', '2026-03-10 16:10:23', 'Questionnaire personnalisé pour les structures qui dépendent de l''ANFH.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('e428b9cb-b1bc-4feb-b005-43a915743e78', 'EVAPRO - Diagnostic CONSTRUCTYS BTP', 'eva-entreprise-constructys__BTP', '30 min', '2026-02-25 15:53:29', '2026-03-10 15:41:01', 'Questionnaire personnalisé pour les structures qui dépendent de CONSTRUCTYS (branche BTP).', 'diagnostic_entreprise', NULL, 'false', NULL),
-	('30af67c1-3b04-4a70-b0b6-f9ec6d349092', 'EVAPRO - Diagnostic CONSTRUCTYS NMC', 'eva-entreprise-constructys__NMC', '30 min', '2026-02-25 15:54:41', '2026-03-10 15:41:15', 'Questionnaire personnalisé pour les structures qui dépendent de CONSTRUCTYS (branche NMC).', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('23124c1e-acd4-4213-8800-5fe14ae4fddd', 'EVAPRO - Diagnostic OPCO EP', 'eva-entreprise-opcoep', '30 min', '2026-02-25 15:56:00', '2026-03-10 15:50:58', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO EP.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('2be24743-069a-412d-9ce1-78d1e51520b0', 'EVAPRO - Diagnostic OPCO MOBILITÉS', 'eva-entreprise-opcomobilites', '30 min', '2026-02-25 15:57:08', '2026-03-10 16:03:27', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO MOBILITÉS.', 'diagnostic_entreprise', NULL, 'false', NULL),
 	('fd2392b3-0e98-4cf7-ad97-d1acafba29f9', 'EVAPRO - Diagnostic OPCO SANTÉ', 'eva-entreprise-opcosante', '30 min', '2026-02-25 15:58:11', '2026-07-07 15:00:57', 'Questionnaire personnalisé pour les structures qui dépendent de l''OPCO Santé.', 'diagnostic_entreprise', NULL, 'false', NULL);
@@ -85578,7 +85579,6 @@ INSERT INTO public.opcos_parcours_type (id, opco_id, parcours_type_id, created_a
 	('4ad33bbd-8e33-4973-af1f-d519cfd8e519', 'e300a2a6-8262-40b7-bf7c-5476b3ba7a95', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
 	('866c7504-240b-4c63-9993-6ee6f5903fe8', '8be3dacc-8535-4736-96cb-860f0802ac3b', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
 	('0c926319-c7fc-4b38-9b24-201371769284', '02376289-5f56-4e49-9786-1eb3b1f695ef', 'e428b9cb-b1bc-4feb-b005-43a915743e78', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
-	('3dfe7260-8409-4f8a-b57c-0c02a92e31e8', '02376289-5f56-4e49-9786-1eb3b1f695ef', '30af67c1-3b04-4a70-b0b6-f9ec6d349092', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
 	('619c3292-1688-47b2-84d2-f3b51734f155', 'e73ee497-5d03-4200-830b-07ecbe72b40d', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
 	('ec09df52-d06f-4b8f-a8af-d68925265271', '25c31e0e-7ae0-4cb2-941e-ff0dd4222ed0', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
 	('75d922a1-e612-4e65-b1cf-8e727f52b00d', 'd00b2d34-8aad-49c6-b2ed-3b836821f725', 'addf385f-0484-4642-bc09-e82d4a11d601', '2026-09-16 18:00:00', '2026-09-16 18:00:00'),
@@ -85594,7 +85594,8 @@ INSERT INTO public.opcos_parcours_type (id, opco_id, parcours_type_id, created_a
 --
 
 INSERT INTO public.campagnes (libelle, code, created_at, updated_at, id, compte_id, affiche_competences_fortes, parcours_type_id, anonymise_le, deleted_at, active, privee) VALUES
-	('Diagnostic des risques : entreprise - Diagnostic evapro', 'STE75017', '2026-04-20 16:50:13.621768', '2026-04-20 16:50:13.621768', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'true', 'addf385f-0484-4642-bc09-e82d4a11d601', NULL, NULL, 'true', 'false');
+	('Diagnostic des risques : entreprise - Diagnostic evapro', 'STE75017', '2026-04-20 16:50:13.621768', '2026-04-20 16:50:13.621768', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', '5e21f714-463e-4a4f-bc16-e77d6b24a53f', 'true', 'addf385f-0484-4642-bc09-e82d4a11d601', NULL, NULL, 'true', 'false'),
+	('Diagnostic : Entreprise BTP', 'BTP75009', '2026-10-08 14:00:00', '2026-10-08 14:00:00', 'cca8ba2c-33a5-4e79-b2da-2ec9b915530c', '796ae46b-cd4a-4e9e-a8d9-0c6fdc5d5982', 'true', 'e428b9cb-b1bc-4feb-b005-43a915743e78', NULL, NULL, 'true', 'false');
 
 
 --
@@ -85614,6 +85615,9 @@ INSERT INTO public.questionnaires (libelle, created_at, updated_at, id, nom_tech
 	('EVAPRO Q1 RISQUES', '2026-01-28 15:33:34.698274', '2026-01-28 15:33:34.698274', '42495975-2921-4442-827b-1864d26391ef', 'evapro-Q1-risques', NULL),
 	('EVAPRO Q2 IMPACTS', '2025-09-22 10:12:03.810231', '2026-01-28 15:36:01.363556', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'eva-entreprise-impact', NULL);
 
+INSERT INTO public.questionnaires (libelle, created_at, updated_at, id, nom_technique, deleted_at) VALUES
+	('EVAPRO Q2 IMPACTS - CONSTRUCTYS BTP', '2026-10-08 12:06:59.16748', '2026-10-08 12:06:59.16748', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'evapro-Q2-constructysbtp', NULL);
+
 
 --
 -- Data for Name: situations; Type: TABLE DATA; Schema: public; Owner: -
@@ -85630,7 +85634,9 @@ INSERT INTO public.situations (libelle, nom_technique, created_at, updated_at, i
 
 INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
 	('1', '2026-04-20 16:50:13.629866', '2026-04-20 16:50:13.629866', '365646d9-a83c-4159-8f9c-7075bf274ec8', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', NULL, NULL),
-	('2', '2026-04-20 16:50:13.632517', '2026-04-20 16:50:13.632517', 'c4968fab-f6a6-48d7-b64e-b11325a0147f', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', NULL, NULL);
+	('2', '2026-04-20 16:50:13.632517', '2026-04-20 16:50:13.632517', 'c4968fab-f6a6-48d7-b64e-b11325a0147f', 'c2ac5ee3-870e-4057-a96f-25fc7b258a43', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', NULL, NULL),
+	('1', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '40e601a1-dfb4-4d3c-b9c2-ba800361bbdc', 'cca8ba2c-33a5-4e79-b2da-2ec9b915530c', '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', NULL, NULL),
+	('2', '2026-10-08 14:00:00', '2026-10-08 14:00:00', 'ea144871-4135-4662-96a5-a82e4586d412', 'cca8ba2c-33a5-4e79-b2da-2ec9b915530c', 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', NULL, NULL);
 INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
 	(1, '2026-02-25 15:47:16', '2026-02-25 15:47:16', 'a33d4768-17c3-4a30-a04d-350f3e5c0cbe', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', 'addf385f-0484-4642-bc09-e82d4a11d601', NULL),
 	(2, '2026-02-25 15:47:16', '2026-02-25 15:47:16', '0171d83d-05c5-46d5-9936-4cc2f03feb59', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'addf385f-0484-4642-bc09-e82d4a11d601', NULL),
@@ -85639,9 +85645,7 @@ INSERT INTO public.situations_configurations ("position", created_at, updated_at
 	(1, '2026-02-25 15:51:33', '2026-02-25 15:51:33', 'ec2221dc-c5a7-40aa-a02f-d325ac6e8474', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', 'c2d142c4-6937-4437-83fc-f3683ffb7dce', NULL),
 	(2, '2026-02-25 15:51:33', '2026-02-25 15:51:33', '22dc92d6-a11a-475e-8874-13a51fd4a20f', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'c2d142c4-6937-4437-83fc-f3683ffb7dce', NULL),
 	(1, '2026-02-25 15:53:29', '2026-02-25 15:53:29', '540c2587-cbf1-4de6-86f0-1134556d02e9', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', 'e428b9cb-b1bc-4feb-b005-43a915743e78', NULL),
-	(2, '2026-02-25 15:53:29', '2026-02-25 15:53:29', '351800ba-4557-49df-9173-0fad9abb89d8', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', 'e428b9cb-b1bc-4feb-b005-43a915743e78', NULL),
-	(1, '2026-02-25 15:54:41', '2026-02-25 15:54:41', '5f8ac4c2-295e-4598-8165-15778f17be4e', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', '30af67c1-3b04-4a70-b0b6-f9ec6d349092', NULL),
-	(2, '2026-02-25 15:54:41', '2026-02-25 15:54:41', '293765dd-ef08-4342-8fcf-9b8062521d99', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', '30af67c1-3b04-4a70-b0b6-f9ec6d349092', NULL),
+	(2, '2026-02-25 15:53:29', '2026-10-08 14:00:00', '351800ba-4557-49df-9173-0fad9abb89d8', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'e428b9cb-b1bc-4feb-b005-43a915743e78', NULL),
 	(1, '2026-02-25 15:56:00', '2026-02-25 15:56:00', '98c1eb0b-02a0-4a86-b696-7a6cdcaa54c9', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', '23124c1e-acd4-4213-8800-5fe14ae4fddd', NULL),
 	(2, '2026-02-25 15:56:00', '2026-02-25 15:56:00', '077f78f9-3587-4b37-9c0e-1d95220e8a80', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '6ee95685-291e-4c75-a406-12f2e03f7a28', '23124c1e-acd4-4213-8800-5fe14ae4fddd', NULL),
 	(1, '2026-02-25 15:57:08', '2026-02-25 15:57:08', 'bcffda02-cdd7-4f33-9d6f-cbb0b8b2546b', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', '2be24743-069a-412d-9ce1-78d1e51520b0', NULL),
@@ -85704,32 +85708,60 @@ INSERT INTO public.questions (created_at, updated_at, type, description, reponse
 
 INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
 	('2025-09-24 14:47:56.137473', '2025-09-24 14:58:22.312546', 'QuestionQcm', NULL, NULL, NULL, 'Eva RH - Q20', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', '0', 'Q1PG20', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:59:40.822344', '2026-02-09 15:14:34.312602', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ05', '77346421-fe52-4202-b9a6-85d9ff05a3ea', '0', 'Q2SQ05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:01:13.901099', '2026-02-09 15:14:34.371922', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ07', '4389eda1-973d-42b0-bfcd-0344d8659106', '0', 'Q2SQ07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:16:54.869522', '2026-02-09 15:14:34.045278', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC01', '727257e5-5738-4917-a1c0-54cb14807530', '0', 'Q2PC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:17:55.798529', '2026-02-09 15:14:34.074433', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC02', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', '0', 'Q2PC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:18:46.251399', '2026-02-09 15:14:34.097637', 'QuestionQcm', NULL, NULL, NULL, 'Q2PC03', '1a4074c1-5699-4842-98d4-141d566d12e1', '0', 'Q2PC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:21:48.33651', '2026-02-09 15:14:34.172674', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO03', '4b947690-2b17-4e37-ace4-1070a01f1170', '0', 'Q2AO03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:26:42.630255', '2026-02-09 15:14:34.195466', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO04', '1d510939-ec68-494c-87c7-a96ae726a766', '0', 'Q2AO04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:27:38.684956', '2026-02-09 15:14:34.218159', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ01', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', '0', 'Q2SQ01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:28:23.545142', '2026-02-09 15:14:34.240773', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ02', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', '0', 'Q2SQ02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+	('2025-09-25 14:59:40.822344', '2026-02-09 15:14:34.312602', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ05', '77346421-fe52-4202-b9a6-85d9ff05a3ea', '0', 'Q2SQ05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:01:13.901099', '2026-02-09 15:14:34.371922', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ07', '4389eda1-973d-42b0-bfcd-0344d8659106', '0', 'Q2SQ07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:16:54.869522', '2026-02-09 15:14:34.045278', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC01', '727257e5-5738-4917-a1c0-54cb14807530', '0', 'Q2PC01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:17:55.798529', '2026-02-09 15:14:34.074433', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC02', '6a1af3c4-8548-4d80-97a3-3782e5f6f88d', '0', 'Q2PC02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:18:46.251399', '2026-02-09 15:14:34.097637', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC03', '1a4074c1-5699-4842-98d4-141d566d12e1', '0', 'Q2PC03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:21:48.33651', '2026-02-09 15:14:34.172674', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO03', '4b947690-2b17-4e37-ace4-1070a01f1170', '0', 'Q2AO03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:26:42.630255', '2026-02-09 15:14:34.195466', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO04', '1d510939-ec68-494c-87c7-a96ae726a766', '0', 'Q2AO04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:27:38.684956', '2026-02-09 15:14:34.218159', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ01', '5fc73f8f-5cbc-4140-8b6c-48f01a06f955', '0', 'Q2SQ01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:28:23.545142', '2026-02-09 15:14:34.240773', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ02', '6f07aa5a-0a3f-4610-b2d8-a39d2122e404', '0', 'Q2SQ02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
 
 INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
-	('2025-09-25 14:19:51.213391', '2026-02-09 15:14:34.120571', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO01', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', '0', 'Q2AO01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:20:50.409243', '2026-02-09 15:14:34.143442', 'QuestionQcm', NULL, NULL, NULL, 'Q2AO02', '9bcde02d-582a-4443-9eb1-994293765103', '0', 'Q2AO02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:05:53.010849', '2026-02-09 15:14:34.474906', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP04', '39a0b25c-ace7-44e1-918c-28e78705ff1c', '0', 'Q2MP04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:06:52.196116', '2026-02-09 15:14:34.50766', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP05', 'c90828a1-6d94-4357-9e78-613ce70ab301', '0', 'Q2MP05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:08:16.369885', '2026-02-09 15:14:34.559352', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP07', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', '0', 'Q2MP07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:09:04.065986', '2026-02-09 15:14:34.583484', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP08', '994e25f6-b457-4b26-a8ae-cdcb891d8441', '0', 'Q2MP08', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:56:23.507674', '2026-02-09 15:14:34.264268', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ03', 'e3d4958b-8756-4cd9-84cf-5790375cf934', '0', 'Q2SQ03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:00:26.64501', '2026-02-09 15:14:34.347308', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ06', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', '0', 'Q2SQ06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:03:15.608956', '2026-02-09 15:14:34.396762', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP01', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', '0', 'Q2MP01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:04:12.671054', '2026-02-09 15:14:34.421111', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP02', '994dec60-d714-4634-b7f4-50674725e259', '0', 'Q2MP02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+	('2025-09-25 14:19:51.213391', '2026-02-09 15:14:34.120571', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO01', '28c8f89c-a67d-487d-9f9b-6af6abbe24e6', '0', 'Q2AO01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:20:50.409243', '2026-02-09 15:14:34.143442', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO02', '9bcde02d-582a-4443-9eb1-994293765103', '0', 'Q2AO02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:05:53.010849', '2026-02-09 15:14:34.474906', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP04', '39a0b25c-ace7-44e1-918c-28e78705ff1c', '0', 'Q2MP04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:06:52.196116', '2026-02-09 15:14:34.50766', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP05', 'c90828a1-6d94-4357-9e78-613ce70ab301', '0', 'Q2MP05', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:08:16.369885', '2026-02-09 15:14:34.559352', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP07', 'f707b9e3-fc32-46c2-b835-1dcd3e8c33e8', '0', 'Q2MP07', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:09:04.065986', '2026-02-09 15:14:34.583484', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP08', '994e25f6-b457-4b26-a8ae-cdcb891d8441', '0', 'Q2MP08', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:56:23.507674', '2026-02-09 15:14:34.264268', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ03', 'e3d4958b-8756-4cd9-84cf-5790375cf934', '0', 'Q2SQ03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:00:26.64501', '2026-02-09 15:14:34.347308', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ06', '1baba2c8-3c82-40e6-b20c-cedee4e2d5f0', '0', 'Q2SQ06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:03:15.608956', '2026-02-09 15:14:34.396762', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP01', '2fa103f1-30e4-4616-8e3a-0e3e8be8294d', '0', 'Q2MP01', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:04:12.671054', '2026-02-09 15:14:34.421111', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP02', '994dec60-d714-4634-b7f4-50674725e259', '0', 'Q2MP02', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
 
 INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
-	('2025-09-25 15:04:56.110807', '2026-02-09 15:14:34.447528', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP03', '4b963f65-e208-4ed3-a745-dc05b0d86b85', '0', 'Q2MP03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 15:07:35.341401', '2026-02-09 15:14:34.534633', 'QuestionQcm', NULL, NULL, NULL, 'Q2MP06', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', '0', 'Q2MP06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
-	('2025-09-25 14:58:54.332023', '2026-02-09 15:14:34.287655', 'QuestionQcm', NULL, NULL, NULL, 'Q2SQ04', 'afff1309-7bb6-49db-a1ed-5132914c3f69', '0', 'Q2SQ04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+	('2025-09-25 15:04:56.110807', '2026-02-09 15:14:34.447528', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP03', '4b963f65-e208-4ed3-a745-dc05b0d86b85', '0', 'Q2MP03', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 15:07:35.341401', '2026-02-09 15:14:34.534633', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP06', '928f05dd-d8ec-4c16-9796-a0a1197bdddb', '0', 'Q2MP06', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2025-09-25 14:58:54.332023', '2026-02-09 15:14:34.287655', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ04', 'afff1309-7bb6-49db-a1ed-5132914c3f69', '0', 'Q2SQ04', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2026-10-08 12:06:28.499531', '2026-10-08 12:06:28.499531', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC01BTP', '8d6d6e64-c5d8-458a-934f-83d67e450696', '0', 'Q2PC01__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.555015', '2026-10-08 12:06:28.555015', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC02BTP', '5caf5e60-ce70-480d-830f-450f51fa4622', '0', 'Q2PC02__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.577779', '2026-10-08 12:06:28.577779', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2PC03BTP', '7af7728d-47d9-4a91-ab9d-a338f2e77506', '0', 'Q2PC03__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.601555', '2026-10-08 12:06:28.601555', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO01BTP', '5f4085cf-5b1b-4962-b216-0dc359a752f4', '0', 'Q2AO01__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.62104', '2026-10-08 12:06:28.62104', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO02BTP', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', '0', 'Q2AO02__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.637408', '2026-10-08 12:06:28.637408', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO03BTP', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', '0', 'Q2AO03__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.653931', '2026-10-08 12:06:28.653931', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2AO04BTP', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', '0', 'Q2AO04__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.671162', '2026-10-08 12:06:28.671162', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ01BTP', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', '0', 'Q2SQ01__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.688695', '2026-10-08 12:06:28.688695', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ02BTP', '5ed24e55-768e-48ed-a01c-aca50493c89a', '0', 'Q2SQ02__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.70403', '2026-10-08 12:06:28.70403', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ03BTP', '0e3c815a-c781-410c-88d9-27a9a5afd413', '0', 'Q2SQ03__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2026-10-08 12:06:28.717006', '2026-10-08 12:06:28.717006', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ04BTP', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', '0', 'Q2SQ04__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.733201', '2026-10-08 12:06:28.733201', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ05BTP', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', '0', 'Q2SQ05__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.747072', '2026-10-08 12:06:28.747072', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ06BTP', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', '0', 'Q2SQ06__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.76031', '2026-10-08 12:06:28.76031', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2SQ07BTP', '2ed9b1aa-60bf-4914-b930-f156903ec78e', '0', 'Q2SQ07__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.773017', '2026-10-08 12:06:28.773017', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP01BTP', 'e655ff2b-28c6-435f-8902-ef027feceaa2', '0', 'Q2MP01__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.786167', '2026-10-08 12:06:28.786167', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP02BTP', '73627aca-8e20-4f15-a264-fb7e8bb762b5', '0', 'Q2MP02__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.798856', '2026-10-08 12:06:28.798856', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP03BTP', '05191706-cc7f-4083-8432-2f99c500d936', '0', 'Q2MP03__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.811861', '2026-10-08 12:06:28.811861', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP04BTP', '2b737b8f-c334-4a21-ab1d-9304fc873f15', '0', 'Q2MP04__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.823977', '2026-10-08 12:06:28.823977', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP05BTP', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', '0', 'Q2MP05__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.838384', '2026-10-08 12:06:28.838384', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP06BTP', 'b6003b44-23cf-4048-911d-97f197d004d3', '0', 'Q2MP06__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
+
+INSERT INTO public.questions (created_at, updated_at, type, description, reponse_placeholder, suffix_reponse, libelle, id, type_qcm, nom_technique, deleted_at, type_saisie, categorie, texte_sur_illustration, texte_a_trous, demarrage_audio_modalite_reponse, aide, orientation, passable) VALUES
+	('2026-10-08 12:06:28.851871', '2026-10-08 12:06:28.851871', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP07BTP', '1e272a0a-87df-444c-9f66-6d77ceaa5407', '0', 'Q2MP07__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false'),
+	('2026-10-08 12:06:28.864518', '2026-10-08 12:06:28.864518', 'QuestionQcm', NULL, NULL, NULL, 'EVAPRO - Q2MP08BTP', '0f4a924a-3452-4411-9acd-db3777f0badb', '0', 'Q2MP08__BTP', NULL, '0', NULL, NULL, NULL, 'false', NULL, NULL, 'false');
 
 
 --
@@ -86022,6 +86054,88 @@ INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "positio
 	('Non', '0', '2025-09-24 14:47:55.788025', '2025-09-24 14:47:55.788025', '1', 'aa2efb6b-d876-4ccb-9a0e-aadf3d34311c', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', 'Q1PG08R2', NULL),
 	('Oui', '0', '2025-09-24 14:47:55.781212', '2025-09-24 14:47:55.791724', '2', '362582ab-09af-4aae-9dc5-8aacd1410467', 'ffed750e-f49d-4cbe-b8ff-406b4d12e465', 'Q1PG08R1', NULL);
 
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2026-10-08 12:06:28.535873', '2026-10-08 12:06:28.535873', '1', 'c4bbf677-d5da-47c3-8dc0-d1b9e51ee54e', '8d6d6e64-c5d8-458a-934f-83d67e450696', 'Q2PC01R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.545253', '2026-10-08 12:06:28.545253', '2', '70a64fca-1fa9-4d04-88e2-76f4e4c20882', '8d6d6e64-c5d8-458a-934f-83d67e450696', 'Q2PC01R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.567309', '2026-10-08 12:06:28.567309', '1', 'bb6812ff-08d1-4cda-a8db-e84bbd0b608b', '5caf5e60-ce70-480d-830f-450f51fa4622', 'Q2PC02R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.570685', '2026-10-08 12:06:28.570685', '2', 'be92389b-5060-4223-b17a-2ca01b247b90', '5caf5e60-ce70-480d-830f-450f51fa4622', 'Q2PC02R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.587956', '2026-10-08 12:06:28.587956', '1', '5487aa39-a96b-44da-9de2-34bbc09d4c73', '7af7728d-47d9-4a91-ab9d-a338f2e77506', 'Q2PC03R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.594663', '2026-10-08 12:06:28.594663', '2', '55ee26a1-b99f-4c45-b294-0600cdfd80c9', '7af7728d-47d9-4a91-ab9d-a338f2e77506', 'Q2PC03R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.611572', '2026-10-08 12:06:28.611572', '1', 'b0ffa25b-2443-4736-b2e4-d9f671ca4c92', '5f4085cf-5b1b-4962-b216-0dc359a752f4', 'Q2AO01R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.614036', '2026-10-08 12:06:28.614036', '2', '747a6dff-6317-4b2a-ab63-c01b408e42dc', '5f4085cf-5b1b-4962-b216-0dc359a752f4', 'Q2AO01R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.629338', '2026-10-08 12:06:28.629338', '1', 'cf3a7279-17d9-4222-b93f-39670e2ae0a3', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', 'Q2AO02R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.631794', '2026-10-08 12:06:28.631794', '2', '260a1c04-bc81-409f-b35f-a5af1578b6c5', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', 'Q2AO02R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2026-10-08 12:06:28.645406', '2026-10-08 12:06:28.645406', '1', '68035c06-9106-42ef-b444-a051bd88d3c6', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', 'Q2AO03R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.647956', '2026-10-08 12:06:28.647956', '2', 'e2277ecd-f4a6-401e-bccc-f5c9654dcadd', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', 'Q2AO03R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.662173', '2026-10-08 12:06:28.662173', '1', '5fdb872f-f9e2-46cc-9d35-3feac344d9d0', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', 'Q2AO04R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.664736', '2026-10-08 12:06:28.664736', '2', '19053b32-8cd4-4350-9d35-10d550d7e1bb', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', 'Q2AO04R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.680337', '2026-10-08 12:06:28.680337', '1', 'b087ab1f-01b5-43f2-b7d6-90790d7dc94c', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', 'Q2SQ01R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.682908', '2026-10-08 12:06:28.682908', '2', '2dff8e6b-a44f-4b56-991f-5b476ff82a5b', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', 'Q2SQ01R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.696973', '2026-10-08 12:06:28.696973', '1', '6c760ca0-500d-4ef0-a5ff-70ef3404846a', '5ed24e55-768e-48ed-a01c-aca50493c89a', 'Q2SQ02R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.69913', '2026-10-08 12:06:28.69913', '2', '05aca6a0-13ad-4da8-9cd5-eae7e27ccb17', '5ed24e55-768e-48ed-a01c-aca50493c89a', 'Q2SQ02R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.710371', '2026-10-08 12:06:28.710371', '1', '55feec7e-1640-42ab-a7c2-b10f39c00e36', '0e3c815a-c781-410c-88d9-27a9a5afd413', 'Q2SQ03R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.712465', '2026-10-08 12:06:28.712465', '2', 'ffed3891-b4ed-4650-83a9-ddfb07ee16aa', '0e3c815a-c781-410c-88d9-27a9a5afd413', 'Q2SQ03R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2026-10-08 12:06:28.723562', '2026-10-08 12:06:28.723562', '1', '6ac68b29-6acc-4870-9f02-20da2e0e7e25', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', 'Q2SQ04R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.72583', '2026-10-08 12:06:28.72583', '2', 'aa8a98e4-3afc-482a-8ea2-d9303ff45551', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', 'Q2SQ04R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.740068', '2026-10-08 12:06:28.740068', '1', '7788612b-0a75-4be6-868a-342ff8a4ce04', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', 'Q2SQ05R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.742501', '2026-10-08 12:06:28.742501', '2', '70c54f80-1b08-48be-ab42-2e2d156a64d8', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', 'Q2SQ05R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.753765', '2026-10-08 12:06:28.753765', '1', '30f6163d-7976-4e70-a2d7-89a5b4389a4c', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', 'Q2SQ06R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.755841', '2026-10-08 12:06:28.755841', '2', '78a0a62f-b2eb-4a28-b720-706c6a6ccc82', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', 'Q2SQ06R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.766738', '2026-10-08 12:06:28.766738', '1', '62f44858-f926-465e-a47b-b91f9e7dcf73', '2ed9b1aa-60bf-4914-b930-f156903ec78e', 'Q2SQ07R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.76864', '2026-10-08 12:06:28.76864', '2', '5f27f034-9d47-4c3b-9496-8cfe0425cf05', '2ed9b1aa-60bf-4914-b930-f156903ec78e', 'Q2SQ07R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.779308', '2026-10-08 12:06:28.779308', '1', 'f9f378f3-392d-422d-a90b-9749c4e98c58', 'e655ff2b-28c6-435f-8902-ef027feceaa2', 'Q2MP01R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.781476', '2026-10-08 12:06:28.781476', '2', '6844e325-ef2f-4f5f-8780-d37273735dc1', 'e655ff2b-28c6-435f-8902-ef027feceaa2', 'Q2MP01R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2026-10-08 12:06:28.792505', '2026-10-08 12:06:28.792505', '1', '8d3be7f1-a849-4197-aa4a-04f6f5435ae1', '73627aca-8e20-4f15-a264-fb7e8bb762b5', 'Q2MP02R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.794503', '2026-10-08 12:06:28.794503', '2', 'aea950a2-4abd-439b-89dd-1e622af0e2e0', '73627aca-8e20-4f15-a264-fb7e8bb762b5', 'Q2MP02R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.805265', '2026-10-08 12:06:28.805265', '1', 'e5d4c433-8811-4740-82c5-6081619a5cec', '05191706-cc7f-4083-8432-2f99c500d936', 'Q2MP03R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.807643', '2026-10-08 12:06:28.807643', '2', '5f6daab3-0410-41ef-a785-0a0baa9b711d', '05191706-cc7f-4083-8432-2f99c500d936', 'Q2MP03R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.817986', '2026-10-08 12:06:28.817986', '1', 'f5e15040-9f41-4b16-bfd5-0eb028db064f', '2b737b8f-c334-4a21-ab1d-9304fc873f15', 'Q2MP04R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.819897', '2026-10-08 12:06:28.819897', '2', 'ff7eb53e-ffdc-4122-9606-85b8e1e5fbbb', '2b737b8f-c334-4a21-ab1d-9304fc873f15', 'Q2MP04R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.830057', '2026-10-08 12:06:28.830057', '1', '47a16f9e-6a94-4c9b-a086-cccdc86f7f4c', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', 'Q2MP05R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.831905', '2026-10-08 12:06:28.831905', '2', 'f65d7232-3e0c-4505-99b0-fdf9376e35cf', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', 'Q2MP05R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.845365', '2026-10-08 12:06:28.845365', '1', 'f5e6591c-015b-4c3a-99ee-9b1377d77361', 'b6003b44-23cf-4048-911d-97f197d004d3', 'Q2MP06R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.8473', '2026-10-08 12:06:28.8473', '2', '967d11c3-a72e-4f89-8147-da98dd0a70f9', 'b6003b44-23cf-4048-911d-97f197d004d3', 'Q2MP06R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Oui', '0', '2026-10-08 12:06:28.858276', '2026-10-08 12:06:28.858276', '1', '79bb654d-b8d0-4cff-a613-4e97b066f30e', '1e272a0a-87df-444c-9f66-6d77ceaa5407', 'Q2MP07R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.860168', '2026-10-08 12:06:28.860168', '2', '438bdbe2-707d-4496-8388-a0dee2506595', '1e272a0a-87df-444c-9f66-6d77ceaa5407', 'Q2MP07R2', NULL),
+	('Oui', '0', '2026-10-08 12:06:28.870703', '2026-10-08 12:06:28.870703', '1', '64e19960-f9db-4d32-a9da-0af560b3e361', '0f4a924a-3452-4411-9acd-db3777f0badb', 'Q2MP08R1', NULL),
+	('Non', '0', '2026-10-08 12:06:28.87251', '2026-10-08 12:06:28.87251', '2', 'a51df796-4f38-496e-9ac3-65b49cc5af06', '0f4a924a-3452-4411-9acd-db3777f0badb', 'Q2MP08R2', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'fa40a944-333e-4957-930b-d438fa6d8741', '8d6d6e64-c5d8-458a-934f-83d67e450696', 'Q2PC01R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '0382a0b2-565d-4ea1-b6b7-282a735f2f63', '5caf5e60-ce70-480d-830f-450f51fa4622', 'Q2PC02R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '1c04591b-a4e3-422f-8c40-f5ad492de872', '7af7728d-47d9-4a91-ab9d-a338f2e77506', 'Q2PC03R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '62702f89-19a3-431b-8a46-65bbe6a5a745', '5f4085cf-5b1b-4962-b216-0dc359a752f4', 'Q2AO01R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '7d454f06-cf93-4771-b6b3-7cbc3806b1aa', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', 'Q2AO02R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '6d6be28d-86b5-41c2-a80f-3a31d54a5bb1', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', 'Q2AO03R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '86d4d6f4-8fe8-4890-bbfe-a08a9c2af293', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', 'Q2AO04R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '35b91cd0-cf7d-45b5-b1df-248b5745b71f', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', 'Q2SQ01R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'cebb3bf1-c368-4249-8862-813516a33ebf', '5ed24e55-768e-48ed-a01c-aca50493c89a', 'Q2SQ02R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '7f3176fa-4349-433e-afa2-36708fc8a300', '0e3c815a-c781-410c-88d9-27a9a5afd413', 'Q2SQ03R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '0b8f2973-687c-4c55-ad8e-eccc9f93562e', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', 'Q2SQ04R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '441c4c27-1405-4c6d-94e8-efa5d6bf858d', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', 'Q2SQ05R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '9d73503f-3ddc-49ab-97a8-9e072618a451', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', 'Q2SQ06R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'd6d283c6-2995-4bb1-a119-62b08557eada', '2ed9b1aa-60bf-4914-b930-f156903ec78e', 'Q2SQ07R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'd8d99be0-fb94-46d0-b5b0-da9a04211046', 'e655ff2b-28c6-435f-8902-ef027feceaa2', 'Q2MP01R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'fe0eb06e-8ba4-42a0-a2fc-224f9a34535a', '73627aca-8e20-4f15-a264-fb7e8bb762b5', 'Q2MP02R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '571c291c-3e10-45e5-aaa0-ff2523cde9b6', '05191706-cc7f-4083-8432-2f99c500d936', 'Q2MP03R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'ee0c25b5-228e-4f4e-8f0d-6bd37f3cef14', '2b737b8f-c334-4a21-ab1d-9304fc873f15', 'Q2MP04R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'cf35470a-8dc5-4d2f-a124-2ac4f02b0fb9', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', 'Q2MP05R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'c0788ef1-8693-4ff6-b799-9098b5016ed2', 'b6003b44-23cf-4048-911d-97f197d004d3', 'Q2MP06R3', NULL);
+
+INSERT INTO public.choix (intitule, type_choix, created_at, updated_at, "position", id, question_id, nom_technique, position_client) VALUES
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', '9470abaa-1cd0-467e-a39f-3f660bb740a8', '1e272a0a-87df-444c-9f66-6d77ceaa5407', 'Q2MP07R3', NULL),
+	('Je ne sais pas', '0', '2026-10-08 14:00:00', '2026-10-08 14:00:00', '3', 'fbe3cc87-44d4-4022-9e67-52fe17d23a15', '0f4a924a-3452-4411-9acd-db3777f0badb', 'Q2MP08R3', NULL);
+
 
 --
 -- Data for Name: transcriptions; Type: TABLE DATA; Schema: public; Owner: -
@@ -86133,6 +86247,34 @@ INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at
 	('4a4ab737-8825-401c-818f-acccf4fdb8e3', 'Avez-vous déjà digitalisé ou robotisé vos activités de production ou d''accompagnement ?', '0', '9afcc196-7b36-4ae8-86e2-56cced0eb7dd', '2026-01-28 15:27:06.909281', '2026-01-28 15:27:06.909281'),
 	('e3f13890-8024-4358-b373-bc041c8176dd', 'Avez-vous déjà digitalisé ou numérisé vos activités de services support (paie, gestion des frais, comptabilité, achats, etc.) ?', '0', '43c78fd1-21aa-4a13-9823-c05dc2c3f6b9', '2026-01-28 15:27:06.960766', '2026-01-28 15:27:06.960766');
 
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('c735aa00-987c-4680-8f75-00ff6e30aead', 'Vous arrive-t-il de devoir prendre plus de temps que nécessaire pour vous assurer que vos salariés ont bien compris certaines consignes, comme des normes de sécurité, la lecture de plans, des notices de chantier, des protocoles écrits ?', '0', '8d6d6e64-c5d8-458a-934f-83d67e450696', '2026-10-08 12:06:28.505281', '2026-10-08 12:06:28.505281'),
+	('63a93c1d-b51a-49c7-82e3-ce0084e8e968', 'Avez-vous des salariés qui estiment devoir prendre en charge une partie du travail de leurs collègues (glissement de fonctions) pour pallier à des difficultés de lecture de plans, de calculs de conversion, d’utilisation de logiciels de chantier ou de saisie de rapports de chantier ?', '0', '5caf5e60-ce70-480d-830f-450f51fa4622', '2026-10-08 12:06:28.556851', '2026-10-08 12:06:28.556851'),
+	('ce850f32-81dd-4a9c-929d-956f069846de', 'Certains de vos salariés font-ils appel à des personnes ressources (professionnels de santé, assistant(e), collègue, membre de la famille, …) afin de répondre à leurs besoins personnels ou professionnels (demande de congés, prise de rendez-vous, lecture de documents, …) ?', '0', '7af7728d-47d9-4a91-ab9d-a338f2e77506', '2026-10-08 12:06:28.579427', '2026-10-08 12:06:28.579427'),
+	('748cc1b0-03ff-4c4e-938e-de85cc542537', 'Avez-vous déjà été surpris par la réaction (stress, refus, agressivité) de certains salariés suite à l’annonce d’un changement (de service, de chef, de poste, de lieu de travail, d''outil de travail, …) ?', '0', '5f4085cf-5b1b-4962-b216-0dc359a752f4', '2026-10-08 12:06:28.603291', '2026-10-08 12:06:28.603291'),
+	('67fda1d0-d1d5-452a-a4d6-617d62547a6e', 'Avez-vous des personnes dans vos effectifs qui peinent à modifier leurs habitudes de travail et à utiliser les outils numériques (tablettes, logiciels, scannettes, applications, …) ?', '0', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', '2026-10-08 12:06:28.622203', '2026-10-08 12:06:28.622203'),
+	('0674cb1a-aa94-44e1-bb15-fee594d7f13b', 'Avez-vous déjà dû aménager un poste de travail pour l’adapter à un salarié en difficulté avec les compétences de base (par exemple, en simplifiant des outils numériques de gestion de chantier) ?', '0', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', '2026-10-08 12:06:28.638645', '2026-10-08 12:06:28.638645'),
+	('ffbb3245-7ece-493b-8edc-102ece09eb24', 'Avez-vous déjà évité des développements potentiels de nouvelles activités pour votre structure (par exemple prise en charge de chantiers en BIM, réponse à des appels d’offres publics dématérialisés) par manque de compétences de certains salariés ?', '0', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', '2026-10-08 12:06:28.655022', '2026-10-08 12:06:28.655022'),
+	('18cd40dd-718e-493b-9326-abe07a149f1c', 'Avez-vous dans vos effectifs des salariés qui n''utilisent pas les documents de travail ou ne respectent pas certaines consignes ?', '0', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', '2026-10-08 12:06:28.67342', '2026-10-08 12:06:28.67342'),
+	('de7705eb-7953-4323-82e5-9eb22bd3b31b', 'Avez-vous, dans vos effectifs, des salariés qui créent leurs propres supports visuels (croquis, pictogrammes, schémas dessinés sur le chantier, etc.) pour mieux comprendre les consignes, les procédures de mise en œuvre ou l’utilisation des équipements  ?', '0', '5ed24e55-768e-48ed-a01c-aca50493c89a', '2026-10-08 12:06:28.689791', '2026-10-08 12:06:28.689791'),
+	('b51afa66-35e8-4f97-ad90-b613405a6efb', 'Avez-vous déjà été amené à adapter ou simplifier vos procédures pour les rendre accessibles aux salariés en difficulté avec les compétences de base ?', '0', '0e3c815a-c781-410c-88d9-27a9a5afd413', '2026-10-08 12:06:28.705095', '2026-10-08 12:06:28.705095');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('b9ceadc4-7811-42da-82e4-a1deca9edf2d', 'Avez-vous des personnes dans vos effectifs qui ne rendent jamais compte de leur activité (par exemple, compte-rendus ou fiches de suivi) ?', '0', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', '2026-10-08 12:06:28.718034', '2026-10-08 12:06:28.718034'),
+	('de03bea9-b274-4390-9ac8-b351598d253c', 'Vous arrive-t-il d’avoir des clients insatisfaits à cause d’un problème de qualité sur un chantier à la suite d''une mauvaise interprétation de plans, erreurs dans les métrés, mauvaise application de consignes techniques ?', '0', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', '2026-10-08 12:06:28.734197', '2026-10-08 12:06:28.734197'),
+	('5241e2ba-7a16-46ce-858b-4dc17422b64b', 'Estimez-vous que votre entreprise prenne des risques dans la gestion et le traitement de ses données numériques du fait d’un manque de connaissances de certains de vos salariés ?', '0', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', '2026-10-08 12:06:28.748045', '2026-10-08 12:06:28.748045'),
+	('759b2991-b063-4c3a-8e2e-ab57b42ddd63', 'Diriez-vous que votre organisation prend des risques sur des consignes de qualité ou de sécurité à cause d’un manque de connaissances ou potentielles incompréhensions de certains de vos salariés ?', '0', '2ed9b1aa-60bf-4914-b930-f156903ec78e', '2026-10-08 12:06:28.761281', '2026-10-08 12:06:28.761281'),
+	('f80c99d6-d248-42d4-aac0-5c0e0556f8a6', 'Avez-vous, parmi vos salariés, des personnes qui ne souhaitent pas évoluer ou changer de poste ?', '0', 'e655ff2b-28c6-435f-8902-ef027feceaa2', '2026-10-08 12:06:28.773923', '2026-10-08 12:06:28.773923'),
+	('397d8d05-0bd4-42fe-9e6b-c4d8d0dc8f75', 'Avez-vous l’impression que vos salariés sont toujours en surcharge de travail, qu’il manque des effectifs et qu’il y a trop d’heures supplémentaires non justifiées par un surcroît d’activité ?', '0', '73627aca-8e20-4f15-a264-fb7e8bb762b5', '2026-10-08 12:06:28.787171', '2026-10-08 12:06:28.787171'),
+	('23738f5a-9639-417b-98c8-de6246da9f2b', 'Vous arrive-t-il de faire appel à du personnel intérimaire pour pallier un manque de compétences de vos équipes ?', '0', '05191706-cc7f-4083-8432-2f99c500d936', '2026-10-08 12:06:28.799844', '2026-10-08 12:06:28.799844'),
+	('7c41a652-cfd6-4dbd-b848-18f5b43654d0', 'Le changement de métiers/ modes d''intervention engendrés par la robotisation ou la digitalisation (comme la mise en place d’un logiciel de suivi des chantiers) ont-elles occasionné des difficultés pour certains membres de vos effectifs à adapter leurs pratiques, à changer de métier ou à profiter de mobilités internes ?', '0', '2b737b8f-c334-4a21-ab1d-9304fc873f15', '2026-10-08 12:06:28.812802', '2026-10-08 12:06:28.812802'),
+	('75bf1981-684f-48c6-9459-e4e7faf0eceb', 'Vous-arrive-t-il d’avoir un salarié souffrant de douleurs de dos récurrentes qui, malgré une formation sur les gestes et postures, n’a pas modifié ses pratiques ?', '0', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', '2026-10-08 12:06:28.824913', '2026-10-08 12:06:28.824913'),
+	('bf1f51a7-68c0-4d02-8593-8ad5e4c86310', 'Avez-vous repéré des absences possiblement dues à un manque de maitrise des compétences de base y compris numériques (absence en formation, lors d’un audit, lors d’une visite de personnalités externes, etc.) ?', '0', 'b6003b44-23cf-4048-911d-97f197d004d3', '2026-10-08 12:06:28.839684', '2026-10-08 12:06:28.839684');
+
+INSERT INTO public.transcriptions (id, ecrit, categorie, question_id, created_at, updated_at) VALUES
+	('1eece22a-c678-4965-8dc1-b216fc1d0ea9', 'Pensez-vous avoir des salariés qui refusent d’aller en formation par manque de maitrise des compétences de base, y compris numériques ?', '0', '1e272a0a-87df-444c-9f66-6d77ceaa5407', '2026-10-08 12:06:28.852814', '2026-10-08 12:06:28.852814'),
+	('5d3a32f7-084d-4184-ae3f-e4a723515bc2', 'Avez-vous repéré des salariés, déclarés inaptes à leurs postes pour raisons de santé, qui se voient proposer un reclassement vers des postes administratifs et le refusent ?', '0', '0f4a924a-3452-4411-9acd-db3777f0badb', '2026-10-08 12:06:28.865436', '2026-10-08 12:06:28.865436');
+
 
 --
 -- Data for Name: questionnaires_questions; Type: TABLE DATA; Schema: public; Owner: -
@@ -86214,6 +86356,34 @@ INSERT INTO public.questionnaires_questions ("position", created_at, updated_at,
 	('18', '2025-09-24 15:00:58.673302', '2025-09-24 15:00:58.673302', 'e3b254c0-9744-4ae4-88df-ed00357be205', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'f75bedcb-eede-475c-a86e-1f6b89e6a32d', NULL),
 	('19', '2025-09-24 15:00:58.675884', '2025-09-24 15:00:58.675884', 'da209692-5d84-4a52-92e3-a818d0bd1759', 'de47df57-093b-4210-aee2-ce84c4c8cedb', '66efa8d0-7b10-4b00-a6c8-139dc05d0fc6', NULL),
 	('20', '2025-09-24 15:00:58.678317', '2025-09-24 15:00:58.678317', '8d97a315-4524-4443-bba3-ead35c44e2c2', 'de47df57-093b-4210-aee2-ce84c4c8cedb', 'dad8fd36-68de-4085-8c2c-c1569e2378c6', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('1', '2026-10-08 12:06:59.168251', '2026-10-08 12:06:59.168251', '15e05846-9d8d-4433-9e0d-b72b9455ff3d', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '8d6d6e64-c5d8-458a-934f-83d67e450696', NULL),
+	('2', '2026-10-08 12:06:59.172811', '2026-10-08 12:06:59.172811', '918c410b-0723-4815-b41b-ffba3416716c', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '5caf5e60-ce70-480d-830f-450f51fa4622', NULL),
+	('3', '2026-10-08 12:06:59.174426', '2026-10-08 12:06:59.174426', '0e9f3ab5-354b-4430-9bef-84b633cb6ab8', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '7af7728d-47d9-4a91-ab9d-a338f2e77506', NULL),
+	('4', '2026-10-08 12:06:59.176125', '2026-10-08 12:06:59.176125', '321741e6-997e-40be-9f7b-1648430549be', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '5f4085cf-5b1b-4962-b216-0dc359a752f4', NULL),
+	('5', '2026-10-08 12:06:59.178321', '2026-10-08 12:06:59.178321', '463a254e-be3e-4fc0-8b63-64d811aad7aa', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'de1f7afe-12db-4d37-8d0e-8bf912056a24', NULL),
+	('6', '2026-10-08 12:06:59.180015', '2026-10-08 12:06:59.180015', '75f78600-7740-4ab3-a2f4-18e4ac83cf4b', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '6cfd8cdf-52f5-434b-bbad-4342e8ef04dc', NULL),
+	('7', '2026-10-08 12:06:59.181531', '2026-10-08 12:06:59.181531', '3cf8cbca-c203-41aa-9498-9c54d68faa5f', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'b71021c3-da9d-4913-9ea8-dbc4a4bec833', NULL),
+	('8', '2026-10-08 12:06:59.182746', '2026-10-08 12:06:59.182746', '7ab33e59-18de-4d0d-8759-c9c25aa09601', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'b8dbe254-6ae3-4c7e-b9d5-54b775a6ce09', NULL),
+	('9', '2026-10-08 12:06:59.184205', '2026-10-08 12:06:59.184205', '488117a4-e7ac-4e64-a066-10fd03410f0e', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '5ed24e55-768e-48ed-a01c-aca50493c89a', NULL),
+	('10', '2026-10-08 12:06:59.18549', '2026-10-08 12:06:59.18549', 'd525b8a8-a6bc-40ae-a2fa-9c4357e45a6a', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '0e3c815a-c781-410c-88d9-27a9a5afd413', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('11', '2026-10-08 12:06:59.187072', '2026-10-08 12:06:59.187072', 'bf03448e-59fa-42b4-b9c8-912776f96967', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '5d64bffb-6196-4fa7-aa5a-72e50cb7d51a', NULL),
+	('12', '2026-10-08 12:06:59.188486', '2026-10-08 12:06:59.188486', 'a692afad-cf4b-4960-86c0-3a9b90e0d41f', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '53e1f2ff-ab1a-408c-bb4e-c2455f5004ce', NULL),
+	('13', '2026-10-08 12:06:59.190218', '2026-10-08 12:06:59.190218', '8a105640-73cb-448f-85ff-489b05d95b6d', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '1965bfb6-cdee-4ff3-99f2-a68e65f30c6d', NULL),
+	('14', '2026-10-08 12:06:59.191947', '2026-10-08 12:06:59.191947', '6ae3e6bd-699a-485f-8b8b-632959326606', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '2ed9b1aa-60bf-4914-b930-f156903ec78e', NULL),
+	('15', '2026-10-08 12:06:59.193394', '2026-10-08 12:06:59.193394', '8d47f6cf-fd7d-4ff1-9d34-a9b163c63cf7', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'e655ff2b-28c6-435f-8902-ef027feceaa2', NULL),
+	('16', '2026-10-08 12:06:59.194971', '2026-10-08 12:06:59.194971', 'c14fe922-e509-44e0-9569-71dfe9781fb6', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '73627aca-8e20-4f15-a264-fb7e8bb762b5', NULL),
+	('17', '2026-10-08 12:06:59.196409', '2026-10-08 12:06:59.196409', 'd19955ff-2f5d-4aa1-a397-22034010ed47', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '05191706-cc7f-4083-8432-2f99c500d936', NULL),
+	('18', '2026-10-08 12:06:59.198068', '2026-10-08 12:06:59.198068', '4de27f9b-1f03-47e6-a37f-6950eec2ceee', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '2b737b8f-c334-4a21-ab1d-9304fc873f15', NULL),
+	('19', '2026-10-08 12:06:59.19947', '2026-10-08 12:06:59.19947', '68e2bdde-2786-45e2-abc8-95420af27c7e', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '2184ea46-fc9a-4c2b-b8b1-563343a00d04', NULL),
+	('20', '2026-10-08 12:06:59.201196', '2026-10-08 12:06:59.201196', '3c2d4fae-d2ac-41ca-85e4-e9770f9c8555', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', 'b6003b44-23cf-4048-911d-97f197d004d3', NULL);
+
+INSERT INTO public.questionnaires_questions ("position", created_at, updated_at, id, questionnaire_id, question_id, deleted_at) VALUES
+	('21', '2026-10-08 12:06:59.20286', '2026-10-08 12:06:59.20286', 'ef3e3b0a-db20-4770-a179-0f48f6ac0261', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '1e272a0a-87df-444c-9f66-6d77ceaa5407', NULL),
+	('22', '2026-10-08 12:06:59.2044', '2026-10-08 12:06:59.2044', 'd93ed20d-5fe3-47a8-ac6a-28233fdadbde', 'eb543334-3c6a-4a67-b5d5-56c89b191be3', '0f4a924a-3452-4411-9acd-db3777f0badb', NULL);
 
 
 --

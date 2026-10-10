@@ -11,7 +11,7 @@ describe 'reviewapp:seed' do
     allow(ENV).to receive(:[]).and_call_original
     allow(ENV).to receive(:[]).with('APP').and_return(app)
     allow(ENV).to receive(:fetch).and_call_original
-    allow(ENV).to receive(:fetch).with('MOT_DE_PASS_COMPTES_PREPROD')
+    allow(ENV).to receive(:fetch).with('MOT_DE_PASSE_COMPTES_PREPROD')
                                  .and_return(mot_de_passe)
   end
 

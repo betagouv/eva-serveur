@@ -45,16 +45,18 @@ bundle exec rake db:drop db:create
 
 Cette commande créera les comptes suivants :
 
+```
 superadmin@eva.anlci.gouv.fr
 admin@eva.anlci.gouv.fr
 conseiller@eva.anlci.gouv.fr
 cmr@eva.anlci.gouv.fr
 boss@eva.anlci.gouv.fr
 rachel.rh@eva.anlci.gouv.fr
+```
 
 Le mot de passe de ses comptes est défini avec la valeur de la variable d'env suivante à ajouter dans votre `.env`
 
-MOT_DE_PASS_COMPTES_PREPROD
+MOT_DE_PASSE_COMPTES_PREPROD
 
 ### Lancer les tests
 `bundle exec rake spec` ou `guard`

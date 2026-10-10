@@ -121,6 +121,9 @@ The API serves the EVA client application:
 
 ## Development Workflow
 
+### Langue
+- Le code est écrit en français : noms de classes, de méthodes et de variables, commentaires, descriptions RSpec et messages de commit. Le vocabulaire imposé par Rails et les gems (`create`, `index`, `has_many`, callbacks…) reste en anglais.
+
 ### Running Tests
 - Use `bundle exec guard` for continuous test running during development
 - Test files follow standard Rails conventions in `spec/`

@@ -52,6 +52,11 @@ class Inscription::RechercheStructuresController < ApplicationController
   end
 
   def assigne_siret_pour_compte(siret)
+    if StructureAdministrative.exists?(siret: siret)
+      @compte.errors.add(:siret, :structure_administrative)
+      return false
+    end
+
     structure = RechercheStructureParSiret.new(siret).call
 
     return false if structure.blank?

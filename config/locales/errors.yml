@@ -5,3 +5,4 @@ fr:
         invalid: SIRET invalide
         siret_ferme: Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure.
         verification_indisponible: La vérification du SIRET est indisponible
+        structure_administrative: Vous ne pouvez pas rejoindre cette structure, veuillez renseigner le SIRET de votre établissement d’exercice ou contacter le support

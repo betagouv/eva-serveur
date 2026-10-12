@@ -57,7 +57,8 @@ class Compte < ApplicationRecord
   validates :nom, :prenom, presence: { on: :create, unless: :peut_sauter_presence_identite? }
   validates :nom, :prenom, presence: { on: :informations_compte,
                                         unless: :peut_sauter_presence_identite? }
-  validate :verifie_dns_email, :structure_a_un_admin
+  validate :verifie_dns_email
+  validate :structure_a_un_admin, if: :modifie_les_admins_de_la_structure?
   validate :structure_de_depart_a_un_admin, unless: :force_deplacement_structure
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
@@ -185,6 +186,11 @@ class Compte < ApplicationRecord
 
   def peut_sauter_presence_identite?
     etape_inscription_preinscription?
+  end
+
+  def modifie_les_admins_de_la_structure?
+    new_record? || will_save_change_to_role? ||
+      will_save_change_to_statut_validation? || will_save_change_to_structure_id?
   end
 
   def structure_a_un_admin

@@ -461,6 +461,44 @@ describe Compte do
       end
     end
 
+    context "quand un conseiller existe déjà dans une structure sans admin" do
+      let(:structure) { create :structure, nom: "Ma Structure" }
+      let(:compte) do
+        compte = create :compte_admin, structure: structure
+        compte.update_column(:role, "conseiller")
+        compte.reload
+      end
+
+      it "peut modifier ses informations" do
+        compte.nom = "Nouveau nom"
+        expect(compte).to be_valid
+      end
+    end
+
+    context "quand un conseiller existant rejoint une structure sans admin" do
+      let(:structure) { create :structure, nom: "Ma Structure" }
+      let(:compte) { create :compte_conseiller, structure: create(:structure, :avec_admin) }
+
+      it "refuse le changement de structure" do
+        compte.structure = structure
+        compte.valid?
+        expect(compte.errors[:role])
+          .to include "La structure « Ma Structure » doit avoir au moins un administrateur"
+      end
+    end
+
+    context "quand le seul admin existant de la structure devient conseiller" do
+      let(:structure) { create :structure, nom: "Ma Structure" }
+      let(:compte) { create :compte_admin, structure: structure }
+
+      it "refuse le changement de rôle" do
+        compte.role = "conseiller"
+        compte.valid?
+        expect(compte.errors[:role])
+          .to include "La structure « Ma Structure » doit avoir au moins un administrateur"
+      end
+    end
+
     context "Quand le compte n'a pas de structure" do
       it "le compte peut avoir un rôle de conseiller" do
         compte.role = "conseiller"

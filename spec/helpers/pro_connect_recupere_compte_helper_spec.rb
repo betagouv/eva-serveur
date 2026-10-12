@@ -163,6 +163,20 @@ describe ProConnectRecupereCompteHelper do
       end
     end
 
+    context "le compte est un conseiller d'une structure sans admin" do
+      let!(:compte_existant) do
+        compte = create :compte_admin, email: email, structure: create(:structure)
+        compte.update_column(:role, "conseiller")
+        compte
+      end
+
+      it "connecte le conseiller et met à jour ses informations" do
+        compte = described_class.cree_ou_recupere_compte(user_info(email))
+        expect(compte.id).to eq(compte_existant.id)
+        expect(compte.reload.id_pro_connect).to eq(sub)
+      end
+    end
+
     context "race condition : le compte est créé simultanément par une autre requête" do
       let!(:compte_existant) { create :compte_admin, email: email }
 

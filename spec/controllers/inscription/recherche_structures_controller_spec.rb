@@ -153,6 +153,20 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
     end
 
+    context "avec le SIRET d'une structure administrative" do
+      before { create(:structure_administrative, siret: siret) }
+
+      it "reste sur la page et affiche le message d'erreur spécifique" do
+        expect(MiseAJourSiret).not_to receive(:new)
+        patch :update, params: { compte: { siret: siret } }
+        compte.reload
+        expect(compte.etape_inscription).to eq("recherche_structure")
+        expect(response).to have_http_status(:success)
+        message = I18n.t("errors.attributes.siret.structure_administrative")
+        expect(response.body).to include(message)
+      end
+    end
+
     context 'avec un SIRET invalide (format)' do
       it 'reste sur la page et affiche une erreur sur le champ sans flash structure non trouvée' do
         patch :update, params: { compte: { siret: "123" } }

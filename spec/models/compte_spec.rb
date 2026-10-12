@@ -499,6 +499,18 @@ describe Compte do
       end
     end
 
+    context "quand le seul admin existant de la structure est refusé" do
+      let(:structure) { create :structure }
+      let(:compte) { create :compte_admin, structure: structure }
+
+      it "refuse le changement de statut" do
+        compte.statut_validation = "refusee"
+        compte.valid?
+        expect(compte.errors[:statut_validation])
+          .to include "La structure doit avoir au moins un administrateur autorisé"
+      end
+    end
+
     context "Quand le compte n'a pas de structure" do
       it "le compte peut avoir un rôle de conseiller" do
         compte.role = "conseiller"

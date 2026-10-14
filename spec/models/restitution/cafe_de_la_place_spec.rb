@@ -102,6 +102,65 @@ describe Restitution::CafeDeLaPlace do
     end
   end
 
+  describe '#competences_litteratie' do
+    let(:restitution) do
+      described_class.new(campagne, [
+                            build(:evenement_demarrage, partie: partie),
+                            *evenements_bloc_lecture,
+                            build(:evenement_abandon, partie: partie)
+                          ])
+    end
+
+    before do
+      partie.update(metriques: { 'score_lecture' => 8,
+                                 'score_comprehension' => 0,
+                                 'score_production' => 0 })
+    end
+
+    context 'quand le bloc lecture est terminé avant un abandon' do
+      let(:evenements_bloc_lecture) do
+        [ build(:evenement_reponse, partie: partie,
+                                    donnees: { question: 'ALrd14', metacompetence: 'lecture',
+                                               score: 1 }) ]
+      end
+
+      it 'attribue le profil de lecture et laisse les autres indéterminés' do
+        profils = restitution.competences_litteratie.transform_values { |c| c.profil.to_sym }
+        expect(profils).to eq(lecture: Competence::PROFIL_2,
+                              comprehension: Competence::NIVEAU_INDETERMINE,
+                              production: Competence::NIVEAU_INDETERMINE)
+      end
+    end
+
+    context "quand le bloc lecture n'est pas terminé avant un abandon" do
+      let(:evenements_bloc_lecture) do
+        [ build(:evenement_reponse, partie: partie,
+                                    donnees: { question: 'ALrd13', metacompetence: 'lecture',
+                                               score: 1 }) ]
+      end
+
+      it 'laisse le profil de lecture indéterminé' do
+        expect(restitution.competences_litteratie[:lecture].profil.to_sym)
+          .to eq(Competence::NIVEAU_INDETERMINE)
+      end
+    end
+  end
+
+  describe '#parcours_haut avec abandon' do
+    let(:restitution) do
+      described_class.new(campagne, [
+                            build(:evenement_demarrage, partie: partie),
+                            build(:evenement_abandon, partie: partie)
+                          ])
+    end
+
+    it 'retourne le profil indeterminé' do
+      allow(restitution).to receive(:scores_parcours_haut)
+        .and_return({ hpar: 9, hgac: 9, hcvf: 9, hpfb: 9 })
+      expect(restitution.parcours_haut).to equal(Competence::NIVEAU_INDETERMINE)
+    end
+  end
+
   describe '#niveau_litteratie' do
     context 'quand un parcours haut est profil 4H++' do
       before do

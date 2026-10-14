@@ -13,13 +13,18 @@ class FabriqueEvenement
     Evenement.new(param).tap do |evenement|
       next unless evenement.save
 
-      if evenement.fin_situation? || evenement.abandon?
-        PersisteMetriquesPartieJob.perform_later(partie)
-      end
+      PersisteMetriquesPartieJob.perform_later(partie) if declenche_calcul?(evenement, partie)
     end
   end
 
   private
+
+  def declenche_calcul?(evenement, partie)
+    return true if evenement.fin_situation? || evenement.abandon?
+
+    partie.situation.nom_technique == Situation::CAFE_DE_LA_PLACE &&
+      Restitution::CafeDeLaPlace.declenche_calcul?(evenement)
+  end
 
   def recupere_partie
     situation = Situation.find_by(nom_technique: parametres[:situation])

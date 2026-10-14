@@ -157,6 +157,41 @@ describe Restitution::CafeDeLaPlace do
           .to eq(Competence::PROFIL_1)
       end
     end
+
+    context 'quand la partie est interrompue sans abandon après le bloc lecture' do
+      let(:restitution) do
+        described_class.new(campagne, [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_reponse, partie: partie,
+                                                        donnees: { question: 'ALrd14',
+                                                                   metacompetence: 'lecture',
+                                                                   score: 1 })
+                            ])
+      end
+
+      it 'attribue le profil de lecture et laisse les autres indéterminés' do
+        profils = restitution.competences_litteratie.transform_values { |c| c.profil.to_sym }
+        expect(profils).to eq(lecture: Competence::PROFIL_2,
+                              comprehension: Competence::NIVEAU_INDETERMINE,
+                              production: Competence::NIVEAU_INDETERMINE)
+      end
+    end
+
+    context 'quand la partie est terminée' do
+      let(:restitution) do
+        described_class.new(campagne, [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_fin_situation, partie: partie)
+                            ])
+      end
+
+      it 'attribue tous les profils' do
+        profils = restitution.competences_litteratie.transform_values { |c| c.profil.to_sym }
+        expect(profils).to eq(lecture: Competence::PROFIL_2,
+                              comprehension: Competence::PROFIL_1,
+                              production: Competence::PROFIL_1)
+      end
+    end
   end
 
   describe '#parcours_haut avec abandon' do

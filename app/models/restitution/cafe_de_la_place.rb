@@ -46,7 +46,8 @@ module Restitution
     QUESTIONS_TERMINANT_BLOC = {
       lecture: "ALrd14",
       comprehension: "ACrd10",
-      production: /\AAPlc\d+\z/
+      production: /\AAPlc\d+\z/,
+      parcours_haut: /\AHPfb\d+\z/
     }.freeze
 
     def initialize(campagne, evenements)
@@ -76,7 +77,7 @@ module Restitution
     end
 
     def parcours_haut
-      return ::Competence::NIVEAU_INDETERMINE if abandon?
+      return ::Competence::NIVEAU_INDETERMINE if !termine? && !bloc_termine?(:parcours_haut)
 
       scores = scores_parcours_haut.values
       return ::Competence::NIVEAU_INDETERMINE if scores.include?(nil)

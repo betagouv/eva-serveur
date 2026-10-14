@@ -106,9 +106,8 @@ module Restitution
       end
     end
 
-    # En cas d'abandon, seuls les blocs terminés ont un profil.
     def niveau(competence)
-      return ::Competence::NIVEAU_INDETERMINE if abandon? && !bloc_termine?(competence)
+      return ::Competence::NIVEAU_INDETERMINE if !termine? && !bloc_termine?(competence)
 
       Competence::ProfilEvacob.new(self, "score_#{competence}").niveau
     end

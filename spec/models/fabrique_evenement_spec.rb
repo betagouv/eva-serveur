@@ -54,6 +54,48 @@ describe FabriqueEvenement do
       end
     end
 
+    context 'quand une réponse est donnée dans Café de la place' do
+      let(:situation_cafe_de_la_place) { create :situation_cafe_de_la_place }
+      let(:parametres_reponse) do
+        parametres.merge(nom: 'reponse', donnees: { 'question' => question },
+                         situation: situation_cafe_de_la_place.nom_technique)
+      end
+
+      %w[ALrd14 ACrd10 APlc1 APlc11 APlc20 HPfb1 HPfb19 HPfb20].each do |question_declenchante|
+        context "à la question #{question_declenchante}" do
+          let(:question) { question_declenchante }
+
+          it 'programme un job pour assigner les métriques à la partie' do
+            expect do
+              described_class.new(parametres_reponse).call
+            end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
+          end
+        end
+      end
+
+      %w[ALrd13 ACrd9 HCvf4].each do |question_non_declenchante|
+        context "à la question #{question_non_declenchante}" do
+          let(:question) { question_non_declenchante }
+
+          it 'ne programme pas de job' do
+            expect do
+              described_class.new(parametres_reponse).call
+            end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(0)
+          end
+        end
+      end
+    end
+
+    context "quand une réponse à ALrd14 est donnée dans une autre situation" do
+      let(:nom_evenement) { 'reponse' }
+
+      it 'ne programme pas de job' do
+        expect do
+          described_class.new(parametres.merge(donnees: { 'question' => 'ALrd14' })).call
+        end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(0)
+      end
+    end
+
     context "Quand l'évènement n'est pas une fin de situation" do
       let(:nom_evenement) { 'autre' }
 

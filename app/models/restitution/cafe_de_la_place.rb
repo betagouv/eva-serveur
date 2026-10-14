@@ -50,6 +50,12 @@ module Restitution
       parcours_haut: /\AHPfb\d+\z/
     }.freeze
 
+    def self.declenche_calcul?(evenement)
+      evenement.reponse? && QUESTIONS_TERMINANT_BLOC.values.any? do |question|
+        question === evenement.question_nom_technique
+      end
+    end
+
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementEvacob.new e }
       super

@@ -4,12 +4,14 @@
     margin: 2rem;
 
     img {
-      height: 4rem;
+      width: 4rem;
     }
+
     .fleche-droite {
       width: 1rem;
       height: 1rem;
     }
+
     h3 {
       margin: 0;
       line-height: 1.875rem;
@@ -22,6 +24,7 @@
     p {
       font-size: 0.875rem;
     }
+
     p:last-child:not(.fr-tile__detail) {
       margin-bottom: 0;
     }

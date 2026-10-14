@@ -165,6 +165,30 @@ describe 'Admin - Evaluation eva', type: :feature do
         visit admin_evaluation_eva_path(mon_evaluation_litteratie)
         expect(page).to have_content 'Communiquer en français - Littératie'
       end
+
+      context "quand la partie est interrompue après le bloc lecture" do
+        before do
+          campagne.situations_configurations.create situation: cafe_de_la_place
+          create :evenement_reponse, partie: partie,
+                                     donnees: { question: 'ALrd14', metacompetence: 'lecture',
+                                                score: 1 }
+          partie.update(metriques: { 'score_lecture' => 8,
+                                     'score_comprehension' => 0,
+                                     'score_production' => 0 })
+        end
+
+        it 'affiche les trois sous-profils, en indiquant ceux non calculés' do
+          visit admin_evaluation_eva_path(mon_evaluation_litteratie)
+          within('.sous-competence__litteratie', text: 'Lecture') do
+            expect(page).to have_content 'vous avez des difficultés en lecture'
+          end
+          %w[Compréhension Production].each do |titre|
+            within('.sous-competence__litteratie', text: titre) do
+              expect(page).to have_content 'Ce profil n’a pas pu être calculé'
+            end
+          end
+        end
+      end
     end
 
     context 'situation place du marché' do

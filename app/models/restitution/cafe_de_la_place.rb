@@ -43,10 +43,10 @@ module Restitution
       }
     }.freeze
 
-    DERNIERE_QUESTION_BLOC = {
+    QUESTIONS_TERMINANT_BLOC = {
       lecture: "ALrd14",
       comprehension: "ACrd10",
-      production: "APlc20"
+      production: /\AAPlc\d+\z/
     }.freeze
 
     def initialize(campagne, evenements)
@@ -101,21 +101,22 @@ module Restitution
 
     def competences_litteratie
       @competences_litteratie ||= %i[lecture comprehension production]
-                                  .index_with do |comp|
-        Restitution::SousCompetence::Litteratie.new(profil: competence(comp))
+                                  .index_with do |competence|
+        Restitution::SousCompetence::Litteratie.new(profil: niveau(competence))
       end
     end
 
     # En cas d'abandon, seuls les blocs terminés ont un profil.
-    def competence(comp)
-      return ::Competence::NIVEAU_INDETERMINE if abandon? && !bloc_termine?(comp)
+    def niveau(competence)
+      return ::Competence::NIVEAU_INDETERMINE if abandon? && !bloc_termine?(competence)
 
-      Competence::ProfilEvacob.new(self, "score_#{comp}").niveau
+      Competence::ProfilEvacob.new(self, "score_#{competence}").niveau
     end
 
-    def bloc_termine?(comp)
+    def bloc_termine?(competence)
       evenements.any? do |evenement|
-        evenement.nom == "reponse" && evenement.donnees["question"] == DERNIERE_QUESTION_BLOC[comp]
+        evenement.nom == "reponse" &&
+          QUESTIONS_TERMINANT_BLOC[competence] === evenement.donnees["question"]
       end
     end
 

@@ -1,5 +1,6 @@
 class Evenement < ApplicationRecord
   FIN_SITUATION = "finSituation"
+  ABANDON = "abandon"
 
   validates :nom, :date, :session_id, presence: true
   # rubocop:disable Rails/UniqueValidationWithoutIndex
@@ -31,6 +32,10 @@ class Evenement < ApplicationRecord
 
   def fin_situation?
     nom == FIN_SITUATION
+  end
+
+  def abandon?
+    nom == ABANDON
   end
 
   def reponse?

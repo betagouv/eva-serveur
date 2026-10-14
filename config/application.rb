@@ -74,7 +74,7 @@ module EvaServeur
     config.active_storage.web_image_content_types += image_svg
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    config.autoload_lib(ignore: %w(assets tasks generateur_aleatoire.rb importeur_telephone.rb google_drive_storage.rb custom_exceptions_app_wrapper.rb importeur_commentaires.rb rake_logger.rb))
+    config.autoload_lib(ignore: %w(assets tasks importeur_telephone.rb google_drive_storage.rb custom_exceptions_app_wrapper.rb importeur_commentaires.rb rake_logger.rb))
 
     Rails.autoloaders.main.ignore(Rails.root.join('app/controllers/active_admin/**/*'))
     config.i18n.available_locales = [:fr]

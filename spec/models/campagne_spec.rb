@@ -143,40 +143,23 @@ describe Campagne, type: :model do
       it { expect(campagne.code).to eq 'CODE_DEJA_PRESENT' }
     end
 
-    context "Ne permet pas de générer des codes problématiques" do
+    context "quand le code est absent" do
+      let(:generateur) { instance_double(GenerateurCode, genere: 'ABC75012') }
+
       before do
-        allow(compte).to receive(:structure_code_postal).and_return '75012'
-        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return('LOL', 'GAG', 'XXX')
-        campagne.genere_code_unique
+        allow(GenerateurCode).to receive(:new).with(described_class, :code).and_return(generateur)
       end
 
-      it { expect(campagne.code).to eq 'XXX75012' }
-    end
-
-    context "quand le code généré existe déjà en base" do
-      before do
-        allow(compte).to receive(:structure_code_postal).and_return '75012'
-        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return('AAA', 'BBB')
-        create :campagne, compte: compte, code: 'AAA75012'
-        campagne.genere_code_unique
-      end
-
-      it { expect(campagne.code).to eq 'BBB75012' }
-    end
-
-    context "Mock le générateur alléatoire" do
-      before do
-        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'
-        allow(GenerateurAleatoire).to receive(:nombres).with(5).and_return 'NNNNN'
-      end
-
-      context 'genere un code avec le code postal de la structure' do
+      context 'avec le code postal de la structure' do
         before do
           allow(compte).to receive(:structure_code_postal).and_return '75012'
           campagne.genere_code_unique
         end
 
-        it { expect(campagne.code).to eq 'XXX75012' }
+        it 'utilise le générateur de code avec le code postal en suffixe' do
+          expect(generateur).to have_received(:genere).with('75012')
+          expect(campagne.code).to eq 'ABC75012'
+        end
       end
 
       context "quand il n'y a pas de compte" do
@@ -185,7 +168,10 @@ describe Campagne, type: :model do
           campagne.genere_code_unique
         end
 
-        it { expect(campagne.code).to be_nil }
+        it "n'utilise pas le générateur de code" do
+          expect(GenerateurCode).not_to have_received(:new)
+          expect(campagne.code).to be_nil
+        end
       end
 
       context "code postal 'non_communique' (structure SIRET sans code postal)" do
@@ -194,9 +180,8 @@ describe Campagne, type: :model do
           campagne.genere_code_unique
         end
 
-        it "génère un code conforme et la campagne est valide" do
-          expect(campagne.code).to eq "XXXNNNNN"
-          expect(campagne).to be_valid
+        it "utilise le générateur de code sans suffixe" do
+          expect(generateur).to have_received(:genere).with(nil)
         end
       end
 
@@ -206,8 +191,8 @@ describe Campagne, type: :model do
           campagne.genere_code_unique
         end
 
-        it "normalise le suffixe pour ne garder que les chiffres" do
-          expect(campagne.code).to eq "XXX75001"
+        it "ne garde que les chiffres du code postal en suffixe" do
+          expect(generateur).to have_received(:genere).with('75001')
         end
       end
     end

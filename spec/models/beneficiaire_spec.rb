@@ -11,64 +11,28 @@ describe Beneficiaire do
   describe '#genere_code_beneficiaire_unique' do
     let(:beneficiaire) { described_class.new nom: "Mathéo" }
 
-    context 'genere un code bénéficiaire avec le nom du bénéficiare' do
+    context 'quand le code_beneficiaire est absent' do
+      let(:generateur) { instance_double(GenerateurCode, genere: 'ABC12345') }
+
       before do
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
+        allow(GenerateurCode).to receive(:new).with(described_class, :code_beneficiaire)
+                                              .and_return(generateur)
         beneficiaire.genere_code_beneficiaire_unique
       end
 
-      it do
-        expect(beneficiaire.code_beneficiaire).to eq 'MAT01234'
-      end
-    end
-
-    context "quand le nom comporte un accent" do
-      let(:beneficiaire) { described_class.new nom: "Élise" }
-
-      before do
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
-        beneficiaire.genere_code_beneficiaire_unique
-      end
-
-      it do
-        expect(beneficiaire.code_beneficiaire).to eq 'ELI01234'
-      end
-    end
-
-    context "quand le nom comporte un caractère spécial" do
-      let(:beneficiaire) { described_class.new nom: "E-T Lise" }
-
-      before do
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
-        beneficiaire.genere_code_beneficiaire_unique
-      end
-
-      it do
-        expect(beneficiaire.code_beneficiaire).to eq 'ETL01234'
-      end
-    end
-
-    context "quand le nom comporte seulement deux lettres" do
-      let(:beneficiaire) { described_class.new nom: "Yo" }
-
-      before do
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(12345)
-        beneficiaire.genere_code_beneficiaire_unique
-      end
-
-      it do
-        expect(beneficiaire.code_beneficiaire).to eq 'XYO12345'
+      it 'utilise le générateur de code sans suffixe' do
+        expect(generateur).to have_received(:genere).with(no_args)
+        expect(beneficiaire.code_beneficiaire).to eq 'ABC12345'
       end
     end
 
     context 'quand le code_beneficiaire est déjà présent' do
       before do
-        _beneficiaire_existant = create(:beneficiaire, code_beneficiaire: 'MAT01234')
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
+        beneficiaire.code_beneficiaire = 'CODE123'
         beneficiaire.genere_code_beneficiaire_unique
       end
 
-      it { expect(beneficiaire.code_beneficiaire).to eq 'MAT01235' }
+      it { expect(beneficiaire.code_beneficiaire).to eq 'CODE123' }
     end
   end
 

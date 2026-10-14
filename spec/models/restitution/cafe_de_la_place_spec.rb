@@ -106,7 +106,7 @@ describe Restitution::CafeDeLaPlace do
     let(:restitution) do
       described_class.new(campagne, [
                             build(:evenement_demarrage, partie: partie),
-                            *evenements_bloc_lecture,
+                            *evenements_avant_abandon,
                             build(:evenement_abandon, partie: partie)
                           ])
     end
@@ -118,7 +118,7 @@ describe Restitution::CafeDeLaPlace do
     end
 
     context 'quand le bloc lecture est terminé avant un abandon' do
-      let(:evenements_bloc_lecture) do
+      let(:evenements_avant_abandon) do
         [ build(:evenement_reponse, partie: partie,
                                     donnees: { question: 'ALrd14', metacompetence: 'lecture',
                                                score: 1 }) ]
@@ -133,7 +133,7 @@ describe Restitution::CafeDeLaPlace do
     end
 
     context "quand le bloc lecture n'est pas terminé avant un abandon" do
-      let(:evenements_bloc_lecture) do
+      let(:evenements_avant_abandon) do
         [ build(:evenement_reponse, partie: partie,
                                     donnees: { question: 'ALrd13', metacompetence: 'lecture',
                                                score: 1 }) ]
@@ -142,6 +142,19 @@ describe Restitution::CafeDeLaPlace do
       it 'laisse le profil de lecture indéterminé' do
         expect(restitution.competences_litteratie[:lecture].profil.to_sym)
           .to eq(Competence::NIVEAU_INDETERMINE)
+      end
+    end
+
+    context 'quand un seul item de production a une réponse avant un abandon' do
+      let(:evenements_avant_abandon) do
+        [ build(:evenement_reponse, partie: partie,
+                                    donnees: { question: 'APlc1', metacompetence: 'production',
+                                               score: 0 }) ]
+      end
+
+      it 'attribue le profil de production' do
+        expect(restitution.competences_litteratie[:production].profil.to_sym)
+          .to eq(Competence::PROFIL_1)
       end
     end
   end

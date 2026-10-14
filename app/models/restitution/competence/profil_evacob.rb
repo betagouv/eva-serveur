@@ -35,10 +35,10 @@ module Restitution
         }
       }.freeze
 
-      def initialize(restitution, metrique, *score)
+      def initialize(restitution, metrique, score = nil)
         super(restitution)
         @metrique = metrique
-        @score = score.sum if score.present? ## pour éviter de renvoyer 0 si score est nil
+        @score = score
       end
 
       def niveau

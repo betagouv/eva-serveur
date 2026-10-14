@@ -59,11 +59,10 @@ describe Restitution::Competence::ProfilEvacob do
     end
 
     context 'avec abandon' do
-      it 'a le niveau indéfini' do
-        expect(restitution).to receive(:abandon?).and_return(true)
-        expect(
-          profil_evacob.niveau
-        ).to eql(Competence::NIVEAU_INDETERMINE)
+      it 'calcule quand même le niveau' do
+        allow(restitution).to receive(:abandon?).and_return(true)
+        allow(partie).to receive(:metriques).and_return({ 'score_lecture' => 7 })
+        expect(profil_evacob.niveau).to be(:profil2)
       end
     end
   end

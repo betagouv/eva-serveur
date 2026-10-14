@@ -42,8 +42,6 @@ module Restitution
       end
 
       def niveau
-        return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
-
         @score ||= @restitution.partie.metriques[@metrique]
         return ::Competence::NIVEAU_INDETERMINE if @score.blank?
 

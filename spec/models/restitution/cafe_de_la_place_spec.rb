@@ -61,6 +61,13 @@ describe Restitution::CafeDeLaPlace do
   end
 
   describe '#parcours_haut' do
+    let(:restitution) do
+      described_class.new(campagne, [
+                            build(:evenement_demarrage, partie: partie),
+                            build(:evenement_fin_situation, partie: partie)
+                          ])
+    end
+
     context 'quand le score total est < 16 points' do
       it 'retourne le profil aberrant' do
         expect(restitution).to receive(:scores_parcours_haut)
@@ -194,18 +201,47 @@ describe Restitution::CafeDeLaPlace do
     end
   end
 
-  describe '#parcours_haut avec abandon' do
+  describe '#parcours_haut quand la partie est interrompue' do
     let(:restitution) do
       described_class.new(campagne, [
                             build(:evenement_demarrage, partie: partie),
-                            build(:evenement_abandon, partie: partie)
+                            build(:evenement_reponse, partie: partie,
+                                                      donnees: { question: derniere_question,
+                                                                 score: 1 }),
+                            *evenements_de_fin
                           ])
     end
 
-    it 'retourne le profil indeterminé' do
+    before do
       allow(restitution).to receive(:scores_parcours_haut)
         .and_return({ hpar: 9, hgac: 9, hcvf: 9, hpfb: 9 })
-      expect(restitution.parcours_haut).to equal(Competence::NIVEAU_INDETERMINE)
+    end
+
+    context 'par un abandon avant le premier item HPfb' do
+      let(:derniere_question) { 'HCvf4' }
+      let(:evenements_de_fin) { [ build(:evenement_abandon, partie: partie) ] }
+
+      it 'retourne le profil indeterminé' do
+        expect(restitution.parcours_haut).to equal(Competence::NIVEAU_INDETERMINE)
+      end
+    end
+
+    context 'sans abandon avant le premier item HPfb' do
+      let(:derniere_question) { 'HCvf4' }
+      let(:evenements_de_fin) { [] }
+
+      it 'retourne le profil indeterminé' do
+        expect(restitution.parcours_haut).to equal(Competence::NIVEAU_INDETERMINE)
+      end
+    end
+
+    context 'par un abandon après un seul item HPfb' do
+      let(:derniere_question) { 'HPfb1' }
+      let(:evenements_de_fin) { [ build(:evenement_abandon, partie: partie) ] }
+
+      it 'calcule le profil' do
+        expect(restitution.parcours_haut).to equal(Competence::PROFIL_4H_PLUS_PLUS)
+      end
     end
   end
 

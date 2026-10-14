@@ -44,6 +44,16 @@ describe FabriqueEvenement do
       end
     end
 
+    context "quand l'évènement est un abandon" do
+      let(:nom_evenement) { 'abandon' }
+
+      it 'programme un job pour assigner les métriques à la partie' do
+        expect do
+          described_class.new(parametres).call
+        end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
+      end
+    end
+
     context "Quand l'évènement n'est pas une fin de situation" do
       let(:nom_evenement) { 'autre' }
 

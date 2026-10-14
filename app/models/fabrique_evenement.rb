@@ -13,7 +13,9 @@ class FabriqueEvenement
     Evenement.new(param).tap do |evenement|
       next unless evenement.save
 
-      PersisteMetriquesPartieJob.perform_later(partie) if evenement.fin_situation?
+      if evenement.fin_situation? || evenement.abandon?
+        PersisteMetriquesPartieJob.perform_later(partie)
+      end
     end
   end
 

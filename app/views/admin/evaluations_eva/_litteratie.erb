@@ -5,7 +5,7 @@
       synthese: synthese,
       scope: "admin.evaluations_eva.litteratie.#{profil}",
       icone: "icone_profil/icone_#{profil}.svg" %>
-    <% if niveau_bas?(profil) %>
+    <% if cafe_de_la_place && (niveau_bas?(profil) || profil == ::Competence::NIVEAU_INDETERMINE) %>
       <%= render "admin/evaluations_eva/positionnement/sous_competences",
         sous_competences: cafe_de_la_place.competences_litteratie,
         competence: :litteratie %>

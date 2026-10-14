@@ -8,6 +8,7 @@ fr:
             one: "1 test proposé"
             other: "%{count} tests proposés"
           litteratie:
+            non_calcule: Ce profil n’a pas pu être calculé car cette partie de l’évaluation n’a pas été terminée.
             profil1:
               alt_icone: Profil 1
             profil2:

@@ -30,7 +30,13 @@ class SousCompetenceComponent < ViewComponent::Base
   end
 
   def description_traduction(profil)
+    return "#{traduction_path}.#{@competence}.non_calcule" if profil_indetermine?
+
     "#{traduction_path}.#{@competence}.#{@sous_competence}.description.#{profil}"
+  end
+
+  def profil_indetermine?
+    litteratie? && profil.to_s == ::Competence::NIVEAU_INDETERMINE.to_s
   end
 
   private

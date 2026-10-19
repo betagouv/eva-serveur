@@ -39,6 +39,8 @@ gem "ruby-vips", "~> 2.0"
 gem "inline_svg"
 gem "jbuilder"
 gem "jquery-rails"
+# ActiveSupport 8.0 passe quirks_mode à JSON.generate, option refusée par json 3
+gem "json", "< 3"
 gem "jwt", "~> 3.2"
 gem "kaminari-i18n"
 gem "mailjet"

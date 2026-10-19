@@ -9,9 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    attributes = column_names + _ransackers.keys + _ransack_aliases.keys
-    attributes += attribute_aliases.keys if Ransack::SUPPORTS_ATTRIBUTE_ALIAS
-    attributes.uniq
+    (column_names + _ransackers.keys + _ransack_aliases.keys + attribute_aliases.keys).uniq
   end
 
   def self.ransackable_associations(_auth_object = nil)

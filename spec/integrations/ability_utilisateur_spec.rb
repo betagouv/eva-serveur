@@ -168,4 +168,42 @@ describe AbilityUtilisateur do
       end
     end
   end
+
+  describe "attestation de passation Evapro" do
+    let(:structure_evapro) do
+      create(:structure_locale, :avec_admin, usage: AvecUsage::USAGE_EVAPRO)
+    end
+    let(:createur_campagne) { create(:compte, role: :admin, structure: structure_evapro) }
+    let(:personne_evaluee) { create(:compte, role: :conseiller, structure: structure_evapro) }
+    let(:campagne) { create(:campagne, :avec_parcours_evapro, compte: createur_campagne) }
+    let(:beneficiaire) { create(:beneficiaire, compte: personne_evaluee) }
+    let(:evaluation) do
+      create(:evaluation, :evapro, campagne: campagne, beneficiaire: beneficiaire)
+    end
+
+    it "autorise la personne qui a passé le diagnostic" do
+      expect(described_class.new(personne_evaluee))
+        .to be_able_to(:telecharger_attestation, evaluation)
+    end
+
+    it "autorise le créateur de la campagne, comme pour l'export de la restitution" do
+      expect(described_class.new(createur_campagne))
+        .to be_able_to(:telecharger_attestation, evaluation)
+    end
+
+    it "autorise le chargé de mission régionale, comme pour l'export de la restitution" do
+      cmr = create(:compte_charge_mission_regionale, :structure_avec_admin)
+
+      expect(described_class.new(cmr)).to be_able_to(:read, evaluation)
+      expect(described_class.new(cmr)).to be_able_to(:telecharger_attestation, evaluation)
+    end
+
+    it "refuse un compte qui ne peut pas lire la restitution" do
+      autre_structure = create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO)
+      compte_externe = create(:compte, role: :admin, structure: autre_structure)
+
+      expect(described_class.new(compte_externe))
+        .not_to be_able_to(:telecharger_attestation, evaluation)
+    end
+  end
 end

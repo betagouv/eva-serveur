@@ -29,7 +29,8 @@ div class: "evaluation-evapro" do
                 ).with_content(t(".bouton_telechargement_pdf"))
               )
             end
-            if AttestationPassation.new(evaluation).disponible?
+            if AttestationPassation.new(evaluation).disponible? &&
+               can?(:telecharger_attestation, evaluation)
               render(
                 BoutonDsfrComponent.new(
                   "#",

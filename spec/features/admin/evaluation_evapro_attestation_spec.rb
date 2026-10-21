@@ -42,6 +42,20 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
         expect(page).to have_no_link(libelle_bouton)
       end
     end
+
+    context "quand le compte a créé la campagne sans avoir passé le diagnostic" do
+      let(:completude) { :complete }
+      let(:personne_evaluee) do
+        create :compte, role: "conseiller", structure: structure_evapro
+      end
+      let(:beneficiaire) { create(:beneficiaire, compte: personne_evaluee) }
+
+      it "affiche le bouton, comme celui de l'export" do
+        visit admin_evaluation_evapro_path(evaluation)
+
+        expect(page).to have_link(libelle_bouton)
+      end
+    end
   end
 
   context "quand la fonctionnalité est inactive" do

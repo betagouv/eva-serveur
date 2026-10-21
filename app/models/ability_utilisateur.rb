@@ -70,19 +70,20 @@ compte_id: compte.id
   end
 
   def droit_evaluation_class(compte, classe_evaluation)
-    can %i[read destroy mise_en_action], classe_evaluation, campagne: { compte_id: compte.id }
-    can %i[read mise_en_action], classe_evaluation,
+    can %i[read destroy mise_en_action telecharger_attestation], classe_evaluation,
+        campagne: { compte_id: compte.id }
+    can %i[read mise_en_action telecharger_attestation], classe_evaluation,
         campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     return if compte.structure_id.blank?
 
     if compte.validation_acceptee?
-      can %i[read mise_en_action renseigner_qualification], classe_evaluation,
-          campagne: campagnes_publique_de_la_structure(compte)
+      can %i[read mise_en_action renseigner_qualification telecharger_attestation],
+          classe_evaluation, campagne: campagnes_publique_de_la_structure(compte)
     end
 
     if compte.admin?
-      can %i[read update destroy mise_en_action renseigner_qualification], classe_evaluation,
-          campagne: campagnes_de_la_structure(compte)
+      can %i[read update destroy mise_en_action renseigner_qualification telecharger_attestation],
+          classe_evaluation, campagne: campagnes_de_la_structure(compte)
     end
   end
 
@@ -190,7 +191,7 @@ compte_id: compte.id
   end
 
   def droits_cmr
-    can :read, :all
+    can %i[read telecharger_attestation], :all
     cannot(%i[update create destroy], :all)
     can(%i[update], compte)
     cannot(:read, AnnonceGenerale)

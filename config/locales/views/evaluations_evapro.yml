@@ -4,6 +4,8 @@ fr:
       restitution_globale:
         bouton_telechargement_pdf: Exporter
         bouton_attestation: Télécharger une attestation de passation
+      attestation:
+        titre: Attestation de passation
       index:
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
         colonne_par: Par

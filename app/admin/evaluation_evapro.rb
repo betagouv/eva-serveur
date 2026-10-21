@@ -40,6 +40,21 @@ ActiveAdmin.register EvaluationEvapro do
       render "index", context: self
   end
 
+  member_action :telecharger_attestation, method: :get do
+    next head(:not_found) unless AttestationPassation.active?
+
+    attestation = AttestationPassation.new(resource)
+    html_content = String.new(render_to_string(
+      template: "admin/evaluations_evapro/attestation",
+      layout: "application",
+      formats: [ :pdf ],
+      locals: { attestation: attestation }
+    ))
+    nom = nom_fichier(resource.debutee_le,
+                      "attestation-passation-#{resource.beneficiaire.nom}", "pdf")
+    demarre_generation_pdf(html_content, nom)
+  end
+
   form partial: "form"
 
   sidebar " ", only: :show do

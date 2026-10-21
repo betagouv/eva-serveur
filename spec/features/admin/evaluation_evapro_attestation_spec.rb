@@ -69,4 +69,49 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
       expect(page).to have_no_link(libelle_bouton)
     end
   end
+
+  describe "téléchargement" do
+    let(:completude) { :complete }
+
+    context "quand la fonctionnalité est active" do
+      before { allow(AttestationPassation).to receive(:active?).and_return(true) }
+
+      it "lance la génération du PDF depuis le bouton" do
+        visit admin_evaluation_evapro_path(evaluation)
+
+        expect do
+          click_link libelle_bouton
+        end.to have_enqueued_job(Pdf::GenerationJob).with { |_jeton, _html, nom|
+          expect(nom).to eq("#{evaluation.debutee_le.strftime('%Y%m%d-%H%M')}-" \
+                            "attestation-passation-#{beneficiaire.nom}.pdf")
+        }
+        expect(page).to have_current_path(%r{/admin/pdf_generations/})
+      end
+
+      context "quand le compte ne peut pas lire la restitution" do
+        let(:autre_structure) { create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO) }
+        let(:createur_campagne) { create :compte, role: "admin", structure: autre_structure }
+        let(:campagne) do
+          create(:campagne, :avec_parcours_evapro, compte: createur_campagne)
+        end
+
+        it "refuse la génération" do
+          expect do
+            visit telecharger_attestation_admin_evaluation_evapro_path(evaluation)
+          end.not_to have_enqueued_job(Pdf::GenerationJob)
+        end
+      end
+    end
+
+    context "quand la fonctionnalité est inactive" do
+      before { allow(AttestationPassation).to receive(:active?).and_return(false) }
+
+      it "renvoie une 404" do
+        expect do
+          visit telecharger_attestation_admin_evaluation_evapro_path(evaluation)
+        end.not_to have_enqueued_job(Pdf::GenerationJob)
+        expect(page).to have_http_status(:not_found)
+      end
+    end
+  end
 end

@@ -106,29 +106,17 @@ ActiveAdmin.register EvaluationEvapro do
     end
 
     def render_pdf
-      html_content = String.new(render_to_string(
-        template: "admin/evaluations_evapro/show",
-        layout: "application",
-        locals: { resource: resource }
-      ))
-
-      nom = nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf")
-      demarre_generation_pdf(html_content, nom)
+      genere_pdf(template: "admin/evaluations_evapro/show",
+                 titre: resource.beneficiaire.nom,
+                 locals: { resource: resource })
     end
 
     def render_attestation_pdf
       return head(:not_found) unless AttestationPassation.active?
 
-      html_content = String.new(render_to_string(
-        template: "admin/evaluations_evapro/attestation",
-        layout: "application",
-        formats: [ :pdf ],
-        locals: { evaluation: resource }
-      ))
-
-      nom = nom_fichier(resource.debutee_le,
-                        "attestation-passation-#{resource.beneficiaire.nom}", "pdf")
-      demarre_generation_pdf(html_content, nom)
+      genere_pdf(template: "admin/evaluations_evapro/attestation",
+                 titre: "attestation-passation-#{resource.beneficiaire.nom}",
+                 locals: { evaluation: resource })
     end
 
     before_action only: :show do
@@ -140,6 +128,13 @@ ActiveAdmin.register EvaluationEvapro do
     end
 
     private
+
+    def genere_pdf(template:, titre:, locals:)
+      html_content = String.new(render_to_string(
+        template: template, layout: "application", formats: [ :pdf ], locals: locals
+      ))
+      demarre_generation_pdf(html_content, nom_fichier(resource.debutee_le, titre, "pdf"))
+    end
 
     def taux_risque_pour_xls(evaluation)
       pourcentage = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :pourcentage_risque)

@@ -1,1 +1,30 @@
-<h1><%= t(".titre") %></h1>
+<div class="attestation-passation">
+  <%= render(Pdf::HeaderEvaproComponent.new(
+    date: evaluation.debutee_le,
+    beneficiaire: evaluation.beneficiaire.nom,
+    structure: evaluation.structure,
+    avec_details: false
+  )) %>
+
+  <div class="attestation-passation__contenu">
+    <div class="attestation-passation__entete">
+      <h1 class="attestation-passation__titre"><%= t(".titre") %></h1>
+      <p class="attestation-passation__sous-titre"><%= t(".sous_titre") %></p>
+    </div>
+
+    <p><%= t(".attestation_html",
+             nom: tag.strong(evaluation.beneficiaire.nom),
+             date: tag.strong(l(evaluation.debutee_le.to_date, format: :long)),
+             structure: tag.strong(evaluation.structure.nom)) %></p>
+    <p><%= t(".questionnaire") %></p>
+    <p><%= t(".resultats") %></p>
+    <p><%= t(".origine_html", nom: tag.strong(evaluation.beneficiaire.nom)) %></p>
+
+    <div class="attestation-passation__cloture">
+      <p><%= t(".formule_cloture") %></p>
+      <p class="attestation-passation__mention">
+        <%= t(".delivrance", date: l(Date.current, format: :long)) %>
+      </p>
+    </div>
+  </div>
+</div>

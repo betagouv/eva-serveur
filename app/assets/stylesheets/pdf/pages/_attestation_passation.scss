@@ -1,0 +1,50 @@
+.attestation-passation {
+  .fr-header {
+    padding: 0 $dsfr-spacing-8w;
+  }
+  .attestation-passation__contenu {
+    display: flex;
+    flex-direction: column;
+    gap: $dsfr-spacing-5w;
+    padding: 7.5rem $dsfr-spacing-8w 0;
+    color: var(--text-default-grey);
+
+    p {
+      margin: 0;
+
+      @include corps-de-texte-md-regular;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  .attestation-passation__entete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $dsfr-spacing-2w;
+    padding-bottom: $dsfr-spacing-6w;
+    text-align: center;
+  }
+
+  .attestation-passation__titre {
+    margin: 0;
+    color: var(--text-title-grey);
+
+    @include titre-h2;
+  }
+
+  .attestation-passation__contenu .attestation-passation__sous-titre {
+    color: var(--text-title-grey);
+
+    @include titre-h4;
+  }
+
+  .attestation-passation__cloture {
+    display: flex;
+    flex-direction: column;
+    gap: $dsfr-spacing-1w;
+  }
+}

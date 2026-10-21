@@ -6,6 +6,13 @@ fr:
         bouton_attestation: Télécharger une attestation de passation
       attestation:
         titre: Attestation de passation
+        sous_titre: Diagnostic Evapro
+        attestation_html: "Par la présente, l’Agence nationale de lutte contre l’illettrisme (ANLCI) atteste que %{nom} a réalisé le diagnostic Evapro le %{date}, pour le compte de la structure %{structure}."
+        questionnaire: Le questionnaire a été complété dans son intégralité.
+        resultats: Les résultats du diagnostic ne figurent pas dans ce document. Ils restent à la seule disposition de la personne qui l’a réalisé.
+        origine_html: "Cette attestation a été établie au nom de %{nom}, à partir des informations enregistrées sur la plateforme Evapro."
+        formule_cloture: Fait pour servir et valoir ce que de droit.
+        delivrance: Délivrée le %{date}.
       index:
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
         colonne_par: Par

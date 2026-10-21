@@ -88,6 +88,18 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
         expect(page).to have_current_path(%r{/admin/pdf_generations/})
       end
 
+      it "atteste la passation sans aucun résultat" do
+        expect do
+          visit telecharger_attestation_admin_evaluation_evapro_path(evaluation)
+        end.to have_enqueued_job(Pdf::GenerationJob).with { |_jeton, html, _nom|
+          expect(html).to include(beneficiaire.nom)
+          expect(html).to include(structure_evapro.nom)
+          expect(html).to include(I18n.l(evaluation.debutee_le.to_date, format: :long))
+          expect(html).to include(I18n.l(Date.current, format: :long))
+          expect(html).not_to include(I18n.t("admin.evaluations_evapro.bilan_evapro.titre"))
+        }
+      end
+
       context "quand le compte ne peut pas lire la restitution" do
         let(:autre_structure) { create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO) }
         let(:createur_campagne) { create :compte, role: "admin", structure: autre_structure }

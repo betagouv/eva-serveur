@@ -15,4 +15,13 @@ RSpec.describe HeaderComponent, type: :component do
 
     expect(page).to have_css("img.fr-responsive-img[alt='alt_logo']")
   end
+
+  it "affiche l'image de service même sans titre" do
+    render_inline(described_class.new(logo: "logo/evapro.png", logo_alt: "alt_logo")) do |c|
+      c.with_service_image { "logo OPCO" }
+    end
+
+    expect(page).to have_css(".fr-header__service", text: "logo OPCO")
+    expect(page).to have_no_css(".fr-header__service-title")
+  end
 end

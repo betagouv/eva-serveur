@@ -1,8 +1,8 @@
 <%= render(HeaderComponent.new(
   logo: "logo/evapro.png",
   logo_alt: t("header.evapro.logo_alt"),
-  titre: @structure.nom,
-  tagline: "le #{l(@date, format: :short)} par #{@beneficiaire}",
+  titre: (@structure.nom if @avec_details),
+  tagline: ("le #{l(@date, format: :short)} par #{@beneficiaire}" if @avec_details),
   classes: [ "header-pdf-evapro" ]
 )) do |c| %>
   <% if @opco.present? && @opco.financeur?%>

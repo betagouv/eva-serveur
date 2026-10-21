@@ -20,18 +20,34 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
     I18n.t("admin.evaluations_evapro.restitution_globale.bouton_attestation")
   end
 
-  context "quand le questionnaire est complet" do
-    let(:completude) { :complete }
+  context "quand la fonctionnalité est active" do
+    before { allow(AttestationPassation).to receive(:active?).and_return(true) }
 
-    it "affiche le bouton de téléchargement de l'attestation" do
-      visit admin_evaluation_evapro_path(evaluation)
+    context "quand le questionnaire est complet" do
+      let(:completude) { :complete }
 
-      expect(page).to have_link(libelle_bouton)
+      it "affiche le bouton de téléchargement de l'attestation" do
+        visit admin_evaluation_evapro_path(evaluation)
+
+        expect(page).to have_link(libelle_bouton)
+      end
+    end
+
+    context "quand le questionnaire est incomplet" do
+      let(:completude) { :incomplete }
+
+      it "n'affiche pas le bouton" do
+        visit admin_evaluation_evapro_path(evaluation)
+
+        expect(page).to have_no_link(libelle_bouton)
+      end
     end
   end
 
-  context "quand le questionnaire est incomplet" do
-    let(:completude) { :incomplete }
+  context "quand la fonctionnalité est inactive" do
+    let(:completude) { :complete }
+
+    before { allow(AttestationPassation).to receive(:active?).and_return(false) }
 
     it "n'affiche pas le bouton" do
       visit admin_evaluation_evapro_path(evaluation)

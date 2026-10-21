@@ -1,9 +1,13 @@
 class AttestationPassation
+  def self.active?
+    ENV["ACTIVE_ATTESTATION_PASSATION_EVAPRO"].present?
+  end
+
   def initialize(evaluation)
     @evaluation = evaluation
   end
 
   def disponible?
-    @evaluation.complete?
+    self.class.active? && @evaluation.complete?
   end
 end

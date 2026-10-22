@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     get '/ui_kit/eva_pro_score', to: 'ui_kit#eva_pro_score'
     get '/ui_kit/header', to: 'ui_kit#header'
     get '/ui_kit/incontournables_etape_card', to: 'ui_kit#incontournables_etape_card'
+    get '/ui_kit/info_bulle', to: 'ui_kit#info_bulle'
     get '/ui_kit/input', to: 'ui_kit#input'
     get '/ui_kit/lien', to: 'ui_kit#lien'
     get '/ui_kit/menu_actions', to: 'ui_kit#menu_actions'

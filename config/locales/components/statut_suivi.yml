@@ -1,0 +1,8 @@
+fr:
+  statut_suivi:
+    suite_engagee: Suite engagée
+    reporte: Reporté
+    pas_de_suite: Pas de suite
+    a_renseigner: À renseigner
+    non_concerne: Pas de suivi
+    info_bulle_non_concerne: "Pas de suivi : pas d'illettrisme potentiel"

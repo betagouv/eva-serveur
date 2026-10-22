@@ -35,6 +35,7 @@ module Admin
     def score_arrows; end
     # def sous_competence; end commenté pour le moment car pas assez unitaire
     def statut_campagne; end
+    def statut_suivi; end
     def tag; end
     def texte_intro; end
     def toggle; end

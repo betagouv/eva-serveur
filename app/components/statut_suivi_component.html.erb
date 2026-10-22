@@ -1,0 +1,8 @@
+<% if concerne? %>
+  <%= render badge %>
+<% else %>
+  <%= render InfoBulleComponent.new(texte: t("statut_suivi.info_bulle_non_concerne")) do %>
+    <span class="fr-text--sm text-grey-425" aria-hidden="true">-</span>
+    <span class="fr-sr-only"><%= t("statut_suivi.non_concerne") %></span>
+  <% end %>
+<% end %>

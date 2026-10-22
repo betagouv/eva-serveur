@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Démo StatutSuiviComponent</h1>
+
+  <p>Statut de suivi d'une évaluation, calculé par EvaluationsEva::StatutSuivi.</p>
+
+  <% EvaluationsEva::StatutSuivi::STATUTS.each do |statut| %>
+    <h2><%= statut %></h2>
+    <div class="fr-mb-3w">
+      <%= render StatutSuiviComponent.new(statut: statut) %>
+    </div>
+  <% end %>
+</div>

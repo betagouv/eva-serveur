@@ -23,6 +23,7 @@ module Admin
     def ellipse; end
     def evaluation_incomplete; end
     def header; end
+    def info_bulle; end
     def lien; end
     def mise_en_avant; end
     def modale_generation_pdf; end

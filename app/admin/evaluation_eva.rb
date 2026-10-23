@@ -47,7 +47,7 @@ ActiveAdmin.register EvaluationEva do
          order_by: "email_asc"
   filter :statut_suivi,
          as: :selection_multiple_filter,
-         cle_resume: "statut_suivi.resume_filtre",
+         traduction_nombre_choisis: "statut_suivi.nombre_statuts",
          collection: proc {
            EvaluationsEva::StatutSuivi::STATUTS_FILTRE.map { |statut|
              [ I18n.t("statut_suivi.#{statut}"), statut ]

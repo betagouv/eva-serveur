@@ -22,6 +22,14 @@ ActiveAdmin.register Beneficiaire do
          order_by: "libelle_asc",
          label: proc { Campagne.model_name.human },
          method_model: Campagne
+  filter :statut_suivi,
+         as: :selection_multiple_filter,
+         traduction_nombre_choisis: "statut_suivi.nombre_statuts",
+         collection: proc {
+           EvaluationsEva::StatutSuivi::STATUTS_FILTRE.map { |statut|
+             [ I18n.t("statut_suivi.#{statut}"), statut ]
+           }
+         }
   filter :created_at
 
   config.sort_order = "created_at_desc"

@@ -13,9 +13,16 @@ class Beneficiaire < ApplicationRecord
 
   scope :par_date_creation_asc, -> { order(created_at: :asc) }
   scope :sauf_pour, ->(id) { where.not(id: id) }
+  scope :statut_suivi_in, lambda { |*statuts|
+    Beneficiaires::StatutSuivi.filtre(all, statuts.flatten)
+  }
 
   def self.ransack_unaccent_attributes
     %w[nom]
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[statut_suivi_in]
   end
 
   def anonyme?

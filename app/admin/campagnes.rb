@@ -47,7 +47,11 @@ ActiveAdmin.register Campagne do
            method: :post
   end
 
-  action_item :voir_evaluations, only: :show do
+  action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do
+    render partial: "admin/campagnes/sidebar/parametres"
+  end
+
+  action_item :voir_evaluations, only: :show, class: "action_item--lien-consultation" do
     classe_evaluation, chemin_evaluations = if resource.evapro?
       [ EvaluationEvapro, admin_evaluations_evapro_path(q: { campagne_id_eq: resource }) ]
     else
@@ -55,23 +59,22 @@ ActiveAdmin.register Campagne do
     end
     nombre = classe_evaluation.accessible_by(current_ability).where(campagne: resource).count
 
-    link_to I18n.t("admin.campagnes.action_items.voir_evaluations", count: nombre),
-            chemin_evaluations
+    render BoutonDsfrComponent.new(chemin_evaluations, type: :tertiary_no_outline, size: :sm,
+                                   class: "fr-btn--icon-left fr-icon-file-line")
+      .with_content(I18n.t("admin.campagnes.action_items.voir_evaluations", count: nombre))
   end
 
-  action_item :voir_beneficiaires, only: :show,
+  action_item :voir_beneficiaires, only: :show, class: "action_item--lien-consultation",
               if: proc { can?(:read, Beneficiaire) } do
     nombre = Beneficiaire.accessible_by(current_ability)
                          .joins(:evaluations)
                          .where(evaluations: { campagne_id: resource.id })
                          .distinct
                          .count
-    link_to I18n.t("admin.campagnes.action_items.voir_beneficiaires", count: nombre),
-            admin_beneficiaires_path(q: { evaluations_campagne_id_eq: resource.id })
-  end
-
-  action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do
-    render partial: "admin/campagnes/sidebar/parametres"
+    render BoutonDsfrComponent.new(
+      admin_beneficiaires_path(q: { evaluations_campagne_id_eq: resource.id }),
+      type: :tertiary_no_outline, size: :sm, class: "fr-btn--icon-left fr-icon-team-line"
+    ).with_content(I18n.t("admin.campagnes.action_items.voir_beneficiaires", count: nombre))
   end
 
   member_action :duplique, method: :post do

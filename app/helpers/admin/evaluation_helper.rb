@@ -8,6 +8,10 @@ module Admin
       compte.anlci? || compte.administratif?
     end
 
+    def affiche_sous_titre_campagne?(parcours_type, compte = current_compte)
+      parcours_type.present? && !compte.administratif?
+    end
+
     def statut_suivi(evaluation, evaluations)
       @statuts_suivi ||= EvaluationsEva::StatutSuivi.par_evaluation(evaluations.map(&:id))
       render StatutSuiviComponent.new(statut: @statuts_suivi[evaluation.id])

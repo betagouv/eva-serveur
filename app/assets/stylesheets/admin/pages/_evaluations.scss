@@ -20,6 +20,10 @@ table.index_table {
     font-weight: 400;
   }
 
+  td .evaluation__campagne {
+    font-weight: 600;
+  }
+
   @mixin colonne-fixe($width) {
     width: $width !important;
     min-width: $width !important;
@@ -52,6 +56,29 @@ table.index_table {
         min-width: 0;
         flex: 1 1 auto;
       }
+    }
+  }
+
+  th.evaluation__col-campagne,
+  td.evaluation__col-campagne {
+    @include colonne-fixe(240px);
+
+    .evaluation__campagne,
+    .evaluation__campagne-sous-titre {
+      @include tronque;
+
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+  }
+
+  td.evaluation__col-suivi {
+    text-align: center;
+
+    .fr-badge {
+      white-space: nowrap;
     }
   }
 }

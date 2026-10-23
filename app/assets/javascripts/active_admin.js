@@ -12,6 +12,7 @@
 //= require bootstrap
 //= require aide
 //= require filtres_dates
+//= require selection_multiple
 //= require form_toggle_submit
 //= require toggle_usage_structure
 //= require bouton_menu_actions

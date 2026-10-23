@@ -85,6 +85,66 @@ describe 'Admin - Evaluation eva', type: :feature do
         end
       end
     end
+
+    context "filtre Suivi" do
+      let(:autre_campagne) do
+        create :campagne, compte: mon_compte, libelle: "Lyon 2020", code: "LYON2020",
+                          parcours_type: parcours_type
+      end
+      let(:attributs_concernee) do
+        { synthese_competences_de_base: :illettrisme_potentiel, completude: "complete" }
+      end
+      let!(:a_renseigner) do
+        create :evaluation, :eva, campagne: ma_campagne, **attributs_concernee
+      end
+      let!(:a_renseigner_autre_campagne) do
+        create :evaluation, :eva, campagne: autre_campagne, **attributs_concernee
+      end
+      let!(:suite_engagee) do
+        create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
+                                                        campagne: ma_campagne,
+                                                        **attributs_concernee
+      end
+      let!(:non_concernee) { create :evaluation, :eva, campagne: ma_campagne }
+
+      before do
+        allow(ENV).to receive(:[]).and_call_original
+        allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+      end
+
+      it "propose les statuts dans le panneau de recherche" do
+        visit admin_evaluations_eva_path
+
+        libelles = all("#q_statut_suivi_input details label", visible: :all)
+                   .map { _1.text(:all).strip }
+        expect(libelles).to eq [ "À renseigner", "Reporté", "Suite engagée", "Pas de suite" ]
+      end
+
+      it "ne garde que les évaluations des statuts choisis" do
+        visit admin_evaluations_eva_path(q: { statut_suivi_in: %w[a_renseigner suite_engagee] })
+
+        expect(page).to have_content(a_renseigner.beneficiaire.code_beneficiaire)
+        expect(page).to have_content(suite_engagee.beneficiaire.code_beneficiaire)
+        expect(page).not_to have_content(non_concernee.beneficiaire.code_beneficiaire)
+      end
+
+      it "se combine avec le filtre campagne" do
+        visit admin_evaluations_eva_path(q: { statut_suivi_in: [ "a_renseigner" ],
+                                              campagne_id_eq: ma_campagne.id })
+
+        expect(page).to have_content(a_renseigner.beneficiaire.code_beneficiaire)
+        expect(page).not_to have_content(a_renseigner_autre_campagne.beneficiaire.code_beneficiaire)
+        expect(page).not_to have_content(suite_engagee.beneficiaire.code_beneficiaire)
+      end
+
+      it "se combine avec l'onglet Illettrisme potentiel" do
+        visit admin_evaluations_eva_path(scope: :illettrisme_potentiel,
+                                         q: { statut_suivi_in: [ "suite_engagee" ] })
+
+        expect(page).to have_content(suite_engagee.beneficiaire.code_beneficiaire)
+        expect(page).not_to have_content(a_renseigner.beneficiaire.code_beneficiaire)
+      end
+    end
   end
 
   describe '#show' do

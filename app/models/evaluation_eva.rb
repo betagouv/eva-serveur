@@ -48,8 +48,15 @@ class EvaluationEva < Evaluation
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
   }
+  scope :statut_suivi_in, lambda { |*statuts|
+    EvaluationsEva::StatutSuivi.filtre(all, statuts.flatten)
+  }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[statut_suivi_in]
+  end
 
   def classe_restitution
     Restitution::GlobaleEva

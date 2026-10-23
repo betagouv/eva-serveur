@@ -90,7 +90,7 @@ scalingo --region osc-fr1 --app <app> logs -n 300 | grep one-off-XXXX
 
 ### Technology Stack
 - **Rails 8.0** with Ruby 4.0.6 (the Ruby version is read from `.tool-versions` by the Gemfile)
-- **Node.js 22.22.1** (managed via asdf/rtx, version in `.tool-versions`)
+- **Node.js 22.23.4** (managed via asdf/rtx, version in `.tool-versions`; Scalingo uses `engines.node` in `package.json`, set to `22.x`: update it on a major version change)
 - **PostgreSQL** with UUID primary keys throughout
 - **Sidekiq** for background job processing
 - **ViewComponent** for component development

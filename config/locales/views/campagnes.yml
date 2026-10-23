@@ -55,6 +55,10 @@ fr:
           zero: Aucune évaluation
           one: Consulter 1 évaluation
           other: Consulter %{count} évaluations
+        voir_beneficiaires:
+          zero: Aucun bénéficiaire
+          one: Consulter 1 bénéficiaire
+          other: Consulter %{count} bénéficiaires
         nouvelle_campagne_disabled: Nouvelle campagne
         nouvelle_campagne_disabled_explication: "La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes."
         dupliquer: Dupliquer

@@ -13,6 +13,10 @@ class BoutonDsfrComponent < ViewComponent::Base
     fr-btn
     fr-btn--tertiary
   ].freeze
+  TERTIARY_NO_OUTLINE_CLASSES = %w[
+    fr-btn
+    fr-btn--tertiary-no-outline
+  ].freeze
   DESACTIVE_CLASSES = %w[
     fr-btn
     fr-btn--disabled
@@ -22,6 +26,7 @@ class BoutonDsfrComponent < ViewComponent::Base
     primary: PRIMARY_CLASSES,
     secondary: SECONDARY_CLASSES,
     tertiary: TERTIARY_CLASSES,
+    tertiary_no_outline: TERTIARY_NO_OUTLINE_CLASSES,
     desactive: DESACTIVE_CLASSES
   }.freeze
 

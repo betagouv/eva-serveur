@@ -209,9 +209,9 @@ body.evapro_admin a:visited:not(.fr-btn),
   text-decoration: none;
 }
 
-body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close),
-.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close),
-.fr-modal.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--menu, .fr-btn--close),
+.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--menu, .fr-btn--close),
+.fr-modal.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline) {
   color: var(--text-inverted-blue-france);
 }
 
@@ -286,6 +286,13 @@ input[type="button"].fr-btn.fr-btn--tertiary {
   box-shadow: inset 0 0 0 1px $grey-900;
 }
 
+button.fr-btn.fr-btn--tertiary-no-outline,
+input[type="submit"].fr-btn.fr-btn--tertiary-no-outline,
+input[type="button"].fr-btn.fr-btn--tertiary-no-outline {
+  border: none;
+  box-shadow: none;
+}
+
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
 button.fr-btn:not(.disabled):hover,
 input[type="submit"].fr-btn:not(.disabled):hover,
@@ -295,7 +302,7 @@ form input[type="submit"].fr-btn:not(.disabled):hover,
 form input[type="button"].fr-btn:not(.disabled):hover {
 
   &.fr-btn--primary,
-  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--close) {
+  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--close) {
     background: $blue-france-sun-113-hover;
     border-color: $blue-france-sun-113-hover;
     color: var(--text-inverted-blue-france);
@@ -312,14 +319,15 @@ form input[type="submit"].fr-btn:not(.disabled):active,
 form input[type="button"].fr-btn:not(.disabled):active {
 
   &.fr-btn--primary,
-  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--close) {
+  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--close) {
     background: $blue-france-sun-113-active;
     border-color: $blue-france-sun-113-active;
   }
 }
 
 .fr-btn--secondary,
-.fr-btn--tertiary {
+.fr-btn--tertiary,
+.fr-btn--tertiary-no-outline {
   color: var(--text-action-high-blue-france);
 }
 
@@ -327,7 +335,8 @@ form input[type="button"].fr-btn:not(.disabled):active {
   @include light-decisions-background-transparent-hover;
 }
 
-.fr-btn--tertiary:not(.disabled, .bouton--actif):hover {
+.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
+.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover {
   @include light-decisions-background-transparent-hover;
 }
 
@@ -345,6 +354,18 @@ input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hove
   border: none;
   box-shadow: inset 0 0 0 1px $grey-900;
   background-image: none;
+}
+
+button.fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover {
+  border: none;
+  box-shadow: none;
+  background-image: none;
+}
+
+.fr-btn--tertiary-no-outline:not(.disabled):active {
+  background-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 button.fr-btn:not(.disabled):active,
@@ -513,12 +534,17 @@ a.fr-btn.fr-btn--secondary:active,
 a.fr-btn.fr-btn--tertiary,
 a.fr-btn.fr-btn--tertiary:link,
 a.fr-btn.fr-btn--tertiary:visited,
-a.fr-btn.fr-btn--tertiary:active {
+a.fr-btn.fr-btn--tertiary:active,
+a.fr-btn.fr-btn--tertiary-no-outline,
+a.fr-btn.fr-btn--tertiary-no-outline:link,
+a.fr-btn.fr-btn--tertiary-no-outline:visited,
+a.fr-btn.fr-btn--tertiary-no-outline:active {
   color: $blue-france-sun-113;
 }
 
 .fr-btn--secondary.bouton--actif,
-.fr-btn--tertiary.bouton--actif {
+.fr-btn--tertiary.bouton--actif,
+.fr-btn--tertiary-no-outline.bouton--actif {
   background: rgba(0, 0, 0, 0.08);
 
   &:hover {

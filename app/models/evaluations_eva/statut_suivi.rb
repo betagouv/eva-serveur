@@ -24,6 +24,11 @@ module EvaluationsEva
       SQL
     end
 
+    def self.expression_rang
+      cas = RANGS.map { |statut, rang| "WHEN '#{statut}' THEN #{rang}" }.join(" ")
+      Arel.sql("CASE #{expression_statut} #{cas} END")
+    end
+
     def self.reponse_mise_en_action
       <<~SQL.squish
         (SELECT mises_en_action.effectuee FROM mises_en_action

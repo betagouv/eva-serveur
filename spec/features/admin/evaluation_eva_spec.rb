@@ -50,6 +50,39 @@ describe 'Admin - Evaluation eva', type: :feature do
 
         expect(all("thead th").map(&:text)).to eq [ "Bénéficiaire", "Date", "Suivi", "" ]
       end
+
+      context "tri par statut de suivi" do
+        let(:attributs_concernee) do
+          { campagne: ma_campagne, synthese_competences_de_base: :illettrisme_potentiel,
+            completude: "complete" }
+        end
+        let!(:a_renseigner) { create :evaluation, :eva, attributs_concernee }
+        let!(:suite_engagee) do
+          create :evaluation, :eva, :avec_mise_en_action, effectuee: true, **attributs_concernee
+        end
+
+        before do
+          allow(ENV).to receive(:[]).and_call_original
+          allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+        end
+
+        it "trie dans l'ordre des statuts, les non concernées en dernier" do
+          visit admin_evaluations_eva_path
+          click_link "Suivi"
+
+          noms = [ suite_engagee, a_renseigner, evaluation ].map { |e| e.beneficiaire.nom }
+          expect(find("tbody").text).to match(/#{noms.join(".*")}/m)
+        end
+
+        it "inverse l'ordre au second clic" do
+          visit admin_evaluations_eva_path
+          click_link "Suivi"
+          click_link "Suivi"
+
+          noms = [ evaluation, a_renseigner, suite_engagee ].map { |e| e.beneficiaire.nom }
+          expect(find("tbody").text).to match(/#{noms.join(".*")}/m)
+        end
+      end
     end
   end
 

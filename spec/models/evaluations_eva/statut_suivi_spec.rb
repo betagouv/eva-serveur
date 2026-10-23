@@ -132,6 +132,18 @@ RSpec.describe EvaluationsEva::StatutSuivi do
       end
     end
 
+    it "trie les évaluations dans l'ordre des statuts, les non concernées en dernier" do
+      a_renseigner = create :evaluation, :eva, attributs_concernee
+      non_concerne = create :evaluation, :eva, synthese_competences_de_base: :socle_clea
+      pas_de_suite = create :evaluation, :eva, :avec_mise_en_action, effectuee: false,
+                                                                    **attributs_concernee
+      suite_engagee = create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
+                                                                     **attributs_concernee
+
+      expect(EvaluationEva.order(described_class.expression_rang).pluck(:id))
+        .to eq [ suite_engagee.id, pas_de_suite.id, a_renseigner.id, non_concerne.id ]
+    end
+
     it "donne le statut de plusieurs évaluations en une fois" do
       suite_engagee = create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
                                                                      **attributs_concernee

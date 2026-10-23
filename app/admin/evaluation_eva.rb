@@ -6,6 +6,11 @@ ActiveAdmin.register EvaluationEva do
 
   config.sort_order = "created_at_desc"
 
+  order_by(:statut_suivi) do |clause|
+    sens = clause.order == "desc" ? "ASC" : "DESC"
+    "#{EvaluationsEva::StatutSuivi.expression_rang} #{sens}"
+  end
+
   filter :beneficiaire_id,
          label: Evaluation.human_attribute_name("beneficiaire"),
          as: :search_select_filter,

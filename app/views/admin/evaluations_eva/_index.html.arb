@@ -9,12 +9,24 @@ context.instance_eval do
     end
   end
 
-  column :debutee_le do |evaluation|
-    evaluation.debutee_le.strftime("%d/%m/%Y")
+  column :campagne, class: "evaluation__col-campagne" do |evaluation|
+    campagne = evaluation.campagne
+    div class: "evaluation__cellule" do
+      div campagne.display_name, class: "evaluation__campagne"
+      parcours_type = campagne.parcours_type
+      if affiche_sous_titre_campagne?(parcours_type)
+        div parcours_type.display_name,
+          class: "evaluation__campagne-sous-titre"
+      end
+    end
   end
 
-  column :statut_suivi, sortable: :statut_suivi do |evaluation|
+  column :statut_suivi, sortable: :statut_suivi, class: "evaluation__col-suivi" do |evaluation|
     statut_suivi(evaluation, collection)
+  end
+
+  column :debutee_le do |evaluation|
+    evaluation.debutee_le.strftime("%d/%m/%Y")
   end
 
   column "", class: "evaluation__colonne_action" do |evaluation|

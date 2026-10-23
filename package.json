@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.x"
+  },
   "devDependencies": {
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",

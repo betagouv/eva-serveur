@@ -65,6 +65,20 @@ RSpec.describe Beneficiaires::StatutSuivi do
         .to eq(beneficiaire.id => "non_concerne")
     end
 
+    it "trie les bénéficiaires dans l'ordre des statuts, les non concernés en dernier" do
+      non_concerne = create :beneficiaire
+      create :evaluation, :eva, beneficiaire: non_concerne,
+                                synthese_competences_de_base: :socle_clea
+      create :evaluation, :eva, debutee_le: Time.zone.local(2026, 5, 1), **attributs_concernee
+      suite_engagee = create :beneficiaire
+      create :evaluation, :eva, :avec_mise_en_action,
+             effectuee: true, debutee_le: Time.zone.local(2026, 5, 1),
+             **attributs_concernee, beneficiaire: suite_engagee
+
+      expect(Beneficiaire.order(described_class.expression_rang).pluck(:id))
+        .to eq [ suite_engagee.id, beneficiaire.id, non_concerne.id ]
+    end
+
     it "ignore les évaluations Evapro" do
       create :evaluation, :evapro, debutee_le: Time.zone.local(2026, 5, 1), **attributs_concernee
 

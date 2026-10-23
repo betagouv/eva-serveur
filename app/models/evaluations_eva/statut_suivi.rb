@@ -30,8 +30,12 @@ module EvaluationsEva
     end
 
     def self.expression_rang
+      rang(expression_statut)
+    end
+
+    def self.rang(expression)
       cas = RANGS.map { |statut, rang| "WHEN '#{statut}' THEN #{rang}" }.join(" ")
-      Arel.sql("CASE #{expression_statut} #{cas} END")
+      Arel.sql("CASE #{expression} #{cas} END")
     end
 
     def self.reponse_mise_en_action

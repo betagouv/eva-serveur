@@ -25,6 +25,11 @@ ActiveAdmin.register Beneficiaire do
   filter :created_at
 
   config.sort_order = "created_at_desc"
+
+  order_by(:statut_suivi) do |clause|
+    sens = clause.order == "desc" ? "ASC" : "DESC"
+    "#{Beneficiaires::StatutSuivi.expression_rang} #{sens}"
+  end
   config.batch_actions = true
 
   batch_action :destroy, false
@@ -94,6 +99,10 @@ ActiveAdmin.register Beneficiaire do
 
     def scoped_collection
       end_of_association_chain.distinct
+    end
+
+    def apply_sorting(beneficiaires)
+      super(Beneficiaire.where(id: beneficiaires.select(:id)))
     end
 
     def restitutions_positionnement

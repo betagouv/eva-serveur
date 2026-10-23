@@ -58,9 +58,17 @@
         display: none;
       }
 
-      a {
+      a:not(.fr-btn--tertiary-no-outline) {
         @include bouton-secondaire;
         @include petit-bouton;
+      }
+
+      .action_item--lien-consultation {
+        width: 100%;
+      }
+
+      .action_item--lien-consultation + .action_item--lien-consultation {
+        margin-top: -$dsfr-spacing-1v;
       }
     }
   }

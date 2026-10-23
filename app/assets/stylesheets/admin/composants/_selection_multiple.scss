@@ -1,0 +1,56 @@
+.selection_multiple_filter fieldset {
+  width: 100%;
+  min-width: 0;
+}
+
+.selection-multiple {
+  display: block;
+  width: 100%;
+
+  .selection-multiple__resume {
+    @include base-input;
+
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    min-height: 2.5rem;
+    color: $couleur-texte;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      flex-shrink: 0;
+      margin-left: auto;
+      border-style: solid;
+      border-width: 5px 4px 0;
+      border-color: $eva_main_blue transparent transparent;
+    }
+  }
+
+  .selection-multiple__liste {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: .25rem;
+    padding: .75rem 1rem;
+    border: 1px solid $grey-950;
+    background-color: $grey-1000;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--background-active-blue-france);
+    }
+  }
+}

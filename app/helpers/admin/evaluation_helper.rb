@@ -8,14 +8,9 @@ module Admin
       compte.anlci? || compte.administratif?
     end
 
-    def classes_colonne_campagne(affiche_structure)
-      classes = [ "evaluation__col-campagne" ]
-      classes << "evaluation__col-campagne--sans-structure" unless affiche_structure
-      classes.join(" ")
-    end
-
-    def affiche_sous_titre_campagne?(parcours_type, compte = current_compte)
-      parcours_type.present? && !compte.administratif?
+    def statut_suivi(evaluation, evaluations)
+      @statuts_suivi ||= EvaluationsEva::StatutSuivi.par_evaluation(evaluations.map(&:id))
+      render StatutSuiviComponent.new(statut: @statuts_suivi[evaluation.id])
     end
 
     def destroy

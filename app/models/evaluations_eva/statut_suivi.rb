@@ -9,27 +9,27 @@ module EvaluationsEva
     }.freeze
     STATUTS = RANGS.keys.freeze
 
-    def self.avec_statut(relation)
-      relation.left_joins(:mise_en_action, :beneficiaire)
-              .select("evaluations.*",
-                      "#{expression_statut} AS statut_suivi",
-                      "#{expression_rang} AS statut_suivi_rang")
+    def self.par_evaluation(ids)
+      EvaluationEva.where(id: ids).pluck(:id, expression_statut).to_h
     end
 
     def self.expression_statut
-      <<~SQL.squish
+      Arel.sql(<<~SQL.squish)
         CASE
           WHEN NOT (#{condition_concernee}) THEN 'non_concerne'
-          WHEN mises_en_action.id IS NULL THEN 'a_renseigner'
-          WHEN mises_en_action.effectuee THEN 'suite_engagee'
+          WHEN #{reponse_mise_en_action} IS NULL THEN 'a_renseigner'
+          WHEN #{reponse_mise_en_action} THEN 'suite_engagee'
           ELSE 'pas_de_suite'
         END
       SQL
     end
 
-    def self.expression_rang
-      cas = RANGS.map { |statut, rang| "WHEN '#{statut}' THEN #{rang}" }.join(" ")
-      "CASE #{expression_statut} #{cas} END"
+    def self.reponse_mise_en_action
+      <<~SQL.squish
+        (SELECT mises_en_action.effectuee FROM mises_en_action
+         WHERE mises_en_action.evaluation_id = evaluations.id
+         AND mises_en_action.deleted_at IS NULL)
+      SQL
     end
 
     def self.condition_concernee
@@ -39,8 +39,10 @@ module EvaluationsEva
       <<~SQL.squish
         evaluations.synthese_competences_de_base = 'illettrisme_potentiel'
         AND evaluations.completude IN ('complete', 'competences_transversales_incompletes')
-        AND beneficiaires.anonymise_le IS NULL
         AND evaluations.debutee_le >= #{ActiveRecord::Base.connection.quote(debut)}
+        AND EXISTS (SELECT 1 FROM beneficiaires
+                    WHERE beneficiaires.id = evaluations.beneficiaire_id
+                    AND beneficiaires.anonymise_le IS NULL)
       SQL
     end
 
@@ -48,7 +50,7 @@ module EvaluationsEva
       date = ENV["DATE_STATUT_SUIVI"]
       return if date.blank?
 
-      Time.zone.parse(date).beginning_of_day
+      Time.zone.parse(date)
     end
   end
 end

@@ -53,5 +53,23 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(page).not_to have_link("Nouveau bénéficiaire")
       end
     end
+
+    context "colonne Suivi" do
+      let!(:compte_admin) { create :compte_admin }
+      let(:campagne) { create :campagne, compte: compte_admin }
+
+      before do
+        create :evaluation, :eva, campagne: campagne
+        connecte(compte_admin)
+      end
+
+      it "affiche la colonne Suivi entre le code bénéficiaire et la date de création" do
+        visit admin_beneficiaires_path
+
+        entetes = all("thead th").map(&:text)
+        expect(entetes.index("Suivi")).to eq entetes.index("Code bénéficiaire") + 1
+        expect(entetes.index("Créé le")).to eq entetes.index("Suivi") + 1
+      end
+    end
   end
 end

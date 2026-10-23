@@ -48,15 +48,15 @@ ActiveAdmin.register Campagne do
   end
 
   action_item :voir_evaluations, only: :show do
-    chemin_evaluations = if resource.evapro?
-      admin_evaluations_evapro_path(q: { campagne_id_eq: resource })
+    classe_evaluation, chemin_evaluations = if resource.evapro?
+      [ EvaluationEvapro, admin_evaluations_evapro_path(q: { campagne_id_eq: resource }) ]
     else
-      admin_evaluations_eva_path(q: { campagne_id_eq: resource })
+      [ EvaluationEva, admin_evaluations_eva_path(q: { campagne_id_eq: resource }) ]
     end
+    nombre = classe_evaluation.accessible_by(current_ability).where(campagne: resource).count
 
-    link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
-           count: Evaluation.where(campagne: resource).count),
-           chemin_evaluations
+    link_to I18n.t("admin.campagnes.action_items.voir_evaluations", count: nombre),
+            chemin_evaluations
   end
 
   action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do

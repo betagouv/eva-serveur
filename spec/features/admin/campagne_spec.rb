@@ -188,6 +188,30 @@ describe 'Admin - Campagne', type: :feature do
     end
   end
 
+  describe "consultation des évaluations d'une campagne" do
+    let!(:ma_campagne) { create :campagne, compte: compte_connecte }
+
+    it "affiche le nombre d'évaluations visibles de la campagne" do
+      create_list :evaluation, 3, :eva, campagne: ma_campagne
+      create(:evaluation, :eva, campagne: ma_campagne).destroy
+      create :evaluation, :eva
+
+      visit admin_campagne_path(ma_campagne)
+
+      expect(page).to have_link "Consulter 3 évaluations"
+    end
+
+    it "n'affiche pas le nombre total quand certaines évaluations ne sont pas visibles" do
+      create_list :evaluation, 3, :eva, campagne: ma_campagne
+      create_list :evaluation, 2, :evapro, campagne: ma_campagne
+
+      visit admin_campagne_path(ma_campagne)
+
+      expect(page).not_to have_link "Consulter 5 évaluations"
+      expect(page).to have_link "Consulter 3 évaluations"
+    end
+  end
+
   describe "autorisation accès privés" do
     let(:mon_collegue) do
       create :compte_conseiller, nom: "Martin",

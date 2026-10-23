@@ -79,6 +79,31 @@ RSpec.describe Beneficiaires::StatutSuivi do
         .to eq [ suite_engagee.id, beneficiaire.id, non_concerne.id ]
     end
 
+    context "quand on filtre par statut" do
+      let!(:non_concerne) do
+        create(:evaluation, :eva, synthese_competences_de_base: :socle_clea).beneficiaire
+      end
+
+      before do
+        create :evaluation, :eva, debutee_le: Time.zone.local(2026, 5, 1), **attributs_concernee
+      end
+
+      it "garde les bénéficiaires du statut choisi" do
+        expect(described_class.filtre(Beneficiaire.all, [ "a_renseigner" ]))
+          .to contain_exactly(beneficiaire)
+      end
+
+      it "n'affiche jamais les bénéficiaires non concernés" do
+        expect(described_class.filtre(Beneficiaire.all, %w[non_concerne suite_engagee]))
+          .to be_empty
+      end
+
+      it "ignore les valeurs inconnues" do
+        expect(described_class.filtre(Beneficiaire.all, [ "a_renseigner') OR ('1'='1" ]))
+          .to be_empty
+      end
+    end
+
     it "ignore les évaluations Evapro" do
       create :evaluation, :evapro, debutee_le: Time.zone.local(2026, 5, 1), **attributs_concernee
 

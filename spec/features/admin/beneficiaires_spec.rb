@@ -112,5 +112,53 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(find("tbody").text).to match(/#{codes.join(".*")}/m)
       end
     end
+
+    context "filtre Suivi" do
+      let!(:compte_admin) { create :compte_admin }
+      let(:campagne) { create :campagne, compte: compte_admin }
+      let(:autre_campagne) { create :campagne, compte: compte_admin }
+      let(:attributs_concernee) do
+        { synthese_competences_de_base: :illettrisme_potentiel, completude: "complete" }
+      end
+      let!(:non_concerne) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+      let!(:a_renseigner) do
+        create(:evaluation, :eva, campagne: campagne, **attributs_concernee).beneficiaire
+      end
+      let!(:a_renseigner_autre_campagne) do
+        create(:evaluation, :eva, campagne: autre_campagne, **attributs_concernee).beneficiaire
+      end
+
+      before do
+        Bullet.enable = false
+        allow(ENV).to receive(:[]).and_call_original
+        allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+        connecte(compte_admin)
+      end
+
+      after { Bullet.enable = true }
+
+      it "propose les statuts dans le panneau de recherche" do
+        visit admin_beneficiaires_path
+
+        libelles = all("#q_statut_suivi_input details label", visible: :all)
+                   .map { _1.text(:all).strip }
+        expect(libelles).to eq [ "À renseigner", "Reporté", "Suite engagée", "Pas de suite" ]
+      end
+
+      it "ne garde que les bénéficiaires des statuts choisis" do
+        visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ] })
+
+        expect(page).to have_content(a_renseigner.code_beneficiaire)
+        expect(page).not_to have_content(non_concerne.code_beneficiaire)
+      end
+
+      it "se combine avec le filtre campagne" do
+        visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ],
+                                            evaluations_campagne_id_eq: campagne.id })
+
+        expect(page).to have_content(a_renseigner.code_beneficiaire)
+        expect(page).not_to have_content(a_renseigner_autre_campagne.code_beneficiaire)
+      end
+    end
   end
 end

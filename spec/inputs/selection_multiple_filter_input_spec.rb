@@ -16,7 +16,7 @@ describe SelectionMultipleFilterInput, type: :input do
       label: "Suivi",
       collection: [ [ "À renseigner", "a_renseigner" ], [ "Reporté", "reporte" ],
                     [ "Suite engagée", "suite_engagee" ] ],
-      cle_resume: "statut_suivi.resume_filtre"
+      traduction_nombre_choisis: "statut_suivi.nombre_statuts"
     }
   end
   let(:input) { described_class.new(builder, template, recherche, :q, :statut_suivi, options) }

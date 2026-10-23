@@ -15,6 +15,11 @@ module Beneficiaires
       Arel.sql("COALESCE((#{derniere_evaluation_concernee.to_sql}), 'non_concerne')")
     end
 
+    def self.filtre(relation, statuts)
+      relation.where("#{expression_statut} IN (?)",
+                     statuts & EvaluationsEva::StatutSuivi::STATUTS_FILTRE)
+    end
+
     def self.expression_rang
       EvaluationsEva::StatutSuivi.rang(expression_statut)
     end

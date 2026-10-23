@@ -8,9 +8,14 @@ module EvaluationsEva
       "non_concerne" => 5
     }.freeze
     STATUTS = RANGS.keys.freeze
+    STATUTS_FILTRE = %w[a_renseigner reporte suite_engagee pas_de_suite].freeze
 
     def self.par_evaluation(ids)
       EvaluationEva.where(id: ids).pluck(:id, expression_statut).to_h
+    end
+
+    def self.filtre(relation, statuts)
+      relation.where("#{expression_statut} IN (?)", statuts & STATUTS_FILTRE)
     end
 
     def self.expression_statut

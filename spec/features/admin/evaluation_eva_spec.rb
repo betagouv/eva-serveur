@@ -41,6 +41,16 @@ describe 'Admin - Evaluation eva', type: :feature do
         end
       end
     end
+
+    context "colonne Suivi" do
+      let!(:evaluation) { create :evaluation, :eva, campagne: ma_campagne }
+
+      it "affiche la colonne Suivi après la date, sans colonne campagne" do
+        visit admin_evaluations_eva_path
+
+        expect(all("thead th").map(&:text)).to eq [ "Bénéficiaire", "Date", "Suivi", "" ]
+      end
+    end
   end
 
   describe '#show' do

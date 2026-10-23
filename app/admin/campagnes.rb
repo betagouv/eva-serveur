@@ -59,6 +59,17 @@ ActiveAdmin.register Campagne do
             chemin_evaluations
   end
 
+  action_item :voir_beneficiaires, only: :show,
+              if: proc { can?(:read, Beneficiaire) } do
+    nombre = Beneficiaire.accessible_by(current_ability)
+                         .joins(:evaluations)
+                         .where(evaluations: { campagne_id: resource.id })
+                         .distinct
+                         .count
+    link_to I18n.t("admin.campagnes.action_items.voir_beneficiaires", count: nombre),
+            admin_beneficiaires_path(q: { evaluations_campagne_id_eq: resource.id })
+  end
+
   action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do
     render partial: "admin/campagnes/sidebar/parametres"
   end

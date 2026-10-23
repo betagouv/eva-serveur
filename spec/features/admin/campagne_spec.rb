@@ -212,6 +212,43 @@ describe 'Admin - Campagne', type: :feature do
     end
   end
 
+  describe "consultation des bénéficiaires d'une campagne" do
+    let!(:ma_campagne) { create :campagne, compte: compte_connecte }
+    let(:alice) { create :beneficiaire, nom: "Alice Martin" }
+    let(:bob) { create :beneficiaire, nom: "Bob Durand" }
+    let(:chloe) { create :beneficiaire, nom: "Chloé Petit" }
+
+    before do
+      create_list :evaluation, 2, :eva, campagne: ma_campagne, beneficiaire: alice
+      create :evaluation, :eva, campagne: ma_campagne, beneficiaire: bob
+      create(:evaluation, :eva, campagne: ma_campagne, beneficiaire: chloe).destroy
+      create :evaluation, :eva, beneficiaire: create(:beneficiaire, nom: "Denis Autre")
+    end
+
+    it "affiche le nombre de personnes évaluées et ouvre leur liste" do
+      visit admin_campagne_path(ma_campagne)
+      click_on "Consulter 2 bénéficiaires", match: :first
+
+      expect(page).to have_content "Alice Martin", count: 1
+      expect(page).to have_content "Bob Durand"
+      expect(page).not_to have_content "Chloé Petit"
+      expect(page).not_to have_content "Denis Autre"
+    end
+
+    context "quand la campagne est evapro" do
+      let!(:campagne_evapro) do
+        create :campagne, :avec_parcours_evapro, compte: compte_connecte
+      end
+
+      it "affiche aussi le bouton bénéficiaires" do
+        create :evaluation, :evapro, campagne: campagne_evapro
+        visit admin_campagne_path(campagne_evapro)
+
+        expect(page).to have_link "Consulter 1 bénéficiaire"
+      end
+    end
+  end
+
   describe "autorisation accès privés" do
     let(:mon_collegue) do
       create :compte_conseiller, nom: "Martin",

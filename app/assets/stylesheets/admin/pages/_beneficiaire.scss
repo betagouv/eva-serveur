@@ -10,6 +10,22 @@
   }
 }
 
+#index_table_beneficiaires {
+  th.col-selectable,
+  td.col-selectable {
+    width: 1%;
+    padding-right: 0;
+  }
+
+  td.beneficiaire__col-suivi {
+    text-align: center;
+
+    .fr-badge {
+      white-space: nowrap;
+    }
+  }
+}
+
 .liste-evaluations-positionnement__tableau {
   td div {
     display: flex;

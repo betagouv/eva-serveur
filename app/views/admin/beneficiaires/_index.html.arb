@@ -4,6 +4,9 @@ context.instance_eval do
     render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
   end
   column :code_beneficiaire
+  column :statut_suivi, sortable: false, class: "beneficiaire__col-suivi" do |beneficiaire|
+    statut_suivi_beneficiaire(beneficiaire, collection)
+  end
   column :created_at do |beneficiaire|
     content_tag :span, localize(beneficiaire.created_at),
       data: { created_at: beneficiaire.created_at.iso8601(3) }

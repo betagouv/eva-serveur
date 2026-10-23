@@ -14,5 +14,9 @@ module Beneficiaires
 
       Arel.sql("COALESCE((#{derniere_evaluation_concernee.to_sql}), 'non_concerne')")
     end
+
+    def self.expression_rang
+      EvaluationsEva::StatutSuivi.rang(expression_statut)
+    end
   end
 end

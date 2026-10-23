@@ -71,5 +71,46 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(entetes.index("Créé le")).to eq entetes.index("Suivi") + 1
       end
     end
+
+    context "tri par statut de suivi" do
+      let!(:compte_admin) { create :compte_admin }
+      let(:campagne) { create :campagne, compte: compte_admin }
+      let(:attributs_concernee) do
+        { campagne: campagne, synthese_competences_de_base: :illettrisme_potentiel,
+          completude: "complete" }
+      end
+      let!(:non_concerne) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+      let!(:a_renseigner) { create(:evaluation, :eva, attributs_concernee).beneficiaire }
+      let!(:suite_engagee) do
+        create(:evaluation, :eva, :avec_mise_en_action, effectuee: true,
+                                                        **attributs_concernee).beneficiaire
+      end
+
+      before do
+        Bullet.enable = false
+        allow(ENV).to receive(:[]).and_call_original
+        allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+        connecte(compte_admin)
+      end
+
+      after { Bullet.enable = true }
+
+      it "trie dans l'ordre des statuts, les non concernés en dernier" do
+        visit admin_beneficiaires_path
+        click_link "Suivi"
+
+        codes = [ suite_engagee, a_renseigner, non_concerne ].map(&:code_beneficiaire)
+        expect(find("tbody").text).to match(/#{codes.join(".*")}/m)
+      end
+
+      it "inverse l'ordre au second clic" do
+        visit admin_beneficiaires_path
+        click_link "Suivi"
+        click_link "Suivi"
+
+        codes = [ non_concerne, a_renseigner, suite_engagee ].map(&:code_beneficiaire)
+        expect(find("tbody").text).to match(/#{codes.join(".*")}/m)
+      end
+    end
   end
 end

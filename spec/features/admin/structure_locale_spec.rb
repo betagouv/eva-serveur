@@ -211,6 +211,21 @@ describe 'Admin - Structure locale', type: :feature do
       end
     end
 
+    describe "modification de l'opérateur de compétences" do
+      let!(:structure) { create :structure_locale, :eva_pro }
+      let!(:autre_opco) { create :opco, nom: 'OPCO de destination' }
+
+      before do
+        visit edit_admin_structure_locale_path(structure)
+        select 'OPCO de destination', from: :structure_locale_opco_id
+        click_on 'Modifier'
+      end
+
+      it "rattache la structure au nouvel opérateur de compétences" do
+        expect(structure.reload.opco).to eq autre_opco
+      end
+    end
+
     describe "modification avec un SIRET dont la vérification est indisponible" do
       let!(:structure) { create :structure_locale, siret: '12345678901225' }
 
@@ -257,6 +272,15 @@ describe 'Admin - Structure locale', type: :feature do
       end
     end
 
+    describe 'show' do
+      it "affiche l'opérateur de compétences de la structure" do
+        structure.update!(opco: create(:opco, nom: 'OPCO de rattachement'))
+        visit admin_structure_locale_path(structure)
+
+        expect(page).to have_content 'OPCO de rattachement'
+      end
+    end
+
     describe 'update' do
       it 'ne permet pas de modifier une structure avec un même SIRET deja affecté' do
         create :structure_locale, siret: '12345678901212'
@@ -274,6 +298,21 @@ describe 'Admin - Structure locale', type: :feature do
 
         expect(page).to have_content "ne peut pas être supprimé"
         expect(structure.reload.siret).to eq '12345678901234'
+      end
+
+      it "rappelle que l'opérateur de compétences est déduit de la convention collective si vide" do
+        visit edit_admin_structure_locale_path(structure)
+
+        expect(page).to have_content(I18n.t("admin.structures_locales.form.hint_opco"))
+      end
+
+      it "permet de changer l'opérateur de compétences" do
+        autre_opco = create :opco, nom: 'OPCO de destination'
+        visit edit_admin_structure_locale_path(structure)
+        select 'OPCO de destination', from: :structure_locale_opco_id
+        click_on 'Modifier'
+
+        expect(structure.reload.opco).to eq autre_opco
       end
 
       it 'permet de modifier le nom même si son SIRET est en doublon avec une autre structure' do

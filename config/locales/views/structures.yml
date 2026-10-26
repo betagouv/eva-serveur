@@ -37,6 +37,7 @@ fr:
         titre:
           nouveau: Création d'une nouvelle structure
           modification: Modification de la structure
+        hint_opco: Si ce champ est vide, l'opérateur de compétences sera recherché à partir de la convention collective (IDCC) de la structure.
         verifier_information_structure: |
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})

@@ -1,6 +1,5 @@
 attributes_table_for opco do
   row :nom
-  row :financeur
   row :logo do
     apercu_piece_jointe_avec_lien(opco.logo, variant: :defaut, fallback: "Aucun logo")
   end

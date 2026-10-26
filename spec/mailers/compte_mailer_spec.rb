@@ -56,7 +56,7 @@ describe CompteMailer, type: :mailer do
     end
   end
 
-  describe 'relance' do
+  describe '#relance' do
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }
     let(:mail) { described_class.with(compte: compte).relance }
 
@@ -81,28 +81,12 @@ describe CompteMailer, type: :mailer do
         expect(mail.from).to eql([ Eva::EMAIL_CONTACT ])
       end
 
-      context "pour une structure de type inconnue" do
-        before { structure.type_structure = nil }
+      it "affiche l'effectif de la structure" do
+        allow(structure).to receive(:effectif).and_return(3)
 
-        it "affiche la cible d'évaluation par defaut" do
-          expect(mail.body).to include "bénéficiaires"
-        end
-      end
-
-      context "pour une structure de type autre" do
-        before { structure.type_structure = "autre" }
-
-        it "affiche la cible d'évaluation par defaut" do
-          expect(mail.body).to include "bénéficiaires"
-        end
-      end
-
-      context "pour une structure de type SMA" do
-        before { structure.type_structure = "SMA" }
-
-        it "affiche la cible d'évaluation" do
-          expect(mail.body).to include "jeunes"
-        end
+        expect(mail.body).to include(
+          I18n.t('compte_mailer.relance.x_personnes_utilisent_eva', count: 3)
+        )
       end
     end
   end

@@ -33,33 +33,37 @@ fr:
       intro: |
         ## Bonjour %{prenom},
 
-        Depuis %{delai_relance} vous avez un accès gratuit à eva.
+        Il y a %{delai_relance} vous avez créé un compte professionnel sur <a
+        href="%{url_connexion}" target="_blank">eva</a>.
 
-        Eva est un outil d'évaluation ludique qui permet de détecter
-        difficultés avec les compétences de base et de valoriser les
-        %{cible_evaluation} que vous accompagnez en vous appuyant sur leurs
-        compétences transversales.
-
-        ### Vous souhaitez essayer eva ? Découvrir les jeux, les réaliser puis visualiser les résultats ?
-
-        Connectez vous à votre compte <a href="%{url_connexion}" target="_blank">ici</a> et créez votre campagne test.
+        Eva (<a href="%{url_site_vitrine}" target="_blank">%{url_site_vitrine}</a>) est un service public numérique d'appui à l'accompagnement des
+        personnes en difficultés avec les compétences de base, qui permet de
+        valoriser les compétences maîtrisées, repérer les éventuels besoins et
+        identifier les solutions adaptées.
       x_personnes_utilisent_eva:
         zero: ""
         one: "Vous êtes la seule personne de votre structure à avoir créé son compte."
         other: "Vous êtes %{count} collègues de votre structure à avoir créé un compte."
       besoin_aide: |
-        ### Vous souhaitez découvrir ou redécouvrir eva ?
+        ### Vous souhaitez en savoir plus sur eva avant de l'utiliser ?
 
-        Choisissez une date de participation à <a href="%{lien_inscription_presentation}" target="_blank">une de nos présentations</a>
+        Choisissez une date de participation à <a
+        href="%{lien_inscription_presentation}" target="_blank">une de nos
+        présentations</a>
 
-        ### Vous avez besoin de plus d'informations ?
+        ### Vous avez besoin de plus d'informations, de ressources spécifiques ?
 
-        Découvrez notre <a href="%{lien_rubrique_aide}" target="_blank">rubrique Aide</a> depuis votre
-        espace professionnel
+        Découvrez la <a href="%{lien_boite_a_outils}" target="_blank">boite à outil eva</a>.
+
+        ### Vous voulez découvrir les parcours d'évaluation, les réaliser puis visualiser les résultats ?
+
+        Vous pouvez utiliser l'<a href="%{lien_demo}" target="_blank">interface
+        « bac à sable »</a> pour créer des campagnes, les tester et consulter
+        des exemples de résultats.
 
         ### Vous rencontrez un problème de connexion ou d'utilisation ?<br>Vous avez des questions ou des remarques ?
 
-        Ecrivez à cette adresse [%{email_support}](mailto:%{email_support}) et
+        Ecrivez à [%{email_support}](mailto:%{email_support}) et
         notre équipe vous répondra dans les plus brefs délais !
     comptes_a_autoriser:
       objet: |

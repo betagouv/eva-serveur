@@ -28,24 +28,6 @@ class StructureLocale < Structure
     autre
   ].freeze
 
-  CIBLE_EVALUATION = {
-    AFPA: "stagiaires",
-    GRETA: "stagiaires",
-    PJJ_UEAJ: "jeunes",
-    SIAE: "salarié(e)s",
-    SMA: "jeunes",
-    SMV: "jeunes",
-    apprentissage: "stagiaires",
-    cap_emploi: "demandeurs d'emploi",
-    e2c: "jeunes",
-    entreprise: "salarié(e)s",
-    france_travail: "demandeurs d'emploi",
-    mission_locale: "jeunes",
-    organisme_formation: "stagiaires",
-    orientation_scolaire: "jeunes",
-    service_insertion_collectivite: "usagers"
-  }.freeze
-
   validates :code_postal, :type_structure, :usage, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }
   validates :code_postal, numericality: { only_integer: true }, length: { is: 5 },
@@ -67,10 +49,6 @@ class StructureLocale < Structure
 
   def display_name
     "#{nom} - #{code_postal}"
-  end
-
-  def cible_evaluation
-    CIBLE_EVALUATION[type_structure&.to_sym] || "bénéficiaires"
   end
 
   def evapro?

@@ -3,8 +3,12 @@ ActiveAdmin.register StructureLocale do
 
   config.sort_order = "created_at_desc"
 
-  permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
-                :autorisation_creation_campagne, :usage, :email_contact, :telephone
+  permit_params do
+    params = [ :nom, :type_structure, :code_postal, :parent_id, :siret,
+               :autorisation_creation_campagne, :usage, :email_contact, :telephone ]
+    params << :opco_id if current_compte.au_moins_admin?
+    params
+  end
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :type_structure,

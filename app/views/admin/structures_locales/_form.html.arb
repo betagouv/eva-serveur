@@ -18,6 +18,12 @@ div class: "panel nouvelle_structure" do
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end
+      if current_compte.au_moins_admin?
+        f.input :opco_id, as: :select,
+                collection: collection_opcos,
+                include_blank: t("formtastic.placeholders.structure.opco_id"),
+                hint: t(".hint_opco")
+      end
       f.input :autorisation_creation_campagne, as: :toggle
     end
     text_node md t(".verifier_information_structure", email_contact: Eva::EMAIL_CONTACT)

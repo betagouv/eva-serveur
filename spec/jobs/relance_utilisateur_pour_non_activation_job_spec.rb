@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 describe RelanceUtilisateurPourNonActivationJob, type: :job do
-  let(:compte) { create :compte_admin, email_bienvenue_envoye: false }
+  let!(:compte) { create :compte_admin, email_bienvenue_envoye: false }
 
   context "quand le compte n'a pas de campagne" do
     it "envoie un email pour relancer l'utilisateur" do
       expect do
         described_class.perform_now(compte.id)
-      end.to change { ActionMailer::Base.deliveries.count }.by(2)
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 
   context 'quand le compte a une ou plusieurs campagne sans passation' do
-    let(:campagne) { create :campagne, compte: compte }
+    let!(:campagne) { create :campagne, compte: compte }
 
     it "envoie un email pour relancer l'utilisateur" do
       expect do
         described_class.perform_now(compte.id)
-      end.to change { ActionMailer::Base.deliveries.count }.by(2)
+      end.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 
@@ -25,6 +25,20 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
     let(:campagne) { create :campagne, compte: compte }
 
     before { create :evaluation, campagne: campagne }
+
+    it 'ne fais rien' do
+      expect do
+        described_class.perform_now(compte.id)
+      end.not_to(change { ActionMailer::Base.deliveries.count })
+    end
+  end
+
+  context 'quand le compte a une campagne avec passations et une campagne sans' do
+    before do
+      create :campagne, compte: compte
+      campagne_avec_passation = create :campagne, compte: compte
+      create :evaluation, campagne: campagne_avec_passation
+    end
 
     it 'ne fais rien' do
       expect do

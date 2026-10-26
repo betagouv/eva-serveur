@@ -20,6 +20,15 @@ class CompteMailerPreview < ActionMailer::Preview
 
   def relance
     structure = StructureLocale.new type_structure: 'mission_locale'
+    structure.define_singleton_method(:effectif) { 1 }
+    compte = Compte.new prenom: 'Lucas', structure: structure, email: 'lucas.dupont@example.com'
+
+    CompteMailer.with(compte: compte).relance
+  end
+
+  def relance_plusieurs_comptes_structure
+    structure = StructureLocale.new type_structure: 'mission_locale'
+    structure.define_singleton_method(:effectif) { 2 }
     compte = Compte.new prenom: 'Lucas', structure: structure, email: 'lucas.dupont@example.com'
 
     CompteMailer.with(compte: compte).relance

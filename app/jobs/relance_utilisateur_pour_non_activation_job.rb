@@ -5,16 +5,12 @@ class RelanceUtilisateurPourNonActivationJob < ApplicationJob
     compte = Compte.find_by id: compte_id
     return if compte.blank? || compte.structure.blank?
 
-    return unless compte_sans_evaluations?(compte)
+    return if au_moins_une_evaluation?(compte)
 
     CompteMailer.with(compte: compte).relance.deliver_now
   end
 
-  def compte_sans_evaluations?(compte)
-    Campagne.left_outer_joins(:evaluations)
-            .where(compte: compte)
-            .group(:compte_id)
-            .pluck("COUNT(evaluations.id)")
-            .all?(&:zero?)
+  def au_moins_une_evaluation?(compte)
+    Evaluation.joins(:campagne).exists?(campagnes: { compte_id: compte.id })
   end
 end

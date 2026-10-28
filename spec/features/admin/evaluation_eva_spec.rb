@@ -160,6 +160,19 @@ describe 'Admin - Evaluation eva', type: :feature do
       end
     end
 
+    context "évaluation anonyme" do
+      let(:beneficiaire) { create(:beneficiaire, anonymise_le: Time.current) }
+      let(:evaluation_eva) do
+        create(:evaluation, :eva, campagne: ma_campagne, beneficiaire: beneficiaire)
+      end
+
+      it "prévient que l'évaluation est anonyme" do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        expect(page).to have_content(I18n.t("admin.evaluations.evaluation_anonyme"))
+      end
+    end
+
     context 'situation plan de la ville' do
       let!(:mon_evaluation_plan_de_la_ville) { create :evaluation, :eva, campagne: campagne }
       let!(:partie) do

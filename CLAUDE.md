@@ -81,6 +81,9 @@ Redis must be running for the Sidekiq workers.
 ### Langue
 - Le code est écrit en français : noms de classes, de méthodes et de variables, commentaires, descriptions RSpec et messages de commit. Le vocabulaire imposé par Rails et les gems (`create`, `index`, `has_many`, callbacks…) reste en anglais.
 
+### Tests
+- Always reference displayed text through its translation (`I18n.t("…")`) instead of hardcoding the string: a hardcoded copy breaks on any wording change and usually misses the narrow non-breaking spaces (U+202F) of the locales.
+
 ### TDD (red → green)
 - Before fixing a bug or changing behavior, write or adapt the test, run it with `bin/rspec <file>` and confirm it **fails**. Only then change the production code and rerun it to confirm it passes.
 - If the test already passes before any change, it is not a real TDD cycle: say so instead of silently skipping the red step.

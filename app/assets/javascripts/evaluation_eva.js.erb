@@ -7,7 +7,7 @@ function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
 
 function reinitialiseFormulaire(evaluationId) {
   $(`#${evaluationId} input[name=reponse_qcm]`).prop('checked', false);
-  $(`#${evaluationId} .valide-qcm`).addClass('bouton--desactive');
+  $(`#${evaluationId} .valide-qcm`).prop('disabled', true);
 }
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
@@ -63,7 +63,7 @@ function activeBoutonValider() {
   radios.each(function() {
     const radio = $(this)
     radio.on("click", function(event) {
-      radio.closest('.qcm').find('.valide-qcm').removeClass('bouton--desactive');
+      radio.closest('.qcm').find('.valide-qcm').prop('disabled', false);
     })
   });
 }

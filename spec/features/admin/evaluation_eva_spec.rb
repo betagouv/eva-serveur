@@ -158,6 +158,17 @@ describe 'Admin - Evaluation eva', type: :feature do
 
         expect(page).to have_css(".evaluation__restitution-globale")
       end
+
+      it "affiche le bouton d'export dans le bloc Gestion" do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        within "#action_items_sidebar_section" do
+          expect(page).to have_link(
+            I18n.t("admin.evaluations_eva.action_items.exporter"),
+            href: /\A#{Regexp.escape(admin_evaluation_eva_path(evaluation_eva, format: :pdf))}/
+          )
+        end
+      end
     end
 
     context "évaluation anonyme" do

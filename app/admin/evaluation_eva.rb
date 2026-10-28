@@ -105,6 +105,16 @@ ActiveAdmin.register EvaluationEva do
     render "menu_sidebar"
   end
 
+  action_item :exporter, only: :show do
+    render BoutonDsfrComponent.new(
+      admin_evaluation_eva_path(resource, format: :pdf,
+                                          parties_selectionnees: params[:parties_selectionnees]),
+      type: :primary,
+      size: :sm,
+      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"
+    ).with_content(I18n.t("admin.evaluations_eva.action_items.exporter"))
+  end
+
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
     redirect_to request.referer

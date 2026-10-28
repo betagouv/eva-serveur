@@ -83,8 +83,7 @@
   }
   
   // État Désactivé
-  &:disabled,
-  &.bouton--desactive {
+  &:disabled {
     cursor: not-allowed;
     color: $grey-625;
     text-shadow:none;
@@ -130,8 +129,7 @@
   }
   
   // État Désactivé
-  &:disabled,
-  &.bouton--desactive {
+  &:disabled {
     cursor: not-allowed;
     border-color: $grey-925;
     color: $grey-625;
@@ -176,8 +174,7 @@
   }
   
   // État Désactivé
-  &:disabled,
-  &.bouton--desactive {
+  &:disabled {
     cursor: not-allowed;
     border-color: $grey-925;
     color: $grey-625;

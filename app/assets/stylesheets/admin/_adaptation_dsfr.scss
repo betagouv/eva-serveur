@@ -294,12 +294,12 @@ input[type="button"].fr-btn.fr-btn--tertiary-no-outline {
 }
 
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
-button.fr-btn:not(.disabled):hover,
-input[type="submit"].fr-btn:not(.disabled):hover,
-input[type="button"].fr-btn:not(.disabled):hover,
-form button.fr-btn:not(.disabled):hover,
-form input[type="submit"].fr-btn:not(.disabled):hover,
-form input[type="button"].fr-btn:not(.disabled):hover {
+button.fr-btn:not(.disabled, :disabled):hover,
+input[type="submit"].fr-btn:not(.disabled, :disabled):hover,
+input[type="button"].fr-btn:not(.disabled, :disabled):hover,
+form button.fr-btn:not(.disabled, :disabled):hover,
+form input[type="submit"].fr-btn:not(.disabled, :disabled):hover,
+form input[type="button"].fr-btn:not(.disabled, :disabled):hover {
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--close) {
@@ -311,12 +311,12 @@ form input[type="button"].fr-btn:not(.disabled):hover {
 
 // Couleur DSFR au clic : sans cette règle, le hover ci-dessus l'emporte
 // aussi pendant le clic. Même spécificité que le hover, donc placée après.
-button.fr-btn:not(.disabled):active,
-input[type="submit"].fr-btn:not(.disabled):active,
-input[type="button"].fr-btn:not(.disabled):active,
-form button.fr-btn:not(.disabled):active,
-form input[type="submit"].fr-btn:not(.disabled):active,
-form input[type="button"].fr-btn:not(.disabled):active {
+button.fr-btn:not(.disabled, :disabled):active,
+input[type="submit"].fr-btn:not(.disabled, :disabled):active,
+input[type="button"].fr-btn:not(.disabled, :disabled):active,
+form button.fr-btn:not(.disabled, :disabled):active,
+form input[type="submit"].fr-btn:not(.disabled, :disabled):active,
+form input[type="button"].fr-btn:not(.disabled, :disabled):active {
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--tertiary-no-outline, .fr-btn--close) {
@@ -331,46 +331,46 @@ form input[type="button"].fr-btn:not(.disabled):active {
   color: var(--text-action-high-blue-france);
 }
 
-.fr-btn--secondary:not(.disabled, .bouton--actif):hover {
+.fr-btn--secondary:not(.disabled, :disabled, .bouton--actif):hover {
   @include light-decisions-background-transparent-hover;
 }
 
-.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
-.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover {
+.fr-btn--tertiary:not(.disabled, :disabled, .bouton--actif):hover,
+.fr-btn--tertiary-no-outline:not(.disabled, :disabled, .bouton--actif):hover {
   @include light-decisions-background-transparent-hover;
 }
 
-button.fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
-input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
-input[type="button"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover {
+button.fr-btn.fr-btn--secondary:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--secondary:not(.disabled, :disabled, .bouton--actif):hover {
   border: none;
   box-shadow: inset 0 0 0 1px $blue-france-sun-113;
   background-image: none;
 }
 
-button.fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
-input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
-input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover {
+button.fr-btn.fr-btn--tertiary:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled, :disabled, .bouton--actif):hover {
   border: none;
   box-shadow: inset 0 0 0 1px $grey-900;
   background-image: none;
 }
 
-button.fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover,
-input[type="submit"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover,
-input[type="button"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, .bouton--actif):hover {
+button.fr-btn.fr-btn--tertiary-no-outline:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, :disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--tertiary-no-outline:not(.disabled, :disabled, .bouton--actif):hover {
   border: none;
   box-shadow: none;
   background-image: none;
 }
 
-.fr-btn--tertiary-no-outline:not(.disabled):active {
+.fr-btn--tertiary-no-outline:not(.disabled, :disabled):active {
   background-color: rgba(0, 0, 0, 0.08) !important;
 }
 
-button.fr-btn:not(.disabled):active,
-input[type="submit"].fr-btn:not(.disabled):active,
-input[type="button"].fr-btn:not(.disabled):active {
+button.fr-btn:not(.disabled, :disabled):active,
+input[type="submit"].fr-btn:not(.disabled, :disabled):active,
+input[type="button"].fr-btn:not(.disabled, :disabled):active {
   background-image: none;
   box-shadow: none;
 }
@@ -388,6 +388,33 @@ input[type="button"].fr-btn:disabled {
   box-shadow: none;
   background-image: none;
   border: none;
+}
+
+// Garde le style désactivé DSFR au survol et au clic : sans ces règles,
+// le dégradé Active Admin (form button:not(.disabled):hover) s'applique.
+button.fr-btn:disabled,
+input[type="submit"].fr-btn:disabled,
+input[type="button"].fr-btn:disabled,
+form button.fr-btn:disabled,
+form input[type="submit"].fr-btn:disabled,
+form input[type="button"].fr-btn:disabled {
+
+  &:hover,
+  &:active {
+    background-color: var(--background-disabled-grey);
+    background-image: none;
+    box-shadow: none;
+  }
+
+  &.fr-btn--secondary,
+  &.fr-btn--tertiary,
+  &.fr-btn--tertiary-no-outline {
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+    }
+  }
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR

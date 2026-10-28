@@ -81,24 +81,41 @@ describe Restitution::QuestionsReponses do
     end
   end
 
-  describe 'questions_redaction' do
-    context 'renvoie les questions de rédaction et leur réponse' do
-      let(:question_redaction_note) { create :question_saisie, nom_technique: 'redaction_note' }
-      let(:question_age) { create :question_saisie, nom_technique: 'age' }
+  describe "#questions_redaction" do
+    let(:question_redaction_note) { create :question_saisie, nom_technique: "redaction_note" }
+
+    context "renvoie les questions de rédaction et leur réponse" do
+      let(:question_age) { create :question_saisie, nom_technique: "age" }
 
       let(:evenements) do
         [
           build(:evenement_reponse,
-                donnees: { question: question_redaction_note.id, reponse: 'ton b' }),
+                donnees: { question: question_redaction_note.id, reponse: "ton b" }),
           build(:evenement_reponse,
-                donnees: { question: question_age.id, reponse: '34' }),
+                donnees: { question: question_age.id, reponse: "34" }),
           build(:evenement_reponse,
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
 
-      it { expect(restitution.questions_redaction.count).to be(1) }
-      it { expect(restitution.questions_redaction.first[1]).to eql('ton b') }
+      it do
+        expect(restitution.questions_redaction.count).to be(1)
+        expect(restitution.questions_redaction.first[1]).to eql("ton b")
+      end
+    end
+
+    context "Renvoie une explication si le bénéficiaire a passé la rédaction" do
+      let(:evenements) do
+        [
+          build(:evenement_reponse,
+                donnees: { question: question_redaction_note.id, neSaisPas: true })
+        ]
+      end
+
+      it do
+        expect(restitution.questions_redaction.first[1])
+          .to eql(I18n.t("admin.restitutions.redaction_passee"))
+      end
     end
   end
 

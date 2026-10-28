@@ -2,5 +2,6 @@ fr:
   admin:
     evaluations:
       inconnue: "Évaluation non trouvée"
+      evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
       lien:
         voir_detail: "Voir le détail"

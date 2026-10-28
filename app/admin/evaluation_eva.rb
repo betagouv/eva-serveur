@@ -212,7 +212,9 @@ ActiveAdmin.register EvaluationEva do
     end
 
     before_action only: :show do
-      flash.now[:evaluation_anonyme] = t(".evaluation_anonyme") if resource.anonyme?
+      if resource.anonyme?
+        flash.now[:evaluation_anonyme] = t("admin.evaluations.evaluation_anonyme")
+      end
     end
 
     def structure

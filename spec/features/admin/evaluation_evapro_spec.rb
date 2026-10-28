@@ -29,4 +29,22 @@ describe 'Admin - EvaluationEvapro', type: :feature do
       expect(page.current_url).to eql(admin_evaluations_evapro_url)
     end
   end
+
+  describe 'évaluation anonyme' do
+    let(:evaluation_evapro) do
+      EvaluationEvapro.create!(campagne: campagne_evapro,
+                               beneficiaire: create(:beneficiaire, anonymise_le: Time.current),
+                               debutee_le: 1.hour.ago)
+    end
+
+    before { Bullet.enable = false }
+
+    after { Bullet.enable = true }
+
+    it "prévient que l'évaluation est anonyme" do
+      visit admin_evaluation_evapro_path(evaluation_evapro)
+
+      expect(page).to have_content(I18n.t("admin.evaluations.evaluation_anonyme"))
+    end
+  end
 end

@@ -175,7 +175,6 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
-        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
     evaluations:
       panel_administration:
         titre: Administration

@@ -88,16 +88,6 @@
   .card {
     max-width: 37.5rem;
 
-    &-pdf {
-      padding: 1.25rem;
-      text-align: center;
-      background-color: var(--blue-france-850-200);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
     &-footer {
       padding: 1rem 0;
     }

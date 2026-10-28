@@ -44,6 +44,31 @@ ActiveAdmin.register EvaluationEvapro do
     render_attestation_pdf
   end
 
+  action_item :telecharger_attestation, only: :show,
+              if: proc {
+                AttestationPassation.new(resource).disponible? &&
+                  can?(:telecharger_attestation, resource)
+              } do
+    render BoutonDsfrComponent.new(
+      telecharger_attestation_admin_evaluation_evapro_path(resource),
+      type: :secondary,
+      size: :sm,
+      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf",
+      "aria-label":
+        I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.aria_label")
+    ).with_content(I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.libelle"))
+  end
+
+  action_item :exporter, only: :show,
+              if: proc { resource.restitution_pro(restitution_globale).pourcentage_risque } do
+    render BoutonDsfrComponent.new(
+      admin_evaluation_evapro_path(resource, format: :pdf),
+      type: :primary,
+      size: :sm,
+      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"
+    ).with_content(I18n.t("admin.evaluations_evapro.action_items.exporter"))
+  end
+
   form partial: "form"
 
   sidebar " ", only: :show do

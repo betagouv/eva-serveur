@@ -75,6 +75,17 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
         allow(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end
 
+      it "affiche le bouton d'export dans le bloc Gestion" do
+        visit admin_evaluation_evapro_path(evaluation_evapro)
+
+        within "#action_items_sidebar_section" do
+          expect(page).to have_link(
+            I18n.t("admin.evaluations_evapro.action_items.exporter"),
+            href: admin_evaluation_evapro_path(evaluation_evapro, format: :pdf)
+          )
+        end
+      end
+
       it "enqueue la génération en tâche de fond et redirige vers la page d'attente" do
         expect do
           visit admin_evaluation_evapro_path(evaluation_evapro, format: :pdf)

@@ -1,9 +1,11 @@
 fr:
   admin:
     evaluations_evapro:
-      restitution_globale:
-        bouton_telechargement_pdf: Exporter
-        bouton_attestation: Télécharger une attestation de passation
+      action_items:
+        exporter: Exporter (pdf)
+        telecharger_attestation:
+          libelle: Attestation de passation
+          aria_label: Télécharger une attestation de passation au format PDF
       attestation:
         titre: Attestation de passation
         sous_titre: Diagnostic Evapro

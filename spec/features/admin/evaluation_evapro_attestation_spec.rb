@@ -17,7 +17,7 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
                                  completude: completude)
   end
   let(:libelle_bouton) do
-    I18n.t("admin.evaluations_evapro.restitution_globale.bouton_attestation")
+    I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.libelle")
   end
 
   context "quand la fonctionnalité est active" do
@@ -29,7 +29,16 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
       it "affiche le bouton de téléchargement de l'attestation" do
         visit admin_evaluation_evapro_path(evaluation)
 
-        expect(page).to have_link(libelle_bouton)
+        within("#action_items_sidebar_section") { expect(page).to have_link(libelle_bouton) }
+      end
+
+      it "décrit l'action du bouton pour les lecteurs d'écran" do
+        visit admin_evaluation_evapro_path(evaluation)
+
+        lien = find("#action_items_sidebar_section a", text: libelle_bouton)
+        expect(lien["aria-label"]).to eq(
+          I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.aria_label")
+        )
       end
     end
 
@@ -53,7 +62,7 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
       it "affiche le bouton, comme celui de l'export" do
         visit admin_evaluation_evapro_path(evaluation)
 
-        expect(page).to have_link(libelle_bouton)
+        within("#action_items_sidebar_section") { expect(page).to have_link(libelle_bouton) }
       end
     end
   end
@@ -80,7 +89,7 @@ describe "Admin - Attestation de passation Evapro", type: :feature do
         visit admin_evaluation_evapro_path(evaluation)
 
         expect do
-          click_link libelle_bouton
+          within("#action_items_sidebar_section") { click_link libelle_bouton }
         end.to have_enqueued_job(Pdf::GenerationJob).with { |_jeton, _html, nom|
           expect(nom).to eq("#{evaluation.debutee_le.strftime('%Y%m%d-%H%M')}-" \
                             "attestation-passation-#{beneficiaire.nom}.pdf")

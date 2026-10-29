@@ -25,6 +25,7 @@
 //= require telecharge_pdf
 //= require export_pdf_modal
 //= require evaluation_eva
+//= require tag_supprimable
 //= require simple_mde
 //= require modal_verification
 //= require deplace_modales_dsfr

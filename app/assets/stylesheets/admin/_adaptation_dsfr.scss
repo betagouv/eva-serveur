@@ -301,6 +301,27 @@ form input[type="button"].fr-btn:not(.disabled, :disabled):active {
   }
 }
 
+// Annule le style de bouton Active Admin (form button : dégradé, bordure, ombres, gras)
+// sur les tags DSFR rendus par button_to. Les couleurs viennent des variables du DSFR.
+form button.fr-tag {
+  background-image: none;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  font-weight: inherit;
+
+  &:not(.disabled, :disabled):hover {
+    background-color: var(--hover);
+    background-image: none;
+  }
+
+  &:not(.disabled, :disabled):active {
+    background-color: var(--active);
+    background-image: none;
+    box-shadow: none;
+  }
+}
+
 .fr-btn--secondary,
 .fr-btn--tertiary,
 .fr-btn--tertiary-no-outline {

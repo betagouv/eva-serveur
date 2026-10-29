@@ -89,9 +89,9 @@ ActiveAdmin.register EvaluationEva do
     resource.responsable_suivi.present?
   } do
     render(Tag.new(resource.responsable_suivi.display_name,
-                   classes: "bleu",
                    supprimable: can?(:supprimer_responsable_suivi, Evaluation),
-                   url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource)))
+                   url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource),
+                   taille: "sm"))
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {

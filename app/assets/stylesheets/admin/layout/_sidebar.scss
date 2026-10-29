@@ -10,15 +10,9 @@
     flex-wrap: wrap;
   }
 
-  .tag {
-    $largeur-panel: 18.125rem;
-    $padding: 1rem;
-
-    @include tronque;
-
-    display: inline-block;
-    max-width: calc(#{ $largeur-panel - ($padding * 2) });
-    font-weight: 400;
+  .fr-tag {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .champ-recherche {
@@ -67,7 +61,7 @@
         width: 100%;
       }
 
-      .action_item--lien-consultation + .action_item--lien-consultation {
+      .action_item--lien-consultation+.action_item--lien-consultation {
         margin-top: -$dsfr-spacing-1v;
       }
     }

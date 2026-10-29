@@ -40,6 +40,14 @@ RSpec.describe EvaluationsEva::StatutSuivi do
           .to eq(evaluation.id => "pas_de_suite")
       end
 
+      it "est à renseigner quand la réponse est « je ne sais pas »" do
+        evaluation = create :evaluation, :eva, :avec_mise_en_action, effectuee: nil,
+                                                                    **attributs_concernee
+
+        expect(described_class.par_evaluation([ evaluation.id ]))
+          .to eq(evaluation.id => "a_renseigner")
+      end
+
       it "suit le changement de réponse" do
         evaluation = create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
                                                                     **attributs_concernee

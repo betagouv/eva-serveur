@@ -27,11 +27,18 @@ RSpec.describe EvaluationsEva::TableauDeBordMisesEnAction do
     let!(:evaluation_autre_compte) do
       create :evaluation, :eva, synthese_competences_de_base: :illettrisme_potentiel
     end
+    let!(:evaluation_je_ne_sais_pas) do
+      create :evaluation, :eva, :avec_mise_en_action,
+             effectuee: nil,
+             synthese_competences_de_base: :illettrisme_potentiel,
+             completude: "complete",
+             campagne: campagne
+    end
 
     it "retourne les évaluations du tableau de bord mises en action pour l'ability" do
       ability = Ability.new(compte_admin)
       expect(described_class.relation(ability).pluck(:id))
-        .to eq [ evaluation_sans_mise_en_action.id ]
+        .to contain_exactly(evaluation_sans_mise_en_action.id, evaluation_je_ne_sais_pas.id)
     end
   end
 end

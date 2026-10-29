@@ -19,7 +19,6 @@ function setupResetPasswordEmailForms() {
       var enable = emailRempli();
 
       submitButton.disabled = !enable;
-      submitButton.classList.toggle("disabled", !enable);
     }
 
     emailInput.addEventListener("input", updateSubmitState);

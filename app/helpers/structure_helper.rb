@@ -32,7 +32,7 @@ module StructureHelper
 
   # Teintes des logos Eva (bleu) et Evapro (gris)
   def classe_tag_usage(usage)
-    usage == AvecUsage::USAGE_EVAPRO ? "grey" : "bleu"
+    usage == AvecUsage::USAGE_EVAPRO ? "gris" : "bleu"
   end
 
   def collection_usages

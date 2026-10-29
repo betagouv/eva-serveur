@@ -11,7 +11,7 @@ ActiveAdmin.register SourceAide do
     end
     column(:categorie) do |a|
       render(Tag.new(t(a.categorie, scope: "activerecord.attributes.source_aide.categories"),
-                     classes: "tag-categorie grey"))
+                     classes: "tag-categorie gris"))
     end
     column :position
     column :description

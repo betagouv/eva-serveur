@@ -10,15 +10,15 @@
   font-weight: 500;
   color: $couleur-texte;
 
-  &.red {
+  &.rouge {
     @include tag-couleur-majuscule($error-425, $error-950)
   }
 
-  &.green {
+  &.vert {
     @include tag-couleur-majuscule($success-425, $success-950)
   }
 
-  &.grey {
+  &.gris {
     @include tag-couleur($grey-425, $grey-950);
   }
 

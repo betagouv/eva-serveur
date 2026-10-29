@@ -49,7 +49,7 @@ describe 'Admin - Structure locale', type: :feature do
 
         it "affiche l'usage traduit dans un tag" do
           expect(page).to have_css(
-            "td .tag.grey", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+            "td .tag.gris", text: I18n.t("activerecord.attributes.structure.usage.evapro")
           )
         end
       end
@@ -176,7 +176,7 @@ describe 'Admin - Structure locale', type: :feature do
 
           it "affiche l'usage traduit dans un tag gris" do
             expect(page).to have_css(
-              ".tag.grey", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+              ".tag.gris", text: I18n.t("activerecord.attributes.structure.usage.evapro")
             )
           end
         end

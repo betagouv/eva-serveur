@@ -54,10 +54,13 @@ fr:
     reponse_mise_en_action:
       bouton_oui: Oui
       bouton_non: Non
+      bouton_je_ne_sais_pas: Je ne sais pas
     modification_mise_en_action:
       modifier_reponse: Modifier votre réponse
       reponse_true_html: <strong>Oui</strong> vous avez trouvé une solution
       reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
+      reponse_je_ne_sais_pas_html: <strong>Je ne sais pas</strong>
+      revue_prevue: Revue prévue le %{date}
     prise_en_main:
       titre: Bienvenue sur eva !
       succes: (étape complétée)

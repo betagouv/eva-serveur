@@ -12,3 +12,5 @@ fr:
           offre_formation_inaccessible: Offre de formation inaccessible (financement, distance, etc.)
           freins_peripheriques: Freins périphériques (mobilité, logement, santé, etc.)
           accompagnement_necessaire: Accompagnement spécifique nécessaire
+        motif:
+          action_prevue: Une action est prévue

@@ -5,12 +5,16 @@ describe EvaluationEva do
   it { is_expected.to have_one :donnee_sociodemographique }
 
   describe 'scopes' do
-    describe '.sans_mise_en_action' do
+    describe '.mise_en_action_a_renseigner' do
       let!(:evaluation_avec_mise_en_action) { create :evaluation, :eva, :avec_mise_en_action }
       let!(:evaluation_sans_mise_en_action) { create :evaluation, :eva }
+      let!(:evaluation_je_ne_sais_pas) do
+        create :evaluation, :eva, :avec_mise_en_action, effectuee: nil
+      end
 
-      it 'retourne les évaluations sans mise en action' do
-        expect(described_class.sans_mise_en_action).to eq [ evaluation_sans_mise_en_action ]
+      it 'retourne les évaluations sans mise en action ou avec une réponse « je ne sais pas »' do
+        expect(described_class.mise_en_action_a_renseigner)
+          .to contain_exactly(evaluation_sans_mise_en_action, evaluation_je_ne_sais_pas)
       end
     end
 

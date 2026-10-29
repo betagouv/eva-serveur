@@ -44,7 +44,9 @@ class EvaluationEva < Evaluation
        NIVEAUX_NUMERATIE.zip(NIVEAUX_NUMERATIE).to_h, prefix: true
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
 
-  scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
+  scope :mise_en_action_a_renseigner, lambda {
+    left_joins(:mise_en_action).where(mises_en_action: { effectuee: nil })
+  }
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
   }

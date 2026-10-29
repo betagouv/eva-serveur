@@ -57,4 +57,14 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
       expect(page).to have_css(".questions-remediation.hidden", visible: :all)
     end
   end
+
+  context "quand on ne sait pas si la mise en action est effectuée" do
+    let(:mise_en_action) { build(:mise_en_action, effectuee: nil) }
+
+    it "ne sélectionne ni Oui ni Non" do
+      expect(page).to have_button("Oui")
+      expect(page).to have_button("Non")
+      expect(page).to have_no_css(".reponse-mise-en-action.bouton--actif")
+    end
+  end
 end

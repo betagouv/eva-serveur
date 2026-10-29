@@ -1,4 +1,4 @@
-<%= render BoutonDsfrComponent.new(locals[:form_url], type: :secondary, tag: :button, size: :sm, class: "fr-icon-add-line fr-btn--icon-left") do %>
+<%= render BoutonDsfrComponent.new(locals[:form_url], type: :secondary, tag: :button, size: :sm, class: "fr-icon-add-line fr-btn--icon-left bouton-ajout-recherche") do %>
   <%= t(".#{locals[:translation_scope]}.action") %>
 <% end %>
 
@@ -10,7 +10,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const boutonAjout = $("#<%= locals[:sidebar_section_id] %> button" );
+  const boutonAjout = $("#<%= locals[:sidebar_section_id] %> .bouton-ajout-recherche");
   const formulaireRecherche = $("#<%= locals[:form_id] %>" );
 
   const comptes = [<% locals[:comptes_collection].each do |compte| %>

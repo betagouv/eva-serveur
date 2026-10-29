@@ -150,6 +150,24 @@ describe 'Admin - Evaluation eva', type: :feature do
   describe '#show' do
     before { connecte(mon_compte) }
 
+    context "avec un responsable de suivi" do
+      let(:evaluation_eva) do
+        create(:evaluation, :eva, campagne: ma_campagne, responsable_suivi: mon_compte)
+      end
+
+      it "peut retirer le responsable de suivi", :js do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        within("#responsable_de_suivi_sidebar_section") do
+          libelle = I18n.t('tag.retirer', contenu: mon_compte.display_name)
+          find("button[aria-label='#{libelle}']").click
+        end
+
+        expect(page).not_to have_css("#responsable_de_suivi_sidebar_section .fr-tag")
+        expect(evaluation_eva.reload.responsable_suivi).to be_nil
+      end
+    end
+
     context "branche d'affichage Eva" do
       let(:evaluation_eva) { create(:evaluation, :eva, campagne: ma_campagne) }
 

@@ -1,8 +1,6 @@
-<div class="tag<%= " tag--supprimable" if @supprimable %> <%= @classes %>">
-  <%= @contenu %>
-  <% if @supprimable %>
-    <%= link_to @url, method: :patch, class: "lien-supprimer" do %>
-        <%= image_tag "croix.svg", alt: t(".supprimer") %>
-    <% end %>
-  <% end %>
-</div>
+<% if @supprimable %>
+  <%= button_to @contenu, @url, method: :patch, class: css_classes,
+                                "aria-label": t(".retirer", contenu: @contenu) %>
+<% else %>
+  <p class="<%= css_classes %>"><%= @contenu %></p>
+<% end %>

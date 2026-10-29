@@ -25,6 +25,24 @@ describe 'Admin - Structure locale', type: :feature do
           expect(page).not_to have_content 'Autre structure'
         end
       end
+
+      describe 'filtre par usage' do
+        let!(:structure_evapro) {
+          create :structure_locale, nom: 'Structure Eva Pro', usage: AvecUsage::USAGE_EVAPRO
+        }
+        let!(:structure_beneficiaires) {
+          create :structure_locale, nom: 'Structure bénéficiaires',
+                                    usage: AvecUsage::USAGE_BENEFICIAIRES
+        }
+
+        it 'ne liste que les structures ayant cet usage' do
+          select AvecUsage::USAGE_EVAPRO, from: 'q[usage_eq]'
+          click_on 'Filtrer'
+
+          expect(page).to have_content 'Structure Eva Pro'
+          expect(page).not_to have_content 'Structure bénéficiaires'
+        end
+      end
     end
 
     describe 'show' do
@@ -255,6 +273,29 @@ describe 'Admin - Structure locale', type: :feature do
       it "enregistre malgré tout la structure" do
         expect(structure.reload.siret).to eq '90813507200020'
       end
+    end
+  end
+
+  describe 'filtre par usage selon le rôle' do
+    let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
+
+    before do
+      connecte(compte)
+      visit admin_structures_locales_path
+    end
+
+    context 'en tant que chargé de mission régionale' do
+      let(:compte) do
+        create :compte_charge_mission_regionale, structure: structure
+      end
+
+      it { expect(page).to have_select 'q[usage_eq]' }
+    end
+
+    context "en tant qu'admin d'une structure" do
+      let(:compte) { create :compte_admin, structure: structure }
+
+      it { expect(page).not_to have_select 'q[usage_eq]' }
     end
   end
 

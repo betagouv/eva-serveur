@@ -415,6 +415,17 @@ form input[type="button"].fr-btn:disabled {
       background-color: transparent;
     }
   }
+
+  // Bordure grise du DSFR, effacée par le box-shadow: none ci-dessus
+  &.fr-btn--secondary,
+  &.fr-btn--tertiary {
+
+    &,
+    &:hover,
+    &:active {
+      box-shadow: inset 0 0 0 1px var(--border-disabled-grey);
+    }
+  }
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR

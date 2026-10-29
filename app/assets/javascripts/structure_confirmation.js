@@ -1,7 +1,6 @@
 function toggleDisabledState(button, enabled) {
   if (!button) return;
   button.disabled = !enabled;
-  button.classList.toggle('disabled', !enabled);
 }
 
 function activation_bouton_rejoindre(structure_confirmee) {

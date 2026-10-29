@@ -11,11 +11,9 @@ function activation_bouton_recherche_structure() {
     const isValid = siretValue.length >= 14 && /^\d+$/.test(siretValue);
     
     if (isValid) {
-      submitButton.classList.remove('disabled');
       submitButton.removeAttribute('disabled');
       submitButton.removeAttribute('title');
     } else {
-      submitButton.classList.add('disabled');
       submitButton.setAttribute('disabled', 'disabled');
     }
   }

@@ -22,7 +22,7 @@ FactoryBot.define do
       end
 
       trait :beneficiaire do
-        usage { AvecUsage::USAGE_BENEFICIAIRES }
+        usage { AvecUsage::USAGE_EVA }
       end
     end
 

@@ -26,7 +26,7 @@ class RechercheStructureParSiret
   def cree_structure_temporaire_via_api_sirene
     structure = StructureLocale.new(
       siret: @siret,
-      usage: "Eva: bénéficiaires",
+      usage: AvecUsage::USAGE_EVA,
       type_structure: StructureLocale::TYPE_NON_COMMUNIQUE
     )
 

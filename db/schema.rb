@@ -452,7 +452,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_03_090000) do
     t.string "ancestry", null: false, collation: "C"
     t.string "siret"
     t.boolean "autorisation_creation_campagne", default: true
-    t.string "usage", default: "Eva: bénéficiaires"
+    t.string "usage", default: "eva"
     t.boolean "statut_siret"
     t.datetime "date_verification_siret"
     t.string "code_naf"

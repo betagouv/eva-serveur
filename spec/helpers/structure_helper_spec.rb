@@ -35,6 +35,17 @@ describe StructureHelper do
     end
   end
 
+  describe "#collection_usages" do
+    it "associe chaque usage à sa traduction" do
+      expect(helper.collection_usages).to eq(
+        [
+          [ I18n.t("activerecord.attributes.structure.usage.eva"), "eva" ],
+          [ I18n.t("activerecord.attributes.structure.usage.evapro"), "evapro" ]
+        ]
+      )
+    end
+  end
+
   describe "#siret_requis?" do
     let(:ability_admin) { Ability.new(create(:compte_admin)) }
     let(:ability_superadmin) { Ability.new(create(:compte_superadmin)) }

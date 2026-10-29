@@ -91,7 +91,7 @@ role: :conseiller
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq 'Nouvelle structure'
         expect(structure.siret).to eq '12345678901234'
-        expect(structure.usage).to eq AvecUsage::USAGE_BENEFICIAIRES
+        expect(structure.usage).to eq AvecUsage::USAGE_EVA
       end
     end
 

@@ -134,7 +134,7 @@ class Inscription::StructuresController < ApplicationController
       session[:structure_params_inscription] = structure_params.to_h
       redirect_to inscription_structure_path(etape: "usage")
     else
-      @compte.usage = AvecUsage::USAGE_BENEFICIAIRES
+      @compte.usage = AvecUsage::USAGE_EVA
       creer_nouvelle_structure
     end
   end

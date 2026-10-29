@@ -26,6 +26,21 @@ module StructureHelper
     end
   end
 
+  def traduction_usage(usage)
+    I18n.t("activerecord.attributes.structure.usage.#{usage}")
+  end
+
+  # Teintes des logos Eva (bleu) et Evapro (gris)
+  def classe_tag_usage(usage)
+    usage == AvecUsage::USAGE_EVAPRO ? "grey" : "bleu"
+  end
+
+  def collection_usages
+    AvecUsage::USAGE.map do |usage|
+      [ traduction_usage(usage), usage ]
+    end
+  end
+
   def collection_opcos
     Opco.order(:nom).map { |opco| [ opco.nom, opco.id ] }
   end

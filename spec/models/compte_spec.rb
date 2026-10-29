@@ -245,7 +245,7 @@ describe Compte do
       let(:structure) do
         build(:structure_locale,
               type_structure: "entreprise",
-              usage: "EVAPRO")
+              usage: AvecUsage::USAGE_EVAPRO)
       end
       let(:compte) { build(:compte, structure: structure) }
 
@@ -256,7 +256,7 @@ describe Compte do
       let(:structure) do
         build(:structure_locale,
               type_structure: "mission_locale",
-              usage: "Eva: bénéficiaires")
+              usage: AvecUsage::USAGE_EVA)
       end
       let(:compte) { build(:compte, structure: structure) }
 

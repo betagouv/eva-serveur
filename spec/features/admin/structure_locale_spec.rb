@@ -32,11 +32,11 @@ describe 'Admin - Structure locale', type: :feature do
         }
         let!(:structure_beneficiaires) {
           create :structure_locale, nom: 'Structure bénéficiaires',
-                                    usage: AvecUsage::USAGE_BENEFICIAIRES
+                                    usage: AvecUsage::USAGE_EVA
         }
 
         it 'ne liste que les structures ayant cet usage' do
-          select AvecUsage::USAGE_EVAPRO, from: 'q[usage_eq]'
+          select I18n.t('activerecord.attributes.structure.usage.evapro'), from: 'q[usage_eq]'
           click_on 'Filtrer'
 
           expect(page).to have_content 'Structure Eva Pro'
@@ -131,6 +131,30 @@ describe 'Admin - Structure locale', type: :feature do
         end
       end
 
+      describe "usage" do
+        before { visit admin_structure_locale_path(structure) }
+
+        context "quand la structure est Evapro" do
+          let!(:structure) { create :structure_locale, :avec_admin, :eva_pro }
+
+          it "affiche l'usage traduit dans un tag gris" do
+            expect(page).to have_css(
+              ".tag.grey", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+            )
+          end
+        end
+
+        context "quand la structure est Eva" do
+          let!(:structure) { create :structure_locale, :avec_admin, :beneficiaire }
+
+          it "affiche l'usage traduit dans un tag bleu" do
+            expect(page).to have_css(
+              ".tag.bleu", text: I18n.t("activerecord.attributes.structure.usage.eva")
+            )
+          end
+        end
+      end
+
       describe "bloc membres - invitation" do
         it "affiche le bouton envoyer une invitation" do
           visit admin_structure_locale_path(structure)
@@ -178,7 +202,7 @@ describe 'Admin - Structure locale', type: :feature do
         visit new_admin_structure_locale_path
         fill_in :structure_locale_nom, with: 'Entreprise test'
         select 'Entreprise'
-        choose 'EVAPRO'
+        choose I18n.t('activerecord.attributes.structure.usage.evapro')
         fill_in :structure_locale_code_postal, with: '92100'
         fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'

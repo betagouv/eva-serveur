@@ -1,0 +1,62 @@
+@mixin suivi-accompagnement-couleur($couleur-principale) {
+  border: 1px solid $couleur-principale;
+
+  h3 {
+    color: $couleur-principale;
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+
+  .card__banner__icone {
+    fill: $couleur-principale;
+  }
+
+  .mise-en-action__texte {
+    color: $couleur-principale;
+  }
+}
+
+.card__banner--illettrisme {
+  border-radius: 0 0 $dsfr-radius-md $dsfr-radius-md;
+
+  &.card__banner--succes {
+    @include suivi-accompagnement-couleur($success-425);
+  }
+
+  &.card__banner--en-attente {
+    @include suivi-accompagnement-couleur($warning-425);
+  }
+
+  .card__banner__icone {
+    margin-right: $dsfr-spacing-6v;
+  }
+
+  .mise-en-action .tag {
+    @include tag-couleur($success-425, $success-950);
+
+    margin: $dsfr-spacing-2v 0;
+    font-weight: 400;
+  }
+
+  .qcm {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .actions {
+    gap: $dsfr-spacing-1v;
+  }
+
+  .banniere-solutions-illettrisme {
+    @include corps-de-texte-xs-regular;
+  }
+
+  .card__banner__asterisque {
+    border-radius: 0 0 $dsfr-radius-md $dsfr-radius-md;
+    background-color: $eva_bluegrey;
+
+    a {
+      color: $couleur-texte;
+    }
+  }
+}

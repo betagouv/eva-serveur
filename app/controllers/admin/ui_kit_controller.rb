@@ -36,6 +36,7 @@ module Admin
     # def sous_competence; end commenté pour le moment car pas assez unitaire
     def statut_campagne; end
     def statut_suivi; end
+    def suivi_accompagnement_illettrisme; end
     def tag; end
     def texte_intro; end
     def toggle; end

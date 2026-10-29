@@ -1,19 +1,21 @@
-<div class="card__banner card__banner--illettrisme <%= classe_bandeau %>">
-  <div class='card__banner__entete d-flex fr-py-4v fr-px-6v'>
-    <div class='d-flex align-items-center justify-content-center' aria-hidden="true">
-      <%= helpers.inline_svg_tag "banner_icone_question.svg", class: "card__banner__icone" %>
+<div id="<%= @evaluation.id %>" class="carte__conteneur">
+  <div class="card__banner card__banner--illettrisme <%= classe_bandeau %>">
+    <div class='card__banner__entete d-flex fr-py-4v fr-px-6v'>
+      <div class='d-flex align-items-center justify-content-center' aria-hidden="true">
+        <%= helpers.inline_svg_tag "banner_icone_question.svg", class: "card__banner__icone" %>
+      </div>
+      <div>
+        <h3><%= t("suivi_accompagnement_illettrisme.titre") %></h3>
+        <%= helpers.md t("suivi_accompagnement_illettrisme.message") %>
+        <%= render partial: "components/reponse_mise_en_action", locals: { evaluation: @evaluation, affiche_qualification: true } %>
+      </div>
     </div>
-    <div>
-      <h3><%= t("suivi_accompagnement_illettrisme.titre") %></h3>
-      <%= helpers.md t("suivi_accompagnement_illettrisme.message") %>
-      <%= render partial: "components/reponse_mise_en_action", locals: { evaluation: @evaluation, affiche_qualification: true } %>
+    <div class='card__banner__questionnaires'>
+      <%= render qcm_remediation %>
+      <%= render qcm_difficulte %>
     </div>
-  </div>
-  <div class='card__banner__questionnaires'>
-    <%= render qcm_remediation %>
-    <%= render qcm_difficulte %>
-  </div>
-  <div class='card__banner__asterisque fr-py-3v fr-px-4v'>
-    <%= render BanniereSolutionsIllettrismeComponent.new(asterisque: true, evaluation: @evaluation) %>
+    <div class='card__banner__asterisque fr-py-3v fr-px-4v'>
+      <%= render BanniereSolutionsIllettrismeComponent.new(asterisque: true, evaluation: @evaluation) %>
+    </div>
   </div>
 </div>

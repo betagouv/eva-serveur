@@ -17,17 +17,12 @@ class BoutonDsfrComponent < ViewComponent::Base
     fr-btn
     fr-btn--tertiary-no-outline
   ].freeze
-  DESACTIVE_CLASSES = %w[
-    fr-btn
-    fr-btn--disabled
-  ].freeze
 
   BUTTON_TYPE_MAPPINGS = {
     primary: PRIMARY_CLASSES,
     secondary: SECONDARY_CLASSES,
     tertiary: TERTIARY_CLASSES,
-    tertiary_no_outline: TERTIARY_NO_OUTLINE_CLASSES,
-    desactive: DESACTIVE_CLASSES
+    tertiary_no_outline: TERTIARY_NO_OUTLINE_CLASSES
   }.freeze
 
   BUTTON_SIZE_MAPPINGS = {

@@ -8,8 +8,8 @@ describe MiseEnAction, type: :model do
     expect(subject).to validate_uniqueness_of(:evaluation_id).case_insensitive
   end
 
-  it "valide que effectuee n'est pas vide" do
-    expect(subject).not_to allow_value(nil).for(:effectuee)
+  it "accepte que effectuee soit vide, pour la réponse « je ne sais pas »" do
+    expect(subject).to allow_value(nil).for(:effectuee)
     expect(subject).to allow_value(true).for(:effectuee)
     expect(subject).to allow_value(false).for(:effectuee)
   end
@@ -70,6 +70,16 @@ describe MiseEnAction, type: :model do
         expect(mise_en_action.qualification).to eq 'freins_peripheriques'
       end
     end
+
+    context "quand on ne sait pas si la mise en action est effectuee" do
+      let!(:mise_en_action) do
+        create :mise_en_action, effectuee: nil, motif: 'action_prevue'
+      end
+
+      it 'renvoie le motif' do
+        expect(mise_en_action.qualification).to eq 'action_prevue'
+      end
+    end
   end
 
   describe '#questionnaire' do
@@ -86,6 +96,14 @@ describe MiseEnAction, type: :model do
 
       it 'renvoie :difficulte' do
         expect(mise_en_action.questionnaire).to eq :difficulte
+      end
+    end
+
+    context "quand on ne sait pas si la mise en action est effectuee" do
+      before { mise_en_action.update effectuee: nil }
+
+      it 'renvoie :motif' do
+        expect(mise_en_action.questionnaire).to eq :motif
       end
     end
   end

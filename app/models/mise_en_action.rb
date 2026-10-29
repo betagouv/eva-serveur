@@ -5,14 +5,15 @@ class MiseEnAction < ApplicationRecord
   DIFFICULTES = %w[aucune_offre_formation offre_formation_inaccessible
                    freins_peripheriques accompagnement_necessaire
                    indetermine].freeze
+  MOTIFS = %w[action_prevue].freeze
 
   belongs_to :evaluation
 
   validates :evaluation_id, uniqueness: true
-  validates :effectuee, absence: false, inclusion: { in: [ true, false ] }
 
   enum :remediation, REMEDIATIONS.zip(REMEDIATIONS).to_h, suffix: true
   enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h, suffix: true
+  enum :motif, MOTIFS.zip(MOTIFS).to_h, suffix: true
 
   acts_as_paranoid
 
@@ -29,12 +30,12 @@ class MiseEnAction < ApplicationRecord
   end
 
   def questionnaire
+    return :motif if effectuee.nil?
+
     effectuee ? :remediation : :difficulte
   end
 
   def qualification
-    return if effectuee.nil?
-
     send(questionnaire)
   end
 end

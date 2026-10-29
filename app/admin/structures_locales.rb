@@ -52,8 +52,8 @@ ActiveAdmin.register StructureLocale do
     end
     if current_compte.anlci?
       column :usage do |structure|
-        render(Tag.new(traduction_usage(structure.usage),
-                       classes: classe_tag_usage(structure.usage)))
+        render(BadgeComponent.new(contenu: traduction_usage(structure.usage),
+                                  class_couleur: classe_badge_usage(structure.usage)))
       end
     end
     column :code_postal

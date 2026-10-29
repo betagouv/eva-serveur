@@ -30,9 +30,9 @@ module StructureHelper
     I18n.t("activerecord.attributes.structure.usage.#{usage}")
   end
 
-  # Teintes des logos Eva (bleu) et Evapro (gris)
-  def classe_tag_usage(usage)
-    usage == AvecUsage::USAGE_EVAPRO ? "gris" : "bleu"
+  # Teintes des logos Eva (bleu) et Evapro (gris par défaut des badges)
+  def classe_badge_usage(usage)
+    "fr-badge--blue-cumulus" if usage == AvecUsage::USAGE_EVA
   end
 
   def collection_usages

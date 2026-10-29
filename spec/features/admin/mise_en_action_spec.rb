@@ -280,7 +280,7 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_no_css(".carte--deroulee")
         expect(page).to have_content("Oui vous avez trouvé une solution")
-        expect(page).to have_no_css(".mise-en-action .tag", visible: :all)
+        expect(page).to have_no_css(".qualification-mise-en-action", visible: :all)
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end

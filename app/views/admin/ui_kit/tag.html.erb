@@ -12,15 +12,4 @@
 
   <h2>Tag supprimable (la couleur de la croix nécessite d'utiliser le bleu)</h2>
   <%= render Tag.new("À supprimer", classes: "bleu", supprimable: true, url: "javascript:alert('vous avez cliqué le lien supprimer');") %>
-
-  <h2>Différents types de tags</h2>
-  <div class="fr-mb-2w">
-    <%= render Tag.new("Assistance", classes: "tag-categorie assistance") %>
-  </div>
-  <div class="fr-mb-2w">
-    <%= render Tag.new("Blog", classes: "tag-categorie blog") %>
-  </div>
-  <div class="fr-mb-2w">
-    <%= render Tag.new("Evolution", classes: "tag-categorie evolution") %>
-  </div>
 </div>

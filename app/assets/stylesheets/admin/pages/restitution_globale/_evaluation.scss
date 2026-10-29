@@ -35,32 +35,6 @@
   }
 }
 
-@mixin card__banner-couleur($couleur-principale, $couleur-principale-legere) {
-  border: 1px solid $couleur-principale;
-
-  h3 {
-    color: $couleur-principale;
-    font-size: 1rem;
-    line-height: 1.25rem;
-  }
-
-  .card__banner__icone {
-    fill: $couleur-principale;
-  }
-
-  .mise-en-action__texte {
-    color: $couleur-principale;
-  }
-}
-
-.container--asterisque {
-  background-color: $eva_bluegrey;
-
-  a {
-    color: $couleur-texte;
-  }
-}
-
 #evaluation__details {
   $grid-columns: 8;
   $grid-gutter-width: 0;
@@ -93,51 +67,9 @@
     }
   }
 
-  .card__banner {
-    &.bg-alerte {
-      padding: 1rem 1.5rem;
-      box-shadow: inset 0 8px 8px -8px rgba(30, 65, 106, 0.25);
-    }
-
-    &--succes {
-      @include card__banner-couleur($success-425, $success-950);
-    }
-
-    &--en-attente {
-      @include card__banner-couleur($warning-425, $warning-950);
-    }
-
-    &--illettrisme {
-      border-radius: 0 0 8px 8px;
-
-      .container:last-child {
-        border-radius: 0 0 8px 8px;
-      }
-
-      .mise-en-action .tag {
-        @include tag-couleur($success-425, $success-950);
-
-        margin: .5rem 0;
-        font-weight: 400;
-      }
-
-      .qcm {
-        margin-bottom: 0;
-        border-radius: 0;
-      }
-
-      .actions {
-        gap: .25rem;
-      }
-
-      .banniere-solutions-illettrisme {
-        @include corps-de-texte-xs-regular;
-      }
-    }
-
-    &__icone {
-      margin-right: 1.5rem;
-    }
+  .card__banner.bg-alerte {
+    padding: 1rem 1.5rem;
+    box-shadow: inset 0 8px 8px -8px rgba(30, 65, 106, 0.25);
   }
 }
 

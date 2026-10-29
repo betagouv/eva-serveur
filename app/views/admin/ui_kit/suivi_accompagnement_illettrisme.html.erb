@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Démo SuiviAccompagnementIllettrismeComponent</h1>
+
+  <p>Bannière affichée sur une évaluation en illettrisme potentiel, selon sa mise en action.</p>
+
+  <% {
+    "Sans réponse" => nil,
+    "Oui, sans remédiation qualifiée" => MiseEnAction.new(effectuee: true),
+    "Oui, avec remédiation" => MiseEnAction.new(effectuee: true, remediation: "formation_metier"),
+    "Non, sans difficulté qualifiée" => MiseEnAction.new(effectuee: false),
+    "Non, avec difficulté" => MiseEnAction.new(effectuee: false, difficulte: "freins_peripheriques")
+  }.each do |titre, mise_en_action| %>
+    <h2><%= titre %></h2>
+    <div class="fr-mb-6w">
+      <%= render SuiviAccompagnementIllettrismeComponent.new(
+            evaluation: EvaluationEva.new(id: SecureRandom.uuid, mise_en_action: mise_en_action)
+          ) %>
+    </div>
+  <% end %>
+</div>

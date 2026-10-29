@@ -1,9 +1,9 @@
 div class: "metadonnees" do
   div class: "donnee" do
     span "Publié dans :", class: "label"
-    render(Tag.new(
-             t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
-             classes: "tag-categorie #{actualite.categorie}"
+    render(BadgeComponent.new(
+             contenu: t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
+             class_couleur: classe_badge_categorie_actualite(actualite.categorie)
            ))
   end
   div class: "donnee" do

@@ -73,17 +73,3 @@
     position: relative;
   }
 }
-
-.tag-categorie {
-  &.assistance {
-    @include tag-couleur-majuscule($warning-425, $warning-950)
-  }
-
-  &.blog, &.orange {
-    @include tag-couleur-majuscule($yellow-tournesol-407, $yellow-tournesol-950)
-  }
-
-  &.evolution {
-    @include tag-couleur-majuscule($success-425, $success-950)
-  }
-}

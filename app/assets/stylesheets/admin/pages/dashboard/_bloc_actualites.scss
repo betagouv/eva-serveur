@@ -1,5 +1,9 @@
 .bloc-actualites,
 .bloc-actualites-entreprise {
+  .fr-badge {
+    white-space: nowrap;
+  }
+
   .derniere-actualite {
     height: 17rem;
     .card { padding: 0;}

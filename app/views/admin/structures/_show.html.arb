@@ -22,8 +22,8 @@ div class: "page-structure" do
             end
             if current_compte.superadmin?
               row :usage do
-                render(Tag.new(traduction_usage(structure.usage),
-                               classes: classe_tag_usage(structure.usage)))
+                render(BadgeComponent.new(contenu: traduction_usage(structure.usage),
+                                          class_couleur: classe_badge_usage(structure.usage)))
               end
             end
             if current_compte.au_moins_admin?

@@ -6,7 +6,8 @@ describe BadgeComponent, type: :component do
       contenu: contenu,
       class_couleur: class_couleur,
       display_icon: display_icon,
-      taille: taille
+      taille: taille,
+      classes: classes
     )
   end
 
@@ -14,6 +15,7 @@ describe BadgeComponent, type: :component do
   let(:class_couleur) { "fr-badge--success" }
   let(:display_icon) { false }
   let(:taille) { nil }
+  let(:classes) { nil }
 
   it "rend correctement le badge avec ses classes par défaut" do
     render_inline(component)
@@ -43,14 +45,21 @@ describe BadgeComponent, type: :component do
     end
   end
 
-  context "quand html_class est vide" do
-    let(:class_couleur) { "" }
+  context "quand des classes supplémentaires sont spécifiées" do
+    let(:classes) { "fr-ml-1v hidden" }
 
-    it "rend un badge sans la classe spécifique" do
+    it "les ajoute au badge" do
       render_inline(component)
 
-      expect(page).to have_css(".fr-badge.fr-badge--no-icon")
-      expect(page).not_to have_css(".fr-badge--success")
+      expect(page).to have_css(".fr-badge.fr-badge--success.fr-ml-1v.hidden", visible: :all)
+    end
+  end
+
+  context "quand aucune couleur n'est spécifiée" do
+    it "rend un badge gris par défaut (pas de class spécifique)" do
+      render_inline(described_class.new(contenu: contenu))
+
+      expect(page).to have_css(".fr-badge.fr-badge--no-icon", text: contenu)
     end
   end
 end

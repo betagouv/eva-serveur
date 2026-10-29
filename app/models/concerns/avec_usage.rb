@@ -1,9 +1,9 @@
 module AvecUsage
   extend ActiveSupport::Concern
 
-  USAGE_BENEFICIAIRES = "Eva: bénéficiaires".freeze
-  USAGE_EVAPRO = "EVAPRO".freeze
-  USAGE = [ USAGE_BENEFICIAIRES, USAGE_EVAPRO ].freeze
+  USAGE_EVA = "eva".freeze
+  USAGE_EVAPRO = "evapro".freeze
+  USAGE = [ USAGE_EVA, USAGE_EVAPRO ].freeze
 
   included do
     validates :usage, inclusion: { in: USAGE }, allow_blank: true
@@ -11,10 +11,5 @@ module AvecUsage
 
   def evapro?
     usage == USAGE_EVAPRO
-  end
-  alias_method :eva_entreprises?, :evapro?
-
-  def eva_beneficiaires?
-    usage == USAGE_BENEFICIAIRES
   end
 end

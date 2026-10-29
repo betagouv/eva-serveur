@@ -10,8 +10,9 @@ ActiveAdmin.register SourceAide do
       link_to sa.titre, admin_source_aide_path(sa)
     end
     column(:categorie) do |a|
-      render(Tag.new(t(a.categorie, scope: "activerecord.attributes.source_aide.categories"),
-                     classes: "tag-categorie grey"))
+      render(BadgeComponent.new(
+               contenu: t(a.categorie, scope: "activerecord.attributes.source_aide.categories")
+             ))
     end
     column :position
     column :description

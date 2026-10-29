@@ -47,6 +47,13 @@
       font-size: .875rem;
     }
 
+    .details-actualite,
+    .autres-actualites {
+      .fr-badge {
+        white-space: nowrap;
+      }
+    }
+
     .details-actualite {
       .metadonnees {
         @include carte-avec-ombre;
@@ -74,10 +81,6 @@
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
-
-        .tag-categorie {
-          margin-right: 1rem;
-        }
 
         .lien {
           // le style dsfr ne supporte pas les liens sur plusieurs lignes

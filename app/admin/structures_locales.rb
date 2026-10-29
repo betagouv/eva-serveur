@@ -14,6 +14,10 @@ ActiveAdmin.register StructureLocale do
   filter :type_structure,
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures
+  filter :usage,
+         as: :select,
+         collection: ApplicationController.helpers.collection_usages,
+         if: proc { current_compte.anlci? }
   filter :code_postal
   filter :siret
   filter :region,
@@ -46,6 +50,12 @@ ActiveAdmin.register StructureLocale do
     column(:type_structure) do |structure|
       traduction_type_structure(structure.type_structure)
     end
+    if current_compte.anlci?
+      column :usage do |structure|
+        render(BadgeComponent.new(contenu: traduction_usage(structure.usage),
+                                  class_couleur: classe_badge_usage(structure.usage)))
+      end
+    end
     column :code_postal
     column :created_at do |structure|
       l(structure.created_at, format: :sans_heure)
@@ -62,6 +72,9 @@ ActiveAdmin.register StructureLocale do
     column :type_structure do |structure|
       traduction_type_structure(structure.type_structure)
     end
+    column :usage do |structure|
+      traduction_usage(structure.usage)
+    end
     column :nombre_evaluations
     column :date_derniere_evaluation
     column "Date de création", &:created_at
@@ -74,6 +87,9 @@ ActiveAdmin.register StructureLocale do
     column :region
     column :type_structure do |structure|
       traduction_type_structure(structure.type_structure)
+    end
+    column :usage do |structure|
+      traduction_usage(structure.usage)
     end
     column :nombre_evaluations
     column :date_derniere_evaluation

@@ -25,6 +25,62 @@ describe 'Admin - Structure locale', type: :feature do
           expect(page).not_to have_content 'Autre structure'
         end
       end
+
+      describe 'filtre par usage' do
+        let!(:structure_evapro) {
+          create :structure_locale, nom: 'Structure Eva Pro', usage: AvecUsage::USAGE_EVAPRO
+        }
+        let!(:structure_beneficiaires) {
+          create :structure_locale, nom: 'Structure bénéficiaires',
+                                    usage: AvecUsage::USAGE_EVA
+        }
+
+        it 'ne liste que les structures ayant cet usage' do
+          select I18n.t('activerecord.attributes.structure.usage.evapro'), from: 'q[usage_eq]'
+          click_on 'Filtrer'
+
+          expect(page).to have_content 'Structure Eva Pro'
+          expect(page).not_to have_content 'Structure bénéficiaires'
+        end
+      end
+
+      describe 'colonne usage' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "affiche l'usage traduit dans un badge" do
+          expect(page).to have_css(
+            "td .fr-badge:not(.fr-badge--blue-cumulus)",
+            text: I18n.t("activerecord.attributes.structure.usage.evapro")
+          )
+        end
+      end
+
+      describe 'export csv' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "contient l'usage traduit" do
+          visit admin_structures_locales_path(format: :csv)
+
+          ligne = CSV.parse(page.body, headers: true)
+                     .find { |l| l.fields.include?(structure.nom) }
+          expect(ligne[StructureLocale.human_attribute_name(:usage)])
+            .to eq I18n.t("activerecord.attributes.structure.usage.evapro")
+        end
+      end
+
+      describe 'export xls' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "contient l'usage traduit" do
+          visit admin_structures_locales_path(format: :xls)
+
+          feuille = Spreadsheet.open(StringIO.new(page.body)).worksheet(0)
+          colonne_usage = feuille.row(0).to_a.index("Usage")
+          ligne = feuille.rows.find { |l| l.to_a.include?(structure.nom) }
+          expect(ligne[colonne_usage])
+            .to eq I18n.t("activerecord.attributes.structure.usage.evapro")
+        end
+      end
     end
 
     describe 'show' do
@@ -113,6 +169,32 @@ describe 'Admin - Structure locale', type: :feature do
         end
       end
 
+      describe "usage" do
+        before { visit admin_structure_locale_path(structure) }
+
+        context "quand la structure est Evapro" do
+          let!(:structure) { create :structure_locale, :avec_admin, :eva_pro }
+
+          it "affiche l'usage traduit dans un badge gris" do
+            expect(page).to have_css(
+              ".fr-badge:not(.fr-badge--blue-cumulus)",
+              text: I18n.t("activerecord.attributes.structure.usage.evapro")
+            )
+          end
+        end
+
+        context "quand la structure est Eva" do
+          let!(:structure) { create :structure_locale, :avec_admin, :beneficiaire }
+
+          it "affiche l'usage traduit dans un badge bleu" do
+            expect(page).to have_css(
+              ".fr-badge.fr-badge--blue-cumulus",
+              text: I18n.t("activerecord.attributes.structure.usage.eva")
+            )
+          end
+        end
+      end
+
       describe "bloc membres - invitation" do
         it "affiche le bouton envoyer une invitation" do
           visit admin_structure_locale_path(structure)
@@ -160,7 +242,7 @@ describe 'Admin - Structure locale', type: :feature do
         visit new_admin_structure_locale_path
         fill_in :structure_locale_nom, with: 'Entreprise test'
         select 'Entreprise'
-        choose 'EVAPRO'
+        choose I18n.t('activerecord.attributes.structure.usage.evapro')
         fill_in :structure_locale_code_postal, with: '92100'
         fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'
@@ -255,6 +337,32 @@ describe 'Admin - Structure locale', type: :feature do
       it "enregistre malgré tout la structure" do
         expect(structure.reload.siret).to eq '90813507200020'
       end
+    end
+  end
+
+  describe 'usage dans l\'index selon le rôle' do
+    let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
+    let(:entete_usage) { StructureLocale.human_attribute_name(:usage) }
+
+    before do
+      connecte(compte)
+      visit admin_structures_locales_path
+    end
+
+    context 'en tant que chargé de mission régionale' do
+      let(:compte) do
+        create :compte_charge_mission_regionale, structure: structure
+      end
+
+      it { expect(page).to have_select 'q[usage_eq]' }
+      it { expect(page).to have_css 'th', text: entete_usage }
+    end
+
+    context "en tant qu'admin d'une structure" do
+      let(:compte) { create :compte_admin, structure: structure }
+
+      it { expect(page).not_to have_select 'q[usage_eq]' }
+      it { expect(page).not_to have_css 'th', text: entete_usage }
     end
   end
 

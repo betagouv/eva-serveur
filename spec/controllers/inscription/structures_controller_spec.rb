@@ -235,7 +235,7 @@ describe Inscription::StructuresController, type: :controller do
 
           structure_creée.reload
           expect(structure_creée.type_structure).to eq("entreprise")
-          expect(structure_creée.usage).to eq("EVAPRO")
+          expect(structure_creée.usage).to eq(AvecUsage::USAGE_EVAPRO)
         end
       end
 
@@ -282,7 +282,7 @@ describe Inscription::StructuresController, type: :controller do
             }
 
             structure_creée.reload
-            expect(structure_creée.usage).to eq(AvecUsage::USAGE_BENEFICIAIRES)
+            expect(structure_creée.usage).to eq(AvecUsage::USAGE_EVA)
             expect(response).to redirect_to(admin_dashboard_path)
           end
         end
@@ -311,7 +311,7 @@ describe Inscription::StructuresController, type: :controller do
       context "avec le feature flip désactivé" do
         it "redirige vers l'étape parametrage" do
           patch :update, params: {
-            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            structure_locale: { usage: AvecUsage::USAGE_EVA },
             commit: "creer_avec_usage"
           }
 
@@ -325,12 +325,12 @@ describe Inscription::StructuresController, type: :controller do
 
         it "crée la structure avec l'usage bénéficiaires et redirige vers le dashboard" do
           patch :update, params: {
-            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            structure_locale: { usage: AvecUsage::USAGE_EVA },
             commit: "creer_avec_usage"
           }
 
           structure_creée.reload
-          expect(structure_creée.usage).to eq(AvecUsage::USAGE_BENEFICIAIRES)
+          expect(structure_creée.usage).to eq(AvecUsage::USAGE_EVA)
           expect(response).to redirect_to(admin_dashboard_path)
         end
 
@@ -376,7 +376,7 @@ describe Inscription::StructuresController, type: :controller do
 
         it "crée la structure avec le code postal saisi manuellement" do
           patch :update, params: {
-            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            structure_locale: { usage: AvecUsage::USAGE_EVA },
             commit: "creer_avec_usage"
           }
 
@@ -401,7 +401,7 @@ describe Inscription::StructuresController, type: :controller do
 
         it "crée la structure avec les champs contact" do
           patch :update, params: {
-            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            structure_locale: { usage: AvecUsage::USAGE_EVA },
             commit: "creer_avec_usage"
           }
 

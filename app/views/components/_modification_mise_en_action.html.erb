@@ -5,7 +5,9 @@
   <span><%= t(".reponse_#{reponse_mise_en_action}_html") %></span>
   <% if affiche_qualification %>
     <% contenu = mise_en_action&.qualification ? t("#{mise_en_action.qualification}", scope: scope) : "" %>
-    <span><%= render(Tag.new(contenu, classes: pas_de_qualification ? "hidden" : "")) %></span>
+    <% classes_qualification = "qualification-mise-en-action fr-my-2v#{" hidden" if pas_de_qualification}" %>
+    <div><%= render(BadgeComponent.new(contenu: contenu, class_couleur: "fr-badge--success", taille: "sm",
+                                       sans_marge_basse: false, classes: classes_qualification)) %></div>
   <% end %>
   <span>(<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)</span>
 </div>

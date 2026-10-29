@@ -31,13 +31,6 @@
     margin-right: $dsfr-spacing-6v;
   }
 
-  .mise-en-action .tag {
-    @include tag-couleur($success-425, $success-950);
-
-    margin: $dsfr-spacing-2v 0;
-    font-weight: 400;
-  }
-
   .qcm {
     margin-bottom: 0;
     border-radius: 0;

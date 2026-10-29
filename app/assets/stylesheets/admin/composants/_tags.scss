@@ -10,15 +10,15 @@
   font-weight: 500;
   color: $couleur-texte;
 
-  &.red {
+  &.rouge {
     @include tag-couleur-majuscule($error-425, $error-950)
   }
 
-  &.green {
+  &.vert {
     @include tag-couleur-majuscule($success-425, $success-950)
   }
 
-  &.grey {
+  &.gris {
     @include tag-couleur($grey-425, $grey-950);
   }
 
@@ -50,40 +50,4 @@
     border: 1px solid $couleur-texte;
   }
 
-}
-
-.tag {
-  @include tag;
-  .lien-supprimer {
-    position: absolute;
-    right: 0.5rem;
-    background-image: none;
-
-    &:active {
-      background-color: transparent;
-    }
-
-    img {
-      vertical-align: baseline;
-    }
-  }
-
-  &.tag--supprimable {
-    padding-right: 1.25rem;
-    position: relative;
-  }
-}
-
-.tag-categorie {
-  &.assistance {
-    @include tag-couleur-majuscule($warning-425, $warning-950)
-  }
-
-  &.blog, &.orange {
-    @include tag-couleur-majuscule($yellow-tournesol-407, $yellow-tournesol-950)
-  }
-
-  &.evolution {
-    @include tag-couleur-majuscule($success-425, $success-950)
-  }
 }

@@ -48,7 +48,8 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_css(".questions-remediation", visible: :hidden)
         expect(page).to have_content("Oui vous avez trouvé une solution")
-        expect(page).to have_css(".tag", text: "Formation métier / qualifiante")
+        expect(page).to have_css(".qualification-mise-en-action",
+                                 text: "Formation métier / qualifiante")
       end
       expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
@@ -61,7 +62,7 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_css(".questions-remediation", visible: :hidden)
         expect(page).to have_content("Oui vous avez trouvé une solution")
-        expect(page).to have_no_css(".mise-en-action .tag", visible: :visible)
+        expect(page).to have_no_css(".qualification-mise-en-action", visible: :visible)
       end
       expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
       expect(mise_en_action.reload.remediation).to eq("indetermine")
@@ -77,7 +78,7 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_css(".questions-difficulte", visible: :hidden)
         expect(page).to have_content("Non vous n'avez pas trouvé de solution")
-        expect(page).to have_css("[data-reponse='false'] .tag",
+        expect(page).to have_css("[data-reponse='false'] .qualification-mise-en-action",
                                  text: "Accompagnement spécifique nécessaire")
       end
       expect(mise_en_action.reload.difficulte).to eq("accompagnement_necessaire")
@@ -111,7 +112,7 @@ describe "Admin - Mise en action", :js, type: :feature do
         end
 
         expect(page).to have_content("Non vous n'avez pas trouvé de solution")
-        expect(page).to have_css("[data-reponse='false'] .tag",
+        expect(page).to have_css("[data-reponse='false'] .qualification-mise-en-action",
                                  text: "Accompagnement spécifique nécessaire")
         expect(page).to have_no_content("Oui vous avez trouvé une solution")
       end
@@ -143,7 +144,7 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_no_css(".carte--deroulee")
         expect(page).to have_content("Oui vous avez trouvé une solution")
-        expect(page).to have_no_css(".mise-en-action .tag", visible: :all)
+        expect(page).to have_no_css(".qualification-mise-en-action", visible: :all)
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end

@@ -26,6 +26,21 @@ module StructureHelper
     end
   end
 
+  def traduction_usage(usage)
+    I18n.t("activerecord.attributes.structure.usage.#{usage}")
+  end
+
+  # Teintes des logos Eva (bleu) et Evapro (gris par défaut des badges)
+  def classe_badge_usage(usage)
+    "fr-badge--blue-cumulus" if usage == AvecUsage::USAGE_EVA
+  end
+
+  def collection_usages
+    AvecUsage::USAGE.map do |usage|
+      [ traduction_usage(usage), usage ]
+    end
+  end
+
   def collection_opcos
     Opco.order(:nom).map { |opco| [ opco.nom, opco.id ] }
   end

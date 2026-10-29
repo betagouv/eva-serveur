@@ -1,10 +1,4 @@
 div class: "actualites" do
-  badges_couleur_categorie = {
-    "assistance" => "fr-badge--pink-macaron",
-    "blog" => "fr-badge--yellow-tournesol",
-    "evolution" => "fr-badge--green-emeraude"
-  }
-
   actualites.each do |actualite|
     render(
       CardComponent.new(
@@ -17,7 +11,7 @@ div class: "actualites" do
         badges: [
           {
             contenu: t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
-            class_couleur: badges_couleur_categorie[actualite.categorie]
+            class_couleur: classe_badge_categorie_actualite(actualite.categorie)
           }
         ],
         detail_start: l(actualite.created_at, format: :sans_heure)

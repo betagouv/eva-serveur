@@ -24,22 +24,3 @@
     <%= render BanniereSolutionsIllettrismeComponent.new(asterisque: true, evaluation: resource) %>
   </div>
 </div>
-
-<script>
-  I18n.locale = "<%= I18n.locale || I18n.default_locale %>"
-
-  document.addEventListener('DOMContentLoaded', () => {
-    ecouteBoutons($(".valide-qcm"), function(evaluationId, $bouton) {
-      const effectuee = miseEnActionEffectuee($bouton)
-      const qcm = nomQcm(effectuee)
-      const reponse = reponseSelectionnee(evaluationId, qcm);
-      const traduction = I18n.t(`activerecord.attributes.mise_en_action.${qcm}.${reponse}`)
-      $(`div[data-reponse='${effectuee}'] .tag`).removeClass('hidden').text(traduction);
-    });
-
-    ecouteBoutons($(".bouton-fermer"), function(evaluationId, $bouton) {
-      const effectuee = miseEnActionEffectuee($bouton)
-      $(`div[data-reponse='${effectuee}'] .tag`).addClass('hidden')
-    });
-  });
-</script>

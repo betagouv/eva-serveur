@@ -27,6 +27,7 @@
 //= require mise_en_action
 //= require mise_en_action_tableau_de_bord
 //= require suivi_accompagnement_illettrisme
+//= require tag_supprimable
 //= require simple_mde
 //= require modal_verification
 //= require deplace_modales_dsfr

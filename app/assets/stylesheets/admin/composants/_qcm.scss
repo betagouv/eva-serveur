@@ -14,12 +14,14 @@
     position: absolute;
   }
 
-  input:checked + .tag { @include tag-couleur($success-425, $success-950); }
-  input:hover:not(:checked) + .tag, input:focus + .tag {
+  input:checked + .qcm__reponse { @include tag-couleur($success-425, $success-950); }
+  input:hover:not(:checked) + .qcm__reponse, input:focus + .qcm__reponse {
     @include focus;
   }
 
-  .tag {
+  .qcm__reponse {
+    @include tag;
+
     cursor: pointer;
     background-color: white;
     font-weight: 400;

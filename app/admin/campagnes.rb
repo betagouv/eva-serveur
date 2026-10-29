@@ -100,14 +100,14 @@ ActiveAdmin.register Campagne do
                 can?(:autoriser_compte, resource)) &&
                resource.privee } do
     render "aide_acces_prives"
-    resource.campagne_compte_autorisations.joins(:compte).each do |autorisation|
+    resource.campagne_compte_autorisations.joins(:compte).includes(:compte).each do |autorisation|
       url = revoquer_compte_admin_campagne_path(
         resource,
         compte_id: autorisation.compte.id)
       render(Tag.new(autorisation.compte.display_name,
-                     classes: "bleu",
                      supprimable: can?(:revoquer_compte, resource),
-                     url: url))
+                     url: url,
+                     taille: "sm"))
     end
     render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)
   end

@@ -274,9 +274,10 @@ describe 'Admin - Campagne', type: :feature do
         visit admin_campagne_path(ma_campagne.reload)
       end
 
-      it "je peux retirer l'autorisation de n'importe quel collègue" do
+      it "je peux retirer l'autorisation de n'importe quel collègue", :js do
         within('#acces_prives_sidebar_section') do
-          find('a.lien-supprimer').click
+          libelle = I18n.t('tag.retirer', contenu: mon_collegue.display_name)
+          find("button[aria-label='#{libelle}']").click
         end
         expect(page).not_to have_content(mon_collegue.nom)
         expect(ma_campagne.reload.campagne_compte_autorisations).to be_empty
@@ -292,8 +293,33 @@ describe 'Admin - Campagne', type: :feature do
 
         it "il voit qu'il y est autorisé" do
           expect(page).to have_css('#acces_prives_sidebar_section')
-          expect(page).to have_content(mon_collegue.nom)
-          expect(page).not_to have_css('#acces_prives_sidebar_section .lien-supprimer')
+          expect(page).to have_css('#acces_prives_sidebar_section p.fr-tag',
+                                   text: mon_collegue.display_name)
+          expect(page).not_to have_css('#acces_prives_sidebar_section .fr-tag--dismiss')
+        end
+      end
+
+      context "quand le collègue autorisé n'a qu'un email long" do
+        let(:collegue_sans_nom) do
+          create :compte_conseiller, prenom: nil, nom: nil,
+                                     etape_inscription: :preinscription,
+                                     email: "prenom.nomtreslong.duconseiller@structureinsertion.fr",
+                                     structure: compte_connecte.structure
+        end
+
+        it "affiche le tag sans déborder de la sidebar", :js do
+          ma_campagne.campagne_compte_autorisations.create!(compte_id: collegue_sans_nom.id)
+          visit admin_campagne_path(ma_campagne)
+
+          depassement = page.evaluate_script(<<~JS)
+            (() => {
+              const section = document.querySelector('#acces_prives_sidebar_section');
+              const panel = section.querySelector('.panel_contents').getBoundingClientRect();
+              const tags = [...section.querySelectorAll('.fr-tag')];
+              return Math.max(...tags.map(tag => tag.getBoundingClientRect().right - panel.right));
+            })()
+          JS
+          expect(depassement).to be <= 0
         end
       end
     end

@@ -2,14 +2,18 @@
   <h1>Démo TagComponent</h1>
 
   <h2>Tag simple</h2>
-  <%= render Tag.new("Important") %>
+  <div class="fr-mb-3w">Taille par défaut (md) :
+    <%= render Tag.new("Important") %>
+  </div>
+  <div class="fr-mb-3w">Taille sm :
+    <%= render Tag.new("Important", taille: "sm") %>
+  </div>
 
-  <h2>Tag avec classes personnalisées</h2>
-  <%= render Tag.new("gris", classes: "gris") %>
-  <%= render Tag.new("rouge", classes: "rouge") %>
-  <%= render Tag.new("vert", classes: "vert") %>
-  <%= render Tag.new("bleu", classes: "bleu") %>
-
-  <h2>Tag supprimable (la couleur de la croix nécessite d'utiliser le bleu)</h2>
-  <%= render Tag.new("À supprimer", classes: "bleu", supprimable: true, url: "javascript:alert('vous avez cliqué le lien supprimer');") %>
+  <h2>Tag supprimable (le clic envoie un PATCH vers l'url)</h2>
+  <div class="fr-mb-3w">Taille par défaut (md) :
+    <%= render Tag.new("À supprimer", supprimable: true, url: "#") %>
+  </div>
+  <div class="fr-mb-3w">Taille sm :
+    <%= render Tag.new("À supprimer", supprimable: true, url: "#", taille: "sm") %>
+  </div>
 </div>

@@ -3,6 +3,9 @@ div class: "evaluation" do
     div class: "col-8" do
       render "admin/evaluations_eva/details_evaluation"
       render "admin/evaluations_eva/restitution_globale", pdf: false
+      if resource.illettrisme_potentiel?
+        render SuiviAccompagnementIllettrismeComponent.new(evaluation: resource)
+      end
       render "admin/evaluations/panel_administration" if can?(:manage, Compte)
     end
   end

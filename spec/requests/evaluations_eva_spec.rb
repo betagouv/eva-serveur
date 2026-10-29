@@ -46,6 +46,31 @@ describe 'Evaluation eva', type: :request do
         expect(mise_en_action.repondue_le).not_to be_nil
         expect(mise_en_action.remediation).to be_nil
       end
+
+      context "quand on répond « je ne sais pas »" do
+        let(:reponse) { { mise_en_action_effectuee: MiseEnAction::REPONSE_JE_NE_SAIS_PAS } }
+
+        it "enregistre la réponse quand l'option est active" do
+          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
+
+          put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
+
+          mise_en_action = evaluation.reload.mise_en_action
+          expect(mise_en_action.effectuee).to be_nil
+          expect(mise_en_action.motif).to eq("action_prevue")
+          expect(mise_en_action.date_revue).not_to be_nil
+          expect(mise_en_action.repondue_le).not_to be_nil
+        end
+
+        it "refuse la réponse quand l'option n'est pas active" do
+          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(false)
+
+          put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
+
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(evaluation.reload.mise_en_action.effectuee).to be(true)
+        end
+      end
     end
 
     describe '#renseigner_qualification' do

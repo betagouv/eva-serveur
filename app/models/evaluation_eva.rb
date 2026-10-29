@@ -76,15 +76,33 @@ class EvaluationEva < Evaluation
     mise_en_action_enregistree.effectuee = effectuee
     mise_en_action_enregistree.repondue_le = Time.zone.now
 
-    if effectuee
-      mise_en_action_enregistree.difficulte = nil
+    if effectuee.nil?
+      mise_en_action_je_ne_sais_pas(mise_en_action_enregistree)
     else
-      mise_en_action_enregistree.remediation = nil
+     mise_en_action_oui_ou_non(mise_en_action_enregistree, effectuee)
     end
     mise_en_action_enregistree.save
   end
 
   def mise_en_action_presenter
     EvaluationsEva::MiseEnActionPresenter.new(self)
+  end
+
+  private
+
+  def mise_en_action_je_ne_sais_pas(mise_en_action_enregistree)
+    mise_en_action_enregistree.assign_attributes(remediation: nil, difficulte: nil,
+                                                   motif: :action_prevue,
+                                                   date_revue: Date.current + 7)
+  end
+
+  def mise_en_action_oui_ou_non(mise_en_action_enregistree, effectuee)
+    mise_en_action_enregistree.assign_attributes(motif: nil, date_revue: nil)
+
+    if effectuee
+      mise_en_action_enregistree.difficulte = nil
+    else
+      mise_en_action_enregistree.remediation = nil
+    end
   end
 end

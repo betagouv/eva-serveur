@@ -47,9 +47,10 @@ describe 'Admin - Structure locale', type: :feature do
       describe 'colonne usage' do
         let!(:structure) { create :structure_locale, :eva_pro }
 
-        it "affiche l'usage traduit dans un tag" do
+        it "affiche l'usage traduit dans un badge" do
           expect(page).to have_css(
-            "td .tag.gris", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+            "td .fr-badge:not(.fr-badge--blue-cumulus)",
+            text: I18n.t("activerecord.attributes.structure.usage.evapro")
           )
         end
       end
@@ -174,9 +175,10 @@ describe 'Admin - Structure locale', type: :feature do
         context "quand la structure est Evapro" do
           let!(:structure) { create :structure_locale, :avec_admin, :eva_pro }
 
-          it "affiche l'usage traduit dans un tag gris" do
+          it "affiche l'usage traduit dans un badge gris" do
             expect(page).to have_css(
-              ".tag.gris", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+              ".fr-badge:not(.fr-badge--blue-cumulus)",
+              text: I18n.t("activerecord.attributes.structure.usage.evapro")
             )
           end
         end
@@ -184,9 +186,10 @@ describe 'Admin - Structure locale', type: :feature do
         context "quand la structure est Eva" do
           let!(:structure) { create :structure_locale, :avec_admin, :beneficiaire }
 
-          it "affiche l'usage traduit dans un tag bleu" do
+          it "affiche l'usage traduit dans un badge bleu" do
             expect(page).to have_css(
-              ".tag.bleu", text: I18n.t("activerecord.attributes.structure.usage.eva")
+              ".fr-badge.fr-badge--blue-cumulus",
+              text: I18n.t("activerecord.attributes.structure.usage.eva")
             )
           end
         end

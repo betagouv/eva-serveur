@@ -1,9 +1,11 @@
 div class: "autres-actualites" do
   autres_actualites.each do |actualite|
     div class: "actualite" do
-      render(Tag.new(
-               t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
-               classes: "tag-categorie #{actualite.categorie}"
+      categorie = t(actualite.categorie, scope: "activerecord.attributes.actualite.categories")
+      render(BadgeComponent.new(
+               contenu: categorie,
+               class_couleur: classe_badge_categorie_actualite(actualite.categorie),
+               classes: "fr-mr-2w"
              ))
       text_node link_to actualite.titre, [ :admin, actualite ], class: "lien"
     end

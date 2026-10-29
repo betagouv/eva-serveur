@@ -12,9 +12,4 @@ module AvecUsage
   def evapro?
     usage == USAGE_EVAPRO
   end
-  alias_method :eva_entreprises?, :evapro?
-
-  def eva?
-    usage == USAGE_EVA
-  end
 end

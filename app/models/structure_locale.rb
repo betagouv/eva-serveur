@@ -51,11 +51,6 @@ class StructureLocale < Structure
     "#{nom} - #{code_postal}"
   end
 
-  def evapro?
-    usage == AvecUsage::USAGE_EVAPRO
-  end
-  alias_method :eva_entreprises?, :evapro?
-
   def metabase_dashboard
     23
   end

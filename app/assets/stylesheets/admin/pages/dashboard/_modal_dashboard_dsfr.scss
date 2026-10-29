@@ -50,8 +50,4 @@
     justify-content: flex-end;
     gap: 0.5rem;
   }
-
-  &.fr-modal.evapro_admin .fr-btn.fr-btn--sm {
-    @include petit-bouton;
-  }
 }

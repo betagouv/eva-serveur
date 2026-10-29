@@ -43,6 +43,43 @@ describe 'Admin - Structure locale', type: :feature do
           expect(page).not_to have_content 'Structure bénéficiaires'
         end
       end
+
+      describe 'colonne usage' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "affiche l'usage traduit dans un tag" do
+          expect(page).to have_css(
+            "td .tag.grey", text: I18n.t("activerecord.attributes.structure.usage.evapro")
+          )
+        end
+      end
+
+      describe 'export csv' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "contient l'usage traduit" do
+          visit admin_structures_locales_path(format: :csv)
+
+          ligne = CSV.parse(page.body, headers: true)
+                     .find { |l| l.fields.include?(structure.nom) }
+          expect(ligne[StructureLocale.human_attribute_name(:usage)])
+            .to eq I18n.t("activerecord.attributes.structure.usage.evapro")
+        end
+      end
+
+      describe 'export xls' do
+        let!(:structure) { create :structure_locale, :eva_pro }
+
+        it "contient l'usage traduit" do
+          visit admin_structures_locales_path(format: :xls)
+
+          feuille = Spreadsheet.open(StringIO.new(page.body)).worksheet(0)
+          colonne_usage = feuille.row(0).to_a.index("Usage")
+          ligne = feuille.rows.find { |l| l.to_a.include?(structure.nom) }
+          expect(ligne[colonne_usage])
+            .to eq I18n.t("activerecord.attributes.structure.usage.evapro")
+        end
+      end
     end
 
     describe 'show' do
@@ -300,8 +337,9 @@ describe 'Admin - Structure locale', type: :feature do
     end
   end
 
-  describe 'filtre par usage selon le rôle' do
+  describe 'usage dans l\'index selon le rôle' do
     let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
+    let(:entete_usage) { StructureLocale.human_attribute_name(:usage) }
 
     before do
       connecte(compte)
@@ -314,12 +352,14 @@ describe 'Admin - Structure locale', type: :feature do
       end
 
       it { expect(page).to have_select 'q[usage_eq]' }
+      it { expect(page).to have_css 'th', text: entete_usage }
     end
 
     context "en tant qu'admin d'une structure" do
       let(:compte) { create :compte_admin, structure: structure }
 
       it { expect(page).not_to have_select 'q[usage_eq]' }
+      it { expect(page).not_to have_css 'th', text: entete_usage }
     end
   end
 

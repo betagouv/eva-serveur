@@ -29,5 +29,14 @@ module EvaluationsEva
     def mise_en_action_avec_qualification?
       effectuee_avec_remediation? || non_effectuee_avec_difficulte?
     end
+
+    def je_ne_sais_pas_affiche?
+      MiseEnAction.je_ne_sais_pas_actif? && a_mise_en_action? &&
+        @evaluation.mise_en_action.effectuee.nil?
+    end
+
+    def reponse_affichee?
+      mise_en_action_avec_qualification? || je_ne_sais_pas_affiche?
+    end
   end
 end

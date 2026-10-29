@@ -11,8 +11,15 @@
               mise_en_action: evaluation&.mise_en_action,
               affiche_qualification: affiche_qualification,
               modification_affichee: mise_en_action_presenter.a_mise_en_action? && mise_en_action_presenter.non_effectuee_avec_difficulte? } %>
+  <% if MiseEnAction.je_ne_sais_pas_actif? %>
+    <%= render partial: "components/modification_mise_en_action",
+      locals: { reponse_mise_en_action: MiseEnAction::REPONSE_JE_NE_SAIS_PAS,
+                mise_en_action: evaluation&.mise_en_action,
+                affiche_qualification: affiche_qualification,
+                modification_affichee: mise_en_action_presenter.je_ne_sais_pas_affiche? } %>
+  <% end %>
 
-  <% classe_reponse_en_attente = mise_en_action_presenter.a_mise_en_action? && mise_en_action_presenter.mise_en_action_avec_qualification? ? "hidden" : "d-flex" %>
+  <% classe_reponse_en_attente = mise_en_action_presenter.reponse_affichee? ? "hidden" : "d-flex" %>
   <% classe_reponse_oui = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
   <% classe_reponse_non = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.effectuee == false ? " bouton--actif" : "" %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
@@ -40,6 +47,21 @@
       "aria-expanded": "false"
     ) do %>
       <%= t(".bouton_non") %>
+    <% end %>
+
+    <% if MiseEnAction.je_ne_sais_pas_actif? %>
+      <%= render BoutonDsfrComponent.new(
+        "#",
+        type: :secondary,
+        tag: :button,
+        size: :sm,
+        class: "reponse-mise-en-action",
+        data: { reponse: MiseEnAction::REPONSE_JE_NE_SAIS_PAS },
+        "aria-describedby": "question-diagnostics nom-#{evaluation.id}",
+        "aria-expanded": "false"
+      ) do %>
+        <%= t(".bouton_je_ne_sais_pas") %>
+      <% end %>
     <% end %>
   </div>
 </div>

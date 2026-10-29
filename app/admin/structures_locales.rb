@@ -50,6 +50,12 @@ ActiveAdmin.register StructureLocale do
     column(:type_structure) do |structure|
       traduction_type_structure(structure.type_structure)
     end
+    if current_compte.anlci?
+      column :usage do |structure|
+        render(Tag.new(traduction_usage(structure.usage),
+                       classes: classe_tag_usage(structure.usage)))
+      end
+    end
     column :code_postal
     column :created_at do |structure|
       l(structure.created_at, format: :sans_heure)
@@ -66,6 +72,9 @@ ActiveAdmin.register StructureLocale do
     column :type_structure do |structure|
       traduction_type_structure(structure.type_structure)
     end
+    column :usage do |structure|
+      traduction_usage(structure.usage)
+    end
     column :nombre_evaluations
     column :date_derniere_evaluation
     column "Date de création", &:created_at
@@ -78,6 +87,9 @@ ActiveAdmin.register StructureLocale do
     column :region
     column :type_structure do |structure|
       traduction_type_structure(structure.type_structure)
+    end
+    column :usage do |structure|
+      traduction_usage(structure.usage)
     end
     column :nombre_evaluations
     column :date_derniere_evaluation

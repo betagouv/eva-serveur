@@ -166,8 +166,15 @@ ActiveAdmin.register EvaluationEva do
   end
 
   member_action :mise_en_action, method: :put do
-    effectuee = params[:mise_en_action_effectuee]  == "true"
-    resource.enregistre_mise_en_action(effectuee)
+    if params[:mise_en_action_effectuee] == MiseEnAction::REPONSE_JE_NE_SAIS_PAS
+      # On ne peut pas répondre "je ne sais pas" si l'option n'est pas activée
+      # Supprimer cette verification une fois l'ensemble de la feature livrée.
+      next head :unprocessable_content unless MiseEnAction.je_ne_sais_pas_actif?
+
+      resource.enregistre_mise_en_action(nil)
+    else
+      resource.enregistre_mise_en_action(params[:mise_en_action_effectuee] == "true")
+    end
   end
 
 

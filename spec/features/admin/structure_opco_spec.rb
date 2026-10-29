@@ -66,7 +66,7 @@ describe 'Admin - Structure Operateur de competence' do
 
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq "Nouvelle structure"
-        expect(structure.usage).to eq AvecUsage::USAGE_BENEFICIAIRES
+        expect(structure.usage).to eq AvecUsage::USAGE_EVA
         expect(structure.opco).to eq(opco)
       end
     end

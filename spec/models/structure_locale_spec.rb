@@ -57,15 +57,15 @@ describe StructureLocale, type: :model do
 
   describe '#usage' do
     it do
-      expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",
-                                                                   "EVAPRO" ])
+      expect(subject).to validate_inclusion_of(:usage)
+        .in_array([ AvecUsage::USAGE_EVA, AvecUsage::USAGE_EVAPRO ])
     end
   end
 
   describe '#evapro?' do
     context 'quand la structure est une entreprise' do
       let(:structure) do
-        described_class.new(type_structure: "entreprise", usage: "EVAPRO")
+        described_class.new(type_structure: "entreprise", usage: AvecUsage::USAGE_EVAPRO)
       end
 
       it { expect(structure).to be_evapro }
@@ -73,23 +73,23 @@ describe StructureLocale, type: :model do
 
     context 'quand la structure n\'est pas une entreprise' do
       let(:structure) do
-        described_class.new(type_structure: "mission_locale", usage: "Eva: bénéficiaires")
+        described_class.new(type_structure: "mission_locale", usage: AvecUsage::USAGE_EVA)
       end
 
       it { expect(structure).not_to be_evapro }
     end
 
-    context 'quand le type est entreprise mais l\'usage est bénéficiaires' do
+    context 'quand le type est entreprise mais l\'usage est eva' do
       let(:structure) do
-        described_class.new(type_structure: "entreprise", usage: "Eva: bénéficiaires")
+        described_class.new(type_structure: "entreprise", usage: AvecUsage::USAGE_EVA)
       end
 
       it { expect(structure).not_to be_evapro }
     end
 
-    context "quand le type n'est pas entreprise mais l'usage est entreprises" do
+    context "quand le type n'est pas entreprise mais l'usage est evapro" do
       let(:structure) do
-        described_class.new(type_structure: "mission_locale", usage: "EVAPRO")
+        described_class.new(type_structure: "mission_locale", usage: AvecUsage::USAGE_EVAPRO)
       end
 
       it { expect(structure).to be_evapro }
@@ -120,33 +120,33 @@ describe StructureLocale, type: :model do
                               type_structure: "entreprise", usage: nil)
         end
 
-        it "affecte l'usage 'EVAPRO'" do
+        it "affecte l'usage evapro" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("EVAPRO")
+          expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
         end
       end
 
-      context 'quand le type_structure est entreprise et usage est déjà "EVAPRO"' do
+      context 'quand le type_structure est entreprise et usage est déjà "evapro"' do
         let(:structure) do
           described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
-                              type_structure: "entreprise", usage: "EVAPRO")
+                              type_structure: "entreprise", usage: AvecUsage::USAGE_EVAPRO)
         end
 
         it "ne modifie pas l'usage existant" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("EVAPRO")
+          expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
         end
       end
 
-      context 'quand le type_structure est entreprise et usage est "Eva: bénéficiaires"' do
+      context 'quand le type_structure est entreprise et usage est "eva"' do
         let(:structure) do
           described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
-                              type_structure: "entreprise", usage: "Eva: bénéficiaires")
+                              type_structure: "entreprise", usage: AvecUsage::USAGE_EVA)
         end
 
-        it "force l'usage à 'EVAPRO'" do
+        it "force l'usage à evapro" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("EVAPRO")
+          expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
         end
       end
 
@@ -156,9 +156,9 @@ describe StructureLocale, type: :model do
                               type_structure: "entreprise", usage: "Eva: entreprises")
         end
 
-        it "normalise l'usage vers EVAPRO" do
+        it "normalise l'usage vers evapro" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("EVAPRO")
+          expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
         end
       end
 

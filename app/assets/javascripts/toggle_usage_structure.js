@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (usageRadios.length > 0) {
     function toggleOpcoField() {
       const selectedUsage = document.querySelector(`input[name="structure_locale[usage]"]:checked`)?.value;
-      const evaproSelected = selectedUsage === 'EVAPRO';
+      const evaproSelected = selectedUsage === 'evapro';
 
       if (evaproSelected && parentField) {
         parentField.value = '';

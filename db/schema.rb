@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_08_155136) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_29_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -449,7 +449,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_08_155136) do
     t.string "ancestry", null: false, collation: "C"
     t.string "siret"
     t.boolean "autorisation_creation_campagne", default: true
-    t.string "usage", default: "Eva: bénéficiaires"
+    t.string "usage", default: "eva"
     t.boolean "statut_siret"
     t.datetime "date_verification_siret"
     t.string "code_naf"

@@ -52,6 +52,10 @@ fr:
         adresse: Adresse
         email_contact: Adresse email de contact
         telephone: Téléphone de l'accueil
+        usage:
+          one: Usage
+          eva: Eva
+          evapro: Evapro
         type_structure:
           one: "Type de structure"
           non_communique: Non communiqué

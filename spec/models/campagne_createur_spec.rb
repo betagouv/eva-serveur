@@ -7,7 +7,7 @@ describe CampagneCreateur, type: :model do
     create(:structure_locale,
            nom: "ma super structure",
            type_structure: "entreprise",
-           usage: "EVAPRO",
+           usage: AvecUsage::USAGE_EVAPRO,
            opco: opco)
   end
   let(:createur) { described_class.new(structure_entreprise, compte) }
@@ -87,7 +87,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_sans_opco) do
           create(:structure_locale,
                  type_structure: "entreprise",
-                 usage: "EVAPRO",
+                 usage: AvecUsage::USAGE_EVAPRO,
                  opco: nil)
         end
         let(:createur_sans_opco) { described_class.new(structure_sans_opco, compte) }
@@ -101,7 +101,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_mauvais_usage) do
           create(:structure_locale,
                  type_structure: "entreprise",
-                 usage: "Eva: bénéficiaires",
+                 usage: AvecUsage::USAGE_EVA,
                  opco: opco)
         end
         let(:createur_mauvais_usage) { described_class.new(structure_mauvais_usage, compte) }
@@ -115,7 +115,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_administrative) do
           create(:structure_administrative,
                  type_structure: "entreprise",
-                 usage: "EVAPRO",
+                 usage: AvecUsage::USAGE_EVAPRO,
                  opco: opco)
         end
         let(:createur_structure_administrative) {
@@ -131,7 +131,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_non_entreprise) do
         create(:structure_locale,
                  type_structure: "mission_locale",
-                 usage: "EVAPRO",
+                 usage: AvecUsage::USAGE_EVAPRO,
                  opco: opco)
         end
         let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }
@@ -146,7 +146,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_ineligible) do
           create(:structure_locale,
                type_structure: "mission_locale",
-               usage: "EVAPRO",
+               usage: AvecUsage::USAGE_EVAPRO,
                  opco: opco)
         end
         let(:createur_ineligible) { described_class.new(structure_ineligible, compte) }

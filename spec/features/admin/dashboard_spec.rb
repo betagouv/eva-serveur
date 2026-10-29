@@ -308,7 +308,7 @@ describe 'Dashboard', type: :feature do
     let!(:structure_entreprise) do
       create :structure_locale,
              type_structure: "entreprise",
-             usage: "EVAPRO",
+             usage: AvecUsage::USAGE_EVAPRO,
              code_postal: "75012"
     end
     let!(:compte) do

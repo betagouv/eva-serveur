@@ -10,7 +10,7 @@ structure = StructureLocale.new(
   siret: SIRET_FAUX,
   nom: "Structure test SIRET non officiel",
   code_postal: "75001",
-  usage: "Eva: bénéficiaires",
+  usage: AvecUsage::USAGE_EVA,
   type_structure: StructureLocale::TYPE_NON_COMMUNIQUE
 )
 

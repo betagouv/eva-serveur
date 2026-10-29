@@ -16,7 +16,7 @@ ActiveAdmin.register StructureLocale do
          collection: ApplicationController.helpers.collection_types_structures
   filter :usage,
          as: :select,
-         collection: StructureLocale::USAGE,
+         collection: ApplicationController.helpers.collection_usages,
          if: proc { current_compte.anlci? }
   filter :code_postal
   filter :siret

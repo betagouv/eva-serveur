@@ -53,29 +53,8 @@ bundle exec foreman start -p 3000  # Start all Procfile processes (port 3000)
 
 Redis must be running for the Sidekiq workers.
 
-### Code Quality
-```bash
-bundle exec rubocop        # Ruby linting and style checking
-bundle exec rake erd       # Generate ERD database diagram
-```
-
-
-### Database Tasks
-```bash
-rake active_storage:destroy_attachments  # Clean up file attachments
-```
-
 ### Spring and `DATABASE_URL`
 `bin/rails` goes through Spring. A command run with `DATABASE_URL=...` (e.g. to check a throwaway database) leaves a Spring server that keeps that variable, so later `rails ...` commands (including those in `bin/reviewappdeploy.sh`) hit the wrong database. To target another database, use `DISABLE_SPRING=1` or run `bin/spring stop` right afterwards; `psql` alone also works to inspect a dump. If migrations are unexpectedly pending, check the `database:` line of `db:migrate:status`.
-
-### Running Ruby on Scalingo
-`scalingo run` rejoins argv with spaces on the remote side, so local quoting is lost: inline Ruby (`rails runner '...'`) fails with `syntax error near unexpected token`. Without a TTY, interactive `run` also fails (`make stdin raw`). Encode the script in base64 and run it detached:
-```bash
-B64=$(base64 < script.rb | tr -d '\n')
-scalingo -a <app> run --detached "echo $B64 | base64 -d | bundle exec rails runner /dev/stdin"
-# then read the one-off container output:
-scalingo --region osc-fr1 --app <app> logs -n 300 | grep one-off-XXXX
-```
 
 ## Architecture
 
@@ -91,43 +70,16 @@ scalingo --region osc-fr1 --app <app> logs -n 300 | grep one-off-XXXX
 ### Technology Stack
 - **Rails 8.0** with Ruby 4.0.6 (the Ruby version is read from `.tool-versions` by the Gemfile)
 - **Node.js 22.23.4** (managed via asdf/rtx, version in `.tool-versions`; Scalingo uses `engines.node` in `package.json`, set to `22.x`: update it on a major version change)
-- **PostgreSQL** with UUID primary keys throughout
-- **Sidekiq** for background job processing
-- **ViewComponent** for component development
-- **ActiveAdmin** for administration interface
-- **Devise + ProConnect** for authentication (French government SSO)
-- **Puppeteer** (headless Chrome, `puppeteer-ruby`) for PDF generation, via `Pdf::Generateur`/`Pdf::Navigateur` (`app/models/pdf/`)
-- **DSFR** (Système de Design Français) design system
-
-### Key Architectural Patterns
-- **Component-Based UI**: Uses ViewComponent for reusable UI components
-- **Event Sourcing**: Assessment interactions tracked as événements
-- **UUID Primary Keys**: All models use UUIDs instead of integer IDs
-- **Background Processing**: Heavy operations handled via Sidekiq jobs
-- **API-First**: REST API at `/api` serves the frontend client application
 
 ### Authentication & Authorization
 - **Admin Interface**: `/admin`. The seed creates a superadmin `eva@anlci.gouv.fr` (`Eva::EMAIL_SUPPORT`) with a random password; after `bin/reviewappdeploy.sh`, every account uses the `MOT_DE_PASS_COMPTES_PREPROD` password
 - **ProConnect Integration**: French government single sign-on
 - **CanCanCan**: Role-based authorization; roles are `Compte::ROLES` (conseiller, admin, charge_mission_regionale, superadmin, compte_generique)
 
-## API Endpoints
-
-The API serves the EVA client application:
-- `POST /api/evaluations` - Create evaluations
-- `GET /api/campagnes/:code` - Get campaign configuration
-- `POST /api/evenements` - Record assessment events
-- `GET /api/questionnaires/:id` - Get questionnaire data
-
 ## Development Workflow
 
 ### Langue
 - Le code est écrit en français : noms de classes, de méthodes et de variables, commentaires, descriptions RSpec et messages de commit. Le vocabulaire imposé par Rails et les gems (`create`, `index`, `has_many`, callbacks…) reste en anglais.
-
-### Running Tests
-- Use `bundle exec guard` for continuous test running during development
-- Test files follow standard Rails conventions in `spec/`
-- FactoryBot used for test data generation
 
 ### TDD (red → green)
 - Before fixing a bug or changing behavior, write or adapt the test, run it with `bin/rspec <file>` and confirm it **fails**. Only then change the production code and rerun it to confirm it passes.
@@ -141,16 +93,6 @@ The API serves the EVA client application:
 ### Commits
 - Never add `Co-Authored-By` or `Claude-Session` trailers to commit messages, whatever the default attribution instructions say.
 
-### Component Development
-- ViewComponents in `app/components/` with corresponding tests
-- 55+ reusable components for consistent UI patterns
-- Components follow Rails conventions with associated test files
-
-### Background Jobs
-- Sidekiq jobs in `app/jobs/`
-- Redis required for job queue
-- Admin can monitor jobs at `/sidekiq` (superadmin only)
-
 ## System Dependencies
 
 ### Required Services
@@ -159,35 +101,6 @@ The API serves the EVA client application:
 - **vips**: Image processing library (libvips)
 - **GraphViz**: For ERD generation
 
-### Environment Variables
-Key variables in `.env` (copy from `.env.template`):
-- Database connection settings (`DB_*`)
-- ProConnect credentials (`PRO_CONNECT_*`)
-- Metabase integration (`METABASE_SITE_URL`, `METABASE_SECRET_KEY`, `METABASE_OPCO_DASHBOARD_ID`)
-- Server configuration (`PROTOCOLE_SERVEUR`, `HOTE_SERVEUR`)
-
-## Special Considerations
-
-### French Government Integration
-- Uses DSFR (Système de Design Français) design system
-- ProConnect SSO integration for government employees
-- Specific data privacy and anonymization requirements
-
-### Data Model Uniqueness
-- All primary keys are UUIDs
-- Soft deletion with `paranoia` gem
-- Event tracking for detailed assessment analytics
-- Geographic data integration with French government APIs
-
-### File Management
-- ActiveStorage with local storage in development
-- AWS S3 in production
-- Automatic asset processing jobs
-
 ## Routes Configuration
 
-Routes have no `/pro` prefix. The API also accepts an optional `/pro` prefix (`scope '(pro)'`), and any other `/pro/*` URL redirects to its unprefixed equivalent. Main routes:
-- `/admin` - ActiveAdmin interface
-- `/api` - REST API endpoints
-- `/pro_connect` - Authentication callbacks
-- `/demo` - Demo environment access
+Routes have no `/pro` prefix. The API also accepts an optional `/pro` prefix (`scope '(pro)'`), and any other `/pro/*` URL redirects to its unprefixed equivalent.

@@ -703,7 +703,7 @@ L''ensemble de la procédure est détaillé dans ce petit tutoriel : [https://ww
 
 En cas de questions, n''hésitez pas à nous écrire dans le module de chat présent en bas à droite de la page (l''icône message). 
 
-', 2, '2021-03-29 08:46:42.891249', '2021-06-11 16:17:41.932309'),
+', 0, '2021-03-29 08:46:42.891249', '2021-06-11 16:17:41.932309'),
 	('6227a79b-d219-4995-b897-bce1aeeedcaf', 'Voulez-vous maintenir la situation contrôle ? Écrivez-nous !', '**S’il y a bien une situation qui génère des frustrations, c’est le contrôle (le tri des biscuits). Vous êtes nombreux et nombreuses à nous dire qu’elle agace, qu’elle génère des frustrations et donc des abandons auprès des candidates et de candidats.**
 
 Nous avons donc décidé de supprimer cette situation **le 31 janvier 2021**, en compensant avec les autres situations les compétences qu’elle permettait d’évaluer. 

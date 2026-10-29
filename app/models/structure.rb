@@ -104,7 +104,6 @@ allow_blank: true
   def evapro?
     false
   end
-  alias_method :eva_entreprises?, :evapro?
 
   def est_une_structure_ocpo?
     is_a?(StructureOpco)

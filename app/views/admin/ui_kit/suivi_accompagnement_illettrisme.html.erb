@@ -3,6 +3,9 @@
 
   <p>Bannière affichée sur une évaluation en illettrisme potentiel, selon sa mise en action.</p>
 
+  <% campagne = Campagne.new(situations_configurations: %w[cafe_de_la_place place_du_marche].map { |nom_technique|
+       SituationConfiguration.new(situation: Situation.new(nom_technique: nom_technique))
+     }) %>
   <% {
     "Sans réponse" => nil,
     "Oui, sans remédiation qualifiée" => MiseEnAction.new(effectuee: true),
@@ -15,7 +18,12 @@
     <h2><%= titre %></h2>
     <div class="fr-mb-6w">
       <%= render SuiviAccompagnementIllettrismeComponent.new(
-            evaluation: EvaluationEva.new(id: SecureRandom.uuid, mise_en_action: mise_en_action)
+            evaluation: EvaluationEva.new(id: SecureRandom.uuid, mise_en_action: mise_en_action,
+                                          beneficiaire: Beneficiaire.new(nom: "Jean Dupont"),
+                                          debutee_le: Date.new(2026, 4, 28),
+                                          campagne: campagne,
+                                          positionnement_niveau_litteratie: "profil2",
+                                          positionnement_niveau_numeratie: "profil3")
           ) %>
     </div>
   <% end %>

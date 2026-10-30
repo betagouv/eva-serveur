@@ -1,4 +1,14 @@
 <div id="<%= @evaluation.id %>" class="carte__conteneur">
+  <div class="fr-notice fr-notice--info">
+    <div class="fr-container">
+      <div class="fr-notice__body">
+        <div>
+          <h2 class="fr-notice__title"><%= t("suivi_accompagnement_illettrisme.bandeau") %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render EnteteMiseEnActionComponent.new(evaluation: @evaluation) %>
   <div class="card__banner card__banner--illettrisme <%= classe_bandeau %>">
     <div class='card__banner__entete d-flex fr-py-4v fr-px-6v'>
       <div class='d-flex align-items-center justify-content-center' aria-hidden="true">

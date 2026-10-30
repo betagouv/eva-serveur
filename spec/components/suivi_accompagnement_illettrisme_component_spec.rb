@@ -7,7 +7,17 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
 
   before do
     allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(je_ne_sais_pas_actif)
+    allow(EnteteMiseEnActionComponent).to receive(:new).and_call_original
     render_inline(described_class.new(evaluation: evaluation))
+  end
+
+  it "affiche le bandeau d'illettrisme potentiel" do
+    expect(page).to have_css(".fr-notice.fr-notice--info .fr-notice__title",
+                             text: I18n.t("suivi_accompagnement_illettrisme.bandeau"))
+  end
+
+  it "affiche l'en-tête de la mise en action" do
+    expect(EnteteMiseEnActionComponent).to have_received(:new).with(evaluation: evaluation)
   end
 
   it "affiche le titre" do

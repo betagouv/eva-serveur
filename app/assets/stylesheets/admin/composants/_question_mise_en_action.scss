@@ -1,0 +1,36 @@
+.question-mise-en-action {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-2w;
+}
+
+.question-mise-en-action__texte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
+
+.question-mise-en-action__libelle {
+  @include corps-de-texte-md-regular;
+
+  color: $grey-50;
+}
+
+.question-mise-en-action__description {
+  @include corps-de-texte-xs-regular;
+
+  color: $grey-425;
+  line-height: 1.25rem;
+}
+
+.question-mise-en-action__boutons {
+  display: flex;
+  align-self: stretch;
+  gap: $dsfr-spacing-1w;
+}
+
+.question-mise-en-action__boutons .reponse-mise-en-action {
+  flex: 1;
+  justify-content: center;
+}

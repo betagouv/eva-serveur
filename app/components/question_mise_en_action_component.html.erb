@@ -1,0 +1,24 @@
+<div data-reponse="vide" class="mise-en-action question-mise-en-action <%= classe_question %>">
+  <div class="question-mise-en-action__texte">
+    <div id="question-mise-en-action-<%= @evaluation.id %>" class="question-mise-en-action__libelle">
+      <%= t("question_mise_en_action.question") %>
+    </div>
+    <div class="question-mise-en-action__description"><%= t("question_mise_en_action.description") %></div>
+  </div>
+  <div class="question-mise-en-action__boutons">
+    <% @reponses.each do |reponse| %>
+      <%= render BoutonDsfrComponent.new(
+        "#",
+        type: :secondary,
+        tag: :button,
+        size: :sm,
+        class: classe_bouton(reponse),
+        data: { reponse: reponse.to_s },
+        "aria-describedby": "question-mise-en-action-#{@evaluation.id}",
+        "aria-expanded": "false"
+      ) do %>
+        <%= libelle_bouton(reponse) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

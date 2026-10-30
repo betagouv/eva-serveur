@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Démo ResultatComponent</h1>
+
+  <p>Résultat d'une évaluation pour un domaine. Pastille ronde pour les profils, rectangulaire pour les niveaux.</p>
+
+  <h2>Littératie</h2>
+  <% %w[profil1 profil2 profil3 profil4 profil_4h profil_4h_plus profil_4h_plus_plus indetermine].each do |niveau| %>
+    <div class="fr-mb-1w"><%= render ResultatComponent.new(domaine: :litteratie, niveau: niveau) %></div>
+  <% end %>
+
+  <h2>Numératie</h2>
+  <% %w[profil1 profil2 profil3 profil4 profil4_plus indetermine].each do |niveau| %>
+    <div class="fr-mb-1w"><%= render ResultatComponent.new(domaine: :numeratie, niveau: niveau) %></div>
+  <% end %>
+
+  <h2>Français</h2>
+  <% [ "pre_A1", "A1", "A2", "B1", nil ].each do |niveau| %>
+    <div class="fr-mb-1w"><%= render ResultatComponent.new(domaine: :francais, niveau: niveau) %></div>
+  <% end %>
+
+  <h2>Mathématiques</h2>
+  <% [ "pre_X1", "X1", "X2", "Y1", nil ].each do |niveau| %>
+    <div class="fr-mb-1w"><%= render ResultatComponent.new(domaine: :mathematiques, niveau: niveau) %></div>
+  <% end %>
+</div>

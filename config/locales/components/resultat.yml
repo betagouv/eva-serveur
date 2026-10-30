@@ -1,0 +1,45 @@
+fr:
+  resultat:
+    domaines:
+      litteratie: Littératie
+      numeratie: Numératie
+      francais: Français
+      mathematiques: Mathématiques
+    pastilles:
+      profil1: "1"
+      profil2: "2"
+      profil3: "3"
+      profil4: "4"
+      profil_4h: "4"
+      profil_4h_plus: 4+
+      profil_4h_plus_plus: 4++
+      profil4_plus: 4+
+      profil4_plus_plus: 4++
+      pre_A1: pré-A1
+      A1: A1
+      A2: A2
+      B1: B1+
+      pre_X1: pré-X1
+      X1: X1
+      X2: X2
+      Y1: Y1+
+      non_calcule: "?"
+    titres:
+      profil1: Formation vivement recommandée
+      profil2: Formation vivement recommandée
+      profil3: Compétences à améliorer
+      profil4: Bases maîtrisées
+      profil_4h: Certification Cléa indiquée
+      profil_4h_plus: Certification Cléa indiquée
+      profil_4h_plus_plus: Très bonne maîtrise
+      profil4_plus: Certification Cléa indiquée
+      profil4_plus_plus: Très bonne maîtrise
+      pre_A1: Formation vivement recommandée
+      A1: Formation conseillée
+      A2: Formation conseillée
+      B1: Bonne maîtrise
+      pre_X1: Formation vivement recommandée
+      X1: Formation conseillée
+      X2: Formation conseillée
+      Y1: Bonne maîtrise
+      non_calcule: Score non calculé

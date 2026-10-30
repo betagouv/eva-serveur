@@ -1,0 +1,58 @@
+.resultat {
+  @include corps-de-texte-sm-regular;
+
+  display: flex;
+  align-items: center;
+  gap: $dsfr-spacing-1w;
+  color: $grey-50;
+}
+
+.resultat__domaine {
+  @include corps-de-texte-sm-bold;
+
+  font-weight: 700;
+}
+
+.resultat__separateur {
+  color: $grey-425;
+}
+
+.resultat__pastille {
+  @include corps-de-texte-xs-bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 1.375rem;
+  min-width: 1.375rem;
+  padding: 0 $dsfr-spacing-1w;
+  border: 0.0938rem solid;
+  border-radius: $dsfr-radius-sm;
+  background: $grey-1000;
+}
+
+.resultat__pastille--ronde {
+  padding: 0 $dsfr-spacing-1v;
+  border-radius: $dsfr-radius-full;
+}
+
+.resultat__pastille--alerte {
+  border-color: $warning-425;
+  color: $warning-425;
+}
+
+.resultat__pastille--intermediaire {
+  border-color: $info-425;
+  color: $info-425;
+}
+
+.resultat__pastille--succes {
+  border-color: $success-425;
+  color: $success-425;
+}
+
+.resultat__pastille--desactive {
+  border-color: $grey-425;
+  color: $grey-425;
+}

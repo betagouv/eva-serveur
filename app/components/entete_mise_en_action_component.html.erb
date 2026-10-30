@@ -1,0 +1,13 @@
+<div class="entete-mise-en-action">
+  <div class="entete-mise-en-action__identification">
+    <div class="entete-mise-en-action__nom">
+      <%= render NomAnonymisableComponent.new(@evaluation.beneficiaire) if @evaluation.beneficiaire %>
+    </div>
+    <div class="entete-mise-en-action__date"><%= date_evaluation %></div>
+    <div class="entete-mise-en-action__resultats">
+      <% resultats.each do |resultat| %>
+        <%= render resultat %>
+      <% end %>
+    </div>
+  </div>
+</div>

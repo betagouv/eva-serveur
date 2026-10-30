@@ -1,0 +1,34 @@
+.entete-mise-en-action {
+  padding: $dsfr-spacing-3w $dsfr-spacing-6w;
+  background: var(--background-alt-grey);
+}
+
+.entete-mise-en-action__identification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
+
+.entete-mise-en-action__nom {
+  @include corps-de-texte-md-bold;
+
+  color: $grey-50;
+  font-weight: 700;
+}
+
+.entete-mise-en-action__date {
+  @include corps-de-texte-xs-regular;
+
+  color: $grey-425;
+  line-height: 1.25rem;
+}
+
+.entete-mise-en-action__resultats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: $dsfr-spacing-1w;
+  padding-top: $dsfr-spacing-3v;
+}

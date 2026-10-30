@@ -50,7 +50,6 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_content("Oui vous avez trouvé une solution")
         expect(page).to have_css(".tag", text: "Formation métier / qualifiante")
       end
-      expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end
 
@@ -63,7 +62,6 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_content("Oui vous avez trouvé une solution")
         expect(page).to have_no_css(".mise-en-action .tag", visible: :visible)
       end
-      expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
       expect(mise_en_action.reload.remediation).to eq("indetermine")
     end
 
@@ -92,13 +90,10 @@ describe "Admin - Mise en action", :js, type: :feature do
     end
 
     it "propose de nouveau Oui et Non quand on modifie la réponse" do
-      expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
-
       within(".card__banner--illettrisme") { click_link "Modifier votre réponse" }
 
       expect(page).to have_button("Oui")
       expect(page).to have_button("Non")
-      expect(page).to have_css(".card__banner--illettrisme.card__banner--en-attente")
     end
 
     it "affiche la nouvelle qualification quand on change de réponse" do
@@ -115,7 +110,6 @@ describe "Admin - Mise en action", :js, type: :feature do
                                  text: "Accompagnement spécifique nécessaire")
         expect(page).to have_no_content("Oui vous avez trouvé une solution")
       end
-      expect(page).to have_css(".card__banner--illettrisme.card__banner--succes")
     end
   end
 
@@ -165,7 +159,6 @@ describe "Admin - Mise en action", :js, type: :feature do
           expect(page).to have_css("[data-reponse='je_ne_sais_pas'] .tag", text: revue_prevue)
           expect(page).to have_css(".qcm", visible: :hidden, count: 2)
         end
-        expect(page).to have_css(".card__banner--illettrisme.card__banner--en-attente")
         expect(mise_en_action.motif).to eq("action_prevue")
       end
 

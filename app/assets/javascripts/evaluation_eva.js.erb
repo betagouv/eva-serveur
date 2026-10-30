@@ -1,8 +1,6 @@
 function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='${reponseMiseEnAction}']`).removeClass('hidden').addClass('d-flex');
-  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--en-attente');
-  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--succes');
 }
 
 const REPONSE_JE_NE_SAIS_PAS = "<%= MiseEnAction::REPONSE_JE_NE_SAIS_PAS %>";
@@ -43,8 +41,6 @@ function modifieReponseMiseEnAction(evaluationId) {
   $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
-  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--succes');
-  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--en-attente');
 }
 
 const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_eva_path('ID_EVALUATION') %>";

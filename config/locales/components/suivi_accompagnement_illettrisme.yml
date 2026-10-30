@@ -1,8 +1,3 @@
 fr:
   suivi_accompagnement_illettrisme:
     bandeau: Situation d’illettrisme potentiel détectée à l’évaluation
-    titre: Cette personne semble avoir besoin de consolider ses compétences de base.
-    message: |
-      D'après nos enquêtes, seulement **25% des personnes en illettrisme potentiel réussissent à entrer en formation.**
-
-      **Avez-vous été en mesure d’orienter cette personne vers une solution d’accompagnement adaptée<a href="#asterisque" class="lien-secondaire" title="aller à la description pistes de solutions"><sup>*</sup></a> ?**

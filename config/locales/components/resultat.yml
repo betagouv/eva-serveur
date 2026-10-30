@@ -1,0 +1,28 @@
+fr:
+  resultat:
+    domaines:
+      litteratie: Littératie
+      numeratie: Numératie
+      francais: Français
+      mathematiques: Mathématiques
+    badges:
+      non_calcule: "?"
+    titres:
+      profil1: Formation vivement recommandée
+      profil2: Formation vivement recommandée
+      profil3: Compétences à améliorer
+      profil4: Bases maîtrisées
+      profil_4h: Certification Cléa indiquée
+      profil_4h_plus: Certification Cléa indiquée
+      profil_4h_plus_plus: Très bonne maîtrise
+      profil4_plus: Certification Cléa indiquée
+      profil4_plus_plus: Très bonne maîtrise
+      pre_A1: Formation vivement recommandée
+      A1: Formation conseillée
+      A2: Formation conseillée
+      B1: Bonne maîtrise
+      pre_X1: Formation vivement recommandée
+      X1: Formation conseillée
+      X2: Formation conseillée
+      Y1: Bonne maîtrise
+      non_calcule: Score non calculé

@@ -34,6 +34,7 @@ module Admin
     def referentiel_anlci; end
     def score_arrows; end
     # def sous_competence; end commenté pour le moment car pas assez unitaire
+    def resultat; end
     def statut_campagne; end
     def statut_suivi; end
     def suivi_accompagnement_illettrisme; end

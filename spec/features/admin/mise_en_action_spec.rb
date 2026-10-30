@@ -148,4 +148,52 @@ describe "Admin - Mise en action", :js, type: :feature do
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end
   end
+
+  describe "quand l'option « je ne sais pas » est active" do
+    let(:revue_prevue) { "Revue prévue le #{I18n.l(Date.current + 7)}" }
+
+    before { allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true) }
+
+    describe "sur le détail d'une évaluation" do
+      before { visit admin_evaluation_eva_path(evaluation) }
+
+      it "affiche la date de revue sans ouvrir de questionnaire " \
+         "quand on répond « je ne sais pas »" do
+        within(".card__banner--illettrisme") do
+          click_button "Je ne sais pas"
+
+          expect(page).to have_css("[data-reponse='je_ne_sais_pas'] .tag", text: revue_prevue)
+          expect(page).to have_css(".qcm", visible: :hidden, count: 2)
+        end
+        expect(page).to have_css(".card__banner--illettrisme.card__banner--en-attente")
+        expect(mise_en_action.motif).to eq("action_prevue")
+      end
+
+      it "propose de nouveau les réponses quand on modifie « je ne sais pas »" do
+        within(".card__banner--illettrisme") do
+          click_button "Je ne sais pas"
+          click_link "Modifier votre réponse"
+
+          expect(page).to have_button("Oui")
+          expect(page).to have_button("Non")
+          expect(page).to have_button("Je ne sais pas")
+        end
+      end
+    end
+
+    describe "sur le tableau de bord" do
+      before { visit admin_dashboard_path }
+
+      it "affiche la réponse sans dérouler la carte quand on répond « je ne sais pas »" do
+        within("li[id='#{evaluation.id}']") do
+          click_button "Je ne sais pas"
+
+          expect(page).to have_css("div[data-reponse='je_ne_sais_pas']", text: "Je ne sais pas")
+          expect(page).to have_no_css(".carte--deroulee")
+          expect(page).to have_css(".qcm", visible: :hidden, count: 2)
+        end
+        expect(mise_en_action.effectuee).to be_nil
+      end
+    end
+  end
 end

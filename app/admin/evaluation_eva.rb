@@ -172,6 +172,11 @@ ActiveAdmin.register EvaluationEva do
       next head :unprocessable_content unless MiseEnAction.je_ne_sais_pas_actif?
 
       resource.enregistre_mise_en_action(nil)
+      date_revue = I18n.l(resource.mise_en_action.date_revue)
+      render json: {
+        revue_prevue: I18n.t("components.modification_mise_en_action.revue_prevue",
+                             date: date_revue)
+      }
     else
       resource.enregistre_mise_en_action(params[:mise_en_action_effectuee] == "true")
     end

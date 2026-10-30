@@ -5,6 +5,16 @@ function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--succes');
 }
 
+const REPONSE_JE_NE_SAIS_PAS = "<%= MiseEnAction::REPONSE_JE_NE_SAIS_PAS %>";
+
+function afficheReponseJeNeSaisPas(evaluationId, revuePrevue) {
+  fermeQcm(evaluationId);
+  $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
+  const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`);
+  $reponse.find('.tag').removeClass('hidden').text(revuePrevue);
+  $reponse.removeClass('hidden').addClass('d-flex');
+}
+
 function reinitialiseFormulaire(evaluationId) {
   $(`#${evaluationId} input[name=reponse_qcm]`).prop('checked', false);
   $(`#${evaluationId} .valide-qcm`).prop('disabled', true);
@@ -50,7 +60,11 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     url: chemin_mise_en_action.replace('ID_EVALUATION', evaluationId),
     data: data,
     dataType: "json",
-    success: function () {
+    success: function (donnees) {
+      if (reponse === REPONSE_JE_NE_SAIS_PAS) {
+        afficheReponseJeNeSaisPas(evaluationId, donnees.revue_prevue);
+        return;
+      }
       const qcm = nomQcm(reponse)
       ouvreQcm(evaluationId, qcm, reponse);
     }

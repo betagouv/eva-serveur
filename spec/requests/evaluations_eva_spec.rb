@@ -50,6 +50,10 @@ describe 'Evaluation eva', type: :request do
       context "quand on répond « je ne sais pas »" do
         let(:reponse) { { mise_en_action_effectuee: MiseEnAction::REPONSE_JE_NE_SAIS_PAS } }
 
+        before { Bullet.enable = false }
+
+        after { Bullet.enable = true }
+
         it "enregistre la réponse quand l'option est active" do
           allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
 
@@ -60,6 +64,16 @@ describe 'Evaluation eva', type: :request do
           expect(mise_en_action.motif).to eq("action_prevue")
           expect(mise_en_action.date_revue).not_to be_nil
           expect(mise_en_action.repondue_le).not_to be_nil
+        end
+
+        it "renvoie la date de revue à afficher" do
+          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
+
+          Timecop.freeze(Time.zone.local(2026, 10, 29, 12)) do
+            put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
+          end
+
+          expect(response.parsed_body).to eq("revue_prevue" => "Revue prévue le 05 nov. 2026")
         end
 
         it "refuse la réponse quand l'option n'est pas active" do

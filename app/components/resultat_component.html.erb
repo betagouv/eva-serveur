@@ -1,0 +1,8 @@
+<div class="resultat">
+  <%= render badge %>
+  <span class="resultat__domaine"><%= domaine %></span>
+  <% if @avec_titre %>
+    <span class="resultat__separateur" aria-hidden="true">-</span>
+    <span class="resultat__titre"><%= titre %></span>
+  <% end %>
+</div>

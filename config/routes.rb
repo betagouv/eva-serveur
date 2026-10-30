@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     get '/ui_kit/pastille', to: 'ui_kit#pastille'
     # get '/ui_kit/qcm', to: 'ui_kit#qcm'
     get '/ui_kit/referentiel_anlci', to: 'ui_kit#referentiel_anlci'
+    get '/ui_kit/resultat', to: 'ui_kit#resultat'
     get '/ui_kit/score_arrows', to: 'ui_kit#score_arrows'
     # get '/ui_kit/sous_competence', to: 'ui_kit#sous_competence'
     get '/ui_kit/statut_campagne', to: 'ui_kit#statut_campagne'

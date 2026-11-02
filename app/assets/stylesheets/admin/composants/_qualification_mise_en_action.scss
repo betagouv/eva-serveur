@@ -1,0 +1,72 @@
+// Le JS de la mise en action, partagé avec le tableau de bord, repère ce bloc
+// grâce à la classe .qcm pour l'afficher ou le masquer. Cette classe apporte aussi
+// le style de l'ancien QCM (_qcm.scss) : on l'annule ici. À retirer quand le
+// tableau de bord passera sur les nouveaux composants.
+.qualification-mise-en-action.qcm {
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+  li {
+    margin-top: 0;
+  }
+}
+
+.qualification-mise-en-action {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-2w;
+}
+
+.qualification-mise-en-action__encart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $dsfr-spacing-3v $dsfr-spacing-2w;
+  background: var(--background-alt-grey);
+}
+
+.qualification-mise-en-action__titre {
+  @include corps-de-texte-sm-bold;
+
+  color: $grey-50;
+  font-weight: 700;
+}
+
+.qualification-mise-en-action__changer {
+  @include corps-de-texte-sm-regular;
+
+  color: $blue-france-sun-113;
+}
+
+.qualification-mise-en-action__texte {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-1v;
+}
+
+.qualification-mise-en-action__libelle {
+  @include corps-de-texte-md-regular;
+
+  color: $grey-50;
+}
+
+.qualification-mise-en-action__description {
+  @include corps-de-texte-xs-regular;
+
+  color: $grey-425;
+  line-height: 1.25rem;
+}
+
+.qualification-mise-en-action__choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $dsfr-spacing-1w;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qualification-mise-en-action__choix li {
+  padding-bottom: 0;
+}

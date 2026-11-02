@@ -106,6 +106,24 @@ function miseEnActionEffectuee($bouton) {
   return $bouton.closest('.qcm')[0].classList.contains('questions-remediation')
 }
 
+// Carte de suivi de l'évaluation : le clic sur un tag enregistre directement la qualification
+function enregistreChoixQualification(evaluationId, $tag) {
+  const effectuee = miseEnActionEffectuee($tag);
+  const libelle = $tag.text().trim();
+
+  $.ajax({
+    method: 'PATCH',
+    url: chemin_renseigner_qualification.replace('ID_EVALUATION', evaluationId),
+    data: { effectuee, qualification: $tag.data('qualification') },
+    dataType: "json",
+    success: function () {
+      $(`#${evaluationId} div[data-reponse='${effectuee}'] .tag`).removeClass('hidden').text(libelle);
+      afficheModificationReponse(effectuee, evaluationId);
+      fermeQcm(evaluationId);
+    }
+  });
+}
+
 function ecouteBoutons(boutons, callback) {
   boutons.on('click', function(event) {
     event.preventDefault();
@@ -134,6 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const effectuee = miseEnActionEffectuee($bouton)
     $(`div[data-reponse='${effectuee}'] .tag`).addClass('hidden')
   });
+  ecouteBoutons($(".suivi-accompagnement-illettrisme .reponse-mise-en-action"), function(evaluationId) {
+    $(`#${evaluationId} div[data-reponse='vide']`).removeClass('d-flex').addClass('hidden');
+  });
+  ecouteBoutons($(".changer-reponse-mise-en-action"), function(evaluationId) {
+    fermeQcm(evaluationId);
+    modifieReponseMiseEnAction(evaluationId);
+  });
+  ecouteBoutons($(".choix-qualification-mise-en-action"), enregistreChoixQualification);
   activeBoutonValider();
   $("input[name=reponse_qcm]").on('focus', function(event) {
     $(event.currentTarget).click();

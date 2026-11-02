@@ -12,13 +12,12 @@
   <div class="card__banner card__banner--illettrisme">
     <div class="suivi-mise-en-action">
       <%= render QuestionMiseEnActionComponent.new(evaluation: @evaluation, reponses: reponses) %>
+      <% %i[remediation difficulte].each do |questionnaire| %>
+        <%= render QualificationMiseEnActionComponent.new(evaluation: @evaluation, questionnaire: questionnaire) %>
+      <% end %>
       <% reponses.each do |reponse| %>
         <%= render ReponseMiseEnActionComponent.new(evaluation: @evaluation, reponse: reponse) %>
       <% end %>
-    </div>
-    <div class='card__banner__questionnaires'>
-      <%= render qcm_remediation %>
-      <%= render qcm_difficulte %>
     </div>
   </div>
 </div>

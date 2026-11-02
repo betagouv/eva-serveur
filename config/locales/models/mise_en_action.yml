@@ -3,14 +3,14 @@ fr:
     attributes:
       mise_en_action:
         remediation:
-          formation_competences_de_base: Formation compétences de base / compétences clés
+          formation_competences_de_base: Formation compétences de base
           formation_metier: Formation métier / qualifiante
-          dispositif_remobilisation: Dispositif de remobilisation (E2C, EPIDE, Promo 16-18, etc.)
+          dispositif_remobilisation: Dispositif de remobilisation
           levee_freins_peripheriques: Levée de freins périphériques
         difficulte:
-          aucune_offre_formation: Aucune offre de formation compétences de base disponible
-          offre_formation_inaccessible: Offre de formation inaccessible (financement, distance, etc.)
-          freins_peripheriques: Freins périphériques (mobilité, logement, santé, etc.)
+          aucune_offre_formation: Aucune offre de formation disponible
+          offre_formation_inaccessible: Offre de formation inaccessible
+          freins_peripheriques: Freins périphériques
           accompagnement_necessaire: Accompagnement spécifique nécessaire
         motif:
           action_prevue: Une action est prévue

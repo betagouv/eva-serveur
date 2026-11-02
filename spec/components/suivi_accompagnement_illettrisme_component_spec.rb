@@ -10,6 +10,7 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     allow(EnteteMiseEnActionComponent).to receive(:new).and_call_original
     allow(QuestionMiseEnActionComponent).to receive(:new).and_call_original
     allow(ReponseMiseEnActionComponent).to receive(:new).and_call_original
+    allow(QualificationMiseEnActionComponent).to receive(:new).and_call_original
     render_inline(described_class.new(evaluation: evaluation))
   end
 
@@ -50,28 +51,10 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     end
   end
 
-  context "sans mise en action" do
-    it "masque les deux questionnaires" do
-      expect(page).to have_css(".questions-remediation.hidden", visible: :all)
-      expect(page).to have_css(".questions-difficulte.hidden", visible: :all)
-    end
-  end
-
-  context "quand la mise en action est effectuée sans remédiation" do
-    let(:mise_en_action) { build(:mise_en_action, effectuee: true) }
-
-    it "affiche le questionnaire de remédiation" do
-      expect(page).to have_css(".questions-remediation:not(.hidden)")
-      expect(page).to have_css(".questions-difficulte.hidden", visible: :all)
-    end
-  end
-
-  context "quand la mise en action n'est pas effectuée sans difficulté" do
-    let(:mise_en_action) { build(:mise_en_action, effectuee: false) }
-
-    it "affiche le questionnaire de difficulté" do
-      expect(page).to have_css(".questions-difficulte:not(.hidden)")
-      expect(page).to have_css(".questions-remediation.hidden", visible: :all)
-    end
+  it "prépare le choix du type d'aide et de la raison" do
+    expect(QualificationMiseEnActionComponent).to have_received(:new)
+      .with(evaluation: evaluation, questionnaire: :remediation)
+    expect(QualificationMiseEnActionComponent).to have_received(:new)
+      .with(evaluation: evaluation, questionnaire: :difficulte)
   end
 end

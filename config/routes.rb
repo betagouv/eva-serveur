@@ -87,6 +87,7 @@ Rails.application.routes.draw do
     get '/ui_kit/suivi_accompagnement_illettrisme', to: 'ui_kit#suivi_accompagnement_illettrisme'
     get '/ui_kit/tableau', to: 'ui_kit#tableau'
     get '/ui_kit/tag', to: 'ui_kit#tag'
+    get '/ui_kit/tag_dsfr', to: 'ui_kit#tag_dsfr'
     get '/ui_kit/texte_intro', to: 'ui_kit#texte_intro'
     get '/ui_kit/toggle', to: 'ui_kit#toggle'
 

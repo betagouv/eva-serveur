@@ -9,6 +9,7 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(je_ne_sais_pas_actif)
     allow(EnteteMiseEnActionComponent).to receive(:new).and_call_original
     allow(QuestionMiseEnActionComponent).to receive(:new).and_call_original
+    allow(ReponseMiseEnActionComponent).to receive(:new).and_call_original
     render_inline(described_class.new(evaluation: evaluation))
   end
 
@@ -26,6 +27,14 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
       .with(evaluation: evaluation, reponses: [ true, false ])
   end
 
+  it "prépare l'affichage des réponses Oui et Non" do
+    expect(ReponseMiseEnActionComponent).to have_received(:new)
+      .with(evaluation: evaluation, reponse: true)
+    expect(ReponseMiseEnActionComponent).to have_received(:new)
+      .with(evaluation: evaluation, reponse: false)
+    expect(ReponseMiseEnActionComponent).to have_received(:new).twice
+  end
+
   context "quand l'option « je ne sais pas » est active" do
     let(:je_ne_sais_pas_actif) { true }
 
@@ -33,6 +42,11 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
       expect(QuestionMiseEnActionComponent).to have_received(:new)
         .with(evaluation: evaluation,
               reponses: [ true, false, MiseEnAction::REPONSE_JE_NE_SAIS_PAS ])
+    end
+
+    it "prépare aussi l'affichage de la réponse « je ne sais pas »" do
+      expect(ReponseMiseEnActionComponent).to have_received(:new)
+        .with(evaluation: evaluation, reponse: MiseEnAction::REPONSE_JE_NE_SAIS_PAS)
     end
   end
 
@@ -62,26 +76,6 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     it "affiche le questionnaire de difficulté" do
       expect(page).to have_css(".questions-difficulte:not(.hidden)")
       expect(page).to have_css(".questions-remediation.hidden", visible: :all)
-    end
-  end
-
-  context "quand on ne sait pas si la mise en action est effectuée" do
-    let(:mise_en_action) do
-      build(:mise_en_action, effectuee: nil, motif: "action_prevue",
-                             date_revue: Date.new(2026, 11, 5))
-    end
-
-    it "n'affiche pas la réponse « je ne sais pas »" do
-      expect(page).to have_no_content("Je ne sais pas")
-    end
-
-    context "quand l'option « je ne sais pas » est active" do
-      let(:je_ne_sais_pas_actif) { true }
-
-      it "affiche la réponse et la date de revue" do
-        expect(page).to have_css("[data-reponse='je_ne_sais_pas']", text: "Je ne sais pas")
-        expect(page).to have_css(".tag", text: "Revue prévue le 05 nov. 2026")
-      end
     end
   end
 end

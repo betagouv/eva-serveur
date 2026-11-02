@@ -47,7 +47,7 @@ describe "Admin - Mise en action", :js, type: :feature do
         end
 
         expect(page).to have_css(".questions-remediation", visible: :hidden)
-        expect(page).to have_content("Oui vous avez trouvé une solution")
+        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
         expect(page).to have_css(".tag", text: "Formation métier / qualifiante")
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
@@ -59,7 +59,7 @@ describe "Admin - Mise en action", :js, type: :feature do
         within(".questions-remediation") { click_button "Ignorer" }
 
         expect(page).to have_css(".questions-remediation", visible: :hidden)
-        expect(page).to have_content("Oui vous avez trouvé une solution")
+        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
         expect(page).to have_no_css(".mise-en-action .tag", visible: :visible)
       end
       expect(mise_en_action.reload.remediation).to eq("indetermine")
@@ -74,7 +74,7 @@ describe "Admin - Mise en action", :js, type: :feature do
         end
 
         expect(page).to have_css(".questions-difficulte", visible: :hidden)
-        expect(page).to have_content("Non vous n'avez pas trouvé de solution")
+        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
         expect(page).to have_css("[data-reponse='false'] .tag",
                                  text: "Accompagnement spécifique nécessaire")
       end
@@ -90,7 +90,7 @@ describe "Admin - Mise en action", :js, type: :feature do
     end
 
     it "propose de nouveau Oui et Non quand on modifie la réponse" do
-      within(".card__banner--illettrisme") { click_link "Modifier votre réponse" }
+      within(".card__banner--illettrisme") { click_link I18n.t("reponse_mise_en_action.modifier") }
 
       expect(page).to have_button("Oui")
       expect(page).to have_button("Non")
@@ -98,17 +98,17 @@ describe "Admin - Mise en action", :js, type: :feature do
 
     it "affiche la nouvelle qualification quand on change de réponse" do
       within(".card__banner--illettrisme") do
-        click_link "Modifier votre réponse"
+        click_link I18n.t("reponse_mise_en_action.modifier")
         click_button "Non"
         within(".questions-difficulte") do
           find("label", text: "Accompagnement spécifique nécessaire").click
           click_button "Valider"
         end
 
-        expect(page).to have_content("Non vous n'avez pas trouvé de solution")
+        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
         expect(page).to have_css("[data-reponse='false'] .tag",
                                  text: "Accompagnement spécifique nécessaire")
-        expect(page).to have_no_content("Oui vous avez trouvé une solution")
+        expect(page).to have_no_content(I18n.t("reponse_mise_en_action.titre_true"))
       end
     end
   end
@@ -165,7 +165,7 @@ describe "Admin - Mise en action", :js, type: :feature do
       it "propose de nouveau les réponses quand on modifie « je ne sais pas »" do
         within(".card__banner--illettrisme") do
           click_button "Je ne sais pas"
-          click_link "Modifier votre réponse"
+          click_link I18n.t("reponse_mise_en_action.modifier")
 
           expect(page).to have_button("Oui")
           expect(page).to have_button("Non")

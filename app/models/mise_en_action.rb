@@ -1,4 +1,5 @@
 class MiseEnAction < ApplicationRecord
+  QUALIFICATION_INDETERMINEE = "indetermine".freeze
   REMEDIATIONS = %w[formation_competences_de_base formation_metier
                     dispositif_remobilisation levee_freins_peripheriques
                     indetermine].freeze
@@ -45,5 +46,11 @@ class MiseEnAction < ApplicationRecord
 
   def qualification
     send(questionnaire)
+  end
+
+  def libelle_qualification
+    return if qualification.blank? || qualification == QUALIFICATION_INDETERMINEE
+
+    I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
   end
 end

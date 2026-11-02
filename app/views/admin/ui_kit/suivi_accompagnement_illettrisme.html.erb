@@ -9,9 +9,11 @@
   <% {
     "Sans réponse" => nil,
     "Oui, sans remédiation qualifiée" => MiseEnAction.new(effectuee: true),
-    "Oui, avec remédiation" => MiseEnAction.new(effectuee: true, remediation: "formation_metier"),
+    "Oui, avec remédiation" => MiseEnAction.new(effectuee: true, remediation: "formation_metier",
+                                                repondue_le: Date.new(2026, 10, 27)),
     "Non, sans difficulté qualifiée" => MiseEnAction.new(effectuee: false),
-    "Non, avec difficulté" => MiseEnAction.new(effectuee: false, difficulte: "freins_peripheriques"),
+    "Non, avec difficulté" => MiseEnAction.new(effectuee: false, difficulte: "freins_peripheriques",
+                                               repondue_le: Date.new(2026, 10, 27)),
     "Je ne sais pas (visible avec ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS)" =>
       MiseEnAction.new(effectuee: nil, motif: "action_prevue", date_revue: Date.current + 7)
   }.each do |titre, mise_en_action| %>

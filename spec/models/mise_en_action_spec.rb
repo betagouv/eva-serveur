@@ -82,6 +82,34 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#libelle_qualification" do
+    it "traduit la remédiation quand la mise en action est effectuée" do
+      mise_en_action = build(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      expect(mise_en_action.libelle_qualification)
+        .to eq I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
+    end
+
+    it "traduit la difficulté quand la mise en action n'est pas effectuée" do
+      mise_en_action = build(:mise_en_action, effectuee: false, difficulte: "freins_peripheriques")
+
+      expect(mise_en_action.libelle_qualification)
+        .to eq I18n.t("activerecord.attributes.mise_en_action.difficulte.freins_peripheriques")
+    end
+
+    it "ne renvoie rien quand la qualification est indéterminée" do
+      mise_en_action = build(:mise_en_action, effectuee: true, remediation: MiseEnAction::QUALIFICATION_INDETERMINEE)
+
+      expect(mise_en_action.libelle_qualification).to be_nil
+    end
+
+    it "ne renvoie rien sans qualification" do
+      mise_en_action = build(:mise_en_action, effectuee: true)
+
+      expect(mise_en_action.libelle_qualification).to be_nil
+    end
+  end
+
   describe '#questionnaire' do
     let!(:mise_en_action) { create :mise_en_action, effectuee: true }
 

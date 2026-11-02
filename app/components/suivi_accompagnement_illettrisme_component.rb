@@ -10,14 +10,6 @@ class SuiviAccompagnementIllettrismeComponent < ViewComponent::Base
     reponses
   end
 
-  def reponse_affichee?(reponse)
-    case reponse
-    when true then @mise_en_action_presenter.effectuee_avec_remediation?
-    when false then @mise_en_action_presenter.non_effectuee_avec_difficulte?
-    else @mise_en_action_presenter.je_ne_sais_pas_affiche?
-    end
-  end
-
   def qcm_remediation
     Qcm.new(@evaluation, MiseEnAction::Questionnaire.new(:remediation),
             qcm_affiche: @mise_en_action_presenter.effectuee_sans_remediation?)

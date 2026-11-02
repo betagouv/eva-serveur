@@ -1,7 +1,15 @@
 <div class="container">
   <h1>Démo SuiviAccompagnementIllettrismeComponent</h1>
 
-  <p>Bannière affichée sur une évaluation en illettrisme potentiel, selon sa mise en action.</p>
+  <p>Carte affichée sur une évaluation en illettrisme potentiel, dans chaque état de sa mise en action.</p>
+
+  <p>Elle assemble les composants suivants :</p>
+  <ul>
+    <li><code>EnteteMiseEnActionComponent</code> : nom, date et résultats de l’évaluation (<code>ResultatComponent</code>) ;</li>
+    <li><code>QuestionMiseEnActionComponent</code> : question et boutons Oui / Non ;</li>
+    <li><code>QualificationMiseEnActionComponent</code> : choix du type d’aide ou de la raison (<code>TagDsfrComponent</code>) ;</li>
+    <li><code>ReponseMiseEnActionComponent</code> : réponse enregistrée, date et lien de remédiation si Non.</li>
+  </ul>
 
   <% campagne = Campagne.new(situations_configurations: %w[cafe_de_la_place place_du_marche].map { |nom_technique|
        SituationConfiguration.new(situation: Situation.new(nom_technique: nom_technique))

@@ -50,10 +50,6 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     end
   end
 
-  it "affiche les pistes de solutions" do
-    expect(page).to have_link(href: /rechercher-une-solution-de-remediation/)
-  end
-
   context "sans mise en action" do
     it "masque les deux questionnaires" do
       expect(page).to have_css(".questions-remediation.hidden", visible: :all)

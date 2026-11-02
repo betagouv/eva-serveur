@@ -6,3 +6,4 @@ fr:
     revue_prevue: Revue prévue le %{date}
     modifier: Modifier la réponse
     repondue_le: Répondu le %{date}
+    trouver_solution: Trouver une solution près de chez la personne

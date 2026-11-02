@@ -1,4 +1,21 @@
+.suivi-accompagnement-illettrisme {
+  display: flex;
+  flex-direction: column;
+  min-height: 36.375rem;
+  border: 1px solid var(--border-default-grey);
+  background: var(--background-default-grey);
+}
+
+.suivi-accompagnement-illettrisme .card__banner--illettrisme {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .suivi-mise-en-action {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: $dsfr-spacing-3w $dsfr-spacing-6w;
 }
 
@@ -8,22 +25,5 @@
   .qcm {
     margin-bottom: 0;
     border-radius: 0;
-  }
-
-  .actions {
-    gap: $dsfr-spacing-1v;
-  }
-
-  .banniere-solutions-illettrisme {
-    @include corps-de-texte-xs-regular;
-  }
-
-  .card__banner__asterisque {
-    border-radius: 0 0 $dsfr-radius-md $dsfr-radius-md;
-    background-color: $eva_bluegrey;
-
-    a {
-      color: $couleur-texte;
-    }
   }
 }

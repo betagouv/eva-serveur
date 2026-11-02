@@ -1,4 +1,5 @@
 .mise-en-action-repondue {
+  flex: 1;
   flex-direction: column;
   align-items: flex-start;
   gap: $dsfr-spacing-1v;
@@ -47,4 +48,10 @@
   @include corps-de-texte-sm-regular;
 
   color: $blue-france-sun-113;
+}
+
+.mise-en-action-repondue__solution {
+  @include corps-de-texte-sm-regular;
+
+  margin-top: auto;
 }

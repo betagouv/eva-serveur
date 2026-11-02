@@ -10,4 +10,10 @@
       <%= t("reponse_mise_en_action.modifier") %>
     </a>
   </div>
+  <% if trouver_solution? %>
+    <div class="mise-en-action-repondue__solution">
+      <%= render LienComponent.new(t("reponse_mise_en_action.trouver_solution"), lien_solution,
+                                   nouvelle_fenetre: true) %>
+    </div>
+  <% end %>
 </div>

@@ -13,9 +13,9 @@ class BanniereSolutionsIllettrismeComponent < ViewComponent::Base
 
   def lien
     if code_commune.present?
-      t("banniere_solutions_illettrisme.lien_commune", code_commune: code_commune)
+      I18n.t("banniere_solutions_illettrisme.lien_commune", code_commune: code_commune)
     else
-      t("banniere_solutions_illettrisme.lien")
+      I18n.t("banniere_solutions_illettrisme.lien")
     end
   end
 

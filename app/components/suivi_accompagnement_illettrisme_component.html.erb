@@ -1,4 +1,4 @@
-<div id="<%= @evaluation.id %>" class="carte__conteneur">
+<div id="<%= @evaluation.id %>" class="carte__conteneur suivi-accompagnement-illettrisme">
   <div class="fr-notice fr-notice--info">
     <div class="fr-container">
       <div class="fr-notice__body">
@@ -19,9 +19,6 @@
     <div class='card__banner__questionnaires'>
       <%= render qcm_remediation %>
       <%= render qcm_difficulte %>
-    </div>
-    <div class='card__banner__asterisque fr-py-3v fr-px-4v'>
-      <%= render BanniereSolutionsIllettrismeComponent.new(asterisque: true, evaluation: @evaluation) %>
     </div>
   </div>
 </div>

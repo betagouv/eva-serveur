@@ -19,6 +19,10 @@ describe ReponseMiseEnActionComponent, type: :component do
                                repondue_le: Time.zone.local(2026, 10, 27, 14))
       end
 
+      it "ne propose pas de trouver une solution" do
+        expect(page).to have_no_link(I18n.t("reponse_mise_en_action.trouver_solution"))
+      end
+
       it "affiche la date de réponse" do
         expect(page).to have_css(".mise-en-action-repondue__date",
                                  text: I18n.t("reponse_mise_en_action.repondue_le",
@@ -67,6 +71,12 @@ describe ReponseMiseEnActionComponent, type: :component do
     context "quand la mise en action n'est pas effectuée avec difficulté" do
       let(:mise_en_action) do
         build(:mise_en_action, effectuee: false, difficulte: "freins_peripheriques")
+      end
+
+      it "propose de trouver une solution près de chez la personne" do
+        expect(page).to have_link(I18n.t("reponse_mise_en_action.trouver_solution"),
+                                  href: /rechercher-une-solution-de-remediation/,
+                                  target: "_blank")
       end
 
       it "affiche la réponse et la raison choisie" do

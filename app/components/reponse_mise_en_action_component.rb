@@ -27,6 +27,14 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
       date: l(@mise_en_action.repondue_le.to_date, format: :short))
   end
 
+  def trouver_solution?
+    @reponse == false
+  end
+
+  def lien_solution
+    BanniereSolutionsIllettrismeComponent.new(evaluation: @evaluation).lien
+  end
+
   def classe_detail
     detail.present? ? "tag" : "tag hidden"
   end

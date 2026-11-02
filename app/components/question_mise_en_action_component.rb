@@ -15,12 +15,6 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
     question_affichee? ? "d-flex" : "hidden"
   end
 
-  def classe_bouton(reponse)
-    bouton_actif = @mise_en_action_presenter.a_mise_en_action? &&
-                   @evaluation.mise_en_action.effectuee == reponse
-    bouton_actif ? "reponse-mise-en-action bouton--actif" : "reponse-mise-en-action"
-  end
-
   def libelle_bouton(reponse)
     t("question_mise_en_action.#{TRADUCTIONS_BOUTONS[reponse]}")
   end

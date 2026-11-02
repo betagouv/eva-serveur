@@ -198,6 +198,7 @@ ActiveAdmin.register EvaluationEva do
     else
       mise_en_action.update(effectuee: false, difficulte: qualification)
     end
+    render json: { repondue_le: mise_en_action.libelle_repondue_le }
   end
 
   controller do

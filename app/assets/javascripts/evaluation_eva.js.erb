@@ -116,8 +116,11 @@ function enregistreChoixQualification(evaluationId, $tag) {
     url: chemin_renseigner_qualification.replace('ID_EVALUATION', evaluationId),
     data: { effectuee, qualification: $tag.data('qualification') },
     dataType: "json",
-    success: function () {
-      $(`#${evaluationId} div[data-reponse='${effectuee}'] .tag`).removeClass('hidden').text(libelle);
+    success: function (donnees) {
+      const $reponse = $(`#${evaluationId} div[data-reponse='${effectuee}']`);
+      $reponse.find('.tag').removeClass('hidden').text(libelle);
+      $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le);
+      $reponse.find('.mise-en-action-repondue__date, .mise-en-action-repondue__separateur').removeClass('hidden');
       afficheModificationReponse(effectuee, evaluationId);
       fermeQcm(evaluationId);
     }

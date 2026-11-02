@@ -62,6 +62,10 @@ describe ReponseMiseEnActionComponent, type: :component do
       it "masque la réponse" do
         expect(page).to have_css("[data-reponse='true'].mise-en-action.hidden", visible: :all)
       end
+
+      it "prépare une date de réponse vide et masquée, que le JS remplira" do
+        expect(page).to have_css(".mise-en-action-repondue__date.hidden", text: "", visible: :all)
+      end
     end
   end
 

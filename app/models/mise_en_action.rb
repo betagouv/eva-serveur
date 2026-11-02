@@ -59,6 +59,13 @@ class MiseEnAction < ApplicationRecord
     I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
   end
 
+  def libelle_repondue_le
+    return if repondue_le.blank?
+
+    I18n.t("reponse_mise_en_action.repondue_le",
+           date: I18n.l(repondue_le.to_date, format: :short))
+  end
+
   private
 
   # Une remédiation n'a de sens que sur une réponse Oui, une difficulté que sur une réponse Non

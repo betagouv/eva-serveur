@@ -57,6 +57,11 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_css(".questions-remediation", visible: :hidden)
         expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
         expect(page).to have_css("[data-reponse='true'] .tag", text: formation_metier)
+        expect(page).to have_css(
+          "[data-reponse='true'] .mise-en-action-repondue__date",
+          text: I18n.t("reponse_mise_en_action.repondue_le",
+                       date: I18n.l(Date.current, format: :short))
+        )
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end

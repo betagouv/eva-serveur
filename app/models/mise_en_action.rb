@@ -12,6 +12,7 @@ class MiseEnAction < ApplicationRecord
   belongs_to :evaluation
 
   validates :evaluation_id, uniqueness: true
+  validate :qualification_coherente_avec_la_reponse
 
   enum :remediation, REMEDIATIONS.zip(REMEDIATIONS).to_h, suffix: true
   enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h, suffix: true
@@ -56,5 +57,13 @@ class MiseEnAction < ApplicationRecord
     return if qualification.blank? || qualification_indeterminee?
 
     I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
+  end
+
+  private
+
+  # Une remédiation n'a de sens que sur une réponse Oui, une difficulté que sur une réponse Non
+  def qualification_coherente_avec_la_reponse
+    errors.add(:base, :remediation_incoherente) if remediation.present? && effectuee != true
+    errors.add(:base, :difficulte_incoherente) if difficulte.present? && effectuee != false
   end
 end

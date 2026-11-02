@@ -1,5 +1,12 @@
 fr:
   activerecord:
+    errors:
+      models:
+        mise_en_action:
+          attributes:
+            base:
+              remediation_incoherente: Le type d’aide ne peut être renseigné que si une suite est engagée.
+              difficulte_incoherente: La raison ne peut être renseignée que si aucune action n’est prévue.
     attributes:
       mise_en_action:
         remediation:

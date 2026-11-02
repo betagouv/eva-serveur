@@ -110,6 +110,40 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "cohérence de la qualification" do
+    it "accepte une remédiation sur une réponse Oui" do
+      expect(build(:mise_en_action, effectuee: true, remediation: "formation_metier")).to be_valid
+    end
+
+    it "accepte une difficulté sur une réponse Non" do
+      expect(build(:mise_en_action, effectuee: false, difficulte: "freins_peripheriques"))
+        .to be_valid
+    end
+
+    it "refuse une difficulté sur une réponse Oui" do
+      mise_en_action = build(:mise_en_action, effectuee: true, difficulte: "freins_peripheriques")
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:base, :difficulte_incoherente)
+    end
+
+    it "refuse une remédiation sur une réponse Non" do
+      mise_en_action = build(:mise_en_action, effectuee: false, remediation: "formation_metier")
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:base, :remediation_incoherente)
+    end
+
+    it "refuse une remédiation ou une difficulté sur une réponse « je ne sais pas »" do
+      mise_en_action = build(:mise_en_action, effectuee: nil, remediation: "formation_metier",
+                                              difficulte: "freins_peripheriques")
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:base, :remediation_incoherente)
+      expect(mise_en_action.errors).to be_added(:base, :difficulte_incoherente)
+    end
+  end
+
   describe "#qualification_indeterminee?" do
     it "est vrai quand la remédiation est indéterminée" do
       mise_en_action = build(:mise_en_action, effectuee: true,

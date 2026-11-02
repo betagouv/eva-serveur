@@ -2,10 +2,8 @@
   <div class="mise-en-action-repondue__titre"><%= titre %></div>
   <div class="mise-en-action-repondue__detail <%= classe_detail %>"><%= detail %></div>
   <div class="mise-en-action-repondue__pied">
-    <% if date_reponse %>
-      <span class="mise-en-action-repondue__date"><%= date_reponse %></span>
-      <span class="mise-en-action-repondue__separateur" aria-hidden="true">-</span>
-    <% end %>
+    <span class="mise-en-action-repondue__date <%= classe_date %>"><%= date_reponse %></span>
+    <span class="mise-en-action-repondue__separateur <%= classe_date %>" aria-hidden="true">-</span>
     <a href="#" class="mise-en-action-repondue__modifier modifier-mise-en-action">
       <%= t("reponse_mise_en_action.modifier") %>
     </a>

@@ -21,10 +21,12 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
   end
 
   def date_reponse
-    return if @mise_en_action&.repondue_le.blank?
+    @mise_en_action&.libelle_repondue_le
+  end
 
-    t("reponse_mise_en_action.repondue_le",
-      date: l(@mise_en_action.repondue_le.to_date, format: :short))
+  # La date est toujours rendue : le JS la remplit et l'affiche après une réponse
+  def classe_date
+    date_reponse.present? ? "" : "hidden"
   end
 
   def trouver_solution?

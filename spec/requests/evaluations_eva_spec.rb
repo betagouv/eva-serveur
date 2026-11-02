@@ -93,12 +93,25 @@ describe 'Evaluation eva', type: :request do
       let(:difficulte) { 'aucune_offre_formation' }
       let(:indetermine) { 'indetermine' }
 
+      before { Bullet.enable = false }
+
+      after { Bullet.enable = true }
+
       it 'peut renseigner le dispositif de remédiation' do
         patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
               params: { effectuee: true, qualification: remediation }
         evaluation.reload
         expect(evaluation.mise_en_action.effectuee).to be true
         expect(evaluation.mise_en_action.remediation).to eq remediation
+      end
+
+      it "renvoie la date de réponse à afficher" do
+        patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
+              params: { effectuee: true, qualification: remediation }
+
+        expect(response.parsed_body).to eq(
+          "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023")
+        )
       end
 
       it 'peut ignorer le dispositif de remédiation' do

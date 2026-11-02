@@ -13,11 +13,7 @@
     <div class="suivi-mise-en-action">
       <%= render QuestionMiseEnActionComponent.new(evaluation: @evaluation, reponses: reponses) %>
       <% reponses.each do |reponse| %>
-        <%= render partial: "components/modification_mise_en_action",
-                   locals: { reponse_mise_en_action: reponse,
-                             mise_en_action: @evaluation.mise_en_action,
-                             affiche_qualification: true,
-                             modification_affichee: reponse_affichee?(reponse) } %>
+        <%= render ReponseMiseEnActionComponent.new(evaluation: @evaluation, reponse: reponse) %>
       <% end %>
     </div>
     <div class='card__banner__questionnaires'>

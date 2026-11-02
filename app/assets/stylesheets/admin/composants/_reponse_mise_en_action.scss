@@ -1,0 +1,50 @@
+.mise-en-action-repondue {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
+
+.mise-en-action-repondue__titre {
+  @include corps-de-texte-md-bold;
+
+  color: $grey-50;
+  font-weight: 700;
+}
+
+// La classe .tag est gardée pour le JS, qui y écrit le libellé choisi :
+// on neutralise ici son style de pastille.
+.mise-en-action-repondue .tag {
+  @include corps-de-texte-xs-regular;
+
+  display: block;
+  line-height: 1.25rem;
+  padding: 0;
+  border-radius: 0;
+  color: $grey-50;
+  text-align: left;
+  white-space: normal;
+}
+
+.mise-en-action-repondue .tag.hidden {
+  display: none;
+}
+
+.mise-en-action-repondue__pied {
+  display: flex;
+  align-items: center;
+  gap: $dsfr-spacing-1v;
+}
+
+.mise-en-action-repondue__date,
+.mise-en-action-repondue__separateur {
+  @include corps-de-texte-xs-regular;
+
+  color: $grey-425;
+  line-height: 1.25rem;
+}
+
+.mise-en-action-repondue__modifier {
+  @include corps-de-texte-sm-regular;
+
+  color: $blue-france-sun-113;
+}

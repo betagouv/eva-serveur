@@ -110,6 +110,28 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#qualification_indeterminee?" do
+    it "est vrai quand la remédiation est indéterminée" do
+      mise_en_action = build(:mise_en_action, effectuee: true,
+                                              remediation: MiseEnAction::QUALIFICATION_INDETERMINEE)
+
+      expect(mise_en_action.qualification_indeterminee?).to be(true)
+    end
+
+    it "est vrai quand la difficulté est indéterminée" do
+      mise_en_action = build(:mise_en_action, effectuee: false,
+                                              difficulte: MiseEnAction::QUALIFICATION_INDETERMINEE)
+
+      expect(mise_en_action.qualification_indeterminee?).to be(true)
+    end
+
+    it "est faux quand une remédiation est choisie" do
+      mise_en_action = build(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      expect(mise_en_action.qualification_indeterminee?).to be(false)
+    end
+  end
+
   describe '#questionnaire' do
     let!(:mise_en_action) { create :mise_en_action, effectuee: true }
 

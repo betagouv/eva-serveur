@@ -48,8 +48,12 @@ class MiseEnAction < ApplicationRecord
     send(questionnaire)
   end
 
+  def qualification_indeterminee?
+    qualification == QUALIFICATION_INDETERMINEE
+  end
+
   def libelle_qualification
-    return if qualification.blank? || qualification == QUALIFICATION_INDETERMINEE
+    return if qualification.blank? || qualification_indeterminee?
 
     I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
   end

@@ -228,6 +228,22 @@ input[type="button"].fr-btn {
   min-width: fit-content;
 }
 
+// Tag cliquable DSFR en bouton : retire le style de bouton Active Admin
+// (bordure, graisse, marge et fond au survol), que le DSFR ne redéfinit pas pour .fr-tag.
+button.fr-tag {
+  margin-right: 0;
+  border: none;
+  font-weight: 400;
+
+  &:not(.disabled):hover {
+    background-color: var(--background-action-low-blue-france-hover);
+  }
+
+  &:not(.disabled):active {
+    background-color: var(--background-action-low-blue-france-active);
+  }
+}
+
 // Le DSFR masque le libellé du bouton fermer des alertes via max-width + overflow ;
 // min-width: fit-content ci-dessus gagne sur max-width et affiche « Masquer le message » en entier.
 .fr-alert .fr-btn--close {

@@ -20,69 +20,78 @@ describe "Admin - Mise en action", :js, type: :feature do
   after { Bullet.enable = true }
 
   describe "sur le détail d'une évaluation" do
+    let(:formation_metier) do
+      I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
+    end
+    let(:accompagnement_necessaire) do
+      I18n.t("activerecord.attributes.mise_en_action.difficulte.accompagnement_necessaire")
+    end
+
     before { visit admin_evaluation_eva_path(evaluation) }
 
-    it "ouvre le questionnaire de remédiation quand on répond Oui" do
+    it "remplace la question par le choix du type d'aide quand on répond Oui" do
       within(".card__banner--illettrisme") { click_button "Oui" }
 
-      expect(page).to have_css(".questions-remediation", visible: :visible)
+      expect(page).to have_css(".questions-remediation", visible: :visible,
+                               text: I18n.t("qualification_mise_en_action.titre_remediation"))
       expect(page).to have_css(".questions-difficulte", visible: :hidden)
+      expect(page).to have_no_button("Oui")
       expect(mise_en_action.effectuee).to be(true)
     end
 
-    it "ouvre le questionnaire de difficulté quand on répond Non" do
+    it "remplace la question par le choix de la raison quand on répond Non" do
       within(".card__banner--illettrisme") { click_button "Non" }
 
-      expect(page).to have_css(".questions-difficulte", visible: :visible)
+      expect(page).to have_css(".questions-difficulte", visible: :visible,
+                               text: I18n.t("qualification_mise_en_action.titre_difficulte"))
       expect(page).to have_css(".questions-remediation", visible: :hidden)
+      expect(page).to have_no_button("Non")
       expect(mise_en_action.effectuee).to be(false)
     end
 
-    it "affiche la remédiation choisie une fois validée" do
+    it "enregistre le type d'aide dès qu'on le choisit" do
       within(".card__banner--illettrisme") do
         click_button "Oui"
-        within(".questions-remediation") do
-          find("label", text: "Formation métier / qualifiante").click
-          click_button "Valider"
-        end
+        within(".questions-remediation") { click_button formation_metier }
 
         expect(page).to have_css(".questions-remediation", visible: :hidden)
         expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
-        expect(page).to have_css(".tag", text: "Formation métier / qualifiante")
+        expect(page).to have_css("[data-reponse='true'] .tag", text: formation_metier)
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end
 
-    it "n'affiche pas de qualification quand on ignore le questionnaire" do
-      within(".card__banner--illettrisme") do
-        click_button "Oui"
-        within(".questions-remediation") { click_button "Ignorer" }
-
-        expect(page).to have_css(".questions-remediation", visible: :hidden)
-        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
-        expect(page).to have_no_css(".mise-en-action .tag", visible: :visible)
-      end
-      expect(mise_en_action.reload.remediation).to eq("indetermine")
-    end
-
-    it "affiche la difficulté choisie une fois validée" do
+    it "enregistre la raison dès qu'on la choisit" do
       within(".card__banner--illettrisme") do
         click_button "Non"
-        within(".questions-difficulte") do
-          find("label", text: "Accompagnement spécifique nécessaire").click
-          click_button "Valider"
-        end
+        within(".questions-difficulte") { click_button accompagnement_necessaire }
 
         expect(page).to have_css(".questions-difficulte", visible: :hidden)
         expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
-        expect(page).to have_css("[data-reponse='false'] .tag",
-                                 text: "Accompagnement spécifique nécessaire")
+        expect(page).to have_css("[data-reponse='false'] .tag", text: accompagnement_necessaire)
       end
       expect(mise_en_action.reload.difficulte).to eq("accompagnement_necessaire")
+    end
+
+    it "repose la question quand on change de réponse avant de choisir" do
+      within(".card__banner--illettrisme") do
+        click_button "Oui"
+        within(".questions-remediation") do
+          click_link I18n.t("qualification_mise_en_action.changer")
+        end
+
+        expect(page).to have_button("Oui")
+        expect(page).to have_button("Non")
+        expect(page).to have_css(".questions-remediation", visible: :hidden)
+      end
     end
   end
 
   describe "sur le détail d'une évaluation avec une remédiation" do
+    let(:accompagnement_necessaire) do
+      I18n.t("activerecord.attributes.mise_en_action.difficulte.accompagnement_necessaire")
+    end
+
     before do
       create :mise_en_action, evaluation: evaluation, effectuee: true,
                               remediation: "formation_metier"
@@ -100,14 +109,10 @@ describe "Admin - Mise en action", :js, type: :feature do
       within(".card__banner--illettrisme") do
         click_link I18n.t("reponse_mise_en_action.modifier")
         click_button "Non"
-        within(".questions-difficulte") do
-          find("label", text: "Accompagnement spécifique nécessaire").click
-          click_button "Valider"
-        end
+        within(".questions-difficulte") { click_button accompagnement_necessaire }
 
         expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
-        expect(page).to have_css("[data-reponse='false'] .tag",
-                                 text: "Accompagnement spécifique nécessaire")
+        expect(page).to have_css("[data-reponse='false'] .tag", text: accompagnement_necessaire)
         expect(page).to have_no_content(I18n.t("reponse_mise_en_action.titre_true"))
       end
     end

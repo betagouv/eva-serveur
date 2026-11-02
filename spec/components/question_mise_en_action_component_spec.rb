@@ -36,8 +36,16 @@ describe QuestionMiseEnActionComponent, type: :component do
   context "quand la mise en action est effectuée sans remédiation" do
     let(:mise_en_action) { build(:mise_en_action, effectuee: true) }
 
-    it "sélectionne Oui" do
-      expect(page).to have_css(".reponse-mise-en-action.bouton--actif", text: "Oui")
+    it "masque la question pendant le choix du type d'aide" do
+      expect(page).to have_css("[data-reponse='vide'].hidden", visible: :all)
+    end
+  end
+
+  context "quand la mise en action n'est pas effectuée sans difficulté" do
+    let(:mise_en_action) { build(:mise_en_action, effectuee: false) }
+
+    it "masque la question pendant le choix de la raison" do
+      expect(page).to have_css("[data-reponse='vide'].hidden", visible: :all)
     end
   end
 

@@ -1,0 +1,26 @@
+<div class="qcm questions-<%= nom %> qualification-mise-en-action <%= classe_qualification %>">
+  <div class="qualification-mise-en-action__encart">
+    <span class="qualification-mise-en-action__titre"><%= t("qualification_mise_en_action.titre_#{nom}") %></span>
+    <a href="#" class="qualification-mise-en-action__changer changer-reponse-mise-en-action">
+      <%= t("qualification_mise_en_action.changer") %>
+    </a>
+  </div>
+  <div class="qualification-mise-en-action__texte">
+    <div id="question-<%= nom %>-<%= @evaluation.id %>" class="qualification-mise-en-action__libelle">
+      <%= t("qualification_mise_en_action.question_#{nom}") %>
+    </div>
+    <div class="qualification-mise-en-action__description">
+      <%= t("qualification_mise_en_action.description") %>
+    </div>
+  </div>
+  <ul class="qualification-mise-en-action__choix"
+      aria-labelledby="question-<%= nom %>-<%= @evaluation.id %>">
+    <% choix.each do |choix| %>
+      <li>
+        <%= render TagDsfrComponent.new(libelle: libelle_choix(choix), cliquable: true,
+                                        class: "choix-qualification-mise-en-action",
+                                        data: { qualification: choix }) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

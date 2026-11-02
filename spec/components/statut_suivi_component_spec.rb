@@ -29,7 +29,7 @@ describe StatutSuiviComponent, type: :component do
 
     it "explique le tiret dans une info-bulle" do
       expect(page).to have_css(".fr-tooltip",
-                               text: "Pas de suivi : pas d'illettrisme potentiel",
+                               exact_text: I18n.t("statut_suivi.info_bulle_non_concerne"),
                                visible: :all)
     end
   end

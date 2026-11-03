@@ -15,11 +15,11 @@ describe QualificationMiseEnActionComponent, type: :component do
       expect(page).to have_css(".qcm.questions-remediation", visible: :all)
     end
 
-    it "rappelle la réponse et propose de la changer" do
+    it "rappelle la réponse et propose de la modifier" do
       bloc = page.find(".qcm", visible: :all)
       expect(bloc).to have_text(:all, I18n.t("qualification_mise_en_action.titre_remediation"))
-      expect(bloc).to have_link(I18n.t("qualification_mise_en_action.changer"),
-                                class: "changer-reponse-mise-en-action", visible: :all)
+      expect(bloc).to have_link(I18n.t("qualification_mise_en_action.modifier"),
+                                class: "modifier-reponse-mise-en-action", visible: :all)
     end
 
     it "demande de quelle aide il s'agit" do

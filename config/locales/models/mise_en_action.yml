@@ -7,17 +7,23 @@ fr:
             base:
               remediation_incoherente: Le type d’aide ne peut être renseigné que si une suite est engagée.
               difficulte_incoherente: La raison ne peut être renseignée que si aucune action n’est prévue.
+            precision_autre:
+              blank_remediation: Indiquez l’aide engagée en quelques mots.
+              blank_difficulte: Indiquez la raison en quelques mots.
     attributes:
       mise_en_action:
+        precision_autre: Précisez
         remediation:
           formation_competences_de_base: Formation compétences de base
           formation_metier: Formation métier / qualifiante
           dispositif_remobilisation: Dispositif de remobilisation
           levee_freins_peripheriques: Levée de freins périphériques
+          autre: Autre
         difficulte:
           aucune_offre_formation: Aucune offre de formation disponible
           offre_formation_inaccessible: Offre de formation inaccessible
           freins_peripheriques: Freins périphériques
           accompagnement_necessaire: Accompagnement spécifique nécessaire
+          autre: Autre
         motif:
           action_prevue: Une action est prévue

@@ -2,10 +2,12 @@ class MiseEnAction < ApplicationRecord
   QUALIFICATION_INDETERMINEE = "indetermine".freeze
   REMEDIATIONS = %w[formation_competences_de_base formation_metier
                     dispositif_remobilisation levee_freins_peripheriques
-                    indetermine].freeze
+                    indetermine autre].freeze
   DIFFICULTES = %w[aucune_offre_formation offre_formation_inaccessible
                    freins_peripheriques accompagnement_necessaire
-                   indetermine].freeze
+                   indetermine autre].freeze
+  QUALIFICATION_AUTRE = "autre".freeze
+  LONGUEUR_MAX_PRECISION_AUTRE = 200
   MOTIFS = %w[action_prevue].freeze
   REPONSE_JE_NE_SAIS_PAS = "je_ne_sais_pas".freeze
 
@@ -13,6 +15,12 @@ class MiseEnAction < ApplicationRecord
 
   validates :evaluation_id, uniqueness: true
   validate :qualification_coherente_avec_la_reponse
+  validate :precision_presente_si_autre
+  validates :precision_autre, length: { maximum: LONGUEUR_MAX_PRECISION_AUTRE }
+
+  auto_strip_attributes :precision_autre
+
+  before_validation :efface_precision_sans_autre
 
   enum :remediation, REMEDIATIONS.zip(REMEDIATIONS).to_h, suffix: true
   enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h, suffix: true
@@ -49,6 +57,10 @@ class MiseEnAction < ApplicationRecord
     send(questionnaire)
   end
 
+  def qualification_autre?
+    qualification == QUALIFICATION_AUTRE
+  end
+
   def qualification_indeterminee?
     qualification == QUALIFICATION_INDETERMINEE
   end
@@ -72,5 +84,17 @@ class MiseEnAction < ApplicationRecord
   def qualification_coherente_avec_la_reponse
     errors.add(:base, :remediation_incoherente) if remediation.present? && effectuee != true
     errors.add(:base, :difficulte_incoherente) if difficulte.present? && effectuee != false
+  end
+
+  def precision_presente_si_autre
+    return unless qualification_autre? && precision_autre.blank?
+
+    errors.add(:precision_autre, :"blank_#{questionnaire}")
+  end
+
+  def efface_precision_sans_autre
+    return if qualification_autre?
+
+    self.precision_autre = nil
   end
 end

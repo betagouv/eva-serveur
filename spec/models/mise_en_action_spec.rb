@@ -97,6 +97,14 @@ describe MiseEnAction, type: :model do
         .to eq I18n.t("activerecord.attributes.mise_en_action.difficulte.freins_peripheriques")
     end
 
+    it "affiche la précision d'une réponse « Autre »" do
+      mise_en_action = build(:mise_en_action, effectuee: false, difficulte: "autre",
+                                              precision_autre: "déménagement")
+
+      expect(mise_en_action.libelle_qualification)
+        .to eq I18n.t("reponse_mise_en_action.autre", precision: "déménagement")
+    end
+
     it "ne renvoie rien quand la qualification est indéterminée" do
       mise_en_action = build(:mise_en_action, effectuee: true, remediation: MiseEnAction::QUALIFICATION_INDETERMINEE)
 

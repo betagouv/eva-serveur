@@ -19,8 +19,20 @@
       <li>
         <%= render TagDsfrComponent.new(libelle: libelle_choix(choix), cliquable: true,
                                         class: "choix-qualification-mise-en-action",
-                                        data: { qualification: choix }) %>
+                                        **attributs_choix(choix)) %>
       </li>
     <% end %>
   </ul>
+  <div class="qualification-mise-en-action__precision <%= classe_precision %>">
+    <%= render PrecisionAutreComponent.new(id: id_precision, questionnaire: nom,
+                                           valeur: precision_autre) %>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      tag: :button,
+      size: :sm,
+      class: "qualification-mise-en-action__enregistrer enregistre-precision-autre"
+    ) do %>
+      <%= t("qualification_mise_en_action.enregistrer") %>
+    <% end %>
+  </div>
 </div>

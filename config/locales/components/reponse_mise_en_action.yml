@@ -7,3 +7,4 @@ fr:
     modifier: Modifier la réponse
     repondue_le: Répondu le %{date}
     trouver_solution: Trouver une solution près de chez la personne
+    autre: "Autre : %{precision}"

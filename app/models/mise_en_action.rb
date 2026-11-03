@@ -74,6 +74,9 @@ class MiseEnAction < ApplicationRecord
 
   def libelle_qualification
     return if qualification.blank? || qualification_indeterminee?
+    if qualification_autre?
+      return I18n.t("reponse_mise_en_action.autre", precision: precision_autre)
+    end
 
     I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
   end

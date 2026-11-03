@@ -144,6 +144,62 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "précision de la réponse « Autre »" do
+    it "refuse un type d'aide « Autre » sans précision" do
+      mise_en_action = build(:mise_en_action, effectuee: true, remediation: "autre")
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:precision_autre, :blank_remediation)
+      expect(mise_en_action.errors[:precision_autre])
+        .to include I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                           ".precision_autre.blank_remediation")
+    end
+
+    it "refuse une raison « Autre » avec des espaces seulement" do
+      mise_en_action = build(:mise_en_action, effectuee: false, difficulte: "autre",
+                                              precision_autre: "   \n ")
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:precision_autre, :blank_difficulte)
+    end
+
+    it "refuse une précision de plus de 200 caractères" do
+      mise_en_action = build(:mise_en_action, effectuee: true, remediation: "autre",
+                                              precision_autre: "a" * 201)
+
+      expect(mise_en_action).not_to be_valid
+      expect(mise_en_action.errors).to be_added(:precision_autre, :too_long, count: 200)
+    end
+
+    it "accepte « Autre » avec une précision, sans les espaces autour et avec ses sauts de ligne" do
+      mise_en_action = build(:mise_en_action, effectuee: false, difficulte: "autre",
+                                              precision_autre: "  déménagement\n- le mois  ")
+
+      expect(mise_en_action).to be_valid
+      expect(mise_en_action.precision_autre).to eq "déménagement\n- le mois"
+    end
+
+    it "efface la précision quand un autre type d'aide est choisi" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "autre",
+                                               precision_autre: "aide sur mesure")
+
+      mise_en_action.update!(remediation: "formation_metier")
+
+      expect(mise_en_action.reload.precision_autre).to be_nil
+    end
+
+    it "efface la précision quand la réponse change" do
+      evaluation = create(:evaluation, :eva)
+      mise_en_action = create(:mise_en_action, evaluation: evaluation, effectuee: true,
+                                               remediation: "autre",
+                                               precision_autre: "aide sur mesure")
+
+      evaluation.enregistre_mise_en_action(false)
+
+      expect(mise_en_action.reload.precision_autre).to be_nil
+    end
+  end
+
   describe "#qualification_indeterminee?" do
     it "est vrai quand la remédiation est indéterminée" do
       mise_en_action = build(:mise_en_action, effectuee: true,

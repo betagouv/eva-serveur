@@ -10,7 +10,8 @@ describe MiseEnAction::Questionnaire, type: :model do
         expect(questionnaire.reponses.values).to eq(%w[formation_competences_de_base
                                                        formation_metier
                                                        dispositif_remobilisation
-                                                       levee_freins_peripheriques])
+                                                       levee_freins_peripheriques
+                                                       autre])
       end
     end
 
@@ -22,7 +23,8 @@ describe MiseEnAction::Questionnaire, type: :model do
         expect(questionnaire.reponses.values).to eq(%w[aucune_offre_formation
                                                        offre_formation_inaccessible
                                                        freins_peripheriques
-                                                       accompagnement_necessaire])
+                                                       accompagnement_necessaire
+                                                       autre])
       end
     end
   end

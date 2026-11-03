@@ -19,19 +19,20 @@ describe PrecisionAutreComponent, type: :component do
                                text: I18n.t("precision_autre.aide_remediation"))
     end
 
+    it "indique que le champ est obligatoire" do
+      expect(page).to have_css("label abbr", text: "*")
+      expect(page).to have_css("input[aria-required='true']")
+    end
+
     it "limite la précision à 200 caractères" do
-      expect(page).to have_css("input[name='precision_autre'][maxlength='200']")
+      longueur_max = MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE
+      expect(page).to have_css("input[name='precision_autre'][maxlength='#{longueur_max}']")
     end
 
     it "fait lire le message d'erreur par les lecteurs d'écran" do
       expect(page).to have_css("input#precision-autre-1" \
                                "[aria-describedby='precision-autre-1-messages']")
       expect(page).to have_css("#precision-autre-1-messages[aria-live='polite']")
-    end
-
-    it "n'est pas en erreur" do
-      expect(page).to have_no_css(".fr-input-group--error")
-      expect(page).to have_no_css(".fr-message--error")
     end
 
     context "avec une précision enregistrée" do
@@ -43,7 +44,10 @@ describe PrecisionAutreComponent, type: :component do
     end
 
     context "avec une erreur" do
-      let(:erreur) { "Indiquez l’aide engagée en quelques mots." }
+      let(:erreur) do
+        I18n.t("activerecord.errors.models.mise_en_action.attributes.precision_autre" \
+               ".blank_remediation")
+      end
 
       it "remplace le message d'information par le message d'erreur" do
         expect(page).to have_css(".fr-input-group.fr-input-group--error")

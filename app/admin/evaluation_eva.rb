@@ -193,7 +193,8 @@ ActiveAdmin.register EvaluationEva do
     mise_en_action = resource.mise_en_action
     if mise_en_action.qualifie(params[:effectuee], params[:qualification],
                                params[:precision_autre])
-      render json: { repondue_le: mise_en_action.libelle_repondue_le }
+      render json: { qualification: mise_en_action.libelle_qualification,
+                     repondue_le: mise_en_action.libelle_repondue_le }
     else
       render json: { erreur: mise_en_action.errors.first.message },
              status: :unprocessable_content

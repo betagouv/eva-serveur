@@ -92,6 +92,165 @@ describe "Admin - Mise en action", :js, type: :feature do
     end
   end
 
+  describe "sur le détail d'une évaluation, réponse « Autre »" do
+    let(:autre) { I18n.t("activerecord.attributes.mise_en_action.remediation.autre") }
+    let(:precisez) { I18n.t("activerecord.attributes.mise_en_action.precision_autre") }
+    let(:enregistrer) { I18n.t("qualification_mise_en_action.enregistrer") }
+    let(:formation_metier) do
+      I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
+    end
+
+    before do
+      visit admin_evaluation_eva_path(evaluation)
+      within(".card__banner--illettrisme") { click_button "Oui" }
+    end
+
+    it "ouvre « Précisez » sans rien enregistrer" do
+      within(".questions-remediation") do
+        click_button autre
+
+        expect(page).to have_css("button[aria-pressed='true']", text: autre)
+        expect(page).to have_field(precisez)
+        expect(page).to have_button(enregistrer)
+        expect(page).to have_field(precisez, focused: true)
+      end
+      expect(mise_en_action.reload.remediation).to be_nil
+    end
+
+    it "refuse d'enregistrer une précision vide ou faite d'espaces" do
+      message = I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                       ".precision_autre.blank_remediation")
+      within(".questions-remediation") do
+        click_button autre
+        click_button enregistrer
+
+        expect(page).to have_css(".fr-message--error", text: message)
+
+        fill_in precisez, with: "   "
+        click_button enregistrer
+
+        expect(page).to have_css(".fr-message--error", text: message)
+        expect(page).to have_field(precisez, focused: true)
+      end
+      expect(mise_en_action.reload.remediation).to be_nil
+    end
+
+    it "enregistre « Autre » avec sa précision et l'affiche" do
+      within(".card__banner--illettrisme") do
+        within(".questions-remediation") do
+          click_button autre
+          fill_in precisez, with: "atelier numérique"
+          click_button enregistrer
+        end
+
+        expect(page).to have_css(".questions-remediation", visible: :hidden)
+        expect(page).to have_css("[data-reponse='true']",
+                                 text: I18n.t("reponse_mise_en_action.autre",
+                                              precision: "atelier numérique"))
+        expect(page).to have_css(
+          "[data-reponse='true'] .mise-en-action-repondue__date",
+          text: I18n.t("reponse_mise_en_action.repondue_le",
+                       date: I18n.l(Date.current, format: :short))
+        )
+      end
+      expect(mise_en_action.reload).to have_attributes(remediation: "autre",
+                                                       precision_autre: "atelier numérique")
+    end
+
+    it "abandonne la précision quand on choisit un autre type d'aide" do
+      within(".questions-remediation") do
+        click_button autre
+        fill_in precisez, with: "atelier numérique"
+        click_button formation_metier
+      end
+
+      expect(page).to have_css("[data-reponse='true'] .tag", text: formation_metier)
+      expect(mise_en_action.reload).to have_attributes(remediation: "formation_metier",
+                                                       precision_autre: nil)
+    end
+
+    it "referme « Précisez » sans rien enregistrer quand on reclique sur « Autre »" do
+      within(".questions-remediation") do
+        click_button autre
+        click_button autre
+
+        expect(page).to have_css("button[aria-pressed='false']", text: autre)
+        expect(page).to have_no_field(precisez)
+        expect(page).to have_no_button(enregistrer)
+      end
+      expect(mise_en_action.reload.remediation).to be_nil
+    end
+  end
+
+  describe "sur le détail d'une évaluation, raison « Autre »" do
+    let(:autre) { I18n.t("activerecord.attributes.mise_en_action.difficulte.autre") }
+    let(:precisez) { I18n.t("activerecord.attributes.mise_en_action.precision_autre") }
+    let(:enregistrer) { I18n.t("qualification_mise_en_action.enregistrer") }
+
+    before do
+      visit admin_evaluation_eva_path(evaluation)
+      within(".card__banner--illettrisme") { click_button "Non" }
+    end
+
+    it "refuse une précision vide avec le message de la raison" do
+      within(".questions-difficulte") do
+        click_button autre
+        click_button enregistrer
+
+        expect(page).to have_css(".fr-message--error",
+                                 text: I18n.t("activerecord.errors.models.mise_en_action" \
+                                              ".attributes.precision_autre.blank_difficulte"))
+      end
+    end
+
+    it "enregistre « Autre » avec sa précision et l'affiche" do
+      within(".card__banner--illettrisme") do
+        within(".questions-difficulte") do
+          click_button autre
+          fill_in precisez, with: "déménagement prévu le mois prochain"
+          click_button enregistrer
+        end
+
+        expect(page).to have_css("[data-reponse='false']",
+                                 text: I18n.t("reponse_mise_en_action.autre",
+                                              precision: "déménagement prévu le mois prochain"))
+      end
+      expect(mise_en_action.reload).to have_attributes(
+        difficulte: "autre", precision_autre: "déménagement prévu le mois prochain"
+      )
+    end
+  end
+
+  describe "sur le détail d'une évaluation avec une réponse « Autre »" do
+    before do
+      create :mise_en_action, evaluation: evaluation, effectuee: true, remediation: "autre",
+                              precision_autre: "atelier numérique"
+      visit admin_evaluation_eva_path(evaluation)
+    end
+
+    it "affiche la précision enregistrée" do
+      expect(page).to have_css("[data-reponse='true']",
+                               text: I18n.t("reponse_mise_en_action.autre",
+                                            precision: "atelier numérique"))
+    end
+
+    it "retrouve « Autre » et sa précision quand on modifie la réponse" do
+      within(".card__banner--illettrisme") do
+        click_link I18n.t("reponse_mise_en_action.modifier")
+        click_button "Oui"
+
+        within(".questions-remediation") do
+          expect(page).to have_css("button[aria-pressed='true']",
+                                   text: I18n.t("activerecord.attributes.mise_en_action" \
+                                                ".remediation.autre"))
+          expect(page).to have_field(I18n.t("activerecord.attributes.mise_en_action" \
+                                            ".precision_autre"),
+                                     with: "atelier numérique")
+        end
+      end
+    end
+  end
+
   describe "sur le détail d'une évaluation avec une remédiation" do
     let(:accompagnement_necessaire) do
       I18n.t("activerecord.attributes.mise_en_action.difficulte.accompagnement_necessaire")

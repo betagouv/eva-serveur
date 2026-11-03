@@ -1,8 +1,8 @@
 <div class="<%= classes_groupe %>">
-  <label class="<%= label_classes %>" for="<%= input_id %>"><%= @label %></label>
+  <label class="<%= label_classes %>" for="<%= input_id %>"><%= @label %><%= required_asterisk %></label>
   <%= tag.input(type: "text", class: input_classes, id: input_id, name: "precision_autre",
                 value: @valeur, maxlength: MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE,
-                "aria-describedby": messages_id) %>
+                "aria-required": "true", "aria-describedby": messages_id) %>
   <div class="fr-messages-group" id="<%= messages_id %>" aria-live="polite">
     <% if has_errors? %>
       <p class="fr-message fr-message--error"><%= @erreur %></p>

@@ -70,3 +70,41 @@
 .qualification-mise-en-action__choix li {
   padding-bottom: 0;
 }
+
+.qualification-mise-en-action__precision {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-2w;
+
+  .fr-input-group {
+    margin-bottom: 0;
+  }
+
+  .fr-label {
+    @include corps-de-texte-md-regular;
+
+    color: $grey-50;
+  }
+
+  .fr-input-group--error .fr-label {
+    color: $error-425;
+  }
+
+  .fr-message {
+    @include corps-de-texte-xs-regular;
+
+    line-height: 1.25rem;
+  }
+
+  .fr-message--info {
+    color: $info-425;
+  }
+}
+
+.qualification-mise-en-action__precision--masquee {
+  visibility: hidden;
+}
+
+.qualification-mise-en-action__enregistrer {
+  align-self: flex-end;
+}

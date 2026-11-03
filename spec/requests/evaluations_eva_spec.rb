@@ -105,11 +105,13 @@ describe 'Evaluation eva', type: :request do
         expect(evaluation.mise_en_action.remediation).to eq remediation
       end
 
-      it "renvoie la date de réponse à afficher" do
+      it "renvoie la qualification et la date de réponse à afficher" do
         patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
               params: { effectuee: true, qualification: remediation }
 
         expect(response.parsed_body).to eq(
+          "qualification" => I18n.t("activerecord.attributes.mise_en_action.remediation" \
+                                    ".formation_metier"),
           "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023")
         )
       end

@@ -1,7 +1,7 @@
 class PrecisionAutreComponent < BaseInputComponent
   def initialize(id:, questionnaire:, valeur: nil, erreur: nil)
     super(id: id, label: MiseEnAction.human_attribute_name(:precision_autre),
-          hint: I18n.t("precision_autre.aide_#{questionnaire}"))
+          hint: I18n.t("precision_autre.aide_#{questionnaire}"), required: true)
     @valeur = valeur
     @erreur = erreur
   end

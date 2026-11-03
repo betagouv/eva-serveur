@@ -1,5 +1,5 @@
 # Tous les blocs (question, qualification, réponses) sont rendus ; le JS partagé
-# avec le tableau de bord (evaluation_eva.js.erb) n'en montre qu'un selon l'état.
+# avec le tableau de bord (mise_en_action.js.erb) n'en montre qu'un selon l'état.
 class SuiviAccompagnementIllettrismeComponent < ViewComponent::Base
   def initialize(evaluation:)
     @evaluation = evaluation

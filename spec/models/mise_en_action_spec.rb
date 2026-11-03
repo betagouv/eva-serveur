@@ -144,6 +144,37 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#qualifie" do
+    let(:mise_en_action) { create(:mise_en_action, effectuee: true) }
+
+    it "enregistre le type d'aide sur une réponse Oui" do
+      expect(mise_en_action.qualifie("true", "formation_metier", nil)).to be(true)
+
+      expect(mise_en_action.reload).to have_attributes(effectuee: true,
+                                                       remediation: "formation_metier")
+    end
+
+    it "enregistre la raison sur une réponse Non" do
+      expect(mise_en_action.qualifie("false", "freins_peripheriques", nil)).to be(true)
+
+      expect(mise_en_action.reload).to have_attributes(effectuee: false,
+                                                       difficulte: "freins_peripheriques")
+    end
+
+    it "enregistre « Autre » avec sa précision" do
+      mise_en_action.qualifie("true", "autre", "aide sur mesure")
+
+      expect(mise_en_action.reload).to have_attributes(remediation: "autre",
+                                                       precision_autre: "aide sur mesure")
+    end
+
+    it "n'enregistre rien et renvoie false quand la qualification est refusée" do
+      expect(mise_en_action.qualifie("true", "autre", "")).to be(false)
+
+      expect(mise_en_action.reload.remediation).to be_nil
+    end
+  end
+
   describe "précision de la réponse « Autre »" do
     it "refuse un type d'aide « Autre » sans précision" do
       mise_en_action = build(:mise_en_action, effectuee: true, remediation: "autre")

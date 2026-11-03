@@ -137,6 +137,39 @@ describe 'Evaluation eva', type: :request do
         expect(evaluation.mise_en_action.effectuee).to be false
         expect(evaluation.mise_en_action.difficulte).to eq indetermine
       end
+
+      it "enregistre une réponse « Autre » avec sa précision" do
+        patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
+              params: { effectuee: false, qualification: "autre",
+                        precision_autre: "déménagement prévu le mois prochain" }
+
+        expect(response).to have_http_status(:ok)
+        mise_en_action = evaluation.mise_en_action.reload
+        expect(mise_en_action.difficulte).to eq "autre"
+        expect(mise_en_action.precision_autre).to eq "déménagement prévu le mois prochain"
+      end
+
+      it "refuse une réponse « Autre » sans précision et renvoie le message d'erreur" do
+        patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
+              params: { effectuee: true, qualification: "autre", precision_autre: "   " }
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.parsed_body).to eq(
+          "erreur" => I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                             ".precision_autre.blank_remediation")
+        )
+        expect(evaluation.mise_en_action.reload.remediation).to be_nil
+      end
+
+      it "refuse une qualification incohérente avec la réponse" do
+        evaluation.mise_en_action.update!(effectuee: false, difficulte: difficulte)
+
+        patch renseigner_qualification_admin_evaluation_eva_path(evaluation),
+              params: { effectuee: true, qualification: remediation }
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(evaluation.mise_en_action.reload.effectuee).to be false
+      end
     end
   end
 end

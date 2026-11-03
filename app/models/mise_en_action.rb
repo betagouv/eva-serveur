@@ -57,6 +57,13 @@ class MiseEnAction < ApplicationRecord
     send(questionnaire)
   end
 
+  def qualifie(effectuee, qualification, precision_autre)
+    self.effectuee = effectuee
+    self[questionnaire] = qualification
+    self.precision_autre = precision_autre
+    save
+  end
+
   def qualification_autre?
     qualification == QUALIFICATION_AUTRE
   end

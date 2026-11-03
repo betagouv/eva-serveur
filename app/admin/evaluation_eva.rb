@@ -191,14 +191,13 @@ ActiveAdmin.register EvaluationEva do
 
   member_action :renseigner_qualification, method: :patch do
     mise_en_action = resource.mise_en_action
-    effectuee = params[:effectuee]
-    qualification = params[:qualification]
-    if effectuee == "true"
-      mise_en_action.update(effectuee: true, remediation: qualification)
+    if mise_en_action.qualifie(params[:effectuee], params[:qualification],
+                               params[:precision_autre])
+      render json: { repondue_le: mise_en_action.libelle_repondue_le }
     else
-      mise_en_action.update(effectuee: false, difficulte: qualification)
+      render json: { erreur: mise_en_action.errors.first.message },
+             status: :unprocessable_content
     end
-    render json: { repondue_le: mise_en_action.libelle_repondue_le }
   end
 
   controller do

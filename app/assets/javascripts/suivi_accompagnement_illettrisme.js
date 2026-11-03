@@ -78,8 +78,7 @@ function affichePrecisionEnErreur($qcm, message) {
   $groupe.addClass('fr-input-group--error');
   $groupe.find('.fr-label').addClass('fr-label--error');
   $groupe.find('.fr-message--info').addClass('hidden');
-  // En premier : le DSFR espace le champ de son premier message (.fr-message:first-child)
-  $groupe.find('.fr-messages-group').prepend($('<p class="fr-message fr-message--error">').text(message));
+  $groupe.find('.fr-messages-group').append($('<p class="fr-message fr-message--error">').text(message));
   $groupe.find('.fr-input').addClass('fr-input--error').trigger('focus');
 }
 

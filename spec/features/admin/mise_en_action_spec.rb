@@ -9,6 +9,8 @@ describe "Admin - Mise en action", :js, type: :feature do
                               completude: "complete"
   end
   let(:mise_en_action) { MiseEnAction.find_by(evaluation_id: evaluation.id) }
+  let(:precisez) { I18n.t("activerecord.attributes.mise_en_action.precision_autre") }
+  let(:enregistrer) { I18n.t("qualification_mise_en_action.enregistrer") }
 
   before do
     Bullet.enable = false
@@ -94,8 +96,6 @@ describe "Admin - Mise en action", :js, type: :feature do
 
   describe "sur le détail d'une évaluation, réponse « Autre »" do
     let(:autre) { I18n.t("activerecord.attributes.mise_en_action.remediation.autre") }
-    let(:precisez) { I18n.t("activerecord.attributes.mise_en_action.precision_autre") }
-    let(:enregistrer) { I18n.t("qualification_mise_en_action.enregistrer") }
     let(:formation_metier) do
       I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
     end
@@ -184,8 +184,6 @@ describe "Admin - Mise en action", :js, type: :feature do
 
   describe "sur le détail d'une évaluation, raison « Autre »" do
     let(:autre) { I18n.t("activerecord.attributes.mise_en_action.difficulte.autre") }
-    let(:precisez) { I18n.t("activerecord.attributes.mise_en_action.precision_autre") }
-    let(:enregistrer) { I18n.t("qualification_mise_en_action.enregistrer") }
 
     before do
       visit admin_evaluation_eva_path(evaluation)
@@ -243,9 +241,7 @@ describe "Admin - Mise en action", :js, type: :feature do
           expect(page).to have_css("button[aria-pressed='true']",
                                    text: I18n.t("activerecord.attributes.mise_en_action" \
                                                 ".remediation.autre"))
-          expect(page).to have_field(I18n.t("activerecord.attributes.mise_en_action" \
-                                            ".precision_autre"),
-                                     with: "atelier numérique")
+          expect(page).to have_field(precisez, with: "atelier numérique")
         end
       end
     end
@@ -309,6 +305,126 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_no_css(".mise-en-action .tag", visible: :all)
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
+    end
+  end
+
+  describe "sur le tableau de bord, réponse « Autre »" do
+    let(:autre) { I18n.t("activerecord.attributes.mise_en_action.remediation.autre") }
+    let(:formation_metier) do
+      I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
+    end
+
+    before do
+      visit admin_dashboard_path
+      within("li[id='#{evaluation.id}']") { click_button "Oui" }
+    end
+
+    it "ouvre « Précisez » sans rien enregistrer" do
+      within("li[id='#{evaluation.id}'] .questions-remediation") do
+        expect(page).to have_no_field(precisez)
+
+        find("label", text: autre).click
+
+        expect(page).to have_field(precisez, focused: true)
+      end
+      expect(mise_en_action.reload.remediation).to be_nil
+    end
+
+    it "n'active « Valider » qu'une fois « Précisez » rempli" do
+      within("li[id='#{evaluation.id}'] .questions-remediation") do
+        find("label", text: autre).click
+
+        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: true)
+
+        fill_in precisez, with: "   "
+
+        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: true)
+
+        fill_in precisez, with: "atelier numérique"
+
+        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: false)
+      end
+    end
+
+    it "enregistre « Autre » avec sa précision et referme la carte" do
+      within("li[id='#{evaluation.id}']") do
+        within(".questions-remediation") do
+          find("label", text: autre).click
+          fill_in precisez, with: "atelier numérique"
+          click_button I18n.t("qcm.action_valider")
+        end
+
+        expect(page).to have_no_css(".carte--deroulee")
+      end
+      expect(mise_en_action.reload).to have_attributes(remediation: "autre",
+                                                       precision_autre: "atelier numérique")
+    end
+
+    it "abandonne la précision quand on choisit un autre type d'aide" do
+      within("li[id='#{evaluation.id}'] .questions-remediation") do
+        find("label", text: autre).click
+        fill_in precisez, with: "atelier numérique"
+        find("label", text: formation_metier).click
+
+        expect(page).to have_no_field(precisez)
+
+        click_button I18n.t("qcm.action_valider")
+      end
+
+      expect(page).to have_no_css(".carte--deroulee")
+      expect(mise_en_action.reload).to have_attributes(remediation: "formation_metier",
+                                                       precision_autre: nil)
+    end
+
+    it "abandonne la précision quand on ignore" do
+      within("li[id='#{evaluation.id}'] .questions-remediation") do
+        find("label", text: autre).click
+        fill_in precisez, with: "atelier numérique"
+        click_button I18n.t("qcm.action_fermer")
+      end
+
+      expect(page).to have_no_css(".carte--deroulee")
+      expect(mise_en_action.reload).to have_attributes(remediation: "indetermine",
+                                                       precision_autre: nil)
+    end
+
+    it "retrouve « Autre » et sa précision quand on modifie la réponse" do
+      within("li[id='#{evaluation.id}']") do
+        within(".questions-remediation") do
+          find("label", text: autre).click
+          fill_in precisez, with: "atelier numérique"
+          click_button I18n.t("qcm.action_valider")
+        end
+        click_link I18n.t("components.modification_mise_en_action.modifier_reponse")
+        click_button "Oui"
+
+        within(".questions-remediation") do
+          expect(find("input[value='autre']", visible: :all)).to be_checked
+          expect(page).to have_field(precisez, with: "atelier numérique")
+        end
+      end
+    end
+  end
+
+  describe "sur le tableau de bord, raison « Autre »" do
+    let(:autre) { I18n.t("activerecord.attributes.mise_en_action.difficulte.autre") }
+
+    before do
+      visit admin_dashboard_path
+      within("li[id='#{evaluation.id}']") { click_button "Non" }
+    end
+
+    it "enregistre « Autre » avec sa précision et referme la carte" do
+      within("li[id='#{evaluation.id}'] .questions-difficulte") do
+        find("label", text: autre).click
+        fill_in precisez, with: "déménagement prévu le mois prochain"
+        click_button I18n.t("qcm.action_valider")
+      end
+
+      expect(page).to have_no_css(".carte--deroulee")
+      expect(mise_en_action.reload).to have_attributes(
+        difficulte: "autre", precision_autre: "déménagement prévu le mois prochain"
+      )
     end
   end
 

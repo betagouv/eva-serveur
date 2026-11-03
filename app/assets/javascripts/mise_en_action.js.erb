@@ -22,9 +22,24 @@ function afficheReponseJeNeSaisPas(evaluationId, revuePrevue) {
   $reponse.removeClass('hidden').addClass('d-flex');
 }
 
+// Questionnaire du tableau de bord : se rouvre vide, sauf après une réponse « Autre » validée,
+// retrouvée avec sa précision (data-precision-enregistree). Sans effet sur la fiche (pas de radios).
 function reinitialiseFormulaire(evaluationId) {
-  $(`#${evaluationId} input[name=reponse_qcm]`).prop('checked', false);
-  $(`#${evaluationId} .valide-qcm`).prop('disabled', true);
+  $(`#${evaluationId} .qcm`).each(function() {
+    const $qcm = $(this);
+    const $radios = $qcm.find('input[name=reponse_qcm]');
+    if (!$radios.length) return;
+
+    const precision = $qcm.attr('data-precision-enregistree');
+    $radios.prop('checked', false);
+    masquePrecisionAutre($qcm);
+    $qcm.find('.valide-qcm').prop('disabled', !precision);
+    if (!precision) return;
+
+    $radios.filter(`[value='${QUALIFICATION_AUTRE}']`).prop('checked', true);
+    $qcm.find('.zone-precision-autre').removeClass(CLASSE_PRECISION_MASQUEE);
+    $qcm.find('input[name=precision_autre]').val(precision);
+  });
 }
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
@@ -81,6 +96,70 @@ function nomQcm(miseEnActionEffectuee) {
 
 function miseEnActionEffectuee($bouton) {
   return $bouton.closest('.qcm')[0].classList.contains('questions-remediation')
+}
+
+// Champ « Précisez » de la réponse « Autre », commun aux deux écrans (PrecisionAutreComponent,
+// dans un bloc .zone-precision-autre). Le serveur juge la précision : le JS affiche son erreur.
+const CLASSE_PRECISION_MASQUEE = 'zone-precision-autre--masquee';
+
+function precisionSaisie($qcm) {
+  return $qcm.find('input[name=precision_autre]').val();
+}
+
+function precisionAutreMasquee($qcm) {
+  return $qcm.find('.zone-precision-autre').hasClass(CLASSE_PRECISION_MASQUEE);
+}
+
+// Entrée dans « Précisez » déclenche le bouton qui enregistre la réponse de l'écran
+function valideAvecEntree($champs, selecteurBouton) {
+  $champs.on('keydown', function(event) {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    $(event.currentTarget).closest('.qcm').find(selecteurBouton).trigger('click');
+  });
+}
+
+function ouvrePrecisionAutre($qcm) {
+  $qcm.find('.zone-precision-autre').removeClass(CLASSE_PRECISION_MASQUEE);
+  $qcm.find('input[name=precision_autre]').trigger('focus');
+}
+
+// Un autre choix ou une autre réponse referme « Précisez » : la précision enregistrée
+// n'existe plus, et le tag « Autre » de la fiche, qui n'a pas été cliqué, est désélectionné
+function fermePrecisionAutre($qcm) {
+  $qcm.find(`[data-qualification='${QUALIFICATION_AUTRE}']`).attr('aria-pressed', 'false');
+  $qcm.removeAttr('data-precision-enregistree');
+  masquePrecisionAutre($qcm);
+}
+
+function masquePrecisionAutre($qcm) {
+  $qcm.find('.zone-precision-autre').addClass(CLASSE_PRECISION_MASQUEE);
+  $qcm.find('input[name=precision_autre]').val('');
+  effaceErreurPrecision($qcm);
+}
+
+function affichePrecisionEnErreurDepuis(xhr, $qcm) {
+  const erreur = xhr.responseJSON && xhr.responseJSON.erreur;
+  if (erreur) affichePrecisionEnErreur($qcm, erreur);
+}
+
+function affichePrecisionEnErreur($qcm, message) {
+  const $groupe = $qcm.find('.precision-autre');
+  effaceErreurPrecision($qcm);
+  $groupe.addClass('fr-input-group--error');
+  $groupe.find('.fr-label').addClass('fr-label--error');
+  $groupe.find('.fr-message--info').addClass('hidden');
+  $groupe.find('.fr-messages-group').append($('<p class="fr-message fr-message--error">').text(message));
+  $groupe.find('.fr-input').addClass('fr-input--error').trigger('focus');
+}
+
+function effaceErreurPrecision($qcm) {
+  const $groupe = $qcm.find('.precision-autre');
+  $groupe.removeClass('fr-input-group--error');
+  $groupe.find('.fr-label').removeClass('fr-label--error');
+  $groupe.find('.fr-input').removeClass('fr-input--error');
+  $groupe.find('.fr-message--error').remove();
+  $groupe.find('.fr-message--info').removeClass('hidden');
 }
 
 function ecouteBoutons(boutons, callback) {

@@ -44,9 +44,8 @@ describe ReponseMiseEnActionComponent, type: :component do
     context "quand la remédiation est indéterminée" do
       let(:mise_en_action) { build(:mise_en_action, effectuee: true, remediation: MiseEnAction::QUALIFICATION_INDETERMINEE) }
 
-      it "affiche la réponse sans aide choisie" do
-        expect(page).to have_css("[data-reponse='true'].mise-en-action:not(.hidden)")
-        expect(page).to have_css(".tag.hidden", visible: :all)
+      it "masque la réponse : le type d'aide reste à qualifier" do
+        expect(page).to have_css("[data-reponse='true'].mise-en-action.hidden", visible: :all)
       end
     end
 

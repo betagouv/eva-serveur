@@ -90,9 +90,14 @@
     color: $error-425;
   }
 
+  .fr-messages-group {
+    margin-top: 1rem;
+  }
+
   .fr-message {
     @include corps-de-texte-xs-regular;
 
+    margin: 0;
     line-height: 1.25rem;
   }
 

@@ -18,6 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: $dsfr-spacing-1v;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .mise-en-action-repondue__titre {

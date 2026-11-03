@@ -29,6 +29,7 @@ function renseigneQualification(evaluationId, $element, donneesQualification) {
     data: { effectuee, ...donneesQualification },
     dataType: "json",
     success: function (donnees) {
+      effaceErreurPrecision($element.closest('.qcm'));
       const $reponse = $(`#${evaluationId} div[data-reponse='${effectuee}']`);
       $reponse.find('.tag').removeClass('hidden').text(donnees.qualification);
       $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');

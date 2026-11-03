@@ -135,6 +135,27 @@ describe "Admin - Mise en action", :js, type: :feature do
       expect(mise_en_action.reload.remediation).to be_nil
     end
 
+    it "n'affiche plus l'erreur une fois la précision enregistrée" do
+      within(".card__banner--illettrisme") do
+        within(".questions-remediation") do
+          click_button autre
+          click_button enregistrer
+          fill_in precisez, with: "atelier numérique"
+          click_button enregistrer
+        end
+        expect(page).to have_css("div[data-reponse='true']",
+                                 text: I18n.t("reponse_mise_en_action.autre",
+                                              precision: "atelier numérique"))
+        click_link I18n.t("reponse_mise_en_action.modifier")
+        click_button "Oui"
+
+        within(".questions-remediation") do
+          expect(page).to have_field(precisez, with: "atelier numérique")
+          expect(page).to have_no_css(".fr-message--error")
+        end
+      end
+    end
+
     it "enregistre « Autre » avec sa précision et l'affiche" do
       within(".card__banner--illettrisme") do
         within(".questions-remediation") do

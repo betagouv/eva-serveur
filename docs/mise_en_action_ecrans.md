@@ -20,12 +20,14 @@ Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (vo
 |---|---|---|
 | JS | `mise_en_action_tableau_de_bord.js` | `suivi_accompagnement_illettrisme.js` |
 | Composant des choix | `Qcm` : boutons radio | `QualificationMiseEnActionComponent` : tags DSFR |
-| Choisir | Cocher n'envoie rien, active « Valider » | Le clic sur un tag enregistre aussitôt, sauf « Autre » |
+| Choisir | Cocher n'envoie rien, active « Valider » (pour « Autre », une fois « Précisez » rempli) | Le clic sur un tag enregistre aussitôt, sauf « Autre » |
 | Enregistrer | « Valider » | Clic sur le tag, ou « Enregistrer » pour « Autre » |
 | Ne pas qualifier | « Ignorer » enregistre `indetermine` | Impossible |
-| Libellé affiché après enregistrement | Calculé en JS (`I18n.t`) | Renvoyé par le serveur (`qualification`) |
+| Libellé affiché après enregistrement | Aucun, « Autre » compris | Renvoyé par le serveur (`qualification`) |
 | Date « Répondu le » | Non mise à jour sans recharger | Mise à jour depuis la réponse |
-| Erreur 422 | Non gérée | Affichée sous le champ « Précisez » |
+| Erreur 422 | Affichée sous le champ « Précisez » | Affichée sous le champ « Précisez » |
+| Champ « Précisez » | Apparaît quand « Autre » est coché, sans réserver sa place | Place réservée, masqué avec `visibility: hidden` (maquette) |
+| Modifier une réponse « Autre » | Retrouvée en JS pendant la visite (`data-precision-enregistree`) : l’évaluation quitte le tableau de bord au rechargement | Retrouvée depuis la base au chargement de la page |
 | Changer de réponse avant de qualifier | Non | Lien « Changer de réponse » |
 
 ## Pièges connus

@@ -23,7 +23,7 @@
       </li>
     <% end %>
   </ul>
-  <div class="qualification-mise-en-action__precision <%= classe_precision %>">
+  <div class="qualification-mise-en-action__precision zone-precision-autre <%= classe_precision %>">
     <%= render PrecisionAutreComponent.new(id: id_precision, questionnaire: nom,
                                            valeur: precision_autre) %>
     <%= render BoutonDsfrComponent.new(

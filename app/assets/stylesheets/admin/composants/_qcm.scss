@@ -33,3 +33,23 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.qcm__precision {
+  margin-top: $dsfr-spacing-2w;
+
+  .fr-input-group {
+    margin-bottom: 0;
+  }
+
+  .fr-messages-group {
+    margin-top: 1rem;
+  }
+
+  .fr-message {
+    margin: 0;
+  }
+}
+
+.qcm__precision.zone-precision-autre--masquee {
+  display: none;
+}

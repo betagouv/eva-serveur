@@ -38,7 +38,7 @@ class QualificationMiseEnActionComponent < ViewComponent::Base
   end
 
   def classe_precision
-    autre_choisi? ? "" : "qualification-mise-en-action__precision--masquee"
+    autre_choisi? ? "" : "zone-precision-autre--masquee"
   end
 
   def id_precision

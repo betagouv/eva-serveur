@@ -2,29 +2,56 @@
 // Utilise les chemins et fonctions communes de mise_en_action.js.erb.
 // Différences avec la fiche évaluation : docs/mise_en_action_ecrans.md
 
+// Choisir « Autre » ouvre « Précisez », choisir une autre réponse le referme
 function activeBoutonValider() {
   const radios = $('input[name=reponse_qcm]');
 
   radios.each(function() {
     const radio = $(this)
     radio.on("click", function(event) {
-      radio.closest('.qcm').find('.valide-qcm').prop('disabled', false);
+      const $qcm = radio.closest('.qcm');
+      if (radio.val() === QUALIFICATION_AUTRE) {
+        if (precisionAutreMasquee($qcm)) {
+          ouvrePrecisionAutre($qcm);
+        }
+      } else {
+        masquePrecisionAutre($qcm);
+      }
+      metAJourBoutonValider($qcm);
     })
   });
 }
 
+// « Valider » s'active dès qu'une réponse est cochée ; pour « Autre », une fois « Précisez » rempli
+function metAJourBoutonValider($qcm) {
+  const reponse = $qcm.find('input[name=reponse_qcm]:checked').val();
+  const precisionManquante = reponse === QUALIFICATION_AUTRE && precisionSaisie($qcm).trim() === '';
+  $qcm.find('.valide-qcm').prop('disabled', !reponse || precisionManquante);
+}
+
 function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer }) {
+  const $qcm = $bouton.closest('.qcm');
   const effectuee = miseEnActionEffectuee($bouton)
   const qualification = ignorer ? 'indetermine' : reponseSelectionnee(evaluationId, nomQcm(effectuee));
+  const donnees = { effectuee, qualification };
+  if (qualification === QUALIFICATION_AUTRE) donnees.precision_autre = precisionSaisie($qcm);
 
   $.ajax({
     method: 'PATCH',
     url: chemin_renseigner_qualification.replace('ID_EVALUATION', evaluationId),
-    data: { effectuee, qualification },
+    data: donnees,
     dataType: "json",
     success: function () {
+      if (qualification === QUALIFICATION_AUTRE) {
+        $qcm.attr('data-precision-enregistree', donnees.precision_autre.trim());
+      } else {
+        fermePrecisionAutre($qcm);
+      }
       afficheModificationReponse(effectuee, evaluationId);
       fermeQcm(evaluationId);
+    },
+    error: function (xhr) {
+      affichePrecisionEnErreurDepuis(xhr, $qcm);
     }
   });
 }
@@ -55,4 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $("input[name=reponse_qcm]").on('focus', function(event) {
     $(event.currentTarget).click();
   });
+  $(".qcm input[name=precision_autre]").on('input', function(event) {
+    metAJourBoutonValider($(event.currentTarget).closest('.qcm'));
+  });
+  valideAvecEntree($(".contenu-avec-evaluations input[name=precision_autre]"),
+                   '.valide-qcm:not(:disabled)');
 });

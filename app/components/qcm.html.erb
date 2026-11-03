@@ -13,6 +13,10 @@
         <% end %>
       </ul>
     </fieldset>
+    <div class="qcm__precision zone-precision-autre zone-precision-autre--masquee">
+      <%= render PrecisionAutreComponent.new(id: "precision-autre-#{@questionnaire.nom}-#{@ressource.id}",
+                                             questionnaire: @questionnaire.nom) %>
+    </div>
     <div class="fr-mt-3v d-flex justify-content-end">
       <button type="button" class="fr-btn fr-btn--secondary fr-btn--sm bouton-fermer fr-mr-2v">
         <%= t(".action_fermer") %>

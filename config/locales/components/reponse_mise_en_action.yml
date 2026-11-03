@@ -5,6 +5,6 @@ fr:
     titre_je_ne_sais_pas: Je ne sais pas
     revue_prevue: Revue prévue le %{date}
     modifier: Modifier la réponse
-    repondue_le: Répondu le %{date}
+    repondue_le: Répondu le %{date}.
     trouver_solution: Trouver une solution près de chez la personne
     autre: "Autre : %{precision}"

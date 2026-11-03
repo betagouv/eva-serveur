@@ -31,8 +31,7 @@ function renseigneQualification(evaluationId, $element, donneesQualification) {
     success: function (donnees) {
       const $reponse = $(`#${evaluationId} div[data-reponse='${effectuee}']`);
       $reponse.find('.tag').removeClass('hidden').text(donnees.qualification);
-      $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le);
-      $reponse.find('.mise-en-action-repondue__date, .mise-en-action-repondue__separateur').removeClass('hidden');
+      $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');
       afficheModificationReponse(effectuee, evaluationId);
       fermeQcm(evaluationId);
     },
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".suivi-accompagnement-illettrisme .reponse-mise-en-action"), function(evaluationId) {
     $(`#${evaluationId} div[data-reponse='vide']`).removeClass('d-flex').addClass('hidden');
   });
-  ecouteBoutons($(".changer-reponse-mise-en-action"), function(evaluationId) {
+  ecouteBoutons($(".modifier-reponse-mise-en-action"), function(evaluationId) {
     fermeQcm(evaluationId);
     modifieReponseMiseEnAction(evaluationId);
   });

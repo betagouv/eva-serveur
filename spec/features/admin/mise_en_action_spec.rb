@@ -84,7 +84,7 @@ describe "Admin - Mise en action", :js, type: :feature do
       within(".card__banner--illettrisme") do
         click_button "Oui"
         within(".questions-remediation") do
-          click_link I18n.t("qualification_mise_en_action.changer")
+          click_link I18n.t("qualification_mise_en_action.modifier")
         end
 
         expect(page).to have_button("Oui")

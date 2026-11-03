@@ -1,13 +1,14 @@
 <div data-reponse="<%= @reponse %>" class="mise-en-action mise-en-action-repondue <%= classe_reponse %>">
-  <div class="mise-en-action-repondue__titre"><%= titre %></div>
-  <div class="mise-en-action-repondue__detail <%= classe_detail %>"><%= detail %></div>
-  <div class="mise-en-action-repondue__pied">
-    <span class="mise-en-action-repondue__date <%= classe_date %>"><%= date_reponse %></span>
-    <span class="mise-en-action-repondue__separateur <%= classe_date %>" aria-hidden="true">-</span>
+  <div class="mise-en-action-repondue__encart">
+    <div class="mise-en-action-repondue__texte">
+      <div class="mise-en-action-repondue__titre"><%= titre %></div>
+      <div class="mise-en-action-repondue__detail <%= classe_detail %>"><%= detail %></div>
+    </div>
     <a href="#" class="mise-en-action-repondue__modifier modifier-mise-en-action">
       <%= t("reponse_mise_en_action.modifier") %>
     </a>
   </div>
+  <p class="mise-en-action-repondue__date <%= classe_date %>"><%= date_reponse %></p>
   <% if trouver_solution? %>
     <div class="mise-en-action-repondue__solution">
       <%= render LienComponent.new(t("reponse_mise_en_action.trouver_solution"), lien_solution,

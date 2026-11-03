@@ -28,7 +28,7 @@ Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (vo
 | Erreur 422 | Affichée sous le champ « Précisez » | Affichée sous le champ « Précisez » |
 | Champ « Précisez » | Apparaît quand « Autre » est coché, sans réserver sa place | Place réservée, masqué avec `visibility: hidden` (maquette) |
 | Modifier une réponse « Autre » | Retrouvée en JS pendant la visite (`data-precision-enregistree`) : l’évaluation quitte le tableau de bord au rechargement | Retrouvée depuis la base au chargement de la page |
-| Changer de réponse avant de qualifier | Non | Lien « Changer de réponse » |
+| Modifier la réponse avant de qualifier | Non | Lien « Modifier la réponse » |
 
 ## Pièges connus
 - **Le DSFR gère `aria-pressed`.** Un tag DSFR avec `aria-pressed` est un tag sélectionnable : le DSFR inverse lui-même l'attribut au clic. Ne pas le poser aussi en JS au clic sur ce tag, les deux s'annulent. Le poser seulement quand un autre élément change l'état (un autre choix qui désélectionne « Autre »).

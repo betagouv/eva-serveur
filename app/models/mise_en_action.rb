@@ -47,12 +47,25 @@ class MiseEnAction < ApplicationRecord
     effectuee.nil?
   end
 
+  # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner
+  def qualification_a_renseigner?
+    qualification.blank? || qualification_indeterminee?
+  end
+
   def effectuee_avec_remediation?
-    repondu_oui? && remediation.present?
+    repondu_oui? && !qualification_a_renseigner?
+  end
+
+  def effectuee_sans_remediation?
+    repondu_oui? && qualification_a_renseigner?
   end
 
   def non_effectuee_avec_difficulte?
-    repondu_non? && difficulte.present?
+    repondu_non? && !qualification_a_renseigner?
+  end
+
+  def non_effectuee_sans_difficulte?
+    repondu_non? && qualification_a_renseigner?
   end
 
   def questionnaire

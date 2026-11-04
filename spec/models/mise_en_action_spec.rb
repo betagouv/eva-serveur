@@ -54,6 +54,42 @@ describe MiseEnAction, type: :model do
         expect(mise_en_action.effectuee_avec_remediation?).to be false
       end
     end
+
+    context "quand le type d'aide a été ignoré depuis le tableau de bord" do
+      before { mise_en_action.update remediation: 'indetermine' }
+
+      it 'renvoie false' do
+        expect(mise_en_action.effectuee_avec_remediation?).to be false
+      end
+    end
+  end
+
+  describe '#effectuee_sans_remediation?' do
+    it "est vrai pour une réponse Oui sans type d'aide ou avec un type d'aide ignoré" do
+      expect(build(:mise_en_action, effectuee: true).effectuee_sans_remediation?).to be(true)
+      expect(build(:mise_en_action, effectuee: true, remediation: 'indetermine')
+               .effectuee_sans_remediation?).to be(true)
+    end
+
+    it "est faux pour une réponse Oui avec un type d'aide ou pour une autre réponse" do
+      expect(build(:mise_en_action, effectuee: true, remediation: 'formation_metier')
+               .effectuee_sans_remediation?).to be(false)
+      expect(build(:mise_en_action, effectuee: false).effectuee_sans_remediation?).to be(false)
+    end
+  end
+
+  describe '#non_effectuee_sans_difficulte?' do
+    it "est vrai pour une réponse Non sans raison ou avec une raison ignorée" do
+      expect(build(:mise_en_action, effectuee: false).non_effectuee_sans_difficulte?).to be(true)
+      expect(build(:mise_en_action, effectuee: false, difficulte: 'indetermine')
+               .non_effectuee_sans_difficulte?).to be(true)
+    end
+
+    it "est faux pour une réponse Non avec une raison ou pour une autre réponse" do
+      expect(build(:mise_en_action, effectuee: false, difficulte: 'freins_peripheriques')
+               .non_effectuee_sans_difficulte?).to be(false)
+      expect(build(:mise_en_action, effectuee: true).non_effectuee_sans_difficulte?).to be(false)
+    end
   end
 
   describe '#non_effectuee_avec_difficulte?' do
@@ -68,6 +104,14 @@ describe MiseEnAction, type: :model do
     end
 
     context "quand la mise en action n'est pas effectuee et n'a pas de difficulte" do
+      it 'renvoie false' do
+        expect(mise_en_action.non_effectuee_avec_difficulte?).to be false
+      end
+    end
+
+    context "quand la raison a été ignorée depuis le tableau de bord" do
+      before { mise_en_action.update difficulte: 'indetermine' }
+
       it 'renvoie false' do
         expect(mise_en_action.non_effectuee_avec_difficulte?).to be false
       end

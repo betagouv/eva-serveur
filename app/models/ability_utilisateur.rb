@@ -77,12 +77,14 @@ compte_id: compte.id
     return if compte.structure_id.blank?
 
     if compte.validation_acceptee?
-      can %i[read mise_en_action renseigner_qualification telecharger_attestation],
+      can %i[read mise_en_action renseigner_qualification renseigner_date_revue
+              telecharger_attestation],
           classe_evaluation, campagne: campagnes_publique_de_la_structure(compte)
     end
 
     if compte.admin?
-      can %i[read update destroy mise_en_action renseigner_qualification telecharger_attestation],
+      can %i[read update destroy mise_en_action renseigner_qualification renseigner_date_revue
+              telecharger_attestation],
           classe_evaluation, campagne: campagnes_de_la_structure(compte)
     end
   end
@@ -198,7 +200,7 @@ compte_id: compte.id
     cannot(:read, SourceAide)
     cannot(:fusionner, Beneficiaire)
     cannot(%i[mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi
-              renseigner_qualification],
+              renseigner_qualification renseigner_date_revue],
            Evaluation)
     cannot(%i[autoriser_compte revoquer_compte], Campagne)
   end

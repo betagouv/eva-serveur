@@ -136,6 +136,12 @@ class MiseEnAction < ApplicationRecord
     I18n.t("activerecord.attributes.mise_en_action.#{questionnaire}.#{qualification}")
   end
 
+  def libelle_relance_prevue
+    return if date_revue.blank?
+
+    I18n.t("reponse_mise_en_action.relance_prevue", date: I18n.l(date_revue, format: :short))
+  end
+
   def libelle_repondue_le
     return if repondue_le.blank?
 

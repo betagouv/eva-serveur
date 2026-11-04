@@ -479,6 +479,30 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(mise_en_action.choix_date_revue).to eq(MiseEnAction::CHOIX_DATE_PRECISE)
       end
 
+      context "quand la date de revue choisie est atteinte" do
+        let(:repondue_le) { Date.current - 14 }
+
+        before do
+          # Il y a 14 jours, le pro a répondu "Pas encore" et choisi "Dans 14 jours"
+          Timecop.freeze(repondue_le) do
+            evaluation.enregistre_mise_en_action(nil)
+            evaluation.mise_en_action.reporte_dans("14_jours")
+          end
+          visit admin_evaluation_eva_path(evaluation)
+        end
+
+        it "repose la question en rappelant la réponse « Pas encore »" do
+          within(".card__banner--illettrisme") do
+            expect(page).to have_content(
+              I18n.t("question_mise_en_action.rappel_pas_encore",
+                     date: I18n.l(repondue_le, format: :short))
+            )
+            expect(page).to have_button(pas_encore)
+            expect(page).to have_no_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          end
+        end
+      end
+
       context "quand le pro a choisi une date précise, puis modifie sa réponse" do
         let(:date_revue) { Date.current + 30 }
 

@@ -57,6 +57,13 @@ class MiseEnAction < ApplicationRecord
     send(questionnaire)
   end
 
+  def enregistre_reponse(effectuee)
+    self.effectuee = effectuee
+    self.repondue_le = Time.zone.now
+    efface_qualification_ancienne_reponse
+    save
+  end
+
   def qualifie(effectuee, qualification, precision_autre)
     self.effectuee = effectuee
     self[questionnaire] = qualification
@@ -89,6 +96,16 @@ class MiseEnAction < ApplicationRecord
   end
 
   private
+
+  def efface_qualification_ancienne_reponse
+    self.remediation = nil unless effectuee == true
+    self.difficulte = nil unless effectuee == false
+    if effectuee.nil?
+      assign_attributes(motif: :action_prevue, date_revue: Date.current + 7)
+    else
+      assign_attributes(motif: nil, date_revue: nil)
+    end
+  end
 
   # Une remédiation n'a de sens que sur une réponse Oui, une difficulté que sur une réponse Non
   def qualification_coherente_avec_la_reponse

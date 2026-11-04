@@ -81,72 +81,14 @@ describe EvaluationEva do
   describe "#enregistre_mise_en_action" do
     let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
 
-    context "lorsque la mise en action existe déjà" do
-      let(:ancienne_date) { Time.zone.local(2022, 1, 1, 10, 0, 0) }
-      let!(:evaluation) do
-        create :evaluation, :eva, :avec_mise_en_action, repondue_le: ancienne_date
-      end
+    context "quand il y a une mise en action associée" do
+      let!(:evaluation) { create :evaluation, :eva, :avec_mise_en_action, effectuee: true }
 
-      context "avec une remediation" do
-        it "met à jour la réponse, la date, et efface la remédiation quand on répond Non" do
-          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
+      it "enregistre la réponse sur la mise en action existante, sans en créer une autre" do
+        expect { evaluation.enregistre_mise_en_action(false) }
+          .not_to change(MiseEnAction, :count)
 
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(false)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(false)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.remediation).to be_nil
-        end
-
-        it "met à jour réponse, date et efface la remédiation quand on répond « je ne sais pas" do
-          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(nil)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be_nil
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.motif).to eq("action_prevue")
-          expect(evaluation.mise_en_action.date_revue).to eq(Date.new(2023, 1, 8))
-          expect(evaluation.mise_en_action.remediation).to be_nil
-        end
-      end
-
-      context "avec une difficulté" do
-        it "met à jour la réponse, la date, et efface la difficulté quand on répond Oui" do
-          evaluation.mise_en_action.update(effectuee: false, difficulte: :freins_peripheriques)
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(true)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(true)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.difficulte).to be_nil
-        end
-      end
-
-      context "avec un motif" do
-        it "met à jour réponse, date et efface le motif et date de revue quand on répond Oui" do
-          evaluation.mise_en_action.update(effectuee: nil, motif: :action_prevue,
-                                           date_revue: Date.new(2023, 1, 8))
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(true)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(true)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.motif).to be_nil
-          expect(evaluation.mise_en_action.date_revue).to be_nil
-        end
+        expect(evaluation.mise_en_action.reload.effectuee).to be(false)
       end
     end
 

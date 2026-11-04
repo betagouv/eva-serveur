@@ -183,6 +183,72 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#enregistre_reponse" do
+    let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
+
+    it "remplace la date de réponse par la date du jour" do
+      mise_en_action = create(:mise_en_action, repondue_le: Time.zone.local(2022, 1, 1))
+
+      Timecop.freeze(date_du_jour) { mise_en_action.enregistre_reponse(false) }
+
+      expect(mise_en_action.reload.repondue_le).to eq(date_du_jour)
+    end
+
+    it "remplace Oui par Non et efface le type d'aide" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      mise_en_action.enregistre_reponse(false)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(false)
+      expect(mise_en_action.remediation).to be_nil
+    end
+
+    it "remplace Non par Oui et efface la raison" do
+      mise_en_action = create(:mise_en_action, effectuee: false,
+                                               difficulte: "freins_peripheriques")
+
+      mise_en_action.enregistre_reponse(true)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(true)
+      expect(mise_en_action.difficulte).to be_nil
+    end
+
+    it "remplace Oui par « je ne sais pas », efface le type d'aide et prévoit la revue à J+7" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      Timecop.freeze(date_du_jour) { mise_en_action.enregistre_reponse(nil) }
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be_nil
+      expect(mise_en_action.remediation).to be_nil
+      expect(mise_en_action.motif).to eq("action_prevue")
+      expect(mise_en_action.date_revue).to eq(Date.new(2023, 1, 8))
+    end
+
+    it "remplace « je ne sais pas » par Oui et efface le motif et la date de revue" do
+      mise_en_action = create(:mise_en_action, effectuee: nil, motif: "action_prevue",
+                                               date_revue: Date.new(2023, 1, 8))
+
+      mise_en_action.enregistre_reponse(true)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(true)
+      expect(mise_en_action.motif).to be_nil
+      expect(mise_en_action.date_revue).to be_nil
+    end
+
+    it "efface la précision d'un « Autre » quand la réponse change" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "autre",
+                                               precision_autre: "aide sur mesure")
+
+      mise_en_action.enregistre_reponse(false)
+
+      expect(mise_en_action.reload.precision_autre).to be_nil
+    end
+  end
+
   describe "précision de la réponse « Autre »" do
     it "refuse un type d'aide « Autre » sans précision" do
       mise_en_action = build(:mise_en_action, effectuee: true, remediation: "autre")
@@ -223,17 +289,6 @@ describe MiseEnAction, type: :model do
                                                precision_autre: "aide sur mesure")
 
       mise_en_action.update!(remediation: "formation_metier")
-
-      expect(mise_en_action.reload.precision_autre).to be_nil
-    end
-
-    it "efface la précision quand la réponse change" do
-      evaluation = create(:evaluation, :eva)
-      mise_en_action = create(:mise_en_action, evaluation: evaluation, effectuee: true,
-                                               remediation: "autre",
-                                               precision_autre: "aide sur mesure")
-
-      evaluation.enregistre_mise_en_action(false)
 
       expect(mise_en_action.reload.precision_autre).to be_nil
     end

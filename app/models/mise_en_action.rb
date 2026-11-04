@@ -28,6 +28,9 @@ class MiseEnAction < ApplicationRecord
 
   acts_as_paranoid
 
+  scope :repondues_pas_encore, -> { where(effectuee: nil) }
+  scope :reportees, -> { repondues_pas_encore.where("date_revue > ?", Date.current) }
+
   def self.je_ne_sais_pas_actif?
     # L'option "je ne sais pas" est activée si la variable d'environnement est définie
     # On peut supprimer cette vérification une fois l'ensemble de la feature livrée.

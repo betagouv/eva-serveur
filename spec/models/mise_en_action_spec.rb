@@ -14,6 +14,53 @@ describe MiseEnAction, type: :model do
     expect(subject).to allow_value(false).for(:effectuee)
   end
 
+  describe ".repondues_pas_encore" do
+    let!(:pas_encore) { create(:mise_en_action, effectuee: nil) }
+    let!(:oui) { create(:mise_en_action, effectuee: true) }
+    let!(:non) { create(:mise_en_action, effectuee: false) }
+
+    it "ne garde que les mises en action auxquelles on a répondu Pas encore" do
+      expect(described_class.repondues_pas_encore).to contain_exactly(pas_encore)
+    end
+  end
+
+  describe ".reportees" do
+    let!(:pas_encore) { create(:mise_en_action, effectuee: nil, date_revue: date_revue) }
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la mise en action est reportée" do
+        expect(described_class.reportees).to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la mise en action n'est plus reportée" do
+        expect(described_class.reportees).not_to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est passée" do
+      let(:date_revue) { Date.current - 1 }
+
+      it "la mise en action n'est plus reportée" do
+        expect(described_class.reportees).not_to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Oui, même avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+      let!(:oui) { create(:mise_en_action, effectuee: true, date_revue: date_revue) }
+
+      it "la mise en action n'est pas reportée" do
+        expect(described_class.reportees).not_to include(oui)
+      end
+    end
+  end
+
   describe "#repondu_oui?" do
     it "n'est vrai que pour une réponse Oui" do
       expect(build(:mise_en_action, effectuee: true).repondu_oui?).to be(true)

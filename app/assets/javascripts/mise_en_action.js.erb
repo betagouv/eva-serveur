@@ -8,6 +8,7 @@ const QUALIFICATION_AUTRE = "<%= MiseEnAction::QUALIFICATION_AUTRE %>";
 
 const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_eva_path('ID_EVALUATION') %>";
 const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_eva_path('ID_EVALUATION') %>";
+const chemin_renseigner_date_revue = "<%= Rails.application.routes.url_helpers.renseigner_date_revue_admin_evaluation_eva_path('ID_EVALUATION') %>";
 
 function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
@@ -79,7 +80,12 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     dataType: "json",
     success: function (donnees) {
       if (reponse === REPONSE_JE_NE_SAIS_PAS) {
-        afficheReponseJeNeSaisPas(evaluationId, donnees.revue_prevue);
+        // La fiche demande quand refaire le point ; le tableau de bord affiche la réponse
+        if ($(`#${evaluationId} .questions-date-revue`).length) {
+          ouvreQcm(evaluationId, 'date-revue', reponse);
+        } else {
+          afficheReponseJeNeSaisPas(evaluationId, donnees.revue_prevue);
+        }
         return;
       }
       const qcm = nomQcm(reponse)

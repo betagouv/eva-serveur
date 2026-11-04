@@ -204,7 +204,8 @@ ActiveAdmin.register EvaluationEva do
   member_action :renseigner_date_revue, method: :patch do
     mise_en_action = resource.mise_en_action
     if mise_en_action.reporte_dans(params[:choix_date_revue], params[:date_revue])
-      render json: { relance_prevue: mise_en_action.libelle_relance_prevue }
+      render json: { relance_prevue: mise_en_action.libelle_relance_prevue,
+                     repondue_le: mise_en_action.libelle_repondue_le }
     else
       render json: { erreur: mise_en_action.errors.first&.message },
              status: :unprocessable_content

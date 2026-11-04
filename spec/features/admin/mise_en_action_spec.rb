@@ -382,15 +382,31 @@ describe "Admin - Mise en action", :js, type: :feature do
 
       before { visit admin_evaluation_eva_path(evaluation) }
 
-      it "affiche la date de revue sans ouvrir de questionnaire " \
-         "quand on répond « Pas encore »" do
+      it "demande quand refaire le point quand on répond « Pas encore »" do
         within(".card__banner--illettrisme") do
           click_button pas_encore
 
-          expect(page).to have_css("[data-reponse='je_ne_sais_pas'] .tag", text: revue_prevue)
-          expect(page).to have_css(".qcm", visible: :hidden, count: 2)
+          expect(page).to have_css(".questions-date-revue", visible: :visible,
+                                   text: I18n.t("date_revue_mise_en_action.question"))
+          expect(page).to have_no_button(pas_encore)
         end
-        expect(mise_en_action.motif).to eq("action_prevue")
+      end
+
+      it "affiche la relance prévue quand on choisit de refaire le point dans 14 jours" do
+        date_revue = Date.current + 14
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.delais.14_jours")
+
+          expect(page).to have_css("[data-reponse='je_ne_sais_pas']", visible: :visible,
+                                   text: I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          expect(page).to have_content(
+            I18n.t("reponse_mise_en_action.relance_prevue",
+                   date: I18n.l(date_revue, format: :short))
+          )
+        end
+        expect(mise_en_action.date_revue).to eq(date_revue)
+        expect(mise_en_action.choix_date_revue).to eq("14_jours")
       end
 
       it "propose de nouveau les réponses quand on modifie « Pas encore »" do

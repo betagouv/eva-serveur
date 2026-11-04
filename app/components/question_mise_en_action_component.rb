@@ -24,6 +24,7 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
   def question_affichee?
     !(@mise_en_action_presenter.reponse_affichee? ||
       @mise_en_action_presenter.effectuee_sans_remediation? ||
-      @mise_en_action_presenter.non_effectuee_sans_difficulte?)
+      @mise_en_action_presenter.non_effectuee_sans_difficulte? ||
+      @mise_en_action_presenter.date_revue_a_choisir?)
   end
 end

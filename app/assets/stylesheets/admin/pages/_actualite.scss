@@ -4,6 +4,7 @@
       #main_content_wrapper #main_content {
         margin-right: 29.0625rem;
       }
+
       #sidebar {
         width: 445px;
         margin-left: -27.8125rem;
@@ -13,6 +14,7 @@
         #main_content_wrapper #main_content {
           margin-right: 0;
         }
+
         #sidebar {
           width: 100%;
           margin-left: 0;
@@ -56,8 +58,6 @@
 
     .details-actualite {
       .metadonnees {
-        @include carte-avec-ombre;
-
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         display: flex;
@@ -97,7 +97,9 @@
 
   padding: 0 .625rem;
 
-  img, iframe, blockquote {
+  img,
+  iframe,
+  blockquote {
     width: calc(100% + 2.5rem);
     border-radius: .5rem;
     margin: 0 -1.25rem;

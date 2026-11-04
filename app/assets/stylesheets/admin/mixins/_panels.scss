@@ -7,8 +7,8 @@
 }
 
 @mixin panel_alerte() {
-  background-repeat: no-repeat,no-repeat,no-repeat;
-  background-size: 1px 1px,1px 1px,1px 1px,2.5rem 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 1px 1px, 1px 1px, 1px 1px, 2.5rem 100%;
   background-color: $grey-1000;
   padding: 1rem 2.25rem 1rem 3.5rem;
   position: relative;
@@ -35,7 +35,7 @@
 
 @mixin panel_alerte_couleur($couleur, $icone) {
   border-color: $couleur;
-  background-image: linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur);
+  background-image: linear-gradient(0deg, $couleur, $couleur), linear-gradient(0deg, $couleur, $couleur), linear-gradient(0deg, $couleur, $couleur), linear-gradient(0deg, $couleur, $couleur), linear-gradient(0deg, $couleur, $couleur);
 
   &::before {
     mask-image: url($icone);

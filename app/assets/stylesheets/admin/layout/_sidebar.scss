@@ -39,10 +39,6 @@
       @include annule-panel;
     }
 
-    &.annule-carte {
-      @include annule-carte;
-    }
-
     .action_items {
       display: flex;
       gap: .5rem;

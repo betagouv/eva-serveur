@@ -28,7 +28,7 @@ class MiseEnAction < ApplicationRecord
 
   acts_as_paranoid
 
-  scope :repondues_pas_encore, -> { where(effectuee: nil) }
+  scope :repondues_pas_encore, -> { where(effectuee: nil).where.not(repondue_le: nil) }
   scope :reportees, -> { repondues_pas_encore.where("date_revue > ?", Date.current) }
 
   def self.je_ne_sais_pas_actif?
@@ -47,7 +47,7 @@ class MiseEnAction < ApplicationRecord
   end
 
   def repondu_pas_encore?
-    effectuee.nil?
+    repondue_le.present? && effectuee.nil?
   end
 
   # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner

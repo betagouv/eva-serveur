@@ -22,6 +22,12 @@ describe MiseEnAction, type: :model do
     it "ne garde que les mises en action auxquelles on a répondu Pas encore" do
       expect(described_class.repondues_pas_encore).to contain_exactly(pas_encore)
     end
+
+    it "ne garde pas une mise en action à laquelle on n'a jamais répondu" do
+      jamais_repondue = create(:mise_en_action, effectuee: nil, repondue_le: nil)
+
+      expect(described_class.repondues_pas_encore).not_to include(jamais_repondue)
+    end
   end
 
   describe ".reportees" do
@@ -82,6 +88,11 @@ describe MiseEnAction, type: :model do
       expect(build(:mise_en_action, effectuee: nil).repondu_pas_encore?).to be(true)
       expect(build(:mise_en_action, effectuee: true).repondu_pas_encore?).to be(false)
       expect(build(:mise_en_action, effectuee: false).repondu_pas_encore?).to be(false)
+    end
+
+    it "est faux quand le pro n'a pas encore répondu" do
+      expect(build(:mise_en_action, effectuee: nil, repondue_le: nil).repondu_pas_encore?)
+        .to be(false)
     end
   end
 

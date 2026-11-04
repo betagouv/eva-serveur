@@ -10,6 +10,8 @@ fr:
             precision_autre:
               blank_remediation: Indiquez l’aide engagée en quelques mots.
               blank_difficulte: Indiquez la raison en quelques mots.
+            date_revue:
+              a_partir_de_demain: Choisissez une date à partir de demain.
     attributes:
       mise_en_action:
         precision_autre: Précisez

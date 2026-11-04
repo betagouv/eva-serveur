@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_03_090000) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_04_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -294,6 +294,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_03_090000) do
     t.string "motif"
     t.date "date_revue"
     t.text "precision_autre"
+    t.string "choix_date_revue"
     t.index ["deleted_at"], name: "index_mises_en_action_on_deleted_at"
     t.index ["evaluation_id"], name: "index_mises_en_action_on_evaluation_id"
   end

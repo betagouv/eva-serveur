@@ -1,27 +1,28 @@
 module Beneficiaires
   class StatutSuivi
     def self.par_beneficiaire(ids)
-      Beneficiaire.where(id: ids).pluck(:id, expression_statut).to_h
+      Beneficiaire.where(id: ids).pluck(:id, sql_statut_suivi).to_h
     end
 
-    def self.expression_statut
-      derniere_evaluation_concernee = EvaluationEva
+    # Le statut de suivi de la dernière évaluation suivie du bénéficiaire
+    def self.sql_statut_suivi
+      derniere_evaluation_suivie = EvaluationEva
         .where("evaluations.beneficiaire_id = beneficiaires.id")
-        .where(EvaluationsEva::StatutSuivi.condition_concernee)
+        .where(EvaluationsEva::StatutSuivi.sql_evaluation_suivie)
         .order(debutee_le: :desc)
         .limit(1)
-        .select(EvaluationsEva::StatutSuivi.expression_statut)
+        .select(EvaluationsEva::StatutSuivi.sql_statut_suivi)
 
-      Arel.sql("COALESCE((#{derniere_evaluation_concernee.to_sql}), 'non_concerne')")
+      Arel.sql("COALESCE((#{derniere_evaluation_suivie.to_sql}), 'non_concerne')")
     end
 
-    def self.filtre(relation, statuts)
-      relation.where("#{expression_statut} IN (?)",
+    def self.filtre_par_statuts(relation, statuts)
+      relation.where("#{sql_statut_suivi} IN (?)",
                      statuts & EvaluationsEva::StatutSuivi::STATUTS_FILTRE)
     end
 
-    def self.expression_rang
-      EvaluationsEva::StatutSuivi.rang(expression_statut)
+    def self.sql_ordre_de_tri
+      EvaluationsEva::StatutSuivi.sql_ordre_de_tri_pour(sql_statut_suivi)
     end
   end
 end

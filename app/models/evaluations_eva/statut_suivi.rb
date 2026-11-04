@@ -1,44 +1,46 @@
 module EvaluationsEva
   class StatutSuivi
-    RANGS = {
+    ORDRE_DE_TRI = {
       "suite_engagee" => 1,
       "reporte" => 2,
       "pas_de_suite" => 3,
       "a_renseigner" => 4,
       "non_concerne" => 5
     }.freeze
-    STATUTS = RANGS.keys.freeze
+    STATUTS = ORDRE_DE_TRI.keys.freeze
     STATUTS_FILTRE = %w[a_renseigner reporte suite_engagee pas_de_suite].freeze
 
     def self.par_evaluation(ids)
-      EvaluationEva.where(id: ids).pluck(:id, expression_statut).to_h
+      EvaluationEva.where(id: ids).pluck(:id, sql_statut_suivi).to_h
     end
 
-    def self.filtre(relation, statuts)
-      relation.where("#{expression_statut} IN (?)", statuts & STATUTS_FILTRE)
+    def self.filtre_par_statuts(relation, statuts)
+      relation.where("#{sql_statut_suivi} IN (?)", statuts & STATUTS_FILTRE)
     end
 
-    def self.expression_statut
+    # Calcule le statut de suivi de chaque évaluation, en SQL pour pouvoir trier et filtrer
+    def self.sql_statut_suivi
       Arel.sql(<<~SQL.squish)
         CASE
-          WHEN NOT (#{condition_concernee}) THEN 'non_concerne'
-          WHEN #{reponse_mise_en_action} IS NULL THEN 'a_renseigner'
-          WHEN #{reponse_mise_en_action} THEN 'suite_engagee'
+          WHEN NOT (#{sql_evaluation_suivie}) THEN 'non_concerne'
+          WHEN #{sql_reponse_mise_en_action} IS NULL THEN 'a_renseigner'
+          WHEN #{sql_reponse_mise_en_action} THEN 'suite_engagee'
           ELSE 'pas_de_suite'
         END
       SQL
     end
 
-    def self.expression_rang
-      rang(expression_statut)
+    def self.sql_ordre_de_tri
+      sql_ordre_de_tri_pour(sql_statut_suivi)
     end
 
-    def self.rang(expression)
-      cas = RANGS.map { |statut, rang| "WHEN '#{statut}' THEN #{rang}" }.join(" ")
-      Arel.sql("CASE #{expression} #{cas} END")
+    def self.sql_ordre_de_tri_pour(sql_statut)
+      cas = ORDRE_DE_TRI.map { |statut, ordre| "WHEN '#{statut}' THEN #{ordre}" }.join(" ")
+      Arel.sql("CASE #{sql_statut} #{cas} END")
     end
 
-    def self.reponse_mise_en_action
+    # La réponse Oui (true), Non (false), ou NULL sans réponse
+    def self.sql_reponse_mise_en_action
       <<~SQL.squish
         (SELECT mises_en_action.effectuee FROM mises_en_action
          WHERE mises_en_action.evaluation_id = evaluations.id
@@ -46,8 +48,10 @@ module EvaluationsEva
       SQL
     end
 
-    def self.condition_concernee
-      debut = date_debut
+    # L'évaluation entre dans le suivi : illettrisme potentiel, compétences de base complètes,
+    # passée depuis DATE_STATUT_SUIVI, bénéficiaire non anonymisé
+    def self.sql_evaluation_suivie
+      debut = date_debut_suivi
       return "FALSE" if debut.nil?
 
       <<~SQL.squish
@@ -60,7 +64,7 @@ module EvaluationsEva
       SQL
     end
 
-    def self.date_debut
+    def self.date_debut_suivi
       date = ENV["DATE_STATUT_SUIVI"]
       return if date.blank?
 

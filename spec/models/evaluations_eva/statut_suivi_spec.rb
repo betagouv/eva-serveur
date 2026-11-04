@@ -148,7 +148,7 @@ RSpec.describe EvaluationsEva::StatutSuivi do
       suite_engagee = create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
                                                                      **attributs_concernee
 
-      expect(EvaluationEva.order(described_class.expression_rang).pluck(:id))
+      expect(EvaluationEva.order(described_class.sql_ordre_de_tri).pluck(:id))
         .to eq [ suite_engagee.id, pas_de_suite.id, a_renseigner.id, non_concerne.id ]
     end
 
@@ -174,22 +174,24 @@ RSpec.describe EvaluationsEva::StatutSuivi do
       end
 
       it "garde les évaluations du statut choisi" do
-        expect(described_class.filtre(EvaluationEva.all, [ "a_renseigner" ]))
+        expect(described_class.filtre_par_statuts(EvaluationEva.all, [ "a_renseigner" ]))
           .to contain_exactly(a_renseigner)
       end
 
       it "garde les évaluations de plusieurs statuts" do
-        expect(described_class.filtre(EvaluationEva.all, %w[suite_engagee pas_de_suite]))
+        expect(described_class.filtre_par_statuts(EvaluationEva.all,
+                                                  %w[suite_engagee pas_de_suite]))
           .to contain_exactly(suite_engagee, pas_de_suite)
       end
 
       it "n'affiche jamais les évaluations non concernées" do
-        expect(described_class.filtre(EvaluationEva.all, %w[non_concerne a_renseigner]))
+        expect(described_class.filtre_par_statuts(EvaluationEva.all, %w[non_concerne a_renseigner]))
           .to contain_exactly(a_renseigner)
       end
 
       it "ignore les valeurs inconnues" do
-        expect(described_class.filtre(EvaluationEva.all, [ "a_renseigner') OR ('1'='1" ]))
+        expect(described_class.filtre_par_statuts(EvaluationEva.all,
+                                                  [ "a_renseigner') OR ('1'='1" ]))
           .to be_empty
       end
     end

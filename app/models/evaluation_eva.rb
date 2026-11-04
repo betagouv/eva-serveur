@@ -51,7 +51,7 @@ class EvaluationEva < Evaluation
     where(completude: %w[complete competences_transversales_incompletes])
   }
   scope :statut_suivi_in, lambda { |*statuts|
-    EvaluationsEva::StatutSuivi.filtre(all, statuts.flatten)
+    EvaluationsEva::StatutSuivi.filtre_par_statuts(all, statuts.flatten)
   }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }

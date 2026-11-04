@@ -35,8 +35,8 @@ ActiveAdmin.register Beneficiaire do
   config.sort_order = "created_at_desc"
 
   order_by(:statut_suivi) do |clause|
-    sens = clause.order == "desc" ? "ASC" : "DESC"
-    "#{Beneficiaires::StatutSuivi.expression_rang} #{sens}"
+    sens_de_tri = clause.order == "desc" ? "ASC" : "DESC"
+    "#{Beneficiaires::StatutSuivi.sql_ordre_de_tri} #{sens_de_tri}"
   end
   config.batch_actions = true
 

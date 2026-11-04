@@ -179,6 +179,8 @@ class Inscription::StructuresController < ApplicationController
       associe_opcos_si_present
       finalise_inscription_compte
     end
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to inscription_structure_path
   end
 
   def cree_structure_avec_params

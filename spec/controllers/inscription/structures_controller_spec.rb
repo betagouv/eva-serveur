@@ -345,6 +345,22 @@ describe Inscription::StructuresController, type: :controller do
           expect(structure_creée.type_structure).to eq('mission_locale')
           expect(response).to redirect_to(admin_dashboard_path)
         end
+
+        context "quand une requête concurrente a déjà créé la structure (double soumission)" do
+          before do
+            allow(FabriqueStructure).to receive(:cree_depuis_siret)
+              .and_raise(ActiveRecord::RecordNotUnique)
+          end
+
+          it "redirige vers l'étape structure au lieu de lever une erreur" do
+            patch :update, params: {
+              structure_locale: { usage: AvecUsage::USAGE_EVA },
+              commit: "creer_avec_usage"
+            }
+
+            expect(response).to redirect_to(inscription_structure_path)
+          end
+        end
       end
 
       context "quand la structure a code_postal manquant et l'utilisateur saisit un code" do

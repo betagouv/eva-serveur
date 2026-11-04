@@ -1,3 +1,12 @@
+.card-usage[aria-busy="true"] .card-avec-logo {
+  cursor: wait;
+  opacity: 0.6;
+
+  .fr-card__link {
+    pointer-events: none;
+  }
+}
+
 .card-avec-logo {
   &.fr-card--horizontal {
     .fr-card__img img {

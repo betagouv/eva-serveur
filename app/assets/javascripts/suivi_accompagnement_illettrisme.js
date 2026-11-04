@@ -45,10 +45,37 @@ function renseigneQualification(evaluationId, $element, donneesQualification) {
 // Choix de la date de revue après « Pas encore » : chaque puce porte son choix,
 // le serveur en déduit la date (MiseEnAction#reporte_dans)
 function enregistreChoixDateRevue(evaluationId, $tag) {
+  // Un délai proposé referme « Choisir une date », comme un autre choix referme « Précisez »
+  const $qcm = $tag.closest('.qcm');
+  $qcm.find('.choisir-date-revue').attr('aria-pressed', 'false');
+  masqueChampDateRevue($qcm.find('.zone-date-revue'));
   renseigneDateRevue(evaluationId, $tag.attr('data-choix-date-revue'));
 }
 
+// « Choisir une date » ouvre ou referme le champ date, comme « Autre » ouvre « Précisez »
+function basculeChampDateRevue(evaluationId, $tag) {
+  const $zone = $tag.closest('.qcm').find('.zone-date-revue');
+  if ($zone.hasClass('zone-date-revue--masquee')) {
+    $zone.removeClass('zone-date-revue--masquee');
+    $zone.find('input[name=date_revue]').trigger('focus');
+  } else {
+    masqueChampDateRevue($zone);
+  }
+}
+
+function masqueChampDateRevue($zone) {
+  $zone.addClass('zone-date-revue--masquee');
+  $zone.find('input[name=date_revue]').val('');
+  effaceErreurChamp($zone.find('.champ-date-revue'));
+}
+
+function enregistreDateChoisie(evaluationId, $bouton) {
+  renseigneDateRevue(evaluationId, CHOIX_DATE_PRECISE,
+                     $bouton.closest('.qcm').find('input[name=date_revue]').val());
+}
+
 function renseigneDateRevue(evaluationId, choixDateRevue, dateRevue) {
+  const $champ = $(`#${evaluationId} .champ-date-revue`);
   $.ajax({
     method: 'PATCH',
     url: chemin_renseigner_date_revue.replace('ID_EVALUATION', evaluationId),
@@ -59,7 +86,12 @@ function renseigneDateRevue(evaluationId, choixDateRevue, dateRevue) {
       $reponse.find('.tag').removeClass('hidden').text(donnees.relance_prevue);
       $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');
       afficheModificationReponse(REPONSE_JE_NE_SAIS_PAS, evaluationId);
+      effaceErreurChamp($champ);
       fermeQcm(evaluationId);
+    },
+    error: function (xhr) {
+      const erreur = xhr.responseJSON && xhr.responseJSON.erreur;
+      if (erreur) afficheErreurChamp($champ, erreur);
     }
   });
 }
@@ -73,9 +105,23 @@ function basculePrecisionAutre($qcm) {
   }
 }
 
+// Répondre efface côté serveur la qualification des autres réponses : l'écran fait de même,
+// comme le changement entre Oui et Non referme « Précisez » (enregistreReponseMiseEnAction)
+function oublieAutresReponses(evaluationId, reponse) {
+  if (reponse === REPONSE_JE_NE_SAIS_PAS) {
+    fermePrecisionAutre($(`#${evaluationId} .questions-remediation`));
+    fermePrecisionAutre($(`#${evaluationId} .questions-difficulte`));
+  } else {
+    const $dateRevue = $(`#${evaluationId} .questions-date-revue`);
+    $dateRevue.find('.choisir-date-revue').attr('aria-pressed', 'false');
+    masqueChampDateRevue($dateRevue.find('.zone-date-revue'));
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  ecouteBoutons($(".suivi-accompagnement-illettrisme .reponse-mise-en-action"), function(evaluationId) {
+  ecouteBoutons($(".suivi-accompagnement-illettrisme .reponse-mise-en-action"), function(evaluationId, $bouton) {
     $(`#${evaluationId} div[data-reponse='vide']`).removeClass('d-flex').addClass('hidden');
+    oublieAutresReponses(evaluationId, $bouton.data('reponse'));
   });
   ecouteBoutons($(".modifier-reponse-mise-en-action"), function(evaluationId) {
     fermeQcm(evaluationId);
@@ -84,6 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".choix-qualification-mise-en-action"), enregistreChoixQualification);
   ecouteBoutons($(".enregistre-precision-autre"), enregistrePrecisionAutre);
   ecouteBoutons($(".choix-date-revue"), enregistreChoixDateRevue);
+  ecouteBoutons($(".choisir-date-revue"), basculeChampDateRevue);
+  ecouteBoutons($(".enregistre-date-revue"), enregistreDateChoisie);
   valideAvecEntree($(".suivi-accompagnement-illettrisme input[name=precision_autre]"),
                    '.enregistre-precision-autre');
+  valideAvecEntree($(".suivi-accompagnement-illettrisme input[name=date_revue]"),
+                   '.enregistre-date-revue');
 });

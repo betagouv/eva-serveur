@@ -5,6 +5,7 @@
 
 const REPONSE_JE_NE_SAIS_PAS = "<%= MiseEnAction::REPONSE_JE_NE_SAIS_PAS %>";
 const QUALIFICATION_AUTRE = "<%= MiseEnAction::QUALIFICATION_AUTRE %>";
+const CHOIX_DATE_PRECISE = "<%= MiseEnAction::CHOIX_DATE_PRECISE %>";
 
 const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_eva_path('ID_EVALUATION') %>";
 const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_eva_path('ID_EVALUATION') %>";
@@ -15,12 +16,10 @@ function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} div[data-reponse='${reponseMiseEnAction}']`).removeClass('hidden').addClass('d-flex');
 }
 
-function afficheReponseJeNeSaisPas(evaluationId, revuePrevue) {
+function afficheReponseJeNeSaisPas(evaluationId) {
   fermeQcm(evaluationId);
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
-  const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`);
-  $reponse.find('.tag').removeClass('hidden').text(revuePrevue);
-  $reponse.removeClass('hidden').addClass('d-flex');
+  $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`).removeClass('hidden').addClass('d-flex');
 }
 
 // Questionnaire du tableau de bord : se rouvre vide, sauf après une réponse « Autre » validée,
@@ -84,7 +83,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
         if ($(`#${evaluationId} .questions-date-revue`).length) {
           ouvreQcm(evaluationId, 'date-revue', reponse);
         } else {
-          afficheReponseJeNeSaisPas(evaluationId, donnees.revue_prevue);
+          afficheReponseJeNeSaisPas(evaluationId);
         }
         return;
       }
@@ -150,8 +149,16 @@ function affichePrecisionEnErreurDepuis(xhr, $qcm) {
 }
 
 function affichePrecisionEnErreur($qcm, message) {
-  const $groupe = $qcm.find('.precision-autre');
-  effaceErreurPrecision($qcm);
+  afficheErreurChamp($qcm.find('.precision-autre'), message);
+}
+
+function effaceErreurPrecision($qcm) {
+  effaceErreurChamp($qcm.find('.precision-autre'));
+}
+
+// Erreur d'un champ DSFR (fr-input-group) : « Précisez » ou la date de revue
+function afficheErreurChamp($groupe, message) {
+  effaceErreurChamp($groupe);
   $groupe.addClass('fr-input-group--error');
   $groupe.find('.fr-label').addClass('fr-label--error');
   $groupe.find('.fr-message--info').addClass('hidden');
@@ -159,8 +166,7 @@ function affichePrecisionEnErreur($qcm, message) {
   $groupe.find('.fr-input').addClass('fr-input--error').trigger('focus');
 }
 
-function effaceErreurPrecision($qcm) {
-  const $groupe = $qcm.find('.precision-autre');
+function effaceErreurChamp($groupe) {
   $groupe.removeClass('fr-input-group--error');
   $groupe.find('.fr-label').removeClass('fr-label--error');
   $groupe.find('.fr-input').removeClass('fr-input--error');

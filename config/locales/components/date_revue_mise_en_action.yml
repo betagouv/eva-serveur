@@ -8,3 +8,7 @@ fr:
       7_jours: Dans 7 jours
       14_jours: Dans 14 jours
       1_mois: Dans 1 mois
+    choisir_une_date: Choisir une date
+    format_attendu: "Format attendu : JJ/MM/AAAA"
+    a_partir_de_demain: Choisissez une date à partir de demain.
+    enregistrer: Enregistrer

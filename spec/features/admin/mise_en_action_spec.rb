@@ -373,8 +373,6 @@ describe "Admin - Mise en action", :js, type: :feature do
   end
 
   describe "quand l'option « je ne sais pas » est active" do
-    let(:revue_prevue) { "Revue prévue le #{I18n.l(Date.current + 7)}" }
-
     before { allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true) }
 
     describe "sur le détail d'une évaluation" do
@@ -407,6 +405,175 @@ describe "Admin - Mise en action", :js, type: :feature do
         end
         expect(mise_en_action.date_revue).to eq(date_revue)
         expect(mise_en_action.choix_date_revue).to eq("14_jours")
+      end
+
+      it "affiche l'erreur et n'enregistre rien quand on choisit la date du jour" do
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.choisir_une_date")
+          fill_in MiseEnAction.human_attribute_name(:date_revue), with: Date.current
+          click_button I18n.t("date_revue_mise_en_action.enregistrer")
+
+          expect(page).to have_css(
+            ".champ-date-revue .fr-message--error",
+            text: I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                         ".date_revue.a_partir_de_demain")
+          )
+        end
+        expect(mise_en_action.date_revue).to be_nil
+      end
+
+      it "efface l'erreur quand on referme puis rouvre « Choisir une date »" do
+        choisir_une_date = I18n.t("date_revue_mise_en_action.choisir_une_date")
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button choisir_une_date
+          click_button I18n.t("date_revue_mise_en_action.enregistrer")
+          expect(page).to have_css(".champ-date-revue .fr-message--error")
+
+          click_button choisir_une_date
+          click_button choisir_une_date
+
+          expect(page).to have_no_css(".champ-date-revue .fr-message--error")
+        end
+      end
+
+      it "ne garde sélectionné que « Choisir une date », refermé quand on passe à un délai" do
+        titre_confirmation = I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas")
+        choisir_une_date = I18n.t("date_revue_mise_en_action.choisir_une_date")
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button choisir_une_date
+          fill_in MiseEnAction.human_attribute_name(:date_revue), with: Date.current + 30
+          click_button I18n.t("date_revue_mise_en_action.enregistrer")
+          expect(page).to have_content(titre_confirmation)
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button pas_encore
+          expect(page).to have_css("button[aria-pressed='true']", count: 1, text: choisir_une_date)
+
+          click_button I18n.t("date_revue_mise_en_action.delais.1_mois")
+          expect(page).to have_content(titre_confirmation)
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button pas_encore
+
+          expect(page).to have_css(".questions-date-revue", visible: :visible)
+          expect(page).to have_no_field(MiseEnAction.human_attribute_name(:date_revue))
+          expect(page).to have_no_css("button[aria-pressed='true']")
+        end
+      end
+
+      it "affiche la relance prévue quand on choisit une date précise" do
+        date_revue = Date.current + 30
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.choisir_une_date")
+          fill_in MiseEnAction.human_attribute_name(:date_revue), with: date_revue
+          click_button I18n.t("date_revue_mise_en_action.enregistrer")
+
+          expect(page).to have_content(
+            I18n.t("reponse_mise_en_action.relance_prevue",
+                   date: I18n.l(date_revue, format: :short))
+          )
+        end
+        expect(mise_en_action.date_revue).to eq(date_revue)
+        expect(mise_en_action.choix_date_revue).to eq(MiseEnAction::CHOIX_DATE_PRECISE)
+      end
+
+      context "quand le pro a choisi une date précise, puis modifie sa réponse" do
+        let(:date_revue) { Date.current + 30 }
+
+        before do
+          evaluation.enregistre_mise_en_action(nil)
+          evaluation.mise_en_action.reporte_dans(MiseEnAction::CHOIX_DATE_PRECISE, date_revue)
+          visit admin_evaluation_eva_path(evaluation)
+        end
+
+        it "retrouve « Choisir une date » sélectionné avec sa date" do
+          within(".card__banner--illettrisme") do
+            click_link I18n.t("reponse_mise_en_action.modifier")
+            click_button pas_encore
+
+            expect(page).to have_css("button[aria-pressed='true']",
+                                     text: I18n.t("date_revue_mise_en_action.choisir_une_date"))
+            expect(page).to have_field(MiseEnAction.human_attribute_name(:date_revue),
+                                       with: date_revue.iso8601)
+          end
+        end
+      end
+
+      context "quand le pro a reporté dans 14 jours, puis modifie sa réponse" do
+        before do
+          evaluation.enregistre_mise_en_action(nil)
+          evaluation.mise_en_action.reporte_dans("14_jours")
+          visit admin_evaluation_eva_path(evaluation)
+        end
+
+        it "ne présélectionne aucun délai, comme les choix de Oui et de Non" do
+          within(".card__banner--illettrisme") do
+            click_link I18n.t("reponse_mise_en_action.modifier")
+            click_button pas_encore
+
+            expect(page).to have_css(".questions-date-revue", visible: :visible)
+            expect(page).to have_no_css("button[aria-pressed='true']")
+          end
+        end
+      end
+
+      context "quand le pro a répondu « Pas encore » sans choisir de date, puis revient" do
+        before do
+          evaluation.enregistre_mise_en_action(nil)
+          visit admin_evaluation_eva_path(evaluation)
+        end
+
+        it "affiche seulement le choix de la date de revue" do
+          within(".card__banner--illettrisme") do
+            expect(page).to have_css(".questions-date-revue", visible: :visible)
+            expect(page).to have_no_css("[data-reponse='je_ne_sais_pas']", visible: :visible)
+          end
+        end
+      end
+
+      it "oublie la date précise quand on passe par Non puis revient sur « Pas encore »" do
+        within(".card__banner--illettrisme") do
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.choisir_une_date")
+          fill_in MiseEnAction.human_attribute_name(:date_revue), with: Date.current + 30
+          click_button I18n.t("date_revue_mise_en_action.enregistrer")
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button I18n.t("question_mise_en_action.bouton_non")
+          freins = I18n.t("activerecord.attributes.mise_en_action.difficulte.freins_peripheriques")
+          within(".questions-difficulte") { click_button freins }
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button pas_encore
+
+          expect(page).to have_css(".questions-date-revue", visible: :visible)
+          expect(page).to have_no_css("button[aria-pressed='true']")
+          expect(page).to have_no_field(MiseEnAction.human_attribute_name(:date_revue))
+        end
+      end
+
+      it "oublie « Autre » quand on passe par « Pas encore » puis revient sur Non" do
+        within(".card__banner--illettrisme") do
+          click_button I18n.t("question_mise_en_action.bouton_non")
+          within(".questions-difficulte") do
+            click_button I18n.t("activerecord.attributes.mise_en_action.difficulte.autre")
+            fill_in precisez, with: "Déménagement"
+            click_button enregistrer
+          end
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.delais.7_jours")
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button I18n.t("question_mise_en_action.bouton_non")
+
+          expect(page).to have_css(".questions-difficulte", visible: :visible)
+          expect(page).to have_no_css("button[aria-pressed='true']")
+          expect(page).to have_no_field(precisez)
+        end
       end
 
       it "propose de nouveau les réponses quand on modifie « Pas encore »" do

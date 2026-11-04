@@ -19,4 +19,21 @@ class DateRevueMiseEnActionComponent < ViewComponent::Base
   def id_question
     "question-date-revue-#{@evaluation.id}"
   end
+
+  def id_champ_date
+    "date-revue-#{@evaluation.id}"
+  end
+
+  # Comme "Autre" pour Oui et Non : seule une date précise est retrouvée, avec sa date
+  def date_precise_choisie?
+    @evaluation.mise_en_action&.choix_date_revue == MiseEnAction::CHOIX_DATE_PRECISE
+  end
+
+  def classe_zone_date
+    date_precise_choisie? ? "" : "zone-date-revue--masquee"
+  end
+
+  def date_revue_precise
+    @evaluation.mise_en_action.date_revue if date_precise_choisie?
+  end
 end

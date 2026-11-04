@@ -76,6 +76,60 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#date_revue_a_choisir?" do
+    context "quand le pro a répondu Pas encore sans avoir choisi de date de revue" do
+      it "la date de revue est à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: nil, date_revue: nil)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(true)
+      end
+    end
+
+    context "quand le pro a répondu Pas encore et choisi une date de revue" do
+      it "la date de revue n'est plus à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: nil, date_revue: Date.current + 7)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(false)
+      end
+    end
+
+    context "quand le pro a répondu Oui" do
+      it "il n'y a pas de date de revue à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: true)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(false)
+      end
+    end
+  end
+
+  describe "#reportee?" do
+    let(:pas_encore) { build(:mise_en_action, effectuee: nil, date_revue: date_revue) }
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la mise en action est reportée" do
+        expect(pas_encore.reportee?).to be(true)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la mise en action n'est plus reportée" do
+        expect(pas_encore.reportee?).to be(false)
+      end
+    end
+
+    context "quand on a répondu Pas encore sans avoir choisi de date de revue" do
+      let(:date_revue) { nil }
+
+      it "la mise en action n'est pas reportée" do
+        expect(pas_encore.reportee?).to be(false)
+      end
+    end
+  end
+
   describe "#repondu_oui?" do
     it "n'est vrai que pour une réponse Oui" do
       expect(build(:mise_en_action, effectuee: true).repondu_oui?).to be(true)

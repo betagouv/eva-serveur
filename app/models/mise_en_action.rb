@@ -56,6 +56,15 @@ class MiseEnAction < ApplicationRecord
     repondue_le.present? && effectuee.nil?
   end
 
+  def date_revue_a_choisir?
+    repondu_pas_encore? && date_revue.blank?
+  end
+
+  # Même règle que le scope reportees, sur une seule mise en action
+  def reportee?
+    repondu_pas_encore? && date_revue.present? && date_revue > Date.current
+  end
+
   # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner
   def qualification_a_renseigner?
     qualification.blank? || qualification_indeterminee?

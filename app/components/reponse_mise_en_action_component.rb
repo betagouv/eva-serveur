@@ -15,9 +15,11 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
   end
 
   def detail
-    return revue_prevue if @reponse == MiseEnAction::REPONSE_JE_NE_SAIS_PAS
-
-    @mise_en_action&.libelle_qualification
+    if @reponse == MiseEnAction::REPONSE_JE_NE_SAIS_PAS
+      @mise_en_action&.libelle_relance_prevue
+    else
+      @mise_en_action&.libelle_qualification
+    end
   end
 
   def date_reponse
@@ -49,11 +51,5 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
     when false then @mise_en_action_presenter.non_effectuee_avec_difficulte?
     else @mise_en_action_presenter.je_ne_sais_pas_affiche?
     end
-  end
-
-  def revue_prevue
-    return if @mise_en_action&.date_revue.blank?
-
-    t("reponse_mise_en_action.revue_prevue", date: l(@mise_en_action.date_revue))
   end
 end

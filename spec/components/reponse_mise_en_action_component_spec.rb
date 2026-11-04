@@ -103,20 +103,20 @@ describe ReponseMiseEnActionComponent, type: :component do
     end
   end
 
-  context "pour la réponse « je ne sais pas »" do
+  context "pour la réponse Pas encore, avec une date de revue choisie" do
     let(:reponse) { MiseEnAction::REPONSE_JE_NE_SAIS_PAS }
     let(:je_ne_sais_pas_actif) { true }
     let(:mise_en_action) do
-      build(:mise_en_action, effectuee: nil, motif: "action_prevue",
-                             date_revue: Date.new(2026, 11, 5))
+      build(:mise_en_action, effectuee: nil, date_revue: Date.new(2026, 11, 18),
+                             choix_date_revue: "14_jours")
     end
 
-    it "affiche la réponse et la date de revue" do
+    it "affiche la réponse et la relance prévue" do
       bloc_reponse = page.find("[data-reponse='je_ne_sais_pas'].mise-en-action:not(.hidden)")
       expect(bloc_reponse).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
       expect(bloc_reponse).to have_css(
         ".tag",
-        text: I18n.t("reponse_mise_en_action.revue_prevue", date: "05 nov. 2026")
+        text: I18n.t("reponse_mise_en_action.relance_prevue", date: "18/11/2026")
       )
     end
   end

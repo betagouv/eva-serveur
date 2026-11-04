@@ -65,6 +65,12 @@ describe PriseEnMain do
       before { compte.update(mode_tutoriel: true) }
 
       it { expect(prise_en_main.terminee?).to be false }
+
+      context "et que le compte appartient à une structure administrative" do
+        before { compte.structure = StructureAdministrative.new }
+
+        it { expect(prise_en_main.terminee?).to be true }
+      end
     end
   end
 end

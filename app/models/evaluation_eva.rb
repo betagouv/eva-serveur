@@ -46,6 +46,7 @@ class EvaluationEva < Evaluation
 
   scope :mise_en_action_a_renseigner, lambda {
     left_joins(:mise_en_action).where(mises_en_action: { effectuee: nil })
+                               .where.not(id: MiseEnAction.reportees.select(:evaluation_id))
   }
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])

@@ -6,15 +6,60 @@ describe EvaluationEva do
 
   describe 'scopes' do
     describe '.mise_en_action_a_renseigner' do
-      let!(:evaluation_avec_mise_en_action) { create :evaluation, :eva, :avec_mise_en_action }
-      let!(:evaluation_sans_mise_en_action) { create :evaluation, :eva }
-      let!(:evaluation_je_ne_sais_pas) do
-        create :evaluation, :eva, :avec_mise_en_action, effectuee: nil
+      context "quand le pro n'a jamais répondu" do
+        let!(:evaluation_sans_reponse) { create :evaluation, :eva }
+
+        it "la mise en action est à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_sans_reponse)
+        end
       end
 
-      it 'retourne les évaluations sans mise en action ou avec une réponse « je ne sais pas »' do
-        expect(described_class.mise_en_action_a_renseigner)
-          .to contain_exactly(evaluation_sans_mise_en_action, evaluation_je_ne_sais_pas)
+      context "quand le pro a répondu Oui" do
+        let!(:evaluation_oui) { create :evaluation, :eva, :avec_mise_en_action, effectuee: true }
+
+        it "la mise en action n'est pas à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).not_to include(evaluation_oui)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore sans avoir choisi de date de revue" do
+        let!(:evaluation_sans_date) do
+          create :evaluation, :eva, :avec_mise_en_action, effectuee: nil
+        end
+
+        it "la mise en action est à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_sans_date)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore avec une date de revue dans le futur" do
+        let!(:evaluation_reportee) { create :evaluation, :eva }
+
+        before do
+          create :mise_en_action, evaluation: evaluation_reportee, effectuee: nil,
+                                  date_revue: Date.current + 7
+        end
+
+        it "la mise en action n'est pas à renseigner avant la date de revue" do
+          expect(described_class.mise_en_action_a_renseigner).not_to include(evaluation_reportee)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore et que la date de revue est aujourd'hui" do
+        let(:date_revue) { Date.current }
+        let!(:evaluation_a_revoir) { create :evaluation, :eva }
+
+        before do
+          # La date de revue a été choisie une semaine avant, quand elle était dans le futur
+          Timecop.freeze(date_revue - 7) do
+            create :mise_en_action, evaluation: evaluation_a_revoir, effectuee: nil,
+                                    date_revue: date_revue
+          end
+        end
+
+        it "la mise en action est de nouveau à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_a_revoir)
+        end
       end
     end
 

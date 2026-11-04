@@ -23,6 +23,7 @@ module EvaluationsEva
       Arel.sql(<<~SQL.squish)
         CASE
           WHEN NOT (#{sql_evaluation_suivie}) THEN 'non_concerne'
+          WHEN #{sql_mise_en_action_reportee} THEN 'reporte'
           WHEN #{sql_reponse_mise_en_action} IS NULL THEN 'a_renseigner'
           WHEN #{sql_reponse_mise_en_action} THEN 'suite_engagee'
           ELSE 'pas_de_suite'
@@ -46,6 +47,14 @@ module EvaluationsEva
          WHERE mises_en_action.evaluation_id = evaluations.id
          AND mises_en_action.deleted_at IS NULL)
       SQL
+    end
+
+    # Vrai si la mise en action de l'évaluation est reportée : le pro a répondu "Pas encore"
+    # et sa date de revue n'est pas atteinte
+    def self.sql_mise_en_action_reportee
+      mise_en_action_reportee = MiseEnAction.reportees
+                                            .where("mises_en_action.evaluation_id = evaluations.id")
+      "EXISTS (#{mise_en_action_reportee.select(1).to_sql})"
     end
 
     # L'évaluation entre dans le suivi : illettrisme potentiel, compétences de base complètes,

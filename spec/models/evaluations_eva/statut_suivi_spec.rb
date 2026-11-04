@@ -48,6 +48,26 @@ RSpec.describe EvaluationsEva::StatutSuivi do
           .to eq(evaluation.id => "a_renseigner")
       end
 
+      it "est reportée quand on a répondu Pas encore avec une date de revue dans le futur" do
+        evaluation = create :evaluation, :eva, attributs_concernee
+        create :mise_en_action, evaluation: evaluation, effectuee: nil,
+                                date_revue: Date.current + 7
+
+        expect(described_class.par_evaluation([ evaluation.id ]))
+          .to eq(evaluation.id => "reporte")
+      end
+
+      it "redevient à renseigner le jour de la date de revue" do
+        evaluation = create :evaluation, :eva, attributs_concernee
+        date_revue = Date.current
+        Timecop.freeze(date_revue - 7) do
+          create :mise_en_action, evaluation: evaluation, effectuee: nil, date_revue: date_revue
+        end
+
+        expect(described_class.par_evaluation([ evaluation.id ]))
+          .to eq(evaluation.id => "a_renseigner")
+      end
+
       it "suit le changement de réponse" do
         evaluation = create :evaluation, :eva, :avec_mise_en_action, effectuee: true,
                                                                     **attributs_concernee

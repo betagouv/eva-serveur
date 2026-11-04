@@ -29,7 +29,24 @@
 <script>
   function choisi(usage) {
     var form = document.querySelector("form.card-usage");
+    if (form.getAttribute("aria-busy") === "true") return;
+
+    form.setAttribute("aria-busy", "true");
+    form.querySelectorAll(".fr-card__link").forEach(function(lien) {
+      lien.setAttribute("aria-disabled", "true");
+    });
     form.querySelector("input[name='structure_locale[usage]']").value = usage;
     form.requestSubmit();
   }
+
+  // Retour arrière depuis le cache du navigateur : réactive les cartes.
+  window.addEventListener("pageshow", function(event) {
+    if (!event.persisted) return;
+
+    var form = document.querySelector("form.card-usage");
+    form.removeAttribute("aria-busy");
+    form.querySelectorAll(".fr-card__link").forEach(function(lien) {
+      lien.removeAttribute("aria-disabled");
+    });
+  });
 </script>

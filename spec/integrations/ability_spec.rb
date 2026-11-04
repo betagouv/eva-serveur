@@ -161,6 +161,7 @@ describe Ability do
       expect(subject).not_to be_able_to(:fusionner, Beneficiaire)
       expect(subject).not_to be_able_to(:supprimer_responsable_suivi, Evaluation)
       expect(subject).not_to be_able_to(:renseigner_qualification, Evaluation)
+      expect(subject).not_to be_able_to(:renseigner_date_revue, Evaluation)
       expect(subject).not_to be_able_to(:ajouter_responsable_suivi, Evaluation)
     end
   end
@@ -269,6 +270,7 @@ describe Ability do
         expect(subject).to be_able_to(:ajouter_responsable_suivi, evaluation)
         expect(subject).to be_able_to(:mise_en_action, evaluation)
         expect(subject).to be_able_to(:renseigner_qualification, evaluation)
+        expect(subject).to be_able_to(:renseigner_date_revue, evaluation)
         expect(subject).to be_able_to(%i[read update], evaluation.beneficiaire)
         expect(subject).to be_able_to(:destroy, beneficiaire_vide)
         expect(subject).not_to be_able_to(:destroy, evaluation.beneficiaire)
@@ -293,6 +295,7 @@ describe Ability do
       it do
         expect(subject).to be_able_to(:mise_en_action, evaluation_collegue)
         expect(subject).to be_able_to(:renseigner_qualification, evaluation_collegue)
+        expect(subject).to be_able_to(:renseigner_date_revue, evaluation_collegue)
       end
     end
   end
@@ -354,6 +357,7 @@ describe Ability do
       it 'peut faire des mises en action sur les évaluations des structures filles' do
         expect(subject).to be_able_to(:mise_en_action, evaluation_structure_fille)
         expect(subject).to be_able_to(:renseigner_qualification, evaluation_structure_fille)
+        expect(subject).to be_able_to(:renseigner_date_revue, evaluation_structure_fille)
       end
     end
   end

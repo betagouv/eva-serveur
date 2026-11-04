@@ -66,6 +66,10 @@ class MiseEnAction < ApplicationRecord
     repondu_pas_encore? && date_revue.present? && date_revue > Date.current
   end
 
+  def date_de_revue_atteinte?
+    repondu_pas_encore? && date_revue.present? && date_revue <= Date.current
+  end
+
   # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner
   def qualification_a_renseigner?
     qualification.blank? || qualification_indeterminee?

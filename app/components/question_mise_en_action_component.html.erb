@@ -1,9 +1,14 @@
 <div data-reponse="vide" class="mise-en-action question-mise-en-action <%= classe_question %>">
+  <% if rappel_pas_encore %>
+    <div class="question-mise-en-action__rappel"><%= rappel_pas_encore %></div>
+  <% end %>
   <div class="question-mise-en-action__texte">
     <div id="question-mise-en-action-<%= @evaluation.id %>" class="question-mise-en-action__libelle">
       <%= t("question_mise_en_action.question") %>
     </div>
-    <div class="question-mise-en-action__description"><%= t("question_mise_en_action.description") %></div>
+    <% unless rappel_pas_encore %>
+      <div class="question-mise-en-action__description"><%= t("question_mise_en_action.description") %></div>
+    <% end %>
   </div>
   <div class="question-mise-en-action__boutons">
     <% @reponses.each do |reponse| %>

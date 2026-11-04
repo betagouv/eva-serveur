@@ -49,10 +49,10 @@ describe QuestionMiseEnActionComponent, type: :component do
     end
   end
 
-  context "quand on ne sait pas si la mise en action est effectuée" do
+  context "quand le pro a répondu Pas encore et que la date de revue n'est pas atteinte" do
     let(:mise_en_action) do
-      build(:mise_en_action, effectuee: nil, motif: "action_prevue",
-                             date_revue: Date.new(2026, 11, 5))
+      build(:mise_en_action, effectuee: nil, date_revue: Date.current + 7,
+                             choix_date_revue: "7_jours")
     end
 
     it "ne sélectionne ni Oui ni Non" do

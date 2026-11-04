@@ -102,6 +102,34 @@ describe MiseEnAction, type: :model do
     end
   end
 
+  describe "#date_de_revue_atteinte?" do
+    let(:pas_encore) { build(:mise_en_action, effectuee: nil, date_revue: date_revue) }
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la date de revue est atteinte" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(true)
+      end
+    end
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la date de revue n'est pas atteinte" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(false)
+      end
+    end
+
+    context "quand on a répondu Pas encore sans avoir choisi de date de revue" do
+      let(:date_revue) { nil }
+
+      it "il n'y a pas de date de revue à atteindre" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(false)
+      end
+    end
+  end
+
   describe "#reportee?" do
     let(:pas_encore) { build(:mise_en_action, effectuee: nil, date_revue: date_revue) }
 

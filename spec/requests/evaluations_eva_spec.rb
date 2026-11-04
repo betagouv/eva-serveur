@@ -184,7 +184,7 @@ describe 'Evaluation eva', type: :request do
       after { Bullet.enable = true }
 
       context "quand le pro choisit « Dans 14 jours »" do
-        it "enregistre la date de revue et son choix, et renvoie la relance à afficher" do
+        it "enregistre la date de revue et son choix, renvoie la relance et la date de réponse" do
           date_revue = Date.current + 14
 
           patch renseigner_date_revue_admin_evaluation_eva_path(evaluation),
@@ -195,7 +195,8 @@ describe 'Evaluation eva', type: :request do
           expect(mise_en_action.choix_date_revue).to eq("14_jours")
           expect(response.parsed_body).to eq(
             "relance_prevue" => I18n.t("reponse_mise_en_action.relance_prevue",
-                                       date: I18n.l(date_revue, format: :short))
+                                       date: I18n.l(date_revue, format: :short)),
+            "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023")
           )
         end
       end

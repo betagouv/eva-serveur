@@ -15,6 +15,9 @@
       <% %i[remediation difficulte].each do |questionnaire| %>
         <%= render QualificationMiseEnActionComponent.new(evaluation: @evaluation, questionnaire: questionnaire) %>
       <% end %>
+      <% if MiseEnAction.je_ne_sais_pas_actif? %>
+        <%= render DateRevueMiseEnActionComponent.new(evaluation: @evaluation) %>
+      <% end %>
       <% reponses.each do |reponse| %>
         <%= render ReponseMiseEnActionComponent.new(evaluation: @evaluation, reponse: reponse) %>
       <% end %>

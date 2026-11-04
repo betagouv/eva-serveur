@@ -1,0 +1,25 @@
+<div class="qcm questions-date-revue qualification-mise-en-action <%= classe_date_revue %>">
+  <div class="qualification-mise-en-action__encart">
+    <span class="qualification-mise-en-action__titre"><%= t("date_revue_mise_en_action.titre") %></span>
+    <a href="#" class="qualification-mise-en-action__modifier modifier-reponse-mise-en-action">
+      <%= t("date_revue_mise_en_action.modifier") %>
+    </a>
+  </div>
+  <div class="qualification-mise-en-action__texte">
+    <div id="<%= id_question %>" class="qualification-mise-en-action__libelle">
+      <%= t("date_revue_mise_en_action.question") %>
+    </div>
+    <div class="qualification-mise-en-action__description">
+      <%= t("date_revue_mise_en_action.description") %>
+    </div>
+  </div>
+  <ul class="qualification-mise-en-action__choix" aria-labelledby="<%= id_question %>">
+    <% delais.each do |delai| %>
+      <li>
+        <%= render TagDsfrComponent.new(libelle: libelle_delai(delai), cliquable: true,
+                                        class: "choix-date-revue",
+                                        data: { choix_date_revue: delai }) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

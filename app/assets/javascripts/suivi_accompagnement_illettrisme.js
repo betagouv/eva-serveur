@@ -42,6 +42,28 @@ function renseigneQualification(evaluationId, $element, donneesQualification) {
   });
 }
 
+// Choix de la date de revue après « Pas encore » : chaque puce porte son choix,
+// le serveur en déduit la date (MiseEnAction#reporte_dans)
+function enregistreChoixDateRevue(evaluationId, $tag) {
+  renseigneDateRevue(evaluationId, $tag.attr('data-choix-date-revue'));
+}
+
+function renseigneDateRevue(evaluationId, choixDateRevue, dateRevue) {
+  $.ajax({
+    method: 'PATCH',
+    url: chemin_renseigner_date_revue.replace('ID_EVALUATION', evaluationId),
+    data: { choix_date_revue: choixDateRevue, date_revue: dateRevue },
+    dataType: "json",
+    success: function (donnees) {
+      const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`);
+      $reponse.find('.tag').removeClass('hidden').text(donnees.relance_prevue);
+      $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');
+      afficheModificationReponse(REPONSE_JE_NE_SAIS_PAS, evaluationId);
+      fermeQcm(evaluationId);
+    }
+  });
+}
+
 // Au clic sur « Autre », le DSFR bascule lui-même aria-pressed (tag sélectionnable)
 function basculePrecisionAutre($qcm) {
   if (precisionAutreMasquee($qcm)) {
@@ -61,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   ecouteBoutons($(".choix-qualification-mise-en-action"), enregistreChoixQualification);
   ecouteBoutons($(".enregistre-precision-autre"), enregistrePrecisionAutre);
+  ecouteBoutons($(".choix-date-revue"), enregistreChoixDateRevue);
   valideAvecEntree($(".suivi-accompagnement-illettrisme input[name=precision_autre]"),
                    '.enregistre-precision-autre');
 });

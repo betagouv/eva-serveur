@@ -28,6 +28,11 @@ module EvaluationsEva
       effectuee_avec_remediation? || non_effectuee_avec_difficulte?
     end
 
+    def date_revue_a_choisir?
+      MiseEnAction.je_ne_sais_pas_actif? && mise_en_action.present? &&
+        mise_en_action.date_revue_a_choisir?
+    end
+
     def je_ne_sais_pas_affiche?
       MiseEnAction.je_ne_sais_pas_actif? && a_mise_en_action? &&
         @evaluation.mise_en_action.repondu_pas_encore?

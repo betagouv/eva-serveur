@@ -35,22 +35,30 @@ class MiseEnAction < ApplicationRecord
     ENV["ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS"].present?
   end
 
+  def repondu_oui?
+    effectuee == true
+  end
+
+  def repondu_non?
+    effectuee == false
+  end
+
+  def repondu_pas_encore?
+    effectuee.nil?
+  end
+
   def effectuee_avec_remediation?
-    effectuee && remediation.present?
+    repondu_oui? && remediation.present?
   end
 
   def non_effectuee_avec_difficulte?
-    effectuee == false && difficulte.present?
-  end
-
-  def effectuee?
-    effectuee
+    repondu_non? && difficulte.present?
   end
 
   def questionnaire
-    return :motif if effectuee.nil?
+    return :motif if repondu_pas_encore?
 
-    effectuee ? :remediation : :difficulte
+    repondu_oui? ? :remediation : :difficulte
   end
 
   def qualification
@@ -98,9 +106,9 @@ class MiseEnAction < ApplicationRecord
   private
 
   def efface_qualification_ancienne_reponse
-    self.remediation = nil unless effectuee == true
-    self.difficulte = nil unless effectuee == false
-    if effectuee.nil?
+    self.remediation = nil unless repondu_oui?
+    self.difficulte = nil unless repondu_non?
+    if repondu_pas_encore?
       assign_attributes(motif: :action_prevue, date_revue: Date.current + 7)
     else
       assign_attributes(motif: nil, date_revue: nil)
@@ -109,8 +117,8 @@ class MiseEnAction < ApplicationRecord
 
   # Une remédiation n'a de sens que sur une réponse Oui, une difficulté que sur une réponse Non
   def qualification_coherente_avec_la_reponse
-    errors.add(:base, :remediation_incoherente) if remediation.present? && effectuee != true
-    errors.add(:base, :difficulte_incoherente) if difficulte.present? && effectuee != false
+    errors.add(:base, :remediation_incoherente) if remediation.present? && !repondu_oui?
+    errors.add(:base, :difficulte_incoherente) if difficulte.present? && !repondu_non?
   end
 
   def precision_presente_si_autre

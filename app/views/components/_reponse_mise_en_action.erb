@@ -20,8 +20,8 @@
   <% end %>
 
   <% classe_reponse_en_attente = mise_en_action_presenter.reponse_affichee? ? "hidden" : "d-flex" %>
-  <% classe_reponse_oui = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
-  <% classe_reponse_non = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.effectuee == false ? " bouton--actif" : "" %>
+  <% classe_reponse_oui = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.repondu_oui? ? " bouton--actif" : "" %>
+  <% classe_reponse_non = mise_en_action_presenter.a_mise_en_action? && evaluation.mise_en_action.repondu_non? ? " bouton--actif" : "" %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
     <%= render BoutonDsfrComponent.new(
       "#",

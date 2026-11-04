@@ -378,12 +378,14 @@ describe "Admin - Mise en action", :js, type: :feature do
     before { allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true) }
 
     describe "sur le détail d'une évaluation" do
+      let(:pas_encore) { I18n.t("question_mise_en_action.bouton_je_ne_sais_pas") }
+
       before { visit admin_evaluation_eva_path(evaluation) }
 
       it "affiche la date de revue sans ouvrir de questionnaire " \
-         "quand on répond « je ne sais pas »" do
+         "quand on répond « Pas encore »" do
         within(".card__banner--illettrisme") do
-          click_button "Je ne sais pas"
+          click_button pas_encore
 
           expect(page).to have_css("[data-reponse='je_ne_sais_pas'] .tag", text: revue_prevue)
           expect(page).to have_css(".qcm", visible: :hidden, count: 2)
@@ -391,14 +393,14 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(mise_en_action.motif).to eq("action_prevue")
       end
 
-      it "propose de nouveau les réponses quand on modifie « je ne sais pas »" do
+      it "propose de nouveau les réponses quand on modifie « Pas encore »" do
         within(".card__banner--illettrisme") do
-          click_button "Je ne sais pas"
+          click_button pas_encore
           click_link I18n.t("reponse_mise_en_action.modifier")
 
           expect(page).to have_button("Oui")
           expect(page).to have_button("Non")
-          expect(page).to have_button("Je ne sais pas")
+          expect(page).to have_button(pas_encore)
         end
       end
     end

@@ -6,8 +6,8 @@ class SuiviAccompagnementIllettrismeComponent < ViewComponent::Base
   end
 
   def reponses
-    reponses = [ true, false ]
-    reponses << MiseEnAction::REPONSE_JE_NE_SAIS_PAS if MiseEnAction.je_ne_sais_pas_actif?
-    reponses
+    return [ true, false ] unless MiseEnAction.je_ne_sais_pas_actif?
+
+    [ true, MiseEnAction::REPONSE_JE_NE_SAIS_PAS, false ]
   end
 end

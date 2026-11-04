@@ -39,10 +39,10 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
   context "quand l'option « je ne sais pas » est active" do
     let(:je_ne_sais_pas_actif) { true }
 
-    it "propose aussi de répondre « je ne sais pas »" do
+    it "propose de répondre Oui, Pas encore ou Non, dans cet ordre" do
       expect(QuestionMiseEnActionComponent).to have_received(:new)
         .with(evaluation: evaluation,
-              reponses: [ true, false, MiseEnAction::REPONSE_JE_NE_SAIS_PAS ])
+              reponses: [ true, MiseEnAction::REPONSE_JE_NE_SAIS_PAS, false ])
     end
 
     it "prépare aussi l'affichage de la réponse « je ne sais pas »" do

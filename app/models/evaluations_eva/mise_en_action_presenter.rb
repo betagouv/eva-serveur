@@ -9,19 +9,19 @@ module EvaluationsEva
     end
 
     def effectuee_avec_remediation?
-      reponse?(true) && !qualification_a_renseigner?
+      repondu_oui? && !qualification_a_renseigner?
     end
 
     def effectuee_sans_remediation?
-      reponse?(true) && qualification_a_renseigner?
+      repondu_oui? && qualification_a_renseigner?
     end
 
     def non_effectuee_sans_difficulte?
-      reponse?(false) && qualification_a_renseigner?
+      repondu_non? && qualification_a_renseigner?
     end
 
     def non_effectuee_avec_difficulte?
-      reponse?(false) && !qualification_a_renseigner?
+      repondu_non? && !qualification_a_renseigner?
     end
 
     def mise_en_action_avec_qualification?
@@ -30,7 +30,7 @@ module EvaluationsEva
 
     def je_ne_sais_pas_affiche?
       MiseEnAction.je_ne_sais_pas_actif? && a_mise_en_action? &&
-        @evaluation.mise_en_action.effectuee.nil?
+        @evaluation.mise_en_action.repondu_pas_encore?
     end
 
     def reponse_affichee?
@@ -43,8 +43,12 @@ module EvaluationsEva
       @evaluation&.mise_en_action
     end
 
-    def reponse?(effectuee)
-      mise_en_action.present? && mise_en_action.effectuee == effectuee
+    def repondu_oui?
+      mise_en_action.present? && mise_en_action.repondu_oui?
+    end
+
+    def repondu_non?
+      mise_en_action.present? && mise_en_action.repondu_non?
     end
 
     # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner

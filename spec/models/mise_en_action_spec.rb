@@ -14,6 +14,30 @@ describe MiseEnAction, type: :model do
     expect(subject).to allow_value(false).for(:effectuee)
   end
 
+  describe "#repondu_oui?" do
+    it "n'est vrai que pour une réponse Oui" do
+      expect(build(:mise_en_action, effectuee: true).repondu_oui?).to be(true)
+      expect(build(:mise_en_action, effectuee: false).repondu_oui?).to be(false)
+      expect(build(:mise_en_action, effectuee: nil).repondu_oui?).to be(false)
+    end
+  end
+
+  describe "#repondu_non?" do
+    it "n'est vrai que pour une réponse Non" do
+      expect(build(:mise_en_action, effectuee: false).repondu_non?).to be(true)
+      expect(build(:mise_en_action, effectuee: true).repondu_non?).to be(false)
+      expect(build(:mise_en_action, effectuee: nil).repondu_non?).to be(false)
+    end
+  end
+
+  describe "#repondu_pas_encore?" do
+    it "n'est vrai que pour une réponse Pas encore" do
+      expect(build(:mise_en_action, effectuee: nil).repondu_pas_encore?).to be(true)
+      expect(build(:mise_en_action, effectuee: true).repondu_pas_encore?).to be(false)
+      expect(build(:mise_en_action, effectuee: false).repondu_pas_encore?).to be(false)
+    end
+  end
+
   describe '#effectuee_avec_remediation?' do
     let!(:mise_en_action) { create :mise_en_action, effectuee: true }
 

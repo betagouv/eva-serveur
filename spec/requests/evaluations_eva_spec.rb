@@ -54,26 +54,17 @@ describe 'Evaluation eva', type: :request do
 
         after { Bullet.enable = true }
 
-        it "enregistre la réponse quand l'option est active" do
+        it "enregistre la réponse, sans motif ni date de revue, quand l'option est active" do
           allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
 
           put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
 
+          expect(response).to have_http_status(:no_content)
           mise_en_action = evaluation.reload.mise_en_action
           expect(mise_en_action.effectuee).to be_nil
-          expect(mise_en_action.motif).to eq("action_prevue")
-          expect(mise_en_action.date_revue).not_to be_nil
+          expect(mise_en_action.motif).to be_nil
+          expect(mise_en_action.date_revue).to be_nil
           expect(mise_en_action.repondue_le).not_to be_nil
-        end
-
-        it "renvoie la date de revue à afficher" do
-          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
-
-          Timecop.freeze(Time.zone.local(2026, 10, 29, 12)) do
-            put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
-          end
-
-          expect(response.parsed_body).to eq("revue_prevue" => "Revue prévue le 05 nov. 2026")
         end
 
         it "refuse la réponse quand l'option n'est pas active" do

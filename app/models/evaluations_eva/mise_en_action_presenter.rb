@@ -35,7 +35,8 @@ module EvaluationsEva
 
     def je_ne_sais_pas_affiche?
       MiseEnAction.je_ne_sais_pas_actif? && a_mise_en_action? &&
-        @evaluation.mise_en_action.repondu_pas_encore?
+        @evaluation.mise_en_action.repondu_pas_encore? &&
+        !@evaluation.mise_en_action.date_revue_a_choisir?
     end
 
     def reponse_affichee?

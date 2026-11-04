@@ -481,16 +481,27 @@ describe MiseEnAction, type: :model do
       expect(mise_en_action.difficulte).to be_nil
     end
 
-    it "remplace Oui par « je ne sais pas », efface le type d'aide et prévoit la revue à J+7" do
+    it "remplace Oui par Pas encore et efface le type d'aide, en laissant le pro choisir la date" do
       mise_en_action = create(:mise_en_action, effectuee: true, remediation: "formation_metier")
 
-      Timecop.freeze(date_du_jour) { mise_en_action.enregistre_reponse(nil) }
+      mise_en_action.enregistre_reponse(nil)
 
       mise_en_action.reload
       expect(mise_en_action.effectuee).to be_nil
       expect(mise_en_action.remediation).to be_nil
-      expect(mise_en_action.motif).to eq("action_prevue")
-      expect(mise_en_action.date_revue).to eq(Date.new(2023, 1, 8))
+      expect(mise_en_action.motif).to be_nil
+      expect(mise_en_action.date_revue).to be_nil
+    end
+
+    it "garde la date de revue et son choix quand on répond de nouveau Pas encore" do
+      mise_en_action = create(:mise_en_action, effectuee: nil, date_revue: Date.current + 30,
+                                               choix_date_revue: "1_mois")
+
+      mise_en_action.enregistre_reponse(nil)
+
+      mise_en_action.reload
+      expect(mise_en_action.date_revue).to eq(Date.current + 30)
+      expect(mise_en_action.choix_date_revue).to eq("1_mois")
     end
 
     it "remplace « je ne sais pas » par Oui et efface le motif, la date de revue et son choix" do
@@ -514,6 +525,19 @@ describe MiseEnAction, type: :model do
       mise_en_action.enregistre_reponse(false)
 
       expect(mise_en_action.reload.precision_autre).to be_nil
+    end
+  end
+
+  describe "date de la réponse « Choisir une date »" do
+    it "refuse le choix d'une date précise sans date" do
+      mise_en_action = build(:mise_en_action, effectuee: nil,
+                                              choix_date_revue: MiseEnAction::CHOIX_DATE_PRECISE)
+
+      expect(mise_en_action.valid?).to be(false)
+      expect(mise_en_action.errors[:date_revue]).to eq(
+        [ I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                 ".date_revue.a_partir_de_demain") ]
+      )
     end
   end
 

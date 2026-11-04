@@ -19,6 +19,7 @@ class MiseEnAction < ApplicationRecord
   validates :evaluation_id, uniqueness: true
   validate :qualification_coherente_avec_la_reponse
   validate :precision_presente_si_autre
+  validate :date_revue_presente_si_date_precise
   # Au jour du choix, pas à repondue_le (voir ADR 0003)
   validate :date_revue_a_partir_de_demain, if: :date_revue_changed?
   validates :precision_autre, length: { maximum: LONGUEUR_MAX_PRECISION_AUTRE }
@@ -160,11 +161,7 @@ class MiseEnAction < ApplicationRecord
   def efface_qualification_ancienne_reponse
     self.remediation = nil unless repondu_oui?
     self.difficulte = nil unless repondu_non?
-    if repondu_pas_encore?
-      assign_attributes(motif: :action_prevue, date_revue: Date.current + 7)
-    else
-      assign_attributes(motif: nil, date_revue: nil, choix_date_revue: nil)
-    end
+    assign_attributes(motif: nil, date_revue: nil, choix_date_revue: nil) unless repondu_pas_encore?
   end
 
   # Une remédiation n'a de sens que sur une réponse Oui, une difficulté que sur une réponse Non
@@ -177,6 +174,12 @@ class MiseEnAction < ApplicationRecord
     return if date_revue.blank? || date_revue > Date.current
 
     errors.add(:date_revue, :a_partir_de_demain)
+  end
+
+  def date_revue_presente_si_date_precise
+    return unless choix_date_revue == CHOIX_DATE_PRECISE && date_revue.blank?
+
+    errors.add(:date_revue, :blank)
   end
 
   def precision_presente_si_autre

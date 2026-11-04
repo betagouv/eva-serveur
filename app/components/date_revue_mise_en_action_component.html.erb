@@ -21,5 +21,21 @@
                                         data: { choix_date_revue: delai }) %>
       </li>
     <% end %>
+    <li>
+      <%= render TagDsfrComponent.new(libelle: t("date_revue_mise_en_action.choisir_une_date"),
+                                      cliquable: true, class: "choisir-date-revue",
+                                      aria: { pressed: date_precise_choisie?.to_s }) %>
+    </li>
   </ul>
+  <div class="qualification-mise-en-action__precision zone-date-revue <%= classe_zone_date %>">
+    <%= render ChampDateRevueComponent.new(id: id_champ_date, valeur: date_revue_precise) %>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      tag: :button,
+      size: :sm,
+      class: "qualification-mise-en-action__enregistrer enregistre-date-revue"
+    ) do %>
+      <%= t("date_revue_mise_en_action.enregistrer") %>
+    <% end %>
+  </div>
 </div>

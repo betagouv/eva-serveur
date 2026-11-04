@@ -12,9 +12,11 @@ fr:
               blank_difficulte: Indiquez la raison en quelques mots.
             date_revue:
               a_partir_de_demain: Choisissez une date à partir de demain.
+              blank: Choisissez une date à partir de demain.
     attributes:
       mise_en_action:
         precision_autre: Précisez
+        date_revue: Date de revue
         remediation:
           formation_competences_de_base: Formation compétences de base
           formation_metier: Formation métier / qualifiante

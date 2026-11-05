@@ -10,77 +10,10 @@
   }
 ) do |component| %>
   <div class="suivi-groupe-modale">
+    <%= render "modal_suivi_groupe_etape_question" %>
+    <%= render "modal_suivi_groupe_etape_qualification" %>
+    <%= render "modal_suivi_groupe_etape_recap" %>
 
-    <%# Étape 1 : question %>
-    <div id="suivi-groupe-etape-question">
-      <p class="fr-text--lead"><%= t(".sous_titre") %></p>
-      <p><%= t(".description") %></p>
-
-      <div class="fr-btns-group fr-btns-group--inline">
-        <% [
-          { effectuee: "true",                                 label: t(".oui")       },
-          { effectuee: MiseEnAction::REPONSE_JE_NE_SAIS_PAS,  label: t(".pas_encore") },
-          { effectuee: "false",                                label: t(".non")       }
-        ].each do |reponse| %>
-          <button type="button" class="fr-btn fr-btn--secondary suivi-groupe-btn-reponse"
-                  data-effectuee="<%= reponse[:effectuee] %>">
-            <%= reponse[:label] %>
-          </button>
-        <% end %>
-      </div>
-    </div>
-
-    <%# Étape 2 : qualification (Oui / Non uniquement) %>
-    <div id="suivi-groupe-etape-qualification" hidden>
-      <div class="fr-callout fr-callout--grey">
-        <p id="suivi-groupe-label-reponse" class="fr-text--bold"></p>
-        <button type="button" id="suivi-groupe-modifier-reponse"
-                class="fr-btn fr-btn--tertiary-no-outline fr-btn--sm">
-          <%= t(".modifier") %>
-        </button>
-      </div>
-
-      <div id="suivi-groupe-tags-remediation" hidden>
-        <% MiseEnAction::REMEDIATIONS.reject { |r| r == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |remediation| %>
-          <button type="button" class="fr-tag suivi-groupe-tag"
-                  data-qualification="<%= remediation %>" data-type="remediation">
-            <%= I18n.t("activerecord.attributes.mise_en_action.remediation.#{remediation}") %>
-          </button>
-        <% end %>
-      </div>
-
-      <div id="suivi-groupe-tags-difficulte" hidden>
-        <% MiseEnAction::DIFFICULTES.reject { |d| d == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |difficulte| %>
-          <button type="button" class="fr-tag suivi-groupe-tag"
-                  data-qualification="<%= difficulte %>" data-type="difficulte">
-            <%= I18n.t("activerecord.attributes.mise_en_action.difficulte.#{difficulte}") %>
-          </button>
-        <% end %>
-      </div>
-
-      <div id="suivi-groupe-precision-autre" hidden>
-        <div class="fr-input-group">
-          <label class="fr-label" for="suivi-groupe-precision-autre-input">
-            <%= t("activerecord.attributes.mise_en_action.precision_autre") %>
-          </label>
-          <textarea class="fr-input" id="suivi-groupe-precision-autre-input"
-                    rows="2" maxlength="<%= MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE %>"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <%# Étape 3 : récapitulatif %>
-    <div id="suivi-groupe-etape-recap" hidden>
-      <div class="fr-callout fr-callout--grey">
-        <p id="suivi-groupe-recap-texte" class="fr-text--bold"></p>
-        <button type="button" id="suivi-groupe-modifier-recap"
-                class="fr-btn fr-btn--tertiary-no-outline fr-btn--sm">
-          <%= t(".modifier") %>
-        </button>
-      </div>
-    </div>
-
-    <%# Champs cachés du formulaire %>
     <%= hidden_field_tag :batch_action, "renseigner_suivi_groupe", form: form_id %>
     <%= hidden_field_tag :batch_action_inputs, "{}", form: form_id %>
     <%= hidden_field_tag :effectuee, "", id: "suivi-groupe-effectuee", form: form_id %>

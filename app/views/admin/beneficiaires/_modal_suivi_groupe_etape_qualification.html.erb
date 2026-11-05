@@ -1,0 +1,37 @@
+<div id="suivi-groupe-etape-qualification" hidden>
+  <div class="fr-callout fr-callout--grey">
+    <p id="suivi-groupe-label-reponse" class="fr-text--bold"></p>
+    <button type="button" id="suivi-groupe-modifier-reponse"
+            class="fr-btn fr-btn--tertiary-no-outline fr-btn--sm">
+      <%= t("admin.beneficiaires.modal_suivi_groupe.modifier") %>
+    </button>
+  </div>
+
+  <div id="suivi-groupe-tags-remediation" hidden>
+    <% MiseEnAction::REMEDIATIONS.reject { |r| r == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |remediation| %>
+      <button type="button" class="fr-tag suivi-groupe-tag"
+              data-qualification="<%= remediation %>" data-type="remediation">
+        <%= I18n.t("activerecord.attributes.mise_en_action.remediation.#{remediation}") %>
+      </button>
+    <% end %>
+  </div>
+
+  <div id="suivi-groupe-tags-difficulte" hidden>
+    <% MiseEnAction::DIFFICULTES.reject { |d| d == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |difficulte| %>
+      <button type="button" class="fr-tag suivi-groupe-tag"
+              data-qualification="<%= difficulte %>" data-type="difficulte">
+        <%= I18n.t("activerecord.attributes.mise_en_action.difficulte.#{difficulte}") %>
+      </button>
+    <% end %>
+  </div>
+
+  <div id="suivi-groupe-precision-autre" hidden>
+    <div class="fr-input-group">
+      <label class="fr-label" for="suivi-groupe-precision-autre-input">
+        <%= t("activerecord.attributes.mise_en_action.precision_autre") %>
+      </label>
+      <textarea class="fr-input" id="suivi-groupe-precision-autre-input"
+                rows="2" maxlength="<%= MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE %>"></textarea>
+    </div>
+  </div>
+</div>

@@ -86,19 +86,20 @@ ActiveAdmin.register EvaluationEva do
   form partial: "form"
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    resource.responsable_suivi.present?
+    resource.responsable_suivi.present? || can?(:ajouter_responsable_suivi, Evaluation)
   } do
-    render(TagComponent.new(libelle: resource.responsable_suivi.display_name,
-                            supprimable: can?(:supprimer_responsable_suivi, Evaluation),
-                            url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource),
-                            taille: :sm))
-  end
-
-  sidebar :responsable_de_suivi, only: :show, if: proc {
-      resource.responsable_suivi.blank? &&
-      can?(:ajouter_responsable_suivi, Evaluation)
-  } do
-    render "admin/evaluations_eva/recherche_responsable_suivi"
+    if resource.responsable_suivi.present?
+      render(TagComponent.new(libelle: resource.responsable_suivi.display_name,
+                              supprimable: can?(:supprimer_responsable_suivi, Evaluation),
+                              url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource),
+                              taille: :sm,
+                              data: { affiche_apres_suppression: "ajout-responsable-suivi" }))
+    end
+    if can?(:ajouter_responsable_suivi, Evaluation)
+      attributs = { id: "ajout-responsable-suivi", class: "ajout-responsable-suivi" }
+      attributs[:hidden] = "hidden" if resource.responsable_suivi.present?
+      div(**attributs) { render "admin/evaluations_eva/recherche_responsable_suivi" }
+    end
   end
 
   sidebar :menu, class: "menu-sidebar", only: :show do
@@ -117,7 +118,7 @@ ActiveAdmin.register EvaluationEva do
 
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
-    redirect_to request.referer
+    head :no_content
   end
 
   xls(i18n_scope: %i[active_admin xls evaluation_eva], header_format: { weight: :bold }) do

@@ -43,17 +43,25 @@ describe TagComponent, type: :component do
   end
 
   context "quand le tag est supprimable" do
-    it "rend un bouton DSFR de suppression qui envoie un PATCH vers l'url" do
+    it "rend un bouton DSFR de suppression, hors formulaire, qui porte l'url de suppression" do
       render_inline(described_class.new(libelle: "Martin", supprimable: true, url: "/retirer"))
 
-      expect(page).to have_css("form[action='/retirer'] input[name='_method'][value='patch']",
-                               visible: :all)
-      expect(page).to have_button(
-        "Martin", class: %w[fr-tag fr-tag--dismiss],
-                  exact_text: true
+      expect(page).to have_no_css("form")
+      expect(page).to have_css(
+        "button.fr-tag.fr-tag--dismiss[type='button'][data-url-suppression='/retirer']",
+        exact_text: "Martin"
       )
       expect(page).to have_css(
         "button[aria-label='#{I18n.t('tag.retirer', contenu: 'Martin')}']"
+      )
+    end
+
+    it "conserve les attributs data transmis" do
+      render_inline(described_class.new(libelle: "Martin", supprimable: true, url: "/retirer",
+                                        data: { affiche_apres_suppression: "bloc" }))
+
+      expect(page).to have_css(
+        "button[data-url-suppression='/retirer'][data-affiche-apres-suppression='bloc']"
       )
     end
   end

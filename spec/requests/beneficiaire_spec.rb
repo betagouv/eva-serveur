@@ -63,7 +63,8 @@ describe 'Admin Beneficiaires Batch Action', type: :request do
         effectuee: "false",
         qualification: "freins_peripheriques"
       }
-      expect(evaluation_eva_concernee.reload.mise_en_action.difficulte).to eq("freins_peripheriques")
+      mise_en_action = evaluation_eva_concernee.reload.mise_en_action
+      expect(mise_en_action.difficulte).to eq("freins_peripheriques")
     end
 
     it "renseigne le motif action_prevue quand effectuee=je_ne_sais_pas" do

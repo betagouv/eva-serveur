@@ -17,9 +17,9 @@
       aria-labelledby="question-<%= nom %>-<%= @evaluation.id %>">
     <% choix.each do |choix| %>
       <li>
-        <%= render TagDsfrComponent.new(libelle: libelle_choix(choix), cliquable: true,
-                                        class: "choix-qualification-mise-en-action",
-                                        **attributs_choix(choix)) %>
+        <%= render TagComponent.new(libelle: libelle_choix(choix), cliquable: true,
+                                    class: "choix-qualification-mise-en-action",
+                                    **attributs_choix(choix)) %>
       </li>
     <% end %>
   </ul>

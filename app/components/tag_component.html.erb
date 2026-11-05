@@ -1,0 +1,9 @@
+<% if @supprimable %>
+  <%= button_to @libelle, @url, method: :patch,
+                                "aria-label": t("tag.retirer", contenu: @libelle),
+                                **attributs %>
+<% elsif @cliquable %>
+  <%= content_tag(:button, @libelle, type: "button", **attributs) %>
+<% else %>
+  <%= content_tag(:p, @libelle, **attributs) %>
+<% end %>

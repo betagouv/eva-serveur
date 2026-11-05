@@ -1,6 +1,0 @@
-<% if @supprimable %>
-  <%= button_to @contenu, @url, method: :patch, class: css_classes,
-                                "aria-label": t(".retirer", contenu: @contenu) %>
-<% else %>
-  <p class="<%= css_classes %>"><%= @contenu %></p>
-<% end %>

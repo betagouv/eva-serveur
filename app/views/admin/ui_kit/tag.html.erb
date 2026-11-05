@@ -1,19 +1,27 @@
 <div class="container">
   <h1>Démo TagComponent</h1>
 
-  <h2>Tag simple</h2>
-  <div class="fr-mb-3w">Taille par défaut (md) :
-    <%= render Tag.new("Important") %>
-  </div>
-  <div class="fr-mb-3w">Taille sm :
-    <%= render Tag.new("Important", taille: "sm") %>
-  </div>
+  <p>Tag du DSFR : non cliquable (paragraphe), cliquable (bouton) ou supprimable (formulaire), en taille moyenne ou petite, avec une icône facultative.</p>
 
-  <h2>Tag supprimable (le clic envoie un PATCH vers l'url)</h2>
-  <div class="fr-mb-3w">Taille par défaut (md) :
-    <%= render Tag.new("À supprimer", supprimable: true, url: "#") %>
+  <h2>Non cliquable</h2>
+  <ul class="fr-tags-group">
+    <li><%= render TagComponent.new(libelle: "Taille moyenne") %></li>
+    <li><%= render TagComponent.new(libelle: "Petite taille", taille: :sm) %></li>
+    <li><%= render TagComponent.new(libelle: "Avec icône", icone: "fr-icon-arrow-right-line") %></li>
+  </ul>
+
+  <h2>Cliquable</h2>
+  <ul class="fr-tags-group">
+    <li><%= render TagComponent.new(libelle: "Taille moyenne", cliquable: true) %></li>
+    <li><%= render TagComponent.new(libelle: "Petite taille", cliquable: true, taille: :sm) %></li>
+    <li><%= render TagComponent.new(libelle: "Avec icône", cliquable: true, icone: "fr-icon-arrow-right-line") %></li>
+  </ul>
+
+  <h2>Supprimable (le clic envoie un PATCH vers l'url)</h2>
+  <div class="fr-mb-3w">
+    <%= render TagComponent.new(libelle: "Taille moyenne", supprimable: true, url: "#") %>
   </div>
-  <div class="fr-mb-3w">Taille sm :
-    <%= render Tag.new("À supprimer", supprimable: true, url: "#", taille: "sm") %>
+  <div class="fr-mb-3w">
+    <%= render TagComponent.new(libelle: "Petite taille", supprimable: true, url: "#", taille: :sm) %>
   </div>
 </div>

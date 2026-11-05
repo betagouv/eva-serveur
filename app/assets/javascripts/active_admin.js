@@ -33,6 +33,7 @@
 //= require deplace_modales_dsfr
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
+//= require modal_suivi_groupe
 //= require structure_confirmation
 //= require reset_password
 

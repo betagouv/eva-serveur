@@ -19,6 +19,7 @@ fr:
     batch_actions:
       action_label: "%{title}"
       labels:
+        renseigner_suivi_groupe: Renseigner le suivi des bénéficiaires
         fusionner: Fusionner les bénéficiaires
         destroy: Supprimer les bénéficiaires sélectionnés
 

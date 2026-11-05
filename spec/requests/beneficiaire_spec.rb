@@ -14,6 +14,16 @@ describe 'Admin Beneficiaires Batch Action', type: :request do
     sign_in mon_compte
   end
 
+  describe "POST batch_action renseigner_suivi_groupe" do
+    it "redirige vers la liste des bénéficiaires" do
+      post '/admin/beneficiaires/batch_action', params: {
+        batch_action: 'renseigner_suivi_groupe',
+        collection_selection: [ beneficiaire1.id ]
+      }
+      expect(response).to redirect_to("/admin/beneficiaires")
+    end
+  end
+
   describe "POST batch_action fusionner" do
     let!(:beneficiaire2) { create :beneficiaire }
     let!(:evaluation2) { create :evaluation, campagne: campagne, beneficiaire: beneficiaire2 }

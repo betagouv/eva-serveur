@@ -117,7 +117,7 @@ compte_id: compte.id
 
   def droit_beneficiaire_admin
     can(:destroy, Beneficiaire) { |b| b.evaluations.empty? }
-    can :fusionner, Beneficiaire
+    can %i[fusionner renseigner_suivi_groupe], Beneficiaire
   end
 
   def droit_beneficiaire_structure(compte)
@@ -125,7 +125,7 @@ compte_id: compte.id
       can %i[read update], Beneficiaire, evaluations: {
         campagne: campagnes_publique_de_la_structure(compte)
       }
-      can :fusionner, Beneficiaire
+      can %i[fusionner renseigner_suivi_groupe], Beneficiaire
     end
 
     if compte.admin?
@@ -198,7 +198,7 @@ compte_id: compte.id
     can(%i[update], compte)
     cannot(:read, AnnonceGenerale)
     cannot(:read, SourceAide)
-    cannot(:fusionner, Beneficiaire)
+    cannot %i[fusionner renseigner_suivi_groupe], Beneficiaire
     cannot(%i[mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification renseigner_date_revue],
            Evaluation)

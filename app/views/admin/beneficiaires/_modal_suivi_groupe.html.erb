@@ -1,0 +1,33 @@
+<% id_modal = "fr-modal-suivi-groupe" %>
+<% form_id = "suivi-groupe-form" %>
+
+<%= dsfr_modal(
+  title: t(".titre").html_safe,
+  html_attributes: {
+    id: id_modal,
+    class: "fr-modal-suivi-groupe",
+    data: { suivi_groupe_batch_action: batch_action_admin_beneficiaires_path }
+  }
+) do |component| %>
+  <div class="contenu-modale">
+    <div class="contenu">
+      <%= hidden_field_tag :batch_action, "renseigner_suivi_groupe", form: form_id %>
+      <%= hidden_field_tag :batch_action_inputs, "{}", form: form_id %>
+
+      <div id="hidden-ids-suivi-container"></div>
+    </div>
+  </div>
+
+  <% component.with_button do %>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      type: :secondary,
+      tag: :button,
+      size: :md,
+      "data-fr-opened": "false",
+      "aria-controls": id_modal
+    ) do %>
+      <%= t(".annuler") %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -42,6 +42,10 @@ ActiveAdmin.register Beneficiaire do
 
   batch_action :destroy, false
 
+  batch_action :renseigner_suivi_groupe, if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |_beneficiaire_ids|
+    redirect_to collection_path
+  end
+
   batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
@@ -82,7 +86,10 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index dsfr_table: proc { true },
-        content_before: proc { render "admin/beneficiaires/modal_fusion" },
+        content_before: proc {
+          render "admin/beneficiaires/modal_fusion"
+          render "admin/beneficiaires/modal_suivi_groupe"
+        },
         class: "fr-table--multiline" do
     render "index", context: self
   end

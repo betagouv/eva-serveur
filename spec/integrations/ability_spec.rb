@@ -159,6 +159,7 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, SourceAide)
       expect(subject).to be_able_to(:read, Beneficiaire)
       expect(subject).not_to be_able_to(:fusionner, Beneficiaire)
+      expect(subject).not_to be_able_to(:renseigner_suivi_groupe, Beneficiaire)
       expect(subject).not_to be_able_to(:supprimer_responsable_suivi, Evaluation)
       expect(subject).not_to be_able_to(:renseigner_qualification, Evaluation)
       expect(subject).not_to be_able_to(:ajouter_responsable_suivi, Evaluation)
@@ -265,6 +266,7 @@ describe Ability do
       it do
         expect(subject).to be_able_to(:update, evaluation)
         expect(subject).to be_able_to(:fusionner, Beneficiaire)
+        expect(subject).to be_able_to(:renseigner_suivi_groupe, Beneficiaire)
         expect(subject).to be_able_to(:supprimer_responsable_suivi, evaluation)
         expect(subject).to be_able_to(:ajouter_responsable_suivi, evaluation)
         expect(subject).to be_able_to(:mise_en_action, evaluation)
@@ -316,6 +318,10 @@ describe Ability do
 
     it 'peut fusionner de bénéficiaire' do
       expect(subject).to be_able_to(:fusionner, beneficiaire)
+    end
+
+    it 'peut renseigner le suivi groupé des bénéficiaires' do
+      expect(subject).to be_able_to(:renseigner_suivi_groupe, beneficiaire)
     end
 
     it 'ne peut pas supprimer de bénéficiaire' do
@@ -448,6 +454,7 @@ describe Ability do
                                         ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
       expect(subject).not_to be_able_to(:read, SourceAide)
       expect(subject).to be_able_to(:fusionner, Beneficiaire)
+      expect(subject).to be_able_to(:renseigner_suivi_groupe, Beneficiaire)
     end
 
     it "peut modifier un bénéficiaire" do

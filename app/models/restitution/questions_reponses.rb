@@ -13,7 +13,7 @@ module Restitution
     def questions_redaction
       @questions_redaction ||= questions_et_evenements_reponse
         .select { |q, _e| q.nom_technique == QuestionSaisie::QUESTION_REDACTION }
-        .map { |q, e| [ q, reponse_redaction(e) ] }
+        .map { |q, e| [ q, e.donnees["reponse"], e.donnees["neSaisPas"] ] }
     end
 
     def reponses
@@ -31,12 +31,6 @@ module Restitution
       questions = questions_repondues.index_by(&:id)
       reponses.map { |reponse| [ questions[reponse.donnees["question"]], reponse ] }
               .select { |q, _e| q.present? }
-    end
-
-    def reponse_redaction(evenement_reponse)
-      return I18n.t("admin.restitutions.redaction_passee") if evenement_reponse.donnees["neSaisPas"]
-
-      evenement_reponse.donnees["reponse"]
     end
 
     def questions_repondues

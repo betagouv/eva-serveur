@@ -1,5 +1,5 @@
 context.instance_eval do
-  selectable_column if can?(:fusionner, Beneficiaire)
+  selectable_column if can?(:fusionner, Beneficiaire) || can?(:renseigner_suivi_groupe, Beneficiaire)
   column :nom, class: "col-lien-voir" do |beneficiaire|
     render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
   end

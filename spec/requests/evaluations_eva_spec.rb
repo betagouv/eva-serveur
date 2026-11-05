@@ -47,15 +47,15 @@ describe 'Evaluation eva', type: :request do
         expect(mise_en_action.remediation).to be_nil
       end
 
-      context "quand on répond « je ne sais pas »" do
-        let(:reponse) { { mise_en_action_effectuee: MiseEnAction::REPONSE_JE_NE_SAIS_PAS } }
+      context "quand on répond « Pas encore »" do
+        let(:reponse) { { mise_en_action_effectuee: MiseEnAction::REPONSE_PAS_ENCORE } }
 
         before { Bullet.enable = false }
 
         after { Bullet.enable = true }
 
         it "enregistre la réponse, sans motif ni date de revue, quand l'option est active" do
-          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true)
+          allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(true)
 
           put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
 
@@ -68,7 +68,7 @@ describe 'Evaluation eva', type: :request do
         end
 
         it "refuse la réponse quand l'option n'est pas active" do
-          allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(false)
+          allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(false)
 
           put mise_en_action_admin_evaluation_eva_path(evaluation), params: reponse
 

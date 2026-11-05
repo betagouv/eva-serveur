@@ -4,5 +4,5 @@ fr:
     description: Votre réponse permet de suivre son accompagnement.
     bouton_oui: Oui
     bouton_non: Non
-    bouton_je_ne_sais_pas: Pas encore
+    bouton_pas_encore: Pas encore
     rappel_pas_encore: "Le %{date}, vous aviez répondu « Pas encore ». Où en est l’accompagnement aujourd’hui ?"

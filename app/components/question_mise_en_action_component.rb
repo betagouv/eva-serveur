@@ -2,7 +2,7 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
   TRADUCTIONS_BOUTONS = {
     true => "bouton_oui",
     false => "bouton_non",
-    MiseEnAction::REPONSE_JE_NE_SAIS_PAS => "bouton_je_ne_sais_pas"
+    MiseEnAction::REPONSE_PAS_ENCORE => "bouton_pas_encore"
   }.freeze
 
   def initialize(evaluation:, reponses:)

@@ -9,7 +9,7 @@ class MiseEnAction < ApplicationRecord
   QUALIFICATION_AUTRE = "autre".freeze
   LONGUEUR_MAX_PRECISION_AUTRE = 200
   MOTIFS = %w[action_prevue].freeze
-  REPONSE_JE_NE_SAIS_PAS = "je_ne_sais_pas".freeze
+  REPONSE_PAS_ENCORE = "pas_encore".freeze
   DELAIS_REVUE = { "7_jours" => 7.days, "14_jours" => 14.days, "1_mois" => 1.month }.freeze
   CHOIX_DATE_PRECISE = "date_precise".freeze
   CHOIX_DATE_REVUE = [ *DELAIS_REVUE.keys, CHOIX_DATE_PRECISE ].freeze
@@ -38,8 +38,8 @@ class MiseEnAction < ApplicationRecord
   scope :repondues_pas_encore, -> { where(effectuee: nil).where.not(repondue_le: nil) }
   scope :reportees, -> { repondues_pas_encore.where("date_revue > ?", Date.current) }
 
-  def self.je_ne_sais_pas_actif?
-    # L'option "je ne sais pas" est activée si la variable d'environnement est définie
+  def self.pas_encore_actif?
+    # L'option "Pas encore" est activée si la variable d'environnement est définie
     # On peut supprimer cette vérification une fois l'ensemble de la feature livrée.
     # Sert de protection pour la prochaine mise en prod
     ENV["ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS"].present?

@@ -8,7 +8,7 @@ describe MiseEnAction, type: :model do
     expect(subject).to validate_uniqueness_of(:evaluation_id).case_insensitive
   end
 
-  it "accepte que effectuee soit vide, pour la réponse « je ne sais pas »" do
+  it "accepte que effectuee soit vide, pour la réponse « Pas encore »" do
     expect(subject).to allow_value(nil).for(:effectuee)
     expect(subject).to allow_value(true).for(:effectuee)
     expect(subject).to allow_value(false).for(:effectuee)
@@ -359,7 +359,7 @@ describe MiseEnAction, type: :model do
       expect(mise_en_action.errors).to be_added(:base, :remediation_incoherente)
     end
 
-    it "refuse une remédiation ou une difficulté sur une réponse « je ne sais pas »" do
+    it "refuse une remédiation ou une difficulté sur une réponse « Pas encore »" do
       mise_en_action = build(:mise_en_action, effectuee: nil, remediation: "formation_metier",
                                               difficulte: "freins_peripheriques")
 
@@ -532,7 +532,7 @@ describe MiseEnAction, type: :model do
       expect(mise_en_action.choix_date_revue).to eq("1_mois")
     end
 
-    it "remplace « je ne sais pas » par Oui et efface le motif, la date de revue et son choix" do
+    it "remplace « Pas encore » par Oui et efface le motif, la date de revue et son choix" do
       mise_en_action = create(:mise_en_action, effectuee: nil, motif: "action_prevue",
                                                date_revue: Date.current + 7,
                                                choix_date_revue: "7_jours")

@@ -4,10 +4,10 @@ describe QuestionMiseEnActionComponent, type: :component do
   let(:evaluation) { build(:evaluation, :eva, mise_en_action: mise_en_action) }
   let(:mise_en_action) { nil }
   let(:reponses) { [ true, false ] }
-  let(:je_ne_sais_pas_actif) { false }
+  let(:pas_encore_actif) { false }
 
   before do
-    allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(je_ne_sais_pas_actif)
+    allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(pas_encore_actif)
     render_inline(described_class.new(evaluation: evaluation, reponses: reponses))
   end
 
@@ -19,17 +19,17 @@ describe QuestionMiseEnActionComponent, type: :component do
     expect(bloc_question).to have_button(I18n.t("question_mise_en_action.bouton_non"))
   end
 
-  it "ne propose pas de répondre « je ne sais pas »" do
+  it "ne propose pas de répondre « Pas encore »" do
     expect(page).to have_no_button(
-      I18n.t("question_mise_en_action.bouton_je_ne_sais_pas")
+      I18n.t("question_mise_en_action.bouton_pas_encore")
     )
   end
 
-  context "quand « je ne sais pas » fait partie des réponses" do
-    let(:reponses) { [ true, false, MiseEnAction::REPONSE_JE_NE_SAIS_PAS ] }
+  context "quand « Pas encore » fait partie des réponses" do
+    let(:reponses) { [ true, false, MiseEnAction::REPONSE_PAS_ENCORE ] }
 
-    it "propose de répondre « je ne sais pas »" do
-      expect(page).to have_button(I18n.t("question_mise_en_action.bouton_je_ne_sais_pas"))
+    it "propose de répondre « Pas encore »" do
+      expect(page).to have_button(I18n.t("question_mise_en_action.bouton_pas_encore"))
     end
   end
 
@@ -59,8 +59,8 @@ describe QuestionMiseEnActionComponent, type: :component do
       expect(page).to have_no_css(".reponse-mise-en-action.bouton--actif")
     end
 
-    context "quand l'option « je ne sais pas » est active" do
-      let(:je_ne_sais_pas_actif) { true }
+    context "quand l'option « Pas encore » est active" do
+      let(:pas_encore_actif) { true }
 
       it "masque la question" do
         expect(page).to have_css("[data-reponse='vide'].hidden", visible: :all)

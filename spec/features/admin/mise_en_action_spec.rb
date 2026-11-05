@@ -372,11 +372,11 @@ describe "Admin - Mise en action", :js, type: :feature do
     end
   end
 
-  describe "quand l'option « je ne sais pas » est active" do
-    before { allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(true) }
+  describe "quand l'option « Pas encore » est active" do
+    before { allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(true) }
 
     describe "sur le détail d'une évaluation" do
-      let(:pas_encore) { I18n.t("question_mise_en_action.bouton_je_ne_sais_pas") }
+      let(:pas_encore) { I18n.t("question_mise_en_action.bouton_pas_encore") }
 
       before { visit admin_evaluation_eva_path(evaluation) }
 
@@ -396,8 +396,8 @@ describe "Admin - Mise en action", :js, type: :feature do
           click_button pas_encore
           click_button I18n.t("date_revue_mise_en_action.delais.14_jours")
 
-          expect(page).to have_css("[data-reponse='je_ne_sais_pas']", visible: :visible,
-                                   text: I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          expect(page).to have_css("[data-reponse='pas_encore']", visible: :visible,
+                                   text: I18n.t("reponse_mise_en_action.titre_pas_encore"))
           expect(page).to have_content(
             I18n.t("reponse_mise_en_action.relance_prevue",
                    date: I18n.l(date_revue, format: :short))
@@ -439,7 +439,7 @@ describe "Admin - Mise en action", :js, type: :feature do
       end
 
       it "ne garde sélectionné que « Choisir une date », refermé quand on passe à un délai" do
-        titre_confirmation = I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas")
+        titre_confirmation = I18n.t("reponse_mise_en_action.titre_pas_encore")
         choisir_une_date = I18n.t("date_revue_mise_en_action.choisir_une_date")
         within(".card__banner--illettrisme") do
           click_button pas_encore
@@ -498,7 +498,7 @@ describe "Admin - Mise en action", :js, type: :feature do
                      date: I18n.l(repondue_le, format: :short))
             )
             expect(page).to have_button(pas_encore)
-            expect(page).to have_no_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+            expect(page).to have_no_content(I18n.t("reponse_mise_en_action.titre_pas_encore"))
           end
         end
       end
@@ -552,7 +552,7 @@ describe "Admin - Mise en action", :js, type: :feature do
         it "affiche seulement le choix de la date de revue" do
           within(".card__banner--illettrisme") do
             expect(page).to have_css(".questions-date-revue", visible: :visible)
-            expect(page).to have_no_css("[data-reponse='je_ne_sais_pas']", visible: :visible)
+            expect(page).to have_no_css("[data-reponse='pas_encore']", visible: :visible)
           end
         end
       end
@@ -563,7 +563,7 @@ describe "Admin - Mise en action", :js, type: :feature do
           click_button I18n.t("date_revue_mise_en_action.choisir_une_date")
           fill_in MiseEnAction.human_attribute_name(:date_revue), with: Date.current + 30
           click_button I18n.t("date_revue_mise_en_action.enregistrer")
-          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_pas_encore"))
           click_link I18n.t("reponse_mise_en_action.modifier")
           click_button I18n.t("question_mise_en_action.bouton_non")
           freins = I18n.t("activerecord.attributes.mise_en_action.difficulte.freins_peripheriques")
@@ -590,7 +590,7 @@ describe "Admin - Mise en action", :js, type: :feature do
           click_link I18n.t("reponse_mise_en_action.modifier")
           click_button pas_encore
           click_button I18n.t("date_revue_mise_en_action.delais.7_jours")
-          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_pas_encore"))
           click_link I18n.t("reponse_mise_en_action.modifier")
           click_button I18n.t("question_mise_en_action.bouton_non")
 
@@ -615,11 +615,12 @@ describe "Admin - Mise en action", :js, type: :feature do
     describe "sur le tableau de bord" do
       before { visit admin_dashboard_path }
 
-      it "affiche la réponse sans dérouler la carte quand on répond « je ne sais pas »" do
+      it "affiche la réponse sans dérouler la carte quand on répond « Pas encore »" do
+        pas_encore = I18n.t("components.reponse_mise_en_action.bouton_pas_encore")
         within("li[id='#{evaluation.id}']") do
-          click_button "Je ne sais pas"
+          click_button pas_encore
 
-          expect(page).to have_css("div[data-reponse='je_ne_sais_pas']", text: "Je ne sais pas")
+          expect(page).to have_css("div[data-reponse='pas_encore']", text: pas_encore)
           expect(page).to have_no_css(".carte--deroulee")
           expect(page).to have_css(".qcm", visible: :hidden, count: 2)
         end

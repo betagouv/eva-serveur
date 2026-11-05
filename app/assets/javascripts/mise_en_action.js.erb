@@ -3,7 +3,7 @@
 // Déclare les chemins et constantes venant de Ruby, utilisés par
 // mise_en_action_tableau_de_bord.js et suivi_accompagnement_illettrisme.js.
 
-const REPONSE_JE_NE_SAIS_PAS = "<%= MiseEnAction::REPONSE_JE_NE_SAIS_PAS %>";
+const REPONSE_PAS_ENCORE = "<%= MiseEnAction::REPONSE_PAS_ENCORE %>";
 const QUALIFICATION_AUTRE = "<%= MiseEnAction::QUALIFICATION_AUTRE %>";
 const CHOIX_DATE_PRECISE = "<%= MiseEnAction::CHOIX_DATE_PRECISE %>";
 
@@ -16,10 +16,10 @@ function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} div[data-reponse='${reponseMiseEnAction}']`).removeClass('hidden').addClass('d-flex');
 }
 
-function afficheReponseJeNeSaisPas(evaluationId) {
+function afficheReponsePasEncore(evaluationId) {
   fermeQcm(evaluationId);
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
-  $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`).removeClass('hidden').addClass('d-flex');
+  $(`#${evaluationId} div[data-reponse='${REPONSE_PAS_ENCORE}']`).removeClass('hidden').addClass('d-flex');
 }
 
 // Questionnaire du tableau de bord : se rouvre vide, sauf après une réponse « Autre » validée,
@@ -78,12 +78,12 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     data: data,
     dataType: "json",
     success: function (donnees) {
-      if (reponse === REPONSE_JE_NE_SAIS_PAS) {
+      if (reponse === REPONSE_PAS_ENCORE) {
         // La fiche demande quand refaire le point ; le tableau de bord affiche la réponse
         if ($(`#${evaluationId} .questions-date-revue`).length) {
           ouvreQcm(evaluationId, 'date-revue', reponse);
         } else {
-          afficheReponseJeNeSaisPas(evaluationId);
+          afficheReponsePasEncore(evaluationId);
         }
         return;
       }

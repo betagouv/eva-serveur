@@ -82,10 +82,10 @@ function renseigneDateRevue(evaluationId, choixDateRevue, dateRevue) {
     data: { choix_date_revue: choixDateRevue, date_revue: dateRevue },
     dataType: "json",
     success: function (donnees) {
-      const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_JE_NE_SAIS_PAS}']`);
+      const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_PAS_ENCORE}']`);
       $reponse.find('.tag').removeClass('hidden').text(donnees.relance_prevue);
       $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');
-      afficheModificationReponse(REPONSE_JE_NE_SAIS_PAS, evaluationId);
+      afficheModificationReponse(REPONSE_PAS_ENCORE, evaluationId);
       effaceErreurChamp($champ);
       fermeQcm(evaluationId);
     },
@@ -108,7 +108,7 @@ function basculePrecisionAutre($qcm) {
 // Répondre efface côté serveur la qualification des autres réponses : l'écran fait de même,
 // comme le changement entre Oui et Non referme « Précisez » (enregistreReponseMiseEnAction)
 function oublieAutresReponses(evaluationId, reponse) {
-  if (reponse === REPONSE_JE_NE_SAIS_PAS) {
+  if (reponse === REPONSE_PAS_ENCORE) {
     fermePrecisionAutre($(`#${evaluationId} .questions-remediation`));
     fermePrecisionAutre($(`#${evaluationId} .questions-difficulte`));
   } else {

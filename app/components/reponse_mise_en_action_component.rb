@@ -15,7 +15,7 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
   end
 
   def detail
-    if @reponse == MiseEnAction::REPONSE_JE_NE_SAIS_PAS
+    if @reponse == MiseEnAction::REPONSE_PAS_ENCORE
       @mise_en_action&.libelle_relance_prevue
     else
       @mise_en_action&.libelle_qualification
@@ -49,7 +49,7 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
     case @reponse
     when true then @mise_en_action_presenter.effectuee_avec_remediation?
     when false then @mise_en_action_presenter.non_effectuee_avec_difficulte?
-    else @mise_en_action_presenter.je_ne_sais_pas_affiche?
+    else @mise_en_action_presenter.pas_encore_affiche?
     end
   end
 end

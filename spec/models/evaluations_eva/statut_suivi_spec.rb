@@ -40,7 +40,7 @@ RSpec.describe EvaluationsEva::StatutSuivi do
           .to eq(evaluation.id => "pas_de_suite")
       end
 
-      it "est à renseigner quand la réponse est « je ne sais pas »" do
+      it "est à renseigner quand la réponse est « Pas encore »" do
         evaluation = create :evaluation, :eva, :avec_mise_en_action, effectuee: nil,
                                                                     **attributs_concernee
 

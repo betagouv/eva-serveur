@@ -3,10 +3,10 @@ require "rails_helper"
 describe ReponseMiseEnActionComponent, type: :component do
   let(:evaluation) { build(:evaluation, :eva, mise_en_action: mise_en_action) }
   let(:mise_en_action) { nil }
-  let(:je_ne_sais_pas_actif) { false }
+  let(:pas_encore_actif) { false }
 
   before do
-    allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(je_ne_sais_pas_actif)
+    allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(pas_encore_actif)
     render_inline(described_class.new(evaluation: evaluation, reponse: reponse))
   end
 
@@ -104,16 +104,16 @@ describe ReponseMiseEnActionComponent, type: :component do
   end
 
   context "pour la réponse Pas encore, avec une date de revue choisie" do
-    let(:reponse) { MiseEnAction::REPONSE_JE_NE_SAIS_PAS }
-    let(:je_ne_sais_pas_actif) { true }
+    let(:reponse) { MiseEnAction::REPONSE_PAS_ENCORE }
+    let(:pas_encore_actif) { true }
     let(:mise_en_action) do
       build(:mise_en_action, effectuee: nil, date_revue: Date.new(2026, 11, 18),
                              choix_date_revue: "14_jours")
     end
 
     it "affiche la réponse et la relance prévue" do
-      bloc_reponse = page.find("[data-reponse='je_ne_sais_pas'].mise-en-action:not(.hidden)")
-      expect(bloc_reponse).to have_content(I18n.t("reponse_mise_en_action.titre_je_ne_sais_pas"))
+      bloc_reponse = page.find("[data-reponse='pas_encore'].mise-en-action:not(.hidden)")
+      expect(bloc_reponse).to have_content(I18n.t("reponse_mise_en_action.titre_pas_encore"))
       expect(bloc_reponse).to have_css(
         ".tag",
         text: I18n.t("reponse_mise_en_action.relance_prevue", date: "18/11/2026")

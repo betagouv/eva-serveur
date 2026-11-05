@@ -42,7 +42,8 @@ ActiveAdmin.register Beneficiaire do
 
   batch_action :destroy, false
 
-  batch_action :renseigner_suivi_groupe, if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |_beneficiaire_ids|
+  batch_action :renseigner_suivi_groupe,
+               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |_beneficiaire_ids|
     redirect_to collection_path
   end
 

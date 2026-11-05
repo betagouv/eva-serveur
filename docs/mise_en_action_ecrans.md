@@ -8,10 +8,12 @@ Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (vo
 ## Ce qui est commun
 
 - **Endpoints** (`app/admin/evaluation_eva.rb`) :
-  - `PUT mise_en_action` : réponse Oui / Non / Je ne sais pas ;
+  - `PUT mise_en_action` : réponse Oui / Non / Pas encore (`MiseEnAction::REPONSE_PAS_ENCORE`). Pas encore répond 204, sans contenu ;
+  - `PATCH renseigner_date_revue` : date de revue de Pas encore (`date_revue` et `choix_date_revue`). Répond 200 avec `relance_prevue` et `repondue_le`, ou 422 avec `erreur`. Fiche évaluation seulement (ADR 0003) ;
   - `PATCH renseigner_qualification` : type d'aide ou raison (`qualification`, et `precision_autre` pour « Autre »). Répond 200 avec `qualification` (libellé à afficher) et `repondue_le`, ou 422 avec `erreur` (message à afficher).
 - **Choix proposés** : `MiseEnAction::Questionnaire`. Un choix ajouté au modèle apparaît sur les deux écrans.
 - **Règles** : dans `MiseEnAction` (cohérence avec la réponse, précision obligatoire avec « Autre », effacement de la précision). Le JS n'en valide aucune : il affiche ce que le serveur renvoie.
+- **« Pas encore » s'appelait « je ne sais pas »** : les noms du code ont été renommés (`REPONSE_PAS_ENCORE`, valeur `pas_encore`, `pas_encore_actif?`, `pas_encore_affiche?`, clés de traduction `*_pas_encore`). Seule la variable d'environnement qui active la fonctionnalité garde son nom, pour ne pas changer la configuration des environnements : `ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS`.
 - **JS** : `app/assets/javascripts/mise_en_action.js.erb` déclare les chemins et constantes venant de Ruby et les fonctions partagées (`ouvreQcm`, `fermeQcm`, `ecouteBoutons`…). Les deux autres fichiers l'utilisent : il doit être inclus en premier dans `active_admin.js`.
 
 ## Ce qui diffère
@@ -29,10 +31,12 @@ Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (vo
 | Champ « Précisez » | Apparaît quand « Autre » est coché, sans réserver sa place | Place réservée, masqué avec `visibility: hidden` (maquette) |
 | Modifier une réponse « Autre » | Retrouvée en JS pendant la visite (`data-precision-enregistree`) : l’évaluation quitte le tableau de bord au rechargement | Retrouvée depuis la base au chargement de la page |
 | Modifier la réponse avant de qualifier | Non | Lien « Modifier la réponse » |
+| Pas encore | Sans choix de date ; l'évaluation reportée quitte la liste jusqu'à sa date de revue | Choix de la date de revue (`DateRevueMiseEnActionComponent`), puis « Relance prévue le… » ; à la date de revue, la question est reposée |
 
 ## Pièges connus
 - **Le DSFR gère `aria-pressed`.** Un tag DSFR avec `aria-pressed` est un tag sélectionnable : le DSFR inverse lui-même l'attribut au clic. Ne pas le poser aussi en JS au clic sur ce tag, les deux s'annulent. Le poser seulement quand un autre élément change l'état (un autre choix qui désélectionne « Autre »).
-- **Le message d'erreur vient du serveur.** Le JS ne contrôle pas le champ vide : il envoie, et affiche l'`erreur` de la 422. Le texte n'existe donc qu'une fois, dans les traductions du modèle.
+- **Le message d'erreur vient du serveur.** Le JS ne contrôle pas le champ vide : il envoie, et affiche l'`erreur` de la 422. Le texte n'existe donc qu'une fois, dans les traductions du modèle. Vaut pour « Précisez » et pour la date de revue (`afficheErreurChamp`).
+- **Dans les tests de feature, attendre la réponse du serveur avant de cliquer à nouveau.** Après un clic qui enregistre (une puce, « Enregistrer »), attendre que la confirmation s'affiche avant « Modifier la réponse » : sinon la réponse du serveur arrive après et réaffiche la confirmation par-dessus la question.
 
 ## Quand le tableau de bord passera sur la carte (EVA-1156)
 

@@ -6,8 +6,9 @@
   <p>Elle assemble les composants suivants :</p>
   <ul>
     <li><code>EnteteMiseEnActionComponent</code> : nom, date et résultats de l’évaluation (<code>ResultatComponent</code>) ;</li>
-    <li><code>QuestionMiseEnActionComponent</code> : question et boutons Oui / Non ;</li>
+    <li><code>QuestionMiseEnActionComponent</code> : question et boutons Oui / Pas encore / Non, avec le rappel de la réponse « Pas encore » à la date de revue ;</li>
     <li><code>QualificationMiseEnActionComponent</code> : choix du type d’aide ou de la raison (<code>TagDsfrComponent</code>), et champ « Précisez » de la réponse « Autre » (<code>PrecisionAutreComponent</code>) ;</li>
+    <li><code>DateRevueMiseEnActionComponent</code> : choix de la date de revue après « Pas encore » (délais proposés, ou « Choisir une date » avec <code>ChampDateRevueComponent</code>) ;</li>
     <li><code>ReponseMiseEnActionComponent</code> : réponse enregistrée, date et lien de remédiation si Non.</li>
   </ul>
 
@@ -29,8 +30,14 @@
       MiseEnAction.new(effectuee: false, difficulte: "autre",
                        precision_autre: "Déménagement prévu le mois prochain",
                        repondue_le: Date.new(2026, 10, 27)),
-    "Je ne sais pas (visible avec ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS)" =>
-      MiseEnAction.new(effectuee: nil, motif: "action_prevue", date_revue: Date.current + 7)
+    "Pas encore, date de revue à choisir (visible avec ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS)" =>
+      MiseEnAction.new(effectuee: nil, repondue_le: Date.new(2026, 10, 27)),
+    "Pas encore, relance prévue (visible avec ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS)" =>
+      MiseEnAction.new(effectuee: nil, repondue_le: Date.new(2026, 10, 27),
+                       date_revue: Date.current + 14, choix_date_revue: "14_jours"),
+    "Pas encore, date de revue atteinte (visible avec ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS)" =>
+      MiseEnAction.new(effectuee: nil, repondue_le: Date.new(2026, 10, 27),
+                       date_revue: Date.current, choix_date_revue: "14_jours")
   }.each do |titre, mise_en_action| %>
     <h2><%= titre %></h2>
     <div class="fr-mb-6w">

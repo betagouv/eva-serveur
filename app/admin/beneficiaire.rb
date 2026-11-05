@@ -43,8 +43,35 @@ ActiveAdmin.register Beneficiaire do
   batch_action :destroy, false
 
   batch_action :renseigner_suivi_groupe,
-               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |_beneficiaire_ids|
-    redirect_to collection_path
+               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |beneficiaire_ids|
+    effectuee_brut = params[:effectuee]
+    effectuee = case effectuee_brut
+    when "true" then true
+    when "false" then false
+    when MiseEnAction::REPONSE_JE_NE_SAIS_PAS then nil
+    else
+                  redirect_to collection_path
+                  next
+    end
+
+    qualification = params[:qualification].presence
+    precision_autre = params[:precision_autre].presence
+
+    Beneficiaire.where(id: beneficiaire_ids).each do |beneficiaire|
+      evaluation = EvaluationEva
+                     .where(beneficiaire: beneficiaire)
+                     .where(EvaluationsEva::StatutSuivi.condition_concernee)
+                     .order(debutee_le: :desc)
+                     .first
+      next unless evaluation
+
+      evaluation.enregistre_mise_en_action(effectuee)
+      if qualification.present?
+        evaluation.mise_en_action.qualifie(effectuee, qualification, precision_autre)
+      end
+    end
+
+    redirect_to collection_path, notice: t(".renseigner_suivi_groupe.success.notice")
   end
 
   batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|

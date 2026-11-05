@@ -2,6 +2,8 @@
   var MODAL_ID = "fr-modal-suivi-groupe";
   var FORM_ID = "suivi-groupe-form";
 
+  var etat = { effectuee: null, qualification: null, precisionAutre: null };
+
   function dsfrModal(modal) {
     if (!modal || !window.dsfr) return null;
     var instance = window.dsfr(modal);
@@ -13,7 +15,7 @@
     if (modalInstance) modalInstance.disclose();
   }
 
-  /** Batch ActiveAdmin englobe la page : un second formulaire dans le HTML serait ignoré ; #suivi-groupe-form est créé ici sur body, champs reliés via attribut form. */
+  /** ActiveAdmin englobe la page dans un formulaire ; #suivi-groupe-form est créé sur body, champs reliés via l'attribut form. */
   function ensureSuiviGroupeFormDom(modal) {
     if (document.getElementById(FORM_ID)) return;
 
@@ -39,20 +41,12 @@
     document.body.appendChild(form);
   }
 
-  function elementFromEventTarget(target) {
-    if (!target) return null;
-    if (target.nodeType === Node.TEXT_NODE) return target.parentElement;
-    return target;
-  }
-
-  function findSuiviGroupeBatchLink(target) {
-    var el = elementFromEventTarget(target);
-    if (!el || !el.closest) return null;
-    return el.closest("a.batch_action[data-action=\"renseigner_suivi_groupe\"]");
-  }
-
   function handleSuiviGroupeClick(event) {
-    var link = findSuiviGroupeBatchLink(event.target);
+    var el = event.target.nodeType === Node.TEXT_NODE
+      ? event.target.parentElement
+      : event.target;
+    if (!el || !el.closest) return;
+    var link = el.closest("a.batch_action[data-action=\"renseigner_suivi_groupe\"]");
     if (!link) return;
 
     event.preventDefault();
@@ -66,12 +60,182 @@
       "input.batch-actions-resource-selection:checked"
     );
 
-    if (checkedBoxes.length < 1) return;
+    modal.dataset.ids = Array.from(checkedBoxes).map(function(cb) {
+      return cb.value;
+    }).join(",");
 
-    var ids = Array.from(checkedBoxes).map(function(cb) { return cb.value; });
-    modal.dataset.ids = ids.join(",");
-
+    updateTitre(modal, checkedBoxes.length);
+    reinitialiser(modal);
     discloseModal(modal);
+  }
+
+  function updateTitre(modal, count) {
+    var titleEl = modal.querySelector(".fr-modal__title");
+    if (!titleEl) return;
+    var suffixe = count > 1 ? "s" : "";
+    titleEl.textContent = "Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
+  }
+
+  function reinitialiser(modal) {
+    etat.effectuee = null;
+    etat.qualification = null;
+    etat.precisionAutre = null;
+    afficherEtapeQuestion(modal);
+  }
+
+  function afficherEtapeQuestion(modal) {
+    afficher(modal, "suivi-groupe-etape-question");
+    cacher(modal, "suivi-groupe-etape-qualification");
+    cacher(modal, "suivi-groupe-etape-recap");
+    cacher(modal, "suivi-groupe-soumettre");
+    reinitialiserTagsSelection(modal);
+  }
+
+  function afficherEtapeQualification(modal) {
+    cacher(modal, "suivi-groupe-etape-question");
+    afficher(modal, "suivi-groupe-etape-qualification");
+    cacher(modal, "suivi-groupe-etape-recap");
+    cacher(modal, "suivi-groupe-soumettre");
+
+    var labelEl = modal.querySelector("#suivi-groupe-label-reponse");
+    if (labelEl) labelEl.textContent = labelPourReponse(etat.effectuee);
+
+    var tagsRemediation = modal.querySelector("#suivi-groupe-tags-remediation");
+    var tagsDifficulte = modal.querySelector("#suivi-groupe-tags-difficulte");
+    if (etat.effectuee === "true") {
+      if (tagsRemediation) tagsRemediation.removeAttribute("hidden");
+      if (tagsDifficulte) tagsDifficulte.setAttribute("hidden", "");
+    } else {
+      if (tagsRemediation) tagsRemediation.setAttribute("hidden", "");
+      if (tagsDifficulte) tagsDifficulte.removeAttribute("hidden");
+    }
+  }
+
+  function afficherEtapeRecap(modal) {
+    cacher(modal, "suivi-groupe-etape-question");
+    cacher(modal, "suivi-groupe-etape-qualification");
+    afficher(modal, "suivi-groupe-etape-recap");
+    afficher(modal, "suivi-groupe-soumettre");
+
+    var recapEl = modal.querySelector("#suivi-groupe-recap-texte");
+    if (recapEl) recapEl.textContent = texteRecap();
+  }
+
+  function labelPourReponse(effectuee) {
+    if (effectuee === "true") return "Une suite est engagée";
+    if (effectuee === "false") return "Aucune action à ce stade";
+    return "Une action est prévue";
+  }
+
+  function texteRecap() {
+    var base = "";
+    if (etat.effectuee === "true") base = "Oui";
+    else if (etat.effectuee === "false") base = "Non";
+    else base = "Pas encore";
+
+    if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+      return base + " — Une action est prévue";
+    }
+
+    if (!etat.qualification) return base;
+
+    var labelTag = labelPourQualification(etat.effectuee, etat.qualification);
+    var precisionText = etat.precisionAutre ? " (« " + etat.precisionAutre + " »)" : "";
+    return base + " — " + labelTag + precisionText;
+  }
+
+  function labelPourQualification(effectuee, qualification) {
+    var tags = document.querySelectorAll(".suivi-groupe-tag[data-qualification=\"" + qualification + "\"]");
+    for (var i = 0; i < tags.length; i++) {
+      var tag = tags[i];
+      var type = tag.dataset.type;
+      if (effectuee === "true" && type === "remediation") return tag.textContent.trim();
+      if (effectuee === "false" && type === "difficulte") return tag.textContent.trim();
+    }
+    return qualification;
+  }
+
+  function reinitialiserTagsSelection(modal) {
+    modal.querySelectorAll(".suivi-groupe-tag--actif").forEach(function(tag) {
+      tag.classList.remove("suivi-groupe-tag--actif");
+    });
+    var precisionDiv = modal.querySelector("#suivi-groupe-precision-autre");
+    if (precisionDiv) precisionDiv.setAttribute("hidden", "");
+  }
+
+  function afficher(modal, id) {
+    var el = modal.querySelector ? modal.querySelector("#" + id) : document.getElementById(id);
+    if (el) el.removeAttribute("hidden");
+  }
+
+  function cacher(modal, id) {
+    var el = modal.querySelector ? modal.querySelector("#" + id) : document.getElementById(id);
+    if (el) el.setAttribute("hidden", "");
+  }
+
+  /* Valeur de la constante Ruby MiseEnAction::REPONSE_JE_NE_SAIS_PAS */
+  var MiseEnAction_REPONSE_JE_NE_SAIS_PAS = "je_ne_sais_pas";
+
+  function handleBtnReponseClick(modal, btn) {
+    etat.effectuee = btn.dataset.effectuee;
+    etat.qualification = null;
+    etat.precisionAutre = null;
+
+    if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+      afficherEtapeRecap(modal);
+    } else {
+      afficherEtapeQualification(modal);
+    }
+  }
+
+  function handleTagClick(modal, tag) {
+    reinitialiserTagsSelection(modal);
+    tag.classList.add("suivi-groupe-tag--actif");
+
+    etat.qualification = tag.dataset.qualification;
+    etat.precisionAutre = null;
+
+    var precisionDiv = modal.querySelector("#suivi-groupe-precision-autre");
+    if (etat.qualification === "autre") {
+      if (precisionDiv) precisionDiv.removeAttribute("hidden");
+      var textarea = document.getElementById("suivi-groupe-precision-autre-input");
+      if (textarea) {
+        etat.precisionAutre = textarea.value.trim() || null;
+        textarea.addEventListener("input", function() {
+          etat.precisionAutre = textarea.value.trim() || null;
+        }, { once: false });
+      }
+    } else {
+      if (precisionDiv) precisionDiv.setAttribute("hidden", "");
+      afficherEtapeRecap(modal);
+    }
+  }
+
+  function handleModalClick(event, modal) {
+    var el = event.target.nodeType === Node.TEXT_NODE
+      ? event.target.parentElement
+      : event.target;
+    if (!el) return;
+
+    var btnReponse = el.closest(".suivi-groupe-btn-reponse");
+    if (btnReponse) { handleBtnReponseClick(modal, btnReponse); return; }
+
+    var tag = el.closest(".suivi-groupe-tag");
+    if (tag) { handleTagClick(modal, tag); return; }
+
+    if (el.id === "suivi-groupe-modifier-reponse" || el.closest("#suivi-groupe-modifier-reponse")) {
+      afficherEtapeQuestion(modal);
+      return;
+    }
+
+    if (el.id === "suivi-groupe-modifier-recap" || el.closest("#suivi-groupe-modifier-recap")) {
+      if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+        afficherEtapeQuestion(modal);
+      } else {
+        afficherEtapeQualification(modal);
+      }
+      return;
+    }
   }
 
   function prepareHiddenInputs(modal) {
@@ -82,7 +246,6 @@
     if (!container) return;
 
     container.innerHTML = "";
-
     ids.forEach(function(id) {
       var input = document.createElement("input");
       input.type = "hidden";
@@ -91,6 +254,20 @@
       input.setAttribute("form", FORM_ID);
       container.appendChild(input);
     });
+
+    var effectueeChamp = document.getElementById("suivi-groupe-effectuee");
+    if (effectueeChamp) effectueeChamp.value = etat.effectuee || "";
+
+    var qualificationChamp = document.getElementById("suivi-groupe-qualification-champ");
+    if (qualificationChamp) qualificationChamp.value = etat.qualification || "";
+
+    var precisionAutreChamp = document.getElementById("suivi-groupe-precision-autre-champ");
+    if (precisionAutreChamp) {
+      var textarea = document.getElementById("suivi-groupe-precision-autre-input");
+      precisionAutreChamp.value = (textarea && etat.qualification === "autre")
+        ? textarea.value.trim()
+        : "";
+    }
   }
 
   function init() {
@@ -100,6 +277,10 @@
     ensureSuiviGroupeFormDom(modal);
 
     document.addEventListener("click", handleSuiviGroupeClick, true);
+
+    modal.addEventListener("click", function(event) {
+      handleModalClick(event, modal);
+    });
 
     var form = document.getElementById(FORM_ID);
     if (form) {

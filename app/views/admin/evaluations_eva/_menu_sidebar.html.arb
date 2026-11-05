@@ -47,5 +47,12 @@ div class: "menu menu-transverse" do
         text_node t("admin.restitutions.numeratie.titre_menu_lateral")
       end
     end
+    if resource.illettrisme_potentiel?
+      li do
+        a href: "#suivi_beneficiaire" do
+          text_node t("admin.evaluations_eva.suivi_beneficiaire.titre_menu_lateral")
+        end
+      end
+    end
   end
 end

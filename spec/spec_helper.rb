@@ -88,6 +88,18 @@ RSpec.configure do |config|
     lien_visible.click
   end
 
+  # Note sur le body le statut de chaque réponse fetch, pour attendre la fin d'une requête
+  # partie en arrière-plan : expect(page).to have_css("body[data-statut-fetch='204']")
+  def espionne_fetch
+    page.execute_script(<<~JS)
+      const fetchOriginal = window.fetch;
+      window.fetch = (...arguments_fetch) => fetchOriginal(...arguments_fetch).then((reponse) => {
+        document.body.dataset.statutFetch = reponse.status;
+        return reponse;
+      });
+    JS
+  end
+
   def inscription_pro_connect(compte = create(:compte_pro_connect))
     tokens = {
       "id_token" => "id_token",

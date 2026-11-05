@@ -17,11 +17,10 @@
     <li><%= render TagComponent.new(libelle: "Avec icône", cliquable: true, icone: "fr-icon-arrow-right-line") %></li>
   </ul>
 
-  <h2>Supprimable (le clic envoie un PATCH vers l'url)</h2>
-  <div class="fr-mb-3w">
-    <%= render TagComponent.new(libelle: "Taille moyenne", supprimable: true, url: "#") %>
-  </div>
-  <div class="fr-mb-3w">
-    <%= render TagComponent.new(libelle: "Petite taille", supprimable: true, url: "#", taille: :sm) %>
-  </div>
+  <h2>Supprimable</h2>
+  <p>Au clic, le tag disparaît immédiatement et, si une <code>url</code> est donnée, un PATCH part en arrière-plan. En cas d'échec, le tag réapparaît avec un message d'erreur. Ici, sans <code>url</code>, rien n'est envoyé.</p>
+  <ul class="fr-tags-group">
+    <li><%= render TagComponent.new(libelle: "Taille moyenne", supprimable: true) %></li>
+    <li><%= render TagComponent.new(libelle: "Petite taille", supprimable: true, taille: :sm) %></li>
+  </ul>
 </div>

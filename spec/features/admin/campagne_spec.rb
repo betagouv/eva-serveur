@@ -274,12 +274,17 @@ describe 'Admin - Campagne', type: :feature do
         visit admin_campagne_path(ma_campagne.reload)
       end
 
-      it "je peux retirer l'autorisation de n'importe quel collègue", :js do
+      it "je peux retirer l'autorisation de n'importe quel collègue sans recharger la page",
+         :js do
+        page.execute_script("window.pageNonRechargee = true")
+        espionne_fetch
         within('#acces_prives_sidebar_section') do
           libelle = I18n.t('tag.retirer', contenu: mon_collegue.display_name)
           find("button[aria-label='#{libelle}']").click
         end
         expect(page).not_to have_content(mon_collegue.nom)
+        expect(page).to have_css("body[data-statut-fetch='204']")
+        expect(page.evaluate_script("window.pageNonRechargee")).to be(true)
         expect(ma_campagne.reload.campagne_compte_autorisations).to be_empty
         expect(CampagneCompteAutorisation.only_deleted).to be_empty
       end

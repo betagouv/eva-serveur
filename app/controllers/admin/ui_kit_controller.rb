@@ -39,7 +39,6 @@ module Admin
     def statut_suivi; end
     def suivi_accompagnement_illettrisme; end
     def tag; end
-    def tag_dsfr; end
     def texte_intro; end
     def toggle; end
     def input; end

@@ -16,15 +16,15 @@
   <ul class="qualification-mise-en-action__choix" aria-labelledby="<%= id_question %>">
     <% delais.each do |delai| %>
       <li>
-        <%= render TagDsfrComponent.new(libelle: libelle_delai(delai), cliquable: true,
-                                        class: "choix-date-revue",
-                                        data: { choix_date_revue: delai }) %>
+        <%= render TagComponent.new(libelle: libelle_delai(delai), cliquable: true,
+                                    class: "choix-date-revue",
+                                    data: { choix_date_revue: delai }) %>
       </li>
     <% end %>
     <li>
-      <%= render TagDsfrComponent.new(libelle: t("date_revue_mise_en_action.choisir_une_date"),
-                                      cliquable: true, class: "choisir-date-revue",
-                                      aria: { pressed: date_precise_choisie?.to_s }) %>
+      <%= render TagComponent.new(libelle: t("date_revue_mise_en_action.choisir_une_date"),
+                                  cliquable: true, class: "choisir-date-revue",
+                                  aria: { pressed: date_precise_choisie?.to_s }) %>
     </li>
   </ul>
   <div class="qualification-mise-en-action__precision zone-date-revue <%= classe_zone_date %>">

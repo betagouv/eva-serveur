@@ -104,10 +104,10 @@ ActiveAdmin.register Campagne do
       url = revoquer_compte_admin_campagne_path(
         resource,
         compte_id: autorisation.compte.id)
-      render(Tag.new(autorisation.compte.display_name,
-                     supprimable: can?(:revoquer_compte, resource),
-                     url: url,
-                     taille: "sm"))
+      render(TagComponent.new(libelle: autorisation.compte.display_name,
+                              supprimable: can?(:revoquer_compte, resource),
+                              url: url,
+                              taille: :sm))
     end
     render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)
   end

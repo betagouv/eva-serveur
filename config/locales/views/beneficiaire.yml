@@ -8,8 +8,8 @@ fr:
         oui: Oui
         pas_encore: Pas encore
         non: Non
-        question: "Ces personnes ont-elles reçu de l'aide depuis leur évaluation ?"
-        qualification_titre: "De quelle aide s'agit-il ?"
+        question: "Ces personnes ont-elles reçu de l'aide depuis leur évaluation ?"
+        qualification_titre: "De quelle aide s'agit-il ?"
         qualification_sous_titre: Choisissez la situation la plus proche.
         precision_autre_description: "Décrivez en quelques mots l'aide engagée."
         modifier: Modifier la réponse
@@ -23,7 +23,7 @@ fr:
           texte: "Les statuts de suivi de ces bénéficiaires sont à jour."
       modal_fusion:
         titre: <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Récapitulatif de fusion
-        instruction: "Cliquez sur « Confirmer » pour fusionner les bénéficiaires suivants :"
+        instruction: "Cliquez sur « Confirmer » pour fusionner les bénéficiaires suivants :"
         pour_fusion: "Après la fusion, toutes les évaluations seront rattachées au bénéficiaire"
         alert_fusion: "Attention, après la fusion seul le compte bénéficiaire de %{nom} existera. Les autres comptes seront supprimés."
         confirmer: Confirmer
@@ -35,9 +35,9 @@ fr:
           notice: "Les évaluations ont été rassemblées dans le bénéficiaire %{beneficiaire_nom}."
       show:
         info: Vous pouvez consulter ici toutes les passations de ce bénéficiaire.
-        beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
+        beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         carte_partage_code:
-          description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
+          description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
       liste_evaluations_diagnostic:
         titre-evaluation-diagnostic: "Évaluations de diagnostic"
         created_at: "Date"

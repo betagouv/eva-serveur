@@ -34,6 +34,41 @@
   }
 }
 
+.fr-modal-suivi-groupe {
+  @media (min-width: $dsfr-breakpoint-lg) {
+    .fr-col-lg-6 {
+      flex: 0 0 66.667%;
+      width: 66.667%;
+      max-width: 66.667%;
+    }
+  }
+}
+
+.suivi-groupe-reponse-enregistree {
+  background: var(--background-alt-grey);
+  display: flex;
+  gap: $dsfr-spacing-4v;
+  align-items: flex-start;
+  padding: $dsfr-spacing-3v $dsfr-spacing-4v;
+
+  &__texte {
+    flex: 1 0 0;
+  }
+}
+
+.suivi-groupe-btns-reponse {
+  flex-wrap: nowrap;
+
+  li {
+    flex: 1;
+  }
+
+  .fr-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (max-width: $dsfr-breakpoint-md-max) {
   .page-beneficiaire {
     padding: 0 1rem;

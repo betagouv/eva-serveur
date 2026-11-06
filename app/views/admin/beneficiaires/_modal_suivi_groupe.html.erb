@@ -9,25 +9,25 @@
     data: { suivi_groupe_batch_action: batch_action_admin_beneficiaires_path }
   }
 ) do |component| %>
-  <div class="contenu-modale">
-    <div class="contenu">
-      <%= hidden_field_tag :batch_action, "renseigner_suivi_groupe", form: form_id %>
-      <%= hidden_field_tag :batch_action_inputs, "{}", form: form_id %>
+  <div class="suivi-groupe-modale">
+    <p class="fr-hint-text fr-mb-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.sous_titre") %></p>
+    <p class="fr-mb-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.description") %></p>
+    <%= render "modal_suivi_groupe_etape_question" %>
+    <%= render "modal_suivi_groupe_etape_qualification" %>
+    <%= render "modal_suivi_groupe_etape_recap" %>
 
-      <div id="hidden-ids-suivi-container"></div>
-    </div>
+    <%= hidden_field_tag :batch_action, "renseigner_suivi_groupe", form: form_id %>
+    <%= hidden_field_tag :batch_action_inputs, "{}", form: form_id %>
+    <%= hidden_field_tag :effectuee, "", id: "suivi-groupe-effectuee", form: form_id %>
+    <%= hidden_field_tag :qualification, "", id: "suivi-groupe-qualification-champ", form: form_id %>
+    <%= hidden_field_tag :precision_autre, "", id: "suivi-groupe-precision-autre-champ", form: form_id %>
+    <div id="hidden-ids-suivi-container"></div>
   </div>
 
   <% component.with_button do %>
-    <%= render BoutonDsfrComponent.new(
-      "#",
-      type: :secondary,
-      tag: :button,
-      size: :md,
-      "data-fr-opened": "false",
-      "aria-controls": id_modal
-    ) do %>
-      <%= t(".annuler") %>
-    <% end %>
+    <button type="submit" form="<%= form_id %>" id="suivi-groupe-soumettre"
+            class="fr-btn" hidden>
+      <%= t(".enregistrer") %>
+    </button>
   <% end %>
 <% end %>

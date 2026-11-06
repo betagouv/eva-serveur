@@ -1,0 +1,40 @@
+<div id="suivi-groupe-etape-qualification" hidden>
+  <div class="suivi-groupe-reponse-enregistree">
+    <p id="suivi-groupe-label-reponse" class="fr-text--bold suivi-groupe-reponse-enregistree__texte"></p>
+    <a href="#" id="suivi-groupe-modifier-reponse" class="fr-link">
+      <%= t("admin.beneficiaires.modal_suivi_groupe.modifier") %>
+    </a>
+  </div>
+
+  <p class="fr-text--bold fr-mt-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_titre") %></p>
+  <p class="fr-hint-text"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_sous_titre") %></p>
+
+  <div id="suivi-groupe-tags-remediation" class="fr-tags-group" hidden>
+    <% MiseEnAction::REMEDIATIONS.reject { |r| r == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |remediation| %>
+      <button type="button" class="fr-tag suivi-groupe-tag"
+              data-qualification="<%= remediation %>" data-type="remediation">
+        <%= I18n.t("activerecord.attributes.mise_en_action.remediation.#{remediation}") %>
+      </button>
+    <% end %>
+  </div>
+
+  <div id="suivi-groupe-tags-difficulte" class="fr-tags-group" hidden>
+    <% MiseEnAction::DIFFICULTES.reject { |d| d == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |difficulte| %>
+      <button type="button" class="fr-tag suivi-groupe-tag"
+              data-qualification="<%= difficulte %>" data-type="difficulte">
+        <%= I18n.t("activerecord.attributes.mise_en_action.difficulte.#{difficulte}") %>
+      </button>
+    <% end %>
+  </div>
+
+  <div id="suivi-groupe-precision-autre" hidden>
+    <div class="fr-input-group">
+      <label class="fr-label" for="suivi-groupe-precision-autre-input">
+        <%= t("activerecord.attributes.mise_en_action.precision_autre") %>
+        <span class="fr-hint-text"><%= t("admin.beneficiaires.modal_suivi_groupe.precision_autre_description") %></span>
+      </label>
+      <textarea class="fr-input" id="suivi-groupe-precision-autre-input"
+                rows="2" maxlength="<%= MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE %>"></textarea>
+    </div>
+  </div>
+</div>

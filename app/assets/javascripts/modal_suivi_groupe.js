@@ -83,7 +83,7 @@
     var titleEl = modal.querySelector(".fr-modal__title");
     if (!titleEl) return;
     var suffixe = count > 1 ? "s" : "";
-    titleEl.innerHTML = "<span class=\"fr-icon-arrow-right-line\" aria-hidden=\"true\"></span> Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
+    titleEl.innerHTML = "<span class=\"fr-icon-arrow-right-line\" aria-hidden=\"true\"></span> Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
   }
 
   function reinitialiser(modal) {
@@ -262,6 +262,7 @@
     if (!container) return;
 
     container.innerHTML = "";
+
     ids.forEach(function(id) {
       var input = document.createElement("input");
       input.type = "hidden";

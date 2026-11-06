@@ -42,11 +42,6 @@ ActiveAdmin.register Beneficiaire do
 
   batch_action :destroy, false
 
-  batch_action :renseigner_suivi_groupe,
-               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |_beneficiaire_ids|
-    redirect_to collection_path
-  end
-
   batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
@@ -65,6 +60,24 @@ ActiveAdmin.register Beneficiaire do
     redirect_to admin_beneficiaire_path(lien.beneficiaire),
       notice: t(".fusion.success.notice",
                 beneficiaire_nom: lien.beneficiaire.nom)
+  end
+
+  batch_action :renseigner_suivi_groupe,
+               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |beneficiaire_ids|
+    service = Beneficiaires::EnregistreSuiviGroupe.new(
+      beneficiaire_ids,
+      params[:effectuee],
+      params[:qualification].presence,
+      params[:precision_autre].presence
+    )
+    resultat = service.call
+    if resultat == :effectuee_invalide
+      redirect_to collection_path
+    else
+      redirect_to collection_path,
+                  flash: { success: "#{t('.renseigner_suivi_groupe.success.titre',
+count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
+    end
   end
 
   before_action only: :show do

@@ -1,17 +1,18 @@
 <div id="suivi-groupe-etape-question">
-  <p class="fr-text--lead"><%= t("admin.beneficiaires.modal_suivi_groupe.sous_titre") %></p>
-  <p><%= t("admin.beneficiaires.modal_suivi_groupe.description") %></p>
+  <p><%= t("admin.beneficiaires.modal_suivi_groupe.question") %></p>
 
-  <div class="fr-btns-group fr-btns-group--inline">
+  <ul class="fr-btns-group fr-btns-group--inline suivi-groupe-btns-reponse">
     <% [
-      { effectuee: "true",                                label: t("admin.beneficiaires.modal_suivi_groupe.oui")       },
+      { effectuee: "true",                           label: t("admin.beneficiaires.modal_suivi_groupe.oui")        },
       { effectuee: MiseEnAction::REPONSE_PAS_ENCORE, label: t("admin.beneficiaires.modal_suivi_groupe.pas_encore") },
-      { effectuee: "false",                               label: t("admin.beneficiaires.modal_suivi_groupe.non")       }
+      { effectuee: "false",                          label: t("admin.beneficiaires.modal_suivi_groupe.non")        }
     ].each do |reponse| %>
-      <button type="button" class="fr-btn fr-btn--secondary suivi-groupe-btn-reponse"
-              data-effectuee="<%= reponse[:effectuee] %>">
-        <%= reponse[:label] %>
-      </button>
+      <li>
+        <button type="button" class="fr-btn fr-btn--secondary suivi-groupe-btn-reponse"
+                data-effectuee="<%= reponse[:effectuee] %>">
+          <%= reponse[:label] %>
+        </button>
+      </li>
     <% end %>
-  </div>
+  </ul>
 </div>

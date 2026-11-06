@@ -10,6 +10,8 @@
   }
 ) do |component| %>
   <div class="suivi-groupe-modale">
+    <p class="fr-hint-text fr-mb-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.sous_titre") %></p>
+    <p class="fr-mb-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.description") %></p>
     <%= render "modal_suivi_groupe_etape_question" %>
     <%= render "modal_suivi_groupe_etape_qualification" %>
     <%= render "modal_suivi_groupe_etape_recap" %>
@@ -27,18 +29,5 @@
             class="fr-btn" hidden>
       <%= t(".enregistrer") %>
     </button>
-  <% end %>
-
-  <% component.with_button do %>
-    <%= render BoutonDsfrComponent.new(
-      "#",
-      type: :secondary,
-      tag: :button,
-      size: :md,
-      "data-fr-opened": "false",
-      "aria-controls": id_modal
-    ) do %>
-      <%= t(".annuler") %>
-    <% end %>
   <% end %>
 <% end %>

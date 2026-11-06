@@ -83,7 +83,7 @@
     var titleEl = modal.querySelector(".fr-modal__title");
     if (!titleEl) return;
     var suffixe = count > 1 ? "s" : "";
-    titleEl.textContent = "Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
+    titleEl.innerHTML = "<span class=\"fr-icon-arrow-right-line\" aria-hidden=\"true\"></span> Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
   }
 
   function reinitialiser(modal) {
@@ -128,7 +128,10 @@
     afficher(modal, "suivi-groupe-soumettre");
 
     var recapEl = modal.querySelector("#suivi-groupe-recap-texte");
-    if (recapEl) recapEl.textContent = texteRecap();
+    if (recapEl) recapEl.textContent = labelRecapReponse(etat.effectuee);
+
+    var qualifEl = modal.querySelector("#suivi-groupe-recap-qualification");
+    if (qualifEl) qualifEl.textContent = texteRecapQualification();
   }
 
   function labelPourReponse(effectuee) {
@@ -137,21 +140,24 @@
     return "Une action est prévue";
   }
 
-  function texteRecap() {
-    var base = "";
-    if (etat.effectuee === "true") base = "Oui";
-    else if (etat.effectuee === "false") base = "Non";
-    else base = "Pas encore";
+  function labelRecapReponse(effectuee) {
+    if (effectuee === "true") return "Oui, une aide a commencé";
+    if (effectuee === "false") return "Non, pas d'aide engagée";
+    return "Pas encore — Une action est prévue";
+  }
 
-    if (etat.effectuee === REPONSE_PAS_ENCORE) {
-      return base + " — Une action est prévue";
-    }
-
-    if (!etat.qualification) return base;
-
+  function texteRecapQualification() {
+    if (etat.effectuee === REPONSE_PAS_ENCORE || !etat.qualification) return "";
     var labelTag = labelPourQualification(etat.effectuee, etat.qualification);
     var precisionText = etat.precisionAutre ? " (« " + etat.precisionAutre + " »)" : "";
-    return base + " — " + labelTag + precisionText;
+    return labelTag + precisionText;
+  }
+
+  function texteRecap() {
+    var base = labelRecapReponse(etat.effectuee);
+    var qualif = texteRecapQualification();
+    if (qualif) return base + " — " + qualif;
+    return base;
   }
 
   function labelPourQualification(effectuee, qualification) {
@@ -232,11 +238,13 @@
     if (tag) { handleTagClick(modal, tag); return; }
 
     if (el.id === "suivi-groupe-modifier-reponse" || el.closest("#suivi-groupe-modifier-reponse")) {
+      event.preventDefault();
       afficherEtapeQuestion(modal);
       return;
     }
 
     if (el.id === "suivi-groupe-modifier-recap" || el.closest("#suivi-groupe-modifier-recap")) {
+      event.preventDefault();
       if (etat.effectuee === REPONSE_PAS_ENCORE) {
         afficherEtapeQuestion(modal);
       } else {
@@ -298,5 +306,6 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  if (typeof module !== "undefined") { module.exports = { init }; }
+  else { document.addEventListener("DOMContentLoaded", init); }
 })();

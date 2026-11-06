@@ -6,8 +6,11 @@
                    when "warning", "annonce_generale", "compte_generique", "evaluation_anonyme", "beneficiaire_anonyme" then :warning
                    else :info
                    end %>
-    <%= dsfr_alert(type: dsfr_type, html_attributes: { class: "fr-mb-4v" }) do %>
-      <%= message %>
+    <% titre, *reste = message.to_s.split("\n") %>
+    <% texte = reste.join("\n") %>
+    <% has_titre = texte.present? %>
+    <%= dsfr_alert(type: dsfr_type, title: has_titre ? titre : nil, close_button: has_titre, html_attributes: { class: "fr-mb-4v" }) do %>
+      <%= has_titre ? texte : titre %>
     <% end %>
   <% end %>
 </div>

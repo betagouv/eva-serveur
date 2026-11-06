@@ -18,7 +18,8 @@ describe 'Admin Beneficiaires Batch Action', type: :request do
     it "redirige vers la liste des bénéficiaires" do
       post '/admin/beneficiaires/batch_action', params: {
         batch_action: 'renseigner_suivi_groupe',
-        collection_selection: [ beneficiaire1.id ]
+        collection_selection: [ beneficiaire1.id ],
+        effectuee: "true"
       }
       expect(response).to redirect_to("/admin/beneficiaires")
     end

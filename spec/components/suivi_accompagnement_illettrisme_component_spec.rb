@@ -3,10 +3,10 @@ require "rails_helper"
 describe SuiviAccompagnementIllettrismeComponent, type: :component do
   let(:evaluation) { build(:evaluation, :eva, mise_en_action: mise_en_action) }
   let(:mise_en_action) { nil }
-  let(:je_ne_sais_pas_actif) { false }
+  let(:pas_encore_actif) { false }
 
   before do
-    allow(MiseEnAction).to receive(:je_ne_sais_pas_actif?).and_return(je_ne_sais_pas_actif)
+    allow(MiseEnAction).to receive(:pas_encore_actif?).and_return(pas_encore_actif)
     allow(EnteteMiseEnActionComponent).to receive(:new).and_call_original
     allow(QuestionMiseEnActionComponent).to receive(:new).and_call_original
     allow(ReponseMiseEnActionComponent).to receive(:new).and_call_original
@@ -36,18 +36,18 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     expect(ReponseMiseEnActionComponent).to have_received(:new).twice
   end
 
-  context "quand l'option « je ne sais pas » est active" do
-    let(:je_ne_sais_pas_actif) { true }
+  context "quand l'option « Pas encore » est active" do
+    let(:pas_encore_actif) { true }
 
-    it "propose aussi de répondre « je ne sais pas »" do
+    it "propose de répondre Oui, Pas encore ou Non, dans cet ordre" do
       expect(QuestionMiseEnActionComponent).to have_received(:new)
         .with(evaluation: evaluation,
-              reponses: [ true, false, MiseEnAction::REPONSE_JE_NE_SAIS_PAS ])
+              reponses: [ true, MiseEnAction::REPONSE_PAS_ENCORE, false ])
     end
 
-    it "prépare aussi l'affichage de la réponse « je ne sais pas »" do
+    it "prépare aussi l'affichage de la réponse « Pas encore »" do
       expect(ReponseMiseEnActionComponent).to have_received(:new)
-        .with(evaluation: evaluation, reponse: MiseEnAction::REPONSE_JE_NE_SAIS_PAS)
+        .with(evaluation: evaluation, reponse: MiseEnAction::REPONSE_PAS_ENCORE)
     end
   end
 

@@ -1,0 +1,14 @@
+fr:
+  date_revue_mise_en_action:
+    titre: La suite n’est pas encore connue
+    modifier: Modifier la réponse
+    question: Quand voulez-vous refaire le point ?
+    description: Eva vous reposera la question à cette date.
+    delais:
+      7_jours: Dans 7 jours
+      14_jours: Dans 14 jours
+      1_mois: Dans 1 mois
+    choisir_une_date: Choisir une date
+    format_attendu: "Format attendu : JJ/MM/AAAA"
+    a_partir_de_demain: Choisissez une date à partir de demain.
+    enregistrer: Enregistrer

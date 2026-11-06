@@ -2,7 +2,7 @@
 <% form_id = "suivi-groupe-form" %>
 
 <%= dsfr_modal(
-  title: t(".titre"),
+  title: t(".titre").html_safe,
   html_attributes: {
     id: id_modal,
     class: "fr-modal-suivi-groupe",

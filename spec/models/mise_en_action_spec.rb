@@ -8,10 +8,183 @@ describe MiseEnAction, type: :model do
     expect(subject).to validate_uniqueness_of(:evaluation_id).case_insensitive
   end
 
-  it "accepte que effectuee soit vide, pour la réponse « je ne sais pas »" do
+  it "accepte que effectuee soit vide, pour la réponse « Pas encore »" do
     expect(subject).to allow_value(nil).for(:effectuee)
     expect(subject).to allow_value(true).for(:effectuee)
     expect(subject).to allow_value(false).for(:effectuee)
+  end
+
+  describe ".repondues_pas_encore" do
+    let!(:pas_encore) { create(:mise_en_action, effectuee: nil) }
+    let!(:oui) { create(:mise_en_action, effectuee: true) }
+    let!(:non) { create(:mise_en_action, effectuee: false) }
+
+    it "ne garde que les mises en action auxquelles on a répondu Pas encore" do
+      expect(described_class.repondues_pas_encore).to contain_exactly(pas_encore)
+    end
+
+    it "ne garde pas une mise en action à laquelle on n'a jamais répondu" do
+      jamais_repondue = create(:mise_en_action, effectuee: nil, repondue_le: nil)
+
+      expect(described_class.repondues_pas_encore).not_to include(jamais_repondue)
+    end
+  end
+
+  describe ".reportees" do
+    # La date de revue a été choisie la veille, quand elle était encore dans le futur
+    let!(:pas_encore) do
+      Timecop.freeze(date_revue - 1) do
+        create(:mise_en_action, effectuee: nil, date_revue: date_revue)
+      end
+    end
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la mise en action est reportée" do
+        expect(described_class.reportees).to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la mise en action n'est plus reportée" do
+        expect(described_class.reportees).not_to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est passée" do
+      let(:date_revue) { Date.current - 1 }
+
+      it "la mise en action n'est plus reportée" do
+        expect(described_class.reportees).not_to include(pas_encore)
+      end
+    end
+
+    context "quand on a répondu Oui, même avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+      let!(:oui) do
+        Timecop.freeze(date_revue - 1) do
+          create(:mise_en_action, effectuee: true, date_revue: date_revue)
+        end
+      end
+
+      it "la mise en action n'est pas reportée" do
+        expect(described_class.reportees).not_to include(oui)
+      end
+    end
+  end
+
+  describe "#date_revue_a_choisir?" do
+    context "quand le pro a répondu Pas encore sans avoir choisi de date de revue" do
+      it "la date de revue est à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: nil, date_revue: nil)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(true)
+      end
+    end
+
+    context "quand le pro a répondu Pas encore et choisi une date de revue" do
+      it "la date de revue n'est plus à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: nil, date_revue: Date.current + 7)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(false)
+      end
+    end
+
+    context "quand le pro a répondu Oui" do
+      it "il n'y a pas de date de revue à choisir" do
+        mise_en_action = build(:mise_en_action, effectuee: true)
+
+        expect(mise_en_action.date_revue_a_choisir?).to be(false)
+      end
+    end
+  end
+
+  describe "#date_de_revue_atteinte?" do
+    let(:pas_encore) { build(:mise_en_action, effectuee: nil, date_revue: date_revue) }
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la date de revue est atteinte" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(true)
+      end
+    end
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la date de revue n'est pas atteinte" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(false)
+      end
+    end
+
+    context "quand on a répondu Pas encore sans avoir choisi de date de revue" do
+      let(:date_revue) { nil }
+
+      it "il n'y a pas de date de revue à atteindre" do
+        expect(pas_encore.date_de_revue_atteinte?).to be(false)
+      end
+    end
+  end
+
+  describe "#reportee?" do
+    let(:pas_encore) { build(:mise_en_action, effectuee: nil, date_revue: date_revue) }
+
+    context "quand on a répondu Pas encore avec une date de revue dans le futur" do
+      let(:date_revue) { Date.current + 1 }
+
+      it "la mise en action est reportée" do
+        expect(pas_encore.reportee?).to be(true)
+      end
+    end
+
+    context "quand on a répondu Pas encore et que la date de revue est aujourd'hui" do
+      let(:date_revue) { Date.current }
+
+      it "la mise en action n'est plus reportée" do
+        expect(pas_encore.reportee?).to be(false)
+      end
+    end
+
+    context "quand on a répondu Pas encore sans avoir choisi de date de revue" do
+      let(:date_revue) { nil }
+
+      it "la mise en action n'est pas reportée" do
+        expect(pas_encore.reportee?).to be(false)
+      end
+    end
+  end
+
+  describe "#repondu_oui?" do
+    it "n'est vrai que pour une réponse Oui" do
+      expect(build(:mise_en_action, effectuee: true).repondu_oui?).to be(true)
+      expect(build(:mise_en_action, effectuee: false).repondu_oui?).to be(false)
+      expect(build(:mise_en_action, effectuee: nil).repondu_oui?).to be(false)
+    end
+  end
+
+  describe "#repondu_non?" do
+    it "n'est vrai que pour une réponse Non" do
+      expect(build(:mise_en_action, effectuee: false).repondu_non?).to be(true)
+      expect(build(:mise_en_action, effectuee: true).repondu_non?).to be(false)
+      expect(build(:mise_en_action, effectuee: nil).repondu_non?).to be(false)
+    end
+  end
+
+  describe "#repondu_pas_encore?" do
+    it "n'est vrai que pour une réponse Pas encore" do
+      expect(build(:mise_en_action, effectuee: nil).repondu_pas_encore?).to be(true)
+      expect(build(:mise_en_action, effectuee: true).repondu_pas_encore?).to be(false)
+      expect(build(:mise_en_action, effectuee: false).repondu_pas_encore?).to be(false)
+    end
+
+    it "est faux quand le pro n'a pas encore répondu" do
+      expect(build(:mise_en_action, effectuee: nil, repondue_le: nil).repondu_pas_encore?)
+        .to be(false)
+    end
   end
 
   describe '#effectuee_avec_remediation?' do
@@ -30,6 +203,42 @@ describe MiseEnAction, type: :model do
         expect(mise_en_action.effectuee_avec_remediation?).to be false
       end
     end
+
+    context "quand le type d'aide a été ignoré depuis le tableau de bord" do
+      before { mise_en_action.update remediation: 'indetermine' }
+
+      it 'renvoie false' do
+        expect(mise_en_action.effectuee_avec_remediation?).to be false
+      end
+    end
+  end
+
+  describe '#effectuee_sans_remediation?' do
+    it "est vrai pour une réponse Oui sans type d'aide ou avec un type d'aide ignoré" do
+      expect(build(:mise_en_action, effectuee: true).effectuee_sans_remediation?).to be(true)
+      expect(build(:mise_en_action, effectuee: true, remediation: 'indetermine')
+               .effectuee_sans_remediation?).to be(true)
+    end
+
+    it "est faux pour une réponse Oui avec un type d'aide ou pour une autre réponse" do
+      expect(build(:mise_en_action, effectuee: true, remediation: 'formation_metier')
+               .effectuee_sans_remediation?).to be(false)
+      expect(build(:mise_en_action, effectuee: false).effectuee_sans_remediation?).to be(false)
+    end
+  end
+
+  describe '#non_effectuee_sans_difficulte?' do
+    it "est vrai pour une réponse Non sans raison ou avec une raison ignorée" do
+      expect(build(:mise_en_action, effectuee: false).non_effectuee_sans_difficulte?).to be(true)
+      expect(build(:mise_en_action, effectuee: false, difficulte: 'indetermine')
+               .non_effectuee_sans_difficulte?).to be(true)
+    end
+
+    it "est faux pour une réponse Non avec une raison ou pour une autre réponse" do
+      expect(build(:mise_en_action, effectuee: false, difficulte: 'freins_peripheriques')
+               .non_effectuee_sans_difficulte?).to be(false)
+      expect(build(:mise_en_action, effectuee: true).non_effectuee_sans_difficulte?).to be(false)
+    end
   end
 
   describe '#non_effectuee_avec_difficulte?' do
@@ -44,6 +253,14 @@ describe MiseEnAction, type: :model do
     end
 
     context "quand la mise en action n'est pas effectuee et n'a pas de difficulte" do
+      it 'renvoie false' do
+        expect(mise_en_action.non_effectuee_avec_difficulte?).to be false
+      end
+    end
+
+    context "quand la raison a été ignorée depuis le tableau de bord" do
+      before { mise_en_action.update difficulte: 'indetermine' }
+
       it 'renvoie false' do
         expect(mise_en_action.non_effectuee_avec_difficulte?).to be false
       end
@@ -142,7 +359,7 @@ describe MiseEnAction, type: :model do
       expect(mise_en_action.errors).to be_added(:base, :remediation_incoherente)
     end
 
-    it "refuse une remédiation ou une difficulté sur une réponse « je ne sais pas »" do
+    it "refuse une remédiation ou une difficulté sur une réponse « Pas encore »" do
       mise_en_action = build(:mise_en_action, effectuee: nil, remediation: "formation_metier",
                                               difficulte: "freins_peripheriques")
 
@@ -180,6 +397,175 @@ describe MiseEnAction, type: :model do
       expect(mise_en_action.qualifie("true", "autre", "")).to be(false)
 
       expect(mise_en_action.reload.remediation).to be_nil
+    end
+  end
+
+  describe "#reporte_dans" do
+    let(:repondue_le) { Time.zone.local(2026, 11, 2, 10) }
+    let(:pas_encore) { create(:mise_en_action, effectuee: nil, repondue_le: repondue_le) }
+
+    context "quand le pro choisit « Dans 14 jours »" do
+      it "fixe la revue dans 14 jours et garde son choix, sans changer la date de réponse" do
+        pas_encore.reporte_dans("14_jours")
+
+        pas_encore.reload
+        expect(pas_encore.date_revue).to eq(Date.current + 14)
+        expect(pas_encore.choix_date_revue).to eq("14_jours")
+        expect(pas_encore.repondue_le).to eq(repondue_le)
+      end
+    end
+
+    context "quand le pro choisit « Dans 1 mois » un 31 janvier" do
+      it "fixe la date de revue au dernier jour de février" do
+        Timecop.freeze(Date.new(2027, 1, 31)) { pas_encore.reporte_dans("1_mois") }
+
+        expect(pas_encore.reload.date_revue).to eq(Date.new(2027, 2, 28))
+      end
+    end
+
+    context "quand le pro choisit une date précise dans le futur" do
+      it "enregistre cette date et son choix" do
+        pas_encore.reporte_dans(MiseEnAction::CHOIX_DATE_PRECISE, Date.current + 30)
+
+        pas_encore.reload
+        expect(pas_encore.date_revue).to eq(Date.current + 30)
+        expect(pas_encore.choix_date_revue).to eq(MiseEnAction::CHOIX_DATE_PRECISE)
+      end
+    end
+
+    context "quand le pro choisit une date précise aujourd'hui" do
+      it "refuse la date et demande une date à partir de demain" do
+        expect(pas_encore.reporte_dans(MiseEnAction::CHOIX_DATE_PRECISE, Date.current)).to be(false)
+
+        expect(pas_encore.errors[:date_revue]).to eq(
+          [ I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                   ".date_revue.a_partir_de_demain") ]
+        )
+        expect(pas_encore.reload.date_revue).to be_nil
+      end
+    end
+
+    context "quand le pro choisit une date précise passée" do
+      it "refuse la date" do
+        hier = Date.current - 1
+
+        expect(pas_encore.reporte_dans(MiseEnAction::CHOIX_DATE_PRECISE, hier)).to be(false)
+
+        expect(pas_encore.reload.date_revue).to be_nil
+      end
+    end
+
+    context "quand le choix n'est pas un de ceux proposés" do
+      it "n'enregistre rien" do
+        expect(pas_encore.reporte_dans("3_ans")).to be(false)
+
+        expect(pas_encore.reload.date_revue).to be_nil
+      end
+    end
+
+    context "quand la date de revue enregistrée est passée depuis" do
+      let(:date_revue) { Date.current - 1 }
+      let(:pas_encore) do
+        Timecop.freeze(date_revue - 1) do
+          create(:mise_en_action, effectuee: nil, date_revue: date_revue)
+        end
+      end
+
+      it "ne la refuse pas tant qu'elle n'est pas modifiée" do
+        expect(pas_encore.valid?).to be(true)
+      end
+    end
+  end
+
+  describe "#enregistre_reponse" do
+    let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
+
+    it "remplace la date de réponse par la date du jour" do
+      mise_en_action = create(:mise_en_action, repondue_le: Time.zone.local(2022, 1, 1))
+
+      Timecop.freeze(date_du_jour) { mise_en_action.enregistre_reponse(false) }
+
+      expect(mise_en_action.reload.repondue_le).to eq(date_du_jour)
+    end
+
+    it "remplace Oui par Non et efface le type d'aide" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      mise_en_action.enregistre_reponse(false)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(false)
+      expect(mise_en_action.remediation).to be_nil
+    end
+
+    it "remplace Non par Oui et efface la raison" do
+      mise_en_action = create(:mise_en_action, effectuee: false,
+                                               difficulte: "freins_peripheriques")
+
+      mise_en_action.enregistre_reponse(true)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(true)
+      expect(mise_en_action.difficulte).to be_nil
+    end
+
+    it "remplace Oui par Pas encore et efface le type d'aide, en laissant le pro choisir la date" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "formation_metier")
+
+      mise_en_action.enregistre_reponse(nil)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be_nil
+      expect(mise_en_action.remediation).to be_nil
+      expect(mise_en_action.motif).to be_nil
+      expect(mise_en_action.date_revue).to be_nil
+    end
+
+    it "garde la date de revue et son choix quand on répond de nouveau Pas encore" do
+      mise_en_action = create(:mise_en_action, effectuee: nil, date_revue: Date.current + 30,
+                                               choix_date_revue: "1_mois")
+
+      mise_en_action.enregistre_reponse(nil)
+
+      mise_en_action.reload
+      expect(mise_en_action.date_revue).to eq(Date.current + 30)
+      expect(mise_en_action.choix_date_revue).to eq("1_mois")
+    end
+
+    it "remplace « Pas encore » par Oui et efface le motif, la date de revue et son choix" do
+      mise_en_action = create(:mise_en_action, effectuee: nil, motif: "action_prevue",
+                                               date_revue: Date.current + 7,
+                                               choix_date_revue: "7_jours")
+
+      mise_en_action.enregistre_reponse(true)
+
+      mise_en_action.reload
+      expect(mise_en_action.effectuee).to be(true)
+      expect(mise_en_action.motif).to be_nil
+      expect(mise_en_action.date_revue).to be_nil
+      expect(mise_en_action.choix_date_revue).to be_nil
+    end
+
+    it "efface la précision d'un « Autre » quand la réponse change" do
+      mise_en_action = create(:mise_en_action, effectuee: true, remediation: "autre",
+                                               precision_autre: "aide sur mesure")
+
+      mise_en_action.enregistre_reponse(false)
+
+      expect(mise_en_action.reload.precision_autre).to be_nil
+    end
+  end
+
+  describe "date de la réponse « Choisir une date »" do
+    it "refuse le choix d'une date précise sans date" do
+      mise_en_action = build(:mise_en_action, effectuee: nil,
+                                              choix_date_revue: MiseEnAction::CHOIX_DATE_PRECISE)
+
+      expect(mise_en_action.valid?).to be(false)
+      expect(mise_en_action.errors[:date_revue]).to eq(
+        [ I18n.t("activerecord.errors.models.mise_en_action.attributes" \
+                 ".date_revue.a_partir_de_demain") ]
+      )
     end
   end
 
@@ -223,17 +609,6 @@ describe MiseEnAction, type: :model do
                                                precision_autre: "aide sur mesure")
 
       mise_en_action.update!(remediation: "formation_metier")
-
-      expect(mise_en_action.reload.precision_autre).to be_nil
-    end
-
-    it "efface la précision quand la réponse change" do
-      evaluation = create(:evaluation, :eva)
-      mise_en_action = create(:mise_en_action, evaluation: evaluation, effectuee: true,
-                                               remediation: "autre",
-                                               precision_autre: "aide sur mesure")
-
-      evaluation.enregistre_mise_en_action(false)
 
       expect(mise_en_action.reload.precision_autre).to be_nil
     end

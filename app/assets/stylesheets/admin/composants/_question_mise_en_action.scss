@@ -4,6 +4,12 @@
   gap: $dsfr-spacing-2w;
 }
 
+.question-mise-en-action__rappel {
+  @include corps-de-texte-sm-regular;
+
+  color: $grey-200;
+}
+
 .question-mise-en-action__texte {
   display: flex;
   flex-direction: column;

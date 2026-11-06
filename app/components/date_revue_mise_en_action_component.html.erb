@@ -1,0 +1,41 @@
+<div class="qcm questions-date-revue qualification-mise-en-action <%= classe_date_revue %>">
+  <div class="qualification-mise-en-action__encart">
+    <span class="qualification-mise-en-action__titre"><%= t("date_revue_mise_en_action.titre") %></span>
+    <a href="#" class="qualification-mise-en-action__modifier modifier-reponse-mise-en-action">
+      <%= t("date_revue_mise_en_action.modifier") %>
+    </a>
+  </div>
+  <div class="qualification-mise-en-action__texte">
+    <div id="<%= id_question %>" class="qualification-mise-en-action__libelle">
+      <%= t("date_revue_mise_en_action.question") %>
+    </div>
+    <div class="qualification-mise-en-action__description">
+      <%= t("date_revue_mise_en_action.description") %>
+    </div>
+  </div>
+  <ul class="qualification-mise-en-action__choix" aria-labelledby="<%= id_question %>">
+    <% delais.each do |delai| %>
+      <li>
+        <%= render TagComponent.new(libelle: libelle_delai(delai), cliquable: true,
+                                    class: "choix-date-revue",
+                                    data: { choix_date_revue: delai }) %>
+      </li>
+    <% end %>
+    <li>
+      <%= render TagComponent.new(libelle: t("date_revue_mise_en_action.choisir_une_date"),
+                                  cliquable: true, class: "choisir-date-revue",
+                                  aria: { pressed: date_precise_choisie?.to_s }) %>
+    </li>
+  </ul>
+  <div class="qualification-mise-en-action__precision zone-date-revue <%= classe_zone_date %>">
+    <%= render ChampDateRevueComponent.new(id: id_champ_date, valeur: date_revue_precise) %>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      tag: :button,
+      size: :sm,
+      class: "qualification-mise-en-action__enregistrer enregistre-date-revue"
+    ) do %>
+      <%= t("date_revue_mise_en_action.enregistrer") %>
+    <% end %>
+  </div>
+</div>

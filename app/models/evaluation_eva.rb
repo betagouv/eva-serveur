@@ -46,12 +46,13 @@ class EvaluationEva < Evaluation
 
   scope :mise_en_action_a_renseigner, lambda {
     left_joins(:mise_en_action).where(mises_en_action: { effectuee: nil })
+                               .where.not(id: MiseEnAction.reportees.select(:evaluation_id))
   }
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
   }
   scope :statut_suivi_in, lambda { |*statuts|
-    EvaluationsEva::StatutSuivi.filtre(all, statuts.flatten)
+    EvaluationsEva::StatutSuivi.filtre_par_statuts(all, statuts.flatten)
   }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
@@ -74,37 +75,11 @@ class EvaluationEva < Evaluation
   end
 
   def enregistre_mise_en_action(effectuee)
-    mise_en_action_enregistree = MiseEnAction.find_or_initialize_by(evaluation: self)
-    mise_en_action_enregistree.effectuee = effectuee
-    mise_en_action_enregistree.repondue_le = Time.zone.now
-
-    if effectuee.nil?
-      mise_en_action_je_ne_sais_pas(mise_en_action_enregistree)
-    else
-     mise_en_action_oui_ou_non(mise_en_action_enregistree, effectuee)
-    end
-    mise_en_action_enregistree.save
+    mise_en_action = MiseEnAction.find_or_initialize_by(evaluation: self)
+    mise_en_action.enregistre_reponse(effectuee)
   end
 
   def mise_en_action_presenter
     EvaluationsEva::MiseEnActionPresenter.new(self)
-  end
-
-  private
-
-  def mise_en_action_je_ne_sais_pas(mise_en_action_enregistree)
-    mise_en_action_enregistree.assign_attributes(remediation: nil, difficulte: nil,
-                                                   motif: :action_prevue,
-                                                   date_revue: Date.current + 7)
-  end
-
-  def mise_en_action_oui_ou_non(mise_en_action_enregistree, effectuee)
-    mise_en_action_enregistree.assign_attributes(motif: nil, date_revue: nil)
-
-    if effectuee
-      mise_en_action_enregistree.difficulte = nil
-    else
-      mise_en_action_enregistree.remediation = nil
-    end
   end
 end

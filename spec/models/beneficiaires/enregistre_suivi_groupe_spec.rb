@@ -36,11 +36,9 @@ describe Beneficiaires::EnregistreSuiviGroupe do
       expect(evaluation_concernee.reload.mise_en_action.effectuee).to be(false)
     end
 
-    it "renseigne le motif action_prevue quand effectuee=je_ne_sais_pas" do
-      service(effectuee: MiseEnAction::REPONSE_JE_NE_SAIS_PAS).call
-      mise_en_action = evaluation_concernee.reload.mise_en_action
-      expect(mise_en_action.motif).to eq("action_prevue")
-      expect(mise_en_action.date_revue).to eq(Date.current + 7)
+    it "crée une MiseEnAction avec effectuee=nil quand effectuee=pas_encore" do
+      service(effectuee: MiseEnAction::REPONSE_PAS_ENCORE).call
+      expect(evaluation_concernee.reload.mise_en_action.effectuee).to be_nil
     end
 
     it "renseigne la remédiation quand effectuee=true avec une qualification" do
@@ -66,8 +64,8 @@ describe Beneficiaires::EnregistreSuiviGroupe do
       end
     end
 
-    it "retourne :succes" do
-      expect(service(effectuee: "true").call).to eq(:succes)
+    it "retourne le nombre de bénéficiaires traités" do
+      expect(service(effectuee: "true").call).to eq({ succes: 1 })
     end
   end
 end

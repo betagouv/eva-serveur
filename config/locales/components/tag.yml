@@ -1,3 +1,4 @@
 fr:
   tag:
+    erreur_suppression: La suppression n’a pas pu être enregistrée, rechargez la page et réessayez.
     retirer: Retirer %{contenu}

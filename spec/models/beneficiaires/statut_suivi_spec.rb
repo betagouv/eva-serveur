@@ -75,7 +75,7 @@ RSpec.describe Beneficiaires::StatutSuivi do
              effectuee: true, debutee_le: Time.zone.local(2026, 5, 1),
              **attributs_concernee, beneficiaire: suite_engagee
 
-      expect(Beneficiaire.order(described_class.expression_rang).pluck(:id))
+      expect(Beneficiaire.order(described_class.sql_ordre_de_tri).pluck(:id))
         .to eq [ suite_engagee.id, beneficiaire.id, non_concerne.id ]
     end
 
@@ -89,17 +89,18 @@ RSpec.describe Beneficiaires::StatutSuivi do
       end
 
       it "garde les bénéficiaires du statut choisi" do
-        expect(described_class.filtre(Beneficiaire.all, [ "a_renseigner" ]))
+        expect(described_class.filtre_par_statuts(Beneficiaire.all, [ "a_renseigner" ]))
           .to contain_exactly(beneficiaire)
       end
 
       it "n'affiche jamais les bénéficiaires non concernés" do
-        expect(described_class.filtre(Beneficiaire.all, %w[non_concerne suite_engagee]))
+        expect(described_class.filtre_par_statuts(Beneficiaire.all, %w[non_concerne suite_engagee]))
           .to be_empty
       end
 
       it "ignore les valeurs inconnues" do
-        expect(described_class.filtre(Beneficiaire.all, [ "a_renseigner') OR ('1'='1" ]))
+        expect(described_class.filtre_par_statuts(Beneficiaire.all,
+                                                  [ "a_renseigner') OR ('1'='1" ]))
           .to be_empty
       end
     end

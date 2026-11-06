@@ -2,8 +2,8 @@ fr:
   reponse_mise_en_action:
     titre_true: Oui, une aide a commencé
     titre_false: Non, rien n’est prévu pour l’instant
-    titre_je_ne_sais_pas: Je ne sais pas
-    revue_prevue: Revue prévue le %{date}
+    titre_pas_encore: Pas encore, la suite est à confirmer
+    relance_prevue: Relance prévue le %{date}.
     modifier: Modifier la réponse
     repondue_le: Répondu le %{date}.
     trouver_solution: Trouver une solution près de chez la personne

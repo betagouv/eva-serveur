@@ -1,0 +1,12 @@
+<div class="fr-input-group champ-date-revue">
+  <label class="<%= label_classes %>" for="<%= input_id %>">
+    <%= @label %><%= required_asterisk %>
+    <span class="fr-hint-text"><%= @hint %></span>
+  </label>
+  <%= tag.input(type: "date", class: input_classes, id: input_id, name: "date_revue",
+                value: @valeur&.iso8601, min: demain, "aria-required": "true",
+                "aria-describedby": messages_id) %>
+  <div class="fr-messages-group" id="<%= messages_id %>" aria-live="polite">
+    <p class="fr-message fr-message--info"><%= t("date_revue_mise_en_action.a_partir_de_demain") %></p>
+  </div>
+</div>

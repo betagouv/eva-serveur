@@ -35,8 +35,8 @@ ActiveAdmin.register Beneficiaire do
   config.sort_order = "created_at_desc"
 
   order_by(:statut_suivi) do |clause|
-    sens = clause.order == "desc" ? "ASC" : "DESC"
-    "#{Beneficiaires::StatutSuivi.expression_rang} #{sens}"
+    sens_de_tri = clause.order == "desc" ? "ASC" : "DESC"
+    "#{Beneficiaires::StatutSuivi.sql_ordre_de_tri} #{sens_de_tri}"
   end
   config.batch_actions = true
 
@@ -50,10 +50,12 @@ ActiveAdmin.register Beneficiaire do
       params[:qualification].presence,
       params[:precision_autre].presence
     )
-    case service.call
-    when :effectuee_invalide then redirect_to collection_path
-    when :succes
-      redirect_to collection_path, notice: t(".renseigner_suivi_groupe.success.notice")
+    resultat = service.call
+    if resultat == :effectuee_invalide
+      redirect_to collection_path
+    else
+      redirect_to collection_path,
+                  notice: t(".renseigner_suivi_groupe.success.notice", count: resultat[:succes])
     end
   end
 

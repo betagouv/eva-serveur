@@ -104,7 +104,7 @@ describe Restitution::QuestionsReponses do
       end
     end
 
-    context "Renvoie une explication si le bénéficiaire a passé la rédaction" do
+    context "indique si le bénéficiaire a passé la rédaction" do
       let(:evenements) do
         [
           build(:evenement_reponse,
@@ -113,8 +113,9 @@ describe Restitution::QuestionsReponses do
       end
 
       it do
-        expect(restitution.questions_redaction.first[1])
-          .to eql(I18n.t("admin.restitutions.redaction_passee"))
+        _question, reponse, ne_sais_pas = restitution.questions_redaction.first
+        expect(reponse).to be_nil
+        expect(ne_sais_pas).to be(true)
       end
     end
   end

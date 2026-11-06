@@ -2,7 +2,7 @@ fr:
   admin:
     beneficiaires:
       modal_suivi_groupe:
-        titre: Suivi groupé
+        titre: <span class='fr-icon-survey-line' aria-hidden='true'></span> Suivi groupé
         sous_titre: Une seule réponse pour tout le groupe sélectionné.
         description: "Un illettrisme potentiel a été détecté lors de l'évaluation de ces bénéficiaires. Votre réponse aide à savoir si elles sont bien accompagnées."
         oui: Oui
@@ -13,7 +13,9 @@ fr:
         annuler: Annuler
       renseigner_suivi_groupe:
         success:
-          notice: Le suivi a été enregistré pour les bénéficiaires sélectionnés.
+          notice:
+            one: "Merci ! 1 réponse enregistrée. Les statuts de suivi de ces bénéficiaires sont à jour."
+            other: "Merci ! %{count} réponses enregistrées. Les statuts de suivi de ces bénéficiaires sont à jour."
       modal_fusion:
         titre: <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Récapitulatif de fusion
         instruction: "Cliquez sur « Confirmer » pour fusionner les bénéficiaires suivants :"

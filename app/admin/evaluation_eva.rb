@@ -7,8 +7,8 @@ ActiveAdmin.register EvaluationEva do
   config.sort_order = "created_at_desc"
 
   order_by(:statut_suivi) do |clause|
-    sens = clause.order == "desc" ? "ASC" : "DESC"
-    "#{EvaluationsEva::StatutSuivi.expression_rang} #{sens}"
+    sens_de_tri = clause.order == "desc" ? "ASC" : "DESC"
+    "#{EvaluationsEva::StatutSuivi.sql_ordre_de_tri} #{sens_de_tri}"
   end
 
   filter :beneficiaire_id,
@@ -86,19 +86,20 @@ ActiveAdmin.register EvaluationEva do
   form partial: "form"
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    resource.responsable_suivi.present?
+    resource.responsable_suivi.present? || can?(:ajouter_responsable_suivi, Evaluation)
   } do
-    render(Tag.new(resource.responsable_suivi.display_name,
-                   supprimable: can?(:supprimer_responsable_suivi, Evaluation),
-                   url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource),
-                   taille: "sm"))
-  end
-
-  sidebar :responsable_de_suivi, only: :show, if: proc {
-      resource.responsable_suivi.blank? &&
-      can?(:ajouter_responsable_suivi, Evaluation)
-  } do
-    render "admin/evaluations_eva/recherche_responsable_suivi"
+    if resource.responsable_suivi.present?
+      render(TagComponent.new(libelle: resource.responsable_suivi.display_name,
+                              supprimable: can?(:supprimer_responsable_suivi, Evaluation),
+                              url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource),
+                              taille: :sm,
+                              data: { affiche_apres_suppression: "ajout-responsable-suivi" }))
+    end
+    if can?(:ajouter_responsable_suivi, Evaluation)
+      attributs = { id: "ajout-responsable-suivi", class: "ajout-responsable-suivi" }
+      attributs[:hidden] = "hidden" if resource.responsable_suivi.present?
+      div(**attributs) { render "admin/evaluations_eva/recherche_responsable_suivi" }
+    end
   end
 
   sidebar :menu, class: "menu-sidebar", only: :show do
@@ -117,7 +118,7 @@ ActiveAdmin.register EvaluationEva do
 
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
-    redirect_to request.referer
+    head :no_content
   end
 
   xls(i18n_scope: %i[active_admin xls evaluation_eva], header_format: { weight: :bold }) do
@@ -166,17 +167,13 @@ ActiveAdmin.register EvaluationEva do
   end
 
   member_action :mise_en_action, method: :put do
-    if params[:mise_en_action_effectuee] == MiseEnAction::REPONSE_JE_NE_SAIS_PAS
-      # On ne peut pas répondre "je ne sais pas" si l'option n'est pas activée
+    if params[:mise_en_action_effectuee] == MiseEnAction::REPONSE_PAS_ENCORE
+      # On ne peut pas répondre "Pas encore" si l'option n'est pas activée
       # Supprimer cette verification une fois l'ensemble de la feature livrée.
-      next head :unprocessable_content unless MiseEnAction.je_ne_sais_pas_actif?
+      next head :unprocessable_content unless MiseEnAction.pas_encore_actif?
 
       resource.enregistre_mise_en_action(nil)
-      date_revue = I18n.l(resource.mise_en_action.date_revue)
-      render json: {
-        revue_prevue: I18n.t("components.modification_mise_en_action.revue_prevue",
-                             date: date_revue)
-      }
+      head :no_content
     else
       resource.enregistre_mise_en_action(params[:mise_en_action_effectuee] == "true")
     end
@@ -197,6 +194,17 @@ ActiveAdmin.register EvaluationEva do
                      repondue_le: mise_en_action.libelle_repondue_le }
     else
       render json: { erreur: mise_en_action.errors.first.message },
+             status: :unprocessable_content
+    end
+  end
+
+  member_action :renseigner_date_revue, method: :patch do
+    mise_en_action = resource.mise_en_action
+    if mise_en_action.reporte_dans(params[:choix_date_revue], params[:date_revue])
+      render json: { relance_prevue: mise_en_action.libelle_relance_prevue,
+                     repondue_le: mise_en_action.libelle_repondue_le }
+    else
+      render json: { erreur: mise_en_action.errors.first&.message },
              status: :unprocessable_content
     end
   end

@@ -6,15 +6,60 @@ describe EvaluationEva do
 
   describe 'scopes' do
     describe '.mise_en_action_a_renseigner' do
-      let!(:evaluation_avec_mise_en_action) { create :evaluation, :eva, :avec_mise_en_action }
-      let!(:evaluation_sans_mise_en_action) { create :evaluation, :eva }
-      let!(:evaluation_je_ne_sais_pas) do
-        create :evaluation, :eva, :avec_mise_en_action, effectuee: nil
+      context "quand le pro n'a jamais répondu" do
+        let!(:evaluation_sans_reponse) { create :evaluation, :eva }
+
+        it "la mise en action est à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_sans_reponse)
+        end
       end
 
-      it 'retourne les évaluations sans mise en action ou avec une réponse « je ne sais pas »' do
-        expect(described_class.mise_en_action_a_renseigner)
-          .to contain_exactly(evaluation_sans_mise_en_action, evaluation_je_ne_sais_pas)
+      context "quand le pro a répondu Oui" do
+        let!(:evaluation_oui) { create :evaluation, :eva, :avec_mise_en_action, effectuee: true }
+
+        it "la mise en action n'est pas à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).not_to include(evaluation_oui)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore sans avoir choisi de date de revue" do
+        let!(:evaluation_sans_date) do
+          create :evaluation, :eva, :avec_mise_en_action, effectuee: nil
+        end
+
+        it "la mise en action est à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_sans_date)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore avec une date de revue dans le futur" do
+        let!(:evaluation_reportee) { create :evaluation, :eva }
+
+        before do
+          create :mise_en_action, evaluation: evaluation_reportee, effectuee: nil,
+                                  date_revue: Date.current + 7
+        end
+
+        it "la mise en action n'est pas à renseigner avant la date de revue" do
+          expect(described_class.mise_en_action_a_renseigner).not_to include(evaluation_reportee)
+        end
+      end
+
+      context "quand le pro a répondu Pas encore et que la date de revue est aujourd'hui" do
+        let(:date_revue) { Date.current }
+        let!(:evaluation_a_revoir) { create :evaluation, :eva }
+
+        before do
+          # La date de revue a été choisie une semaine avant, quand elle était dans le futur
+          Timecop.freeze(date_revue - 7) do
+            create :mise_en_action, evaluation: evaluation_a_revoir, effectuee: nil,
+                                    date_revue: date_revue
+          end
+        end
+
+        it "la mise en action est de nouveau à renseigner" do
+          expect(described_class.mise_en_action_a_renseigner).to include(evaluation_a_revoir)
+        end
       end
     end
 
@@ -81,72 +126,14 @@ describe EvaluationEva do
   describe "#enregistre_mise_en_action" do
     let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
 
-    context "lorsque la mise en action existe déjà" do
-      let(:ancienne_date) { Time.zone.local(2022, 1, 1, 10, 0, 0) }
-      let!(:evaluation) do
-        create :evaluation, :eva, :avec_mise_en_action, repondue_le: ancienne_date
-      end
+    context "quand il y a une mise en action associée" do
+      let!(:evaluation) { create :evaluation, :eva, :avec_mise_en_action, effectuee: true }
 
-      context "avec une remediation" do
-        it "met à jour la réponse, la date, et efface la remédiation quand on répond Non" do
-          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
+      it "enregistre la réponse sur la mise en action existante, sans en créer une autre" do
+        expect { evaluation.enregistre_mise_en_action(false) }
+          .not_to change(MiseEnAction, :count)
 
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(false)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(false)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.remediation).to be_nil
-        end
-
-        it "met à jour réponse, date et efface la remédiation quand on répond « je ne sais pas" do
-          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(nil)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be_nil
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.motif).to eq("action_prevue")
-          expect(evaluation.mise_en_action.date_revue).to eq(Date.new(2023, 1, 8))
-          expect(evaluation.mise_en_action.remediation).to be_nil
-        end
-      end
-
-      context "avec une difficulté" do
-        it "met à jour la réponse, la date, et efface la difficulté quand on répond Oui" do
-          evaluation.mise_en_action.update(effectuee: false, difficulte: :freins_peripheriques)
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(true)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(true)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.difficulte).to be_nil
-        end
-      end
-
-      context "avec un motif" do
-        it "met à jour réponse, date et efface le motif et date de revue quand on répond Oui" do
-          evaluation.mise_en_action.update(effectuee: nil, motif: :action_prevue,
-                                           date_revue: Date.new(2023, 1, 8))
-
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(true)
-          end
-
-          evaluation.reload
-          expect(evaluation.mise_en_action.effectuee).to be(true)
-          expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
-          expect(evaluation.mise_en_action.motif).to be_nil
-          expect(evaluation.mise_en_action.date_revue).to be_nil
-        end
+        expect(evaluation.mise_en_action.reload.effectuee).to be(false)
       end
     end
 

@@ -15,7 +15,7 @@
     if (modalInstance) modalInstance.disclose();
   }
 
-  /** ActiveAdmin englobe la page dans un formulaire ; #suivi-groupe-form est créé sur body, champs reliés via l'attribut form. */
+  /** Batch ActiveAdmin englobe la page : un second formulaire dans le HTML serait ignoré ; #suivi-groupe-form est créé ici sur body, champs reliés via attribut form. */
   function ensureSuiviGroupeFormDom(modal) {
     if (document.getElementById(FORM_ID)) return;
 
@@ -41,12 +41,20 @@
     document.body.appendChild(form);
   }
 
+  function elementFromEventTarget(target) {
+    if (!target) return null;
+    if (target.nodeType === Node.TEXT_NODE) return target.parentElement;
+    return target;
+  }
+
+  function findSuiviGroupeBatchLink(target) {
+    var el = elementFromEventTarget(target);
+    if (!el || !el.closest) return null;
+    return el.closest("a.batch_action[data-action=\"renseigner_suivi_groupe\"]");
+  }
+
   function handleSuiviGroupeClick(event) {
-    var el = event.target.nodeType === Node.TEXT_NODE
-      ? event.target.parentElement
-      : event.target;
-    if (!el || !el.closest) return;
-    var link = el.closest("a.batch_action[data-action=\"renseigner_suivi_groupe\"]");
+    var link = findSuiviGroupeBatchLink(event.target);
     if (!link) return;
 
     event.preventDefault();
@@ -59,6 +67,8 @@
     var checkedBoxes = document.querySelectorAll(
       "input.batch-actions-resource-selection:checked"
     );
+
+    if (checkedBoxes.length < 1) return;
 
     modal.dataset.ids = Array.from(checkedBoxes).map(function(cb) {
       return cb.value;
@@ -133,14 +143,14 @@
     else if (etat.effectuee === "false") base = "Non";
     else base = "Pas encore";
 
-    if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+    if (etat.effectuee === REPONSE_PAS_ENCORE) {
       return base + " — Une action est prévue";
     }
 
     if (!etat.qualification) return base;
 
     var labelTag = labelPourQualification(etat.effectuee, etat.qualification);
-    var precisionText = etat.precisionAutre ? " (« " + etat.precisionAutre + " »)" : "";
+    var precisionText = etat.precisionAutre ? " (« " + etat.precisionAutre + " »)" : "";
     return base + " — " + labelTag + precisionText;
   }
 
@@ -173,15 +183,15 @@
     if (el) el.setAttribute("hidden", "");
   }
 
-  /* Valeur de la constante Ruby MiseEnAction::REPONSE_JE_NE_SAIS_PAS */
-  var MiseEnAction_REPONSE_JE_NE_SAIS_PAS = "je_ne_sais_pas";
+  /* Valeur de la constante Ruby MiseEnAction::REPONSE_PAS_ENCORE */
+  var REPONSE_PAS_ENCORE = "pas_encore";
 
   function handleBtnReponseClick(modal, btn) {
     etat.effectuee = btn.dataset.effectuee;
     etat.qualification = null;
     etat.precisionAutre = null;
 
-    if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+    if (etat.effectuee === REPONSE_PAS_ENCORE) {
       afficherEtapeRecap(modal);
     } else {
       afficherEtapeQualification(modal);
@@ -212,9 +222,7 @@
   }
 
   function handleModalClick(event, modal) {
-    var el = event.target.nodeType === Node.TEXT_NODE
-      ? event.target.parentElement
-      : event.target;
+    var el = elementFromEventTarget(event.target);
     if (!el) return;
 
     var btnReponse = el.closest(".suivi-groupe-btn-reponse");
@@ -229,7 +237,7 @@
     }
 
     if (el.id === "suivi-groupe-modifier-recap" || el.closest("#suivi-groupe-modifier-recap")) {
-      if (etat.effectuee === MiseEnAction_REPONSE_JE_NE_SAIS_PAS) {
+      if (etat.effectuee === REPONSE_PAS_ENCORE) {
         afficherEtapeQuestion(modal);
       } else {
         afficherEtapeQualification(modal);

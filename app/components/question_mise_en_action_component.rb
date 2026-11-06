@@ -2,7 +2,7 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
   TRADUCTIONS_BOUTONS = {
     true => "bouton_oui",
     false => "bouton_non",
-    MiseEnAction::REPONSE_JE_NE_SAIS_PAS => "bouton_je_ne_sais_pas"
+    MiseEnAction::REPONSE_PAS_ENCORE => "bouton_pas_encore"
   }.freeze
 
   def initialize(evaluation:, reponses:)
@@ -15,6 +15,14 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
     question_affichee? ? "d-flex" : "hidden"
   end
 
+  # À la date de revue, la question est reposée en rappelant la réponse Pas encore
+  def rappel_pas_encore
+    return unless @mise_en_action_presenter.rappel_pas_encore?
+
+    t("question_mise_en_action.rappel_pas_encore",
+      date: l(@evaluation.mise_en_action.repondue_le.to_date, format: :short))
+  end
+
   def libelle_bouton(reponse)
     t("question_mise_en_action.#{TRADUCTIONS_BOUTONS[reponse]}")
   end
@@ -24,6 +32,7 @@ class QuestionMiseEnActionComponent < ViewComponent::Base
   def question_affichee?
     !(@mise_en_action_presenter.reponse_affichee? ||
       @mise_en_action_presenter.effectuee_sans_remediation? ||
-      @mise_en_action_presenter.non_effectuee_sans_difficulte?)
+      @mise_en_action_presenter.non_effectuee_sans_difficulte? ||
+      @mise_en_action_presenter.date_revue_a_choisir?)
   end
 end

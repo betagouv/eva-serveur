@@ -155,16 +155,67 @@ describe 'Admin - Evaluation eva', type: :feature do
         create(:evaluation, :eva, campagne: ma_campagne, responsable_suivi: mon_compte)
       end
 
-      it "peut retirer le responsable de suivi", :js do
+      let(:libelle_retirer) { I18n.t('tag.retirer', contenu: mon_compte.display_name) }
+      let(:action_choisir) do
+        I18n.t('components.recherche_compte.responsable_suivi.action')
+      end
+
+      it "masque la recherche d'un responsable tant qu'il y en a un", :js do
         visit admin_evaluation_eva_path(evaluation_eva)
 
         within("#responsable_de_suivi_sidebar_section") do
-          libelle = I18n.t('tag.retirer', contenu: mon_compte.display_name)
-          find("button[aria-label='#{libelle}']").click
+          expect(page).to have_css("button[aria-label='#{libelle_retirer}']")
+          expect(page).to have_no_button(action_choisir)
         end
+      end
 
-        expect(page).not_to have_css("#responsable_de_suivi_sidebar_section .fr-tag")
+      it "retire le responsable de suivi sans recharger la page", :js do
+        visit admin_evaluation_eva_path(evaluation_eva)
+        page.execute_script("window.pageNonRechargee = true")
+        espionne_fetch
+
+        within("#responsable_de_suivi_sidebar_section") do
+          find("button[aria-label='#{libelle_retirer}']").click
+
+          expect(page).to have_no_css(".fr-tag")
+          expect(page).to have_button(action_choisir)
+        end
+        expect(page).to have_css("body[data-statut-fetch='204']")
+        expect(page.evaluate_script("window.pageNonRechargee")).to be(true)
         expect(evaluation_eva.reload.responsable_suivi).to be_nil
+      end
+
+      it "réaffiche le tag avec un message si la suppression échoue", :js do
+        visit admin_evaluation_eva_path(evaluation_eva)
+        page.execute_script(
+          "window.fetch = () => Promise.resolve(new Response(null, { status: 500 }))"
+        )
+
+        within("#responsable_de_suivi_sidebar_section") do
+          find("button[aria-label='#{libelle_retirer}']").click
+
+          expect(page).to have_content(I18n.t('tag.erreur_suppression'))
+          expect(page).to have_css("button[aria-label='#{libelle_retirer}']")
+          expect(page).to have_no_button(action_choisir)
+        end
+        expect(evaluation_eva.reload.responsable_suivi).to eq(mon_compte)
+      end
+
+      it "réaffiche le tag à chaque nouvel échec de la suppression", :js do
+        visit admin_evaluation_eva_path(evaluation_eva)
+        page.execute_script(
+          "window.fetch = () => Promise.resolve(new Response(null, { status: 500 }))"
+        )
+
+        within("#responsable_de_suivi_sidebar_section") do
+          find("button[aria-label='#{libelle_retirer}']").click
+          expect(page).to have_content(I18n.t('tag.erreur_suppression'))
+
+          find("button[aria-label='#{libelle_retirer}']").click
+
+          expect(page).to have_css("button[aria-label='#{libelle_retirer}']")
+          expect(page).to have_content(I18n.t('tag.erreur_suppression'), count: 1)
+        end
       end
     end
 

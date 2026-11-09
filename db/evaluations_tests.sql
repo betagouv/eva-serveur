@@ -85639,7 +85639,7 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('69e05bb9-872a-4676-95b9-c06b23fa0387', 'test LOdi et ALrd sans la suite', '2026-10-12 15:36:58.01897', '2026-10-12 15:36:58.01897', NULL, NULL, 'TES87517', NULL);
 
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
-	('72cac66c-6051-408d-a5c3-cab6660f2909', 'admin entreprise CONSTRUCTYS (BTP)', '2026-11-05 10:12:34.518207', '2026-11-05 10:12:34.518207', NULL, NULL, 'FBH59728', '796ae46b-cd4a-4e9e-a8d9-0c6fdc5d5982');
+	('72cac66c-6051-408d-a5c3-cab6660f2909', 'admin entreprise CONSTRUCTYS (BTP)', '2026-11-04 10:12:34.518207', '2026-11-04 10:12:34.518207', NULL, NULL, 'FBH59728', '796ae46b-cd4a-4e9e-a8d9-0c6fdc5d5982');
 
 
 --
@@ -86606,6 +86606,9 @@ INSERT INTO public.evaluations (created_at, updated_at, id, campagne_id, termine
 INSERT INTO public.evaluations (created_at, updated_at, id, campagne_id, terminee_le, debutee_le, synthese_competences_de_base, niveau_cefr, niveau_cnef, niveau_anlci_litteratie, niveau_anlci_numeratie, completude, beneficiaire_id, deleted_at, statut, responsable_suivi_id, positionnement_niveau_litteratie, positionnement_niveau_numeratie, redactions, type) VALUES
 	('2026-11-05 10:12:34.518207', '2026-11-05 10:13:10.371839', 'a6b87e69-0536-4ba6-8fda-e3e8215fc0ef', 'cca8ba2c-33a5-4e79-b2da-2ec9b915530c', NULL, '2026-11-05 10:12:33.849105', NULL, NULL, NULL, NULL, NULL, 'incomplete', '72cac66c-6051-408d-a5c3-cab6660f2909', NULL, '0', NULL, NULL, NULL, NULL, 'EvaluationEvapro');
 
+INSERT INTO public.evaluations (created_at, updated_at, id, campagne_id, terminee_le, debutee_le, synthese_competences_de_base, niveau_cefr, niveau_cnef, niveau_anlci_litteratie, niveau_anlci_numeratie, completude, beneficiaire_id, deleted_at, statut, responsable_suivi_id, positionnement_niveau_litteratie, positionnement_niveau_numeratie, redactions, type) VALUES
+	('2026-11-04 10:12:34.518207', '2026-11-04 10:12:34.838786', '84c185e4-9db0-4b71-a9c7-99c1feda7a21', 'cca8ba2c-33a5-4e79-b2da-2ec9b915530c', NULL, '2026-11-04 10:12:33.849105', NULL, NULL, NULL, NULL, NULL, 'incomplete', '72cac66c-6051-408d-a5c3-cab6660f2909', NULL, '0', NULL, NULL, NULL, NULL, 'EvaluationEvapro');
+
 INSERT INTO public.conditions_passations (id, materiel_utilise, modele_materiel, nom_navigateur, version_navigateur, evaluation_id, created_at, updated_at, user_agent, hauteur_fenetre_navigation, largeur_fenetre_navigation, deleted_at) VALUES
 	('d6038329-1a91-4954-bca6-35b8411fbbd7', 'desktop', NULL, 'Firefox', '157.0', '2c3f769c-6ced-4b50-b2e2-890313fd9e7c', '2026-10-12 15:36:58.020497', '2026-10-12 15:36:58.020497', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0', '1063', '1387', NULL);
 
@@ -86633,6 +86636,9 @@ INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, e
 INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, evaluation_id, situation_id, deleted_at, synthese, competences, competences_de_base) VALUES
 	('ff15eb07-ff28-41fa-9ec6-bde3ca8f051c', '068d563c-2b43-4ddc-a923-47514c329d89', '{}', '2026-11-05 10:12:34.830524', '2026-11-05 10:13:10.371839', 'a6b87e69-0536-4ba6-8fda-e3e8215fc0ef', '592ec5a0-2c81-4550-a9f5-eb26274753a3', NULL, '{"pourcentage_risque": 50}', '{}', '{}');
 
+INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, evaluation_id, situation_id, deleted_at, synthese, competences, competences_de_base) VALUES
+	('9e0987bb-1f5e-47a0-adb6-0e2fa3e6000a', '8cae525f-d613-4294-bd8d-313b6104789b', '{}', '2026-11-04 10:12:34.830524', '2026-11-04 10:12:34.838786', '84c185e4-9db0-4b71-a9c7-99c1feda7a21', '592ec5a0-2c81-4550-a9f5-eb26274753a3', NULL, '{}', '{}', '{}');
+
 
 --
 -- Data for Name: conditions_passations; Type: TABLE DATA; Schema: public; Owner: -
@@ -86644,6 +86650,9 @@ INSERT INTO public.conditions_passations (id, materiel_utilise, modele_materiel,
 
 INSERT INTO public.conditions_passations (id, materiel_utilise, modele_materiel, nom_navigateur, version_navigateur, evaluation_id, created_at, updated_at, user_agent, hauteur_fenetre_navigation, largeur_fenetre_navigation, deleted_at) VALUES
 	('bea2a5e6-4eea-4610-88e8-8cd119f08645', 'desktop', NULL, 'Chrome', '148.0.0.0', 'a6b87e69-0536-4ba6-8fda-e3e8215fc0ef', '2026-11-05 10:12:34.523664', '2026-11-05 10:12:34.523664', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '1262', '2221', NULL);
+
+INSERT INTO public.conditions_passations (id, materiel_utilise, modele_materiel, nom_navigateur, version_navigateur, evaluation_id, created_at, updated_at, user_agent, hauteur_fenetre_navigation, largeur_fenetre_navigation, deleted_at) VALUES
+	('d8565618-cec4-45ab-87b7-2ec1d28c9c9f', 'desktop', NULL, 'Chrome', '148.0.0.0', '84c185e4-9db0-4b71-a9c7-99c1feda7a21', '2026-11-04 10:12:34.523664', '2026-11-04 10:12:34.523664', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', '1262', '2221', NULL);
 
 
 --
@@ -87073,4 +87082,7 @@ INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, sessi
 	('affichageQuestionQCM', '{"question": "Q1TO04"}', '2026-11-05 10:13:04.473105', '2026-11-05 10:13:04.489052', '2026-11-05 10:13:04.489052', '068d563c-2b43-4ddc-a923-47514c329d89', '041c8943-5828-417c-a615-2f287ea6b0db', '38', NULL),
 	('reponse', '{"score": 0, "reponse": "Q1TO04R03", "intitule": "Je ne sais pas", "question": "Q1TO04", "scoreMax": 0, "nom_technique": "Q1TO04R03"}', '2026-11-05 10:13:05.349105', '2026-11-05 10:13:05.368761', '2026-11-05 10:13:05.368761', '068d563c-2b43-4ddc-a923-47514c329d89', '9893d218-bd18-47ac-a3ea-35250f1bc100', '39', NULL),
 	('finSituation', '"{}"', '2026-11-05 10:13:05.378105', '2026-11-05 10:13:05.396246', '2026-11-05 10:13:05.396246', '068d563c-2b43-4ddc-a923-47514c329d89', '7675903a-9e92-4686-b215-7a4d311e5c48', '40', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('demarrage', '"{}"', '2026-11-04 10:12:34.798105', '2026-11-04 10:12:34.838786', '2026-11-04 10:12:34.838786', '8cae525f-d613-4294-bd8d-313b6104789b', '30faaca1-1fb7-4eb8-b7f8-7b8f59a4771b', '0', NULL);
 

@@ -259,4 +259,26 @@ completude: :incomplete)
       end
     end
   end
+
+  describe "#afficher_lettre_risque_index_evapro" do
+    let(:evaluation) { instance_double(EvaluationEvapro, id: 1, complete?: false) }
+
+    context "quand le pourcentage de risque est connu sur une évaluation incomplète" do
+      let(:synthese_evapro) { { pourcentage_risque: 50, score_cout: nil } }
+
+      it "affiche le score de risque" do
+        expect(helper.afficher_lettre_risque_index_evapro(evaluation, synthese_evapro))
+          .to include("eva-pro-score")
+      end
+    end
+
+    context "quand le pourcentage de risque est inconnu" do
+      let(:synthese_evapro) { { pourcentage_risque: nil, score_cout: nil } }
+
+      it "affiche un tiret" do
+        expect(helper.afficher_lettre_risque_index_evapro(evaluation, synthese_evapro))
+          .to eq("-")
+      end
+    end
+  end
 end

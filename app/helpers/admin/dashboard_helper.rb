@@ -73,7 +73,7 @@ module Admin
     def afficher_lettre_risque_index_evapro(evaluation, synthese_evapro)
       lettre_risque = Admin::DashboardHelper.instance_method(:lettre_risque_pour).bind(self)
         .call(evaluation, synthese_evapro)
-      if lettre_risque.present? && evaluation.complete?
+      if lettre_risque.present?
         render EvaProScoreComponent.new(score: lettre_risque)
       else
         "-"

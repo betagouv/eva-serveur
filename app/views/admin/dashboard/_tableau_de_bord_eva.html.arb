@@ -47,7 +47,7 @@ if evaluations.present?
       end
       column do
         render "admin/dashboard/mise_en_action/bloc_evaluations_sans_mise_en_action",
-               evaluations: evaluations_sans_mise_en_action
+               evaluation: evaluation_a_suivre
       end
     end
   end

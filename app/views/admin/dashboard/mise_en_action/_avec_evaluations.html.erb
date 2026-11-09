@@ -1,34 +1,29 @@
 <div class="contenu-avec-evaluations">
-  <div class="titre-panel-avec-bouton bg-orange fr-p-6v fr-mb-0">
+  <div class="titre-panel-avec-bouton fr-p-6v fr-mb-0">
     <h3><%= t(".titre") %></h3>
-    <%= render(BoutonDsfrComponent.new(admin_evaluations_eva_path(scope: :illettrisme_potentiel))) do %>
-      <%= t(".action") %>
-    <% end %>
+    <%= link_to t(".voir_tout"),
+        admin_evaluations_eva_path(scope: :illettrisme_potentiel),
+        class: "fr-btn fr-btn--secondary fr-btn--md" %>
   </div>
-  <div class='fr-px-4v'>
-    <div class='d-flex align-items-center question'>
-      <%= image_tag "point_interrogation.svg", class: "fr-mr-4v", alt: "" %>
-      <div>
-        <%= md(t(".introduction")) %>
-        <span id="question-diagnostics"><%= md(t(".question")) %></span>
-      </div>
+  <div class="fr-px-4v fr-py-4v">
+    <%= render(EnteteMiseEnActionComponent.new(evaluation: evaluation, avec_lien_evaluation: true)) %>
+    <p class="fr-mt-4v"><%= t(".introduction") %></p>
+    <div class="fr-mt-4v d-flex gap-3">
+      <%= button_to t(".bouton_oui"),
+          repondre_suivi_tableau_de_bord_admin_evaluation_eva_path(evaluation),
+          method: :put,
+          params: { mise_en_action_effectuee: "true" },
+          class: "fr-btn fr-btn--md" %>
+      <%= button_to t(".bouton_non"),
+          repondre_suivi_tableau_de_bord_admin_evaluation_eva_path(evaluation),
+          method: :put,
+          params: { mise_en_action_effectuee: "false" },
+          class: "fr-btn fr-btn--secondary fr-btn--md" %>
+      <%= button_to t(".bouton_pas_encore"),
+          repondre_suivi_tableau_de_bord_admin_evaluation_eva_path(evaluation),
+          method: :put,
+          params: { mise_en_action_effectuee: MiseEnAction::REPONSE_PAS_ENCORE },
+          class: "fr-btn fr-btn--tertiary fr-btn--md" %>
     </div>
-    <ul class='fr-mb-0'>
-      <% evaluations.each_with_index do |evaluation, index| %>
-        <% mise_en_action_presenter = evaluation.mise_en_action_presenter %>
-        <%= render(CarteMiseEnAction.new(evaluation,
-                                         carte_deroulee: mise_en_action_presenter.mise_en_action_avec_qualification?)) do %>
-          <%= render(Qcm.new(evaluation,
-                             MiseEnAction::Questionnaire.new(:remediation),
-                             qcm_affiche: mise_en_action_presenter.effectuee_sans_remediation?,
-                             priorite: evaluations.size - index.to_i)) %>
-          <%= render(Qcm.new(evaluation,
-                             MiseEnAction::Questionnaire.new(:difficulte),
-                             qcm_affiche: mise_en_action_presenter.non_effectuee_sans_difficulte?,
-                             priorite: evaluations.size - index.to_i)) %>
-        <% end %>
-      <% end %>
-    </ul>
-    <%= render BanniereSolutionsIllettrismeComponent.new(current_compte: current_compte) %>
   </div>
 </div>

@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Dashboard" do
   controller do
     include EtapeInscriptionHelper
 
-    helper_method :evaluations_eva, :evaluations_sans_mise_en_action, :prise_en_main,
+    helper_method :evaluations_eva, :evaluation_a_suivre, :prise_en_main,
       :campagnes, :campagnes_entreprise, :evaluations_entreprise,
       :cinq_dernieres_evaluations_completes, :comptes_en_attente,
       :actualites, :support
@@ -72,9 +72,9 @@ ActiveAdmin.register_page "Dashboard" do
         .limit(10)
     end
 
-    def evaluations_sans_mise_en_action
-      @evaluations_sans_mise_en_action ||=
-        EvaluationsEva::TableauDeBordMisesEnAction.relation(current_ability).limit(6)
+    def evaluation_a_suivre
+      @evaluation_a_suivre ||=
+        EvaluationsEva::TableauDeBordMisesEnAction.relation(current_ability).first
     end
 
     def actualites

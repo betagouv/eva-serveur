@@ -179,6 +179,17 @@ ActiveAdmin.register EvaluationEva do
     end
   end
 
+  member_action :repondre_suivi_tableau_de_bord, method: :put do
+    effectuee = case params[:mise_en_action_effectuee]
+                when MiseEnAction::REPONSE_PAS_ENCORE then nil
+                when "true" then true
+                when "false" then false
+                end
+    resource.enregistre_mise_en_action(effectuee)
+    redirect_to admin_dashboard_path,
+                flash: { success: I18n.t("admin.dashboard.mise_en_action.repondre_succes") }
+  end
+
 
   member_action :ajouter_responsable_suivi, method: :post do
     responsable = Compte.find_by(id: params["responsable_suivi_id"])

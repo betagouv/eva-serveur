@@ -1,6 +1,6 @@
 div class: "evaluations-sans-mise-en-action panel fr-p-0 border-orange" do
-  if evaluations.present?
-    render "admin/dashboard/mise_en_action/avec_evaluations", evaluations: evaluations
+  if evaluation.present?
+    render "admin/dashboard/mise_en_action/avec_evaluations", evaluation: evaluation
   else
     render "admin/dashboard/mise_en_action/sans_evaluations"
   end

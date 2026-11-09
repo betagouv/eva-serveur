@@ -10,4 +10,7 @@
       <%= render resultat %>
     <% end %>
   </div>
+  <% if lien_evaluation? %>
+    <%= link_to t("entete_mise_en_action.voir_evaluation"), chemin_evaluation, class: "fr-link" %>
+  <% end %>
 </div>

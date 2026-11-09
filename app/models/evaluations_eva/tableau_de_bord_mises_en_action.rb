@@ -5,8 +5,7 @@ module EvaluationsEva
                 .mise_en_action_a_renseigner
                 .competences_de_base_completes
                 .non_anonymes
-                .order(created_at: :desc)
-                .includes(:mise_en_action)
+                .order(Arel.sql("mises_en_action.repondue_le NULLS FIRST, evaluations.created_at ASC"))
     end
   end
 end

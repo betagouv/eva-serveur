@@ -8,10 +8,10 @@ fr:
 
         Notez que plusieurs utilisateurs peuvent utiliser ce compte en même temps et que tout ce qui est créé avec **ce compte est effacé quotidiennement**.
 
-        **Attention !** N'utilisez pas ce compte pour faire des évaluations avec vos bénéficiaires.
+        **Attention !** N'utilisez pas ce compte pour faire des évaluations avec vos bénéficiaires.
       modal_confirmation_cgu:
         titre: "Conditions Générales d'Utilisation"
-        information_cgu: "Les conditions générales d’utilisation du service eva sont consultables ici :"
+        information_cgu: "Les conditions générales d’utilisation du service eva sont consultables ici :"
         demande_acceptation: "Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva."
         bouton_acceptation_cgu: "J’ai lu et j’accepte les CGU"
         ouverture_initiale_libelle_bouton: "Ouverture automatique de la fenêtre des conditions générales d’utilisation"
@@ -59,26 +59,19 @@ fr:
       evaluation:
         action: Voir
       mise_en_action:
+        repondre_succes: "Suivi mis à jour."
         sans_evaluations:
-          titre: Diagnostics d’illettrisme potentiel
-          action: Aucun
-          description: |
-            **Les évaluations eva permettent de mettre en évidence les situations d’illettrisme. Vous retrouverez ici les bénéficiaires concernés.**
-
-            Nos équipes peuvent vous aider dans cette démarche d’accompagnement.
-          presentation_pistes: |
-            Voici les pistes de solutions disponibles dans votre région  
-            (ateliers, formations, ré-orientations, accompagnement social…) :
+          titre: Suivi des bénéficiaires
+          message: "Tout est à jour, merci !"
         avec_evaluations:
-          titre: Diagnostics d’illettrisme potentiel
-          action: "Voir tout"
-          introduction: |
-            Au sein de votre structure, ces personnes semblent avoir  
-            besoin d’accompagnement.
-          question: |
-            **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
+          titre: Suivi des bénéficiaires
+          voir_tout: "Voir tout"
+          introduction: "Cette personne présente un diagnostic d’illettrisme potentiel. Avez-vous pu l’orienter ?"
+          bouton_oui: "Oui"
+          bouton_non: "Non"
+          bouton_pas_encore: "Pas encore"
       prise_en_main:
-        titre: Bienvenue sur eva !
+        titre: Bienvenue sur eva !
         quitter: Quitter le tutoriel
         terminer: Fermer le tutoriel
       validation_necessaire:
@@ -88,7 +81,7 @@ fr:
 
           Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
 
-          Vous pensez que cette personne est momentanément absente ?
+          Vous pensez que cette personne est momentanément absente ?
           Vous pouvez contacter le support par mail à [%{email}](mailto:%{email})
       validation_refusee:
         titre: Votre compte est refusé.
@@ -102,7 +95,7 @@ fr:
         intro_apres_premiere_reponse_paragraphe_1: |
           Vous avez terminé votre questionnaire. Les éléments ci-dessous s'appuient sur les réponses déjà collectées pour votre entreprise.
         intro_apres_premiere_reponse_paragraphe_2: |
-          Pour obtenir une vision plus fiable de la situation de votre entreprise, invitez des managers, des RH ou des représentants du personnel à répondre. Nous recommandons 3 à 5 répondants.
+          Pour obtenir une vision plus fiable de la situation de votre entreprise, invitez des managers, des RH ou des représentants du personnel à répondre. Nous recommandons 3 à 5 répondants.
         inviter_collegues_bouton: "Inviter mes collègues à répondre"
         premier_questionnaire_titre: "Passez votre premier questionnaire !"
         premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.

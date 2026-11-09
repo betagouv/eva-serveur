@@ -1,6 +1,15 @@
 class EnteteMiseEnActionComponent < ViewComponent::Base
-  def initialize(evaluation:)
+  def initialize(evaluation:, avec_lien_evaluation: false)
     @evaluation = evaluation
+    @avec_lien_evaluation = avec_lien_evaluation
+  end
+
+  def lien_evaluation?
+    @avec_lien_evaluation
+  end
+
+  def chemin_evaluation
+    helpers.admin_evaluation_eva_path(@evaluation)
   end
 
   def date_evaluation

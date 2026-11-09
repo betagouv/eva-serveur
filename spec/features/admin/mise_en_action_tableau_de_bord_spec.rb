@@ -49,22 +49,26 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
     end
 
     context "quand on répond Oui" do
-      it "enregistre la réponse et affiche le message tout est à jour" do
+      it "enregistre la réponse et redirige avec un flash de confirmation" do
         visit admin_path
         click_button I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui")
         expect(evaluation_a_suivre.reload.mise_en_action.effectuee).to be(true)
-        message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
-        expect(page).to have_content(message, normalize_ws: true)
+        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.repondre_succes"))
+        expect(page).not_to have_button(
+          I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui")
+        )
       end
     end
 
     context "quand on répond Non" do
-      it "enregistre la réponse et affiche le message tout est à jour" do
+      it "enregistre la réponse et redirige avec un flash de confirmation" do
         visit admin_path
         click_button I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_non")
         expect(evaluation_a_suivre.reload.mise_en_action.effectuee).to be(false)
-        message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
-        expect(page).to have_content(message, normalize_ws: true)
+        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.repondre_succes"))
+        expect(page).not_to have_button(
+          I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_non")
+        )
       end
     end
 
@@ -86,10 +90,11 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
       evaluation_a_suivre.enregistre_mise_en_action(true)
     end
 
-    it "affiche le message tout est à jour" do
+    it "n'affiche pas les boutons de réponse" do
       visit admin_path
-      message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
-      expect(page).to have_content(message, normalize_ws: true)
+      expect(page).not_to have_button(
+        I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui")
+      )
     end
   end
 end

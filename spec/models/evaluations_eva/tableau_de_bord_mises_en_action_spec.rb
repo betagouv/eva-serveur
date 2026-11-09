@@ -44,7 +44,7 @@ RSpec.describe EvaluationsEva::TableauDeBordMisesEnAction do
     it "met les évaluations sans réponse en premier, les 'Pas encore' en dernier" do
       ability = Ability.new(compte_admin)
       expect(described_class.relation(ability).pluck(:id))
-        .to eq([evaluation_sans_mise_en_action.id, evaluation_pas_encore.id])
+        .to eq([ evaluation_sans_mise_en_action.id, evaluation_pas_encore.id ])
     end
   end
 end

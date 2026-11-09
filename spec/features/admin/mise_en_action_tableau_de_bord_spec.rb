@@ -29,9 +29,15 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
     it "affiche le nom du bénéficiaire avec les 3 boutons de réponse" do
       visit admin_path
       expect(page).to have_content("Dupont")
-      expect(page).to have_button(I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui"))
-      expect(page).to have_button(I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_non"))
-      expect(page).to have_button(I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_pas_encore"))
+      expect(page).to have_button(
+        I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui")
+      )
+      expect(page).to have_button(
+        I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_non")
+      )
+      expect(page).to have_button(
+        I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_pas_encore")
+      )
     end
 
     it "propose un lien vers toutes les évaluations illettrisme potentiel" do
@@ -47,7 +53,8 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
         visit admin_path
         click_button I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_oui")
         expect(evaluation_a_suivre.reload.mise_en_action.effectuee).to be(true)
-        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message"), normalize_ws: true)
+        message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
+        expect(page).to have_content(message, normalize_ws: true)
       end
     end
 
@@ -56,7 +63,8 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
         visit admin_path
         click_button I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_non")
         expect(evaluation_a_suivre.reload.mise_en_action.effectuee).to be(false)
-        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message"), normalize_ws: true)
+        message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
+        expect(page).to have_content(message, normalize_ws: true)
       end
     end
 
@@ -66,7 +74,9 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
         click_button I18n.t("admin.dashboard.mise_en_action.avec_evaluations.bouton_pas_encore")
         expect(evaluation_a_suivre.reload.mise_en_action.effectuee).to be_nil
         expect(evaluation_a_suivre.reload.mise_en_action.repondue_le).not_to be_nil
-        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.avec_evaluations.titre"))
+        expect(page).to have_content(
+          I18n.t("admin.dashboard.mise_en_action.avec_evaluations.titre")
+        )
       end
     end
   end
@@ -78,7 +88,8 @@ describe "Dashboard - Suivi des bénéficiaires", type: :feature do
 
     it "affiche le message tout est à jour" do
       visit admin_path
-      expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message"), normalize_ws: true)
+      message = I18n.t("admin.dashboard.mise_en_action.sans_evaluations.message")
+      expect(page).to have_content(message, normalize_ws: true)
     end
   end
 end

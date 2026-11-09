@@ -105,6 +105,15 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
 
+  jest:
+    executor: ruby-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Tests JavaScript (Jest)
+          command: npm run test:js
+
   stylelint:
     executor: ruby-executor
     steps:
@@ -186,8 +195,12 @@ workflows:
       - stylelint:
           requires:
             - build
+      - jest:
+          requires:
+            - build
       - rspec:
           requires:
             - seed
             - rubocop
             - stylelint
+            - jest

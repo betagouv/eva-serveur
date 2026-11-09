@@ -29,6 +29,7 @@ The `reviewapp:*` tasks abort when `APP=eva-serveur` (production).
 ### Testing
 ```bash
 bundle exec rake spec        # Run full test suite
+npm run test:js             # Run JavaScript tests (Jest, spec/javascript)
 bundle exec guard           # Continuous testing with file watching
 bin/rspec spec/path/file_spec.rb  # Run single test file
 bundle exec rake validation  # Full pre-commit validation (see below)
@@ -38,7 +39,8 @@ bundle exec rake validation  # Full pre-commit validation (see below)
 1. `bundle exec rubocop -A`: lints Ruby and **auto-corrects** files (including unsafe corrections)
 2. `rake locale_typography`: checks non-breaking spaces in translations (before `:` `!` `?`, after `«` and before `»`)
 3. `npm run lint:css`: stylelint on `app/assets/stylesheets/**/*.scss`
-4. `bundle exec rspec`: full test suite
+4. `npm run test:js`: Jest tests
+5. `bundle exec rspec`: full test suite
 
 ### Development Server
 ```bash

@@ -4,6 +4,7 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "roots": ["<rootDir>/spec/javascript", "<rootDir>/app/assets/javascripts"],
     "testMatch": ["**/spec/javascript/**/*.test.js"]
   },
   "devDependencies": {

@@ -4,8 +4,7 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "roots": ["<rootDir>/spec/javascript", "<rootDir>/app/assets/javascripts"],
-    "testMatch": ["**/spec/javascript/**/*.test.js"]
+    "roots": ["<rootDir>/spec/javascript", "<rootDir>/app/assets/javascripts"]
   },
   "devDependencies": {
     "eslint": "^8.8.0",

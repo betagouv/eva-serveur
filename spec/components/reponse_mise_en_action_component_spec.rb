@@ -26,7 +26,7 @@ describe ReponseMiseEnActionComponent, type: :component do
       it "affiche la date de réponse" do
         expect(page).to have_css(".mise-en-action-repondue__date",
                                  text: I18n.t("reponse_mise_en_action.repondue_le",
-                                              date: "27/10/2026"))
+                                              date: "27/10/2026", auteur: "", origine: ""))
       end
 
       it "affiche la réponse et l'aide choisie" do

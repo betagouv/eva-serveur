@@ -76,10 +76,17 @@ describe Beneficiaires::EnregistreSuiviGroupe do
                **attributs_concernee, debutee_le: "2020-06-01"
       end
 
-      it "enregistre la mise en action sur l'évaluation la plus récente uniquement" do
+      it "n'enregistre qu'une déclaration, depuis l'évaluation la plus récente" do
         service(effectuee: "true").call
-        expect(evaluation_concernee.reload.mise_en_action).to be_present
-        expect(evaluation_ancienne.reload.mise_en_action).to be_nil
+        expect(MiseEnAction.where(beneficiaire: beneficiaire).count).to eq(1)
+        expect(evaluation_concernee.reload.mise_en_action.evaluation_id)
+          .to eq(evaluation_concernee.id)
+      end
+
+      it "vaut aussi pour les autres évaluations de la personne dans la structure" do
+        service(effectuee: "true").call
+        expect(evaluation_ancienne.reload.mise_en_action)
+          .to eq(evaluation_concernee.reload.mise_en_action)
       end
     end
 

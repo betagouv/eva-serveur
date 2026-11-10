@@ -85,6 +85,14 @@ class Compte < ApplicationRecord
     [ prenom, nom ].compact_blank.join(" ")
   end
 
+  # Prénom et initiale du nom, pour nommer l'auteur d'une action sans l'identifier en entier
+  def nom_abrege
+    initiale = nom.presence&.first
+    return display_name if prenom.blank? || initiale.blank?
+
+    "#{prenom} #{initiale.upcase}."
+  end
+
   def anlci?
     ANLCI_ROLES.include?(role)
   end

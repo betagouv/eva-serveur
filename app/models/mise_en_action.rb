@@ -14,9 +14,16 @@ class MiseEnAction < ApplicationRecord
   CHOIX_DATE_PRECISE = "date_precise".freeze
   CHOIX_DATE_REVUE = [ *DELAIS_REVUE.keys, CHOIX_DATE_PRECISE ].freeze
 
+  # L'évaluation depuis laquelle la réponse a été donnée ; la mise en action, elle, vaut
+  # pour le bénéficiaire dans sa structure (EVA-1186)
   belongs_to :evaluation
+  belongs_to :beneficiaire
+  belongs_to :structure
+  belongs_to :repondue_par, class_name: "Compte", optional: true
 
-  validates :evaluation_id, uniqueness: true
+  validates :beneficiaire_id,
+            uniqueness: { scope: :structure_id, conditions: -> { en_cours } },
+            if: :en_cours?
   validate :qualification_coherente_avec_la_reponse
   validate :precision_presente_si_autre
   validate :date_revue_presente_si_date_precise
@@ -35,14 +42,31 @@ class MiseEnAction < ApplicationRecord
 
   acts_as_paranoid
 
+  scope :en_cours, -> { where(remplacee_le: nil) }
   scope :repondues_pas_encore, -> { where(effectuee: nil).where.not(repondue_le: nil) }
   scope :reportees, -> { repondues_pas_encore.where("date_revue > ?", Date.current) }
+
+  # La déclaration qui vaut aujourd'hui pour cette personne dans cette structure
+  def self.en_cours_pour(beneficiaire_id, structure_id)
+    return if beneficiaire_id.blank? || structure_id.blank?
+
+    en_cours.find_by(beneficiaire_id: beneficiaire_id, structure_id: structure_id)
+  end
 
   def self.pas_encore_actif?
     # L'option "Pas encore" est activée si la variable d'environnement est définie
     # On peut supprimer cette vérification une fois l'ensemble de la feature livrée.
     # Sert de protection pour la prochaine mise en prod
     ENV["ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS"].present?
+  end
+
+  def en_cours?
+    remplacee_le.nil?
+  end
+
+  # Conservée pour les statistiques de l'ANLCI et un futur historique, mais plus affichée
+  def remplace!
+    update_column(:remplacee_le, Time.zone.now)
   end
 
   def repondu_oui?
@@ -148,14 +172,32 @@ class MiseEnAction < ApplicationRecord
     I18n.t("reponse_mise_en_action.relance_prevue", date: I18n.l(date_revue, format: :short))
   end
 
-  def libelle_repondue_le
+  # La réponse peut avoir été donnée depuis une autre évaluation de la personne : l'évaluation
+  # d'origine est alors rappelée (EVA-1186)
+  def libelle_repondue_le(evaluation_affichee = nil)
     return if repondue_le.blank?
 
     I18n.t("reponse_mise_en_action.repondue_le",
-           date: I18n.l(repondue_le.to_date, format: :short))
+           date: I18n.l(repondue_le.to_date, format: :short),
+           auteur: libelle_auteur,
+           origine: libelle_evaluation_origine(evaluation_affichee))
   end
 
   private
+
+  def libelle_auteur
+    return "" if repondue_par.blank?
+
+    I18n.t("reponse_mise_en_action.auteur", compte: repondue_par.nom_abrege)
+  end
+
+  def libelle_evaluation_origine(evaluation_affichee)
+    return "" if evaluation_affichee.blank? || evaluation_affichee.id == evaluation_id
+    return "" if evaluation&.debutee_le.blank?
+
+    I18n.t("reponse_mise_en_action.origine",
+           date: I18n.l(evaluation.debutee_le.to_date, format: :short))
+  end
 
   def date_revue_selon(choix_date_revue, date_precise)
     return date_precise if choix_date_revue == CHOIX_DATE_PRECISE

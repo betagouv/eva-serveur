@@ -43,7 +43,10 @@ function fermeQcm(evaluationId) {
   $(`#${evaluationId} .qcm`).addClass('hidden');
 }
 
+// Modifier la réponse enregistre une nouvelle déclaration : la précédente est conservée
+// et marquée « remplacée » côté serveur (EVA-1186)
 function modifieReponseMiseEnAction(evaluationId) {
+  document.getElementById(evaluationId).dataset.modification = 'true';
   $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
@@ -51,9 +54,12 @@ function modifieReponseMiseEnAction(evaluationId) {
 
 function enregistreReponseMiseEnAction(evaluationId, bouton) {
   const reponse = bouton.data('reponse');
+  const carte = document.getElementById(evaluationId);
   const data = {
-    mise_en_action_effectuee: reponse
+    mise_en_action_effectuee: reponse,
+    modification: carte.dataset.modification === 'true'
   };
+  delete carte.dataset.modification;
   $.ajax({
     method: 'PUT',
     url: chemin_mise_en_action.replace('ID_EVALUATION', evaluationId),

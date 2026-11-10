@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_04_100000) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_10_180001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -295,8 +295,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_04_100000) do
     t.date "date_revue"
     t.text "precision_autre"
     t.string "choix_date_revue"
+    t.uuid "beneficiaire_id"
+    t.uuid "structure_id"
+    t.uuid "repondue_par_id"
+    t.datetime "remplacee_le"
+    t.index ["beneficiaire_id", "structure_id"], name: "index_mises_en_action_en_cours_par_beneficiaire_et_structure", unique: true, where: "((deleted_at IS NULL) AND (remplacee_le IS NULL))"
+    t.index ["beneficiaire_id"], name: "index_mises_en_action_on_beneficiaire_id"
     t.index ["deleted_at"], name: "index_mises_en_action_on_deleted_at"
     t.index ["evaluation_id"], name: "index_mises_en_action_on_evaluation_id"
+    t.index ["repondue_par_id"], name: "index_mises_en_action_on_repondue_par_id"
+    t.index ["structure_id"], name: "index_mises_en_action_on_structure_id"
   end
 
   create_table "opcos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

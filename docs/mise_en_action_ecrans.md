@@ -1,46 +1,39 @@
-# Mise en action : deux écrans en transition
+# Mise en action : une seule carte, deux écrans
 
-Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (voir **Mise en action** dans `CONTEXT.md`) depuis deux écrans. Ils posent la même question, enregistrent via les mêmes endpoints, mais n'ont ni les mêmes composants ni le même JS.
+Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (voir **Mise en action** dans `CONTEXT.md`) depuis deux écrans, qui affichent **la même carte** `SuiviAccompagnementIllettrismeComponent` et partagent le même JS (`mise_en_action.js.erb` + `suivi_accompagnement_illettrisme.js`).
 
-- **Fiche évaluation** : la carte « Suivi de l'accompagnement » (EVA-1152), nouvelle interface.
-- **Tableau de bord** : la liste des mises en action, ancienne interface, appelée à passer sur la carte de la fiche (EVA-1156).
+- **Fiche évaluation** (EVA-1152) : la carte « Suivi de l'accompagnement » de l'évaluation consultée.
+- **Tableau de bord** (EVA-1156) : le bloc « Suivi des bénéficiaires », qui propose **une personne à la fois**.
 
 ## Ce qui est commun
 
 - **Endpoints** (`app/admin/evaluation_eva.rb`) :
   - `PUT mise_en_action` : réponse Oui / Non / Pas encore (`MiseEnAction::REPONSE_PAS_ENCORE`). Pas encore répond 204, sans contenu ;
-  - `PATCH renseigner_date_revue` : date de revue de Pas encore (`date_revue` et `choix_date_revue`). Répond 200 avec `relance_prevue` et `repondue_le`, ou 422 avec `erreur`. Fiche évaluation seulement (ADR 0003) ;
+  - `PATCH renseigner_date_revue` : date de revue de Pas encore (`date_revue` et `choix_date_revue`). Répond 200 avec `relance_prevue` et `repondue_le`, ou 422 avec `erreur` ;
   - `PATCH renseigner_qualification` : type d'aide ou raison (`qualification`, et `precision_autre` pour « Autre »). Répond 200 avec `qualification` (libellé à afficher) et `repondue_le`, ou 422 avec `erreur` (message à afficher).
 - **Choix proposés** : `MiseEnAction::Questionnaire`. Un choix ajouté au modèle apparaît sur les deux écrans.
 - **Règles** : dans `MiseEnAction` (cohérence avec la réponse, précision obligatoire avec « Autre », effacement de la précision). Le JS n'en valide aucune : il affiche ce que le serveur renvoie.
 - **« Pas encore » s'appelait « je ne sais pas »** : les noms du code ont été renommés (`REPONSE_PAS_ENCORE`, valeur `pas_encore`, `pas_encore_actif?`, `pas_encore_affiche?`, clés de traduction `*_pas_encore`). Seule la variable d'environnement qui active la fonctionnalité garde son nom, pour ne pas changer la configuration des environnements : `ACTIVE_MISE_EN_ACTION_JE_NE_SAIS_PAS`.
-- **JS** : `app/assets/javascripts/mise_en_action.js.erb` déclare les chemins et constantes venant de Ruby et les fonctions partagées (`ouvreQcm`, `fermeQcm`, `ecouteBoutons`…). Les deux autres fichiers l'utilisent : il doit être inclus en premier dans `active_admin.js`.
+- **JS** : `mise_en_action.js.erb` déclare les chemins et constantes venant de Ruby et les fonctions partagées (`ouvreQcm`, `fermeQcm`, `ecouteBoutons`…). `suivi_accompagnement_illettrisme.js` l'utilise : il doit être inclus après lui dans `active_admin.js`.
 
-## Ce qui diffère
+## Ce que le tableau de bord ajoute
 
-| | Tableau de bord | Fiche évaluation |
+`SuiviAccompagnementIllettrismeComponent.new(evaluation:, tableau_de_bord: true)` :
+
+| | Fiche évaluation | Tableau de bord |
 |---|---|---|
-| JS | `mise_en_action_tableau_de_bord.js` | `suivi_accompagnement_illettrisme.js` |
-| Composant des choix | `Qcm` : boutons radio | `QualificationMiseEnActionComponent` : tags DSFR |
-| Choisir | Cocher n'envoie rien, active « Valider » (pour « Autre », une fois « Précisez » rempli) | Le clic sur un tag enregistre aussitôt, sauf « Autre » |
-| Enregistrer | « Valider » | Clic sur le tag, ou « Enregistrer » pour « Autre » |
-| Ne pas qualifier | « Ignorer » enregistre `indetermine` | Impossible |
-| Libellé affiché après enregistrement | Aucun, « Autre » compris | Renvoyé par le serveur (`qualification`) |
-| Date « Répondu le » | Non mise à jour sans recharger | Mise à jour depuis la réponse |
-| Erreur 422 | Affichée sous le champ « Précisez » | Affichée sous le champ « Précisez » |
-| Champ « Précisez » | Apparaît quand « Autre » est coché, sans réserver sa place | Place réservée, masqué avec `visibility: hidden` (maquette) |
-| Modifier une réponse « Autre » | Retrouvée en JS pendant la visite (`data-precision-enregistree`) : l’évaluation quitte le tableau de bord au rechargement | Retrouvée depuis la base au chargement de la page |
-| Modifier la réponse avant de qualifier | Non | Lien « Modifier la réponse » |
-| Pas encore | Sans choix de date ; l'évaluation reportée quitte la liste jusqu'à sa date de revue | Choix de la date de revue (`DateRevueMiseEnActionComponent`), puis « Relance prévue le… » ; à la date de revue, la question est reposée |
+| En-tête | large, sans lien | compact, avec « Voir l'évaluation » (`EnteteMiseEnActionComponent`, `compact:` et `lien_evaluation:`) |
+| Personnes | l'évaluation consultée | la première de `EvaluationsEva::TableauDeBordMisesEnAction`, une à la fois |
+| Après une réponse complète | la confirmation remplace la question | `data-personne-suivante` : le JS recharge `/admin?suivi_enregistre=<id>`, qui remercie le pro et propose la personne suivante |
+| Plus rien à renseigner | — | écran « Tout est à jour, merci » (`_tout_a_jour.html.erb`) |
 
 ## Pièges connus
 - **Le DSFR gère `aria-pressed`.** Un tag DSFR avec `aria-pressed` est un tag sélectionnable : le DSFR inverse lui-même l'attribut au clic. Ne pas le poser aussi en JS au clic sur ce tag, les deux s'annulent. Le poser seulement quand un autre élément change l'état (un autre choix qui désélectionne « Autre »).
 - **Le message d'erreur vient du serveur.** Le JS ne contrôle pas le champ vide : il envoie, et affiche l'`erreur` de la 422. Le texte n'existe donc qu'une fois, dans les traductions du modèle. Vaut pour « Précisez » et pour la date de revue (`afficheErreurChamp`).
 - **Dans les tests de feature, attendre la réponse du serveur avant de cliquer à nouveau.** Après un clic qui enregistre (une puce, « Enregistrer »), attendre que la confirmation s'affiche avant « Modifier la réponse » : sinon la réponse du serveur arrive après et réaffiche la confirmation par-dessus la question.
+- **Sur le tableau de bord, la confirmation n'est jamais affichée** : la page est rechargée dès que le serveur a accepté la réponse.
 
-## Quand le tableau de bord passera sur la carte (EVA-1156)
+## Reste à décider
 
-- Supprimer `mise_en_action_tableau_de_bord.js`, `Qcm` et les partiels de l'ancien questionnaire.
-- Décider du sort d'« Ignorer » et de la valeur `indetermine` (voir **Qualification ignorée** dans `CONTEXT.md`).
-- Envisager que `PUT mise_en_action` renvoie le HTML de la liste à afficher au lieu de JSON : il n'y aurait plus deux listes dans le DOM ni d'état à resynchroniser en JS.
-- Envisager de passer `mise_en_action.js.erb` en `.js`, en transmettant chemins et constantes par des attributs `data-` sur la carte.
+- Le sort d'« Ignorer » et de la valeur `indetermine`, qui n'ont plus d'écran depuis la disparition du questionnaire du tableau de bord (voir **Qualification ignorée** dans `CONTEXT.md`).
+- Passer `mise_en_action.js.erb` en `.js`, en transmettant chemins et constantes par des attributs `data-` sur la carte.

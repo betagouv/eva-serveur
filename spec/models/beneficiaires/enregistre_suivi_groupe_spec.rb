@@ -17,8 +17,10 @@ describe Beneficiaires::EnregistreSuiviGroupe do
     allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
   end
 
-  def service(effectuee:, qualification: nil, precision_autre: nil, choix_date_revue: nil, date_precise: nil)
-    described_class.new([ beneficiaire.id ], effectuee, qualification, precision_autre, choix_date_revue, date_precise)
+  def service(effectuee:, qualification: nil, precision_autre: nil,
+              choix_date_revue: nil, date_precise: nil)
+    described_class.new([ beneficiaire.id ], effectuee, qualification, precision_autre,
+                        choix_date_revue, date_precise)
   end
 
   describe "#call" do

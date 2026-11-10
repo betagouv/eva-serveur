@@ -59,24 +59,16 @@ fr:
       evaluation:
         action: Voir
       mise_en_action:
-        sans_evaluations:
-          titre: Diagnostics d’illettrisme potentiel
-          action: Aucun
-          description: |
-            **Les évaluations eva permettent de mettre en évidence les situations d’illettrisme. Vous retrouverez ici les bénéficiaires concernés.**
-
-            Nos équipes peuvent vous aider dans cette démarche d’accompagnement.
-          presentation_pistes: |
-            Voici les pistes de solutions disponibles dans votre région  
-            (ateliers, formations, ré-orientations, accompagnement social…) :
-        avec_evaluations:
-          titre: Diagnostics d’illettrisme potentiel
-          action: "Voir tout"
-          introduction: |
-            Au sein de votre structure, ces personnes semblent avoir  
-            besoin d’accompagnement.
-          question: |
-            **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
+        suivi_beneficiaires:
+          titre: Suivi des bénéficiaires
+          voir_tout: "Voir tout"
+        tout_a_jour:
+          titre: "Tout est à jour, merci !"
+          description: Personne n’attend de réponse de votre part. Les prochains bénéficiaires évalués apparaîtront ici.
+        reponse_enregistree:
+          titre: Merci, votre réponse pour %{nom} est enregistrée
+          description: La personne suivante vous est proposée dans « Suivi des bénéficiaires ».
+          fermer: Masquer le message
       prise_en_main:
         titre: Bienvenue sur eva !
         quitter: Quitter le tutoriel

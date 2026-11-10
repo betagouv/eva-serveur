@@ -1,7 +1,6 @@
 fr:
   question_mise_en_action:
     question: Cette personne a-t-elle reçu de l’aide depuis cette évaluation ?
-    description: Votre réponse permet de suivre son accompagnement.
     bouton_oui: Oui
     bouton_non: Non
     bouton_pas_encore: Pas encore

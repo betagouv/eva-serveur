@@ -39,6 +39,10 @@ elsif current_compte.validation_en_attente?
   render "validation_necessaire"
 end
 
+if evaluation_repondue.present?
+  render "admin/dashboard/mise_en_action/reponse_enregistree", evaluation: evaluation_repondue
+end
+
 if evaluations.present?
   section class: "section-evaluations" do
     columns do
@@ -46,8 +50,8 @@ if evaluations.present?
         render partial: "admin/dashboard/eva/bloc_evaluations", locals: { evaluations: evaluations }
       end
       column do
-        render "admin/dashboard/mise_en_action/bloc_evaluations_sans_mise_en_action",
-               evaluations: evaluations_sans_mise_en_action
+        render "admin/dashboard/mise_en_action/suivi_beneficiaires",
+               evaluation: evaluation_a_suivre
       end
     end
   end

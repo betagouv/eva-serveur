@@ -13,6 +13,19 @@
     margin-bottom: 2.5rem;
   }
 
+  // Le suivi des bénéficiaires s'aligne sur la hauteur des dernières évaluations (EVA-1156) :
+  // les colonnes d'ActiveAdmin sont en float, qui ne sait pas égaliser deux hauteurs
+  .section-evaluations .columns {
+    display: flex;
+    align-items: stretch;
+
+    > .column {
+      display: flex;
+      float: none;
+      flex-direction: column;
+    }
+  }
+
   .section-tableau-bord-eva-pro {
     display: flex;
     flex-direction: column;
@@ -240,130 +253,6 @@
   .card__banner--alert {
     padding: 1.5rem 2rem;
     gap: 2rem;
-  }
-
-  .evaluations-sans-mise-en-action {
-    box-shadow: none;
-
-
-    .card {
-      box-shadow: none;
-
-      &.carte--deroulee {
-        border-radius: .5rem .5rem 0 0;
-        box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
-
-        &~.qcm {
-          box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
-        }
-      }
-    }
-
-    .carte-liste {
-      height: 3rem;
-      margin-bottom: 0;
-      margin-top: .5rem;
-
-      .carte__nom {
-        a {
-          display: flex;
-          align-items: center;
-
-          &::after {
-            content: '';
-            width: 1.5rem;
-            height: 1.5rem;
-            display: none;
-            margin-left: .5rem;
-            background: asset-data-url('oeil.svg') no-repeat center;
-          }
-        }
-      }
-
-      &:hover {
-        background-color: white;
-
-        .carte__nom a {
-          color: $eva_main_blue;
-
-          &::after {
-            display: inline-block;
-          }
-        }
-      }
-
-      .mise-en-action {
-        @include corps-de-texte-sm-regular;
-      }
-    }
-
-    .titre-panel-avec-bouton {
-      box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
-      border-radius: .5rem .5rem 0 0;
-    }
-
-    .banniere-solutions-illettrisme,
-    .description {
-      a {
-        color: $couleur-texte
-      }
-    }
-
-    .contenu-avec-evaluations {
-      background-color: $blue-france-950;
-      padding-bottom: 0.5rem;
-      border-radius: 0.5rem;
-
-      .banniere-solutions-illettrisme {
-        margin: 1rem 0;
-      }
-
-      .question {
-        margin: 3.438rem 0;
-      }
-
-      p {
-        margin-bottom: 0;
-      }
-
-      ul {
-        list-style-type: none;
-      }
-    }
-
-    .contenu-sans-evaluations {
-      .description {
-        padding: 2rem 1rem;
-      }
-
-      .illustration {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      h5 {
-        font-size: .875rem;
-        line-height: 1.125rem;
-      }
-
-      p {
-        margin-bottom: 1rem
-      }
-
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .qcm {
-      position: absolute;
-    }
-  }
-
-  .mise-en-action__texte {
-    text-align: right !important;
-    color: $eva_main_blue;
   }
 
   .actions {

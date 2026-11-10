@@ -1,7 +1,7 @@
 // Mise en action : partie commune à la fiche évaluation et au tableau de bord.
 // Différences entre les deux écrans et pièges connus : docs/mise_en_action_ecrans.md
 // Déclare les chemins et constantes venant de Ruby, utilisés par
-// mise_en_action_tableau_de_bord.js et suivi_accompagnement_illettrisme.js.
+// suivi_accompagnement_illettrisme.js.
 
 const REPONSE_PAS_ENCORE = "<%= MiseEnAction::REPONSE_PAS_ENCORE %>";
 const QUALIFICATION_AUTRE = "<%= MiseEnAction::QUALIFICATION_AUTRE %>";
@@ -10,36 +10,21 @@ const CHOIX_DATE_PRECISE = "<%= MiseEnAction::CHOIX_DATE_PRECISE %>";
 const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_eva_path('ID_EVALUATION') %>";
 const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_eva_path('ID_EVALUATION') %>";
 const chemin_renseigner_date_revue = "<%= Rails.application.routes.url_helpers.renseigner_date_revue_admin_evaluation_eva_path('ID_EVALUATION') %>";
+const chemin_tableau_de_bord = "<%= Rails.application.routes.url_helpers.admin_dashboard_path %>";
+
+// Le tableau de bord ne propose qu'une personne à la fois : une fois la réponse complète,
+// la page est rechargée pour remercier le pro et lui proposer la personne suivante.
+function passeALaPersonneSuivante(evaluationId) {
+  const carte = document.getElementById(evaluationId);
+  if (!carte || !carte.hasAttribute('data-personne-suivante')) return false;
+
+  window.location.href = `${chemin_tableau_de_bord}?suivi_enregistre=${evaluationId}`;
+  return true;
+}
 
 function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='${reponseMiseEnAction}']`).removeClass('hidden').addClass('d-flex');
-}
-
-function afficheReponsePasEncore(evaluationId) {
-  fermeQcm(evaluationId);
-  $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
-  $(`#${evaluationId} div[data-reponse='${REPONSE_PAS_ENCORE}']`).removeClass('hidden').addClass('d-flex');
-}
-
-// Questionnaire du tableau de bord : se rouvre vide, sauf après une réponse « Autre » validée,
-// retrouvée avec sa précision (data-precision-enregistree). Sans effet sur la fiche (pas de radios).
-function reinitialiseFormulaire(evaluationId) {
-  $(`#${evaluationId} .qcm`).each(function() {
-    const $qcm = $(this);
-    const $radios = $qcm.find('input[name=reponse_qcm]');
-    if (!$radios.length) return;
-
-    const precision = $qcm.attr('data-precision-enregistree');
-    $radios.prop('checked', false);
-    masquePrecisionAutre($qcm);
-    $qcm.find('.valide-qcm').prop('disabled', !precision);
-    if (!precision) return;
-
-    $radios.filter(`[value='${QUALIFICATION_AUTRE}']`).prop('checked', true);
-    $qcm.find('.zone-precision-autre').removeClass(CLASSE_PRECISION_MASQUEE);
-    $qcm.find('input[name=precision_autre]').val(precision);
-  });
 }
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
@@ -47,7 +32,6 @@ function ouvreQcm(evaluationId, qcm, effectuee) {
   let bouton_actif = $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`);
   bouton_actif.addClass('bouton--actif');
   bouton_actif.attr('aria-expanded', true);
-  $(`#${evaluationId} .carte-liste`).addClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
   $(`#${evaluationId} .questions-${qcm}`).removeClass('hidden');
 }
@@ -56,9 +40,7 @@ function fermeQcm(evaluationId) {
   let boutons_reponses_mise_en_action = $(`#${evaluationId} .reponse-mise-en-action`);
   boutons_reponses_mise_en_action.removeClass('bouton--actif');
   boutons_reponses_mise_en_action.attr('aria-expanded', false);
-  $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
-  reinitialiseFormulaire(evaluationId);
 }
 
 function modifieReponseMiseEnAction(evaluationId) {
@@ -79,12 +61,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     dataType: "json",
     success: function (donnees) {
       if (reponse === REPONSE_PAS_ENCORE) {
-        // La fiche demande quand refaire le point ; le tableau de bord affiche la réponse
-        if ($(`#${evaluationId} .questions-date-revue`).length) {
-          ouvreQcm(evaluationId, 'date-revue', reponse);
-        } else {
-          afficheReponsePasEncore(evaluationId);
-        }
+        ouvreQcm(evaluationId, 'date-revue', reponse);
         return;
       }
       const qcm = nomQcm(reponse)
@@ -129,11 +106,10 @@ function ouvrePrecisionAutre($qcm) {
   $qcm.find('input[name=precision_autre]').trigger('focus');
 }
 
-// Un autre choix ou une autre réponse referme « Précisez » : la précision enregistrée
-// n'existe plus, et le tag « Autre » de la fiche, qui n'a pas été cliqué, est désélectionné
+// Un autre choix ou une autre réponse referme « Précisez » : le tag « Autre »,
+// qui n'a pas été cliqué, est désélectionné
 function fermePrecisionAutre($qcm) {
   $qcm.find(`[data-qualification='${QUALIFICATION_AUTRE}']`).attr('aria-pressed', 'false');
-  $qcm.removeAttr('data-precision-enregistree');
   masquePrecisionAutre($qcm);
 }
 

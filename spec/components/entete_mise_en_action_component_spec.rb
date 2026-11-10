@@ -71,4 +71,27 @@ describe EnteteMiseEnActionComponent, type: :component do
       expect(ResultatComponent).to have_received(:new).twice
     end
   end
+
+  context "avec le lien vers l'évaluation" do
+    let(:evaluation) { create(:evaluation, :eva, beneficiaire: create(:beneficiaire)) }
+
+    before { render_inline(described_class.new(evaluation: evaluation, lien_evaluation: true)) }
+
+    it "affiche le lien vers l'évaluation" do
+      expect(page).to have_link(I18n.t("entete_mise_en_action.voir_evaluation"),
+                                href: "/admin/evaluations_eva/#{evaluation.id}")
+    end
+  end
+
+  it "n'affiche pas le lien vers l'évaluation par défaut" do
+    expect(page).to have_no_link(I18n.t("entete_mise_en_action.voir_evaluation"))
+  end
+
+  context "en version compacte" do
+    before { render_inline(described_class.new(evaluation: evaluation, compact: true)) }
+
+    it "empile le nom, la date et les résultats" do
+      expect(page).to have_css(".entete-mise-en-action--compact")
+    end
+  end
 end

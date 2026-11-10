@@ -1,6 +1,16 @@
 class EnteteMiseEnActionComponent < ViewComponent::Base
-  def initialize(evaluation:)
+  def initialize(evaluation:, lien_evaluation: false, compact: false)
     @evaluation = evaluation
+    @lien_evaluation = lien_evaluation
+    @compact = compact
+  end
+
+  def classes
+    [ "entete-mise-en-action", ("entete-mise-en-action--compact" if @compact) ].compact.join(" ")
+  end
+
+  def lien_evaluation?
+    @lien_evaluation
   end
 
   def date_evaluation

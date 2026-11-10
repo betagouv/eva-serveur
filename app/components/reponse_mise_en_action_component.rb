@@ -23,7 +23,7 @@ class ReponseMiseEnActionComponent < ViewComponent::Base
   end
 
   def date_reponse
-    @mise_en_action&.libelle_repondue_le
+    @mise_en_action&.libelle_repondue_le(@evaluation)
   end
 
   # La date est toujours rendue : le JS la remplit et l'affiche après une réponse

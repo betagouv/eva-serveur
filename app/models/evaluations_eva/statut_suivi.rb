@@ -40,21 +40,44 @@ module EvaluationsEva
       Arel.sql("CASE #{sql_statut} #{cas} END")
     end
 
+    # La structure dans laquelle l'évaluation a été passée
+    def self.sql_structure_de_levaluation
+      <<~SQL.squish
+        (SELECT comptes.structure_id FROM campagnes
+         JOIN comptes ON comptes.id = campagnes.compte_id
+         WHERE campagnes.id = evaluations.campagne_id)
+      SQL
+    end
+
+    # La déclaration qui vaut pour la personne dans la structure de l'évaluation (EVA-1186) :
+    # une réponse donnée sur une autre évaluation de la même personne y vaut aussi
+    def self.sql_mise_en_action_en_cours
+      <<~SQL.squish
+        mises_en_action.deleted_at IS NULL
+        AND mises_en_action.remplacee_le IS NULL
+        AND mises_en_action.beneficiaire_id = evaluations.beneficiaire_id
+        AND mises_en_action.structure_id = #{sql_structure_de_levaluation}
+      SQL
+    end
+
     # La réponse Oui (true), Non (false), ou NULL sans réponse
     def self.sql_reponse_mise_en_action
       <<~SQL.squish
         (SELECT mises_en_action.effectuee FROM mises_en_action
-         WHERE mises_en_action.evaluation_id = evaluations.id
-         AND mises_en_action.deleted_at IS NULL)
+         WHERE #{sql_mise_en_action_en_cours} LIMIT 1)
       SQL
     end
 
     # Vrai si la mise en action de l'évaluation est reportée : le pro a répondu "Pas encore"
     # et sa date de revue n'est pas atteinte
     def self.sql_mise_en_action_reportee
-      mise_en_action_reportee = MiseEnAction.reportees
-                                            .where("mises_en_action.evaluation_id = evaluations.id")
-      "EXISTS (#{mise_en_action_reportee.select(1).to_sql})"
+      <<~SQL.squish
+        EXISTS (SELECT 1 FROM mises_en_action
+                WHERE #{sql_mise_en_action_en_cours}
+                AND mises_en_action.effectuee IS NULL
+                AND mises_en_action.repondue_le IS NOT NULL
+                AND mises_en_action.date_revue > CURRENT_DATE)
+      SQL
     end
 
     # L'évaluation entre dans le suivi : illettrisme potentiel, compétences de base complètes,

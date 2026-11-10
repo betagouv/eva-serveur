@@ -157,6 +157,64 @@ describe EvaluationEva do
         expect(evaluation.mise_en_action.effectuee).to be(false)
         expect(evaluation.mise_en_action.repondue_le).to eq(date_du_jour)
       end
+
+      it "retient le compte qui a répondu" do
+        compte = create(:compte)
+        evaluation.enregistre_mise_en_action(true, compte: compte)
+
+        expect(evaluation.mise_en_action.repondue_par).to eq(compte)
+      end
+    end
+
+    context "quand le pro modifie sa réponse" do
+      let!(:evaluation) { create :evaluation, :eva, :avec_mise_en_action, effectuee: true }
+      let(:precedente) { evaluation.mise_en_action }
+
+      it "conserve la précédente en la marquant remplacée" do
+        precedente
+        expect { evaluation.enregistre_mise_en_action(false, modification: true) }
+          .to change(MiseEnAction, :count).by(1)
+
+        expect(precedente.reload.remplacee_le).to be_present
+        expect(evaluation.mise_en_action.effectuee).to be(false)
+        expect(evaluation.mise_en_action.remplacee_le).to be_nil
+      end
+    end
+  end
+
+  describe "#mise_en_action" do
+    let(:structure) { create(:structure_locale) }
+    let(:campagne) { create(:campagne, compte: create(:compte, structure: structure)) }
+    let(:beneficiaire) { create(:beneficiaire) }
+    let!(:premiere) do
+      create :evaluation, :eva, campagne: campagne, beneficiaire: beneficiaire,
+                                debutee_le: "2026-02-10"
+    end
+    let!(:seconde) do
+      create :evaluation, :eva, campagne: campagne, beneficiaire: beneficiaire,
+                                debutee_le: "2026-04-28"
+    end
+
+    it "vaut pour les autres évaluations de la personne dans la même structure" do
+      premiere.enregistre_mise_en_action(true)
+
+      expect(seconde.mise_en_action).to eq(premiere.mise_en_action)
+    end
+
+    it "ne vaut pas dans une autre structure" do
+      premiere.enregistre_mise_en_action(true)
+      autre_campagne = create(:campagne, compte: create(:compte,
+                                                        structure: create(:structure_locale)))
+      ailleurs = create :evaluation, :eva, campagne: autre_campagne, beneficiaire: beneficiaire
+
+      expect(ailleurs.mise_en_action).to be_nil
+    end
+
+    it "ignore une déclaration remplacée" do
+      premiere.enregistre_mise_en_action(true)
+      premiere.mise_en_action.remplace!
+
+      expect(seconde.mise_en_action).to be_nil
     end
   end
 end

@@ -103,7 +103,8 @@ describe 'Evaluation eva', type: :request do
         expect(response.parsed_body).to eq(
           "qualification" => I18n.t("activerecord.attributes.mise_en_action.remediation" \
                                     ".formation_metier"),
-          "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023")
+          "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023",
+                                  auteur: "", origine: "")
         )
       end
 
@@ -187,7 +188,8 @@ describe 'Evaluation eva', type: :request do
           expect(response.parsed_body).to eq(
             "relance_prevue" => I18n.t("reponse_mise_en_action.relance_prevue",
                                        date: I18n.l(date_revue, format: :short)),
-            "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023")
+            "repondue_le" => I18n.t("reponse_mise_en_action.repondue_le", date: "01/01/2023",
+                                  auteur: "", origine: "")
           )
         end
       end

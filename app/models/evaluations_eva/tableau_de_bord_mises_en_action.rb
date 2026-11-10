@@ -6,7 +6,6 @@ module EvaluationsEva
                 .competences_de_base_completes
                 .non_anonymes
                 .order(created_at: :desc)
-                .includes(:mise_en_action)
     end
   end
 end

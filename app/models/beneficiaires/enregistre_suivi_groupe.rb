@@ -3,13 +3,14 @@ module Beneficiaires
     EFFECTUEE_VALIDE = [ "true", "false", MiseEnAction::REPONSE_PAS_ENCORE ].freeze
 
     def initialize(beneficiaire_ids, effectuee_brut, qualification, precision_autre,
-                   choix_date_revue = nil, date_precise = nil)
+                   choix_date_revue = nil, date_precise = nil, compte = nil)
       @beneficiaire_ids = beneficiaire_ids
       @effectuee_brut = effectuee_brut
       @qualification = qualification
       @precision_autre = precision_autre
       @choix_date_revue = choix_date_revue
       @date_precise = date_precise
+      @compte = compte
     end
 
     def call
@@ -20,8 +21,8 @@ module Beneficiaires
         evaluation = evaluation_concernee(beneficiaire)
         next unless evaluation
 
-        evaluation.enregistre_mise_en_action(effectuee)
-        mise_en_action = evaluation.reload.mise_en_action
+        evaluation.enregistre_mise_en_action(effectuee, compte: @compte)
+        mise_en_action = evaluation.mise_en_action
 
         if @effectuee_brut == MiseEnAction::REPONSE_PAS_ENCORE
           if @choix_date_revue.present?

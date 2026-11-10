@@ -3,9 +3,30 @@ require 'rails_helper'
 describe MiseEnAction, type: :model do
   it { is_expected.to belong_to(:evaluation) }
 
-  it do
-    subject.evaluation = create(:evaluation, :eva, :avec_mise_en_action)
-    expect(subject).to validate_uniqueness_of(:evaluation_id).case_insensitive
+  it { is_expected.to belong_to(:beneficiaire) }
+  it { is_expected.to belong_to(:structure) }
+
+  describe "une seule mise en action en cours par personne et par structure" do
+    let(:existante) { create(:mise_en_action) }
+
+    it "refuse une seconde déclaration en cours dans la même structure" do
+      doublon = build(:mise_en_action, beneficiaire: existante.beneficiaire,
+                                       structure: existante.structure)
+      expect(doublon).not_to be_valid
+    end
+
+    it "accepte une déclaration dans une autre structure" do
+      autre = build(:mise_en_action, beneficiaire: existante.beneficiaire,
+                                     structure: create(:structure_locale))
+      expect(autre).to be_valid
+    end
+
+    it "accepte une nouvelle déclaration quand la précédente est remplacée" do
+      existante.remplace!
+      nouvelle = build(:mise_en_action, beneficiaire: existante.beneficiaire,
+                                        structure: existante.structure)
+      expect(nouvelle).to be_valid
+    end
   end
 
   it "accepte que effectuee soit vide, pour la réponse « Pas encore »" do

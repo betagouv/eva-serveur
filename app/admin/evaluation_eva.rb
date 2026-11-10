@@ -172,10 +172,10 @@ ActiveAdmin.register EvaluationEva do
       # Supprimer cette verification une fois l'ensemble de la feature livrée.
       next head :unprocessable_content unless MiseEnAction.pas_encore_actif?
 
-      resource.enregistre_mise_en_action(nil)
+      enregistre_mise_en_action(nil)
       head :no_content
     else
-      resource.enregistre_mise_en_action(params[:mise_en_action_effectuee] == "true")
+      enregistre_mise_en_action(params[:mise_en_action_effectuee] == "true")
     end
   end
 
@@ -191,7 +191,7 @@ ActiveAdmin.register EvaluationEva do
     if mise_en_action.qualifie(params[:effectuee], params[:qualification],
                                params[:precision_autre])
       render json: { qualification: mise_en_action.libelle_qualification,
-                     repondue_le: mise_en_action.libelle_repondue_le }
+                     repondue_le: mise_en_action.libelle_repondue_le(resource) }
     else
       render json: { erreur: mise_en_action.errors.first.message },
              status: :unprocessable_content
@@ -202,7 +202,7 @@ ActiveAdmin.register EvaluationEva do
     mise_en_action = resource.mise_en_action
     if mise_en_action.reporte_dans(params[:choix_date_revue], params[:date_revue])
       render json: { relance_prevue: mise_en_action.libelle_relance_prevue,
-                     repondue_le: mise_en_action.libelle_repondue_le }
+                     repondue_le: mise_en_action.libelle_repondue_le(resource) }
     else
       render json: { erreur: mise_en_action.errors.first&.message },
              status: :unprocessable_content
@@ -253,6 +253,13 @@ ActiveAdmin.register EvaluationEva do
     end
 
     private
+
+    # "Modifier la réponse" remplace la déclaration en cours plutôt que de l'écraser
+    def enregistre_mise_en_action(effectuee)
+      resource.enregistre_mise_en_action(effectuee,
+                                         compte: current_compte,
+                                         modification: params[:modification] == "true")
+    end
 
     def find_resource
       scoped_collection.where(id: params[:id])

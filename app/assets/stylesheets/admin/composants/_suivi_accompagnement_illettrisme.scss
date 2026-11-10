@@ -42,8 +42,8 @@
   flex-direction: column;
 }
 
-.suivi-accompagnement-illettrisme--tableau-de-bord {
-  flex: 1;
+// Tableau de bord et fiche bénéficiaire : carte plus courte (maquettes EVA-1156, EVA-1186)
+.suivi-accompagnement-illettrisme--compacte {
   min-height: 32.25rem;
 
   // La carte a déjà du mou : réserver en plus la place du champ date la rendrait
@@ -51,6 +51,10 @@
   .zone-date-revue--masquee {
     display: none;
   }
+}
+
+.suivi-accompagnement-illettrisme--tableau-de-bord {
+  flex: 1;
 }
 
 .card__banner--illettrisme {

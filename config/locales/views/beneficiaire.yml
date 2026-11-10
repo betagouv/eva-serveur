@@ -1,6 +1,8 @@
 fr:
   admin:
     beneficiaires:
+      suivi_accompagnement:
+        titre: Suivi de l’accompagnement
       modal_suivi_groupe:
         titre: <span class='fr-icon-survey-line' aria-hidden='true'></span> Suivi groupé
         sous_titre: Une seule réponse pour tout le groupe sélectionné.

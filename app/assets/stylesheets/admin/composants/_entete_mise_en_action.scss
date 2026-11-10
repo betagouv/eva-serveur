@@ -21,6 +21,13 @@
   font-weight: 700;
 }
 
+.entete-mise-en-action__date-et-lien {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $dsfr-spacing-1v $dsfr-spacing-2w;
+}
+
 .entete-mise-en-action__date {
   @include corps-de-texte-xs-regular;
 
@@ -33,4 +40,21 @@
   flex-wrap: wrap;
   align-items: center;
   gap: $dsfr-spacing-3w;
+}
+
+// Variante du tableau de bord : colonne étroite, tout est empilé (maquette EVA-1156)
+.entete-mise-en-action--compact {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-3v;
+  padding: $dsfr-spacing-2w;
+
+  .entete-mise-en-action__identification {
+    gap: $dsfr-spacing-1v;
+    align-self: stretch;
+  }
+
+  .entete-mise-en-action__resultats {
+    gap: $dsfr-spacing-1v $dsfr-spacing-3w;
+  }
 }

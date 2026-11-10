@@ -6,9 +6,6 @@
     <div id="question-mise-en-action-<%= @evaluation.id %>" class="question-mise-en-action__libelle">
       <%= t("question_mise_en_action.question") %>
     </div>
-    <% unless rappel_pas_encore %>
-      <div class="question-mise-en-action__description"><%= t("question_mise_en_action.description") %></div>
-    <% end %>
   </div>
   <div class="question-mise-en-action__boutons">
     <% @reponses.each do |reponse| %>

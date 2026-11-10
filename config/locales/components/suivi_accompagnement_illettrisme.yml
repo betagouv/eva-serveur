@@ -1,3 +1,4 @@
 fr:
   suivi_accompagnement_illettrisme:
-    bandeau: Situation d’illettrisme potentiel détectée à l’évaluation
+    badge: Situation d’illettrisme potentiel détectée à l’évaluation
+    description: Un illettrisme potentiel a été détecté lors de son évaluation. Votre réponse aide à savoir s’il est bien accompagné.

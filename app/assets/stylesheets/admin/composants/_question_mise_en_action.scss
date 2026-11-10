@@ -23,13 +23,6 @@
   color: $grey-50;
 }
 
-.question-mise-en-action__description {
-  @include corps-de-texte-xs-regular;
-
-  color: $grey-425;
-  line-height: 1.25rem;
-}
-
 .question-mise-en-action__boutons {
   display: flex;
   align-self: stretch;

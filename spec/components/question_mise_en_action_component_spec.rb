@@ -14,7 +14,6 @@ describe QuestionMiseEnActionComponent, type: :component do
   it "pose la question de la mise en action" do
     bloc_question = page.find("[data-reponse='vide']")
     expect(bloc_question).to have_content(I18n.t("question_mise_en_action.question"))
-    expect(bloc_question).to have_content(I18n.t("question_mise_en_action.description"))
     expect(bloc_question).to have_button(I18n.t("question_mise_en_action.bouton_oui"))
     expect(bloc_question).to have_button(I18n.t("question_mise_en_action.bouton_non"))
   end

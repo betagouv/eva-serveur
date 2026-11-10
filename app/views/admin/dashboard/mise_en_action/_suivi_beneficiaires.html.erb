@@ -1,0 +1,16 @@
+<div class="suivi-beneficiaires">
+  <div class="titre-panel-avec-bouton fr-mb-3v">
+    <h3><%= t(".titre") %></h3>
+    <%= render(BoutonDsfrComponent.new(admin_evaluations_eva_path(scope: :illettrisme_potentiel),
+                                       type: :primary, size: :md)) do %>
+      <%= t(".voir_tout") %>
+    <% end %>
+  </div>
+
+  <% if evaluation.present? %>
+    <%= render SuiviAccompagnementIllettrismeComponent.new(evaluation: evaluation,
+                                                           tableau_de_bord: true) %>
+  <% else %>
+    <%= render "admin/dashboard/mise_en_action/tout_a_jour" %>
+  <% end %>
+</div>

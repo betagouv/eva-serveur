@@ -1,16 +1,18 @@
-<div id="<%= @evaluation.id %>" class="carte__conteneur suivi-accompagnement-illettrisme">
-  <div class="fr-notice fr-notice--info">
-    <div class="fr-container">
-      <div class="fr-notice__body">
-        <div>
-          <h2 class="fr-notice__title"><%= t("suivi_accompagnement_illettrisme.bandeau") %></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  <%= render EnteteMiseEnActionComponent.new(evaluation: @evaluation) %>
+<div id="<%= @evaluation.id %>" class="<%= classes %>"
+     <%= "data-personne-suivante=true" if tableau_de_bord? %>>
+  <%= render EnteteMiseEnActionComponent.new(evaluation: @evaluation,
+                                             lien_evaluation: tableau_de_bord?,
+                                             compact: tableau_de_bord?) %>
   <div class="card__banner card__banner--illettrisme">
     <div class="suivi-mise-en-action">
+      <div class="suivi-mise-en-action__contexte">
+        <p class="fr-badge fr-badge--info fr-badge--sm">
+          <%= t("suivi_accompagnement_illettrisme.badge") %>
+        </p>
+        <p class="suivi-mise-en-action__description">
+          <%= t("suivi_accompagnement_illettrisme.description") %>
+        </p>
+      </div>
       <%= render QuestionMiseEnActionComponent.new(evaluation: @evaluation, reponses: reponses) %>
       <% %i[remediation difficulte].each do |questionnaire| %>
         <%= render QualificationMiseEnActionComponent.new(evaluation: @evaluation, questionnaire: questionnaire) %>

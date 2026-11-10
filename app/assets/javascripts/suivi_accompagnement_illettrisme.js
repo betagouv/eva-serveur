@@ -29,6 +29,8 @@ function renseigneQualification(evaluationId, $element, donneesQualification) {
     data: { effectuee, ...donneesQualification },
     dataType: "json",
     success: function (donnees) {
+      if (passeALaPersonneSuivante(evaluationId)) return;
+
       effaceErreurPrecision($element.closest('.qcm'));
       const $reponse = $(`#${evaluationId} div[data-reponse='${effectuee}']`);
       $reponse.find('.tag').removeClass('hidden').text(donnees.qualification);
@@ -82,6 +84,8 @@ function renseigneDateRevue(evaluationId, choixDateRevue, dateRevue) {
     data: { choix_date_revue: choixDateRevue, date_revue: dateRevue },
     dataType: "json",
     success: function (donnees) {
+      if (passeALaPersonneSuivante(evaluationId)) return;
+
       const $reponse = $(`#${evaluationId} div[data-reponse='${REPONSE_PAS_ENCORE}']`);
       $reponse.find('.tag').removeClass('hidden').text(donnees.relance_prevue);
       $reponse.find('.mise-en-action-repondue__date').text(donnees.repondue_le).removeClass('hidden');

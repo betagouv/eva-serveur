@@ -257,118 +257,42 @@ describe "Admin - Mise en action", :js, type: :feature do
   end
 
   describe "sur le tableau de bord" do
-    before { visit admin_dashboard_path }
-
-    it "ouvre le questionnaire de remédiation dans la carte quand on répond Oui" do
-      within("li[id='#{evaluation.id}']") do
-        click_button "Oui"
-
-        expect(page).to have_css(".carte--deroulee")
-        expect(page).to have_css(".questions-remediation", visible: :visible)
-        expect(page).to have_css(".questions-difficulte", visible: :hidden)
-      end
-      expect(mise_en_action.effectuee).to be(true)
-    end
-
-    it "referme la carte une fois la remédiation validée" do
-      within("li[id='#{evaluation.id}']") do
-        click_button "Oui"
-        within(".questions-remediation") do
-          find("label", text: "Formation métier / qualifiante").click
-          click_button "Valider"
-        end
-
-        expect(page).to have_no_css(".carte--deroulee")
-        expect(page).to have_content("Oui vous avez trouvé une solution")
-        expect(page).to have_no_css(".qualification-mise-en-action", visible: :all)
-      end
-      expect(mise_en_action.reload.remediation).to eq("formation_metier")
-    end
-  end
-
-  describe "sur le tableau de bord, réponse « Autre »" do
-    let(:autre) { I18n.t("activerecord.attributes.mise_en_action.remediation.autre") }
     let(:formation_metier) do
       I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
     end
 
-    before do
-      visit admin_dashboard_path
-      within("li[id='#{evaluation.id}']") { click_button "Oui" }
+    before { visit admin_dashboard_path }
+
+    it "propose une seule personne à suivre, avec le lien vers son évaluation" do
+      expect(page).to have_css(".suivi-accompagnement-illettrisme", count: 1)
+      expect(page).to have_link(I18n.t("entete_mise_en_action.voir_evaluation"),
+                                href: admin_evaluation_eva_path(evaluation))
     end
 
-    it "ouvre « Précisez » sans rien enregistrer" do
-      within("li[id='#{evaluation.id}'] .questions-remediation") do
-        expect(page).to have_no_field(precisez)
-
-        find("label", text: autre).click
-
-        expect(page).to have_field(precisez, focused: true)
-      end
-      expect(mise_en_action.reload.remediation).to be_nil
-    end
-
-    it "n'active « Valider » qu'une fois « Précisez » rempli" do
-      within("li[id='#{evaluation.id}'] .questions-remediation") do
-        find("label", text: autre).click
-
-        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: true)
-
-        fill_in precisez, with: "   "
-
-        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: true)
-
-        fill_in precisez, with: "atelier numérique"
-
-        expect(page).to have_button(I18n.t("qcm.action_valider"), disabled: false)
-      end
-    end
-
-    it "enregistre « Autre » avec sa précision et referme la carte" do
-      within("li[id='#{evaluation.id}']") do
-        within(".questions-remediation") do
-          find("label", text: autre).click
-          fill_in precisez, with: "atelier numérique"
-          click_button I18n.t("qcm.action_valider")
-        end
-
-        expect(page).to have_no_css(".carte--deroulee")
-      end
-      expect(mise_en_action.reload).to have_attributes(remediation: "autre",
-                                                       precision_autre: "atelier numérique")
-    end
-
-    it "abandonne la précision quand on choisit un autre type d'aide" do
-      within("li[id='#{evaluation.id}'] .questions-remediation") do
-        find("label", text: autre).click
-        fill_in precisez, with: "atelier numérique"
-        find("label", text: formation_metier).click
-
-        expect(page).to have_no_field(precisez)
-
-        click_button I18n.t("qcm.action_valider")
-      end
-
-      expect(page).to have_no_css(".carte--deroulee")
-      expect(mise_en_action.reload).to have_attributes(remediation: "formation_metier",
-                                                       precision_autre: nil)
-    end
-
-    it "retrouve « Autre » et sa précision quand on modifie la réponse" do
-      within("li[id='#{evaluation.id}']") do
-        within(".questions-remediation") do
-          find("label", text: autre).click
-          fill_in precisez, with: "atelier numérique"
-          click_button I18n.t("qcm.action_valider")
-        end
-        click_link I18n.t("components.modification_mise_en_action.modifier_reponse")
+    it "remercie et passe à la personne suivante une fois la réponse complète" do
+      within(".suivi-accompagnement-illettrisme") do
         click_button "Oui"
-
-        within(".questions-remediation") do
-          expect(find("input[value='autre']", visible: :all)).to be_checked
-          expect(page).to have_field(precisez, with: "atelier numérique")
-        end
+        within(".questions-remediation") { click_button formation_metier }
       end
+
+      expect(page).to have_css(
+        ".fr-alert--success",
+        text: I18n.t("admin.dashboard.mise_en_action.reponse_enregistree.titre",
+                     nom: evaluation.beneficiaire.nom)
+      )
+      expect(mise_en_action.reload.remediation).to eq("formation_metier")
+    end
+
+    it "affiche « Tout est à jour » quand plus personne n'attend de réponse" do
+      within(".suivi-accompagnement-illettrisme") do
+        click_button "Oui"
+        within(".questions-remediation") { click_button formation_metier }
+      end
+
+      expect(page).to have_content(
+        I18n.t("admin.dashboard.mise_en_action.tout_a_jour.titre")
+      )
+      expect(page).to have_no_css(".suivi-accompagnement-illettrisme")
     end
   end
 
@@ -613,18 +537,29 @@ describe "Admin - Mise en action", :js, type: :feature do
     end
 
     describe "sur le tableau de bord" do
+      let(:pas_encore) { I18n.t("question_mise_en_action.bouton_pas_encore") }
+
       before { visit admin_dashboard_path }
 
-      it "affiche la réponse sans dérouler la carte quand on répond « Pas encore »" do
-        pas_encore = I18n.t("components.reponse_mise_en_action.bouton_pas_encore")
-        within("li[id='#{evaluation.id}']") do
+      it "demande quand refaire le point quand on répond « Pas encore »" do
+        within(".suivi-accompagnement-illettrisme") do
           click_button pas_encore
 
-          expect(page).to have_css("div[data-reponse='pas_encore']", text: pas_encore)
-          expect(page).to have_no_css(".carte--deroulee")
-          expect(page).to have_css(".qcm", visible: :hidden, count: 2)
+          expect(page).to have_css(".questions-date-revue", visible: :visible,
+                                   text: I18n.t("date_revue_mise_en_action.question"))
+          expect(page).to have_no_button(pas_encore)
         end
         expect(mise_en_action.effectuee).to be_nil
+      end
+
+      it "passe à la personne suivante une fois la date de revue choisie" do
+        within(".suivi-accompagnement-illettrisme") do
+          click_button pas_encore
+          click_button I18n.t("date_revue_mise_en_action.delais.14_jours")
+        end
+
+        expect(page).to have_css(".fr-alert--success")
+        expect(mise_en_action.reload.date_revue).to eq(Date.current + 14)
       end
     end
   end

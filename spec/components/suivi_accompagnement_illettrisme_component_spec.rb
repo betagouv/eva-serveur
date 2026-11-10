@@ -14,13 +14,36 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     render_inline(described_class.new(evaluation: evaluation))
   end
 
-  it "affiche le bandeau d'illettrisme potentiel" do
-    expect(page).to have_css(".fr-notice.fr-notice--info .fr-notice__title",
-                             text: I18n.t("suivi_accompagnement_illettrisme.bandeau"))
+  it "signale l'illettrisme potentiel par un badge info" do
+    expect(page).to have_css(".fr-badge.fr-badge--info",
+                             text: I18n.t("suivi_accompagnement_illettrisme.badge"))
+  end
+
+  it "explique pourquoi la réponse est demandée" do
+    expect(page).to have_content(I18n.t("suivi_accompagnement_illettrisme.description"))
   end
 
   it "affiche l'en-tête de la mise en action" do
-    expect(EnteteMiseEnActionComponent).to have_received(:new).with(evaluation: evaluation)
+    expect(EnteteMiseEnActionComponent).to have_received(:new)
+      .with(evaluation: evaluation, lien_evaluation: false, compact: false)
+  end
+
+  context "sur le tableau de bord" do
+    let(:evaluation) { create(:evaluation, :eva, mise_en_action: mise_en_action) }
+
+    before do
+      render_inline(described_class.new(evaluation: evaluation, tableau_de_bord: true))
+    end
+
+    it "affiche l'en-tête compact avec le lien vers l'évaluation" do
+      expect(EnteteMiseEnActionComponent).to have_received(:new)
+        .with(evaluation: evaluation, lien_evaluation: true, compact: true)
+    end
+
+    it "demande au JS de passer à la personne suivante après la réponse" do
+      expect(page).to have_css(".suivi-accompagnement-illettrisme[data-personne-suivante]",
+                               visible: :all)
+    end
   end
 
   it "pose la question de la mise en action avec Oui et Non" do

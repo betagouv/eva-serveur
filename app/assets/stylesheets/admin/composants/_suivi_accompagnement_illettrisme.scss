@@ -16,7 +16,41 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  gap: $dsfr-spacing-3w;
   padding: $dsfr-spacing-3w $dsfr-spacing-6w;
+}
+
+.suivi-mise-en-action__contexte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1w;
+}
+
+.suivi-mise-en-action__description {
+  @include corps-de-texte-sm-regular;
+
+  margin: 0;
+  color: $grey-200;
+}
+
+// Sur le tableau de bord, la carte s'étire jusqu'au bas de la liste des dernières
+// évaluations (EVA-1156)
+.suivi-beneficiaires {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.suivi-accompagnement-illettrisme--tableau-de-bord {
+  flex: 1;
+  min-height: 32.25rem;
+
+  // La carte a déjà du mou : réserver en plus la place du champ date la rendrait
+  // plus haute que la liste, alors que sur la fiche évaluation cela évite un saut
+  .zone-date-revue--masquee {
+    display: none;
+  }
 }
 
 .card__banner--illettrisme {
@@ -26,4 +60,37 @@
     margin-bottom: 0;
     border-radius: 0;
   }
+}
+
+// Bloc « Suivi des bénéficiaires » du tableau de bord (EVA-1156)
+.suivi-tout-a-jour {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $dsfr-spacing-3w $dsfr-spacing-6w;
+  background: var(--background-alt-grey);
+  text-align: center;
+}
+
+.suivi-tout-a-jour__picto {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: $dsfr-spacing-3w;
+}
+
+.suivi-tout-a-jour__titre {
+  @include corps-de-texte-md-bold;
+
+  margin: 0 0 $dsfr-spacing-1w;
+  color: $grey-50;
+}
+
+.suivi-tout-a-jour__description {
+  @include corps-de-texte-sm-regular;
+
+  max-width: 31rem;
+  margin: 0;
+  color: $grey-200;
 }

@@ -32,7 +32,7 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     let(:evaluation) { create(:evaluation, :eva, mise_en_action: mise_en_action) }
 
     before do
-      render_inline(described_class.new(evaluation: evaluation, tableau_de_bord: true))
+      render_inline(described_class.new(evaluation: evaluation, contexte: :tableau_de_bord))
     end
 
     it "affiche l'en-tête compact avec le lien vers l'évaluation" do
@@ -43,6 +43,24 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     it "demande au JS de passer à la personne suivante après la réponse" do
       expect(page).to have_css(".suivi-accompagnement-illettrisme[data-personne-suivante]",
                                visible: :all)
+    end
+  end
+
+  context "sur la fiche bénéficiaire" do
+    let(:evaluation) { create(:evaluation, :eva, mise_en_action: mise_en_action) }
+
+    before do
+      render_inline(described_class.new(evaluation: evaluation, contexte: :fiche_beneficiaire))
+    end
+
+    it "garde l'en-tête large et renvoie vers l'évaluation" do
+      expect(EnteteMiseEnActionComponent).to have_received(:new)
+        .with(evaluation: evaluation, lien_evaluation: true, compact: false)
+    end
+
+    it "ne passe pas à la personne suivante : la carte porte sur cette personne" do
+      expect(page).to have_no_css(".suivi-accompagnement-illettrisme[data-personne-suivante]",
+                                  visible: :all)
     end
   end
 

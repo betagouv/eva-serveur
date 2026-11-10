@@ -70,7 +70,8 @@ ActiveAdmin.register Beneficiaire do
       params[:qualification].presence,
       params[:precision_autre].presence,
       params[:choix_date_revue].presence,
-      params[:date_precise].presence
+      params[:date_precise].presence,
+      current_compte
     )
     resultat = service.call
     if resultat == :effectuee_invalide
@@ -113,6 +114,7 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
   controller do
     before_action :restitutions_positionnement, only: :show
     before_action :evaluations_diagnostic, only: :show
+    before_action :evaluation_suivi, only: :show
 
     def find_resource
       scoped_collection.includes(
@@ -145,6 +147,15 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
     def evaluations_diagnostic
       @evaluations_diagnostic ||= evaluations_eva_accessibles.diagnostic
                                                              .order(created_at: :desc)
+    end
+
+    # La carte "Suivi de l'accompagnement" porte sur la dernière évaluation suivie
+    # de la personne : la réponse donnée vaut pour toute sa structure (EVA-1186)
+    def evaluation_suivi
+      @evaluation_suivi ||= evaluations_eva_accessibles
+                              .where(EvaluationsEva::StatutSuivi.sql_evaluation_suivie)
+                              .order(debutee_le: :desc)
+                              .first
     end
 
     private

@@ -62,7 +62,10 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_css(
           "[data-reponse='true'] .mise-en-action-repondue__date",
           text: I18n.t("reponse_mise_en_action.repondue_le",
-                       date: I18n.l(Date.current, format: :short))
+                       date: I18n.l(Date.current, format: :short),
+                       auteur: I18n.t("reponse_mise_en_action.auteur",
+                                       compte: mon_compte.nom_abrege),
+                       origine: "")
         )
       end
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
@@ -171,7 +174,10 @@ describe "Admin - Mise en action", :js, type: :feature do
         expect(page).to have_css(
           "[data-reponse='true'] .mise-en-action-repondue__date",
           text: I18n.t("reponse_mise_en_action.repondue_le",
-                       date: I18n.l(Date.current, format: :short))
+                       date: I18n.l(Date.current, format: :short),
+                       auteur: I18n.t("reponse_mise_en_action.auteur",
+                                       compte: mon_compte.nom_abrege),
+                       origine: "")
         )
       end
       expect(mise_en_action.reload).to have_attributes(remediation: "autre",
@@ -560,6 +566,91 @@ describe "Admin - Mise en action", :js, type: :feature do
 
         expect(page).to have_css(".fr-alert--success")
         expect(mise_en_action.reload.date_revue).to eq(Date.current + 14)
+      end
+    end
+  end
+
+  # Une mise en action vaut pour la personne dans sa structure : la fiche bénéficiaire la
+  # déclare depuis la dernière évaluation suivie (EVA-1186)
+  describe "sur la fiche bénéficiaire" do
+    let(:beneficiaire) { evaluation.beneficiaire }
+    let(:formation_metier) do
+      I18n.t("activerecord.attributes.mise_en_action.remediation.formation_metier")
+    end
+    let!(:evaluation) do
+      create :evaluation, :eva, campagne: ma_campagne,
+                                synthese_competences_de_base: :illettrisme_potentiel,
+                                completude: "complete", debutee_le: "2026-02-10"
+    end
+    let!(:evaluation_recente) do
+      create :evaluation, :eva, campagne: ma_campagne, beneficiaire: beneficiaire,
+                                synthese_competences_de_base: :illettrisme_potentiel,
+                                completude: "complete", debutee_le: "2026-04-28"
+    end
+
+    before do
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+    end
+
+    it "pose la question sur la dernière évaluation suivie" do
+      visit admin_beneficiaire_path(beneficiaire)
+
+      expect(page).to have_content(I18n.t("admin.beneficiaires.suivi_accompagnement.titre"))
+      within("[id='#{evaluation_recente.id}']") do
+        expect(page).to have_content(I18n.t("question_mise_en_action.question"))
+        expect(page).to have_link(I18n.t("entete_mise_en_action.voir_evaluation"))
+      end
+    end
+
+    it "enregistre la réponse pour la personne, pas pour la seule évaluation" do
+      visit admin_beneficiaire_path(beneficiaire)
+      within("[id='#{evaluation_recente.id}']") do
+        click_button "Oui"
+        within(".questions-remediation") { click_button formation_metier }
+        expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
+      end
+
+      expect(MiseEnAction.where(beneficiaire: beneficiaire).count).to eq(1)
+      expect(evaluation.reload.mise_en_action.remediation).to eq("formation_metier")
+    end
+
+    context "quand la réponse a été donnée sur une autre évaluation" do
+      before do
+        evaluation.enregistre_mise_en_action(true, compte: mon_compte)
+        evaluation.mise_en_action.qualifie(true, "formation_metier", nil)
+      end
+
+      it "l'affiche en rappelant l'évaluation d'origine, sans reposer la question" do
+        visit admin_beneficiaire_path(beneficiaire)
+
+        within("[id='#{evaluation_recente.id}']") do
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_true"))
+          expect(page).to have_content(
+            I18n.t("reponse_mise_en_action.origine",
+                   date: I18n.l(evaluation.debutee_le.to_date, format: :short)).delete_prefix(", ")
+          )
+          expect(page).to have_no_content(I18n.t("question_mise_en_action.question"))
+        end
+      end
+
+      it "conserve la précédente, marquée remplacée, quand le pro modifie sa réponse" do
+        visit admin_beneficiaire_path(beneficiaire)
+        precedente = evaluation.reload.mise_en_action
+
+        within("[id='#{evaluation_recente.id}']") do
+          click_link I18n.t("reponse_mise_en_action.modifier")
+          click_button "Non"
+          within(".questions-difficulte") do
+            click_button I18n.t("activerecord.attributes.mise_en_action.difficulte" \
+                                 ".freins_peripheriques")
+          end
+          expect(page).to have_content(I18n.t("reponse_mise_en_action.titre_false"))
+        end
+
+        expect(precedente.reload.remplacee_le).to be_present
+        expect(MiseEnAction.en_cours_pour(beneficiaire.id, ma_campagne.structure.id).effectuee)
+          .to be(false)
       end
     end
   end

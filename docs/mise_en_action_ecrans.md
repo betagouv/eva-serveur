@@ -1,9 +1,19 @@
-# Mise en action : une seule carte, deux écrans
+# Mise en action : une seule carte, trois écrans
 
-Le pro déclare la mise en action d'une évaluation en illettrisme potentiel (voir **Mise en action** dans `CONTEXT.md`) depuis deux écrans, qui affichent **la même carte** `SuiviAccompagnementIllettrismeComponent` et partagent le même JS (`mise_en_action.js.erb` + `suivi_accompagnement_illettrisme.js`).
+Le pro déclare la mise en action d'une personne en illettrisme potentiel (voir **Mise en action** dans `CONTEXT.md`) depuis trois écrans, qui affichent **la même carte** `SuiviAccompagnementIllettrismeComponent` et partagent le même JS (`mise_en_action.js.erb` + `suivi_accompagnement_illettrisme.js`). Le `contexte:` du composant les distingue.
 
-- **Fiche évaluation** (EVA-1152) : la carte « Suivi de l'accompagnement » de l'évaluation consultée.
-- **Tableau de bord** (EVA-1156) : le bloc « Suivi des bénéficiaires », qui propose **une personne à la fois**.
+- **Fiche évaluation** (EVA-1152, `contexte: :evaluation`) : la carte « Suivi de l'accompagnement » de l'évaluation consultée.
+- **Tableau de bord** (EVA-1156, `contexte: :tableau_de_bord`) : le bloc « Suivi des bénéficiaires », qui propose **une personne à la fois**.
+- **Fiche bénéficiaire** (EVA-1186, `contexte: :fiche_beneficiaire`) : la carte porte sur la **dernière évaluation suivie** de la personne et renvoie vers elle.
+
+## Une réponse par personne et par structure (EVA-1186)
+
+Une mise en action vaut pour un **bénéficiaire dans une structure**, plus pour une évaluation : `mises_en_action` porte `beneficiaire_id`, `structure_id`, `repondue_par_id` (le compte qui a répondu) et `remplacee_le`, et garde `evaluation_id` comme **évaluation d'origine**.
+
+- `MiseEnAction.en_cours_pour(beneficiaire_id, structure_id)` donne la déclaration qui s'applique ; `EvaluationEva#mise_en_action` la cherche ainsi (ce n'est plus une association, d'où `attr_writer` et le `reload` qui oublie la valeur mémoïsée).
+- Une réponse donnée sur une évaluation vaut pour les autres évaluations de la personne **dans la même structure** : la carte l'affiche avec sa date, son auteur et, si elle vient d'une autre évaluation, la date de celle-ci. Dans une autre structure, la question est reposée.
+- **« Modifier la réponse » crée une nouvelle déclaration** : le JS pose `data-modification` sur la carte, le `PUT mise_en_action` reçoit `modification=true`, l'ancienne est marquée `remplacee_le` et reste disponible pour les statistiques de l'ANLCI. Répondre à une relance « Pas encore » met à jour la déclaration en place, sans la remplacer.
+- Les filtres et tris de statut (`EvaluationsEva::StatutSuivi`, `Beneficiaires::StatutSuivi`) cherchent la déclaration en cours par `beneficiaire_id` **et** par la structure de l'évaluation (`sql_mise_en_action_en_cours`).
 
 ## Ce qui est commun
 

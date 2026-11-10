@@ -30,4 +30,12 @@ div class: "page-beneficiaire" do
              evaluations_diagnostic: evaluations_diagnostic
            }
   end
+
+  if evaluation_suivi.present?
+    div class: "panel-component panel--beneficiaire" do
+      h2 t("admin.beneficiaires.suivi_accompagnement.titre")
+      render SuiviAccompagnementIllettrismeComponent.new(evaluation: evaluation_suivi,
+                                                         contexte: :fiche_beneficiaire)
+    end
+  end
 end

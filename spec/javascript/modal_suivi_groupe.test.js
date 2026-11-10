@@ -82,7 +82,15 @@ function clicBouton(selector) {
   btn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 }
 
+// La modale lit les libellés de réponse dans les traductions servies par i18n-js
+const TRADUCTIONS = {
+  "reponse_mise_en_action.titre_true": "Oui, une aide a commencé",
+  "reponse_mise_en_action.titre_false": "Non, rien n’est prévu pour l’instant",
+  "reponse_mise_en_action.titre_pas_encore": "Pas encore, la suite est à confirmer"
+};
+
 beforeEach(() => {
+  global.I18n = { t: (cle) => TRADUCTIONS[cle] || cle };
   document.body.innerHTML = creerModalHTML();
   init();
   ouvrirModalAvecIds(["42", "43"]);
@@ -169,12 +177,12 @@ describe("navigation entre les étapes", () => {
 });
 
 describe("texte récapitulatif", () => {
-  test("affiche 'Pas encore — Une action est prévue' pour effectuee=pas_encore après tag relance", () => {
+  test("affiche 'Pas encore, la suite est à confirmer' pour effectuee=pas_encore après tag relance", () => {
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
     clicBouton('[data-qualification="7_jours"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
-    expect(texte).toBe("Pas encore — Une action est prévue");
+    expect(texte).toBe("Pas encore, la suite est à confirmer");
   });
 
   test("affiche le label du délai dans la qualification récap pour pas_encore", () => {
@@ -195,12 +203,12 @@ describe("texte récapitulatif", () => {
     expect(qualif).toContain("Formation métier");
   });
 
-  test("affiche 'Non, pas d'aide engagée' pour effectuee=false sans qualification", () => {
+  test("affiche 'Non, rien n’est prévu pour l’instant' pour effectuee=false sans qualification", () => {
     clicBouton('[data-effectuee="false"]');
     clicBouton('[data-qualification="freins_peripheriques"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
-    expect(texte).toBe("Non, pas d'aide engagée");
+    expect(texte).toBe("Non, rien n’est prévu pour l’instant");
   });
 });
 

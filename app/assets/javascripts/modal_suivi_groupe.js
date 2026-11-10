@@ -162,10 +162,11 @@
     return "La suite n'est pas encore connue";
   }
 
+  // Mêmes libellés que la réponse enregistrée d'une carte (ReponseMiseEnActionComponent)
   function labelRecapReponse(effectuee) {
-    if (effectuee === "true") return "Oui, une aide a commencé";
-    if (effectuee === "false") return "Non, pas d'aide engagée";
-    return "Pas encore — Une action est prévue";
+    if (effectuee === "true") return I18n.t("reponse_mise_en_action.titre_true");
+    if (effectuee === "false") return I18n.t("reponse_mise_en_action.titre_false");
+    return I18n.t("reponse_mise_en_action.titre_pas_encore");
   }
 
   function texteRecapQualification() {

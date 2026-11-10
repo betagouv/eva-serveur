@@ -47,12 +47,37 @@
 .suivi-groupe-reponse-enregistree {
   background: var(--background-alt-grey);
   display: flex;
-  gap: $dsfr-spacing-4v;
+  gap: $dsfr-spacing-3v;
   align-items: flex-start;
-  padding: $dsfr-spacing-4v;
+  padding: $dsfr-spacing-3v $dsfr-spacing-2w;
 
   &__texte {
+    @include corps-de-texte-sm-bold;
+
+    display: flex;
     flex: 1 0 0;
+    flex-direction: column;
+    gap: $dsfr-spacing-1v;
+
+    // Les paragraphes DSFR gardent sinon leur marge basse, qui creuse le bloc
+    margin: 0;
+    color: $grey-50;
+    font-weight: 700;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // Étape récapitulative : le libellé de la réponse et sa précision empilés
+  &__titre {
+    @include corps-de-texte-md-bold;
+
+    font-weight: 700;
+  }
+
+  &__precision {
+    @include corps-de-texte-sm-regular;
   }
 }
 

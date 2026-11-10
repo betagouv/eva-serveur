@@ -25,7 +25,6 @@
 //= require telecharge_pdf
 //= require export_pdf_modal
 //= require mise_en_action
-//= require mise_en_action_tableau_de_bord
 //= require suivi_accompagnement_illettrisme
 //= require tag_supprimable
 //= require simple_mde

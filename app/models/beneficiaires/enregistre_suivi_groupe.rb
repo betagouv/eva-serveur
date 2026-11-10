@@ -2,7 +2,8 @@ module Beneficiaires
   class EnregistreSuiviGroupe
     EFFECTUEE_VALIDE = [ "true", "false", MiseEnAction::REPONSE_PAS_ENCORE ].freeze
 
-    def initialize(beneficiaire_ids, effectuee_brut, qualification, precision_autre, choix_date_revue = nil, date_precise = nil)
+    def initialize(beneficiaire_ids, effectuee_brut, qualification, precision_autre,
+                   choix_date_revue = nil, date_precise = nil)
       @beneficiaire_ids = beneficiaire_ids
       @effectuee_brut = effectuee_brut
       @qualification = qualification
@@ -23,7 +24,9 @@ module Beneficiaires
         mise_en_action = evaluation.reload.mise_en_action
 
         if @effectuee_brut == MiseEnAction::REPONSE_PAS_ENCORE
-          mise_en_action.reporte_dans(@choix_date_revue, @date_precise) if @choix_date_revue.present?
+          if @choix_date_revue.present?
+            mise_en_action.reporte_dans(@choix_date_revue, @date_precise)
+          end
         elsif @qualification.present?
           mise_en_action.qualifie(effectuee, @qualification, @precision_autre)
         end

@@ -70,7 +70,8 @@ class MiseEnAction < ApplicationRecord
     repondu_pas_encore? && date_revue.present? && date_revue <= Date.current
   end
 
-  # Une qualification ignorée ("Ignorer" du tableau de bord) reste à renseigner
+  # Une qualification ignorée (ancien "Ignorer" du tableau de bord) reste à renseigner :
+  # plus aucun écran ne l'enregistre, les valeurs existantes restent à compléter
   def qualification_a_renseigner?
     qualification.blank? || qualification_indeterminee?
   end

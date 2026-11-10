@@ -2,7 +2,11 @@
   var MODAL_ID = "fr-modal-suivi-groupe";
   var FORM_ID = "suivi-groupe-form";
 
-  var etat = { effectuee: null, qualification: null, precisionAutre: null };
+  /* Valeurs des constantes Ruby MiseEnAction */
+  var REPONSE_PAS_ENCORE = "pas_encore";
+  var CHOIX_DATE_PRECISE = "date_precise";
+
+  var etat = { effectuee: null, qualification: null, precisionAutre: null, choixDateRevue: null, datePrecise: null };
 
   function dsfrModal(modal) {
     if (!modal || !window.dsfr) return null;
@@ -90,6 +94,8 @@
     etat.effectuee = null;
     etat.qualification = null;
     etat.precisionAutre = null;
+    etat.choixDateRevue = null;
+    etat.datePrecise = null;
     afficherEtapeQuestion(modal);
   }
 
@@ -112,12 +118,28 @@
 
     var tagsRemediation = modal.querySelector("#suivi-groupe-tags-remediation");
     var tagsDifficulte = modal.querySelector("#suivi-groupe-tags-difficulte");
-    if (etat.effectuee === "true") {
+    var tagsRelance = modal.querySelector("#suivi-groupe-tags-relance");
+    var titreQualification = modal.querySelector("#suivi-groupe-titre-qualification");
+    var titreRelance = modal.querySelector("#suivi-groupe-titre-relance");
+
+    if (etat.effectuee === REPONSE_PAS_ENCORE) {
+      if (tagsRemediation) tagsRemediation.setAttribute("hidden", "");
+      if (tagsDifficulte) tagsDifficulte.setAttribute("hidden", "");
+      if (tagsRelance) tagsRelance.removeAttribute("hidden");
+      if (titreQualification) titreQualification.setAttribute("hidden", "");
+      if (titreRelance) titreRelance.removeAttribute("hidden");
+    } else if (etat.effectuee === "true") {
       if (tagsRemediation) tagsRemediation.removeAttribute("hidden");
       if (tagsDifficulte) tagsDifficulte.setAttribute("hidden", "");
+      if (tagsRelance) tagsRelance.setAttribute("hidden", "");
+      if (titreQualification) titreQualification.removeAttribute("hidden");
+      if (titreRelance) titreRelance.setAttribute("hidden", "");
     } else {
       if (tagsRemediation) tagsRemediation.setAttribute("hidden", "");
       if (tagsDifficulte) tagsDifficulte.removeAttribute("hidden");
+      if (tagsRelance) tagsRelance.setAttribute("hidden", "");
+      if (titreQualification) titreQualification.removeAttribute("hidden");
+      if (titreRelance) titreRelance.setAttribute("hidden", "");
     }
   }
 
@@ -137,7 +159,7 @@
   function labelPourReponse(effectuee) {
     if (effectuee === "true") return "Une suite est engagée";
     if (effectuee === "false") return "Aucune action à ce stade";
-    return "Une action est prévue";
+    return "La suite n'est pas encore connue";
   }
 
   function labelRecapReponse(effectuee) {
@@ -147,17 +169,29 @@
   }
 
   function texteRecapQualification() {
-    if (etat.effectuee === REPONSE_PAS_ENCORE || !etat.qualification) return "";
+    if (etat.effectuee === REPONSE_PAS_ENCORE) {
+      if (!etat.choixDateRevue) return "";
+      return labelPourRelance(etat.choixDateRevue, etat.datePrecise);
+    }
+    if (!etat.qualification) return "";
     var labelTag = labelPourQualification(etat.effectuee, etat.qualification);
     var precisionText = etat.precisionAutre ? " (« " + etat.precisionAutre + " »)" : "";
     return labelTag + precisionText;
   }
 
-  function texteRecap() {
-    var base = labelRecapReponse(etat.effectuee);
-    var qualif = texteRecapQualification();
-    if (qualif) return base + " — " + qualif;
-    return base;
+  function labelPourRelance(choixDateRevue, datePrecise) {
+    if (choixDateRevue === CHOIX_DATE_PRECISE) {
+      return datePrecise ? "Le " + formatDateFr(datePrecise) : "";
+    }
+    var tag = document.querySelector(".suivi-groupe-tag[data-qualification=\"" + choixDateRevue + "\"][data-type=\"relance\"]");
+    return tag ? tag.textContent.trim() : choixDateRevue;
+  }
+
+  function formatDateFr(isoDate) {
+    if (!isoDate) return "";
+    var parts = isoDate.split("-");
+    if (parts.length !== 3) return isoDate;
+    return parts[2] + "/" + parts[1] + "/" + parts[0];
   }
 
   function labelPourQualification(effectuee, qualification) {
@@ -177,6 +211,8 @@
     });
     var precisionDiv = modal.querySelector("#suivi-groupe-precision-autre");
     if (precisionDiv) precisionDiv.setAttribute("hidden", "");
+    var datePreciseDiv = modal.querySelector("#suivi-groupe-relance-date-precise");
+    if (datePreciseDiv) datePreciseDiv.setAttribute("hidden", "");
   }
 
   function afficher(modal, id) {
@@ -189,24 +225,33 @@
     if (el) el.setAttribute("hidden", "");
   }
 
-  /* Valeur de la constante Ruby MiseEnAction::REPONSE_PAS_ENCORE */
-  var REPONSE_PAS_ENCORE = "pas_encore";
-
   function handleBtnReponseClick(modal, btn) {
     etat.effectuee = btn.dataset.effectuee;
     etat.qualification = null;
     etat.precisionAutre = null;
+    etat.choixDateRevue = null;
+    etat.datePrecise = null;
 
-    if (etat.effectuee === REPONSE_PAS_ENCORE) {
-      afficherEtapeRecap(modal);
-    } else {
-      afficherEtapeQualification(modal);
-    }
+    afficherEtapeQualification(modal);
   }
 
   function handleTagClick(modal, tag) {
     reinitialiserTagsSelection(modal);
     tag.classList.add("suivi-groupe-tag--actif");
+
+    if (tag.dataset.type === "relance") {
+      etat.choixDateRevue = tag.dataset.qualification;
+      etat.qualification = null;
+      etat.precisionAutre = null;
+
+      if (etat.choixDateRevue === CHOIX_DATE_PRECISE) {
+        var datePreciseDiv = modal.querySelector("#suivi-groupe-relance-date-precise");
+        if (datePreciseDiv) datePreciseDiv.removeAttribute("hidden");
+      } else {
+        afficherEtapeRecap(modal);
+      }
+      return;
+    }
 
     etat.qualification = tag.dataset.qualification;
     etat.precisionAutre = null;
@@ -237,6 +282,16 @@
     var tag = el.closest(".suivi-groupe-tag");
     if (tag) { handleTagClick(modal, tag); return; }
 
+    if (el.id === "suivi-groupe-enregistrer-date" || el.closest("#suivi-groupe-enregistrer-date")) {
+      event.preventDefault();
+      var dateInput = document.getElementById("suivi-groupe-date-precise-input");
+      if (dateInput && dateInput.value) {
+        etat.datePrecise = dateInput.value;
+        afficherEtapeRecap(modal);
+      }
+      return;
+    }
+
     if (el.id === "suivi-groupe-modifier-reponse" || el.closest("#suivi-groupe-modifier-reponse")) {
       event.preventDefault();
       afficherEtapeQuestion(modal);
@@ -245,11 +300,7 @@
 
     if (el.id === "suivi-groupe-modifier-recap" || el.closest("#suivi-groupe-modifier-recap")) {
       event.preventDefault();
-      if (etat.effectuee === REPONSE_PAS_ENCORE) {
-        afficherEtapeQuestion(modal);
-      } else {
-        afficherEtapeQualification(modal);
-      }
+      afficherEtapeQualification(modal);
       return;
     }
   }
@@ -285,6 +336,12 @@
         ? textarea.value.trim()
         : "";
     }
+
+    var choixDateRevueChamp = document.getElementById("suivi-groupe-choix-date-revue");
+    if (choixDateRevueChamp) choixDateRevueChamp.value = etat.choixDateRevue || "";
+
+    var datePreciseChamp = document.getElementById("suivi-groupe-date-precise-champ");
+    if (datePreciseChamp) datePreciseChamp.value = etat.datePrecise || "";
   }
 
   function init() {

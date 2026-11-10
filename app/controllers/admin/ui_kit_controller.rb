@@ -16,7 +16,6 @@ module Admin
     def card; end
     def carte; end
     def carte_v2; end
-    # def carte_mise_en_action; end commenté pour le moment car besoin d'une resource
     def carte_partage_code; end
     def chiffre_cle; end
     def code; end

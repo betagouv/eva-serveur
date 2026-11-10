@@ -68,7 +68,9 @@ ActiveAdmin.register Beneficiaire do
       beneficiaire_ids,
       params[:effectuee],
       params[:qualification].presence,
-      params[:precision_autre].presence
+      params[:precision_autre].presence,
+      params[:choix_date_revue].presence,
+      params[:date_precise].presence
     )
     resultat = service.call
     if resultat == :effectuee_invalide

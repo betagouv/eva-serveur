@@ -23,12 +23,28 @@ function creerModalHTML() {
 
       <div id="suivi-groupe-etape-qualification" hidden>
         <span id="suivi-groupe-label-reponse"></span>
+        <div id="suivi-groupe-titre-qualification">
+          <p>De quelle aide s'agit-il ?</p>
+        </div>
+        <div id="suivi-groupe-titre-relance" hidden>
+          <p>Quand voulez-vous refaire le point ?</p>
+        </div>
         <div id="suivi-groupe-tags-remediation">
           <button class="suivi-groupe-tag" data-qualification="formation_metier" data-type="remediation">Formation métier</button>
           <button class="suivi-groupe-tag" data-qualification="autre" data-type="remediation">Autre</button>
         </div>
         <div id="suivi-groupe-tags-difficulte" hidden>
           <button class="suivi-groupe-tag" data-qualification="freins_peripheriques" data-type="difficulte">Freins périphériques</button>
+        </div>
+        <div id="suivi-groupe-tags-relance" hidden>
+          <button class="suivi-groupe-tag" data-qualification="7_jours" data-type="relance">Dans 7 jours</button>
+          <button class="suivi-groupe-tag" data-qualification="14_jours" data-type="relance">Dans 14 jours</button>
+          <button class="suivi-groupe-tag" data-qualification="1_mois" data-type="relance">Dans 1 mois</button>
+          <button class="suivi-groupe-tag" data-qualification="date_precise" data-type="relance">Choisir une date</button>
+        </div>
+        <div id="suivi-groupe-relance-date-precise" hidden>
+          <input type="date" id="suivi-groupe-date-precise-input" />
+          <button id="suivi-groupe-enregistrer-date">Enregistrer</button>
         </div>
         <div id="suivi-groupe-precision-autre" hidden>
           <textarea id="suivi-groupe-precision-autre-input"></textarea>
@@ -47,6 +63,8 @@ function creerModalHTML() {
       <input id="suivi-groupe-effectuee" type="hidden" form="${FORM_ID}" value="" />
       <input id="suivi-groupe-qualification-champ" type="hidden" form="${FORM_ID}" value="" />
       <input id="suivi-groupe-precision-autre-champ" type="hidden" form="${FORM_ID}" value="" />
+      <input id="suivi-groupe-choix-date-revue" type="hidden" form="${FORM_ID}" value="" />
+      <input id="suivi-groupe-date-precise-champ" type="hidden" form="${FORM_ID}" value="" />
       <div id="hidden-ids-suivi-container"></div>
     </div>
 
@@ -90,12 +108,30 @@ describe("navigation entre les étapes", () => {
     expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(false);
   });
 
-  test("cliquer Pas encore saute directement à l'étape récap", () => {
+  test("cliquer Pas encore affiche l'étape qualification avec les tags relance", () => {
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
 
     expect(document.getElementById("suivi-groupe-etape-question").hasAttribute("hidden")).toBe(true);
-    expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(true);
+    expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-tags-relance").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-tags-remediation").hasAttribute("hidden")).toBe(true);
+    expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(true);
+  });
+
+  test("cliquer un tag relance affiche l'étape récap", () => {
+    clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="7_jours"]');
+
     expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-soumettre").hasAttribute("hidden")).toBe(false);
+  });
+
+  test("cliquer 'Choisir une date' affiche le champ date sans aller au récap", () => {
+    clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="date_precise"]');
+
+    expect(document.getElementById("suivi-groupe-relance-date-precise").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(true);
   });
 
   test("cliquer un tag de remédiation affiche l'étape récap", () => {
@@ -114,11 +150,13 @@ describe("navigation entre les étapes", () => {
     expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(true);
   });
 
-  test("Modifier le récap depuis pas_encore revient à l'étape question", () => {
+  test("Modifier le récap depuis pas_encore revient à l'étape qualification", () => {
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="7_jours"]');
     clicBouton("#suivi-groupe-modifier-recap");
 
-    expect(document.getElementById("suivi-groupe-etape-question").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-tags-relance").hasAttribute("hidden")).toBe(false);
   });
 
   test("Modifier le récap depuis une qualification revient à l'étape qualification", () => {
@@ -131,11 +169,20 @@ describe("navigation entre les étapes", () => {
 });
 
 describe("texte récapitulatif", () => {
-  test("affiche 'Pas encore — Une action est prévue' pour effectuee=pas_encore", () => {
+  test("affiche 'Pas encore — Une action est prévue' pour effectuee=pas_encore après tag relance", () => {
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="7_jours"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
     expect(texte).toBe("Pas encore — Une action est prévue");
+  });
+
+  test("affiche le label du délai dans la qualification récap pour pas_encore", () => {
+    clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="7_jours"]');
+
+    const qualif = document.getElementById("suivi-groupe-recap-qualification").textContent;
+    expect(qualif).toBe("Dans 7 jours");
   });
 
   test("affiche le label récap et la qualification sur deux lignes pour effectuee=true", () => {
@@ -244,15 +291,17 @@ describe("remplissage des champs cachés avant soumission", () => {
     expect(ids).toEqual(["10", "20"]);
   });
 
-  test("effectuee=pas_encore est transmis sans qualification", () => {
+  test("effectuee=pas_encore et choix_date_revue sont transmis après tag relance", () => {
     ouvrirModalAvecIds(["5"]);
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+    clicBouton('[data-qualification="7_jours"]');
 
     const form = document.getElementById(FORM_ID);
     form.dispatchEvent(new Event("submit"));
 
     expect(document.getElementById("suivi-groupe-effectuee").value).toBe(REPONSE_PAS_ENCORE);
     expect(document.getElementById("suivi-groupe-qualification-champ").value).toBe("");
+    expect(document.getElementById("suivi-groupe-choix-date-revue").value).toBe("7_jours");
   });
 });
 

@@ -6,8 +6,15 @@
     </a>
   </div>
 
-  <p class="fr-text--bold fr-mt-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_titre") %></p>
-  <p class="fr-hint-text"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_sous_titre") %></p>
+  <div id="suivi-groupe-titre-qualification">
+    <p class="fr-text--bold fr-mt-6v"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_titre") %></p>
+    <p class="fr-hint-text"><%= t("admin.beneficiaires.modal_suivi_groupe.qualification_sous_titre") %></p>
+  </div>
+
+  <div id="suivi-groupe-titre-relance" hidden>
+    <p class="fr-text--bold fr-mt-6v"><%= t("date_revue_mise_en_action.question") %></p>
+    <p class="fr-hint-text"><%= t("date_revue_mise_en_action.description") %></p>
+  </div>
 
   <div id="suivi-groupe-tags-remediation" class="fr-tags-group" hidden>
     <% MiseEnAction::REMEDIATIONS.reject { |r| r == MiseEnAction::QUALIFICATION_INDETERMINEE }.each do |remediation| %>
@@ -25,6 +32,33 @@
         <%= I18n.t("activerecord.attributes.mise_en_action.difficulte.#{difficulte}") %>
       </button>
     <% end %>
+  </div>
+
+  <div id="suivi-groupe-tags-relance" class="fr-tags-group" hidden>
+    <% MiseEnAction::DELAIS_REVUE.keys.each do |delai| %>
+      <button type="button" class="fr-tag suivi-groupe-tag"
+              data-qualification="<%= delai %>" data-type="relance">
+        <%= t("date_revue_mise_en_action.delais.#{delai}") %>
+      </button>
+    <% end %>
+    <button type="button" class="fr-tag suivi-groupe-tag"
+            data-qualification="<%= MiseEnAction::CHOIX_DATE_PRECISE %>" data-type="relance">
+      <%= t("date_revue_mise_en_action.choisir_une_date") %>
+    </button>
+  </div>
+
+  <div id="suivi-groupe-relance-date-precise" hidden>
+    <div class="fr-input-group fr-mt-4v">
+      <label class="fr-label" for="suivi-groupe-date-precise-input">
+        <%= t("date_revue_mise_en_action.choisir_une_date") %>
+        <span class="fr-hint-text"><%= t("date_revue_mise_en_action.format_attendu") %></span>
+      </label>
+      <input class="fr-input" type="date" id="suivi-groupe-date-precise-input"
+             min="<%= Date.tomorrow %>">
+    </div>
+    <button type="button" class="fr-btn fr-mt-4v" id="suivi-groupe-enregistrer-date">
+      <%= t("date_revue_mise_en_action.enregistrer") %>
+    </button>
   </div>
 
   <div id="suivi-groupe-precision-autre" hidden>

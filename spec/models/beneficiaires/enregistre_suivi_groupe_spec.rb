@@ -17,8 +17,10 @@ describe Beneficiaires::EnregistreSuiviGroupe do
     allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
   end
 
-  def service(effectuee:, qualification: nil, precision_autre: nil)
-    described_class.new([ beneficiaire.id ], effectuee, qualification, precision_autre)
+  def service(effectuee:, qualification: nil, precision_autre: nil,
+              choix_date_revue: nil, date_precise: nil)
+    described_class.new([ beneficiaire.id ], effectuee, qualification, precision_autre,
+                        choix_date_revue, date_precise)
   end
 
   describe "#call" do
@@ -39,6 +41,23 @@ describe Beneficiaires::EnregistreSuiviGroupe do
     it "crée une MiseEnAction avec effectuee=nil quand effectuee=pas_encore" do
       service(effectuee: MiseEnAction::REPONSE_PAS_ENCORE).call
       expect(evaluation_concernee.reload.mise_en_action.effectuee).to be_nil
+    end
+
+    it "enregistre le délai de relance quand effectuee=pas_encore avec choix_date_revue" do
+      service(effectuee: MiseEnAction::REPONSE_PAS_ENCORE, choix_date_revue: "7_jours").call
+      expect(evaluation_concernee.reload.mise_en_action.choix_date_revue).to eq("7_jours")
+    end
+
+    it "enregistre la date précise quand effectuee=pas_encore avec date_precise" do
+      service(effectuee: MiseEnAction::REPONSE_PAS_ENCORE,
+              choix_date_revue: MiseEnAction::CHOIX_DATE_PRECISE,
+              date_precise: Date.tomorrow.to_s).call
+      expect(evaluation_concernee.reload.mise_en_action.date_revue).to eq(Date.tomorrow)
+    end
+
+    it "n'appelle pas qualifie quand effectuee=pas_encore avec une qualification" do
+      service(effectuee: MiseEnAction::REPONSE_PAS_ENCORE, qualification: "formation_metier").call
+      expect(evaluation_concernee.reload.mise_en_action.remediation).to be_nil
     end
 
     it "renseigne la remédiation quand effectuee=true avec une qualification" do

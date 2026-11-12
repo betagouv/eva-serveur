@@ -82,15 +82,15 @@ function clicBouton(selector) {
   btn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 }
 
-// La modale lit les libellés de réponse dans les traductions servies par i18n-js
-const TRADUCTIONS = {
-  "reponse_mise_en_action.titre_true": "Oui, une aide a commencé",
-  "reponse_mise_en_action.titre_false": "Non, rien n’est prévu pour l’instant",
-  "reponse_mise_en_action.titre_pas_encore": "Pas encore, la suite est à confirmer"
-};
+const CLE_TITRE_SELECTION = "admin.beneficiaires.modal_suivi_groupe.titre_selection";
+
+function traductionSimulee(cle, options) {
+  if (options && options.count !== undefined) return `${cle} count=${options.count}`;
+  return cle;
+}
 
 beforeEach(() => {
-  global.I18n = { t: (cle) => TRADUCTIONS[cle] || cle };
+  global.I18n = { t: traductionSimulee };
   document.body.innerHTML = creerModalHTML();
   init();
   ouvrirModalAvecIds(["42", "43"]);
@@ -177,12 +177,12 @@ describe("navigation entre les étapes", () => {
 });
 
 describe("texte récapitulatif", () => {
-  test("affiche 'Pas encore, la suite est à confirmer' pour effectuee=pas_encore après tag relance", () => {
+  test("utilise la traduction titre_pas_encore pour effectuee=pas_encore après tag relance", () => {
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
     clicBouton('[data-qualification="7_jours"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
-    expect(texte).toBe("Pas encore, la suite est à confirmer");
+    expect(texte).toBe("reponse_mise_en_action.titre_pas_encore");
   });
 
   test("affiche le label du délai dans la qualification récap pour pas_encore", () => {
@@ -193,38 +193,45 @@ describe("texte récapitulatif", () => {
     expect(qualif).toBe("Dans 7 jours");
   });
 
-  test("affiche le label récap et la qualification sur deux lignes pour effectuee=true", () => {
+  test("utilise la traduction titre_true et affiche la qualification pour effectuee=true", () => {
     clicBouton('[data-effectuee="true"]');
     clicBouton('[data-qualification="formation_metier"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
     const qualif = document.getElementById("suivi-groupe-recap-qualification").textContent;
-    expect(texte).toBe("Oui, une aide a commencé");
+    expect(texte).toBe("reponse_mise_en_action.titre_true");
     expect(qualif).toContain("Formation métier");
   });
 
-  test("affiche 'Non, rien n’est prévu pour l’instant' pour effectuee=false sans qualification", () => {
+  test("utilise la traduction titre_false pour effectuee=false", () => {
     clicBouton('[data-effectuee="false"]');
     clicBouton('[data-qualification="freins_peripheriques"]');
 
     const texte = document.getElementById("suivi-groupe-recap-texte").textContent;
-    expect(texte).toBe("Non, rien n’est prévu pour l’instant");
+    expect(texte).toBe("reponse_mise_en_action.titre_false");
   });
 });
 
 describe("label de réponse à l'étape qualification", () => {
-  test("affiche 'Une suite est engagée' pour Oui", () => {
+  test("utilise la traduction titre_remediation pour Oui", () => {
     clicBouton('[data-effectuee="true"]');
 
     const label = document.getElementById("suivi-groupe-label-reponse").textContent;
-    expect(label).toBe("Une suite est engagée");
+    expect(label).toBe("qualification_mise_en_action.titre_remediation");
   });
 
-  test("affiche 'Aucune action à ce stade' pour Non", () => {
+  test("utilise la traduction titre_difficulte pour Non", () => {
     clicBouton('[data-effectuee="false"]');
 
     const label = document.getElementById("suivi-groupe-label-reponse").textContent;
-    expect(label).toBe("Aucune action à ce stade");
+    expect(label).toBe("qualification_mise_en_action.titre_difficulte");
+  });
+
+  test("utilise la traduction du titre de date de revue pour Pas encore", () => {
+    clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
+
+    const label = document.getElementById("suivi-groupe-label-reponse").textContent;
+    expect(label).toBe("date_revue_mise_en_action.titre");
   });
 
   test("affiche les tags remédiation pour Oui et cache les tags difficulté", () => {
@@ -243,7 +250,7 @@ describe("label de réponse à l'étape qualification", () => {
 });
 
 describe("updateTitre", () => {
-  test("affiche le singulier pour 1 bénéficiaire", () => {
+  test("utilise la traduction du titre avec count=1 pour 1 bénéficiaire", () => {
     ouvrirModalAvecIds(["42"]);
     document.querySelector('[data-effectuee="true"]').dispatchEvent(
       new MouseEvent("click", { bubbles: true })
@@ -263,10 +270,10 @@ describe("updateTitre", () => {
     );
 
     const titre = document.querySelector(".fr-modal__title").textContent;
-    expect(titre).toMatch(/1 bénéficiaire[^s]/);
+    expect(titre.trim()).toBe(`${CLE_TITRE_SELECTION} count=1`);
   });
 
-  test("affiche le pluriel pour plusieurs bénéficiaires", () => {
+  test("utilise la traduction du titre avec le nombre de bénéficiaires sélectionnés", () => {
     document.body.innerHTML += `
       <a class="batch_action" data-action="renseigner_suivi_groupe">Ouvrir</a>
       <input class="batch-actions-resource-selection" type="checkbox" checked value="42" />
@@ -277,7 +284,7 @@ describe("updateTitre", () => {
     );
 
     const titre = document.querySelector(".fr-modal__title").textContent;
-    expect(titre).toMatch(/2 bénéficiaires/);
+    expect(titre.trim()).toBe(`${CLE_TITRE_SELECTION} count=2`);
   });
 });
 

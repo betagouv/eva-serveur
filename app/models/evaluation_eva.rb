@@ -46,9 +46,9 @@ class EvaluationEva < Evaluation
        NIVEAUX_NUMERATIE.zip(NIVEAUX_NUMERATIE).to_h, prefix: true
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
 
+  scope :suivies, -> { EvaluationsEva::StatutSuivi.evaluations_suivies(all) }
   scope :mise_en_action_a_renseigner, lambda {
-    where("#{EvaluationsEva::StatutSuivi.sql_reponse_mise_en_action} IS NULL")
-      .where("NOT (#{EvaluationsEva::StatutSuivi.sql_mise_en_action_reportee})")
+    EvaluationsEva::StatutSuivi.mises_en_action_a_renseigner(all)
   }
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])

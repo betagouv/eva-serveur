@@ -8,7 +8,7 @@ module Beneficiaires
     def self.sql_statut_suivi
       derniere_evaluation_suivie = EvaluationEva
         .where("evaluations.beneficiaire_id = beneficiaires.id")
-        .where(EvaluationsEva::StatutSuivi.sql_evaluation_suivie)
+        .suivies
         .order(debutee_le: :desc)
         .limit(1)
         .select(EvaluationsEva::StatutSuivi.sql_statut_suivi)

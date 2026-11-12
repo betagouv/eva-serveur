@@ -14,6 +14,18 @@ module EvaluationsEva
       EvaluationEva.where(id: ids).pluck(:id, sql_statut_suivi).to_h
     end
 
+    # Les relations ci-dessous portent les scopes d'EvaluationEva : les appelants passent par
+    # eux (EvaluationEva.suivies, .mise_en_action_a_renseigner, .statut_suivi_in) plutôt que de
+    # recoller les fragments SQL, qui restent privés.
+    def self.evaluations_suivies(relation)
+      relation.where(sql_evaluation_suivie)
+    end
+
+    def self.mises_en_action_a_renseigner(relation)
+      relation.where("#{sql_reponse_mise_en_action} IS NULL")
+              .where("NOT (#{sql_mise_en_action_reportee})")
+    end
+
     def self.filtre_par_statuts(relation, statuts)
       relation.where("#{sql_statut_suivi} IN (?)", statuts & STATUTS_FILTRE)
     end
@@ -40,45 +52,29 @@ module EvaluationsEva
       Arel.sql("CASE #{sql_statut} #{cas} END")
     end
 
-    # La structure dans laquelle l'évaluation a été passée
-    def self.sql_structure_de_levaluation
-      <<~SQL.squish
-        (SELECT comptes.structure_id FROM campagnes
-         JOIN comptes ON comptes.id = campagnes.compte_id
-         WHERE campagnes.id = evaluations.campagne_id)
-      SQL
-    end
-
-    # La déclaration qui vaut pour la personne dans la structure de l'évaluation (EVA-1186) :
-    # une réponse donnée sur une autre évaluation de la même personne y vaut aussi
-    def self.sql_mise_en_action_en_cours
-      <<~SQL.squish
-        mises_en_action.deleted_at IS NULL
-        AND mises_en_action.remplacee_le IS NULL
-        AND mises_en_action.beneficiaire_id = evaluations.beneficiaire_id
-        AND mises_en_action.structure_id = #{sql_structure_de_levaluation}
-      SQL
-    end
-
-    # La réponse Oui (true), Non (false), ou NULL sans réponse
+    # La réponse Oui (true), Non (false), ou NULL sans réponse. La déclaration qui vaut pour
+    # l'évaluation est celle de la personne dans sa structure (EVA-1186) : une réponse donnée
+    # sur une autre évaluation de la même personne y vaut aussi.
     def self.sql_reponse_mise_en_action
       <<~SQL.squish
         (SELECT mises_en_action.effectuee FROM mises_en_action
-         WHERE #{sql_mise_en_action_en_cours} LIMIT 1)
+         WHERE #{MisesEnAction::EnCours.sql_correlee_a_levaluation} LIMIT 1)
       SQL
     end
+    private_class_method :sql_reponse_mise_en_action
 
     # Vrai si la mise en action de l'évaluation est reportée : le pro a répondu "Pas encore"
     # et sa date de revue n'est pas atteinte
     def self.sql_mise_en_action_reportee
       <<~SQL.squish
         EXISTS (SELECT 1 FROM mises_en_action
-                WHERE #{sql_mise_en_action_en_cours}
+                WHERE #{MisesEnAction::EnCours.sql_correlee_a_levaluation}
                 AND mises_en_action.effectuee IS NULL
                 AND mises_en_action.repondue_le IS NOT NULL
                 AND mises_en_action.date_revue > CURRENT_DATE)
       SQL
     end
+    private_class_method :sql_mise_en_action_reportee
 
     # L'évaluation entre dans le suivi : illettrisme potentiel, compétences de base complètes,
     # passée depuis DATE_STATUT_SUIVI, bénéficiaire non anonymisé
@@ -95,6 +91,7 @@ module EvaluationsEva
                     AND beneficiaires.anonymise_le IS NULL)
       SQL
     end
+    private_class_method :sql_evaluation_suivie
 
     def self.date_debut_suivi
       date = ENV["DATE_STATUT_SUIVI"]
@@ -102,5 +99,6 @@ module EvaluationsEva
 
       Time.zone.parse(date)
     end
+    private_class_method :date_debut_suivi
   end
 end

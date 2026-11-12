@@ -153,7 +153,7 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
     # de la personne : la réponse donnée vaut pour toute sa structure (EVA-1186)
     def evaluation_suivi
       @evaluation_suivi ||= evaluations_eva_accessibles
-                              .where(EvaluationsEva::StatutSuivi.sql_evaluation_suivie)
+                              .suivies
                               .order(debutee_le: :desc)
                               .first
     end

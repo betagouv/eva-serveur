@@ -50,7 +50,7 @@ module Beneficiaires
     def evaluation_concernee(beneficiaire)
       EvaluationEva
         .where(beneficiaire: beneficiaire)
-        .where(EvaluationsEva::StatutSuivi.sql_evaluation_suivie)
+        .suivies
         .order(debutee_le: :desc)
         .first
     end

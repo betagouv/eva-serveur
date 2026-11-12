@@ -48,9 +48,7 @@ class MiseEnAction < ApplicationRecord
 
   # La déclaration qui vaut aujourd'hui pour cette personne dans cette structure
   def self.en_cours_pour(beneficiaire_id, structure_id)
-    return if beneficiaire_id.blank? || structure_id.blank?
-
-    en_cours.find_by(beneficiaire_id: beneficiaire_id, structure_id: structure_id)
+    MisesEnAction::EnCours.pour(beneficiaire_id, structure_id)
   end
 
   def self.pas_encore_actif?

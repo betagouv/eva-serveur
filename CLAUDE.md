@@ -85,6 +85,7 @@ Redis must be running for the Sidekiq workers.
 
 ### Tests
 - Always reference displayed text through its translation (`I18n.t("…")`) instead of hardcoding the string: a hardcoded copy breaks on any wording change and usually misses the narrow non-breaking spaces (U+202F) of the locales.
+- JavaScript tests (Jest) do not load the locales: stub `I18n.t` so it returns the key (plus interpolation options such as `count` when relevant) and assert on the key, never on a copy of the message. Text displayed by JavaScript must therefore come from `I18n.t` (translations are served by i18n-js), not be hardcoded in the script.
 
 ### TDD (red → green)
 - Before fixing a bug or changing behavior, write or adapt the test, run it with `bin/rspec <file>` and confirm it **fails**. Only then change the production code and rerun it to confirm it passes.

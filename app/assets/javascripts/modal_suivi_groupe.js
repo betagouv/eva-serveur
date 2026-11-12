@@ -86,8 +86,10 @@
   function updateTitre(modal, count) {
     var titleEl = modal.querySelector(".fr-modal__title");
     if (!titleEl) return;
-    var suffixe = count > 1 ? "s" : "";
-    titleEl.innerHTML = "<span class=\"fr-icon-arrow-right-line\" aria-hidden=\"true\"></span> Où en sont ces " + count + " bénéficiaire" + suffixe + " ?";
+    titleEl.innerHTML = "<span class=\"fr-icon-arrow-right-line\" aria-hidden=\"true\"></span> ";
+    titleEl.appendChild(document.createTextNode(
+      I18n.t("admin.beneficiaires.modal_suivi_groupe.titre_selection", { count: count })
+    ));
   }
 
   function reinitialiser(modal) {
@@ -157,12 +159,11 @@
   }
 
   function labelPourReponse(effectuee) {
-    if (effectuee === "true") return "Une suite est engagée";
-    if (effectuee === "false") return "Aucune action à ce stade";
-    return "La suite n'est pas encore connue";
+    if (effectuee === "true") return I18n.t("qualification_mise_en_action.titre_remediation");
+    if (effectuee === "false") return I18n.t("qualification_mise_en_action.titre_difficulte");
+    return I18n.t("date_revue_mise_en_action.titre");
   }
 
-  // Mêmes libellés que la réponse enregistrée d'une carte (ReponseMiseEnActionComponent)
   function labelRecapReponse(effectuee) {
     if (effectuee === "true") return I18n.t("reponse_mise_en_action.titre_true");
     if (effectuee === "false") return I18n.t("reponse_mise_en_action.titre_false");

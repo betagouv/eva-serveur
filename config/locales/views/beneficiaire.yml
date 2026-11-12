@@ -5,6 +5,9 @@ fr:
         titre: Suivi de l’accompagnement
       modal_suivi_groupe:
         titre: <span class='fr-icon-survey-line' aria-hidden='true'></span> Suivi groupé
+        titre_selection:
+          one: "Où en est ce bénéficiaire ?"
+          other: "Où en sont ces %{count} bénéficiaires ?"
         sous_titre: Une seule réponse pour tout le groupe sélectionné.
         description: "Un illettrisme potentiel a été détecté lors de l'évaluation de ces bénéficiaires. Votre réponse aide à savoir si elles sont bien accompagnées."
         oui: Oui

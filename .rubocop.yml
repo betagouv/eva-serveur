@@ -49,6 +49,7 @@ Metrics/BlockLength:
     - 'spec/factories/*'
     - 'Guardfile'
     - 'app/**/*.arb'
+    - 'app/**/*.erb'
   AllowedMethods:
     - describe
     - it

@@ -53,6 +53,16 @@ class Rack::Attack
   THROTTLE_PAR_SESSION_PATHS =
     %r{\A/api/(evenements|evaluations/[^/]+/collections_evenements)\z}.freeze
 
+  # Fichiers servis par Active Storage (illustrations, audios, etc.) : une
+  # situation les précharge tous au démarrage, plusieurs centaines d'un coup, ce qui
+  # dépasserait les throttles par IP. Leurs URL portent un identifiant signé,
+  # rejeté sans requête en base quand il est forgé.
+  CHEMINS_ACTIVE_STORAGE = %r{\A/rails/active_storage/}.freeze
+
+  def self.throttle_par_ip?(req)
+    !req.path.match?(THROTTLE_PAR_SESSION_PATHS) && !req.path.match?(CHEMINS_ACTIVE_STORAGE)
+  end
+
   # Le routeur accepte aussi /admin/login.json et /admin/login/
   CHEMIN_CONNEXION = %r{\A/admin/login(\.[^/]*)?/?\z}.freeze
   LIMITE_CONNEXIONS_PAR_EMAIL = 10
@@ -100,15 +110,16 @@ class Rack::Attack
   # Limite le nombre de requêtes par IP pour éviter qu'une rafale (scan,
   # bot, exploit) ne sature les workers Puma, quel que soit le chemin visé.
   # Fenêtre courte : coupe une rafale de type "scan" en quelques requêtes.
-  # Exclut les chemins throttlés par session_id (cf. plus haut).
+  # Exclut les chemins throttlés par session_id et ceux d'Active Storage
+  # (cf. plus haut).
   throttle('rafale par ip', limit: 100, period: 10.seconds) do |req|
-    req.ip unless req.path.match?(THROTTLE_PAR_SESSION_PATHS)
+    req.ip if Rack::Attack.throttle_par_ip?(req)
   end
 
   # Fenêtre longue : attrape un scan plus lent/étalé qui resterait sous le
   # seuil de la fenêtre courte.
   throttle('requetes par ip', limit: 600, period: 5.minutes) do |req|
-    req.ip unless req.path.match?(THROTTLE_PAR_SESSION_PATHS)
+    req.ip if Rack::Attack.throttle_par_ip?(req)
   end
 
   # Rafale par session : une session d'évaluation ne devrait pas envoyer

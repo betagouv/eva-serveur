@@ -193,6 +193,35 @@ describe "Rack::Attack" do
     end
   end
 
+  describe "limitation des rafales par IP", type: :request do
+    around do |exemple|
+      cache_initial = Rack::Attack.cache.store
+      Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+      Rack::Attack.enabled = true
+      Timecop.freeze(Time.utc(2026, 1, 1, 12, 0, 30)) { exemple.run }
+    ensure
+      Rack::Attack.enabled = false
+      Rack::Attack.cache.store = cache_initial
+    end
+
+    it "bloque une IP qui enchaîne plus de 100 requêtes en 10 secondes" do
+      100.times { get "/chemin-inexistant" }
+
+      get "/chemin-inexistant"
+      expect(response).to have_http_status(:too_many_requests)
+    end
+
+    it "ne bloque pas le préchargement des fichiers Active Storage d'une situation" do
+      101.times do |i|
+        get "/rails/active_storage/blobs/redirect/signature-invalide--#{i}/audio_#{i}.mp3"
+        expect(response).not_to have_http_status(:too_many_requests)
+      end
+
+      get "/chemin-inexistant"
+      expect(response).not_to have_http_status(:too_many_requests)
+    end
+  end
+
   describe "limitation des tentatives de connexion", type: :request do
     let(:mot_de_passe) { "Password78901$" }
     let!(:compte) { create :compte_admin, email: "moi@exemple.fr", password: mot_de_passe }

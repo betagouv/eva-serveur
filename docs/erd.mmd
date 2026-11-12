@@ -170,6 +170,7 @@ erDiagram
 		string token
 	}
 	MiseEnAction {
+		uuid beneficiaire_id FK
 		string choix_date_revue
 		date date_revue
 		datetime deleted_at
@@ -179,7 +180,10 @@ erDiagram
 		string motif
 		text precision_autre
 		string remediation
+		datetime remplacee_le
 		datetime repondue_le
+		uuid repondue_par_id FK
+		uuid structure_id FK
 	}
 	Opco {
 		string email
@@ -325,6 +329,9 @@ erDiagram
 	Structure ||--}o Invitation : ""
 	Compte ||--}o Invitation : ""
 	Evaluation ||--}o MiseEnAction : ""
+	Beneficiaire ||--}o MiseEnAction : ""
+	Structure ||--}o MiseEnAction : ""
+	Compte o|--}o MiseEnAction : ""
 	Opco ||--}o OpcoParcoursType : ""
 	Opco o|..}o ParcoursType : ""
 	Opco o|..|o "ActiveStorage::Blob" : ""

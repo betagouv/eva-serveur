@@ -24,6 +24,30 @@
       float: none;
       flex-direction: column;
     }
+
+    // Répondre « oui » ou « non » affiche les questions de qualification : sans cela
+    // la carte de droite s'allonge et dépasse la liste des évaluations (EVA-1186).
+    // Sortie du flux, la colonne ne pousse plus la hauteur de la ligne et le contenu
+    // défile dans la carte. Sur petit écran les colonnes s'empilent : on laisse faire.
+    @media (min-width: $dsfr-breakpoint-md) {
+      > .column:last-child {
+        position: relative;
+
+        > .suivi-beneficiaires {
+          position: absolute;
+          inset: 0;
+        }
+
+        .suivi-accompagnement-illettrisme {
+          min-height: 0;
+        }
+
+        .suivi-mise-en-action {
+          min-height: 0;
+          overflow-y: auto;
+        }
+      }
+    }
   }
 
   .section-tableau-bord-eva-pro {

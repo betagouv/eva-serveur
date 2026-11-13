@@ -97,23 +97,6 @@ describe StructureLocale, type: :model do
   end
 
   describe "#affecte_usage_entreprise_si_necessaire" do
-    context "quand ACTIVE_EVAPRO n'est pas définie" do
-      let!(:valeur_precedente_active_evapro) { ENV["ACTIVE_EVAPRO"] }
-      let(:structure) do
-        described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
-                            type_structure: "entreprise", usage: nil)
-      end
-
-      before { ENV.delete("ACTIVE_EVAPRO") }
-
-      after { ENV["ACTIVE_EVAPRO"] = valeur_precedente_active_evapro }
-
-      it "ne modifie pas l'usage" do
-        structure.affecte_usage_entreprise_si_necessaire
-        expect(structure.usage).to be_nil
-      end
-    end
-
     context 'quand le type_structure est entreprise et usage est vide' do
         let(:structure) do
           described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",

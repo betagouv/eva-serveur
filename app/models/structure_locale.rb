@@ -40,7 +40,6 @@ class StructureLocale < Structure
   end
 
   def affecte_usage_entreprise_si_necessaire
-    return unless ENV["ACTIVE_EVAPRO"].present?
     return unless type_structure == "entreprise"
     return if evapro?
 

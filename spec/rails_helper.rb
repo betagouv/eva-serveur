@@ -2,7 +2,6 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 ENV['SIRENE_API_URL'] ||= 'https://api.sirene.test'
-ENV['ACTIVE_EVAPRO'] ||= 'true'
 ENV['PREFIXES_CODE_EXCLUS'] ||= 'LOL GAG'
 ENV.delete('METABASE_SECRET_KEY')
 require File.expand_path('../config/environment', __dir__)

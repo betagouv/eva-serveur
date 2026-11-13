@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | grep -q 'db/migrate/' && bundle exec rake erd 2>/dev/null || true",
+            "statusMessage": "Mise à jour de l'ERD..."
+          }
+        ]
+      }
+    ]
+  }
+}

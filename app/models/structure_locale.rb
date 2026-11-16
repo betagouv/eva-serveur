@@ -5,7 +5,7 @@ class StructureLocale < Structure
 
   scope :pour_inscription, ->(siret) { where(siret: siret).order(:nom, :id) }
 
-  TYPE_NON_COMMUNIQUE = "non_communique"
+  VALEUR_NON_COMMUNIQUEE = "non_communique"
   TYPES_STRUCTURES = %w[
     AFPA
     apprentissage
@@ -29,14 +29,14 @@ class StructureLocale < Structure
   ].freeze
 
   validates :code_postal, :type_structure, :usage, presence: true
-  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }
+  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ VALEUR_NON_COMMUNIQUEE ]) }
   validates :code_postal, numericality: { only_integer: true }, length: { is: 5 },
-                          unless: proc { |s| s.code_postal == TYPE_NON_COMMUNIQUE }
+                          unless: proc { |s| s.code_postal == VALEUR_NON_COMMUNIQUEE }
 
   auto_strip_attributes :code_postal, delete_whitespaces: true
 
   def code_postal_manquant?
-    code_postal.blank? || code_postal == TYPE_NON_COMMUNIQUE
+    code_postal.blank? || code_postal == VALEUR_NON_COMMUNIQUEE
   end
 
   def affecte_usage_entreprise_si_necessaire

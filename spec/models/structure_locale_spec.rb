@@ -42,8 +42,8 @@ describe StructureLocale, type: :model do
       it { expect(structure).to be_code_postal_manquant }
     end
 
-    context "quand code_postal est TYPE_NON_COMMUNIQUE" do
-      let(:structure) { described_class.new(code_postal: described_class::TYPE_NON_COMMUNIQUE) }
+    context "quand code_postal est VALEUR_NON_COMMUNIQUEE" do
+      let(:structure) { described_class.new(code_postal: described_class::VALEUR_NON_COMMUNIQUEE) }
 
       it { expect(structure).to be_code_postal_manquant }
     end

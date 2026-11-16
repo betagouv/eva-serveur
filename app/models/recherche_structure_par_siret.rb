@@ -27,7 +27,7 @@ class RechercheStructureParSiret
     structure = StructureLocale.new(
       siret: @siret,
       usage: AvecUsage::USAGE_EVA,
-      type_structure: StructureLocale::TYPE_NON_COMMUNIQUE
+      type_structure: StructureLocale::VALEUR_NON_COMMUNIQUEE
     )
 
     mise_a_jour = MiseAJourSiret.new(structure)

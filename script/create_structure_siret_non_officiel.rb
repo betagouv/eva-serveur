@@ -11,7 +11,7 @@ structure = StructureLocale.new(
   nom: "Structure test SIRET non officiel",
   code_postal: "75001",
   usage: AvecUsage::USAGE_EVA,
-  type_structure: StructureLocale::TYPE_NON_COMMUNIQUE
+  type_structure: StructureLocale::VALEUR_NON_COMMUNIQUEE
 )
 
 # L'API ne reconnaît pas ce SIRET → on force la sauvegarde sans valider le SIRET.

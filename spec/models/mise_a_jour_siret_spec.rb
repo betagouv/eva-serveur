@@ -263,6 +263,47 @@ RSpec.describe MiseAJourSiret, type: :model do
       end
     end
 
+    context "quand le SIRET correspond à un établissement non diffusible" do
+      let(:donnees_api) do
+        {
+          "results" => [
+            {
+              "siren" => "123456789",
+              "statut_diffusion" => "P",
+              "nom_complet" => "[NON-DIFFUSIBLE]",
+              "nom_raison_sociale" => "[NON-DIFFUSIBLE]",
+              "activite_principale" => "85.59B",
+              "siege" => {
+                "siret" => "12345678901234",
+                "adresse" => "[NON-DIFFUSIBLE]",
+                "code_postal" => "[NON-DIFFUSIBLE]",
+                "statut_diffusion_etablissement" => "P",
+                "etat_administratif" => "A"
+              },
+              "matching_etablissements" => [],
+              "complements" => {}
+            }
+          ],
+          "total_results" => 1
+        }
+      end
+
+      before do
+        allow(client_sirene).to receive(:recherche).with("12345678901234").and_return(donnees_api)
+      end
+
+      it "vide le code postal existant" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_postal).to be_nil
+      end
+
+      it "conserve le code postal saisi en même temps que le SIRET" do
+        structure.code_postal = "69001"
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_postal).to eq("69001")
+      end
+    end
+
     context "quand le SIRET est valide mais sans adresse" do
       let(:donnees_api) do
         {

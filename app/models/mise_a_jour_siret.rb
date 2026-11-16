@@ -1,4 +1,6 @@
 class MiseAJourSiret
+  STATUT_NON_DIFFUSIBLE = "P".freeze
+
   def initialize(structure)
     @structure = structure
   end
@@ -75,9 +77,19 @@ class MiseAJourSiret
   def met_a_jour_localisation(resultat)
     etablissement = cherche_etablissement(resultat)
     @structure.adresse = etablissement&.dig("adresse")
-    unless @structure.code_postal_changed?
-      @structure.code_postal = etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
-    end
+    return if @structure.code_postal_changed?
+
+    @structure.code_postal = code_postal_depuis(etablissement)
+  end
+
+  def code_postal_depuis(etablissement)
+    return if non_diffusible?(etablissement)
+
+    etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
+  end
+
+  def non_diffusible?(etablissement)
+    etablissement&.dig("statut_diffusion_etablissement") == STATUT_NON_DIFFUSIBLE
   end
 
   def cherche_etablissement(resultat)

@@ -525,6 +525,50 @@ describe Structure, type: :model do
     end
   end
 
+  describe "changement de SIRET vers un établissement non diffusible" do
+    let!(:structure) { create(:structure_locale, siret: "12345678901234", code_postal: "75012") }
+    let(:client_sirene) { instance_double(Sirene::Client) }
+    let(:donnees_api) do
+      {
+        "results" => [
+          {
+            "siren" => "840336572",
+            "nom_raison_sociale" => "[NON-DIFFUSIBLE]",
+            "siege" => {
+              "siret" => "84033657200028",
+              "adresse" => "[NON-DIFFUSIBLE]",
+              "code_postal" => "[NON-DIFFUSIBLE]",
+              "statut_diffusion_etablissement" => "P",
+              "etat_administratif" => "A"
+            },
+            "matching_etablissements" => []
+          }
+        ]
+      }
+    end
+
+    before do
+      RSpec::Mocks.space.proxy_for(MiseAJourSiret).reset
+      allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+      allow(client_sirene).to receive(:recherche).with("84033657200028").and_return(donnees_api)
+    end
+
+    it "refuse la sauvegarde tant que le code postal n'est pas saisi" do
+      structure.siret = "84033657200028"
+
+      expect(structure.save).to be false
+      expect(structure.errors.details[:code_postal]).to include(error: :blank)
+    end
+
+    it "accepte la sauvegarde avec le code postal saisi en même temps" do
+      structure.siret = "84033657200028"
+      structure.code_postal = "13250"
+
+      expect(structure.save).to be true
+      expect(structure.reload.code_postal).to eq("13250")
+    end
+  end
+
   describe 'unicité du SIRET' do
     context 'quand un SIRET identique existe avec des espaces' do
       # Test spécifique pour vérifier que la normalisation des espaces fonctionne

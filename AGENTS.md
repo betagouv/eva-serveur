@@ -83,6 +83,9 @@ Redis must be running for the Sidekiq workers.
 ### Langue
 - Le code est écrit en français : noms de classes, de méthodes et de variables, commentaires, descriptions RSpec et messages de commit. Le vocabulaire imposé par Rails et les gems (`create`, `index`, `has_many`, callbacks…) reste en anglais.
 
+### Comments
+- Do not add a comment when the name (constant, method, variable) and the tests already document the code, e.g. the format of an API response illustrated by the specs. Keep comments for a non-obvious "why" that appears neither in the code nor in the tests.
+
 ### Tests
 - Always reference displayed text through its translation (`I18n.t("…")`) instead of hardcoding the string: a hardcoded copy breaks on any wording change and usually misses the narrow non-breaking spaces (U+202F) of the locales.
 - JavaScript tests (Jest) do not load the locales: stub `I18n.t` so it returns the key (plus interpolation options such as `count` when relevant) and assert on the key, never on a copy of the message. Text displayed by JavaScript must therefore come from `I18n.t` (translations are served by i18n-js), not be hardcoded in the script.

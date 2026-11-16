@@ -38,7 +38,6 @@ class CodePostalInputComponent < ViewComponent::Base
 
   def normalized_value(raw)
     return nil if raw.blank?
-    return nil if raw.to_s == StructureLocale::TYPE_NON_COMMUNIQUE
 
     digits = raw.to_s.gsub(/\D/, "")[0, CODE_POSTAL_LENGTH]
     digits.presence

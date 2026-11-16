@@ -11,7 +11,8 @@ module StructureHelper
   end
 
   def structure_necessite_saisie_code_postal?(structure)
-    structure.is_a?(StructureLocale) && structure.code_postal_manquant?
+    structure.is_a?(StructureLocale) &&
+      (structure.code_postal_manquant? || structure.errors.include?(:code_postal))
   end
 
   def traduction_type_structure(type_structure)

@@ -85,7 +85,7 @@ class MiseAJourSiret
   def code_postal_depuis(etablissement)
     return if non_diffusible?(etablissement)
 
-    etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
+    etablissement&.dig("code_postal")
   end
 
   def non_diffusible?(etablissement)

@@ -30,8 +30,8 @@ describe CodePostalInputComponent, type: :component do
       expect(options[:label]).to eq("Code postal")
     end
 
-    context "quand value est TYPE_NON_COMMUNIQUE" do
-      let(:value) { StructureLocale::TYPE_NON_COMMUNIQUE }
+    context "quand value est VALEUR_NON_COMMUNIQUEE" do
+      let(:value) { StructureLocale::VALEUR_NON_COMMUNIQUEE }
 
       it "passe une valeur vide pour ne pas afficher non_communique" do
         options = component.instance_variable_get(:@input_component_options)

@@ -368,7 +368,7 @@ describe Inscription::StructuresController, type: :controller do
           build(:structure_locale,
                 siret: compte.siret,
                 idcc: [ "3" ],
-                code_postal: StructureLocale::TYPE_NON_COMMUNIQUE)
+                code_postal: StructureLocale::VALEUR_NON_COMMUNIQUEE)
         end
 
         before do

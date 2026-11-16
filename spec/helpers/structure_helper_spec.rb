@@ -10,8 +10,8 @@ describe StructureHelper do
       end
     end
 
-    context "quand la structure est une StructureLocale avec code_postal TYPE_NON_COMMUNIQUE" do
-      let(:structure) { StructureLocale.new(code_postal: StructureLocale::TYPE_NON_COMMUNIQUE) }
+    context "quand la structure est une StructureLocale avec code_postal VALEUR_NON_COMMUNIQUEE" do
+      let(:structure) { StructureLocale.new(code_postal: StructureLocale::VALEUR_NON_COMMUNIQUEE) }
 
       it "retourne true" do
         expect(helper.structure_necessite_saisie_code_postal?(structure)).to be(true)

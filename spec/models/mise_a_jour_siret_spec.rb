@@ -334,7 +334,7 @@ RSpec.describe MiseAJourSiret, type: :model do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.raison_sociale).to eq("ENTREPRISE TEST")
         expect(structure.adresse).to be_nil
-        expect(structure.code_postal).to eq(StructureLocale::TYPE_NON_COMMUNIQUE)
+        expect(structure.code_postal).to be_nil
       end
     end
 

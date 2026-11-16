@@ -26,6 +26,15 @@ describe StructureHelper do
       end
     end
 
+    context "quand la structure est une StructureLocale avec un code postal invalide" do
+      let(:structure) { StructureLocale.new(code_postal: "132") }
+
+      it "retourne true pour permettre de corriger la saisie" do
+        structure.validate
+        expect(helper.structure_necessite_saisie_code_postal?(structure)).to be(true)
+      end
+    end
+
     context "quand la structure n'est pas une StructureLocale" do
       let(:structure) { build(:structure_administrative) }
 

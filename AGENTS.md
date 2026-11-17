@@ -70,8 +70,8 @@ Redis must be running for the Sidekiq workers.
 - **Événement**: Tracking events during assessments
 
 ### Technology Stack
-- **Rails 8.0** with Ruby 4.0.6 (the Ruby version is read from `.tool-versions` by the Gemfile)
-- **Node.js 22.23.4** (managed via asdf/rtx, version in `.tool-versions`; Scalingo uses `engines.node` in `package.json`, set to `22.x`: update it on a major version change)
+- **Rails 8.0** with Ruby 4.0.9 (the Ruby version is read from `.tool-versions` by the Gemfile)
+- **Node.js 22.23.5** (managed via asdf/rtx, version in `.tool-versions`; Scalingo uses `engines.node` in `package.json`, set to `22.x`: update it on a major version change)
 
 ### Authentication & Authorization
 - **Admin Interface**: `/admin`. The seed creates a superadmin `eva@anlci.gouv.fr` (`Eva::EMAIL_SUPPORT`) with a random password; after `bin/reviewappdeploy.sh`, every account uses the `MOT_DE_PASS_COMPTES_PREPROD` password

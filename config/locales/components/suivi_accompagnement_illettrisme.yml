@@ -1,4 +1,3 @@
 fr:
   suivi_accompagnement_illettrisme:
-    badge: Situation d’illettrisme potentiel détectée à l’évaluation
-    description: Un illettrisme potentiel a été détecté lors de son évaluation. Votre réponse aide à savoir s’il est bien accompagné.
+    badge: Cette personne semble rencontrer des difficultés en français et/ou en mathématiques.

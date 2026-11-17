@@ -6,11 +6,8 @@
   <div class="card__banner card__banner--illettrisme">
     <div class="suivi-mise-en-action">
       <div class="suivi-mise-en-action__contexte">
-        <p class="fr-badge fr-badge--info fr-badge--sm">
+        <p class="fr-badge fr-badge--info fr-badge--sm fr-mb-0">
           <%= t("suivi_accompagnement_illettrisme.badge") %>
-        </p>
-        <p class="suivi-mise-en-action__description">
-          <%= t("suivi_accompagnement_illettrisme.description") %>
         </p>
       </div>
       <%= render QuestionMiseEnActionComponent.new(evaluation: @evaluation, reponses: reponses) %>

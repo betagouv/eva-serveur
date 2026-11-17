@@ -27,13 +27,6 @@
   gap: $dsfr-spacing-1w;
 }
 
-.suivi-mise-en-action__description {
-  @include corps-de-texte-sm-regular;
-
-  margin: 0;
-  color: $grey-200;
-}
-
 // Sur le tableau de bord, la carte s'étire jusqu'au bas de la liste des dernières
 // évaluations (EVA-1156)
 .suivi-beneficiaires {
@@ -66,7 +59,7 @@
   }
 }
 
-// Bloc « Suivi des bénéficiaires » du tableau de bord (EVA-1156)
+// Bloc « Accompagnement des bénéficiaires » du tableau de bord (EVA-1156)
 .suivi-tout-a-jour {
   display: flex;
   flex: 1;

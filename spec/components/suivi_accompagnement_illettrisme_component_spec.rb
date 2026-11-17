@@ -19,10 +19,6 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
                              text: I18n.t("suivi_accompagnement_illettrisme.badge"))
   end
 
-  it "explique pourquoi la réponse est demandée" do
-    expect(page).to have_content(I18n.t("suivi_accompagnement_illettrisme.description"))
-  end
-
   it "affiche l'en-tête de la mise en action" do
     expect(EnteteMiseEnActionComponent).to have_received(:new)
       .with(evaluation: evaluation, lien_evaluation: false, compact: false)

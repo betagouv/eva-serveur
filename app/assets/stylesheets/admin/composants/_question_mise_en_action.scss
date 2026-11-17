@@ -29,6 +29,12 @@
   gap: $dsfr-spacing-1w;
 }
 
+.question-mise-en-action__aide {
+  @include corps-de-texte-md-italic;
+
+  color: $grey-200;
+}
+
 .question-mise-en-action__boutons .reponse-mise-en-action {
   flex: 1;
   justify-content: center;

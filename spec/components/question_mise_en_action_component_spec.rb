@@ -18,9 +18,10 @@ describe QuestionMiseEnActionComponent, type: :component do
     expect(bloc_question).to have_button(I18n.t("question_mise_en_action.bouton_non"))
   end
 
-  it "explique à quoi sert la réponse, en italique, sous les boutons" do
+  it "explique à quoi sert la réponse sous les boutons, sans emphase sémantique" do
+    expect(page).to have_no_css(".question-mise-en-action__aide em")
     expect(page).to have_css(
-      ".question-mise-en-action__boutons + p.question-mise-en-action__aide em",
+      ".question-mise-en-action__boutons + p.question-mise-en-action__aide",
       text: I18n.t("question_mise_en_action.aide")
     )
   end

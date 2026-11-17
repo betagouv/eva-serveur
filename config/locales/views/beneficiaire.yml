@@ -2,7 +2,7 @@ fr:
   admin:
     beneficiaires:
       suivi_accompagnement:
-        titre: Suivi de l’accompagnement
+        titre: Accompagnement des bénéficiaires
       modal_suivi_groupe:
         titre: <span class='fr-icon-survey-line' aria-hidden='true'></span> Suivi groupé
         titre_selection:

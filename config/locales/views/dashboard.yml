@@ -60,14 +60,14 @@ fr:
         action: Voir
       mise_en_action:
         suivi_beneficiaires:
-          titre: Suivi des bénéficiaires
+          titre: Accompagnement des bénéficiaires
           voir_tout: "Voir tout"
         tout_a_jour:
           titre: "Tout est à jour, merci !"
           description: Personne n’attend de réponse de votre part. Les prochains bénéficiaires évalués apparaîtront ici.
         reponse_enregistree:
           titre: Merci, votre réponse pour %{nom} est enregistrée
-          description: La personne suivante vous est proposée dans « Suivi des bénéficiaires ».
+          description: La personne suivante vous est proposée dans « Accompagnement des bénéficiaires ».
           fermer: Masquer le message
       prise_en_main:
         titre: Bienvenue sur eva !

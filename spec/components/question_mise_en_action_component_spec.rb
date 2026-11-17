@@ -18,6 +18,13 @@ describe QuestionMiseEnActionComponent, type: :component do
     expect(bloc_question).to have_button(I18n.t("question_mise_en_action.bouton_non"))
   end
 
+  it "explique à quoi sert la réponse, en italique, sous les boutons" do
+    expect(page).to have_css(
+      ".question-mise-en-action__boutons + p.question-mise-en-action__aide em",
+      text: I18n.t("question_mise_en_action.aide")
+    )
+  end
+
   it "ne propose pas de répondre « Pas encore »" do
     expect(page).to have_no_button(
       I18n.t("question_mise_en_action.bouton_pas_encore")

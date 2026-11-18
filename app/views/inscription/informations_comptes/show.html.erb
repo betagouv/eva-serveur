@@ -81,7 +81,7 @@
           </div>
           <div class="fr-col-12">
             <div class="informations-compte-actions">
-              <%= render BoutonDsfrComponent.new(pro_connect_logout_path, type: :tertiary) do %>
+              <%= render BoutonDsfrComponent.new(pro_connect_logout_path, tag: :a, type: :tertiary) do %>
                 <%= t(".quitter") %>
               <% end %>
               <%= render BoutonDsfrComponent.new(

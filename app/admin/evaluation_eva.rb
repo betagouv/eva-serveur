@@ -110,6 +110,7 @@ ActiveAdmin.register EvaluationEva do
     render BoutonDsfrComponent.new(
       admin_evaluation_eva_path(resource, format: :pdf,
                                           parties_selectionnees: params[:parties_selectionnees]),
+      tag: :telechargement,
       type: :primary,
       size: :sm,
       class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"

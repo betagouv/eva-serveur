@@ -1,4 +1,4 @@
-<% if @tag == :a %>
+<% if %i[a telechargement].include?(@tag) %>
   <%= link_to @url, @params do %>
     <% content %>
   <% end %>

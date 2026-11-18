@@ -39,8 +39,8 @@
         <% end %>
       <% end %>
     </div>
-    <%= render BoutonDsfrComponent.new(admin_evaluations_evapro_path, type: :secondary) do %>
-      <%= t("admin.dashboard.cinq_dernieres_evaluations.voir_tout") %>
-    <% end %>
+    <%= render LienComponent.new(t("admin.dashboard.cinq_dernieres_evaluations.voir_tout"),
+                                 admin_evaluations_evapro_path,
+                                 class: "fr-link fr-icon-arrow-right-line fr-link--icon-right") %>
   </section>
 <% end %>

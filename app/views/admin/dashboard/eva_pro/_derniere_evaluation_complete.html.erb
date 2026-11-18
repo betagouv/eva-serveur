@@ -58,9 +58,11 @@
           ) %>
         </div>
       </div>
-      <%= render BoutonDsfrComponent.new(admin_evaluation_evapro_path(derniere_evaluation_complete), type: :secondary) do %>
-        <%= t("admin.dashboard.derniere_reponse_complete.consulter_diagnostique") %>
-      <% end %>
+      <%= render LienComponent.new(
+        t("admin.dashboard.derniere_reponse_complete.consulter_diagnostique"),
+        admin_evaluation_evapro_path(derniere_evaluation_complete),
+        class: "fr-link fr-icon-arrow-right-line fr-link--icon-right"
+      ) %>
     </section>
   <% end %>
 <% end %>

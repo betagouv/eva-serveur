@@ -9,9 +9,9 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
       div class: "d-flex justify-content-between align-items-center banner__action" do
         div md t("question", scope: scope)
         div style: "width: 100%;" do
-          link_to t("action", scope: scope),
-                  new_confirmation_path(current_compte, email: current_compte.email_a_confirmer),
-                  class: "fr-btn fr-btn--sm text-center"
+          url = new_confirmation_path(current_compte, email: current_compte.email_a_confirmer)
+          render BoutonDsfrComponent.new(url, tag: :a, size: :sm, class: "text-center")
+                  .with_content(t("action", scope: scope))
         end
       end
     end
@@ -24,9 +24,9 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
           span compte.unconfirmed_email, class: "font-weight-bold"
         end
         div do
-          link_to t(".renvoyer_email"),
-                  new_confirmation_path(compte, email: compte.email_a_confirmer),
-                  class: "fr-btn fr-btn--sm text-center"
+          url = new_confirmation_path(compte, email: compte.email_a_confirmer)
+          render BoutonDsfrComponent.new(url, tag: :a, size: :sm, class: "text-center")
+                  .with_content(t(".renvoyer_email"))
         end
       end
     end
@@ -36,9 +36,9 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
         div t(".#{demande}.email_non_confirme")
       end
       div do
-        link_to t(".renvoyer_email"),
-                new_confirmation_path(compte, email: compte.email_a_confirmer),
-                class: "fr-btn fr-btn--sm text-center"
+        url = new_confirmation_path(compte, email: compte.email_a_confirmer)
+        render BoutonDsfrComponent.new(url, tag: :a, size: :sm, class: "text-center")
+                .with_content(t(".renvoyer_email"))
       end
     end
   end

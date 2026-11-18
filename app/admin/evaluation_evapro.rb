@@ -51,6 +51,7 @@ ActiveAdmin.register EvaluationEvapro do
               } do
     render BoutonDsfrComponent.new(
       telecharger_attestation_admin_evaluation_evapro_path(resource),
+      tag: :telechargement,
       type: :secondary,
       size: :sm,
       class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf",
@@ -63,6 +64,7 @@ ActiveAdmin.register EvaluationEvapro do
               if: proc { resource.restitution_pro(restitution_globale).pourcentage_risque } do
     render BoutonDsfrComponent.new(
       admin_evaluation_evapro_path(resource, format: :pdf),
+      tag: :telechargement,
       type: :primary,
       size: :sm,
       class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"

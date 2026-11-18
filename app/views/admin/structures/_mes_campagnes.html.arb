@@ -13,8 +13,7 @@ div class: "bloc-mes-campagnes fr-mt-8v" do
       end
       column :nombre_evaluations, class: "text-right"
       column :actions do |campagne|
-        link_to t(".voir"), admin_campagne_path(campagne),
-class: "fr-btn fr-btn--secondary fr-btn--sm"
+        link_to t(".voir"), admin_campagne_path(campagne), class: "fr-link"
       end
     end
   else

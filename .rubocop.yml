@@ -5,6 +5,7 @@ inherit_gem:
 
 require:
   - rubocop-rails-accessibility
+  - ./lib/rubocop/cop/dsfr/lien_style_bouton.rb
 
 plugins:
   - rubocop-rails
@@ -95,3 +96,10 @@ RSpec/MultipleExpectations:
 
 RSpec/ChangeByZero:
   NegatedMatcher: not_change
+
+Dsfr/LienStyleBouton:
+  Enabled: true
+  Include:
+    - 'app/**/*.rb'
+    - 'app/**/*.arb'
+    - 'app/**/*.erb'

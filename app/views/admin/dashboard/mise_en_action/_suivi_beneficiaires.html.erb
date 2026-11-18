@@ -1,10 +1,9 @@
 <div class="suivi-beneficiaires">
   <div class="titre-panel-avec-bouton fr-mb-3v">
     <h3><%= t(".titre") %></h3>
-    <%= render(BoutonDsfrComponent.new(admin_evaluations_eva_path(scope: :illettrisme_potentiel),
-                                       type: :primary, size: :md)) do %>
-      <%= t(".voir_tout") %>
-    <% end %>
+    <%= render LienComponent.new(t(".voir_tout"),
+                                 admin_evaluations_eva_path(scope: :illettrisme_potentiel),
+                                 class: "fr-link fr-icon-arrow-right-line fr-link--icon-right") %>
   </div>
 
   <% if evaluation.present? %>

@@ -31,7 +31,7 @@
         </div>
         <div class="fr-col-12">
           <div class="recherche-structure-actions">
-            <%= render BoutonDsfrComponent.new(inscription_informations_compte_path, type: :tertiary) do %>
+            <%= render BoutonDsfrComponent.new(inscription_informations_compte_path, tag: :a, type: :tertiary) do %>
               <%= t(".bouton_retour") %>
             <% end %>
             <%= render BoutonDsfrComponent.new(

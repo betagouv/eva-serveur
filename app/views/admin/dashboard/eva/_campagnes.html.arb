@@ -1,7 +1,8 @@
 div class: "bloc-apercu" do
   div class: "titre-panel-avec-bouton" do
     h3 t(".titre")
-    text_node link_to t(".action"), admin_campagnes_path
+    text_node link_to t(".action"), admin_campagnes_path,
+                      class: "fr-link fr-icon-arrow-right-line fr-link--icon-right"
   end
 
   div class: "campagnes-liste" do
@@ -30,9 +31,10 @@ div class: "bloc-apercu" do
             texte: url,
             aria: { describedby: campagne.id }
           )
-          text_node link_to "Jouer", url, class: "fr-btn fr-btn--secondary fr-btn--sm",
-                                          target: "_blank", rel: "noopener",
-                                          aria: { describedby: campagne.id }
+          render BoutonDsfrComponent.new(url, tag: :a, type: :secondary, size: :sm,
+                                              target: "_blank", rel: "noopener",
+                                              aria: { describedby: campagne.id })
+                                    .with_content("Jouer")
         end
       end
     end

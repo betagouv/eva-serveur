@@ -36,7 +36,8 @@
 
     <% if has_bouton? %>
       <div class="fr-card__end">
-        <%= link_to @bouton_label, @bouton_url, { class: "fr-btn" }.merge(@bouton_attributes) %>
+        <%= render BoutonDsfrComponent.new(@bouton_url, tag: :a, **@bouton_attributes)
+                                      .with_content(@bouton_label) %>
       </div>
     <% end %>
   </div>

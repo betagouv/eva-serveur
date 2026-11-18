@@ -59,9 +59,11 @@ ActiveAdmin.register Campagne do
     end
     nombre = classe_evaluation.accessible_by(current_ability).where(campagne: resource).count
 
-    render BoutonDsfrComponent.new(chemin_evaluations, type: :tertiary_no_outline, size: :sm,
-                                   class: "fr-btn--icon-left fr-icon-file-line")
-      .with_content(I18n.t("admin.campagnes.action_items.voir_evaluations", count: nombre))
+    render LienComponent.new(
+      I18n.t("admin.campagnes.action_items.voir_evaluations", count: nombre),
+      chemin_evaluations,
+      class: "fr-link fr-link--icon-left fr-icon-file-line"
+    )
   end
 
   action_item :voir_beneficiaires, only: :show, class: "action_item--lien-consultation",
@@ -71,10 +73,11 @@ ActiveAdmin.register Campagne do
                          .where(evaluations: { campagne_id: resource.id })
                          .distinct
                          .count
-    render BoutonDsfrComponent.new(
+    render LienComponent.new(
+      I18n.t("admin.campagnes.action_items.voir_beneficiaires", count: nombre),
       admin_beneficiaires_path(q: { evaluations_campagne_id_eq: resource.id }),
-      type: :tertiary_no_outline, size: :sm, class: "fr-btn--icon-left fr-icon-team-line"
-    ).with_content(I18n.t("admin.campagnes.action_items.voir_beneficiaires", count: nombre))
+      class: "fr-link fr-link--icon-left fr-icon-team-line"
+    )
   end
 
   member_action :duplique, method: :post do

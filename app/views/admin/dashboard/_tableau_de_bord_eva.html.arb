@@ -17,6 +17,7 @@ elsif prise_en_main.en_cours? && current_compte.validation_acceptee?
           if prise_en_main.etape_en_cours == PriseEnMain::ETAPES.last
             render(
               BoutonDsfrComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
+                                  tag: :button_with_form,
                                   type: :primary,
                                   size: :md,
                                   method: :patch)
@@ -25,6 +26,7 @@ elsif prise_en_main.en_cours? && current_compte.validation_acceptee?
           elsif current_compte.structure_id.present?
             render(
               BoutonDsfrComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
+                                  tag: :button_with_form,
                                   type: :secondary,
                                   size: :md,
                                   method: :patch)

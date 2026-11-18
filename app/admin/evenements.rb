@@ -22,7 +22,8 @@ ActiveAdmin.register Evenement do
     column(:created_at)
   end
 
-  index dsfr_table: proc { true }, class: "fr-table--multiline" do
+  index download_links: %i[csv json], dsfr_table: proc { true },
+        class: "fr-table--multiline" do
     instance_eval(&colonnes_evenement)
     column(:partie) { |e| auto_link(e.partie) }
     column :nom

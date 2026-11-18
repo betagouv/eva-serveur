@@ -27,7 +27,7 @@ ActiveAdmin.register QuestionClicDansTexte do
 
   form partial: "form"
 
-  index dsfr_table: proc { true } do
+  index download_links: %i[xls], dsfr_table: proc { true } do
     column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_clic_dans_texte_path(q)
     end

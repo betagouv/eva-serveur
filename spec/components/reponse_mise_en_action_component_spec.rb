@@ -111,6 +111,10 @@ describe ReponseMiseEnActionComponent, type: :component do
                              choix_date_revue: "14_jours")
     end
 
+    around do |exemple|
+      Timecop.freeze(Date.new(2026, 11, 4)) { exemple.run }
+    end
+
     it "affiche la réponse et la relance prévue" do
       bloc_reponse = page.find("[data-reponse='pas_encore'].mise-en-action:not(.hidden)")
       expect(bloc_reponse).to have_content(I18n.t("reponse_mise_en_action.titre_pas_encore"))

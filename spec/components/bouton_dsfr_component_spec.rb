@@ -25,7 +25,8 @@ describe BoutonDsfrComponent, type: :component do
     render_inline(described_class.new("/export.pdf", tag: :telechargement, type: :secondary)
                     .with_content("Exporter"))
 
-    expect(page).to have_css("a.fr-btn.fr-btn--secondary[href='/export.pdf'][download]",
+    expect(page).to have_css("a.fr-btn.fr-btn--secondary.fr-icon-download-line" \
+                             ".fr-btn--icon-left[href='/export.pdf'][download]",
                              text: "Exporter")
   end
 

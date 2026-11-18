@@ -30,7 +30,9 @@ class BoutonDsfrComponent < ViewComponent::Base
     md: "fr-btn--md"
   }.freeze
 
-  BUTTON_TAG_MAPPINGS = %i[a telechargement submit button button_with_form].freeze
+  TELECHARGEMENT_CLASSES = "fr-icon-download-line fr-btn--icon-left".freeze
+
+  BUTTON_TAG_MAPPINGS =%i[a telechargement submit button button_with_form].freeze
 
   def initialize(url, tag:, type: :primary, size: :md, **params)
     unless BUTTON_TAG_MAPPINGS.include?(tag)
@@ -45,7 +47,10 @@ class BoutonDsfrComponent < ViewComponent::Base
     @params[:class] ||= ""
     @params[:class] += " #{classes}"
     @params[:class] += " #{BUTTON_SIZE_MAPPINGS[@size]}" if BUTTON_SIZE_MAPPINGS[@size].present?
-    @params[:download] = true if @tag == :telechargement
+    return unless @tag == :telechargement
+
+    @params[:class] += " #{TELECHARGEMENT_CLASSES}"
+    @params[:download] = true
   end
 
   def classes

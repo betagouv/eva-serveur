@@ -20,8 +20,7 @@ ActiveAdmin.register Questionnaire do
       export_admin_questionnaire_path(resource),
       tag: :telechargement,
       type: :secondary,
-      size: :sm,
-      class: "fr-icon-download-line fr-btn--icon-left"
+      size: :sm
     ).with_content(t("admin.questionnaires.action_items.exporter_questionnaire"))
   end
 
@@ -30,8 +29,7 @@ ActiveAdmin.register Questionnaire do
       export_questions_admin_questionnaire_path(resource),
       tag: :telechargement,
       type: :secondary,
-      size: :sm,
-      class: "fr-icon-download-line fr-btn--icon-left"
+      size: :sm
     ).with_content(t("admin.questionnaires.action_items.exporter_questions"))
   end
 

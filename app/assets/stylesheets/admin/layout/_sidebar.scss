@@ -48,7 +48,7 @@
         display: none;
       }
 
-      a:not(.fr-btn--tertiary-no-outline) {
+      a:not(.fr-btn--tertiary-no-outline, .fr-link) {
         @include bouton-secondaire;
         @include petit-bouton;
       }

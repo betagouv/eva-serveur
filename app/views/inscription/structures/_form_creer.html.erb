@@ -8,7 +8,7 @@
         <%= render "parametrage_section", form: form %>
 
         <div class="informations-compte-actions">
-          <%= render BoutonDsfrComponent.new(inscription_structure_path(etape: "confirmation"), type: :tertiary) do %>
+          <%= render BoutonDsfrComponent.new(inscription_structure_path(etape: "confirmation"), tag: :a, type: :tertiary) do %>
             <%= t("inscription.structures.show.retour") %>
           <% end %>
           <%= render BoutonDsfrComponent.new(

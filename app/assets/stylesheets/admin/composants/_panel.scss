@@ -34,9 +34,8 @@ body.logged_out #content_wrapper #active_admin_content {
     margin-bottom: 0;
   }
 
-  >a {
-    @include bouton-primaire;
-    @include grand-bouton;
+  >.fr-link {
+    white-space: nowrap;
   }
 }
 

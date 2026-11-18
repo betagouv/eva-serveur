@@ -1,6 +1,11 @@
 <div class="container">
   <h1 class="fr-h1 fr-mt-6w">Démo BoutonDsfrComponent</h1>
-  <h2 class="fr-h2 fr-mt-6w">Tag a (défaut)</h2>
+  <p class="fr-mt-2w">
+    Un <strong>bouton</strong> déclenche une action ou engage dans un parcours (créer, jouer,
+    annuler, exporter…). Un contenu à consulter (voir, consulter, lire) est un <strong>lien</strong> :
+    utiliser <code>LienComponent</code> (voir plus bas). Le paramètre <code>tag</code> est obligatoire.
+  </p>
+  <h2 class="fr-h2 fr-mt-6w">Tag a (bouton qui engage dans un parcours)</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
   <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
@@ -203,9 +208,26 @@
     <%= render BoutonDsfrComponent.new("#", type: :tertiary_no_outline, tag: :button, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
+
+  <h2 class="fr-h2 fr-mt-6w">Tag telechargement</h2>
+  <div class="uik-grille-boutons">
+    <span></span><span>Primaire</span><span>Secondaire</span><span>Tertiaire</span><span></span>
+    <span>SM</span>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :telechargement, size: :sm, class: "fr-icon-download-line fr-btn--icon-left") do %>Exporter<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :telechargement, size: :sm, class: "fr-icon-download-line fr-btn--icon-left") do %>Exporter<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :telechargement, size: :sm, class: "fr-icon-download-line fr-btn--icon-left") do %>Exporter<% end %>
+    <span></span>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Lien de consultation (LienComponent)</h2>
+  <p>
+    <%= render LienComponent.new("Voir tout", "#", class: "fr-link fr-icon-arrow-right-line fr-link--icon-right") %>
+  </p>
+
   <h2 class="fr-h2 fr-mt-6w">Avec paramètres supplémentaires</h2>
   <%= render BoutonDsfrComponent.new(
         "#",
+        tag: :button,
         type: :primary,
         id: "mon-bouton",
         data: { test: "value" }

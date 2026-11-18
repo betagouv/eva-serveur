@@ -37,6 +37,7 @@ div class: "carte-prise-en-main" do
           render(
             BoutonDsfrComponent.new(
               lien_action,
+              tag: :a,
               type: :primary,
               size: :sm
             ).with_content(t("etapes.#{etape_en_cours}.action", scope: scope))

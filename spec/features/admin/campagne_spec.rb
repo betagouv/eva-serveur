@@ -235,14 +235,13 @@ describe 'Admin - Campagne', type: :feature do
       expect(page).not_to have_content "Denis Autre"
     end
 
-    it "place les boutons de consultation en bas du bloc Gestion, après les paramètres" do
+    it "place les liens de consultation en bas du bloc Gestion, après les paramètres" do
       visit admin_campagne_path(ma_campagne)
 
-      bouton_sous_parametres =
-        ".action_item--sidebar-parametres ~ .action_item a.fr-btn--tertiary-no-outline"
+      lien_sous_parametres = ".action_item--sidebar-parametres ~ .action_item a.fr-link"
       within "#action_items_sidebar_section" do
-        expect(page).to have_css(bouton_sous_parametres, text: "Consulter 3 évaluations")
-        expect(page).to have_css(bouton_sous_parametres, text: "Consulter 2 bénéficiaires")
+        expect(page).to have_css(lien_sous_parametres, text: "Consulter 3 évaluations")
+        expect(page).to have_css(lien_sous_parametres, text: "Consulter 2 bénéficiaires")
       end
     end
 

@@ -18,6 +18,13 @@ describe BoutonCopierComponent, type: :component do
     expect(page).to have_content(libelle)
   end
 
+  it "rend un bouton tertiaire, conformément au DSFR pour une action de copie" do
+    render_inline(component)
+
+    expect(page).to have_css("button.fr-btn.fr-btn--tertiary")
+    expect(page).to have_no_css("button.fr-btn--secondary")
+  end
+
   context "quand des classes supplémentaires sont passées" do
     let(:classes) { "ma-classe" }
 

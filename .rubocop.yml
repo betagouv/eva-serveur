@@ -6,6 +6,7 @@ inherit_gem:
 require:
   - rubocop-rails-accessibility
   - ./lib/rubocop/cop/dsfr/lien_style_bouton.rb
+  - ./lib/rubocop/cop/dsfr/bouton_copier_tertiaire.rb
 
 plugins:
   - rubocop-rails
@@ -98,6 +99,13 @@ RSpec/ChangeByZero:
   NegatedMatcher: not_change
 
 Dsfr/LienStyleBouton:
+  Enabled: true
+  Include:
+    - 'app/**/*.rb'
+    - 'app/**/*.arb'
+    - 'app/**/*.erb'
+
+Dsfr/BoutonCopierTertiaire:
   Enabled: true
   Include:
     - 'app/**/*.rb'

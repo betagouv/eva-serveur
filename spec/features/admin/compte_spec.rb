@@ -18,6 +18,13 @@ describe 'Admin - Compte', type: :feature do
     before { visit admin_comptes_path }
 
     it { expect(page).to have_content 'moi@structure' }
+
+    it "propose le téléchargement XLS dans l'encart de gestion" do
+      within("#action_items_sidebar_section") do
+        lien = find_link(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
+        expect(lien[:href]).to eq admin_comptes_path(format: :xls)
+      end
+    end
   end
 
   context 'en tant que superadmin' do

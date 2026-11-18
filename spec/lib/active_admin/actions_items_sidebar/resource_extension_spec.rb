@@ -28,7 +28,7 @@ RSpec.describe ActiveAdmin::ActionsItemsSidebar::ResourceExtension do
   let(:ma_resource) { MaResource.new }
   let(:sidebar_sections) { ma_resource.sidebar_sections }
 
-  before { ma_resource.namespace = double(download_links: %i[csv xls json]) }
+  before { ma_resource.namespace = double(download_links: %i[xls json]) }
 
   it do
     expect(sidebar_sections.length).to eq 1
@@ -53,7 +53,7 @@ RSpec.describe ActiveAdmin::ActionsItemsSidebar::ResourceExtension do
     end
 
     it "n'est pas disponible quand l'espace de noms ne propose pas le XLS" do
-      ma_resource.namespace = double(download_links: %i[csv json])
+      ma_resource.namespace = double(download_links: %i[json])
       expect(disponible?).to be false
     end
 
@@ -75,7 +75,7 @@ RSpec.describe ActiveAdmin::ActionsItemsSidebar::ResourceExtension do
     end
 
     it "n'est pas disponible quand l'index ne liste pas le XLS" do
-      ma_resource.presenter_index = ActiveAdmin::PagePresenter.new(download_links: %i[csv])
+      ma_resource.presenter_index = ActiveAdmin::PagePresenter.new(download_links: %i[json])
       expect(disponible?).to be false
     end
   end

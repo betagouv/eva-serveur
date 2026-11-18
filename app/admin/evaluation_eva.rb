@@ -113,7 +113,7 @@ ActiveAdmin.register EvaluationEva do
       tag: :telechargement,
       type: :primary,
       size: :sm,
-      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"
+      class: "lien-export-pdf"
     ).with_content(I18n.t("admin.evaluations_eva.action_items.exporter"))
   end
 

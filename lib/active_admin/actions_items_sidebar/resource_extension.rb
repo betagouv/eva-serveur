@@ -62,7 +62,6 @@ module ActiveAdmin
             tag: :telechargement,
             type: :secondary,
             size: :sm,
-            class: "fr-icon-download-line fr-btn--icon-left",
             title: I18n.t("active_admin.action_items.telechargement_xls.titre")
           ).with_content(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
         end

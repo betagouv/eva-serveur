@@ -77,7 +77,7 @@ ActiveAdmin.register Beneficiaire do
     if resultat == :effectuee_invalide
       redirect_to collection_path
     else
-      redirect_to collection_path,
+      redirect_to collection_path(selection: beneficiaire_ids),
                   flash: { success: "#{t('.renseigner_suivi_groupe.success.titre',
 count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
     end
@@ -106,6 +106,7 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
         content_before: proc {
           render "admin/beneficiaires/modal_fusion"
           render "admin/beneficiaires/modal_suivi_groupe"
+          render "admin/beneficiaires/selection" if params[:selection].present?
         },
         class: "fr-table--multiline" do
     render "index", context: self
@@ -130,8 +131,13 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
                        .first!
     end
 
+    # La sélection (retour du suivi groupé, EVA-1219) ne fait que restreindre
+    # le périmètre du compte : elle ne peut pas l'élargir
     def scoped_collection
-      end_of_association_chain.distinct
+      beneficiaires = end_of_association_chain.distinct
+      return beneficiaires if params[:selection].blank?
+
+      beneficiaires.where(id: Array(params[:selection]))
     end
 
     def apply_sorting(beneficiaires)

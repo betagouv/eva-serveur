@@ -23,7 +23,7 @@ ActiveAdmin.register Actualite do
     end
   end
 
-  index do
+  index download_links: false do
     render partial: "actualites", locals: { actualites: actualites }
   end
 

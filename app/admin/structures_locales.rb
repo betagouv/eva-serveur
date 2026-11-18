@@ -43,8 +43,7 @@ ActiveAdmin.register StructureLocale do
 
   sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
-  index download_links: %i[csv xls json], dsfr_table: proc { true },
-        class: "fr-table--multiline" do
+  index download_links: %i[xls json], dsfr_table: proc { true }, class: "fr-table--multiline" do
     column :nom, class: "col-lien-voir" do |sl|
       link_to sl.nom, admin_structure_locale_path(sl)
     end
@@ -64,21 +63,6 @@ ActiveAdmin.register StructureLocale do
     column :nombre_evaluations, sortable: :nombre_evaluations
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation
     actions
-  end
-
-  csv do
-    column :nom
-    column :code_postal
-    column :region
-    column :type_structure do |structure|
-      traduction_type_structure(structure.type_structure)
-    end
-    column :usage do |structure|
-      traduction_usage(structure.usage)
-    end
-    column :nombre_evaluations
-    column :date_derniere_evaluation
-    column "Date de création", &:created_at
   end
 
   xls do

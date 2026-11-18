@@ -20,7 +20,7 @@ ActiveAdmin.register QuestionSaisie do
   end
 
   action_item :exporter_question, only: :show do
-    link_to "Exporter la question en XLS", export_xls_admin_question_path(params[:id])
+    bouton_export_question_xls(resource)
   end
 
   controller do
@@ -29,7 +29,7 @@ ActiveAdmin.register QuestionSaisie do
 
   form partial: "form"
 
-  index dsfr_table: proc { true } do
+  index download_links: %i[xls], dsfr_table: proc { true } do
     column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_saisie_path(q)
     end

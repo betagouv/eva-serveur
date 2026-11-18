@@ -27,6 +27,26 @@ describe 'Admin - Questionnaire', type: :feature do
     end
   end
 
+  describe 'show' do
+    let!(:questionnaire) { create :questionnaire }
+
+    before { visit admin_questionnaire_path(questionnaire) }
+
+    it "propose les exports sous forme de boutons de téléchargement" do
+      within("#action_items_sidebar_section") do
+        {
+          "exporter_questionnaire" => export_admin_questionnaire_path(questionnaire),
+          "exporter_questions" => export_questions_admin_questionnaire_path(questionnaire)
+        }.each do |cle, chemin|
+          lien = find_link(I18n.t("admin.questionnaires.action_items.#{cle}"))
+          expect(lien[:href]).to eq chemin
+          expect(lien[:class]).to include("fr-btn", "fr-icon-download-line")
+          expect(lien[:download]).not_to be_nil
+        end
+      end
+    end
+  end
+
   describe 'création' do
     before do
       visit new_admin_questionnaire_path

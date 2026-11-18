@@ -96,6 +96,10 @@ fr:
           submit: "Envoyer l'e-mail"
           lien_accueil: ← Aller à l’accueil pour se connecter
           lien_accueil_description: Aller à l’accueil pour se connecter
+    action_items:
+      telechargement_xls:
+        libelle: Exporter (xls)
+        titre: Télécharger la liste au format XLS
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
     menu_connexion:

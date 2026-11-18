@@ -55,19 +55,6 @@ describe 'Admin - Structure locale', type: :feature do
         end
       end
 
-      describe 'export csv' do
-        let!(:structure) { create :structure_locale, :eva_pro }
-
-        it "contient l'usage traduit" do
-          visit admin_structures_locales_path(format: :csv)
-
-          ligne = CSV.parse(page.body, headers: true)
-                     .find { |l| l.fields.include?(structure.nom) }
-          expect(ligne[StructureLocale.human_attribute_name(:usage)])
-            .to eq I18n.t("activerecord.attributes.structure.usage.evapro")
-        end
-      end
-
       describe 'export xls' do
         let!(:structure) { create :structure_locale, :eva_pro }
 

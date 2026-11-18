@@ -10,6 +10,7 @@ module ActiveAdmin
       def initialize(*)
         super
         add_action_items_sidebar
+        add_action_item_telechargement_xls
       end
 
       def actions_items_sidebar_section
@@ -30,7 +31,41 @@ module ActiveAdmin
         end
       end
 
+      def telechargement_xls_disponible?(contexte_vue)
+        presenter_index = get_page_presenter(:index) || {}
+        liens = presenter_index.fetch(:download_links, namespace.download_links)
+        liens = contexte_vue.instance_exec(&liens) if liens.is_a?(Proc)
+        formats_telechargement(liens).include?(:xls)
+      end
+
       private
+
+      # Reproduit ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper#build_download_formats,
+      # qui est privé.
+      def formats_telechargement(liens)
+        if liens.is_a?(Array) && liens.any?
+          liens
+        elsif liens == false
+          []
+        else
+          ActiveAdmin::Views::PaginatedCollection.formats
+        end
+      end
+
+      def add_action_item_telechargement_xls
+        extension = self
+        add_action_item :telechargement_xls, only: :index, priority: 100,
+                        if: -> { extension.telechargement_xls_disponible?(self) } do
+          parametres = request.query_parameters.except(:format, :commit)
+          render BoutonDsfrComponent.new(
+            url_for(params: parametres, format: :xls),
+            tag: :telechargement,
+            type: :secondary,
+            size: :sm,
+            title: I18n.t("active_admin.action_items.telechargement_xls.titre")
+          ).with_content(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
+        end
+      end
 
       def action_autorisee?(action, contexte_vue)
         begin

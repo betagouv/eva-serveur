@@ -54,7 +54,7 @@ ActiveAdmin.register EvaluationEvapro do
       tag: :telechargement,
       type: :secondary,
       size: :sm,
-      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf",
+      class: "js-export-pdf",
       "aria-label":
         I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.aria_label")
     ).with_content(I18n.t("admin.evaluations_evapro.action_items.telecharger_attestation.libelle"))
@@ -67,7 +67,7 @@ ActiveAdmin.register EvaluationEvapro do
       tag: :telechargement,
       type: :primary,
       size: :sm,
-      class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"
+      class: "js-export-pdf"
     ).with_content(I18n.t("admin.evaluations_evapro.action_items.exporter"))
   end
 

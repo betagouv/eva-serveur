@@ -150,6 +150,19 @@ describe 'Admin - Evaluation eva', type: :feature do
   describe '#show' do
     before { connecte(mon_compte) }
 
+    describe "export PDF" do
+      let(:evaluation_eva) { create(:evaluation, :eva, campagne: ma_campagne) }
+
+      it "ouvre la modale d'attente au lieu de suivre le lien", :js do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        click_link I18n.t("admin.evaluations_eva.action_items.exporter")
+
+        expect(page).to have_css("#modal-generation-pdf.fr-modal--opened")
+        expect(page).to have_current_path(admin_evaluation_eva_path(evaluation_eva))
+      end
+    end
+
     context "avec un responsable de suivi" do
       let(:evaluation_eva) do
         create(:evaluation, :eva, campagne: ma_campagne, responsable_suivi: mon_compte)

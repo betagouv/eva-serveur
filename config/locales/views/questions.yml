@@ -3,6 +3,8 @@ fr:
     passable_hint: Quand une question est passable, le bénéficiaire peut cocher la case « je ne sais pas » sinon cette case n'est pas affichée.
   admin:
     questions:
+      action_items:
+        exporter_question: Exporter (xls)
       hints:
         nom_technique: |
           Pour créer un variant, suivez la nomenclature de type N1Pse1__variant pour que la question hérite automatiquement de la métacompétence de la question N1Pse1

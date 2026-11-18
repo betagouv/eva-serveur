@@ -16,13 +16,21 @@ ActiveAdmin.register Questionnaire do
   member_action :export_questions, method: :get
 
   action_item :export_questionnaire, only: :show do
-    link_to "Exporter le questionnaire", export_admin_questionnaire_path(resource)
+    render BoutonDsfrComponent.new(
+      export_admin_questionnaire_path(resource),
+      tag: :telechargement,
+      type: :secondary,
+      size: :sm
+    ).with_content(t("admin.questionnaires.action_items.exporter_questionnaire"))
   end
 
   action_item :export_questions, only: :show do
-    link_to "Exporter le contenu des questions",
-            export_questions_admin_questionnaire_path(resource),
-            format: :xls
+    render BoutonDsfrComponent.new(
+      export_questions_admin_questionnaire_path(resource),
+      tag: :telechargement,
+      type: :secondary,
+      size: :sm
+    ).with_content(t("admin.questionnaires.action_items.exporter_questions"))
   end
 
   action_item :import_xls, only: :index do

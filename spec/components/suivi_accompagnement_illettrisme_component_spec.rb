@@ -14,8 +14,8 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     render_inline(described_class.new(evaluation: evaluation))
   end
 
-  it "signale l'illettrisme potentiel par un badge info" do
-    expect(page).to have_css(".fr-badge.fr-badge--info",
+  it "signale l'illettrisme potentiel par un bandeau d'information" do
+    expect(page).to have_css(".fr-notice.fr-notice--info .fr-notice__title",
                              text: I18n.t("suivi_accompagnement_illettrisme.badge"))
   end
 

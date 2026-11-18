@@ -5,10 +5,12 @@
                                              compact: compact?) %>
   <div class="card__banner card__banner--illettrisme">
     <div class="suivi-mise-en-action">
-      <div class="suivi-mise-en-action__contexte">
-        <p class="fr-badge fr-badge--info fr-badge--sm fr-mb-0">
-          <%= t("suivi_accompagnement_illettrisme.badge") %>
-        </p>
+      <div class="fr-notice fr-notice--info suivi-mise-en-action__contexte">
+        <div class="fr-notice__body">
+          <p>
+            <span class="fr-notice__title"><%= t("suivi_accompagnement_illettrisme.badge") %></span>
+          </p>
+        </div>
       </div>
       <%= render QuestionMiseEnActionComponent.new(evaluation: @evaluation, reponses: reponses) %>
       <% %i[remediation difficulte].each do |questionnaire| %>

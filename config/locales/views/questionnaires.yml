@@ -1,0 +1,6 @@
+fr:
+  admin:
+    questionnaires:
+      action_items:
+        exporter_questionnaire: Exporter le questionnaire
+        exporter_questions: Exporter le contenu des questions

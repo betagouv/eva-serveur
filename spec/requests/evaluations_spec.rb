@@ -118,6 +118,20 @@ describe 'Evaluation', type: :request do
         end
       end
 
+      context "quand le nom et le code bénéficiaire sont vides" do
+        let(:payload_invalide) do
+          { nom: "", code_beneficiaire: "", code_campagne: "ETE19", debutee_le: date.iso8601 }
+        end
+
+        before { post "/api/evaluations", params: payload_invalide, as: :json }
+
+        it "retourne une 422" do
+          expect(response).to have_http_status(:unprocessable_content)
+          expect(response.parsed_body["beneficiaire"])
+            .to eq [ I18n.t("errors.messages.required") ]
+        end
+      end
+
       context 'quand une requête est vide' do
         let(:payload_invalide) { {} }
 

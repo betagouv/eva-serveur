@@ -79,25 +79,20 @@ module Api
     end
 
     def traite_beneficiaire
-      if @evaluation_params[:code_beneficiaire].present?
-        traite_avec_code_beneficiaire
+      code = @evaluation_params.delete(:code_beneficiaire)
+      if code.present?
+        traite_avec_code_beneficiaire(code)
       elsif params[:nom].present? && params[:id].blank?
-        construit_beneficiaire_attributes(params[:nom])
+        @evaluation_params[:beneficiaire_attributes] = { nom: params[:nom] }
       end
     end
 
-    def traite_avec_code_beneficiaire
-      code = @evaluation_params.delete(:code_beneficiaire)
+    def traite_avec_code_beneficiaire(code)
       beneficiaire = Beneficiaire.find_by(code_beneficiaire: code)
 
       return unless beneficiaire
 
       @evaluation_params[:beneficiaire_id] = beneficiaire.id
-    end
-
-    def construit_beneficiaire_attributes(nom)
-      @evaluation_params[:beneficiaire_attributes] = { nom: nom }
-      @evaluation_params.delete(:code_beneficiaire)
     end
   end
 end

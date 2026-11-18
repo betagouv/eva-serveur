@@ -84,7 +84,7 @@
 
     modal.addEventListener('dsfr.conceal', annuleGeneration);
 
-    document.querySelectorAll('.lien-export-pdf').forEach(function(lien) {
+    document.querySelectorAll('.js-export-pdf').forEach(function(lien) {
       lien.addEventListener('click', function(event) {
         event.preventDefault();
         declencheExportPdf(lien, modal);

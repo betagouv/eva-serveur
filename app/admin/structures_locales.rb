@@ -43,7 +43,8 @@ ActiveAdmin.register StructureLocale do
 
   sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
-  index dsfr_table: proc { true }, class: "fr-table--multiline" do
+  index download_links: %i[csv xls json], dsfr_table: proc { true },
+        class: "fr-table--multiline" do
     column :nom, class: "col-lien-voir" do |sl|
       link_to sl.nom, admin_structure_locale_path(sl)
     end

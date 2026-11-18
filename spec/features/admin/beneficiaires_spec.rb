@@ -160,5 +160,101 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(page).not_to have_content(a_renseigner_autre_campagne.code_beneficiaire)
       end
     end
+
+    context "liste restreinte à une sélection" do
+      let!(:compte_admin) { create :compte_admin }
+      let(:campagne) { create :campagne, compte: compte_admin }
+      let!(:selectionne) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+      let!(:hors_selection) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+      let!(:hors_perimetre) { create(:evaluation, :eva).beneficiaire }
+
+      before do
+        Bullet.enable = false
+        connecte(compte_admin)
+        visit admin_beneficiaires_path(selection: [ selectionne.id, hors_perimetre.id ])
+      end
+
+      after { Bullet.enable = true }
+
+      it "n'affiche que les bénéficiaires sélectionnés du périmètre du compte" do
+        expect(page).to have_content(selectionne.code_beneficiaire)
+        expect(page).not_to have_content(hors_selection.code_beneficiaire)
+        expect(page).not_to have_content(hors_perimetre.code_beneficiaire)
+      end
+
+      it "indique que la liste ne montre que la sélection" do
+        expect(page).to have_content(
+          I18n.t("admin.beneficiaires.selection.titre", count: 1)
+        )
+      end
+
+      it "n'affiche pas la restriction dans le panneau Rechercher" do
+        expect(find("#filters_sidebar_section")).not_to have_content(selectionne.id)
+        expect(page).not_to have_css(".current_filters")
+      end
+
+      it "ramène à la liste complète avec « Voir tous les bénéficiaires »" do
+        click_link I18n.t("admin.beneficiaires.selection.voir_tous")
+
+        expect(page).to have_content(hors_selection.code_beneficiaire)
+        expect(page).not_to have_content(I18n.t("admin.beneficiaires.selection.titre",
+                                                count: 1))
+      end
+    end
+  end
+
+  describe "suivi groupé", :js do
+    let!(:compte_admin) { create :compte_admin }
+    let(:campagne) { create :campagne, compte: compte_admin }
+    let(:attributs_concernee) do
+      { campagne: campagne, synthese_competences_de_base: :illettrisme_potentiel,
+        completude: "complete" }
+    end
+    let!(:premier) { create(:evaluation, :eva, attributs_concernee).beneficiaire }
+    let!(:second) { create(:evaluation, :eva, attributs_concernee).beneficiaire }
+    let!(:non_coche) { create(:evaluation, :eva, attributs_concernee).beneficiaire }
+
+    before do
+      Bullet.enable = false
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
+      connecte(compte_admin)
+      # En mode JS, la connexion n'est pas terminée au retour de connecte
+      page.assert_current_path(admin_dashboard_path)
+    end
+
+    after { Bullet.enable = true }
+
+    it "renvoie sur la sélection, cochée et à jour, après l'enregistrement" do
+      visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ] })
+      [ premier, second ].each do |beneficiaire|
+        check "batch_action_item_#{beneficiaire.id}", allow_label_click: true
+      end
+      click_link I18n.t("active_admin.batch_actions.button_label")
+      click_link I18n.t("active_admin.batch_actions.labels.renseigner_suivi_groupe")
+      click_button I18n.t("admin.beneficiaires.modal_suivi_groupe.oui")
+      click_on I18n.t(
+        "activerecord.attributes.mise_en_action.remediation.formation_competences_de_base"
+      )
+      click_button I18n.t("admin.beneficiaires.modal_suivi_groupe.enregistrer")
+
+      expect(page).to have_content(
+        I18n.t("admin.beneficiaires.renseigner_suivi_groupe.success.titre", count: 2)
+      )
+      expect(page).to have_content(I18n.t("admin.beneficiaires.selection.titre", count: 2))
+      expect(page).not_to have_content(non_coche.code_beneficiaire)
+      [ premier, second ].each do |beneficiaire|
+        ligne = find("tr", text: beneficiaire.code_beneficiaire)
+        expect(ligne).to have_content(I18n.t("statut_suivi.suite_engagee"))
+        expect(ligne).to have_checked_field("batch_action_item_#{beneficiaire.id}",
+                                            visible: :all)
+      end
+      expect(page).not_to have_css(".dropdown_menu_button.disabled")
+
+      click_link I18n.t("admin.beneficiaires.selection.voir_tous")
+      expect(page).to have_content(non_coche.code_beneficiaire)
+      expect(page).not_to have_css("input.batch-actions-resource-selection:checked",
+                                   visible: :all)
+    end
   end
 end

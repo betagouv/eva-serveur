@@ -11,33 +11,16 @@ ActiveAdmin.register Evenement do
   filter :position
   filter :date
 
-  colonnes_evenement = proc do
+  index download_links: false, dsfr_table: proc { true }, class: "fr-table--multiline" do
     column(:evaluation) { |e| e.evaluation.display_name }
     column(:situation) { |e| e.situation.display_name }
-  end
-
-  autres_colonnes_evenement = proc do
-    column :position
-    column(:date)
-    column(:created_at)
-  end
-
-  index download_links: %i[csv json], dsfr_table: proc { true },
-        class: "fr-table--multiline" do
-    instance_eval(&colonnes_evenement)
     column(:partie) { |e| auto_link(e.partie) }
     column :nom
     column(:donnees) { |e| content_tag(:pre, JSON.pretty_generate(e.donnees)) }
-    instance_eval(&autres_colonnes_evenement)
+    column :position
+    column(:date)
+    column(:created_at)
     actions
-  end
-
-  csv do
-    instance_eval(&colonnes_evenement)
-    column(:partie) { |e| e.partie.id }
-    column :nom
-    column :donnees
-    instance_eval(&autres_colonnes_evenement)
   end
 
   controller do
@@ -46,10 +29,6 @@ ActiveAdmin.register Evenement do
       sessions_ids_de_la_campagne = Partie.where(evaluations: { campagne: campagne })
                                           .joins(:evaluation).select(:session_id)
       Evenement.where(session_id: sessions_ids_de_la_campagne)
-    end
-
-    def csv_filename
-      "#{Time.current.to_fs(:number)}-evenements-#{@campagne.code}.csv"
     end
   end
 end

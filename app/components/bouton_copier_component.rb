@@ -4,5 +4,6 @@ class BoutonCopierComponent < ViewComponent::Base
     @texte = texte
     @classes = classes
     @options = options
+    @id_infobulle = "infobulle-copier-#{SecureRandom.uuid}"
   end
 end

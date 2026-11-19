@@ -21,6 +21,7 @@
 //= require code_postal_input
 //= require recherche_structure
 //= require vendor/clipboard.min
+//= require bouton_copier
 //= require actioncable
 //= require telecharge_pdf
 //= require export_pdf_modal
@@ -46,7 +47,6 @@ jQuery.datetimepicker.setLocale('fr');
 I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
-  new ClipboardJS('.copier-coller');
   $('[data-toggle="tooltip"]').tooltip();
 });
 

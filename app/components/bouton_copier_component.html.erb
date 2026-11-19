@@ -2,7 +2,7 @@
   @libelle,
   class: "fr-btn fr-btn--tertiary fr-btn--sm copier-coller #{@classes}",
   data: { clipboard_text: @texte },
-  aria: { describedby: @id_infobulle },
+  aria: @aria,
   **@options
 ) %>
 <span class="fr-tooltip fr-placement" id="<%= @id_infobulle %>" role="tooltip" aria-hidden="true" hidden><%= t("actions.copie") %></span>

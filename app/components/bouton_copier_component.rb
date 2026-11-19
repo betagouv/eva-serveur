@@ -3,7 +3,9 @@ class BoutonCopierComponent < ViewComponent::Base
     @libelle = libelle
     @texte = texte
     @classes = classes
-    @options = options
     @id_infobulle = "infobulle-copier-#{SecureRandom.uuid}"
+    @options = options
+    @aria = (options.delete(:aria) || {}).dup
+    @aria[:describedby] = [ @aria[:describedby], @id_infobulle ].compact.join(" ")
   end
 end

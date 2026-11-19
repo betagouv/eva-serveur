@@ -10,6 +10,23 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
+# Capybara 3.40.0 vide le stockage avec l'origine '*', que Chrome 158 refuse
+# ("* is not a valid URL") : on cible l'origine du serveur de test.
+module ViderStockageOrigineServeur
+  private
+
+  def execute_cdp(cmd, params = {})
+    if cmd == 'Storage.clearDataForOrigin' && params[:origin] == '*'
+      origine = Capybara.current_session.server&.base_url
+      return unless origine
+
+      params = params.merge(origin: origine)
+    end
+    super
+  end
+end
+Capybara::Selenium::Driver::ChromeDriver.prepend(ViderStockageOrigineServeur)
+
 Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.default_max_wait_time = 5
 Capybara.server = :puma, { Silent: true, Threads: '1:1' }

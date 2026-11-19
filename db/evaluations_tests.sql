@@ -762,7 +762,7 @@ INSERT INTO public.annonce_generales (id, texte, afficher, created_at, updated_a
 --
 
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
-	('004ff3b8-dcb9-4afd-9f26-22e82332d297', 'bienvenue_2023', '2024-04-03 14:10:18.03929', '2026-09-16 12:21:49.638421', NULL, NULL, 'BIE54214', NULL),
+	('004ff3b8-dcb9-4afd-9f26-22e82332d297', 'Bienvenue sociodémographie seule', '2024-04-03 14:10:18.03929', '2026-09-16 12:21:49.638421', NULL, NULL, 'BIE54214', NULL),
 	('0609ce7d-a5e8-4bd8-b05d-ed5550ff452f', 'Benjamin Durand', '2021-06-21 13:05:01.848107', '2026-09-16 12:21:49.639462', '2023-08-29 23:00:00.697941', NULL, 'BEN52955', NULL),
 	('087859bb-34a2-4a28-8a8e-83cff1a5b056', 'Agnès Lucas', '2021-03-12 08:59:22.332683', '2026-09-16 12:21:49.644923', '2023-08-29 23:00:00.984624', NULL, 'AGN89155', NULL),
 	('0b623282-92dc-4bf0-afad-9039a39bb270', 'Victoire Dupuis', '2025-07-12 18:13:00.254807', '2026-09-16 12:21:49.645657', NULL, NULL, 'VIC70904', NULL),
@@ -771,7 +771,7 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('1157112f-9b2b-486a-9341-e414b86d331a', 'David Morin', '2021-04-01 08:34:37.156631', '2026-09-16 12:21:49.647712', '2023-08-29 23:00:01.10356', NULL, 'DAV10608', NULL),
 	('12cb1326-38c4-42d3-828a-5c06a570e0ba', 'Thérèse Martins', '2021-01-27 20:49:30.251877', '2026-09-16 12:21:49.648357', '2023-08-29 23:00:01.16584', NULL, 'THE24224', NULL),
 	('1324d067-309e-4ba0-a3f5-cdeebbd6bc77', 'Cécile Imbert', '2021-06-24 13:00:19.464787', '2026-09-16 12:21:49.648981', '2023-08-29 23:00:01.189172', NULL, 'CEC70539', NULL),
-	('13a14d85-a7fd-4ddc-882e-934d4accbd0f', 'Avec données sociodémographique', '2024-02-01 09:53:48.480909', '2026-09-16 12:21:49.649662', NULL, NULL, 'AVE42831', NULL);
+	('13a14d85-a7fd-4ddc-882e-934d4accbd0f', 'Bienvenue avec autopositionnement', '2024-02-01 09:53:48.480909', '2026-09-16 12:21:49.649662', NULL, NULL, 'AVE42831', NULL);
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
 	('14afe924-5cef-405b-bdde-75ab70c77c1a', 'Benoît Poulain', '2021-06-15 14:17:55.405989', '2026-09-16 12:21:49.650422', '2023-08-29 23:00:01.211978', NULL, 'BEN92456', NULL),
 	('165d1a35-d938-44bd-84d8-0e1ef00bba7a', 'Constance Maillot', '2021-05-18 07:32:27.682748', '2026-09-16 12:21:49.651148', '2023-08-29 23:00:01.233184', NULL, 'CON55771', NULL),

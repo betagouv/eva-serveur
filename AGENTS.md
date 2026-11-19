@@ -91,7 +91,8 @@ Redis must be running for the Sidekiq workers.
 - JavaScript tests (Jest) do not load the locales: stub `I18n.t` so it returns the key (plus interpolation options such as `count` when relevant) and assert on the key, never on a copy of the message. Text displayed by JavaScript must therefore come from `I18n.t` (translations are served by i18n-js), not be hardcoded in the script.
 
 ### TDD (red → green)
-- Before fixing a bug or changing behavior, write or adapt the test, run it with `bin/rspec <file>` and confirm it **fails**. Only then change the production code and rerun it to confirm it passes.
+- Before fixing a bug or changing behavior, write or adapt the test, run it and confirm it **fails**. Only then change the production code and rerun it to confirm it passes.
+- This applies to JavaScript too: a change in `app/assets/javascripts` starts with a Jest test in `spec/javascript`, run with `npm run test:js -- <file>`. Ruby code is tested with `bin/rspec <file>`.
 - If the test already passes before any change, it is not a real TDD cycle: say so instead of silently skipping the red step.
 - When removing a feature (parameter, route, field), do not add a test that only checks it is gone. The red step comes from modifying or deleting the tests that exercised it. When in doubt (e.g. a security hole being closed), suggest the test instead of writing it.
 

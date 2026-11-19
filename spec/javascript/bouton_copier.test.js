@@ -25,6 +25,18 @@ describe("afficheInfobulleCopie", () => {
 
   afterEach(() => jest.useRealTimers());
 
+  it("retrouve l'infobulle quand le bouton est aussi décrit par un autre élément", () => {
+    document.body.innerHTML = `
+      <a id="campagne">Campagne</a>
+      <button aria-describedby="campagne infobulle">Copier</button>
+      <span id="infobulle" class="fr-tooltip" hidden></span>`;
+
+    afficheInfobulleCopie(document.querySelector("button"));
+
+    expect(window.dsfr).toHaveBeenCalledWith(document.getElementById("infobulle"));
+    expect(document.getElementById("infobulle").hidden).toBe(false);
+  });
+
   it("affiche l'infobulle puis la masque après quelques secondes", () => {
     afficheInfobulleCopie(bouton);
 

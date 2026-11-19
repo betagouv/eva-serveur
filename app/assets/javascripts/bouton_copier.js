@@ -1,7 +1,9 @@
 const DUREE_AFFICHAGE_INFOBULLE_COPIE = 2000;
 
 function afficheInfobulleCopie(bouton) {
-  const infobulle = document.getElementById(bouton.getAttribute('aria-describedby'));
+  const infobulle = bouton.getAttribute('aria-describedby').split(' ')
+    .map((id) => document.getElementById(id))
+    .find((element) => element?.classList.contains('fr-tooltip'));
   if (!infobulle || !window.dsfr) return;
 
   // hidden empêche l'infobulle de s'afficher au survol avant la copie

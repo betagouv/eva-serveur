@@ -33,6 +33,18 @@ describe BoutonCopierComponent, type: :component do
                              text: I18n.t("actions.copie"), visible: :hidden)
   end
 
+  context "quand un aria-describedby est passé" do
+    let(:options) { { aria: { describedby: "libelle-campagne" } } }
+
+    it "le conserve en plus de l'infobulle" do
+      render_inline(component)
+
+      ids = page.find("button.copier-coller")["aria-describedby"].split
+      expect(ids.first).to eq("libelle-campagne")
+      expect(page).to have_css("##{ids.last}.fr-tooltip", visible: :hidden)
+    end
+  end
+
   context "quand des classes supplémentaires sont passées" do
     let(:classes) { "ma-classe" }
 

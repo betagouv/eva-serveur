@@ -25,6 +25,14 @@ describe BoutonCopierComponent, type: :component do
     expect(page).to have_no_css("button.fr-btn--secondary")
   end
 
+  it "rend une infobulle masquée, décrivant le bouton, qui confirme la copie" do
+    render_inline(component)
+
+    id_infobulle = page.find("button.copier-coller")["aria-describedby"]
+    expect(page).to have_css("##{id_infobulle}.fr-tooltip[role='tooltip'][hidden]",
+                             text: I18n.t("actions.copie"), visible: :hidden)
+  end
+
   context "quand des classes supplémentaires sont passées" do
     let(:classes) { "ma-classe" }
 

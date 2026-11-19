@@ -682,4 +682,19 @@ describe MiseEnAction, type: :model do
       end
     end
   end
+
+  describe "#libelle_repondue_le" do
+    it "nomme l'auteur en entier avec un seul point final" do
+      compte = Compte.new(prenom: "Julien", nom: "Martin")
+      mise_en_action = described_class.new(repondue_le: Time.zone.local(2026, 2, 12),
+                                           repondue_par: compte)
+
+      expect(mise_en_action.libelle_repondue_le).to eq(
+        I18n.t("reponse_mise_en_action.repondue_le",
+               date: "12/02/2026",
+               auteur: I18n.t("reponse_mise_en_action.auteur", compte: "Julien Martin"),
+               origine: "")
+      )
+    end
+  end
 end

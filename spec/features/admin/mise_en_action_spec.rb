@@ -64,7 +64,7 @@ describe "Admin - Mise en action", :js, type: :feature do
           text: I18n.t("reponse_mise_en_action.repondue_le",
                        date: I18n.l(Date.current, format: :short),
                        auteur: I18n.t("reponse_mise_en_action.auteur",
-                                       compte: mon_compte.nom_abrege),
+                                       compte: mon_compte.display_name),
                        origine: "")
         )
       end
@@ -176,7 +176,7 @@ describe "Admin - Mise en action", :js, type: :feature do
           text: I18n.t("reponse_mise_en_action.repondue_le",
                        date: I18n.l(Date.current, format: :short),
                        auteur: I18n.t("reponse_mise_en_action.auteur",
-                                       compte: mon_compte.nom_abrege),
+                                       compte: mon_compte.display_name),
                        origine: "")
         )
       end

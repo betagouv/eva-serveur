@@ -186,7 +186,7 @@ class MiseEnAction < ApplicationRecord
   def libelle_auteur
     return "" if repondue_par.blank?
 
-    I18n.t("reponse_mise_en_action.auteur", compte: repondue_par.nom_abrege)
+    I18n.t("reponse_mise_en_action.auteur", compte: repondue_par.display_name)
   end
 
   def libelle_evaluation_origine(evaluation_affichee)

@@ -781,11 +781,9 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('19c53ec4-4a31-41b6-b67d-271bd30d04c2', 'Grégoire Bourdon', '2021-06-17 14:58:33.186389', '2026-09-16 12:21:49.653897', '2023-08-29 23:00:01.393624', NULL, 'GRE60170', NULL),
 	('1a4bf4a4-074d-42e2-9654-15bf08b4b441', 'Lucy Jean', '2025-07-10 22:17:47.008954', '2026-09-16 12:21:49.654998', NULL, NULL, 'LUC60708', NULL),
 	('1b03a107-e278-4c8f-b65a-da9e653ab091', 'Dominique Hamel', '2021-06-17 14:32:58.3463', '2026-09-16 12:21:49.655641', '2023-08-29 23:00:01.464147', NULL, 'DOM13417', NULL),
-	('1bf76d9f-bb58-4f9e-9ebe-9b7f44c5d91d', 'etienne s''auto évalue', '2024-04-14 15:37:26.874681', '2026-09-16 12:21:49.656277', NULL, NULL, 'ETI14002', NULL),
 	('1d1a14c1-441e-466f-a532-6417948b437d', 'marie test enchainement des audios', '2023-05-06 16:04:10.378811', '2026-09-16 12:21:49.658328', NULL, NULL, 'MAR61734', NULL);
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
 	('1db3dfe0-7f82-4ecc-b83c-959298a5c68f', 'Joséphine Boucher', '2021-03-17 13:11:24.285166', '2026-09-16 12:21:49.65904', '2023-08-29 23:00:01.491356', NULL, 'JOS65387', NULL),
-	('1ff64bee-d8b0-4a21-92c1-314759209924', 'etienne HL', '2023-08-26 13:44:46.942105', '2026-09-16 12:21:49.659676', NULL, NULL, 'ETI96298', NULL),
 	('206bc983-842c-45b0-bf74-f6dadefaae4e', 'Jules le Gauthier', '2021-06-22 19:00:23.239977', '2026-09-16 12:21:49.660287', '2023-08-29 23:00:01.522381', NULL, 'JUL77453', NULL),
 	('20b7c0aa-f363-488f-b2c6-2fc1d63c0c0b', 'Jean Huet', '2021-06-24 14:02:36.587271', '2026-09-16 12:21:49.66117', '2023-08-29 23:00:01.553539', NULL, 'JEA50207', NULL),
 	('22c99208-6fd7-4d9b-b017-0435785a7b74', 'Margot Lesage', '2025-07-28 12:31:42.772931', '2026-09-16 12:21:49.661792', NULL, NULL, 'MAR33600', NULL),
@@ -803,8 +801,7 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('31b5974e-5009-4fdc-bfdf-980324dedbe2', 'Célina Bouvet', '2021-06-22 18:59:48.38406', '2026-09-16 12:21:49.669138', '2023-08-29 23:00:02.190808', NULL, 'CEL29456', NULL),
 	('3313c68b-45b2-40ec-8c82-96ded1973d8b', 'Margaret Torres', '2021-06-21 13:06:35.559698', '2026-09-16 12:21:49.669873', '2023-08-29 23:00:02.232967', NULL, 'MAR98334', NULL),
 	('364a1d51-0fd2-4421-b023-625cebce5b17', 'Yves Renard', '2021-06-08 18:16:11.152109', '2026-09-16 12:21:49.670507', '2023-08-29 23:00:02.266771', NULL, 'YVE98369', NULL),
-	('3663a86b-5407-4d5b-aec1-134ef5358f6b', 'Lucas Petit', '2021-04-01 07:05:54.732118', '2026-09-16 12:21:49.671146', '2023-08-29 23:00:02.323282', NULL, 'LUC54395', NULL),
-	('37a0069c-d0e5-4a9a-903f-8ab171f2d509', 'efewfwe', '2023-08-26 13:44:45.518567', '2026-09-16 12:21:49.672002', NULL, NULL, 'EFE92925', NULL);
+	('3663a86b-5407-4d5b-aec1-134ef5358f6b', 'Lucas Petit', '2021-04-01 07:05:54.732118', '2026-09-16 12:21:49.671146', '2023-08-29 23:00:02.323282', NULL, 'LUC54395', NULL);
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
 	('3862948a-2550-4e83-a2f8-65fac81ffc72', 'Guillaume Rocher', '2021-03-17 08:09:16.784793', '2026-09-16 12:21:49.672852', '2023-08-29 23:00:02.38593', NULL, 'GUI47864', NULL),
 	('3c0eca3f-c6af-40ef-a161-853931826aa1', 'Michelle de Jean', '2021-06-15 14:23:58.294697', '2026-09-16 12:21:49.67357', '2023-08-29 23:00:02.409837', NULL, 'MIC45153', NULL),
@@ -823,10 +820,8 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('5211981b-ee30-4573-ac8b-92cd723ea7e8', 'Odette Dupuy', '2021-05-29 12:43:45.502719', '2026-09-16 12:21:49.684685', '2023-08-29 23:00:02.782667', NULL, 'ODE39891', NULL),
 	('52941993-1754-41a8-b1c5-bccb5f14035f', 'Michelle du Roux', '2021-03-17 13:09:12.646599', '2026-09-16 12:21:49.685425', '2023-08-29 23:00:02.803774', NULL, 'MIC20720', NULL),
 	('54175cc7-a3f3-414f-8338-3be11a3a05a7', 'Marthe Deschamps', '2021-06-09 13:51:50.569129', '2026-09-16 12:21:49.686165', '2023-08-29 23:00:02.821089', NULL, 'MAR19562', NULL),
-	('54cbe07f-3063-45b6-99dc-5c91cabe89fe', 'pas école', '2024-04-03 14:12:22.671172', '2026-09-16 12:21:49.686887', NULL, NULL, 'PAS19229', NULL),
 	('55ba9e5e-4fdb-40e3-a993-6204a99ad05c', 'Théophile Charpentier', '2021-06-22 13:50:00.888701', '2026-09-16 12:21:49.687727', '2023-08-29 23:00:02.84179', NULL, 'THE84070', NULL),
-	('578ea60a-97f5-4bab-bee6-e99823b7e3bc', 'Suzanne Gauthier', '2021-01-26 17:27:30.066105', '2026-09-16 12:21:49.688447', '2023-08-29 23:00:02.861465', NULL, 'SUZ30097', NULL),
-	('5b2174f9-f52b-41a0-9b87-aafa48fcee78', 'etienne fait objets trouvés en V3', '2023-10-05 09:47:55.29267', '2026-09-16 12:21:49.689211', NULL, NULL, 'ETI75745', NULL);
+	('578ea60a-97f5-4bab-bee6-e99823b7e3bc', 'Suzanne Gauthier', '2021-01-26 17:27:30.066105', '2026-09-16 12:21:49.688447', '2023-08-29 23:00:02.861465', NULL, 'SUZ30097', NULL);
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
 	('5b9eb25c-23c0-4ddb-9eb0-9aded00b9794', 'Adèle Sauvage', '2021-06-17 14:57:07.026636', '2026-09-16 12:21:49.689934', '2023-08-29 23:00:02.907818', NULL, 'ADE17078', NULL),
 	('5bbede7d-f914-4802-8b62-cad4df9e7357', 'Laure Da', '2021-01-27 20:20:17.343049', '2026-09-16 12:21:49.690672', '2023-08-29 23:00:02.923261', NULL, 'LAU98542', NULL),
@@ -851,7 +846,6 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('781607d3-f337-4553-8152-8317d9ed6511', 'Mathilde du Letellier', '2021-06-15 14:17:24.609527', '2026-09-16 12:21:49.705931', '2023-08-29 23:00:03.531275', NULL, 'MAT32813', NULL);
 INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le, deleted_at, code_beneficiaire, compte_id) VALUES
 	('7c5fefc1-da7e-4b48-befc-3b4fc57c0583', 'Valérie Camus', '2021-06-16 07:20:16.212208', '2026-09-16 12:21:49.706685', '2023-08-29 23:00:03.550351', NULL, 'VAL44056', NULL),
-	('7cf0cbbc-9a28-4993-b5ce-14f4059b1ace', 'Autre bienvenue 2023', '2024-04-03 14:11:02.404531', '2026-09-16 12:21:49.707405', NULL, NULL, 'AUT91175', NULL),
 	('7e1e6cfc-51dc-4cc2-841c-86155caaca72', 'Guy Torres', '2021-03-17 08:17:09.243891', '2026-09-16 12:21:49.708161', '2023-08-29 23:00:03.574012', NULL, 'GUY28216', NULL),
 	('7e3b1e0e-32c2-4f4a-9f1a-19c1f7b74788', 'Astrid du Boutin', '2021-03-12 08:59:27.453647', '2026-09-16 12:21:49.709013', '2023-08-29 23:00:03.596429', NULL, 'AST20445', NULL),
 	('7e911165-8be1-4f1c-a139-a4669117e870', 'Zacharie Ledoux', '2021-06-24 13:00:17.273235', '2026-09-16 12:21:49.709733', '2023-08-29 23:00:03.618653', NULL, 'ZAC25271', NULL),
@@ -919,9 +913,7 @@ INSERT INTO public.beneficiaires (id, nom, created_at, updated_at, anonymise_le,
 	('dd4a90b3-d311-432e-be52-82b4f594ac29', 'Victoire Bailly', '2021-05-18 07:39:12.417149', '2026-09-16 12:21:49.757118', '2023-08-29 23:00:05.280997', NULL, 'VIC74638', NULL),
 	('de5ee507-0e72-4262-ad10-32e78855f102', 'Grégoire Guillou', '2021-03-12 08:59:26.503687', '2026-09-16 12:21:49.757916', '2023-08-29 23:00:05.323483', NULL, 'GRE48894', NULL),
 	('e063c654-a218-4cf6-8b74-28aa75c0cf75', 'Marcelle Marchal', '2025-07-13 00:51:00.314432', '2026-09-16 12:21:49.75873', NULL, NULL, 'MAR85003', NULL),
-	('ed6a4c8f-9104-4ee2-b8cb-249a59ad2d25', 'oto', '2023-08-26 13:44:45.250068', '2026-09-16 12:21:49.75957', NULL, NULL, 'OTO24923', NULL),
 	('ee49a99e-6048-47fe-91ad-b33cf7a5c198', 'Constance Wagner', '2021-06-09 13:54:54.978204', '2026-09-16 12:21:49.76054', '2023-08-29 23:00:05.805308', NULL, 'CON84628', NULL),
-	('ee7e443a-7a10-4d85-a235-0ad102171050', 'etienne', '2023-08-26 13:44:44.333855', '2026-09-16 12:21:49.761295', NULL, NULL, 'ETI89337', NULL),
 	('eeb8f406-9c4f-4d32-90fa-228baaa756b5', 'Jules Garcia', '2021-06-03 18:52:09.637483', '2026-09-16 12:21:49.762164', '2023-08-29 23:00:05.832145', NULL, 'JUL68642', NULL),
 	('ef749529-dcca-4a18-ac57-f95ca1b6c191', 'Georges Lelievre', '2021-06-08 18:12:32.584762', '2026-09-16 12:21:49.763002', '2023-08-29 23:00:05.849504', NULL, 'GEO15770', NULL),
 	('efa09b6d-ed4e-4b55-a6a6-1ba673587445', 'Catherine Besnard', '2021-06-17 14:52:54.994194', '2026-09-16 12:21:49.764277', '2023-08-29 23:00:05.867877', NULL, 'CAT27933', NULL),

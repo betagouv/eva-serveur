@@ -84177,13 +84177,13 @@ INSERT INTO public.situations (libelle, nom_technique, created_at, updated_at, i
 --
 
 INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
-	(2, '2021-01-25 14:02:39.933509', '2021-01-25 14:02:39.933509', '72bdb671-5133-443c-9fe7-da2ce7e96246', '7801c562-e489-4ebc-800d-415231cf1428', '0cdbc5b9-aa48-4587-844d-86965dc67709', NULL, NULL, NULL),
-	(4, '2021-01-25 14:02:39.94483', '2021-05-04 19:26:25.875325', '9a5d640b-b6f4-47e9-8760-b8086e07a489', '7801c562-e489-4ebc-800d-415231cf1428', '56950c03-d386-4918-bc41-11800078fd8e', NULL, NULL, NULL),
-	(5, '2021-01-25 14:02:39.947847', '2021-05-04 19:26:25.875325', '819b4365-b665-4879-ba22-0d1c066f79f1', '7801c562-e489-4ebc-800d-415231cf1428', '8cf7d02b-4806-4d2c-ac05-ee5828ef19ef', NULL, NULL, NULL),
-	(6, '2021-01-25 14:02:39.950901', '2021-05-04 19:26:25.875325', '27d520b8-0344-4838-8957-11eed37efa67', '7801c562-e489-4ebc-800d-415231cf1428', 'e05619a7-ea29-49ba-8aeb-962c01b34d3b', NULL, NULL, NULL),
-	(7, '2021-01-25 14:02:39.953974', '2021-05-04 19:26:25.875325', '9a9c836f-350d-4da4-b3c8-0ec5240c1ca2', '7801c562-e489-4ebc-800d-415231cf1428', '50d7cdae-46de-43d5-8f20-73912ee5c6d8', NULL, NULL, NULL),
-	(8, '2021-01-25 14:02:39.937525', '2021-05-04 19:26:25.878499', '01bdd57a-4cda-405b-871c-828251229bfd', '7801c562-e489-4ebc-800d-415231cf1428', 'cd8bbc27-62e6-4a4f-b383-a5bcc2cd5d7a', NULL, NULL, NULL),
-	(3, '2021-01-25 14:02:39.941644', '2023-12-02 13:14:01.582002', 'bf3f3396-2f57-44bc-8983-ec3fc64bf19a', '7801c562-e489-4ebc-800d-415231cf1428', '569cdc17-554d-4227-acfe-1d5d3a4afdbc', 'f958d99d-4adb-455b-8d85-c7e89ab7025c', NULL, NULL),
+	(3, '2021-01-25 14:02:39.933509', '2021-01-25 14:02:39.933509', '72bdb671-5133-443c-9fe7-da2ce7e96246', '7801c562-e489-4ebc-800d-415231cf1428', '0cdbc5b9-aa48-4587-844d-86965dc67709', NULL, NULL, NULL),
+	(5, '2021-01-25 14:02:39.94483', '2021-05-04 19:26:25.875325', '9a5d640b-b6f4-47e9-8760-b8086e07a489', '7801c562-e489-4ebc-800d-415231cf1428', '56950c03-d386-4918-bc41-11800078fd8e', NULL, NULL, NULL),
+	(6, '2021-01-25 14:02:39.947847', '2021-05-04 19:26:25.875325', '819b4365-b665-4879-ba22-0d1c066f79f1', '7801c562-e489-4ebc-800d-415231cf1428', '8cf7d02b-4806-4d2c-ac05-ee5828ef19ef', NULL, NULL, NULL),
+	(7, '2021-01-25 14:02:39.950901', '2021-05-04 19:26:25.875325', '27d520b8-0344-4838-8957-11eed37efa67', '7801c562-e489-4ebc-800d-415231cf1428', 'e05619a7-ea29-49ba-8aeb-962c01b34d3b', NULL, NULL, NULL),
+	(8, '2021-01-25 14:02:39.953974', '2021-05-04 19:26:25.875325', '9a9c836f-350d-4da4-b3c8-0ec5240c1ca2', '7801c562-e489-4ebc-800d-415231cf1428', '50d7cdae-46de-43d5-8f20-73912ee5c6d8', NULL, NULL, NULL),
+	(9, '2021-01-25 14:02:39.937525', '2021-05-04 19:26:25.878499', '01bdd57a-4cda-405b-871c-828251229bfd', '7801c562-e489-4ebc-800d-415231cf1428', 'cd8bbc27-62e6-4a4f-b383-a5bcc2cd5d7a', NULL, NULL, NULL),
+	(4, '2021-01-25 14:02:39.941644', '2023-12-02 13:14:01.582002', 'bf3f3396-2f57-44bc-8983-ec3fc64bf19a', '7801c562-e489-4ebc-800d-415231cf1428', '569cdc17-554d-4227-acfe-1d5d3a4afdbc', 'f958d99d-4adb-455b-8d85-c7e89ab7025c', NULL, NULL),
 	(2, '2024-04-03 14:09:09.302646', '2024-04-03 14:09:09.302646', '4e801dba-00f8-4131-abed-6a1781e989c6', '07bd8158-86f3-40f4-9915-733cdfcf0b20', '569cdc17-554d-4227-acfe-1d5d3a4afdbc', '128b79f8-fcfb-4e63-88e8-991047af3a70', NULL, NULL),
 	(3, '2024-04-03 14:09:09.30747', '2024-04-03 14:09:09.30747', '818247ce-9586-44b2-ad86-f93013f61485', '07bd8158-86f3-40f4-9915-733cdfcf0b20', '50d7cdae-46de-43d5-8f20-73912ee5c6d8', NULL, NULL, NULL),
 	(2, '2024-04-14 15:36:35.167557', '2024-04-14 15:36:35.167557', 'da414560-6b58-4082-935f-d41bfe18f8b7', 'a89be5c6-71cc-4ccf-ae9b-0287f64904dc', '0cdbc5b9-aa48-4587-844d-86965dc67709', NULL, NULL, NULL);
@@ -84206,7 +84206,7 @@ INSERT INTO public.situations_configurations ("position", created_at, updated_at
 	(3, '2023-03-16 15:06:41.795507', '2024-08-19 13:45:47.829076', '9f0cb468-885d-405f-8f1a-16addc9b77b5', '35896385-1560-46f9-8324-9d238dd3c8e5', '569cdc17-554d-4227-acfe-1d5d3a4afdbc', NULL, NULL, NULL),
 	(4, '2023-03-16 15:06:41.798355', '2024-08-19 13:45:47.829076', '636cb779-dab6-4191-b27f-7b0ae9772112', '35896385-1560-46f9-8324-9d238dd3c8e5', '50d7cdae-46de-43d5-8f20-73912ee5c6d8', NULL, NULL, NULL),
 	(2, '2023-03-16 15:06:41.790656', '2024-08-19 13:45:47.829076', 'c745e08c-e961-4736-8bb6-d27fe6b4120d', '35896385-1560-46f9-8324-9d238dd3c8e5', '0cdbc5b9-aa48-4587-844d-86965dc67709', NULL, NULL, NULL),
-	(1, '2021-01-25 14:02:39.927002', '2024-08-19 13:45:47.838494', 'd82a7a4f-7d55-46e5-8473-3ced12d28213', '7801c562-e489-4ebc-800d-415231cf1428', '2d154cbd-a422-43bf-8534-1538b6d1b8c5', '5f2a9a71-2e4b-4b0a-9efe-a10275486dd9', NULL, NULL),
+	(2, '2021-01-25 14:02:39.927002', '2024-08-19 13:45:47.838494', 'd82a7a4f-7d55-46e5-8473-3ced12d28213', '7801c562-e489-4ebc-800d-415231cf1428', '2d154cbd-a422-43bf-8534-1538b6d1b8c5', '5f2a9a71-2e4b-4b0a-9efe-a10275486dd9', NULL, NULL),
 	(1, '2024-08-19 13:45:36.165426', '2024-08-19 13:45:47.867877', 'bcd7c902-f65e-40e1-8c21-d46c9cc816fc', NULL, '2d154cbd-a422-43bf-8534-1538b6d1b8c5', NULL, 'de929188-1d22-48b6-b7f1-07ad5d327f0b', NULL),
 	(1, '2024-08-19 13:45:36.181436', '2024-08-19 13:45:47.875559', 'f08173fd-01c9-4b23-b21e-5b7297337183', NULL, '2d154cbd-a422-43bf-8534-1538b6d1b8c5', NULL, '92347336-b083-4480-b269-a81af9222909', NULL);
 INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
@@ -87139,6 +87139,9 @@ INSERT INTO public.situations_configurations ("position", created_at, updated_at
 	('1', '2026-10-26 10:13:06.79729', '2026-10-26 10:13:06.79729', 'f53ba7b9-0149-44c3-9024-66eefc0d6b4c', NULL, '592ec5a0-2c81-4550-a9f5-eb26274753a3', '42495975-2921-4442-827b-1864d26391ef', '15eb95b6-15fa-4b91-8d51-4aeb30f3751e', NULL),
 	('2', '2026-10-26 10:13:06.806192', '2026-10-26 10:13:06.806192', '03ad66ab-1c30-482d-80a7-1d9523696ac6', NULL, 'ec2d6c9c-951b-4552-9a16-b2f5e49ff00c', '782b2d22-6128-4cf3-92ad-583db961b30d', '15eb95b6-15fa-4b91-8d51-4aeb30f3751e', NULL);
 
+INSERT INTO public.situations_configurations ("position", created_at, updated_at, id, campagne_id, situation_id, questionnaire_id, parcours_type_id, deleted_at) VALUES
+	(1, '2026-11-19 10:00:00', '2026-11-19 10:00:00', 'be41c090-4863-4858-81dc-94f88d6c6bb3', '7801c562-e489-4ebc-800d-415231cf1428', 'e74239ba-7fd1-41d0-9dc4-436c27165ff0', NULL, NULL, NULL);
+
 
 --
 -- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: -
@@ -88086,6 +88089,10 @@ INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, e
 INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, evaluation_id, situation_id, deleted_at, synthese, competences, competences_de_base) VALUES
 	('9e0987bb-1f5e-47a0-adb6-0e2fa3e6000a', '8cae525f-d613-4294-bd8d-313b6104789b', '{}', '2026-11-04 10:12:34.830524', '2026-11-04 10:12:34.838786', '84c185e4-9db0-4b71-a9c7-99c1feda7a21', '592ec5a0-2c81-4550-a9f5-eb26274753a3', NULL, '{}', '{}', '{}');
 
+INSERT INTO public.parties (id, session_id, metriques, created_at, updated_at, evaluation_id, situation_id, deleted_at, synthese, competences, competences_de_base) VALUES
+	('db11bad7-1ce8-401a-b90e-089c89bf7979', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '{}', '2021-09-02 07:46:51.783', '2021-09-02 07:46:51.783', 'e7c0e179-0fdc-4604-8ba0-93605afdd4b5', 'e74239ba-7fd1-41d0-9dc4-436c27165ff0', NULL, '{}', '{}', '{}'),
+	('b5fbe83e-08d6-408c-bda7-a30dfa594966', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '{}', '2021-07-30 07:22:46.997', '2021-07-30 07:22:46.997', '512cf064-9097-43fc-8fd7-b1964194e578', 'e74239ba-7fd1-41d0-9dc4-436c27165ff0', NULL, '{}', '{}', '{}');
+
 
 --
 -- Data for Name: conditions_passations; Type: TABLE DATA; Schema: public; Owner: -
@@ -88532,4 +88539,34 @@ INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, sessi
 
 INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
 	('demarrage', '"{}"', '2026-11-04 10:12:34.798105', '2026-11-04 10:12:34.838786', '2026-11-04 10:12:34.838786', '8cae525f-d613-4294-bd8d-313b6104789b', '30faaca1-1fb7-4eb8-b7f8-7b8f59a4771b', '0', NULL);
+
+INSERT INTO public.evenements (nom, donnees, date, created_at, updated_at, session_id, id, "position", deleted_at) VALUES
+	('demarrage', '{}', '2021-09-02 07:46:52.104', '2021-09-02 07:46:51.694', '2021-09-02 07:46:51.694', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '0a8d5b31-f56a-48e8-bda0-0cec9cc5cb43', 0, NULL),
+	('affichageQuestionQCM', '{"question":"mode-emploi"}', '2021-09-02 07:46:53.303', '2021-09-02 07:46:52.893', '2021-09-02 07:46:52.893', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '17d116e7-ec30-43f3-80b1-04446c3a0c2a', 1, NULL),
+	('reponse', '{"question":"mode-emploi","intitule":"Pour écouter ou réécouter la question et les réponses, cliquez sur le bouton « Lecture » ( <svg width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" fill=\"var(--blue-france-sun-113-625)\" r=\"10\"/><path d=\"M14 8.701c1 .577 1 2.02 0 2.598l-5.813 3.356a1.5 1.5 0 0 1-2.25-1.3v-6.71a1.5 1.5 0 0 1 2.25-1.3z\" fill=\"#fff\"/></svg> ) à gauche de la phrase que vous souhaitez entendre."}', '2021-09-02 07:47:08.104', '2021-09-02 07:47:07.694', '2021-09-02 07:47:07.694', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', 'ee3ab6f6-7447-41ac-9808-eda57822514e', 2, NULL),
+	('affichageQuestionQCM', '{"question":"clic-maison-bleue"}', '2021-09-02 07:47:08.504', '2021-09-02 07:47:08.094', '2021-09-02 07:47:08.094', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '2836d3dd-2f56-41d2-98f0-2ee6b655f3ac', 3, NULL),
+	('reponse', '{"question":"clic-maison-bleue","intitule":"Cliquez sur la maison bleue","succes":true}', '2021-09-02 07:47:14.804', '2021-09-02 07:47:14.394', '2021-09-02 07:47:14.394', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', 'ed0338f9-845f-41db-9dee-03f71f9f0468', 4, NULL),
+	('affichageQuestionQCM', '{"question":"drag-and-drop"}', '2021-09-02 07:47:15.304', '2021-09-02 07:47:14.894', '2021-09-02 07:47:14.894', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', 'c18f74e2-34c9-4ec4-bb70-78ddcf2b8981', 5, NULL),
+	('reponse', '{"question":"drag-and-drop","intitule":"Super ! Maintenant, ajoutez une maison au village.","succes":true}', '2021-09-02 07:47:27.003', '2021-09-02 07:47:26.593', '2021-09-02 07:47:26.593', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '2d991f64-ac49-4d41-8942-2ac8e4c2f8c5', 6, NULL),
+	('affichageQuestionQCM', '{"question":"saisie-boulangerie"}', '2021-09-02 07:47:27.403', '2021-09-02 07:47:26.993', '2021-09-02 07:47:26.993', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '579e294e-7c6e-4cf6-ae75-6be5728f9d99', 7, NULL),
+	('reponse', '{"question":"saisie-boulangerie","intitule":"Recopiez le nom « Boulangerie » dans le cadre de texte ci-dessous, puis cliquez sur « Valider »","reponse":"Boulangerie","succes":true}', '2021-09-02 07:47:46.303', '2021-09-02 07:47:45.893', '2021-09-02 07:47:45.893', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '30cd4aa8-12e7-48fe-88f6-bb2616673901', 8, NULL),
+	('affichageQuestionQCM', '{"question":"deplacement-droite-maison-verte"}', '2021-09-02 07:47:46.803', '2021-09-02 07:47:46.393', '2021-09-02 07:47:46.393', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', 'f1052865-59ef-44dd-b8aa-b1c98decb0de', 9, NULL),
+	('reponse', '{"question":"deplacement-droite-maison-verte","intitule":"Dans quelle direction le personnage situé au milieu de l’écran doit-il aller pour se rendre à la maison verte ?","succes":true}', '2021-09-02 07:47:56.403', '2021-09-02 07:47:55.993', '2021-09-02 07:47:55.993', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', 'bcbd6f18-4232-4af8-8624-4e00ed5f2fa8', 10, NULL),
+	('affichageQuestionQCM', '{"question":"couleur-maison"}', '2021-09-02 07:47:56.803', '2021-09-02 07:47:56.393', '2021-09-02 07:47:56.393', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '8d6cb9dd-28f8-487f-9e63-abd9ecca9d59', 11, NULL),
+	('reponse', '{"question":"couleur-maison","intitule":"La maison est rouge","reponse":"rouge","succes":true}', '2021-09-02 07:48:04.003', '2021-09-02 07:48:03.593', '2021-09-02 07:48:03.593', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '631e163f-4b2f-4815-b2b0-0984d41d9248', 12, NULL),
+	('finSituation', '{}', '2021-09-02 07:48:04.603', '2021-09-02 07:48:04.193', '2021-09-02 07:48:04.193', '7af499c0-c0f8-4333-9d60-3ea3a8c75cb5', '94afb486-f6f7-4a62-8a39-0ef6867ade61', 13, NULL),
+	('demarrage', '{}', '2021-07-30 07:22:47.318', '2021-07-30 07:22:46.908', '2021-07-30 07:22:46.908', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '413591d1-f428-425d-a4a7-62e9a37f97b2', 0, NULL),
+	('affichageQuestionQCM', '{"question":"mode-emploi"}', '2021-07-30 07:22:48.517', '2021-07-30 07:22:48.107', '2021-07-30 07:22:48.107', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '6ff613c7-821f-4af9-ab40-a7fc0d041aa6', 1, NULL),
+	('reponse', '{"question":"mode-emploi","intitule":"Pour écouter ou réécouter la question et les réponses, cliquez sur le bouton « Lecture » ( <svg width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" fill=\"var(--blue-france-sun-113-625)\" r=\"10\"/><path d=\"M14 8.701c1 .577 1 2.02 0 2.598l-5.813 3.356a1.5 1.5 0 0 1-2.25-1.3v-6.71a1.5 1.5 0 0 1 2.25-1.3z\" fill=\"#fff\"/></svg> ) à gauche de la phrase que vous souhaitez entendre."}', '2021-07-30 07:23:03.318', '2021-07-30 07:23:02.908', '2021-07-30 07:23:02.908', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '3a8b9c32-6304-482a-939d-13faf8bcc15f', 2, NULL),
+	('affichageQuestionQCM', '{"question":"clic-maison-bleue"}', '2021-07-30 07:23:03.718', '2021-07-30 07:23:03.308', '2021-07-30 07:23:03.308', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '0eea8373-9946-416d-b471-c68165cbfb64', 3, NULL),
+	('reponse', '{"question":"clic-maison-bleue","intitule":"Cliquez sur la maison bleue","succes":true}', '2021-07-30 07:23:10.018', '2021-07-30 07:23:09.608', '2021-07-30 07:23:09.608', '0b57f0af-0a23-4152-886a-b90bc2d09b03', 'c930db6f-8b98-4599-9ed7-d6c0509140a9', 4, NULL),
+	('affichageQuestionQCM', '{"question":"drag-and-drop"}', '2021-07-30 07:23:10.518', '2021-07-30 07:23:10.108', '2021-07-30 07:23:10.108', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '5f558f2d-793b-47f0-a6c8-d6761ecae79a', 5, NULL),
+	('reponse', '{"question":"drag-and-drop","intitule":"Super ! Maintenant, ajoutez une maison au village.","succes":true}', '2021-07-30 07:23:22.217', '2021-07-30 07:23:21.807', '2021-07-30 07:23:21.807', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '1b791880-0b2c-43a7-9c5a-6cec2c19bc19', 6, NULL),
+	('affichageQuestionQCM', '{"question":"saisie-boulangerie"}', '2021-07-30 07:23:22.617', '2021-07-30 07:23:22.207', '2021-07-30 07:23:22.207', '0b57f0af-0a23-4152-886a-b90bc2d09b03', 'd912e3b5-5195-41a8-a82c-c4027a795ce6', 7, NULL),
+	('reponse', '{"question":"saisie-boulangerie","intitule":"Recopiez le nom « Boulangerie » dans le cadre de texte ci-dessous, puis cliquez sur « Valider »","reponse":"Boulangerie","succes":true}', '2021-07-30 07:23:41.517', '2021-07-30 07:23:41.107', '2021-07-30 07:23:41.107', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '8bb015e6-6f7c-48f2-8580-9dc1089b9100', 8, NULL),
+	('affichageQuestionQCM', '{"question":"deplacement-droite-maison-verte"}', '2021-07-30 07:23:42.017', '2021-07-30 07:23:41.607', '2021-07-30 07:23:41.607', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '9e30dfd4-293c-445f-8c50-d1784e36dd6e', 9, NULL),
+	('reponse', '{"question":"deplacement-droite-maison-verte","intitule":"Dans quelle direction le personnage situé au milieu de l’écran doit-il aller pour se rendre à la maison verte ?","succes":true}', '2021-07-30 07:23:51.617', '2021-07-30 07:23:51.207', '2021-07-30 07:23:51.207', '0b57f0af-0a23-4152-886a-b90bc2d09b03', '2f646e51-f2ec-4599-af27-f956516da5d7', 10, NULL),
+	('affichageQuestionQCM', '{"question":"couleur-maison"}', '2021-07-30 07:23:52.017', '2021-07-30 07:23:51.607', '2021-07-30 07:23:51.607', '0b57f0af-0a23-4152-886a-b90bc2d09b03', 'dd2f238c-d084-4cd3-9f38-c00d46d50404', 11, NULL),
+	('reponse', '{"question":"couleur-maison","intitule":"La maison est rouge","reponse":"rouge","succes":true}', '2021-07-30 07:23:59.217', '2021-07-30 07:23:58.807', '2021-07-30 07:23:58.807', '0b57f0af-0a23-4152-886a-b90bc2d09b03', 'a3c9fe03-412e-48b3-af48-0d9ed2044acb', 12, NULL),
+	('finSituation', '{}', '2021-07-30 07:23:59.817', '2021-07-30 07:23:59.407', '2021-07-30 07:23:59.407', '0b57f0af-0a23-4152-886a-b90bc2d09b03', 'dbab2a41-9cbc-4e60-8de1-c50f15eed131', 13, NULL);
 

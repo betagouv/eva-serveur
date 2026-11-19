@@ -39,7 +39,7 @@ h5 {
 
 h6 {
   @include titre;
-  @include ancien-titre-h6;
+  @include titre-h6;
 }
 
 .body-sm {

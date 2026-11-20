@@ -1,0 +1,5 @@
+<% if desactive %>
+  <%= tag.a libelle, class: classes, aria: { disabled: true }, role: "link" %>
+<% else %>
+  <%= link_to libelle, url, class: classes, title: libelle %>
+<% end %>

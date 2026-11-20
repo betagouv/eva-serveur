@@ -1,0 +1,17 @@
+<%= paginator.render do -%>
+  <nav role="navigation" class="fr-pagination" aria-label="<%= t("pagination_dsfr.titre") %>">
+    <ul class="fr-pagination__list">
+      <li><%= first_page_tag %></li>
+      <li><%= prev_page_tag %></li>
+      <% each_page do |page| -%>
+        <% if page.display_tag? -%>
+          <li><%= page_tag page %></li>
+        <% elsif !page.was_truncated? -%>
+          <li><%= gap_tag %></li>
+        <% end -%>
+      <% end -%>
+      <li><%= next_page_tag %></li>
+      <li><%= last_page_tag %></li>
+    </ul>
+  </nav>
+<% end -%>

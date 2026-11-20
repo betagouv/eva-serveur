@@ -1,0 +1,3 @@
+<%= render "kaminari/dsfr/lien", libelle: t("pagination_dsfr.derniere"), url: url,
+                                 desactive: current_page.last? || current_page.out_of_range?,
+                                 classes: "fr-pagination__link fr-pagination__link--last" %>

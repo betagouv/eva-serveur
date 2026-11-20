@@ -5,13 +5,18 @@
 const { init } = require("../../app/assets/javascripts/modal_suivi_groupe.js");
 
 const MODAL_ID = "fr-modal-suivi-groupe";
-const FORM_ID = "suivi-groupe-form";
+const FORM_ID = "beneficiaires-selection";
 const REPONSE_PAS_ENCORE = "pas_encore";
 
 function creerModalHTML() {
   return `
+    <form id="${FORM_ID}">
+      <input type="checkbox" name="beneficiaire_ids[]" value="42" />
+      <input type="checkbox" name="beneficiaire_ids[]" value="43" />
+      <input type="checkbox" name="beneficiaire_ids[]" value="99" />
+    </form>
     <div id="${MODAL_ID}"
-         data-suivi-groupe-batch-action="/admin/beneficiaires/batch_action"
+         data-formulaire-selection="${FORM_ID}"
          class="fr-modal-suivi-groupe">
       <span class="fr-modal__title"></span>
 
@@ -65,16 +70,15 @@ function creerModalHTML() {
       <input id="suivi-groupe-precision-autre-champ" type="hidden" form="${FORM_ID}" value="" />
       <input id="suivi-groupe-choix-date-revue" type="hidden" form="${FORM_ID}" value="" />
       <input id="suivi-groupe-date-precise-champ" type="hidden" form="${FORM_ID}" value="" />
-      <div id="hidden-ids-suivi-container"></div>
     </div>
-
-    <meta name="csrf-token" content="test-token" />
   `;
 }
 
 function ouvrirModalAvecIds(ids) {
-  const modal = document.getElementById(MODAL_ID);
-  modal.dataset.ids = ids.join(",");
+  document.querySelectorAll('input[name="beneficiaire_ids[]"]').forEach((caseACocher) => {
+    caseACocher.checked = ids.includes(caseACocher.value);
+  });
+  document.getElementById(MODAL_ID).dispatchEvent(new Event("dsfr.disclose"));
 }
 
 function clicBouton(selector) {
@@ -94,11 +98,6 @@ beforeEach(() => {
   document.body.innerHTML = creerModalHTML();
   init();
   ouvrirModalAvecIds(["42", "43"]);
-});
-
-afterEach(() => {
-  const form = document.getElementById(FORM_ID);
-  if (form) form.remove();
 });
 
 describe("navigation entre les étapes", () => {
@@ -249,48 +248,22 @@ describe("label de réponse à l'étape qualification", () => {
   });
 });
 
-describe("updateTitre", () => {
+describe("titre à l'ouverture", () => {
   test("utilise la traduction du titre avec count=1 pour 1 bénéficiaire", () => {
     ouvrirModalAvecIds(["42"]);
-    document.querySelector('[data-effectuee="true"]').dispatchEvent(
-      new MouseEvent("click", { bubbles: true })
-    );
-
-    const modal = document.getElementById(MODAL_ID);
-    modal.dataset.ids = "42";
-
-    // updateTitre est appelé lors du déclenchement handleSuiviGroupeClick
-    // On simule en cliquant un lien batch_action
-    document.body.innerHTML += `
-      <a class="batch_action" data-action="renseigner_suivi_groupe">Ouvrir</a>
-      <input class="batch-actions-resource-selection" type="checkbox" checked value="42" />
-    `;
-    document.querySelector("a.batch_action").dispatchEvent(
-      new MouseEvent("click", { bubbles: true, cancelable: true })
-    );
 
     const titre = document.querySelector(".fr-modal__title").textContent;
     expect(titre.trim()).toBe(`${CLE_TITRE_SELECTION} count=1`);
   });
 
   test("utilise la traduction du titre avec le nombre de bénéficiaires sélectionnés", () => {
-    document.body.innerHTML += `
-      <a class="batch_action" data-action="renseigner_suivi_groupe">Ouvrir</a>
-      <input class="batch-actions-resource-selection" type="checkbox" checked value="42" />
-      <input class="batch-actions-resource-selection" type="checkbox" checked value="43" />
-    `;
-    document.querySelector("a.batch_action").dispatchEvent(
-      new MouseEvent("click", { bubbles: true, cancelable: true })
-    );
-
     const titre = document.querySelector(".fr-modal__title").textContent;
     expect(titre.trim()).toBe(`${CLE_TITRE_SELECTION} count=2`);
   });
 });
 
 describe("remplissage des champs cachés avant soumission", () => {
-  test("remplit effectuee, qualification et les IDs", () => {
-    ouvrirModalAvecIds(["10", "20"]);
+  test("remplit effectuee et qualification", () => {
     clicBouton('[data-effectuee="true"]');
     clicBouton('[data-qualification="formation_metier"]');
 
@@ -299,15 +272,9 @@ describe("remplissage des champs cachés avant soumission", () => {
 
     expect(document.getElementById("suivi-groupe-effectuee").value).toBe("true");
     expect(document.getElementById("suivi-groupe-qualification-champ").value).toBe("formation_metier");
-
-    const ids = Array.from(
-      document.querySelectorAll('#hidden-ids-suivi-container input[name="collection_selection[]"]')
-    ).map(i => i.value);
-    expect(ids).toEqual(["10", "20"]);
   });
 
   test("effectuee=pas_encore et choix_date_revue sont transmis après tag relance", () => {
-    ouvrirModalAvecIds(["5"]);
     clicBouton(`[data-effectuee="${REPONSE_PAS_ENCORE}"]`);
     clicBouton('[data-qualification="7_jours"]');
 
@@ -325,14 +292,7 @@ describe("réinitialisation à l'ouverture", () => {
     clicBouton('[data-effectuee="true"]');
     clicBouton('[data-qualification="formation_metier"]');
 
-    // Simule une réouverture de la modale via le batch link
-    document.body.innerHTML += `
-      <a class="batch_action" data-action="renseigner_suivi_groupe">Réouvrir</a>
-      <input class="batch-actions-resource-selection" type="checkbox" checked value="99" />
-    `;
-    document.querySelectorAll("a.batch_action")[0].dispatchEvent(
-      new MouseEvent("click", { bubbles: true, cancelable: true })
-    );
+    ouvrirModalAvecIds(["99"]);
 
     expect(document.getElementById("suivi-groupe-etape-question").hasAttribute("hidden")).toBe(false);
     expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(true);

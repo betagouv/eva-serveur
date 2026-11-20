@@ -1,0 +1,21 @@
+<p class="fr-table__detail" data-selection-compteur>
+  <%= t("components.tableau.lignes_selectionnees", count: Array(params[:selection]).size) %>
+</p>
+<ul class="fr-btns-group fr-btns-group--right fr-btns-group--inline-md fr-btns-group--icon-left">
+  <% if can?(:renseigner_suivi_groupe, Beneficiaire) %>
+    <li>
+      <%= tag.button t(".renseigner_suivi"), type: "button",
+                     class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-survey-line",
+                     aria: { controls: "fr-modal-suivi-groupe" },
+                     data: { fr_opened: false, selection_minimum: 1 } %>
+    </li>
+  <% end %>
+  <% if can?(:fusionner, Beneficiaire) %>
+    <li>
+      <%= tag.button t(".fusionner"), type: "button",
+                     class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-git-merge-line",
+                     aria: { controls: "fr-modal-fusionner" },
+                     data: { fr_opened: false, selection_minimum: 2 } %>
+    </li>
+  <% end %>
+</ul>

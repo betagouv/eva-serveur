@@ -1,0 +1,28 @@
+<% actions_groupees = can?(:fusionner, Beneficiaire) || can?(:renseigner_suivi_groupe, Beneficiaire) %>
+
+<%= render EntetePageComponent.new(
+      titre: active_admin_config.plural_resource_label,
+      fil_ariane: [ { libelle: t(".accueil"), lien: admin_root_path },
+                    { libelle: active_admin_config.plural_resource_label } ]
+    ) do |entete| %>
+  <% if can?(:create, Beneficiaire) %>
+    <% entete.with_actions do %>
+      <%= render BoutonDsfrComponent.new(new_admin_beneficiaire_path, tag: :a, type: :primary) do %>
+        <%= t("active_admin.resources.beneficiaire.new_model") %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<div id="resultats-beneficiaires" data-actualise-a-la-volee>
+  <%= render "selection" if params[:selection].present? %>
+  <%= render "tableau", actions_groupees: actions_groupees %>
+</div>
+
+<% if actions_groupees %>
+  <%= render "modal_suivi_groupe" if can?(:renseigner_suivi_groupe, Beneficiaire) %>
+  <%= render "modal_fusion" if can?(:fusionner, Beneficiaire) %>
+<% end %>

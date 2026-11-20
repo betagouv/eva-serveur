@@ -1,0 +1,7 @@
+<% if page.current? %>
+  <%= tag.a page, class: "fr-pagination__link", aria: { current: "page" },
+                  title: t("pagination_dsfr.page", numero: page) %>
+<% else %>
+  <%= link_to page, url, class: "fr-pagination__link", rel: page.rel,
+                         title: t("pagination_dsfr.page", numero: page) %>
+<% end %>

@@ -1,0 +1,44 @@
+<%= form_with url: @url, method: :get, id: @id,
+              html: { role: "search", aria: { label: t("components.filtres.titre") } } do %>
+  <% @parametres_conserves.each do |nom, valeur| %>
+    <%= hidden_field_tag nom, valeur, id: nil %>
+  <% end %>
+  <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+    <% if recherche? %>
+      <div class="fr-col-12 fr-col-md-6 fr-col-lg-4"><%= recherche %></div>
+    <% end %>
+    <div class="fr-col-12 fr-col-md">
+      <ul class="fr-btns-group fr-btns-group--inline-sm fr-mb-n2w">
+        <% filtres.each_with_index do |filtre, index| %>
+          <li class="filtres__menu">
+            <button type="button" aria-expanded="false" aria-controls="<%= id_menu(index) %>"
+                    class="fr-btn <%= filtre.classe_bouton %> fr-btn--icon-right fr-icon-arrow-down-s-line">
+              <%= filtre.libelle_bouton %>
+              <% if filtre.compteur? %>
+                <span class="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon fr-ml-1w"><%= filtre.actifs %></span>
+              <% end %>
+            </button>
+            <%= tag.div class: "fr-collapse filtres__panneau", id: id_menu(index),
+                        data: { application_immediate: filtre.application_immediate? || nil } do %>
+              <div class="filtres__contenu">
+                <%= filtre %>
+                <% unless filtre.application_immediate? %>
+                  <ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--sm fr-mt-2w">
+                    <li><button type="submit" class="fr-btn fr-btn--sm"><%= t("components.filtres.appliquer") %></button></li>
+                  </ul>
+                <% end %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+        <li id="<%= @id %>-effacer" data-actualise-a-la-volee>
+          <% if filtres_actifs? %>
+            <%= render BoutonDsfrComponent.new(url_effacer, tag: :a, type: :tertiary_no_outline) do %>
+              <%= t("components.filtres.effacer") %>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>

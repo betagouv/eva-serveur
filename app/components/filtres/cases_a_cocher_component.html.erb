@@ -1,0 +1,11 @@
+<fieldset class="fr-fieldset">
+  <legend class="fr-fieldset__legend fr-fieldset__legend--regular"><%= @libelle %></legend>
+  <% @options.each do |libelle, valeur| %>
+    <div class="fr-fieldset__element">
+      <div class="fr-checkbox-group fr-checkbox-group--sm">
+        <%= check_box_tag "q[#{@champ}][]", valeur, cochee?(valeur), id: identifiant(valeur) %>
+        <%= label_tag identifiant(valeur), libelle, class: "fr-label" %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>

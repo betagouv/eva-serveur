@@ -1,0 +1,5 @@
+<div class="fr-search-bar">
+  <%= label_tag "q[#{@champ}]", @libelle, class: "fr-label" %>
+  <%= search_field_tag "q[#{@champ}]", @valeur, class: "fr-input", placeholder: @libelle,
+                                                data: { recherche_a_la_volee: true } %>
+</div>

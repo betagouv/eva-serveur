@@ -25,6 +25,16 @@
   &.fr-collapse--expanded {
     overflow: visible;
   }
+
+  // Le collapse du DSFR anime son dépliage en faisant glisser le contenu depuis une marge
+  // négative (::before) et en le gardant visible pendant ce glissement (transition de
+  // visibility) : sur un menu posé en absolu, le contenu traverserait la page depuis le
+  // haut. Le menu s'ouvre et se ferme directement sous son bouton.
+  transition: none;
+
+  &::before {
+    content: none;
+  }
 }
 
 // L'ombre « overlap » du DSFR, très légère, ne suffit pas à détacher un menu blanc posé

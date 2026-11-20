@@ -19,11 +19,108 @@ describe 'Admin - Compte', type: :feature do
 
     it { expect(page).to have_content 'moi@structure' }
 
-    it "propose le téléchargement XLS dans l'encart de gestion" do
-      within("#action_items_sidebar_section") do
+    it "affiche l'en-tête de page du DSFR à la place de la barre de titre d'ActiveAdmin" do
+      expect(page).to have_css("h1", text: Compte.model_name.human(count: 2))
+      expect(page).not_to have_css("#title_bar")
+      expect(page).not_to have_css("#sidebar")
+    end
+
+    it "propose le téléchargement XLS dans l'en-tête" do
+      within(".entete-page__actions") do
         lien = find_link(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
         expect(lien[:href]).to eq admin_comptes_path(format: :xls)
+        expect(page).to have_link(I18n.t("active_admin.resources.compte.new_model"),
+                                  href: new_admin_compte_path)
       end
+    end
+
+    it "filtre par statut d'accès" do
+      collegue.validation_en_attente!
+      statut = Compte.human_attribute_name(:statut_validation)
+      within("#filtres-comptes .filtres__menu", text: statut) do
+        check Compte.human_enum_name(:statut_validation, "en_attente"), allow_label_click: true
+        click_button I18n.t("components.filtres.appliquer")
+      end
+
+      expect(page).to have_content 'collegue@structure'
+      expect(page).not_to have_content 'moi@structure'
+    end
+
+    describe "critères de structure" do
+      let!(:structure_bretonne) { create :structure_locale, :avec_admin, region: "Bretagne" }
+      let!(:breton) do
+        create :compte_conseiller, structure: structure_bretonne, email: "breton@structure"
+      end
+
+      before { visit admin_comptes_path }
+
+      def menu_structure
+        find_field("q[structure_region_eq]", visible: :all).ancestor(".filtres__menu")
+      end
+
+      it "regroupe le nom, le type et la région de la structure dans un seul menu" do
+        expect(page).to have_css("#filtres-comptes .filtres__menu > button",
+                                 text: Structure.model_name.human, count: 1)
+        within(menu_structure) do
+          expect(page).to have_field("q[structure_id_eq]", type: :hidden)
+          expect(page).to have_css("label", text: I18n.t("admin.comptes.filtres.nom_structure"))
+          expect(page).to have_select("q[structure_type_structure_eq]", visible: :all)
+          expect(page).to have_select("q[structure_region_eq]", visible: :all)
+        end
+      end
+
+      it "filtre par région et indique le nombre de critères choisis" do
+        within(menu_structure) do
+          select "Bretagne", from: "q[structure_region_eq]"
+          click_button I18n.t("components.filtres.appliquer")
+        end
+
+        expect(page).to have_content 'breton@structure'
+        expect(page).not_to have_content 'moi@structure'
+        expect(page).to have_css("#filtres-comptes button.fr-btn--secondary .fr-badge", text: "1")
+      end
+    end
+
+    describe "statistiques d'activation des structures" do
+      let!(:autre_structure) { create :structure_locale, :avec_admin }
+
+      before do
+        create :campagne, compte: compte_superadmin
+        click_link I18n.t("active_admin.resource.index.stats")
+      end
+
+      it "propose le statut d'activation avec le nombre de comptes concernés" do
+        within("#filtres-comptes") do
+          expect(page).to have_field("#{I18n.t('active_admin.scopes.sans_campagne')} (1)",
+                                     type: "radio", visible: :all)
+        end
+      end
+
+      it "filtre par statut d'activation en restant dans les statistiques" do
+        within("#filtres-comptes") do
+          choose "#{I18n.t('active_admin.scopes.sans_campagne')} (1)", allow_label_click: true
+          first(:button, I18n.t("components.filtres.appliquer")).click
+        end
+
+        expect(page).to have_link(I18n.t("active_admin.resource.index.sans_stats"))
+        expect(page).not_to have_content 'moi@structure'
+      end
+    end
+  end
+
+  describe "recherche", :js do
+    let(:compte_connecte) { compte_superadmin }
+
+    before do
+      page.assert_current_path(admin_dashboard_path)
+      visit admin_comptes_path
+    end
+
+    it "filtre à la volée par email pendant la saisie" do
+      fill_in I18n.t("admin.comptes.filtres.recherche"), with: "collegue@"
+
+      expect(page).not_to have_content 'moi@structure'
+      expect(page).to have_content 'collegue@structure'
     end
   end
 

@@ -1,0 +1,18 @@
+<%= render EntetePageComponent.new(
+      titre: active_admin_config.plural_resource_label,
+      fil_ariane: [ { libelle: t(".accueil"), lien: admin_root_path },
+                    { libelle: active_admin_config.plural_resource_label } ]
+    ) do |entete| %>
+  <% entete.with_actions do %>
+    <%= render "actions_entete" %>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<%= render "mise_en_avant_comptes_en_attente" %>
+
+<div id="resultats-comptes" data-actualise-a-la-volee>
+  <%= render "tableau" %>
+</div>

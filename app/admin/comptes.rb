@@ -26,73 +26,12 @@ ActiveAdmin.register Compte do
     "#{table}.prenom #{clause.order}, #{table}.nom #{clause.order}"
   end
 
-  filter :email
-  filter :nom, filters: [ :contains_unaccent, :eq ]
-  filter :prenom, filters: [ :contains_unaccent, :eq ]
-  filter :statut_validation,
-         as: :select,
-         collection: Compte.statuts_validation.map { |v, id|
-                       [ Compte.human_enum_name(:statut_validation, v), id ]
-                     }
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
-  filter :structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "lower_nom_asc",
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :role,
-         as: :select,
-         collection: proc { collection_roles }
-  filter :created_at
-
-  filter :structure_type_structure_eq,
-         as: :select,
-         collection: ApplicationController.helpers.collection_types_structures,
-         label: I18n.t("type_structure", count: 1, scope: "activerecord.attributes.structure"),
-         if: proc { can? :manage, Compte }
-
-  filter :structure_region_eq,
-         as: :select,
-         collection: proc { Structure.distinct.order(:region).pluck(:region) },
-         label: I18n.t("region", scope: "activerecord.attributes.structure"),
-         if: proc { can? :manage, Compte }
-
-  def filtrer_par_activation_structure(statut_activation, options = {})
-    options.merge!({ if: -> { params[:stats] && can?(:manage, Compte) } })
-    scope statut_activation, options do |scope|
-      scope.where(structure: Structure.send(statut_activation))
-    end
-  end
-
-  scope :all, { default: true, if: -> { params[:stats] && can?(:manage, Compte) } }
-  filtrer_par_activation_structure(:sans_campagne)
-  filtrer_par_activation_structure(:pas_vraiment_utilisatrices)
-  filtrer_par_activation_structure(:non_activees)
-  filtrer_par_activation_structure(:actives)
-  filtrer_par_activation_structure(:inactives)
-  filtrer_par_activation_structure(:abandonnistes)
-
-  index download_links: -> { %i[json xls] }, dsfr_table: proc { true },
-        content_before: proc { render "mise_en_avant_comptes_en_attente" },
-        class: "fr-table--multiline" do
-    render "index", context: self
-  end
-
-  action_item :stats, only: :index, if: -> { can? :manage, Compte } do
-    if params[:stats]
-      link_to t(".sans_stats"), admin_comptes_path
-    else
-      link_to t(".stats"), admin_comptes_path(stats: true)
-    end
-  end
-
-  sidebar :aide_filtres,
-          partial: "admin/structures_locales/aide_filtres_sidebar",
-          only: :index,
-          if: -> { params[:stats] && can?(:manage, Compte) }
+  index download_links: -> { %i[json xls] }
 
   form partial: "form"
 
@@ -145,11 +84,11 @@ ActiveAdmin.register Compte do
   end
 
   controller do
-    before_action :trouve_comptes, only: :index
+    before_action :trouve_comptes, :entete_index, only: :index
 
     helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description,
                   :structure_par_defaut, :champ_structure, :structures_filles,
-                  :compte_a_des_campagnes?
+                  :compte_a_des_campagnes?, :statistiques?, :nombres_activation
 
     def destroy
       destroy! do |format|
@@ -243,6 +182,32 @@ ActiveAdmin.register Compte do
       ids = [ (compte_en_edition || current_compte).structure_id ]
       ids += structures_filles.map(&:id) if current_compte.administratif?
       ids.compact
+    end
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @filtres = Comptes::FiltresListe.new(params[:q], current_compte,
+                                           gestion: can?(:manage, Compte),
+                                           activation: (params[:activation] if statistiques?))
+    end
+
+    def statistiques?
+      params[:stats].present? && can?(:manage, Compte)
+    end
+
+    # Étape de la chaîne d'ActiveAdmin qui appliquait ses scopes : en statistiques, la
+    # liste se restreint au statut d'activation de la structure choisi
+    def apply_scoping(comptes)
+      @comptes_avant_activation = comptes
+      return comptes unless statistiques?
+
+      Comptes::ActivationStructure.filtre(comptes, params[:activation])
+    end
+
+    def nombres_activation
+      collection
+      Comptes::ActivationStructure.nombres(@comptes_avant_activation)
     end
 
     def trouve_comptes

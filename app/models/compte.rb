@@ -76,6 +76,18 @@ class Compte < ApplicationRecord
   accepts_nested_attributes_for :structure
 
   scope :de_la_structure, ->(structure) { structure ? where(structure: structure) : none }
+  scope :recherche, lambda { |texte|
+    ransack(m: "or", nom_contains_unaccent: texte, prenom_contains_unaccent: texte,
+            email_i_cont: texte).result
+  }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[recherche]
+  end
+
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[recherche]
+  end
 
   def display_name
     nom_complet.presence || email

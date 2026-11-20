@@ -1,30 +1,50 @@
-<div class="fr-table fr-table--no-caption fr-m-0 <%= @params[:class] %>" id="table-0-component" data-fr-js-table="true">
+<div class="fr-table fr-table--no-caption fr-m-0 <%= @params[:class] %>" id="<%= @id %>-component">
+  <% if entete? %>
+    <div class="fr-table__header"><%= entete %></div>
+  <% end %>
   <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
-        <table id="table-0">
+        <table id="<%= @id %>">
           <thead>
-            <tr style="border-bottom-color: $grey-200;">
+            <tr>
               <% if @selectionnable %>
-                <th class="fr-cell--fixed" role="columnheader">
-                  <span class="fr-sr-only">Sélectionner</span>
+                <th class="fr-cell--fixed" role="columnheader" scope="col">
+                  <span class="fr-sr-only"><%= t("components.tableau.selectionner") %></span>
                 </th>
               <% end %>
               <% colonnes.each do |colonne| %>
-                <%= tag.th(class: (colonne[:multiline] ? "fr-cell--multiline" : nil)) do %>
-                  <%= colonne[:titre] %>
+                <%= tag.th(scope: "col",
+                           class: (colonne[:multiline] ? "fr-cell--multiline" : nil),
+                           aria: { sort: sens_tri(colonne) }) do %>
+                  <% if colonne[:tri] %>
+                    <div class="fr-cell--sort">
+                      <span class="fr-cell__title"><%= colonne[:titre] %></span>
+                      <%= render BoutonDsfrComponent.new(url_tri(colonne), tag: :a,
+                                                         type: :tertiary, size: :sm,
+                                                         class: classe_bouton_tri(colonne)) do %>
+                        <%= t("components.tableau.trier", colonne: colonne[:titre]) %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <%= colonne[:titre] %>
+                  <% end %>
                 <% end %>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% collection.each_with_index do |item, index| %>
-              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>" data-id="<%= data_id(item, index) %>">
+              <tr id="<%= @id %>-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>" data-id="<%= data_id(item) %>">
                 <% if @selectionnable %>
                   <th class="fr-cell--fixed" scope="row">
-                    <div class='fr-checkbox-group fr-checkbox-group--sm'>
-                      <input name='row-select' id='table-select-checkbox--<%= index %>' type='checkbox'>
-                      <label class='fr-label' for='table-select-checkbox--<%= index %>'> Sélectionner la ligne <%= index + 1 %> </label>
+                    <div class="fr-checkbox-group fr-checkbox-group--sm">
+                      <%= check_box_tag @champ_selection, data_id(item), selectionne?(item),
+                                        id: "#{@id}-selection-#{index}",
+                                        data: { fr_row_select: true } %>
+                      <label class="fr-label" for="<%= @id %>-selection-<%= index %>">
+                        <%= t("components.tableau.selectionner_ligne", numero: index + 1) %>
+                      </label>
                     </div>
                   </th>
                 <% end %>
@@ -41,4 +61,10 @@
       </div>
     </div>
   </div>
+  <% if pied? %>
+    <div class="fr-table__footer">
+      <%= pied %>
+      <div class="fr-table__footer--end"><%= actions_pied %></div>
+    </div>
+  <% end %>
 </div>

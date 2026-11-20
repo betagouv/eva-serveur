@@ -9,11 +9,11 @@
                                                   valeurs: @filtres.statuts) %>
   <% end %>
   <% filtres.with_filtre(titre: Beneficiaire.human_attribute_name(:created_at),
-                         actifs: @filtres.nombre_bornes_creation) do %>
+                         actifs: @filtres.creation.nombre_bornes) do %>
     <%= render Filtres::PeriodeComponent.new(champ: :created_at,
                                              libelle: Beneficiaire.human_attribute_name(:created_at),
-                                             debut: @filtres.creation_debut,
-                                             fin: @filtres.creation_fin) %>
+                                             debut: @filtres.creation.debut,
+                                             fin: @filtres.creation.fin) %>
   <% end %>
   <% filtres.with_filtre(titre: Campagne.model_name.human, valeur: @filtres.campagne&.display_name,
                          application_immediate: true) do %>

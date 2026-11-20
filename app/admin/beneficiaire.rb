@@ -105,16 +105,9 @@ ActiveAdmin.register Beneficiaire do
       super(Beneficiaire.where(id: beneficiaires.select(:id)))
     end
 
-    # La vue index est un ERB et non une page Arbre : AA doit l'encadrer de son layout,
-    # comme il le fait pour une action personnalisée
-    def determine_active_admin_layout
-      action_name == "index" ? "active_admin" : super
-    end
-
     def entete_index
       @page_title = active_admin_config.plural_resource_label
-      @entete_page_dsfr = true
-      @skip_sidebar = true
+      @page_dsfr = true
       @filtres = Beneficiaires::FiltresListe.new(params[:q], current_compte)
     end
 

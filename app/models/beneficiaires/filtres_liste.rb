@@ -19,16 +19,8 @@ module Beneficiaires
       end
     end
 
-    def creation_debut
-      @parametres[:created_at_gteq_datetime]
-    end
-
-    def creation_fin
-      @parametres[:created_at_lteq_datetime]
-    end
-
-    def nombre_bornes_creation
-      [ creation_debut, creation_fin ].count(&:present?)
+    def creation
+      @creation ||= Filtres::Periode.new(@parametres, :created_at)
     end
 
     def campagne_id

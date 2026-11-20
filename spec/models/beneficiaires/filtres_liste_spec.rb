@@ -12,7 +12,7 @@ describe Beneficiaires::FiltresListe do
 
     expect(filtres_vides.recherche).to be_nil
     expect(filtres_vides.statuts).to eq []
-    expect(filtres_vides.nombre_bornes_creation).to eq 0
+    expect(filtres_vides.creation.nombre_bornes).to eq 0
     expect(filtres_vides.campagne).to be_nil
   end
 
@@ -31,19 +31,8 @@ describe Beneficiaires::FiltresListe do
     end
   end
 
-  describe "date de création" do
-    subject(:periode) do
-      filtres(created_at_gteq_datetime: "2025-01-01", created_at_lteq_datetime: "")
-    end
-
-    it "lit les deux bornes" do
-      expect(periode.creation_debut).to eq "2025-01-01"
-      expect(periode.creation_fin).to eq ""
-    end
-
-    it "compte les bornes renseignées" do
-      expect(periode.nombre_bornes_creation).to eq 1
-    end
+  it "lit la période de création" do
+    expect(filtres(created_at_gteq_datetime: "2025-01-01").creation.debut).to eq "2025-01-01"
   end
 
   describe "campagne" do

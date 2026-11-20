@@ -11,8 +11,8 @@ L'administration est construite sur ActiveAdmin (AA). Son rendu (tableaux, pagin
 
 - **On sort d'AA au fur et à mesure, une page à la fois**, à l'occasion d'un ticket qui touche cette page. Aucune réécriture globale n'est prévue.
 - **Le contenu d'une page sort d'abord, son cadre ensuite.** La vue de la page devient un ERB classique, avec ViewComponents et DSFR, sans Arbre. AA ne fournit plus que le contrôleur, ransack (`params[:q]`), le tri (`params[:order]`), la pagination Kaminari, les autorisations et le cadre (en-tête, menu, flash, sidebar). La première page traitée est la liste des bénéficiaires (`app/views/admin/beneficiaires/index.html.erb`).
-- **La seule couture avec AA est son layout** : une vue ERB placée dans `app/views/admin/<ressource>/` est trouvée avant le template d'AA. Pour une action standard comme `index`, le contrôleur surcharge `determine_active_admin_layout`, afin qu'AA encadre la vue comme il le fait pour une action personnalisée.
-- **L'en-tête de la page est aussi sorti d'AA** : fil d'Ariane, titre, actions, puis recherche et filtres, dans `EntetePageComponent`. Pour cela, le contrôleur pose `@entete_page_dsfr`, ce qui retire la barre de titre d'AA (`lib/active_admin/views/title_bar_override.rb`), et `@skip_sidebar`, ce qui retire sa sidebar.
+- **La couture avec AA tient en un réglage** : une vue ERB placée dans `app/views/admin/<ressource>/` est trouvée avant le template d'AA, et le contrôleur pose `@page_dsfr` (`lib/active_admin/page_dsfr.rb`). AA encadre alors la vue de son layout, comme une action personnalisée, sans sa barre de titre ni sa sidebar.
+- **L'en-tête de la page est aussi sorti d'AA** : fil d'Ariane, titre, actions, puis recherche et filtres, dans `EntetePageComponent`. La logique des filtres d'une liste (lecture des paramètres, valeurs choisies, droits) est portée par une classe dédiée et testée, par exemple `Beneficiaires::FiltresListe`, que le partial des filtres se contente d'afficher.
 - **Les briques sont des composants qui ne dépendent pas d'AA**, pour être réutilisées par les pages suivantes puis hors d'AA :
   - `TableauComponent` : tri, sélection de lignes, en-tête et pied de tableau ;
   - le thème Kaminari `dsfr` : `paginate collection, theme: "dsfr"` ;
@@ -24,7 +24,7 @@ L'administration est construite sur ActiveAdmin (AA). Son rendu (tableaux, pagin
 
 ## Étapes suivantes
 
-1. Migrer les autres pages de liste au fil des tickets. Les composants existent déjà, il reste à écrire la vue.
+1. Migrer les autres pages de liste au fil des tickets, comme les bénéficiaires puis les campagnes. Les composants existent déjà, il reste à écrire la vue et la classe de filtres.
 2. Faire de même pour les fiches et les formulaires, avec des composants de formulaire DSFR à la place de Formtastic.
 3. Sortir le cadre (en-tête, menu, sidebar) dans un layout Rails. Une page dont la vue est déjà en ERB passe alors sur un contrôleur Rails classique sans changer de vue. Cette étape est transverse à toute l'administration et ne se fait qu'une fois.
 

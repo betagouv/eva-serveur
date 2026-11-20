@@ -1,0 +1,18 @@
+<div class="entete-page fr-mb-4w">
+  <%= render DsfrComponent::BreadcrumbsComponent.new(html_attributes: { class: "fr-mt-0 fr-mb-2w" }) do |fil| %>
+    <% @fil_ariane.each do |etape| %>
+      <% fil.with_breadcrumb(label: etape[:libelle], href: etape[:lien]) %>
+    <% end %>
+  <% end %>
+  <div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters">
+    <div class="fr-col">
+      <h1 class="fr-h3 fr-mb-0"><%= @titre %></h1>
+    </div>
+    <% if actions? %>
+      <div class="fr-col-auto entete-page__actions"><%= actions %></div>
+    <% end %>
+  </div>
+  <% if barre? %>
+    <div class="entete-page__barre fr-mt-3w"><%= barre %></div>
+  <% end %>
+</div>

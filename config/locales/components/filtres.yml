@@ -5,3 +5,4 @@ fr:
       appliquer: "Appliquer"
       titre_avec_valeur: "%{titre} : %{valeur}"
       effacer: "Effacer les filtres"
+      toutes: "Toutes"

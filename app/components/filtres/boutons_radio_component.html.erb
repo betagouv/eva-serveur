@@ -1,0 +1,11 @@
+<fieldset class="fr-fieldset">
+  <legend class="fr-fieldset__legend fr-fieldset__legend--regular"><%= @libelle %></legend>
+  <% @options.each do |libelle, valeur| %>
+    <div class="fr-fieldset__element">
+      <div class="fr-radio-group fr-radio-group--sm">
+        <%= radio_button_tag @nom, valeur, @valeur == valeur.to_s, id: identifiant(valeur) %>
+        <%= label_tag identifiant(valeur), libelle, class: "fr-label" %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>

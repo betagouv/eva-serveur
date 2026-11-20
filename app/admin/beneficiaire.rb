@@ -1,36 +1,11 @@
 ActiveAdmin.register Beneficiaire do
   permit_params :nom
 
-  filter :nom, filters: [ :contains_unaccent, :eq ]
-  filter :code_beneficiaire
-  filter :evaluations_campagne_compte_structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "lower_nom_asc",
-         label: proc { Structure.model_name.human },
-         method_model: Structure,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :evaluations_campagne_id,
-         as: :search_select_filter,
-         url: proc { admin_campagnes_path },
-         fields: %i[libelle code],
-         display_name: "libelle",
-         minimum_input_length: 2,
-         order_by: "libelle_asc",
-         label: proc { Campagne.model_name.human },
-         method_model: Campagne
-  filter :statut_suivi,
-         as: :selection_multiple_filter,
-         traduction_nombre_choisis: "statut_suivi.nombre_statuts",
-         collection: proc {
-           EvaluationsEva::StatutSuivi::STATUTS_FILTRE.map { |statut|
-             [ I18n.t("statut_suivi.#{statut}"), statut ]
-           }
-         }
-  filter :created_at
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
+  config.batch_actions = false
 
   config.sort_order = "created_at_desc"
 
@@ -38,33 +13,29 @@ ActiveAdmin.register Beneficiaire do
     sens_de_tri = clause.order == "desc" ? "ASC" : "DESC"
     "#{Beneficiaires::StatutSuivi.sql_ordre_de_tri} #{sens_de_tri}"
   end
-  config.batch_actions = true
 
-  batch_action :destroy, false
-
-  batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|
-    beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
+  collection_action :fusionner, method: :post do
+    authorize! :fusionner, Beneficiaire
+    beneficiaires = Beneficiaire.where(id: params[:beneficiaire_ids])
 
     if beneficiaires.size < 2
-      redirect_to collection_path,
-      alert: t(".fusion.errors.alert")
+      redirect_to collection_path, alert: t("admin.beneficiaires.fusion.errors.alert")
       next
     end
 
     beneficiaire = beneficiaires.par_date_creation_asc.first
-    beneficiaires_a_fusionner = beneficiaires.sauf_pour(beneficiaire.id)
-
-    lien = LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner)
+    lien = LienBeneficiaires.new(beneficiaire, beneficiaires.sauf_pour(beneficiaire.id))
     lien.call
 
     redirect_to admin_beneficiaire_path(lien.beneficiaire),
-      notice: t(".fusion.success.notice",
-                beneficiaire_nom: lien.beneficiaire.nom)
+                notice: t("admin.beneficiaires.fusion.success.notice",
+                          beneficiaire_nom: lien.beneficiaire.nom)
   end
 
-  batch_action :renseigner_suivi_groupe,
-               if: proc { can?(:renseigner_suivi_groupe, Beneficiaire) } do |beneficiaire_ids|
-    service = Beneficiaires::EnregistreSuiviGroupe.new(
+  collection_action :renseigner_suivi_groupe, method: :post do
+    authorize! :renseigner_suivi_groupe, Beneficiaire
+    beneficiaire_ids = Array(params[:beneficiaire_ids])
+    resultat = Beneficiaires::EnregistreSuiviGroupe.new(
       beneficiaire_ids,
       params[:effectuee],
       params[:qualification].presence,
@@ -72,14 +43,13 @@ ActiveAdmin.register Beneficiaire do
       params[:choix_date_revue].presence,
       params[:date_precise].presence,
       current_compte
-    )
-    resultat = service.call
+    ).call
+
     if resultat == :effectuee_invalide
       redirect_to collection_path
     else
       redirect_to collection_path(selection: beneficiaire_ids),
-                  flash: { success: "#{t('.renseigner_suivi_groupe.success.titre',
-count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
+                  flash: { success: message_suivi_groupe_enregistre(resultat[:succes]) }
     end
   end
 
@@ -102,17 +72,8 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
     render partial: "show"
   end
 
-  index dsfr_table: proc { true },
-        content_before: proc {
-          render "admin/beneficiaires/modal_fusion"
-          render "admin/beneficiaires/modal_suivi_groupe"
-          render "admin/beneficiaires/selection" if params[:selection].present?
-        },
-        class: "fr-table--multiline" do
-    render "index", context: self
-  end
-
   controller do
+    before_action :entete_index, only: :index
     before_action :restitutions_positionnement, only: :show
     before_action :evaluations_diagnostic, only: :show
     before_action :evaluation_suivi, only: :show
@@ -144,6 +105,12 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
       super(Beneficiaire.where(id: beneficiaires.select(:id)))
     end
 
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @filtres = Beneficiaires::FiltresListe.new(params[:q], current_compte)
+    end
+
     def restitutions_positionnement
       @restitutions_positionnement ||= evaluations_positionnement.map do |evaluation|
         FabriqueRestitution.restitution_globale(evaluation)
@@ -165,6 +132,11 @@ count: resultat[:succes])}\n#{t('.renseigner_suivi_groupe.success.texte')}" }
     end
 
     private
+
+    def message_suivi_groupe_enregistre(nombre)
+      cles = "admin.beneficiaires.renseigner_suivi_groupe.success"
+      "#{t("#{cles}.titre", count: nombre)}\n#{t("#{cles}.texte")}"
+    end
 
     def evaluations_eva_accessibles
       @evaluations_eva_accessibles ||=

@@ -244,6 +244,13 @@ button.fr-tag {
   }
 }
 
+// Fil d'Ariane DSFR : la typographie Active Admin (ul, ol) décale la liste ; on lui rend
+// les marges que le DSFR lui donne par ses variables (--ol-start et --xl-block à 0).
+.fr-breadcrumb__list {
+  margin: var(--xl-block) 0;
+  padding-left: var(--ol-start);
+}
+
 // Le DSFR masque le libellé du bouton fermer des alertes via max-width + overflow ;
 // min-width: fit-content ci-dessus gagne sur max-width et affiche « Masquer le message » en entier.
 .fr-alert .fr-btn--close {

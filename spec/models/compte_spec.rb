@@ -619,4 +619,28 @@ describe Compte do
         .only_deleted.find(autorisation.id).deleted_at).not_to be_nil
     end
   end
+
+  describe "recherche par nom, prénom ou email" do
+    let(:structure) { create :structure_locale, :avec_admin }
+    let!(:helene) do
+      create :compte_conseiller, structure: structure, prenom: "Hélène", nom: "Durand",
+                                 email: "h.durand@exemple.fr"
+    end
+    let!(:paul) do
+      create :compte_conseiller, structure: structure, prenom: "Paul", nom: "Martin",
+                                 email: "paul@autre.fr"
+    end
+
+    it "trouve par prénom sans tenir compte des accents" do
+      expect(described_class.ransack(recherche: "helene").result).to contain_exactly(helene)
+    end
+
+    it "trouve par nom" do
+      expect(described_class.ransack(recherche: "martin").result).to contain_exactly(paul)
+    end
+
+    it "trouve par email sans tenir compte de la casse" do
+      expect(described_class.ransack(recherche: "AUTRE.FR").result).to contain_exactly(paul)
+    end
+  end
 end

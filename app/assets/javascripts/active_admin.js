@@ -1,7 +1,6 @@
 //= require active_admin/base
 //= require image_file_input_clear
 //= require activeadmin_addons/all
-//= require actions_groupees
 //= require liens_evitement
 //= require vendor/select2_locale_fr
 //= require accessible-autocomplete.min
@@ -34,7 +33,10 @@
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require modal_suivi_groupe
-//= require recoche_selection
+//= require selection_tableau
+//= require filtre_recherche
+//= require panneau_filtres
+//= require recherche_a_la_volee
 //= require structure_confirmation
 //= require reset_password
 

@@ -1,0 +1,54 @@
+<%= render FiltresComponent.new(url: admin_comptes_path, id: "filtres-comptes",
+                                parametres_conserves: { order: params[:order], stats: params[:stats] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t(".recherche"), valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: Compte.human_attribute_name(:statut_validation),
+                         actifs: @filtres.statuts_validation.size) do %>
+    <%= render Filtres::CasesACocherComponent.new(champ: :statut_validation_in,
+                                                  libelle: Compte.human_attribute_name(:statut_validation),
+                                                  options: @filtres.options_statuts_validation,
+                                                  valeurs: @filtres.statuts_validation) %>
+  <% end %>
+  <% filtres.with_filtre(titre: Compte.human_attribute_name(:role), actifs: @filtres.roles.size) do %>
+    <%= render Filtres::CasesACocherComponent.new(champ: :role_in,
+                                                  libelle: Compte.human_attribute_name(:role),
+                                                  options: collection_roles,
+                                                  valeurs: @filtres.roles) %>
+  <% end %>
+  <% filtres.with_filtre(titre: Compte.human_attribute_name(:created_at),
+                         actifs: @filtres.creation.nombre_bornes) do %>
+    <%= render Filtres::PeriodeComponent.new(champ: :created_at,
+                                             libelle: Compte.human_attribute_name(:created_at),
+                                             debut: @filtres.creation.debut,
+                                             fin: @filtres.creation.fin) %>
+  <% end %>
+  <% if @filtres.criteres_structure? %>
+    <% filtres.with_filtre(titre: Structure.model_name.human, actifs: @filtres.nombre_criteres_structure) do %>
+      <% if @filtres.filtre_structure? %>
+        <%= render Filtres::RechercheComponent.new(champ: :structure_id_eq,
+                                                   libelle: t(".nom_structure"),
+                                                   url: admin_structures_path(format: :json, order: "lower_nom_asc"),
+                                                   champs_recherche: %i[nom code_postal],
+                                                   valeur: @filtres.structure_id,
+                                                   libelle_valeur: @filtres.structure&.display_name) %>
+      <% end %>
+      <% if @filtres.filtres_gestion? %>
+        <%= render Filtres::ListeDeroulanteComponent.new(champ: :structure_type_structure_eq,
+                                                         libelle: t(".type_structure"),
+                                                         options: collection_types_structures,
+                                                         valeur: @filtres.type_structure) %>
+        <%= render Filtres::ListeDeroulanteComponent.new(champ: :structure_region_eq,
+                                                         libelle: t(".region"),
+                                                         options: @filtres.options_regions,
+                                                         valeur: @filtres.region) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if statistiques? %>
+    <% filtres.with_filtre(titre: t(".activation"), actifs: @filtres.activation.present? ? 1 : 0) do %>
+      <%= render Filtres::BoutonsRadioComponent.new(nom: :activation, libelle: t(".activation"),
+                                                    options: @filtres.options_activation(nombres_activation),
+                                                    valeur: @filtres.activation) %>
+      <%= render "admin/structures_locales/aide_filtres_sidebar" %>
+    <% end %>
+  <% end %>
+<% end %>

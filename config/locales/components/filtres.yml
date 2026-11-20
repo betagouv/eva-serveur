@@ -1,0 +1,8 @@
+fr:
+  components:
+    filtres:
+      titre: "Filtres"
+      appliquer: "Appliquer"
+      titre_avec_valeur: "%{titre} : %{valeur}"
+      effacer: "Effacer les filtres"
+      toutes: "Toutes"

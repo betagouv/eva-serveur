@@ -1,12 +1,12 @@
 <% id_modal = "fr-modal-fusionner" %>
-<% form_id = "fusion-form" %>
+<% form_id = "beneficiaires-selection" %>
 
 <%= dsfr_modal(
   title: t(".titre").html_safe,
   html_attributes: {
     id: id_modal,
     class: "fr-modal-fusion",
-    data: { fusion_batch_action: batch_action_admin_beneficiaires_path }
+    data: { formulaire_selection: form_id }
   }
 ) do |component| %>
   <div class="contenu-modale">
@@ -21,11 +21,6 @@
           <% end %>
         </div>
       </div>
-
-      <%= hidden_field_tag :batch_action, "fusionner", form: form_id %>
-      <%= hidden_field_tag :batch_action_inputs, "{}", form: form_id %>
-
-      <div id="hidden-ids-container"></div>
     </div>
   </div>
 
@@ -37,6 +32,7 @@
       size: :md,
       id: "confirmer-fusion",
       form: form_id,
+      formaction: fusionner_admin_beneficiaires_path
     ) do %>
       <%= t(".confirmer") %>
     <% end %>

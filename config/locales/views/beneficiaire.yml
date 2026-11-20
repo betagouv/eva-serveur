@@ -1,6 +1,21 @@
 fr:
   admin:
     beneficiaires:
+      index:
+        accueil: Accueil
+        voir: Voir
+        modifier: Modifier
+        supprimer: Supprimer
+        confirmation_suppression: "Voulez-vous vraiment supprimer ce bénéficiaire ?"
+      tableau:
+        nombre_beneficiaires:
+          one: "1 bénéficiaire"
+          other: "%{count} bénéficiaires"
+      filtres:
+        recherche: Nom ou code bénéficiaire
+      actions_groupees:
+        renseigner_suivi: Renseigner le suivi
+        fusionner: Fusionner
       suivi_accompagnement:
         titre: Accompagnement des bénéficiaires
       modal_suivi_groupe:

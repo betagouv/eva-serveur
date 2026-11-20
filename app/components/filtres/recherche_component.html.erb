@@ -1,0 +1,7 @@
+<div class="fr-input-group" data-filtre-recherche
+     data-url="<%= @url %>" data-predicat="<%= @predicat %>"
+     data-libelle-valeur="<%= @libelle_valeur %>">
+  <%= label_tag "#{identifiant}_recherche", @libelle, class: "fr-label" %>
+  <div data-filtre-recherche-saisie data-identifiant="<%= identifiant %>_recherche"></div>
+  <%= hidden_field_tag "q[#{@champ}]", @valeur.to_s, id: identifiant %>
+</div>

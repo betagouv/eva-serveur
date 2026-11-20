@@ -1,0 +1,8 @@
+fr:
+  pagination_dsfr:
+    titre: "Pagination"
+    premiere: "Première page"
+    precedente: "Précédente"
+    suivante: "Suivante"
+    derniere: "Dernière page"
+    page: "Page %{numero}"

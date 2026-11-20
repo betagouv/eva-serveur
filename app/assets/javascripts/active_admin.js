@@ -1,7 +1,6 @@
 //= require active_admin/base
 //= require image_file_input_clear
 //= require activeadmin_addons/all
-//= require actions_groupees
 //= require liens_evitement
 //= require vendor/select2_locale_fr
 //= require accessible-autocomplete.min

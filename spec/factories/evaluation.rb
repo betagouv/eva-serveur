@@ -22,6 +22,11 @@ FactoryBot.define do
       end
     end
 
+    trait :a_renseigner do
+      synthese_competences_de_base { :illettrisme_potentiel }
+      completude { "complete" }
+    end
+
     trait :avec_mise_en_action do
       transient do
         effectuee { true }

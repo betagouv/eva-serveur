@@ -75,7 +75,7 @@ ActiveAdmin.register_page "Dashboard" do
     # Une seule personne est proposée à la fois : répondre fait passer à la suivante
     def evaluation_a_suivre
       @evaluation_a_suivre ||=
-        EvaluationsEva::TableauDeBordMisesEnAction.relation(current_ability).first
+        EvaluationsEva::TableauDeBordMisesEnAction.new(current_ability).a_renseigner.first
     end
 
     # Au retour d'une réponse, on remercie le pro en nommant la personne concernée

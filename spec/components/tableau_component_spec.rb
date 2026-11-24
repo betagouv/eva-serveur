@@ -18,6 +18,23 @@ describe TableauComponent, type: :component do
     expect(page).to have_css("tbody tr[data-id='12'] td", text: "Alice")
   end
 
+  describe "sans résultat" do
+    let(:collection) { [] }
+
+    before { rendu { |tableau| tableau.with_pied { "pagination" } } }
+
+    it "garde l'en-tête du tableau" do
+      expect(page).to have_css("thead th", text: "Nom")
+      expect(page).not_to have_css("tbody tr")
+    end
+
+    it "indique l'absence de résultat à la place du pied" do
+      expect(page).to have_css(".fr-table__footer p.fr-table__detail",
+                               text: I18n.t("components.tableau.aucun_resultat"))
+      expect(page).not_to have_text("pagination")
+    end
+  end
+
   it "utilise l'identifiant fourni pour éviter les doublons sur une même page" do
     rendu(id: "liste")
 

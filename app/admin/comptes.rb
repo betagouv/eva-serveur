@@ -187,7 +187,6 @@ ActiveAdmin.register Compte do
     def entete_index
       @page_title = active_admin_config.plural_resource_label
       @page_dsfr = true
-      @entete_dsfr = true
       @filtres = Comptes::FiltresListe.new(params[:q], current_compte,
                                            gestion: can?(:manage, Compte),
                                            activation: statistiques.statut)

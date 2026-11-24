@@ -87,7 +87,6 @@ ActiveAdmin.register StructureLocale do
     def entete_index
       @page_title = active_admin_config.plural_resource_label
       @page_dsfr = true
-      @entete_dsfr = true
       @filtres = Structures::FiltresListe.new(params[:q], current_compte,
                                               activation: statistiques.statut)
     end

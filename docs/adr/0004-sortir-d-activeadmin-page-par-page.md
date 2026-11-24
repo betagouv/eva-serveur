@@ -10,19 +10,21 @@ L'administration est construite sur ActiveAdmin (AA). Son rendu (tableaux, pagin
 ## Décision
 
 - **On sort d'AA au fur et à mesure, une page à la fois**, à l'occasion d'un ticket qui touche cette page. Aucune réécriture globale n'est prévue.
-- **Le contenu d'une page sort d'abord, son cadre ensuite.** Le contenu d'une liste devient un ERB classique, avec ViewComponents et DSFR, sans Arbre. AA ne fournit plus que le contrôleur, ransack (`params[:q]`), le tri (`params[:order]`), la pagination Kaminari, les autorisations et le cadre : en-tête, menu, flash, barre de titre et sidebar (encart de gestion et filtres).
-- **La couture avec AA tient en un réglage** : une vue ERB placée dans `app/views/admin/<ressource>/` est trouvée avant le template d'AA, et `liste_dsfr` dans `ActiveAdmin.register` pose `@page_dsfr` (`lib/active_admin/page_dsfr.rb`). AA encadre alors la vue de son layout, avec sa barre de titre et sa sidebar, comme ses propres pages. Les scopes, que le template d'index d'AA affichait, sont repris par le partial `admin/_scopes` avec le composant d'AA.
+- **Le contenu d'une page sort d'abord, son cadre ensuite.** La vue de la page devient un ERB classique, avec ViewComponents et DSFR, sans Arbre. AA ne fournit plus que le contrôleur, ransack (`params[:q]`), le tri (`params[:order]`), la pagination Kaminari, les autorisations et le cadre (en-tête, menu, flash, sidebar). La première page traitée est la liste des bénéficiaires (`app/views/admin/beneficiaires/index.html.erb`).
+- **La couture avec AA tient en un réglage** : une vue ERB placée dans `app/views/admin/<ressource>/` est trouvée avant le template d'AA, et le contrôleur pose `@page_dsfr` (`lib/active_admin/page_dsfr.rb`). AA encadre alors la vue de son layout, comme une action personnalisée, sans sa barre de titre ni sa sidebar. Pour une liste simple, `liste_dsfr { |parametres| … }` dans `ActiveAdmin.register` fait ce réglage, désactive les filtres d'AA et construit l'objet de filtres ; les référentiels partagent ainsi `Referentiels::FiltresListe` et le partial `admin/referentiels/_liste`.
+- **L'en-tête de la page est aussi sorti d'AA** : fil d'Ariane, titre, actions, puis recherche et filtres, dans `EntetePageComponent`. La logique des filtres d'une liste (lecture des paramètres, valeurs choisies, droits) est portée par une classe dédiée et testée, par exemple `Beneficiaires::FiltresListe`, que le partial des filtres se contente d'afficher.
 - **Les briques sont des composants qui ne dépendent pas d'AA**, pour être réutilisées par les pages suivantes puis hors d'AA :
-  - `TableauComponent` : tri, sélection de lignes, en-tête et pied de tableau, tableau vide ;
+  - `TableauComponent` : tri, sélection de lignes, en-tête et pied de tableau ;
   - le thème Kaminari `dsfr` : `paginate collection, theme: "dsfr"` ;
-  - `selection_tableau.js` : compteur de lignes sélectionnées et activation des actions ;
-  - `admin/referentiels/_liste` : tableau paginé commun aux référentiels, dont la ressource ne fournit que les colonnes.
+  - `EntetePageComponent` : fil d'Ariane DSFR, titre, actions et barre ;
+  - `FiltresComponent` et `Filtres::*` : barre de recherche DSFR, puis bouton Filtrer qui ouvre un panneau à onglets ; ils émettent les prédicats ransack ;
+  - `selection_tableau.js` : compteur de lignes sélectionnées et activation des actions.
 - **Les actions groupées sont des `collection_action`** qui reçoivent la sélection d'un vrai formulaire, au lieu des `batch_action` d'AA. Elles appellent `authorize!` explicitement : AA ne vérifie les droits ni des `batch_action` ni des `collection_action`, son option `if:` ne fait que masquer l'entrée de menu.
 - **On n'ajoute pas de nouvelle surcharge CSS d'AA** pour une page sortie. Si un style d'AA déborde sur un composant DSFR, on corrige l'adaptation existante (`_adaptation_dsfr.scss`) plutôt que d'empiler une règle de plus.
 
 ## Étapes suivantes
 
-1. Sortir l'en-tête et les filtres des listes : fil d'Ariane, titre et actions de la page, recherche et filtres DSFR à la place de la sidebar d'AA.
+1. Migrer les autres pages de liste au fil des tickets, comme les bénéficiaires puis les campagnes. Les composants existent déjà, il reste à écrire la vue et la classe de filtres.
 2. Faire de même pour les fiches et les formulaires, avec des composants de formulaire DSFR à la place de Formtastic.
 3. Sortir le cadre (en-tête, menu, sidebar) dans un layout Rails. Une page dont la vue est déjà en ERB passe alors sur un contrôleur Rails classique sans changer de vue. Cette étape est transverse à toute l'administration et ne se fait qu'une fois.
 

@@ -1,7 +1,6 @@
-# Une liste dont le contenu est sorti d'ActiveAdmin (ADR 0004) est une vue ERB placée dans
-# app/views/admin/<ressource>/. Son contrôleur pose @page_dsfr : ActiveAdmin l'encadre alors
-# de son layout. Quand la liste rend aussi son en-tête et ses filtres DSFR (@entete_dsfr),
-# ActiveAdmin n'affiche ni sa barre de titre ni sa sidebar.
+# Une page sortie d'ActiveAdmin (ADR 0004) est une vue ERB qui affiche son propre en-tête
+# DSFR. Son contrôleur pose @page_dsfr : ActiveAdmin l'encadre alors de son layout, comme
+# une action personnalisée, sans sa barre de titre ni sa sidebar.
 
 module ActiveAdmin
   module PageDsfr
@@ -15,29 +14,20 @@ module ActiveAdmin
 
     module Page
       def skip_sidebar?
-        assigns[:entete_dsfr] == true || super
+        assigns[:page_dsfr] == true || super
       end
     end
 
-    # Dans ActiveAdmin.register : la liste est rendue par la vue ERB de la ressource. Avec un
-    # bloc, ses filtres sont rendus par la vue et lus par l'objet que construit le bloc à
-    # partir de params[:q].
+    # Dans ActiveAdmin.register : la liste devient une page DSFR, ses filtres sont rendus
+    # par la vue et lus par l'objet que construit le bloc à partir de params[:q].
     module Dsl
       def liste_dsfr(&filtres)
-        if filtres
-          config.filters = false
-          config.current_filters = false
-        end
+        config.filters = false
+        config.current_filters = false
         controller do
-          # Pour les compteurs des scopes (admin/_scopes), comme dans le template d'index d'AA
-          helper_method :collection_before_scope
-
           before_action(only: :index) do
             @page_title = active_admin_config.plural_resource_label
             @page_dsfr = true
-            next unless filtres
-
-            @entete_dsfr = true
             @filtres = instance_exec(params[:q], &filtres)
           end
         end
@@ -46,7 +36,7 @@ module ActiveAdmin
 
     module BarreDeTitre
       def build(*)
-        return if assigns[:entete_dsfr]
+        return if assigns[:page_dsfr]
 
         super
       end

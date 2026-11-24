@@ -17,11 +17,38 @@ describe 'Admin - Evaluation eva', type: :feature do
   describe '#index' do
     before { connecte(mon_compte) }
 
-    it "garde la barre de titre d'ActiveAdmin, réservée à la fiche pour le DSFR" do
-      visit admin_evaluations_eva_path
+    context "en-tête de page" do
+      it "affiche l'en-tête du DSFR à la place de la barre de titre d'ActiveAdmin" do
+        visit admin_evaluations_eva_path
 
-      expect(page).to have_css("#title_bar .breadcrumb")
-      expect(page).to have_no_css(".fr-breadcrumb")
+        expect(page).to have_css("nav.fr-breadcrumb")
+        expect(page).to have_css("h1", text: EvaluationEva.model_name.human(count: 2))
+        expect(page).not_to have_css("#title_bar")
+        expect(page).not_to have_css("#sidebar")
+      end
+
+      it "propose le téléchargement XLS des évaluations filtrées dans l'en-tête" do
+        filtres = { statut_suivi_in: [ "a_renseigner" ] }
+        visit admin_evaluations_eva_path(q: filtres)
+
+        within(".entete-page__actions") do
+          lien = find_link(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
+          expect(lien[:href]).to eq admin_evaluations_eva_path(format: :xls, q: filtres)
+        end
+      end
+    end
+
+    context "recherche" do
+      let!(:evaluation) { create :evaluation, :eva, campagne: ma_campagne }
+      let!(:autre) { create :evaluation, :eva, campagne: ma_campagne }
+
+      it "trouve une évaluation par le code du bénéficiaire" do
+        code = evaluation.beneficiaire.code_beneficiaire
+        visit admin_evaluations_eva_path(q: { recherche: code.downcase })
+
+        expect(page).to have_content(code)
+        expect(page).not_to have_content(autre.beneficiaire.code_beneficiaire)
+      end
     end
 
     context "évaluation potentiellement en situation d'illettrisme" do
@@ -42,8 +69,8 @@ describe 'Admin - Evaluation eva', type: :feature do
       it "masque la pastille dans le scope illettrisme_potentiel" do
         visit admin_evaluations_eva_path(scope: :illettrisme_potentiel)
 
-        expect(page).to have_css(".scopes .scope.illettrisme_potentiel.selected")
-
+        expect(page).to have_checked_field(I18n.t("components.pastille.illettrisme_potentiel"),
+                                           visible: :all)
         within("tr",
                text: evaluation_illettrisme.beneficiaire.code_beneficiaire) do
           expect(page).not_to have_css(".ellipse--alerte", visible: :all)
@@ -122,12 +149,23 @@ describe 'Admin - Evaluation eva', type: :feature do
         allow(ENV).to receive(:[]).with("DATE_STATUT_SUIVI").and_return("2020-01-01")
       end
 
-      it "propose les statuts dans le panneau de recherche" do
+      it "propose les statuts dans le panneau de filtres" do
         visit admin_evaluations_eva_path
 
-        libelles = all("#q_statut_suivi_input details label", visible: :all)
-                   .map { _1.text(:all).strip }
+        libelles = all("#filtres-evaluations fieldset", text: "Suivi", visible: :all).first
+                   .all("label", visible: :all).map { _1.text(:all).strip }
         expect(libelles).to eq [ "À renseigner", "Reporté", "Suite engagée", "Pas de suite" ]
+      end
+
+      it "filtre depuis le panneau de filtres" do
+        visit admin_evaluations_eva_path
+        within("#filtres-evaluations .filtres__menu", text: "Suivi") do
+          check "À renseigner", allow_label_click: true
+          click_button I18n.t("components.filtres.appliquer")
+        end
+
+        expect(page).to have_content(a_renseigner.beneficiaire.code_beneficiaire)
+        expect(page).not_to have_content(non_concernee.beneficiaire.code_beneficiaire)
       end
 
       it "ne garde que les évaluations des statuts choisis" do

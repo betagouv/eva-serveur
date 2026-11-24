@@ -77,9 +77,6 @@ fr:
           a_suivre: À suivre
           suivi_en_cours: Suivi en cours
           suivi_effectue: Suivi effectué
-    scopes:
-      evaluation_eva:
-        all: "Toutes les évaluations"
   formtastic:
     actions:
       evaluation_eva:

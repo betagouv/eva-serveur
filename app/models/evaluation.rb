@@ -45,6 +45,15 @@ class Evaluation < ApplicationRecord
       )
       .distinct
   }
+  scope :recherche, ->(texte) { where(beneficiaire_id: Beneficiaire.recherche(texte)) }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[recherche]
+  end
+
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[recherche]
+  end
 
   delegate :anonyme?, to: :beneficiaire
 

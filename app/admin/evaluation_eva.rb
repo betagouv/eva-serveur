@@ -4,8 +4,6 @@ ActiveAdmin.register EvaluationEva do
   includes :beneficiaire, :donnee_sociodemographique,
            campagne: [ :parcours_type, compte: [ :structure ] ]
 
-  liste_dsfr
-
   config.sort_order = "created_at_desc"
 
   order_by(:statut_suivi) do |clause|
@@ -13,63 +11,13 @@ ActiveAdmin.register EvaluationEva do
     "#{EvaluationsEva::StatutSuivi.sql_ordre_de_tri} #{sens_de_tri}"
   end
 
-  filter :beneficiaire_id,
-         label: Evaluation.human_attribute_name("beneficiaire"),
-         as: :search_select_filter,
-         url: proc { admin_beneficiaires_path },
-         fields: %i[nom code_beneficiaire],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "nom_asc"
-  filter :campagne_compte_structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_locales_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "nom_asc",
-         label: proc { StructureLocale.model_name.human },
-         method_model: StructureLocale,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :campagne_id,
-         as: :search_select_filter,
-         url: proc { admin_campagnes_path },
-         fields: %i[libelle code],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "libelle_asc"
-  filter :debutee_le
-  filter :responsable_suivi_id,
-         label: EvaluationEva.human_attribute_name("responsable_suivi"),
-         as: :search_select_filter,
-         url: proc { admin_comptes_path },
-         fields: %i[email nom prenom],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "email_asc"
-  filter :statut_suivi,
-         as: :selection_multiple_filter,
-         traduction_nombre_choisis: "statut_suivi.nombre_statuts",
-         collection: proc {
-           EvaluationsEva::StatutSuivi::STATUTS_FILTRE.map { |statut|
-             [ I18n.t("statut_suivi.#{statut}"), statut ]
-           }
-         }
-  filter :statut,
-         as: :select,
-         collection: EvaluationEva.statuts.map { |v, id|
-           [ EvaluationEva.human_enum_name(:statut, v), id ]
-         },
-         if: proc { current_compte.superadmin? }
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
-  scope proc { I18n.t("activerecord.scopes.evaluation_eva.all") }, :all, default: true
-
-  scope proc {
-    render(PastilleComponent.new(
-      couleur: "alerte",
-      etiquette: I18n.t("components.pastille.illettrisme_potentiel")
-    ))
-  }, :illettrisme_potentiel
+  scope :all, default: true
+  scope :illettrisme_potentiel
 
   show fil_ariane_dsfr: proc {
     [
@@ -246,6 +194,8 @@ ActiveAdmin.register EvaluationEva do
       demarre_generation_pdf(html_content, nom)
     end
 
+    before_action :entete_index, only: :index
+
     before_action only: :show do
       if resource.anonyme?
         flash.now[:evaluation_anonyme] = t("admin.evaluations.evaluation_anonyme")
@@ -257,6 +207,14 @@ ActiveAdmin.register EvaluationEva do
     end
 
     private
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = EvaluationsEva::FiltresListe.new(params[:q], current_compte,
+                                                  scope: params[:scope])
+    end
 
     # "Modifier la réponse" remplace la déclaration en cours plutôt que de l'écraser
     def enregistre_mise_en_action(effectuee)

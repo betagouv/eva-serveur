@@ -1,0 +1,4 @@
+<%= render BoutonDsfrComponent.new(url_for(params: request.query_parameters.except(:format, :commit), format: :xls),
+                                   tag: :telechargement, type: :secondary,
+                                   title: t("active_admin.action_items.telechargement_xls.titre"))
+                              .with_content(t("active_admin.action_items.telechargement_xls.libelle")) %>

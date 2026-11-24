@@ -2,10 +2,17 @@ fr:
   admin:
     comptes:
       index:
+        accueil: Accueil
         voir: Voir
         modifier: Modifier
         supprimer: Supprimer
         confirmation_suppression: "Voulez-vous vraiment supprimer ce compte ?"
+      filtres:
+        recherche: Nom, prénom ou email
+        activation: Activation de la structure
+        nom_structure: Nom de la structure
+        type_structure: Type de structure
+        region: Région
       tableau:
         nombre_comptes:
           one: "1 compte"

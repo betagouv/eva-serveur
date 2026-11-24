@@ -881,4 +881,35 @@ describe Structure, type: :model do
       end
     end
   end
+
+  describe "recherche par nom, code postal ou SIRET" do
+    let!(:orleans) do
+      create :structure_locale, nom: "Mission locale d'Orléans", code_postal: "45000",
+                                siret: "85170326400024"
+    end
+    let!(:paris) { create :structure_locale, nom: "Paris", code_postal: "75012" }
+
+    it "trouve par nom sans tenir compte des accents" do
+      expect(StructureLocale.ransack(recherche: "orleans").result).to contain_exactly(orleans)
+    end
+
+    it "trouve par code postal" do
+      expect(StructureLocale.ransack(recherche: "7501").result).to contain_exactly(paris)
+    end
+
+    it "trouve par SIRET saisi avec des espaces" do
+      expect(StructureLocale.ransack(recherche: "851 703 264").result).to contain_exactly(orleans)
+    end
+  end
+
+  describe ".regions" do
+    it "liste les régions renseignées, une fois chacune, dans l'ordre" do
+      create :structure_locale, region: "Corse"
+      create :structure_locale, region: "Bretagne"
+      create :structure_locale, region: "Bretagne"
+      create :structure_locale, region: nil
+
+      expect(described_class.regions).to eq %w[Bretagne Corse]
+    end
+  end
 end

@@ -1,0 +1,7 @@
+<%# Les scopes d'ActiveAdmin (onglets au-dessus de la liste), que son template d'index
+    affichait : une liste en vue ERB les reprend avec le composant d'ActiveAdmin. %>
+<% if active_admin_config.scopes.any? %>
+  <div class="table_tools">
+    <%= Arbre::Context.new({}, self) { scopes_renderer(active_admin_config.scopes, scope_count: true) } %>
+  </div>
+<% end %>

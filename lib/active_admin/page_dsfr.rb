@@ -17,6 +17,9 @@ module ActiveAdmin
     module Dsl
       def liste_dsfr
         controller do
+          # Pour les compteurs des scopes (admin/_scopes), comme dans le template d'index d'AA
+          helper_method :collection_before_scope
+
           before_action(only: :index) do
             @page_title = active_admin_config.plural_resource_label
             @page_dsfr = true

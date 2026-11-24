@@ -1,0 +1,32 @@
+<% avec_structure = current_compte.anlci? || current_compte.administratif? %>
+<%= render TableauComponent.new(collection: collection, id: "comptes", ordre: params[:order]) do |tableau| %>
+  <% tableau.colonne(titre: Compte.human_attribute_name(:nom), tri: "prenom_nom", multiline: true) do |compte| %>
+    <%= render "nom", compte: compte %>
+  <% end %>
+  <% tableau.colonne(titre: Compte.human_attribute_name(:telephone)) do |compte| %>
+    <%= compte.telephone %>
+  <% end %>
+  <% tableau.colonne(titre: Compte.human_attribute_name(:statut_validation), multiline: true) do |compte| %>
+    <%= traduis_acces(compte.statut_validation, compte.role) %>
+  <% end %>
+  <% if avec_structure %>
+    <% tableau.colonne(titre: Compte.human_attribute_name(:structure), tri: "structures.nom",
+                       multiline: true) do |compte| %>
+      <%= compte.structure&.display_name %>
+    <% end %>
+    <% tableau.colonne(titre: Compte.human_attribute_name(:created_at), tri: "created_at") do |compte| %>
+      <%= l(compte.created_at) %>
+    <% end %>
+  <% end %>
+  <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |compte| %>
+    <%= render MenuActionsComponent.new(compte, *actions_compte) %>
+  <% end %>
+  <% tableau.with_pied do %>
+    <div class="fr-table__footer--start">
+      <p class="fr-table__detail"><%= t(".nombre_comptes", count: collection.total_count) %></p>
+    </div>
+    <div class="fr-table__footer--middle">
+      <%= paginate collection, theme: "dsfr" %>
+    </div>
+  <% end %>
+<% end %>

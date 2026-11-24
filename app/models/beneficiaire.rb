@@ -16,13 +16,20 @@ class Beneficiaire < ApplicationRecord
   scope :statut_suivi_in, lambda { |*statuts|
     Beneficiaires::StatutSuivi.filtre_par_statuts(all, statuts.flatten)
   }
+  scope :recherche, lambda { |texte|
+    ransack(m: "or", nom_cont: texte, code_beneficiaire_cont: texte.to_s.upcase).result
+  }
 
   def self.ransack_unaccent_attributes
     %w[nom]
   end
 
   def self.ransackable_scopes(_auth_object = nil)
-    %i[statut_suivi_in]
+    %i[statut_suivi_in recherche]
+  end
+
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[recherche]
   end
 
   def anonyme?

@@ -1,39 +1,10 @@
 ActiveAdmin.register Beneficiaire do
   permit_params :nom
 
-  liste_dsfr
-
-  filter :nom, filters: [ :contains_unaccent, :eq ]
-  filter :code_beneficiaire
-  filter :evaluations_campagne_compte_structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "lower_nom_asc",
-         label: proc { Structure.model_name.human },
-         method_model: Structure,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :evaluations_campagne_id,
-         as: :search_select_filter,
-         url: proc { admin_campagnes_path },
-         fields: %i[libelle code],
-         display_name: "libelle",
-         minimum_input_length: 2,
-         order_by: "libelle_asc",
-         label: proc { Campagne.model_name.human },
-         method_model: Campagne
-  filter :statut_suivi,
-         as: :selection_multiple_filter,
-         traduction_nombre_choisis: "statut_suivi.nombre_statuts",
-         collection: proc {
-           EvaluationsEva::StatutSuivi::STATUTS_FILTRE.map { |statut|
-             [ I18n.t("statut_suivi.#{statut}"), statut ]
-           }
-         }
-  filter :created_at
-
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
   config.batch_actions = false
 
   config.sort_order = "created_at_desc"
@@ -102,6 +73,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   controller do
+    before_action :entete_index, only: :index
     before_action :restitutions_positionnement, only: :show
     before_action :evaluations_diagnostic, only: :show
     before_action :evaluation_suivi, only: :show
@@ -131,6 +103,13 @@ ActiveAdmin.register Beneficiaire do
 
     def apply_sorting(beneficiaires)
       super(Beneficiaire.where(id: beneficiaires.select(:id)))
+    end
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = Beneficiaires::FiltresListe.new(params[:q], current_compte)
     end
 
     def restitutions_positionnement

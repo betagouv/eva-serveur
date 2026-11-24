@@ -52,6 +52,68 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(page).not_to have_content("Nouveau bénéficiaire")
         expect(page).not_to have_link("Nouveau bénéficiaire")
       end
+
+      it "affiche l'en-tête de page du DSFR à la place de la barre de titre d'ActiveAdmin" do
+        expect(page).to have_css("h1", text: Beneficiaire.model_name.human(count: 2))
+        expect(page).to have_css("nav.fr-breadcrumb")
+        expect(page).not_to have_css("#title_bar")
+        expect(page).not_to have_css("#sidebar")
+      end
+    end
+
+    context "en tant que superadmin" do
+      before do
+        connecte(create(:compte_superadmin))
+        visit admin_beneficiaires_path
+      end
+
+      it "propose de créer un bénéficiaire depuis l'en-tête" do
+        expect(page).to have_link(I18n.t("active_admin.resources.beneficiaire.new_model"),
+                                  href: new_admin_beneficiaire_path)
+      end
+    end
+
+    context "recherche", :js do
+      let!(:compte_admin) { create :compte_admin }
+      let(:campagne) { create :campagne, compte: compte_admin }
+      let!(:cherche) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+      let!(:autre) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
+
+      before do
+        Bullet.enable = false
+        connecte(compte_admin)
+        page.assert_current_path(admin_dashboard_path)
+      end
+
+      after { Bullet.enable = true }
+
+      it "filtre à la volée par code pendant la saisie, sans recharger la page" do
+        visit admin_beneficiaires_path
+        page.execute_script("window.pageInitiale = true")
+        fill_in I18n.t("admin.beneficiaires.filtres.recherche"),
+                with: cherche.code_beneficiaire.downcase
+
+        expect(page).not_to have_content(autre.code_beneficiaire)
+        expect(page).to have_content(cherche.code_beneficiaire)
+        expect(page).to have_current_path(/q%5Brecherche%5D=#{cherche.code_beneficiaire.downcase}/)
+        expect(page.evaluate_script("window.pageInitiale")).to be true
+      end
+
+      it "garde la sélection fonctionnelle sur les résultats actualisés" do
+        visit admin_beneficiaires_path
+        fill_in I18n.t("admin.beneficiaires.filtres.recherche"),
+                with: cherche.code_beneficiaire.downcase
+        expect(page).not_to have_content(autre.code_beneficiaire)
+
+        find("tr", text: cherche.code_beneficiaire).find("label").click
+
+        expect(page).to have_content(
+          I18n.t("components.tableau.lignes_selectionnees", count: 1)
+        )
+        expect(page).to have_button(
+          I18n.t("admin.beneficiaires.actions_groupees.renseigner_suivi"), disabled: false
+        )
+      end
     end
 
     context "colonne Suivi" do
@@ -138,12 +200,24 @@ describe 'Admin - Bénéficiaires', type: :feature do
 
       after { Bullet.enable = true }
 
-      it "propose les statuts dans le panneau de recherche" do
+      it "propose les statuts dans le panneau de filtres" do
         visit admin_beneficiaires_path
 
-        libelles = all("#q_statut_suivi_input details label", visible: :all)
-                   .map { _1.text(:all).strip }
+        libelles = all("#filtres-beneficiaires fieldset", text: "Suivi").first
+                   .all("label").map { _1.text.strip }
         expect(libelles).to eq [ "À renseigner", "Reporté", "Suite engagée", "Pas de suite" ]
+      end
+
+      it "filtre depuis le panneau de filtres" do
+        visit admin_beneficiaires_path
+        within("#filtres-beneficiaires .filtres__menu", text: "Suivi") do
+          check "À renseigner", allow_label_click: true
+          click_button I18n.t("components.filtres.appliquer")
+        end
+
+        expect(page).to have_content(a_renseigner.code_beneficiaire)
+        expect(page).not_to have_content(non_concerne.code_beneficiaire)
+        expect(page).to have_checked_field("À renseigner", visible: :all)
       end
 
       it "ne garde que les bénéficiaires des statuts choisis" do
@@ -159,6 +233,16 @@ describe 'Admin - Bénéficiaires', type: :feature do
 
         expect(page).to have_content(a_renseigner.code_beneficiaire)
         expect(page).not_to have_content(a_renseigner_autre_campagne.code_beneficiaire)
+      end
+
+      it "retire un critère depuis son tag en gardant les autres" do
+        visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ],
+                                            evaluations_campagne_id_eq: campagne.id })
+        click_link campagne.display_name
+
+        expect(page).to have_content(a_renseigner_autre_campagne.code_beneficiaire)
+        expect(page).not_to have_content(non_concerne.code_beneficiaire)
+        expect(page).to have_link("À renseigner", class: "fr-tag")
       end
     end
 
@@ -194,9 +278,10 @@ describe 'Admin - Bénéficiaires', type: :feature do
                                                                  visible: :all)
       end
 
-      it "n'affiche pas la restriction dans le panneau Rechercher" do
-        expect(find("#filters_sidebar_section")).not_to have_content(selectionne.id)
-        expect(page).not_to have_css(".current_filters")
+      it "n'affiche pas la restriction dans le panneau de filtres" do
+        expect(find("#filtres-beneficiaires")).not_to have_field(with: selectionne.id,
+                                                                  visible: :all)
+        expect(page).not_to have_css("#search_status_sidebar_section")
       end
 
       it "ramène à la liste complète avec « Voir tous les bénéficiaires »" do
@@ -231,6 +316,14 @@ describe 'Admin - Bénéficiaires', type: :feature do
 
     after { Bullet.enable = true }
 
+    it "retire un critère depuis son tag supprimable du DSFR" do
+      visit admin_beneficiaires_path(q: { statut_suivi_in: [ "suite_engagee" ] })
+      find("a.fr-tag--dismiss", text: I18n.t("statut_suivi.suite_engagee")).click
+
+      expect(page).to have_content(non_coche.code_beneficiaire)
+      expect(page).to have_no_current_path(/statut_suivi_in/)
+    end
+
     def coche(beneficiaire)
       find("tr", text: beneficiaire.code_beneficiaire).find("label").click
     end
@@ -263,6 +356,40 @@ describe 'Admin - Bénéficiaires', type: :feature do
       click_link I18n.t("admin.beneficiaires.selection.voir_tous")
       expect(page).to have_content(non_coche.code_beneficiaire)
       expect(page).not_to have_checked_field("beneficiaire_ids[]", visible: :all)
+    end
+
+    it "filtre depuis le menu déroulant Suivi" do
+      suivi = create(:evaluation, :eva, :avec_mise_en_action, effectuee: true,
+                                                              **attributs_concernee).beneficiaire
+      visit admin_beneficiaires_path
+      menu_suivi = find("#filtres-beneficiaires .filtres__menu", text: "Suivi")
+      menu_suivi.click_button Beneficiaire.human_attribute_name(:statut_suivi)
+      within(menu_suivi) do
+        check I18n.t("statut_suivi.suite_engagee"), allow_label_click: true
+        click_button I18n.t("components.filtres.appliquer")
+      end
+
+      expect(page).to have_current_path(/statut_suivi_in/)
+      expect(page).to have_content(suivi.code_beneficiaire)
+      expect(page).not_to have_content(premier.code_beneficiaire)
+      expect(page).to have_button(Beneficiaire.human_attribute_name(:statut_suivi), text: "1")
+    end
+
+    it "filtre par campagne dès qu'une campagne est choisie" do
+      autre_campagne = create :campagne, compte: compte_admin, libelle: "Lyon 2025"
+      ailleurs = create(:evaluation, :eva, campagne: autre_campagne).beneficiaire
+      visit admin_beneficiaires_path
+      menu = find("#filtres-beneficiaires .filtres__menu", text: Campagne.model_name.human)
+      menu.click_button Campagne.model_name.human
+      within(menu) do
+        find("input[type='search']").fill_in with: "Lyon"
+        find("li", text: autre_campagne.display_name).click
+      end
+
+      expect(page).to have_current_path(/evaluations_campagne_id_eq/)
+      expect(page).to have_content(ailleurs.code_beneficiaire)
+      expect(page).not_to have_content(premier.code_beneficiaire)
+      expect(page).to have_link(autre_campagne.display_name, class: "fr-tag")
     end
 
     it "fusionne les bénéficiaires sélectionnés dans le plus ancien" do

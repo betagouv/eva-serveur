@@ -49,11 +49,10 @@ describe 'Admin - Campagne', type: :feature do
       before { visit admin_campagnes_path }
 
       it "affiche le nombre d'évaluation par campagne" do
-        within('#index_table_campagnes') do
-          expect(page).to have_content 'Éval.'
-        end
-        within('td.col-nombre_evaluations') do
-          expect(page).to have_content '1'
+        expect(page).to have_css("#campagnes thead th",
+                                 text: Campagne.human_attribute_name(:nombre_evaluations))
+        within(find("#campagnes tr", text: 'Amiens 18 juin')) do
+          expect(page).to have_css("td.fr-cell--right", exact_text: '1')
         end
       end
     end

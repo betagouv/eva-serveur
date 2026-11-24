@@ -1,6 +1,15 @@
 fr:
   admin:
     campagnes:
+      index:
+        voir: Voir
+        modifier: Modifier
+        supprimer: Supprimer
+        confirmation_suppression: "Voulez-vous vraiment supprimer cette campagne ?"
+      tableau:
+        nombre_campagnes:
+          one: "1 campagne"
+          other: "%{count} campagnes"
       duplique:
         notice: |
           La campagne a bien été dupliquée.

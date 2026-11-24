@@ -28,6 +28,11 @@
   }
 }
 
+// La fiche s'aligne sur le conteneur DSFR de l'en-tête
+.evaluation--fiche {
+  margin: 0;
+}
+
 .evaluation__titre {
   margin-bottom: $dsfr-spacing-6v;
 }

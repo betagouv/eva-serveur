@@ -18,10 +18,19 @@ body.logged_in {
   }
 
   #title_bar,
+  .fil-ariane-dsfr,
   #active_admin_content {
     max-width: calc(#{$container} + 2 * #{$dsfr-spacing-2w});
     padding-left: $dsfr-spacing-2w;
     padding-right: $dsfr-spacing-2w;
+  }
+
+  .fil-ariane-dsfr {
+    margin: 0 auto;
+
+    .fr-breadcrumb {
+      margin-bottom: $dsfr-spacing-4w;
+    }
   }
 }
 

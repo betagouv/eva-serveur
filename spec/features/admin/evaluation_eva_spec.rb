@@ -241,6 +241,14 @@ describe 'Admin - Evaluation eva', type: :feature do
         expect(page).to have_css(".evaluation__restitution-globale")
       end
 
+      it "affiche les détails de l'évaluation en DSFR, ancrés pour le menu latéral" do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        expect(page).to have_css("#evaluation__details .details-evaluation h1",
+                                 text: evaluation_eva.beneficiaire.nom)
+        expect(page).to have_css("#evaluation__details .fr-alert.fr-alert--warning")
+      end
+
       it "affiche le bouton d'export dans le bloc Gestion" do
         visit admin_evaluation_eva_path(evaluation_eva)
 

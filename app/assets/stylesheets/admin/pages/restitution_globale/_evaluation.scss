@@ -5,14 +5,7 @@
   @import "../../../bootstrap_grid";
 
   margin: 0 1rem;
-}
 
-.evaluation__titre {
-  margin-bottom: $dsfr-spacing-6v;
-}
-
-#evaluation__details,
-.evaluation {
   .card-informations {
     $grid-columns: 3;
     $grid-gutter-width: 0;
@@ -35,50 +28,10 @@
   }
 }
 
-#evaluation__details {
-  $grid-columns: 8;
-  $grid-gutter-width: 0;
-
-  @import "../../../bootstrap_grid";
-
-  font-size: 0.875rem;
-
-  .card-informations {
-    // utilisation de la propriété important pour forcer l'import bootstrap à ne pas écraser cette ligne
-    padding: 1.5rem !important;
-  }
-
-  .titre,
-  .sous-titre {
-    @include titre-carte;
-  }
-
-  .sous-titre {
-    margin-bottom: .875rem;
-    font-size: 2.25rem;
-    color: $eva_main_blue;
-  }
-
-  .card {
-    max-width: 37.5rem;
-
-    &-footer {
-      padding: 1rem 0;
-    }
-  }
-
-  .card__banner.bg-alerte {
-    padding: 1rem 1.5rem;
-    box-shadow: inset 0 8px 8px -8px rgba(30, 65, 106, 0.25);
-  }
+.evaluation__titre {
+  margin-bottom: $dsfr-spacing-6v;
 }
 
-.evaluation__details--panel {
-  margin-bottom: $dsfr-spacing-12v;
-}
-
-
-#evaluation__details,
 .evaluation-evapro {
   .card-informations {
     $grid-columns: 3;

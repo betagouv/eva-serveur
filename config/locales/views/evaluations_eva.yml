@@ -153,22 +153,6 @@ fr:
         titre: Détails de l'évaluation
         titre_menu_lateral: Détails de l'évaluation
         donnees_sociodemographiques: Socio-démo
-        evaluation_competences_de_base_incomplete: |
-          #### Évaluation des compétences de base incomplète
-
-          Tous les modules permettant **d’évaluer <u>les compétences de base</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
-
-          **Néanmoins, les résultats de l’évaluation des compétences transversales sont bien complets et fiables.**
-        evaluation_competences_transversales_incomplete: |
-          #### Évaluation des compétences transversales incomplète
-
-          Certains modules permettant **d’évaluer <u>les compétences transversales</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
-
-          **Néanmoins, les résultats de l’évaluation des compétences de base sont bien complets et fiables.**
-        evaluation_incomplete: |
-          #### Évaluation incomplète
-
-          Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
         incompletude:
           competences_de_base_incompletes:
             titre: Évaluation des compétences de base incomplète

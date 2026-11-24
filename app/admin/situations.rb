@@ -1,4 +1,6 @@
 ActiveAdmin.register Situation do
+  liste_dsfr
+
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
                 :description, :illustration
 
@@ -21,20 +23,6 @@ ActiveAdmin.register Situation do
     f.actions do
       f.action :submit
       annulation_formulaire(f)
-    end
-  end
-
-  index dsfr_table: proc { true } do
-    column :illustration, class: "col-lien-voir" do |situation|
-      illustration = situation_illustration(situation)
-      link_to illustration, admin_situation_path(situation) if illustration.present?
-    end
-    column :libelle
-    column :nom_technique
-    column :questionnaire
-    column :questionnaire_entrainement
-    actions do |situation|
-      link_to "Parties", admin_situation_parties_path(situation) if can?(:manage, Partie)
     end
   end
 

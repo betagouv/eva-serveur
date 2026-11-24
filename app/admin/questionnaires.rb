@@ -1,4 +1,6 @@
 ActiveAdmin.register Questionnaire do
+  liste_dsfr
+
   permit_params :libelle, :nom_technique,
                 questionnaires_questions_attributes: %i[id question_id _destroy]
 
@@ -61,17 +63,6 @@ ActiveAdmin.register Questionnaire do
     f.actions do
       f.action :submit
       annulation_formulaire(f)
-    end
-  end
-
-  index dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_questionnaire_path(q)
-    end
-    column :nom_technique
-    column :created_at
-    actions do |questionnaire|
-      link_to "Exporter", export_admin_questionnaire_path(questionnaire)
     end
   end
 

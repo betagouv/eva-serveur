@@ -21,4 +21,15 @@ RSpec.describe SourceAide, type: :model do
       )
     end
   end
+
+  describe "#domaine" do
+    it "donne le domaine du lien" do
+      expect(described_class.new(url: "https://www.youtube.com/watch?v=1").domaine)
+        .to eq "www.youtube.com"
+    end
+
+    it "garde le lien tel quel quand il n'est pas une URL valide" do
+      expect(described_class.new(url: "pas une url").domaine).to eq "pas une url"
+    end
+  end
 end

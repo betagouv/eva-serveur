@@ -67,13 +67,6 @@ table.index_table {
         border-bottom: 1px solid $eva_bluegrey;
         background-color: $grey-1000;
 
-        &.col-lien-voir {
-          a {
-            font-weight: 600;
-            background-image: none;
-          }
-        }
-
         a {
           color: $eva_main_blue;
         }

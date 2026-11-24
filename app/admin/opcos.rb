@@ -1,4 +1,6 @@
 ActiveAdmin.register Opco do
+  liste_dsfr
+
   permit_params :nom, :financeur, :logo, :telephone, :url, :email, :url_contact,
                 :visuel_offre_services, :supprimer_visuel_offre_services, :url_offre_services,
                 :idcc_texte,
@@ -8,24 +10,6 @@ ActiveAdmin.register Opco do
 
   filter :nom
   filter :financeur
-
-  index dsfr_table: proc { true } do
-    column :nom, class: "col-lien-voir" do |opco|
-      libelle = opco.nom
-      if opco.logo.attached?
-        logo = image_tag(cdn_for(opco.logo.variant(:defaut)),
-                         alt: opco.logo.filename,
-                         class: "logo-opco-preview")
-        libelle = logo + " " + libelle
-      end
-      link_to libelle, admin_opco_path(opco)
-    end
-    column :financeur do |opco|
-      badge_financeur(opco)
-    end
-    column :created_at
-    actions
-  end
 
   show do
     render partial: "show"

@@ -1,0 +1,9 @@
+<% tableau.colonne(titre: AnnonceGenerale.human_attribute_name(:texte), tri: "texte", multiline: true) do |ressource| %>
+  <%= link_to ressource.texte, admin_annonce_generale_path(ressource) %>
+<% end %>
+<% tableau.colonne(titre: AnnonceGenerale.human_attribute_name(:afficher), tri: "afficher") do |ressource| %>
+  <%= t("active_admin.status_tag.#{ressource.afficher ? "yes" : "no"}") %>
+<% end %>
+<% tableau.colonne(titre: AnnonceGenerale.human_attribute_name(:created_at), tri: "created_at") do |ressource| %>
+  <%= l(ressource.created_at, format: :sans_heure) %>
+<% end %>

@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     get '/ui_kit/carte_v2', to: 'ui_kit#carte_v2'
     get '/ui_kit/chiffre_cle', to: 'ui_kit#chiffre_cle'
     get '/ui_kit/code', to: 'ui_kit#code'
+    get '/ui_kit/details_evaluation', to: 'ui_kit#details_evaluation'
     get '/ui_kit/ellipse', to: 'ui_kit#ellipse'
     get '/ui_kit/evaluation_incomplete', to: 'ui_kit#evaluation_incomplete'
     get '/ui_kit/eva_pro_score', to: 'ui_kit#eva_pro_score'

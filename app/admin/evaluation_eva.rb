@@ -4,6 +4,8 @@ ActiveAdmin.register EvaluationEva do
   includes :beneficiaire, :donnee_sociodemographique,
            campagne: [ :parcours_type, compte: [ :structure ] ]
 
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   order_by(:statut_suivi) do |clause|
@@ -82,12 +84,7 @@ ActiveAdmin.register EvaluationEva do
     render partial: "show"
   end
 
-  index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
-        row_class: ->(elem) { "anonyme" if elem.anonyme? },
-        dsfr_table: proc { true },
-        class: "fr-table--multiline" do
-      render "index", context: self
-  end
+  index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] }
 
   form partial: "form"
 

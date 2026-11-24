@@ -33,7 +33,7 @@ describe 'Admin - Evaluation eva', type: :feature do
       it "affiche la pastille hors du scope illettrisme_potentiel" do
         visit admin_evaluations_eva_path
 
-        within(".evaluation__cellule",
+        within("tr",
                text: evaluation_illettrisme.beneficiaire.code_beneficiaire) do
           expect(page).to have_css(".ellipse--alerte", visible: :all)
         end
@@ -42,7 +42,9 @@ describe 'Admin - Evaluation eva', type: :feature do
       it "masque la pastille dans le scope illettrisme_potentiel" do
         visit admin_evaluations_eva_path(scope: :illettrisme_potentiel)
 
-        within(".evaluation__cellule",
+        expect(page).to have_css(".scopes .scope.illettrisme_potentiel.selected")
+
+        within("tr",
                text: evaluation_illettrisme.beneficiaire.code_beneficiaire) do
           expect(page).not_to have_css(".ellipse--alerte", visible: :all)
         end
@@ -55,8 +57,9 @@ describe 'Admin - Evaluation eva', type: :feature do
       it "affiche la colonne Suivi entre la campagne et la date" do
         visit admin_evaluations_eva_path
 
+        trier = ->(colonne) { "#{colonne} #{I18n.t('components.tableau.trier', colonne: colonne)}" }
         expect(all("thead th").map(&:text))
-          .to eq [ "Bénéficiaire", "Campagne", "Suivi", "Date", "" ]
+          .to eq [ "Bénéficiaire", "Campagne", trier.call("Suivi"), trier.call("Date"), "" ]
       end
 
       context "tri par statut de suivi" do

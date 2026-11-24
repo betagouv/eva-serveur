@@ -14,6 +14,10 @@ fr:
         supprimer: Supprimer
         modifier: Modifier
         voir: Voir
+      tableau:
+        nombre_evaluations:
+          one: "1 évaluation"
+          other: "%{count} évaluations"
       commun: &commun
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"

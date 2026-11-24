@@ -1,0 +1,9 @@
+<% question = @filtres.choix(:questions_id_eq, Question) %>
+<% filtres.with_filtre(titre: Question.model_name.human, application_immediate: true, filtres: [
+     Filtres::RechercheComponent.new(champ: :questions_id_eq,
+                                     libelle: Question.model_name.human,
+                                     url: admin_questions_path(format: :json, order: "libelle_asc"),
+                                     champs_recherche: %i[libelle nom_technique],
+                                     valeur: question.id,
+                                     libelle_valeur: question.libelle)
+   ]) %>

@@ -1,0 +1,12 @@
+<% filtres.with_filtre(titre: AnnonceGenerale.human_attribute_name(:afficher), filtres: [
+     Filtres::BoutonsRadioComponent.new(nom: "q[afficher_eq]",
+                                        libelle: AnnonceGenerale.human_attribute_name(:afficher),
+                                        options: [ [ t("active_admin.status_tag.yes"), "true" ], [ t("active_admin.status_tag.no"), "false" ] ],
+                                        valeur: @filtres.valeur(:afficher_eq))
+   ]) %>
+<% filtres.with_filtre(titre: AnnonceGenerale.human_attribute_name(:created_at), filtres: [
+     Filtres::PeriodeComponent.new(champ: :created_at,
+                                   libelle: AnnonceGenerale.human_attribute_name(:created_at),
+                                   debut: @filtres.periode(:created_at).debut,
+                                   fin: @filtres.periode(:created_at).fin)
+   ]) %>

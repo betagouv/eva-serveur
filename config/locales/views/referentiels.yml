@@ -2,8 +2,22 @@ fr:
   admin:
     referentiels:
       liste:
+        accueil: Accueil
+        recherche: Libellé ou nom technique
+        recherche_annonce_generale: Texte
+        recherche_opco: Nom
+        recherche_source_aide: Titre ou description
         exporter: Exporter
         parties: Parties
+        importer_questionnaire: Importer un questionnaire en XLS
         nombre_resultats:
           one: "1 résultat"
           other: "%{count} résultats"
+      questions:
+        importer:
+          question_qcm: Importer questions QCM
+          question_clic_dans_image: Importer questions clic dans image
+          question_clic_dans_texte: Importer questions Clic dans texte
+          question_glisser_deposer: Importer questions glisser déposer
+          question_saisie: Importer questions saisies
+          question_sous_consigne: Importer questions sous consigne

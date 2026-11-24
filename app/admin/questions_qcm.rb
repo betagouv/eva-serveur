@@ -1,5 +1,5 @@
 ActiveAdmin.register QuestionQcm do
-  liste_dsfr
+  liste_dsfr { |parametres| Referentiels::FiltresListe.new(parametres) }
 
   before_action :set_question, only: %i[update]
 
@@ -11,16 +11,7 @@ ActiveAdmin.register QuestionQcm do
                 choix_attributes: %i[id intitule audio type_choix score _destroy nom_technique],
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
-  filter :libelle
-  filter :nom_technique
-
   form partial: "form"
-
-  action_item :importer_question, only: :index do
-    link_to "Importer questions QCM",
-            admin_import_xls_path(type: QuestionQcm::QUESTION_TYPE, model: "question",
-                                  redirect_to: admin_question_qcms_path)
-  end
 
   action_item :exporter_question, only: :show do
     bouton_export_question_xls(resource)

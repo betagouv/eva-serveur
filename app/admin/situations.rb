@@ -1,12 +1,8 @@
 ActiveAdmin.register Situation do
-  liste_dsfr
+  liste_dsfr { |parametres| Referentiels::FiltresListe.new(parametres) }
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
                 :description, :illustration
-
-  filter :libelle
-  filter :nom_technique
-  filter :description
 
   includes :questionnaire, :questionnaire_entrainement, illustration_attachment: :blob
 

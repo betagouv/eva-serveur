@@ -1,5 +1,5 @@
 ActiveAdmin.register QuestionGlisserDeposer do
-  liste_dsfr
+  liste_dsfr { |parametres| Referentiels::FiltresListe.new(parametres) }
 
   before_action :set_question, only: %i[update]
 
@@ -11,16 +11,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
                 reponses_attributes: %i[id illustration intitule position type_choix position_client
                                         nom_technique _destroy]
 
-  filter :libelle
-  filter :nom_technique
-
   form partial: "form"
-
-  action_item :importer_question, only: :index do
-    link_to "Importer questions glisser déposer",
-            admin_import_xls_path(type: QuestionGlisserDeposer::QUESTION_TYPE, model: "question",
-                                  redirect_to: admin_questions_glisser_deposer_path)
-  end
 
   action_item :exporter_question, only: :show do
     bouton_export_question_xls(resource)

@@ -36,14 +36,23 @@ describe "Admin - Listes des référentiels", type: :feature do
         instance_exec("Autre bravo", &cree)
       end
 
-      it "affiche le tableau du DSFR dans le cadre d'ActiveAdmin, avec ses filtres" do
+      it "affiche l'en-tête et le tableau du DSFR à la place du rendu d'ActiveAdmin" do
         visit public_send(chemin)
 
-        expect(page).to have_css("h2#page_title", text: modele.model_name.human(count: 2))
-        expect(page).to have_css("#filters_sidebar_section")
+        expect(page).to have_css("nav.fr-breadcrumb")
+        expect(page).to have_css("h1", text: modele.model_name.human(count: 2))
+        expect(page).not_to have_css("#title_bar")
+        expect(page).not_to have_css("#sidebar")
         expect(page).to have_css(".fr-table table")
+      end
+
+      it "recherche depuis la barre de recherche" do
+        visit public_send(chemin)
+        champ = find(".fr-search-bar input")
+        visit public_send(chemin, q: { champ[:name][/q\[(.*)\]/, 1] => "alpha" })
+
         expect(page).to have_content("Recherché alpha")
-        expect(page).to have_content("Autre bravo")
+        expect(page).not_to have_content("Autre bravo")
       end
     end
   end

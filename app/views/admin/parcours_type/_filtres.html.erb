@@ -1,0 +1,14 @@
+<% filtres.with_filtre(titre: ParcoursType.human_attribute_name(:type_de_programme), filtres: [
+     Filtres::BoutonsRadioComponent.new(nom: "q[type_de_programme_eq]",
+                                        libelle: ParcoursType.human_attribute_name(:type_de_programme),
+                                        options: ParcoursType::TYPES_DE_PROGRAMME.map { |type|
+                                        [ t("activerecord.attributes.parcours_type.types_de_programme.#{type}"), type ]
+                                        },
+                                        valeur: @filtres.valeur(:type_de_programme_eq))
+   ]) %>
+<% filtres.with_filtre(titre: ParcoursType.human_attribute_name(:created_at), filtres: [
+     Filtres::PeriodeComponent.new(champ: :created_at,
+                                   libelle: ParcoursType.human_attribute_name(:created_at),
+                                   debut: @filtres.periode(:created_at).debut,
+                                   fin: @filtres.periode(:created_at).fin)
+   ]) %>

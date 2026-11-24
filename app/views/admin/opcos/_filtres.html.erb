@@ -1,0 +1,6 @@
+<% filtres.with_filtre(titre: Opco.human_attribute_name(:financeur), filtres: [
+     Filtres::BoutonsRadioComponent.new(nom: "q[financeur_eq]",
+                                        libelle: Opco.human_attribute_name(:financeur),
+                                        options: [ [ t("active_admin.status_tag.yes"), "true" ], [ t("active_admin.status_tag.no"), "false" ] ],
+                                        valeur: @filtres.valeur(:financeur_eq))
+   ]) %>

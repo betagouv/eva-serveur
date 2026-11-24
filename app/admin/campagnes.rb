@@ -4,6 +4,8 @@ ActiveAdmin.register Campagne do
                 options_personnalisation: [],
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   includes :parcours_type
@@ -115,36 +117,6 @@ ActiveAdmin.register Campagne do
     render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)
   end
 
-  index blank_slate_link: proc {
-    link_to(I18n.t("active_admin.campagnes.blank_slate_link"), new_resource_path)
-  }, dsfr_table: proc { true },
-    class: "fr-table--multiline" do
-      column :libelle, class: "col-lien-voir" do |campagne|
-        div class: "contenu-libelle" do
-          div do
-            div link_to(campagne.libelle, admin_campagne_path(campagne))
-            div parcours_type_libelle(campagne), class: "text-xs"
-          end
-          div do
-            render(StatutCampagneComponent.new(campagne_active: campagne.active,
-              campagne_privee: campagne.privee))
-          end
-        end
-    end
-    column :code
-    column :nombre_evaluations, class: "col-nombre_evaluations text-right",
-                                sortable: :nombre_evaluations
-    column :date_derniere_evaluation, sortable: :date_derniere_evaluation do |campagne|
-      l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
-    end
-    if current_compte.anlci? || current_compte.administratif?
-      column :structure, sortable: "lower_structures.nom"
-    end
-    column :compte
-    column :created_at
-    actions
-  end
-
   show do
     render partial: "show"
   end
@@ -171,15 +143,24 @@ ActiveAdmin.register Campagne do
 
     def scoped_collection
       collection = end_of_association_chain.avec_nombre_evaluations_et_derniere_evaluation
-      if (current_compte.anlci? || current_compte.administratif?) && action_name == "index"
+      if liste_avec_structures?
         collection.left_joins(compte: :structure)
                   .includes(compte: :structure)
                   .group("comptes.id", "structures.id")
-      elsif can?(:manage, Compte)
+      elsif charge_les_comptes?
         collection.includes(:compte)
       else
         collection
       end
+    end
+
+    def liste_avec_structures?
+      (current_compte.anlci? || current_compte.administratif?) && action_name == "index"
+    end
+
+    # La liste HTML affiche le compte de chaque campagne ; la recherche JSON, non
+    def charge_les_comptes?
+      can?(:manage, Compte) || (action_name == "index" && request.format.html?)
     end
 
     def find_resource

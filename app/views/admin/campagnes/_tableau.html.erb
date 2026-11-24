@@ -1,0 +1,51 @@
+<% libelle_ressources = active_admin_config.plural_resource_label %>
+<% if collection.empty? && params[:q].blank? %>
+  <p>
+    <%= t("active_admin.blank_slate.content", resource_name: libelle_ressources) %>
+    <%= link_to t("active_admin.campagnes.blank_slate_link"), new_admin_campagne_path if can?(:create, Campagne) %>
+  </p>
+<% else %>
+  <%= render TableauComponent.new(collection: collection, id: "campagnes", ordre: params[:order]) do |tableau| %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:libelle), tri: "libelle", multiline: true) do |campagne| %>
+      <%= link_to campagne.libelle, admin_campagne_path(campagne) %>
+      <p class="fr-text--xs fr-mb-1v"><%= parcours_type_libelle(campagne) %></p>
+      <%= render StatutCampagneComponent.new(campagne_active: campagne.active, campagne_privee: campagne.privee) %>
+    <% end %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:code), tri: "code") do |campagne| %>
+      <%= campagne.code %>
+    <% end %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:nombre_evaluations),
+                       tri: "nombre_evaluations", td_class: "fr-cell--right") do |campagne| %>
+      <%= campagne.nombre_evaluations %>
+    <% end %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:date_derniere_evaluation),
+                       tri: "date_derniere_evaluation") do |campagne| %>
+      <%= l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation %>
+    <% end %>
+    <% if current_compte.anlci? || current_compte.administratif? %>
+      <% tableau.colonne(titre: Campagne.human_attribute_name(:structure), tri: "lower_structures.nom",
+                         multiline: true) do |campagne| %>
+        <%= campagne.structure&.display_name %>
+      <% end %>
+    <% end %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:compte), multiline: true) do |campagne| %>
+      <% if campagne.compte %>
+        <%= link_to_if can?(:read, campagne.compte), campagne.compte.display_name, admin_compte_path(campagne.compte) %>
+      <% end %>
+    <% end %>
+    <% tableau.colonne(titre: Campagne.human_attribute_name(:created_at), tri: "created_at") do |campagne| %>
+      <%= l(campagne.created_at) %>
+    <% end %>
+    <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |campagne| %>
+      <%= render MenuActionsComponent.new(campagne, *actions_campagne) %>
+    <% end %>
+    <% tableau.with_pied do %>
+      <div class="fr-table__footer--start">
+        <p class="fr-table__detail"><%= t(".nombre_campagnes", count: collection.total_count) %></p>
+      </div>
+      <div class="fr-table__footer--middle">
+        <%= paginate collection, theme: "dsfr" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

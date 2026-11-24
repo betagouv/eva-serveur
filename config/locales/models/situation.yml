@@ -5,6 +5,10 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
+    models:
+      situation:
+        one: Situation
+        other: Situations
     errors:
       models:
         situation:

@@ -1,4 +1,14 @@
 module CampagneHelper
+  def actions_campagne
+    [
+      { label: t("admin.campagnes.index.voir"), type: :read, url: :admin_campagne_path },
+      { label: t("admin.campagnes.index.modifier"), type: :edit, url: :edit_admin_campagne_path },
+      { label: t("admin.campagnes.index.supprimer"), type: :destroy,
+        url: :admin_campagne_path, method: :delete,
+        data: { confirm: t("admin.campagnes.index.confirmation_suppression") } }
+    ]
+  end
+
   def collection_parcours_type(liste_parcours_type)
     liste_parcours_type.map do |parcours_type|
       [

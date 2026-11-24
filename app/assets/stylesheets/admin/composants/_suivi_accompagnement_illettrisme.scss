@@ -20,6 +20,24 @@
   padding: $dsfr-spacing-3w $dsfr-spacing-6w;
 }
 
+.suivi-accompagnement-illettrisme:has(.suivi-mise-en-action__pied) {
+  position: relative;
+}
+
+.suivi-mise-en-action__pied {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: $dsfr-spacing-3w $dsfr-spacing-6w;
+}
+
+.suivi-accompagnement-illettrisme:has(.question-mise-en-action.hidden) .suivi-mise-en-action__pied {
+  display: none;
+}
+
 // Bandeau d'information importante (EVA-1217) : sans fr-container, il occupe la
 // largeur de la carte
 .suivi-mise-en-action__contexte {
@@ -53,7 +71,8 @@
   flex: 1;
 
   // Aligné sur la marge de l'en-tête compact
-  .suivi-mise-en-action {
+  .suivi-mise-en-action,
+  .suivi-mise-en-action__pied {
     padding: $dsfr-spacing-3w $dsfr-spacing-2w;
   }
 }

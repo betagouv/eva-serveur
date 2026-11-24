@@ -94,4 +94,23 @@ describe SuiviAccompagnementIllettrismeComponent, type: :component do
     expect(QualificationMiseEnActionComponent).to have_received(:new)
       .with(evaluation: evaluation, questionnaire: :difficulte)
   end
+
+  it "ne propose pas de passer à une autre personne sans adresse de la suivante" do
+    expect(page).to have_no_link(I18n.t("suivi_accompagnement_illettrisme.passer"))
+  end
+
+  context "quand le tableau de bord donne l'adresse de la personne suivante" do
+    let(:evaluation) { create(:evaluation, :eva, mise_en_action: mise_en_action) }
+
+    before do
+      render_inline(described_class.new(evaluation: evaluation, contexte: :tableau_de_bord,
+                                        url_personne_suivante: "/admin/dashboard?apres=1"))
+    end
+
+    it "propose de passer à une autre personne" do
+      expect(page).to have_link(I18n.t("suivi_accompagnement_illettrisme.passer"),
+                                href: "/admin/dashboard?apres=1",
+                                class: %w[fr-link fr-icon-arrow-right-line fr-link--icon-right])
+    end
+  end
 end

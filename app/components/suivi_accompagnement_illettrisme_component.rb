@@ -7,9 +7,10 @@ class SuiviAccompagnementIllettrismeComponent < ViewComponent::Base
   # - :fiche_beneficiaire, qui renvoie vers l'évaluation affichée.
   CONTEXTES = %i[evaluation tableau_de_bord fiche_beneficiaire].freeze
 
-  def initialize(evaluation:, contexte: :evaluation)
+  def initialize(evaluation:, contexte: :evaluation, url_personne_suivante: nil)
     @evaluation = evaluation
     @contexte = contexte
+    @url_personne_suivante = url_personne_suivante
   end
 
   def reponses

@@ -8,7 +8,8 @@
 
   <% if evaluation.present? %>
     <%= render SuiviAccompagnementIllettrismeComponent.new(evaluation: evaluation,
-                                                           contexte: :tableau_de_bord) %>
+                                                           contexte: :tableau_de_bord,
+                                                           url_personne_suivante: url_personne_suivante) %>
   <% else %>
     <%= render "admin/dashboard/mise_en_action/tout_a_jour" %>
   <% end %>

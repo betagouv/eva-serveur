@@ -28,20 +28,24 @@ Une mise en action vaut pour un **bénéficiaire dans une structure**, plus pour
 
 ## Ce que le tableau de bord ajoute
 
-`SuiviAccompagnementIllettrismeComponent.new(evaluation:, tableau_de_bord: true)` :
+`SuiviAccompagnementIllettrismeComponent.new(evaluation:, contexte: :tableau_de_bord, url_personne_suivante:)` :
 
 | | Fiche évaluation | Tableau de bord |
 |---|---|---|
 | En-tête | large, sans lien | compact, avec « Voir l'évaluation » (`EnteteMiseEnActionComponent`, `compact:` et `lien_evaluation:`) |
-| Personnes | l'évaluation consultée | la première de `EvaluationsEva::TableauDeBordMisesEnAction`, une à la fois |
+| Personnes | l'évaluation consultée | une à la fois, dans la liste `EvaluationsEva::TableauDeBordMisesEnAction#a_renseigner` (évaluation la plus récente d'abord) |
+| Passer au suivant (EVA-1224) | — | lien `/admin/dashboard?apres=<id>`, affiché seulement avec au moins 2 personnes (`#plusieurs_a_renseigner?`). Rien n'est enregistré : la personne passée reste à renseigner |
 | Après une réponse complète | la confirmation remplace la question | `data-personne-suivante` : le JS recharge `/admin?suivi_enregistre=<id>`, qui remercie le pro et propose la personne suivante |
 | Plus rien à renseigner | — | écran « Tout est à jour, merci » (`_tout_a_jour.html.erb`) |
+
+**Personne suivante** (`#suivante(apres:)`, EVA-1224) : `apres` vient de `?apres=` (passer au suivant) ou de `?suivi_enregistre=` (après une réponse). On propose la première personne à renseigner évaluée avant celle-ci, sinon on revient à la première de la liste. Les personnes passées reviennent donc en fin de tour. `apres` est cherché parmi toutes les évaluations accessibles, car une personne répondue n'est plus à renseigner ; un identifiant inconnu ou inaccessible ramène à la première.
 
 ## Pièges connus
 - **Le DSFR gère `aria-pressed`.** Un tag DSFR avec `aria-pressed` est un tag sélectionnable : le DSFR inverse lui-même l'attribut au clic. Ne pas le poser aussi en JS au clic sur ce tag, les deux s'annulent. Le poser seulement quand un autre élément change l'état (un autre choix qui désélectionne « Autre »).
 - **Le message d'erreur vient du serveur.** Le JS ne contrôle pas le champ vide : il envoie, et affiche l'`erreur` de la 422. Le texte n'existe donc qu'une fois, dans les traductions du modèle. Vaut pour « Précisez » et pour la date de revue (`afficheErreurChamp`).
 - **Dans les tests de feature, attendre la réponse du serveur avant de cliquer à nouveau.** Après un clic qui enregistre (une puce, « Enregistrer »), attendre que la confirmation s'affiche avant « Modifier la réponse » : sinon la réponse du serveur arrive après et réaffiche la confirmation par-dessus la question.
 - **Sur le tableau de bord, la confirmation n'est jamais affichée** : la page est rechargée dès que le serveur a accepté la réponse.
+- **Le lien « Passer au suivant » n'est proposé qu'avec la question Oui / Pas encore / Non.** Dès qu'une réponse est choisie, le JS masque la question (`.question-mise-en-action.hidden`) et le CSS masque le pied du lien (`.suivi-mise-en-action__pied`, via `:has()`) ; « Modifier la réponse » les réaffiche. Le pied est en `position: absolute` pour ne jamais agrandir la carte.
 
 ## Reste à décider
 

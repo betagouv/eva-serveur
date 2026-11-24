@@ -1,6 +1,14 @@
 fr:
   admin:
     structures:
+      liste:
+        voir: Voir
+        modifier: Modifier
+        supprimer: Supprimer
+        confirmation_suppression: "Voulez-vous vraiment supprimer cette structure ?"
+        nombre_structures:
+          one: "1 structure"
+          other: "%{count} structures"
       show:
         introduction: |
           Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.

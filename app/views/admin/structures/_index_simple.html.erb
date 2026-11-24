@@ -1,0 +1,23 @@
+<%# Liste commune aux structures administratives et OPCO : type est leur nom de route %>
+<%= render TableauComponent.new(collection: collection, id: "structures", ordre: params[:order]) do |tableau| %>
+  <% tableau.colonne(titre: Structure.human_attribute_name(:nom), tri: "nom", multiline: true) do |structure| %>
+    <%= link_to structure.nom, public_send(:"admin_#{type}_path", structure) %>
+  <% end %>
+  <% tableau.colonne(titre: Structure.human_attribute_name(:siret)) do |structure| %>
+    <%= FormatageSiretHelper.formater_siret(structure.siret) %>
+  <% end %>
+  <% tableau.colonne(titre: Structure.human_attribute_name(:created_at), tri: "created_at") do |structure| %>
+    <%= l(structure.created_at, format: :sans_heure) %>
+  <% end %>
+  <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |structure| %>
+    <%= render MenuActionsComponent.new(structure, *actions_structure(type)) %>
+  <% end %>
+  <% tableau.with_pied do %>
+    <div class="fr-table__footer--start">
+      <p class="fr-table__detail"><%= t("admin.structures.liste.nombre_structures", count: collection.total_count) %></p>
+    </div>
+    <div class="fr-table__footer--middle">
+      <%= paginate collection, theme: "dsfr" %>
+    </div>
+  <% end %>
+<% end %>

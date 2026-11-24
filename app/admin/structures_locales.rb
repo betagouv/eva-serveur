@@ -1,6 +1,8 @@
 ActiveAdmin.register StructureLocale do
   actions :all
 
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   permit_params do
@@ -43,27 +45,7 @@ ActiveAdmin.register StructureLocale do
 
   sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
-  index download_links: %i[xls json], dsfr_table: proc { true }, class: "fr-table--multiline" do
-    column :nom, class: "col-lien-voir" do |sl|
-      link_to sl.nom, admin_structure_locale_path(sl)
-    end
-    column(:type_structure) do |structure|
-      traduction_type_structure(structure.type_structure)
-    end
-    if current_compte.anlci?
-      column :usage do |structure|
-        render(BadgeComponent.new(contenu: traduction_usage(structure.usage),
-                                  class_couleur: classe_badge_usage(structure.usage)))
-      end
-    end
-    column :code_postal
-    column :created_at do |structure|
-      l(structure.created_at, format: :sans_heure)
-    end
-    column :nombre_evaluations, sortable: :nombre_evaluations
-    column :date_derniere_evaluation, sortable: :date_derniere_evaluation
-    actions
-  end
+  index download_links: %i[xls json]
 
   xls do
     whitelist

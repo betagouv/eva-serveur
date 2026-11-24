@@ -1,4 +1,6 @@
 ActiveAdmin.register StructureOpco do
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   permit_params :nom, :siret, :opco_id
@@ -6,19 +8,6 @@ ActiveAdmin.register StructureOpco do
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :siret
   filter :created_at
-
-  index dsfr_table: proc { true } do
-    column :nom, class: "col-lien-voir" do |structure|
-      link_to structure.nom, admin_structure_opco_path(structure)
-    end
-    column :siret do |structure|
-      FormatageSiretHelper.formater_siret(structure.siret)
-    end
-    column :created_at do |structure|
-      l(structure.created_at, format: :sans_heure)
-    end
-    actions
-  end
 
   show do
     render partial: "admin/structures/show", locals: { structure: resource }

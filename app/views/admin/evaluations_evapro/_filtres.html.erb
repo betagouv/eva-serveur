@@ -1,0 +1,20 @@
+<%= render FiltresComponent.new(url: admin_evaluations_evapro_path, id: "filtres-evaluations",
+                                parametres_conserves: { order: params[:order] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t(".recherche"), valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: EvaluationEvapro.human_attribute_name(:debutee_le), filtres: [
+       Filtres::PeriodeComponent.new(champ: :debutee_le,
+                                     libelle: EvaluationEvapro.human_attribute_name(:debutee_le),
+                                     debut: @filtres.debut.debut,
+                                     fin: @filtres.debut.fin)
+     ]) %>
+  <% if @filtres.filtre_structure? %>
+    <% filtres.with_filtre(titre: StructureLocale.model_name.human, application_immediate: true, filtres: [
+         Filtres::RechercheComponent.new(champ: :campagne_compte_structure_id_eq,
+                                         libelle: StructureLocale.model_name.human,
+                                         url: admin_structures_locales_path(format: :json, order: "nom_asc"),
+                                         champs_recherche: %i[nom code_postal],
+                                         valeur: @filtres.structure.id,
+                                         libelle_valeur: @filtres.structure.libelle)
+       ]) %>
+  <% end %>
+<% end %>

@@ -1,3 +1,4 @@
+<% taille = local_assigns.fetch(:taille, :sm) %>
 <% id_modal = "fr-modal-invitation-#{structure.id}" %>
 <% form_id = "invitation-form-#{structure.id}" %>
 <% invitation_url = if structure.is_a?(StructureOpco)
@@ -10,7 +11,7 @@ end %>
   "#",
   tag: :button,
   type: :secondary,
-  size: :sm,
+  size: taille,
   "data-fr-opened": "false",
   "aria-controls": id_modal
   ) do %>

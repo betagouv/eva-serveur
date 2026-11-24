@@ -1,2 +1,42 @@
-<p><%= t(".texte") %></p>
-<%= render "tableau" %>
+<% structure = current_compte.structure %>
+
+<%= render EntetePageComponent.new(
+      titre: active_admin_config.plural_resource_label,
+      fil_ariane: [ { libelle: t(".accueil"), lien: admin_root_path },
+                    { libelle: active_admin_config.plural_resource_label } ]
+    ) do |entete| %>
+  <% if structure.present? %>
+    <% entete.with_description do %>
+      <%= t(".entreprise", nom: structure.nom) %>
+      <% if structure.is_a?(StructureOpco) %>
+        · <%= t("admin.structures.bloc_structure_invitation.entreprises_rattachees",
+                count: structure.opco.nombre_structures_locales) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% entete.with_actions do %>
+    <ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--icon-left fr-mb-n2w">
+      <% if structure.is_a?(StructureOpco) || structure.is_a?(StructureLocale) %>
+        <li><%= render "admin/structures/modal_invitation", structure: structure, taille: :md %></li>
+      <% end %>
+      <li>
+        <%= render "admin/bouton_export_xls" %>
+      </li>
+    </ul>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<div class="fr-grid-row fr-grid-row--gutters">
+  <div id="resultats-evaluations" class="fr-col-12 fr-col-lg" data-actualise-a-la-volee>
+    <p><%= t(".texte") %></p>
+    <%= render "tableau" %>
+  </div>
+  <% if structure&.opco&.financeur? %>
+    <div class="fr-col-12 fr-col-lg-3">
+      <%= render "admin/opcos/bloc_opco_partenaire", opco: structure.opco %>
+    </div>
+  <% end %>
+</div>

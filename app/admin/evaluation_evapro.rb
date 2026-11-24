@@ -5,29 +5,12 @@ ActiveAdmin.register EvaluationEvapro do
 
   includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
 
-  liste_dsfr
-
   config.sort_order = "created_at_desc"
 
-  filter :beneficiaire_id,
-         label: I18n.t("admin.evaluations_evapro.tableau.colonne_par"),
-         as: :search_select_filter,
-         url: proc { admin_beneficiaires_path },
-         fields: %i[nom],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "nom_asc"
-  filter :campagne_compte_structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_locales_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "nom_asc",
-         label: proc { StructureLocale.model_name.human },
-         method_model: StructureLocale,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :debutee_le
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
   show do
     params[:parties_selectionnees] =
@@ -78,13 +61,6 @@ ActiveAdmin.register EvaluationEvapro do
       }
   end
 
-  sidebar " ", only: :index do
-    render partial: "sidebar_structure",
-      locals: {
-        structure: current_compte.structure
-      }
-  end
-
   xls(i18n_scope: %i[active_admin xls evaluation_evapro], header_format: { weight: :bold }) do
     whitelist
     column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
@@ -121,7 +97,7 @@ ActiveAdmin.register EvaluationEvapro do
                   :recommandation_risque_pour_xls,
                   :impact_evapro_pour_xls, :score_cout_pour_xls
 
-    before_action :remplir_syntheses_evapro_pour_index, only: :index
+    before_action :remplir_syntheses_evapro_pour_index, :entete_index, only: :index
 
     def show
       show! do |format|
@@ -155,6 +131,13 @@ ActiveAdmin.register EvaluationEvapro do
     end
 
     private
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = EvaluationsEvapro::FiltresListe.new(params[:q], current_compte)
+    end
 
     def genere_pdf(template:, titre:, locals:)
       html_content = String.new(render_to_string(

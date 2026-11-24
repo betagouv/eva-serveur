@@ -90,4 +90,13 @@ evaluation: double(complete?: false))
       expect(presenter.synthese_impact_general).to be_nil
     end
   end
+
+  describe "recherche par nom du bénéficiaire" do
+    let!(:jose) { create :evaluation, :evapro, beneficiaire: create(:beneficiaire, nom: "José") }
+    let!(:autre) { create :evaluation, :evapro, beneficiaire: create(:beneficiaire, nom: "Alice") }
+
+    it "trouve par nom sans tenir compte des accents" do
+      expect(described_class.ransack(recherche: "jose").result.ids).to contain_exactly(jose.id)
+    end
+  end
 end

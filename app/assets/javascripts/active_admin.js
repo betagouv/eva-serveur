@@ -34,7 +34,7 @@
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require modal_suivi_groupe
-//= require recoche_selection
+//= require selection_tableau
 //= require structure_confirmation
 //= require reset_password
 

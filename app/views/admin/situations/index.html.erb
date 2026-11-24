@@ -1,0 +1,3 @@
+<% parties = { label: t("admin.referentiels.liste.parties"), type: :read, url: :admin_situation_parties_path } %>
+<%= render "admin/referentiels/liste", tableau: "tableau",
+                                      actions_ligne: (parties if can?(:manage, Partie)) %>

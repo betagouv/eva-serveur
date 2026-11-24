@@ -1,0 +1,9 @@
+<% tableau.colonne(titre: Questionnaire.human_attribute_name(:libelle), tri: "libelle", multiline: true) do |ressource| %>
+  <%= link_to ressource.libelle, admin_questionnaire_path(ressource) %>
+<% end %>
+<% tableau.colonne(titre: Questionnaire.human_attribute_name(:nom_technique), tri: "nom_technique") do |ressource| %>
+  <%= ressource.nom_technique %>
+<% end %>
+<% tableau.colonne(titre: Questionnaire.human_attribute_name(:created_at), tri: "created_at") do |ressource| %>
+  <%= l(ressource.created_at, format: :sans_heure) %>
+<% end %>

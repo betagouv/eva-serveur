@@ -8,6 +8,12 @@ class SourceAide < ApplicationRecord
     titre
   end
 
+  def domaine
+    URI.parse(url).host || url
+  rescue URI::InvalidURIError
+    url
+  end
+
   def self.sources_par_categorie
     order(:categorie).each_with_object({}) do |source, result|
       result[source.categorie] ||= []

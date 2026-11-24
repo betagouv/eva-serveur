@@ -1,4 +1,6 @@
 ActiveAdmin.register ParcoursType do
+  liste_dsfr
+
   permit_params :libelle, :actif, :position, :nom_technique,
                 :duree_moyenne, :description, :type_de_programme,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
@@ -10,18 +12,6 @@ ActiveAdmin.register ParcoursType do
   filter :created_at
 
   form partial: "form"
-
-  index dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |pt|
-      link_to pt.libelle, admin_parcours_type_path(pt)
-    end
-    column :actif
-    column :position
-    column :nom_technique
-    column :type_de_programme
-    column :created_at
-    actions
-  end
 
   show do
     render partial: "show"

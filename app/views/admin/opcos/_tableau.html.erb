@@ -1,0 +1,14 @@
+<% tableau.colonne(titre: Opco.human_attribute_name(:nom), tri: "nom", multiline: true) do |opco| %>
+  <%= link_to admin_opco_path(opco) do %>
+    <% if opco.logo.attached? %>
+      <%= image_tag cdn_for(opco.logo.variant(:defaut)), alt: opco.logo.filename, class: "logo-opco-preview" %>
+    <% end %>
+    <%= opco.nom %>
+  <% end %>
+<% end %>
+<% tableau.colonne(titre: Opco.human_attribute_name(:financeur), tri: "financeur") do |ressource| %>
+  <%= badge_financeur(ressource) %>
+<% end %>
+<% tableau.colonne(titre: Opco.human_attribute_name(:created_at), tri: "created_at") do |ressource| %>
+  <%= l(ressource.created_at, format: :sans_heure) %>
+<% end %>

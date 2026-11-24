@@ -1,0 +1,15 @@
+<% tableau.colonne(titre: SourceAide.human_attribute_name(:titre), tri: "titre", multiline: true) do |ressource| %>
+  <%= link_to ressource.titre, admin_source_aide_path(ressource) %>
+<% end %>
+<% tableau.colonne(titre: SourceAide.human_attribute_name(:categorie), tri: "categorie") do |ressource| %>
+  <%= render BadgeComponent.new(contenu: t(ressource.categorie, scope: "activerecord.attributes.source_aide.categories")) %>
+<% end %>
+<% tableau.colonne(titre: SourceAide.human_attribute_name(:position), tri: "position") do |ressource| %>
+  <%= ressource.position %>
+<% end %>
+<% tableau.colonne(titre: SourceAide.human_attribute_name(:description), multiline: true) do |ressource| %>
+  <%= ressource.description %>
+<% end %>
+<% tableau.colonne(titre: SourceAide.human_attribute_name(:url)) do |ressource| %>
+  <%= link_to ressource.domaine, ressource.url, title: ressource.url, target: "_blank", rel: "noopener" %>
+<% end %>

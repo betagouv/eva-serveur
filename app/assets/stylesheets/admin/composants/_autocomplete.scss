@@ -4,7 +4,8 @@
   font-family: $font-texte;
   color: $couleur-texte;
   background-color: $eva_light;
-  overflow: hidden;
+  // La liste est limitée en hauteur (max-height de la bibliothèque) : elle doit défiler
+  overflow: hidden auto;
   padding: 0.3rem 0;
   box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
 

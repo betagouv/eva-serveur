@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionSaisie do
+  liste_dsfr
+
   permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :reponse_placeholder, :type_saisie, :passable, :aide,
                 :illustration, :supprimer_illustration,
@@ -29,17 +31,7 @@ ActiveAdmin.register QuestionSaisie do
 
   form partial: "form"
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_saisie_path(q)
-    end
-    column :categorie
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   show do
     render partial: "show"

@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionSousConsigne do
+  liste_dsfr
+
   permit_params :libelle, :nom_technique, :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
@@ -22,16 +24,7 @@ ActiveAdmin.register QuestionSousConsigne do
 
   form partial: "form"
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_sous_consigne_path(q)
-    end
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   show do
     render partial: "show"

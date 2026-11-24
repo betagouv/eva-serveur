@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionQcm do
+  liste_dsfr
+
   before_action :set_question, only: %i[update]
 
   permit_params :categorie, :libelle, :nom_technique, :description,
@@ -24,19 +26,7 @@ ActiveAdmin.register QuestionQcm do
     bouton_export_question_xls(resource)
   end
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_qcm_path(q)
-    end
-    column :categorie
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :metacompetence
-    column :type_qcm
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   show do
     render partial: "show"

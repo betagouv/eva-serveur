@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionClicDansImage do
+  liste_dsfr
+
   before_action :set_question, only: %i[update]
 
   permit_params :libelle, :nom_technique, :description, :passable,
@@ -16,16 +18,7 @@ ActiveAdmin.register QuestionClicDansImage do
 
   form partial: "form"
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_clic_dans_image_path(q)
-    end
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   action_item :importer_question, only: :index do
     link_to "Importer questions clic dans image",

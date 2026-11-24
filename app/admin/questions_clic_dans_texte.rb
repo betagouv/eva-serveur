@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionClicDansTexte do
+  liste_dsfr
+
   permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :passable, :reponse_placeholder,
                 :illustration, :supprimer_illustration, :texte_sur_illustration,
@@ -27,17 +29,7 @@ ActiveAdmin.register QuestionClicDansTexte do
 
   form partial: "form"
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_clic_dans_texte_path(q)
-    end
-    column :categorie
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   show do
     render partial: "show"

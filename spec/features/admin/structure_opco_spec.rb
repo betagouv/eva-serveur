@@ -14,6 +14,18 @@ describe 'Admin - Structure Operateur de competence' do
 
         expect(page).to have_content 'Structure AFDAS'
       end
+
+      it "affiche l'en-tête de page du DSFR et recherche par nom" do
+        create :structure_opco, nom: 'Structure AKTO'
+        visit admin_structures_opcos_path
+        expect(page).to have_css("h1", text: StructureOpco.model_name.human(count: 2))
+
+        fill_in 'q[recherche]', with: 'afdas'
+        first(:button, I18n.t("components.filtres.appliquer")).click
+
+        expect(page).to have_content 'Structure AFDAS'
+        expect(page).not_to have_content 'Structure AKTO'
+      end
     end
 
     describe "show" do

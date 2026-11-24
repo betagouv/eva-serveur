@@ -12,9 +12,22 @@ describe 'Admin - Structure administrative', type: :feature do
     before { connecte(compte_superadmin) }
 
     describe 'index' do
+      let!(:autre) { create :structure_administrative, :avec_admin, nom: 'Autre structure' }
+
       before { visit admin_structures_administratives_path }
 
       it { expect(page).to have_content 'Ma structure' }
+
+      it "affiche l'en-tête de page du DSFR et recherche par SIRET" do
+        expect(page).to have_css("h1", text: StructureAdministrative.model_name.human(count: 2))
+        expect(page).not_to have_css("#title_bar")
+
+        fill_in 'q[recherche]', with: '12345678901234'
+        first(:button, I18n.t("components.filtres.appliquer")).click
+
+        expect(page).to have_content 'Ma structure'
+        expect(page).not_to have_content 'Autre structure'
+      end
     end
 
     describe 'show' do

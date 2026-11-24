@@ -1,8 +1,6 @@
 ActiveAdmin.register StructureLocale do
   actions :all
 
-  liste_dsfr
-
   config.sort_order = "created_at_desc"
 
   permit_params do
@@ -12,38 +10,10 @@ ActiveAdmin.register StructureLocale do
     params
   end
 
-  filter :nom, filters: [ :contains_unaccent, :eq ]
-  filter :type_structure,
-         as: :select,
-         collection: ApplicationController.helpers.collection_types_structures
-  filter :usage,
-         as: :select,
-         collection: ApplicationController.helpers.collection_usages,
-         if: proc { current_compte.anlci? }
-  filter :code_postal
-  filter :siret
-  filter :region,
-         as: :select,
-         collection: proc { Structure.distinct.order(:region).pluck(:region) }
-  filter :created_at
-
-  scope :all, default: true, if: -> { params[:stats] }
-  scope :sans_campagne, if: -> { params[:stats] }
-  scope :pas_vraiment_utilisatrices, if: -> { params[:stats] }
-  scope :non_activees, if: -> { params[:stats] }
-  scope :actives, if: -> { params[:stats] }
-  scope :inactives, if: -> { params[:stats] }
-  scope :abandonnistes, if: -> { params[:stats] }
-
-  action_item :stats, only: :index do
-    if params[:stats]
-      link_to t(".sans_stats"), admin_structures_locales_path
-    else
-      link_to t(".stats"), admin_structures_locales_path(stats: true)
-    end
-  end
-
-  sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
   index download_links: %i[xls json]
 
@@ -75,6 +45,9 @@ ActiveAdmin.register StructureLocale do
 
   controller do
     before_action :trouve_campagnes, only: :show
+    before_action :entete_index, only: :index
+
+    helper_method :statistiques, :nombres_activation
 
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)
@@ -110,6 +83,33 @@ ActiveAdmin.register StructureLocale do
         render :edit
       end
     end
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = Structures::FiltresListe.new(params[:q], current_compte,
+                                              activation: statistiques.statut)
+    end
+
+    def statistiques
+      @statistiques ||= Structures::StatistiquesActivation.new(
+        Structures::Activation, actif: params[:stats].present?, statut: params[:activation]
+      )
+    end
+
+    # Étape de la chaîne d'ActiveAdmin qui appliquait ses scopes
+    def apply_scoping(structures)
+      statistiques.applique(structures)
+    end
+
+    # Les filtres sont rendus avant le tableau : la liste doit être calculée pour compter
+    def nombres_activation
+      collection
+      statistiques.nombres
+    end
+    private :entete_index, :statistiques, :nombres_activation
+    protected :apply_scoping
 
     private
 

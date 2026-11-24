@@ -1,2 +1,17 @@
-<%= render "admin/scopes" %>
-<%= render "tableau" %>
+<% libelle = active_admin_config.plural_resource_label %>
+<%= render EntetePageComponent.new(
+      titre: libelle,
+      fil_ariane: [ { libelle: t("admin.structures.liste.accueil"), lien: admin_root_path },
+                    { libelle: libelle } ]
+    ) do |entete| %>
+  <% entete.with_actions do %>
+    <%= render "actions_entete" %>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<div id="resultats-structures" data-actualise-a-la-volee>
+  <%= render "tableau" %>
+</div>

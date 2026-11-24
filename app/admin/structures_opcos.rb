@@ -1,13 +1,12 @@
 ActiveAdmin.register StructureOpco do
-  liste_dsfr
-
   config.sort_order = "created_at_desc"
 
   permit_params :nom, :siret, :opco_id
 
-  filter :nom, filters: [ :contains_unaccent, :eq ]
-  filter :siret
-  filter :created_at
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
   show do
     render partial: "admin/structures/show", locals: { structure: resource }
@@ -20,6 +19,16 @@ ActiveAdmin.register StructureOpco do
   form partial: "form"
 
   controller do
+    before_action :entete_index, only: :index
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = Structures::FiltresListe.new(params[:q], current_compte, activation: nil)
+    end
+    private :entete_index
+
     def create
       @structure_opco = StructureOpco.new(
           permitted_params[:structure_opco]

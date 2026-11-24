@@ -1,23 +1,54 @@
 <%# Liste commune aux structures administratives et OPCO : type est leur nom de route %>
-<%= render TableauComponent.new(collection: collection, id: "structures", ordre: params[:order]) do |tableau| %>
-  <% tableau.colonne(titre: Structure.human_attribute_name(:nom), tri: "nom", multiline: true) do |structure| %>
-    <%= link_to structure.nom, public_send(:"admin_#{type}_path", structure) %>
+<% libelle = active_admin_config.plural_resource_label %>
+<%= render EntetePageComponent.new(
+      titre: libelle,
+      fil_ariane: [ { libelle: t("admin.structures.liste.accueil"), lien: admin_root_path },
+                    { libelle: libelle } ]
+    ) do |entete| %>
+  <% if can?(:create, active_admin_config.resource_class) %>
+    <% entete.with_actions do %>
+      <%= render BoutonDsfrComponent.new(new_resource_path, tag: :a, type: :primary) do %>
+        <%= t("active_admin.resources.#{type}.new_model") %>
+      <% end %>
+    <% end %>
   <% end %>
-  <% tableau.colonne(titre: Structure.human_attribute_name(:siret)) do |structure| %>
-    <%= FormatageSiretHelper.formater_siret(structure.siret) %>
-  <% end %>
-  <% tableau.colonne(titre: Structure.human_attribute_name(:created_at), tri: "created_at") do |structure| %>
-    <%= l(structure.created_at, format: :sans_heure) %>
-  <% end %>
-  <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |structure| %>
-    <%= render MenuActionsComponent.new(structure, *actions_structure(type)) %>
-  <% end %>
-  <% tableau.with_pied do %>
-    <div class="fr-table__footer--start">
-      <p class="fr-table__detail"><%= t("admin.structures.liste.nombre_structures", count: collection.total_count) %></p>
-    </div>
-    <div class="fr-table__footer--middle">
-      <%= paginate collection, theme: "dsfr" %>
-    </div>
+  <% entete.with_barre do %>
+    <%= render FiltresComponent.new(url: collection_path,
+                                    id: "filtres-structures",
+                                    parametres_conserves: { order: params[:order] }) do |filtres| %>
+      <% filtres.with_recherche(champ: :recherche, libelle: t("admin.structures.liste.recherche"),
+                                valeur: @filtres.recherche) %>
+      <% filtres.with_filtre(titre: Structure.human_attribute_name(:created_at), filtres: [
+           Filtres::PeriodeComponent.new(champ: :created_at,
+                                         libelle: Structure.human_attribute_name(:created_at),
+                                         debut: @filtres.creation.debut,
+                                         fin: @filtres.creation.fin)
+         ]) %>
+    <% end %>
   <% end %>
 <% end %>
+
+<div id="resultats-structures" data-actualise-a-la-volee>
+  <%= render TableauComponent.new(collection: collection, id: "structures", ordre: params[:order]) do |tableau| %>
+    <% tableau.colonne(titre: Structure.human_attribute_name(:nom), tri: "nom", multiline: true) do |structure| %>
+      <%= link_to structure.nom, public_send(:"admin_#{type}_path", structure) %>
+    <% end %>
+    <% tableau.colonne(titre: Structure.human_attribute_name(:siret)) do |structure| %>
+      <%= FormatageSiretHelper.formater_siret(structure.siret) %>
+    <% end %>
+    <% tableau.colonne(titre: Structure.human_attribute_name(:created_at), tri: "created_at") do |structure| %>
+      <%= l(structure.created_at, format: :sans_heure) %>
+    <% end %>
+    <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |structure| %>
+      <%= render MenuActionsComponent.new(structure, *actions_structure(type)) %>
+    <% end %>
+    <% tableau.with_pied do %>
+      <div class="fr-table__footer--start">
+        <p class="fr-table__detail"><%= t("admin.structures.liste.nombre_structures", count: collection.total_count) %></p>
+      </div>
+      <div class="fr-table__footer--middle">
+        <%= paginate collection, theme: "dsfr" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

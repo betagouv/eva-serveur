@@ -11,6 +11,44 @@ describe 'Admin - Structure locale', type: :feature do
 
       it { expect(page).to have_content 'Ma structure' }
 
+      it "affiche l'en-tête de page du DSFR à la place de la barre de titre d'ActiveAdmin" do
+        expect(page).to have_css("h1", text: StructureLocale.model_name.human(count: 2))
+        expect(page).not_to have_css("#title_bar")
+        expect(page).not_to have_css("#sidebar")
+      end
+
+      it "propose l'export XLS et la création dans l'en-tête" do
+        within(".entete-page__actions") do
+          lien = find_link(I18n.t("active_admin.action_items.telechargement_xls.libelle"))
+          expect(lien[:href]).to eq admin_structures_locales_path(format: :xls)
+          expect(page).to have_link(I18n.t("active_admin.resources.structure_locale.new_model"),
+                                    href: new_admin_structure_locale_path)
+        end
+      end
+
+      describe "statistiques d'activation" do
+        let!(:active) { create :structure_locale, :avec_admin, nom: 'Structure active' }
+
+        before do
+          create :campagne, compte: create(:compte_admin, structure: active)
+          click_link I18n.t("active_admin.resource.index.stats")
+        end
+
+        it "filtre par statut d'activation, avec le nombre de structures concernées" do
+          within("#filtres-structures") do
+            libelle = /\A#{Regexp.escape(I18n.t('active_admin.scopes.sans_campagne'))} \(\d+\)\z/
+            expect(page).to have_css("label[for='activation_sans_campagne']", text: libelle,
+                                                                              visible: :all)
+            choose "activation_sans_campagne", allow_label_click: true
+            first(:button, I18n.t("components.filtres.appliquer")).click
+          end
+
+          expect(page).to have_content 'Ma structure'
+          expect(page).not_to have_content 'Structure active'
+          expect(page).to have_link(I18n.t("active_admin.resource.index.sans_stats"))
+        end
+      end
+
       describe 'filtre par siret' do
         let!(:structure_avec_siret) {
           create :structure_locale, nom: 'Structure SIRET', siret: '85170326400024'
@@ -18,8 +56,8 @@ describe 'Admin - Structure locale', type: :feature do
         let!(:autre_structure) { create :structure_locale, nom: 'Autre structure' }
 
         it 'trouve une structure en saisissant le siret avec des espaces' do
-          fill_in 'q[siret_cont]', with: '851 703 264 00024'
-          click_on 'Filtrer'
+          fill_in 'q[recherche]', with: '851 703 264 00024'
+          first(:button, I18n.t("components.filtres.appliquer")).click
 
           expect(page).to have_content 'Structure SIRET'
           expect(page).not_to have_content 'Autre structure'
@@ -37,7 +75,7 @@ describe 'Admin - Structure locale', type: :feature do
 
         it 'ne liste que les structures ayant cet usage' do
           select I18n.t('activerecord.attributes.structure.usage.evapro'), from: 'q[usage_eq]'
-          click_on 'Filtrer'
+          first(:button, I18n.t("components.filtres.appliquer")).click
 
           expect(page).to have_content 'Structure Eva Pro'
           expect(page).not_to have_content 'Structure bénéficiaires'

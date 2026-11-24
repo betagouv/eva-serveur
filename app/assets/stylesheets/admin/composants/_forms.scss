@@ -44,7 +44,7 @@
   }
 }
 
-label {
+label:not(.fr-label) {
   @include label
 }
 

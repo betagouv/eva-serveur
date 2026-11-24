@@ -283,6 +283,48 @@ describe 'Admin - Evaluation eva', type: :feature do
       end
     end
 
+    context "accompagnement du bénéficiaire" do
+      let(:evaluation_eva) do
+        create(:evaluation, :eva, campagne: ma_campagne,
+                                  synthese_competences_de_base: synthese)
+      end
+      let(:titre) { I18n.t("admin.evaluations_eva.suivi_beneficiaire.titre") }
+
+      context "quand un illettrisme potentiel est détecté" do
+        let(:synthese) { :illettrisme_potentiel }
+
+        it "place la section juste sous les détails, avant le déroulement de la passation" do
+          visit admin_evaluation_eva_path(evaluation_eva)
+
+          expect(page).to have_css("#evaluation__details + #suivi_beneficiaire")
+          expect(page).to have_css(
+            "#suivi_beneficiaire + .evaluation__restitution-globale #evaluation__deroulement"
+          )
+          expect(page).to have_css("#suivi_beneficiaire h2", text: titre)
+        end
+
+        it "propose la section en 2e entrée du menu latéral" do
+          visit admin_evaluation_eva_path(evaluation_eva)
+
+          expect(page).to have_css(
+            ".menu-transverse li:nth-child(2) a[href='#suivi_beneficiaire']",
+            text: I18n.t("admin.evaluations_eva.suivi_beneficiaire.titre_menu_lateral")
+          )
+        end
+      end
+
+      context "quand aucun illettrisme potentiel n'est détecté" do
+        let(:synthese) { :socle_clea }
+
+        it "n'affiche ni la section ni son entrée dans le menu" do
+          visit admin_evaluation_eva_path(evaluation_eva)
+
+          expect(page).to have_no_css("#suivi_beneficiaire")
+          expect(page).to have_no_css(".menu-transverse a[href='#suivi_beneficiaire']")
+        end
+      end
+    end
+
     context "évaluation anonyme" do
       let(:beneficiaire) { create(:beneficiaire, anonymise_le: Time.current) }
       let(:evaluation_eva) do

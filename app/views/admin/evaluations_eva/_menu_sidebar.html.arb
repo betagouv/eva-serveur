@@ -5,6 +5,13 @@ div class: "menu menu-transverse" do
         text_node t("admin.evaluations_eva.details_evaluation.titre_menu_lateral")
       end
     end
+    if resource.illettrisme_potentiel?
+      li do
+        a href: "#suivi_beneficiaire" do
+          text_node t("admin.evaluations_eva.suivi_beneficiaire.titre_menu_lateral")
+        end
+      end
+    end
     li do
       a href: "#evaluation__deroulement" do
         text_node t("admin.evaluations_eva.deroulement_passation.titre_menu_lateral")
@@ -45,13 +52,6 @@ div class: "menu menu-transverse" do
     li do
       a href: "#numeratie" do
         text_node t("admin.restitutions.numeratie.titre_menu_lateral")
-      end
-    end
-    if resource.illettrisme_potentiel?
-      li do
-        a href: "#suivi_beneficiaire" do
-          text_node t("admin.evaluations_eva.suivi_beneficiaire.titre_menu_lateral")
-        end
       end
     end
   end

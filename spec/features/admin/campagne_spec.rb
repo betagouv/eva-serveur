@@ -22,10 +22,34 @@ describe 'Admin - Campagne', type: :feature do
         expect(page).not_to have_content 'Rouen 30 mars'
       end
 
-      it 'permet de filtrer par compte' do
-        within '#filters_sidebar_section' do
-          expect(page).to have_content 'Compte'
+      it "affiche l'en-tête de page du DSFR à la place de la barre de titre d'ActiveAdmin" do
+        expect(page).to have_css("h1", text: Campagne.model_name.human(count: 2))
+        expect(page).to have_css("nav.fr-breadcrumb")
+        expect(page).not_to have_css("#title_bar")
+        expect(page).not_to have_css("#sidebar")
+      end
+
+      it 'permet de filtrer par compte, mais pas par structure' do
+        within '#filtres-campagnes' do
+          expect(page).to have_button Compte.model_name.human
+          expect(page).not_to have_button StructureLocale.model_name.human
         end
+      end
+
+      it "filtre par situation depuis son menu" do
+        situation = create :situation_inventaire
+        create :situation_configuration, campagne_id: ma_campagne.id, situation: situation
+        create :campagne, libelle: 'Lille sans inventaire', compte: compte_connecte
+        visit admin_campagnes_path
+        expect(page).to have_content 'Lille sans inventaire'
+        within("#filtres-campagnes .filtres__menu", text: Situation.model_name.human(count: 2)) do
+          check situation.libelle, allow_label_click: true
+          click_button I18n.t("components.filtres.appliquer")
+        end
+
+        expect(page).to have_content 'Amiens 18 juin'
+        expect(page).not_to have_content 'Lille sans inventaire'
+        expect(page).to have_checked_field(situation.libelle, visible: :all)
       end
     end
 
@@ -35,10 +59,38 @@ describe 'Admin - Campagne', type: :feature do
         visit admin_campagnes_path
       end
 
-      it 'permet de filtrer par compte' do
-        within '#filters_sidebar_section' do
-          expect(page).to have_content 'Compte'
+      it 'permet de filtrer par compte et par structure' do
+        within '#filtres-campagnes' do
+          expect(page).to have_button Compte.model_name.human
+          expect(page).to have_button StructureLocale.model_name.human
         end
+      end
+
+      it "propose de créer une campagne depuis l'en-tête" do
+        expect(page).to have_link(I18n.t("active_admin.resources.campagne.new_model"),
+                                  href: new_admin_campagne_path)
+      end
+    end
+
+    context "quand la structure n'autorise pas la création de campagne" do
+      let(:structure_conseiller) do
+        create :structure_locale, autorisation_creation_campagne: false
+      end
+      let!(:compte_connecte) do
+        create(:compte_admin, structure: structure_conseiller)
+        connecte(create(:compte_conseiller, structure: structure_conseiller))
+      end
+
+      before { visit admin_campagnes_path }
+
+      it "affiche la création désactivée et son explication" do
+        expect(page).not_to have_link(I18n.t("active_admin.resources.campagne.new_model"))
+        expect(page).to have_button(
+          I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"), disabled: true
+        )
+        expect(page).to have_content(
+          I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication")
+        )
       end
     end
 
@@ -54,6 +106,21 @@ describe 'Admin - Campagne', type: :feature do
         within(find("#campagnes tr", text: 'Amiens 18 juin')) do
           expect(page).to have_css("td.fr-cell--right", exact_text: '1')
         end
+      end
+    end
+
+    context "recherche", :js do
+      before do
+        compte_connecte.update(role: 'superadmin')
+        page.assert_current_path(admin_dashboard_path)
+        visit admin_campagnes_path
+      end
+
+      it "filtre à la volée par code pendant la saisie" do
+        fill_in I18n.t("admin.campagnes.filtres.recherche"), with: "a5rou"
+
+        expect(page).not_to have_content 'Amiens 18 juin'
+        expect(page).to have_content 'Rouen 30 mars'
       end
     end
   end

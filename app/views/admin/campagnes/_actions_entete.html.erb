@@ -1,0 +1,12 @@
+<% if creation_desactivee %>
+  <%= render BoutonDsfrComponent.new("#", tag: :button, disabled: true) do %>
+    <%= t("admin.campagnes.action_items.nouvelle_campagne_disabled") %>
+  <% end %>
+  <p class="fr-text--xs fr-mt-1w fr-mb-0">
+    <%= t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication") %>
+  </p>
+<% else %>
+  <%= render BoutonDsfrComponent.new(new_admin_campagne_path, tag: :a, type: :primary) do %>
+    <%= t("active_admin.resources.campagne.new_model") %>
+  <% end %>
+<% end %>

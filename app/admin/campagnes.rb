@@ -4,44 +4,14 @@ ActiveAdmin.register Campagne do
                 options_personnalisation: [],
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
-  liste_dsfr
-
   config.sort_order = "created_at_desc"
 
   includes :parcours_type
 
-  filter :libelle, filters: [ :contains_unaccent, :eq ]
-  filter :code
-  filter :compte_structure_id,
-         as: :search_select_filter,
-         url: proc { admin_structures_locales_path },
-         fields: %i[nom code_postal],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "nom_asc",
-         label: proc { StructureLocale.model_name.human },
-         method_model: StructureLocale,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
-  filter :compte_id,
-         as: :search_select_filter,
-         url: proc { admin_comptes_path },
-         fields: %i[email nom prenom],
-         display_name: "display_name",
-         minimum_input_length: 2,
-         order_by: "email_asc"
-  filter :situations
-  filter :created_at
-
-  action_item :nouvelle_campagne_disabled, only: :index,
-              if: proc { current_compte.structure_id.present? && !can?(:create, Campagne) &&
-                         !current_compte.structure.autorisation_creation_campagne? } do
-    div class: "fr-mb-2v" do
-      link_to(I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"), "#",
-          class: "bouton-disabled")
-    end
-    span I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication"),
-  class: "fr-text--xs text-grey-425"
-  end
+  # Les filtres sont rendus par FiltresComponent dans l'en-tête de la page ; ransack
+  # les applique toujours à partir de params[:q]
+  config.filters = false
+  config.current_filters = false
 
   action_item :dupliquer, only: :show, if: proc { can?(:duplique, resource) } do
     link_to I18n.t("admin.campagnes.action_items.dupliquer"),
@@ -129,6 +99,7 @@ ActiveAdmin.register Campagne do
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
+    before_action :entete_index, only: :index
 
     def create
       create!
@@ -140,6 +111,13 @@ ActiveAdmin.register Campagne do
     end
 
     private
+
+    def entete_index
+      @page_title = active_admin_config.plural_resource_label
+      @page_dsfr = true
+      @entete_dsfr = true
+      @filtres = Campagnes::FiltresListe.new(params[:q], current_compte)
+    end
 
     def scoped_collection
       collection = end_of_association_chain.avec_nombre_evaluations_et_derniere_evaluation

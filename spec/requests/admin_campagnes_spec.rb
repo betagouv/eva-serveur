@@ -8,12 +8,12 @@ describe "Admin Campagnes", type: :request do
   before { sign_in compte }
 
   describe "GET index" do
-    it "affiche la liste dans le cadre de l'administration, avec ses filtres" do
+    it "affiche la liste dans le cadre de l'administration, sans sa barre de titre" do
       get admin_campagnes_path
 
       expect(response.body).to include("<title>Campagnes | eva</title>")
       expect(response.body).to include("fr-header")
-      expect(response.body).to include('id="filters_sidebar_section"')
+      expect(response.body).not_to include('id="title_bar"')
     end
 
     it "pagine la liste avec la pagination DSFR" do

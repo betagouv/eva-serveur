@@ -1,1 +1,21 @@
-<%= render "tableau" %>
+<% creation_desactivee = !can?(:create, Campagne) && current_compte.structure.present? &&
+                         !current_compte.structure.autorisation_creation_campagne? %>
+
+<%= render EntetePageComponent.new(
+      titre: active_admin_config.plural_resource_label,
+      fil_ariane: [ { libelle: t(".accueil"), lien: admin_root_path },
+                    { libelle: active_admin_config.plural_resource_label } ]
+    ) do |entete| %>
+  <% if can?(:create, Campagne) || creation_desactivee %>
+    <% entete.with_actions do %>
+      <%= render "actions_entete", creation_desactivee: creation_desactivee %>
+    <% end %>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<div id="resultats-campagnes" data-actualise-a-la-volee>
+  <%= render "tableau" %>
+</div>

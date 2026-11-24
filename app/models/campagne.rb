@@ -40,6 +40,9 @@ class Campagne < ApplicationRecord
               MAX(evaluations.created_at) AS date_derniere_evaluation')
   }
   scope :par_code, ->(code) { where code: code.upcase }
+  scope :recherche, lambda { |texte|
+    ransack(m: "or", libelle_contains_unaccent: texte, code_cont: texte.to_s.upcase).result
+  }
   scope :active, -> { where(active: true) }
   scope :privee, -> { where(privee: true) }
   scope :avec_situation, lambda { |situation|
@@ -47,6 +50,14 @@ class Campagne < ApplicationRecord
                                               situation_id: situation&.id
                                             })
   }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[recherche]
+  end
+
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[recherche]
+  end
 
   def display_name
     libelle

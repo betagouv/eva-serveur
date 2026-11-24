@@ -1,0 +1,32 @@
+<%= render TableauComponent.new(collection: collection, id: "evaluations", ordre: params[:order]) do |tableau| %>
+  <% tableau.colonne(titre: t(".colonne_par"), tri: "beneficiaires.nom", multiline: true) do |evaluation| %>
+    <%= link_to evaluation.beneficiaire&.nom, admin_evaluation_evapro_path(evaluation) %>
+  <% end %>
+  <% tableau.colonne(titre: t(".colonne_date"), tri: "created_at") do |evaluation| %>
+    <%= l(evaluation.created_at.to_date) %>
+  <% end %>
+  <% if affiche_colonne_structure? %>
+    <% tableau.colonne(titre: Structure.model_name.human, multiline: true) do |evaluation| %>
+      <%= evaluation.campagne&.structure&.nom %>
+    <% end %>
+  <% end %>
+  <% tableau.colonne(titre: t(".colonne_taux_risque")) do |evaluation| %>
+    <%= afficher_lettre_risque_index_evapro(evaluation, syntheses_evapro_par_evaluation_id[evaluation.id]) %>
+  <% end %>
+  <% tableau.colonne(titre: t(".colonne_couts")) do |evaluation| %>
+    <%= afficher_lettre_cout_index_evapro(evaluation, syntheses_evapro_par_evaluation_id[evaluation.id]) %>
+  <% end %>
+  <% tableau.colonne(td_class: "fr-cell--right") do |evaluation| %>
+    <%= render "admin/evaluations/lien", chemin: admin_evaluation_evapro_path(evaluation) %>
+  <% end %>
+  <% tableau.with_pied do %>
+    <div class="fr-table__footer--start">
+      <p class="fr-table__detail">
+        <%= t(".nombre_evaluations", count: collection.total_count) %>
+      </p>
+    </div>
+    <div class="fr-table__footer--middle">
+      <%= paginate collection, theme: "dsfr" %>
+    </div>
+  <% end %>
+<% end %>

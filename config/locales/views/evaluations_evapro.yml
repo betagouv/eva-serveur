@@ -17,11 +17,14 @@ fr:
         delivrance: Délivrée le %{date}.
       index:
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
+      tableau:
         colonne_par: Par
         colonne_date: Date
-        colonne_structure: Structure
         colonne_taux_risque: "Taux de risque"
         colonne_couts: Coûts
+        nombre_evaluations:
+          one: "1 évaluation"
+          other: "%{count} évaluations"
       impact_couts:
         titre: "Coûts potentiels dans votre structure"
         suffixe_masse_salariale: "de votre masse salariale"

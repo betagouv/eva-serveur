@@ -5,10 +5,12 @@ ActiveAdmin.register EvaluationEvapro do
 
   includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
 
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   filter :beneficiaire_id,
-         label: I18n.t("admin.evaluations_evapro.index.colonne_par"),
+         label: I18n.t("admin.evaluations_evapro.tableau.colonne_par"),
          as: :search_select_filter,
          url: proc { admin_beneficiaires_path },
          fields: %i[nom],
@@ -34,11 +36,7 @@ ActiveAdmin.register EvaluationEvapro do
     render partial: "show"
   end
 
-  index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
-        row_class: ->(elem) { "anonyme" if elem.anonyme? },
-        dsfr_table: proc { true }, class: "fr-table--multiline" do
-      render "index", context: self
-  end
+  index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] }
 
   member_action :telecharger_attestation, method: :get do
     render_attestation_pdf

@@ -1,6 +1,15 @@
 fr:
   admin:
     comptes:
+      index:
+        voir: Voir
+        modifier: Modifier
+        supprimer: Supprimer
+        confirmation_suppression: "Voulez-vous vraiment supprimer ce compte ?"
+      tableau:
+        nombre_comptes:
+          one: "1 compte"
+          other: "%{count} comptes"
       action_items:
         voir_campagnes:
           zero: Aucune campagne

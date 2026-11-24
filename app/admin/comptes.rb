@@ -19,6 +19,8 @@ ActiveAdmin.register Compte do
 
   includes :structure
 
+  liste_dsfr
+
   config.sort_order = "created_at_desc"
 
   order_by(:prenom_nom) do |clause|
@@ -75,11 +77,7 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:inactives)
   filtrer_par_activation_structure(:abandonnistes)
 
-  index download_links: -> { %i[json xls] }, dsfr_table: proc { true },
-        content_before: proc { render "mise_en_avant_comptes_en_attente" },
-        class: "fr-table--multiline" do
-    render "index", context: self
-  end
+  index download_links: -> { %i[json xls] }
 
   action_item :stats, only: :index, if: -> { can? :manage, Compte } do
     if params[:stats]

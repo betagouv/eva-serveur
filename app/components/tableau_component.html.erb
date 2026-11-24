@@ -61,7 +61,13 @@
       </div>
     </div>
   </div>
-  <% if pied? %>
+  <% if collection.none? %>
+    <div class="fr-table__footer">
+      <div class="fr-table__footer--start">
+        <p class="fr-table__detail"><%= t("components.tableau.aucun_resultat") %></p>
+      </div>
+    </div>
+  <% elsif pied? %>
     <div class="fr-table__footer">
       <%= pied %>
       <div class="fr-table__footer--end"><%= actions_pied %></div>

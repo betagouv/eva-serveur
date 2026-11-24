@@ -4,6 +4,7 @@ fr:
       selectionner: "Sélectionner"
       selectionner_ligne: "Sélectionner la ligne %{numero}"
       trier: "Trier par %{colonne}"
+      aucun_resultat: "Aucun résultat"
       lignes_selectionnees:
         zero: "Aucune ligne sélectionnée"
         one: "1 ligne sélectionnée"

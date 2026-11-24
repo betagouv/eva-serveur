@@ -1,0 +1,39 @@
+<%= render TableauComponent.new(collection: collection, id: "evaluations", ordre: params[:order]) do |tableau| %>
+  <% tableau.colonne(titre: EvaluationEva.human_attribute_name(:beneficiaire),
+                     multiline: true) do |evaluation| %>
+    <%= render "admin/evaluations_eva/beneficiaire", evaluation: evaluation %>
+  <% end %>
+  <% if affiche_colonne_structure? %>
+    <% tableau.colonne(titre: Structure.model_name.human, multiline: true) do |evaluation| %>
+      <%= evaluation.campagne.structure.display_name %>
+    <% end %>
+  <% end %>
+  <% tableau.colonne(titre: Campagne.model_name.human, multiline: true) do |evaluation| %>
+    <% campagne = evaluation.campagne %>
+    <p class="fr-text--bold fr-mb-0"><%= campagne.display_name %></p>
+    <% if affiche_sous_titre_campagne?(campagne.parcours_type) %>
+      <p class="fr-text--sm fr-mb-0"><%= campagne.parcours_type.display_name %></p>
+    <% end %>
+  <% end %>
+  <% tableau.colonne(titre: EvaluationEva.human_attribute_name(:statut_suivi),
+                     tri: "statut_suivi") do |evaluation| %>
+    <%= statut_suivi(evaluation, collection) %>
+  <% end %>
+  <% tableau.colonne(titre: EvaluationEva.human_attribute_name(:debutee_le),
+                     tri: "debutee_le") do |evaluation| %>
+    <%= l(evaluation.debutee_le.to_date) %>
+  <% end %>
+  <% tableau.colonne(td_class: "fr-cell--right") do |evaluation| %>
+    <%= render "admin/evaluations/lien", chemin: admin_evaluation_eva_path(evaluation) %>
+  <% end %>
+  <% tableau.with_pied do %>
+    <div class="fr-table__footer--start">
+      <p class="fr-table__detail">
+        <%= t(".nombre_evaluations", count: collection.total_count) %>
+      </p>
+    </div>
+    <div class="fr-table__footer--middle">
+      <%= paginate collection, theme: "dsfr" %>
+    </div>
+  <% end %>
+<% end %>

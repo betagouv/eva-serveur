@@ -1,15 +1,11 @@
-<div class="evaluation__cellule">
-  <div class="d-flex align-items-center">
-    <% if !scope_illettrisme? && evaluation.illettrisme_potentiel? %>
-      <%= render(PastilleComponent.new(
-                   couleur: "alerte",
-                   tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
-                 )) %>
-    <% end %>
-    <%= link_to render(NomAnonymisableComponent.new(evaluation.beneficiaire)),
-                admin_evaluation_eva_path(evaluation) %>
-  </div>
-  <div class= "evaluation__code-beneficiaire">
-    <%= evaluation.beneficiaire.code_beneficiaire %>
-  </div>
+<div class="fr-grid-row fr-grid-row--middle">
+  <% if !scope_illettrisme? && evaluation.illettrisme_potentiel? %>
+    <%= render(PastilleComponent.new(
+                 couleur: "alerte",
+                 tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
+               )) %>
+  <% end %>
+  <%= link_to render(NomAnonymisableComponent.new(evaluation.beneficiaire)),
+              admin_evaluation_eva_path(evaluation) %>
 </div>
+<p class="fr-text--sm fr-mb-0"><%= evaluation.beneficiaire.code_beneficiaire %></p>

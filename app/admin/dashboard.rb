@@ -26,7 +26,8 @@ ActiveAdmin.register_page "Dashboard" do
   controller do
     include EtapeInscriptionHelper
 
-    helper_method :evaluations_eva, :evaluation_a_suivre, :evaluation_repondue, :prise_en_main,
+    helper_method :evaluations_eva, :evaluation_a_suivre, :url_personne_suivante,
+      :evaluation_repondue, :prise_en_main,
       :campagnes, :campagnes_entreprise, :evaluations_entreprise,
       :cinq_dernieres_evaluations_completes, :comptes_en_attente,
       :actualites, :support
@@ -72,10 +73,22 @@ ActiveAdmin.register_page "Dashboard" do
         .limit(10)
     end
 
-    # Une seule personne est proposée à la fois : répondre fait passer à la suivante
+    # Une seule personne est proposée à la fois : la passer ou lui répondre fait passer
+    # à la suivante
     def evaluation_a_suivre
-      @evaluation_a_suivre ||=
-        EvaluationsEva::TableauDeBordMisesEnAction.new(current_ability).a_renseigner.first
+      @evaluation_a_suivre ||= mises_en_action.suivante(
+        apres: params[:apres].presence || params[:suivi_enregistre]
+      )
+    end
+
+    def url_personne_suivante
+      return unless evaluation_a_suivre && mises_en_action.plusieurs_a_renseigner?
+
+      admin_dashboard_path(apres: evaluation_a_suivre.id)
+    end
+
+    def mises_en_action
+      @mises_en_action ||= EvaluationsEva::TableauDeBordMisesEnAction.new(current_ability)
     end
 
     # Au retour d'une réponse, on remercie le pro en nommant la personne concernée

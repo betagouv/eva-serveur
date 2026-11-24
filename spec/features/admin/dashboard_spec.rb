@@ -357,4 +357,81 @@ describe 'Dashboard', type: :feature do
       expect(page).to have_field("invitation_email", visible: :all)
     end
   end
+
+  context "accompagnement des bénéficiaires" do
+    let(:campagne) { create :campagne, compte: compte }
+    let(:passer) { I18n.t("suivi_accompagnement_illettrisme.passer") }
+
+    before { Bullet.enable = false }
+
+    after { Bullet.enable = true }
+
+    context "avec plusieurs personnes à renseigner" do
+      let!(:premiere) do
+        create :evaluation, :eva, :a_renseigner, campagne: campagne, created_at: 1.day.ago
+      end
+
+      let!(:seconde) do
+        create :evaluation, :eva, :a_renseigner, campagne: campagne, created_at: 2.days.ago
+      end
+
+      it "propose de passer à une autre personne" do
+        visit admin_dashboard_path
+
+        expect(page).to have_link(passer, href: admin_dashboard_path(apres: premiere.id))
+      end
+
+      it "affiche la personne suivante sans enregistrer de réponse pour la précédente" do
+        visit admin_dashboard_path
+        click_link passer
+
+        expect(page).to have_css(".entete-mise-en-action__nom", text: seconde.beneficiaire.nom)
+        expect(MiseEnAction.count).to eq(0)
+      end
+
+      it "revient à la première personne depuis la dernière" do
+        visit admin_dashboard_path(apres: premiere.id)
+        expect(page).to have_css(".entete-mise-en-action__nom", text: seconde.beneficiaire.nom)
+        click_link passer
+
+        expect(page).to have_css(".entete-mise-en-action__nom", text: premiere.beneficiaire.nom)
+      end
+
+      context "quand le conseiller vient de répondre pour une personne" do
+        let(:repondue) do
+          create :evaluation, :eva, :a_renseigner, :avec_mise_en_action,
+                 campagne: campagne, created_at: 36.hours.ago
+        end
+
+        it "propose la personne qui la suivait" do
+          visit admin_dashboard_path(suivi_enregistre: repondue.id)
+
+          expect(page).to have_css(".suivi-accompagnement-illettrisme",
+                                   text: seconde.beneficiaire.nom)
+        end
+      end
+    end
+
+    context "avec une seule personne à renseigner" do
+      before { create :evaluation, :eva, :a_renseigner, campagne: campagne }
+
+      it "ne propose pas de passer à une autre personne" do
+        visit admin_dashboard_path
+
+        expect(page).to have_css(".suivi-accompagnement-illettrisme")
+        expect(page).to have_no_link(passer)
+      end
+    end
+
+    context "sans personne à renseigner" do
+      before { create :evaluation, :eva, campagne: campagne }
+
+      it "indique que tout est à jour" do
+        visit admin_dashboard_path
+
+        expect(page).to have_content(I18n.t("admin.dashboard.mise_en_action.tout_a_jour.titre"))
+        expect(page).to have_no_link(passer)
+      end
+    end
+  end
 end

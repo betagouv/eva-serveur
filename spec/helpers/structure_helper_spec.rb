@@ -98,4 +98,25 @@ describe StructureHelper do
       end
     end
   end
+
+  describe "#actions_structure" do
+    it "propose de voir, modifier et supprimer la structure du type donné" do
+      actions = helper.actions_structure(:structure_locale)
+
+      expect(actions.pluck(:type)).to eq %i[read edit destroy]
+      expect(actions.pluck(:url)).to eq %i[admin_structure_locale_path
+                                           edit_admin_structure_locale_path
+                                           admin_structure_locale_path]
+      expect(actions.pluck(:label)).to eq [ I18n.t("admin.structures.liste.voir"),
+                                            I18n.t("admin.structures.liste.modifier"),
+                                            I18n.t("admin.structures.liste.supprimer") ]
+    end
+
+    it "demande confirmation avant de supprimer" do
+      expect(helper.actions_structure(:structure_opco).last).to include(
+        method: :delete,
+        data: { confirm: I18n.t("admin.structures.liste.confirmation_suppression") }
+      )
+    end
+  end
 end

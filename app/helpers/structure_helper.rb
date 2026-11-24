@@ -1,4 +1,15 @@
 module StructureHelper
+  def actions_structure(type)
+    [
+      { label: t("admin.structures.liste.voir"), type: :read, url: :"admin_#{type}_path" },
+      { label: t("admin.structures.liste.modifier"), type: :edit,
+        url: :"edit_admin_#{type}_path" },
+      { label: t("admin.structures.liste.supprimer"), type: :destroy,
+        url: :"admin_#{type}_path", method: :delete,
+        data: { confirm: t("admin.structures.liste.confirmation_suppression") } }
+    ]
+  end
+
   def opco_id_associe(structure)
     structure.opco_id
   end

@@ -1,0 +1,9 @@
+fr:
+  admin:
+    referentiels:
+      liste:
+        exporter: Exporter
+        parties: Parties
+        nombre_resultats:
+          one: "1 résultat"
+          other: "%{count} résultats"

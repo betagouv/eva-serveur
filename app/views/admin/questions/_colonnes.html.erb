@@ -1,0 +1,23 @@
+<% modele = active_admin_config.resource_class %>
+<% tableau.colonne(titre: modele.human_attribute_name(:libelle), tri: "libelle", multiline: true) do |question| %>
+  <%= link_to question.libelle, resource_path(question) %>
+<% end %>
+<% if local_assigns[:categorie] %>
+  <% tableau.colonne(titre: modele.human_attribute_name(:categorie), tri: "categorie") do |question| %>
+    <%= question.categorie %>
+  <% end %>
+<% end %>
+<% tableau.colonne(titre: modele.human_attribute_name(:intitule), multiline: true) do |question| %>
+  <%= question.transcription_intitule&.ecrit %>
+<% end %>
+<% if local_assigns[:qcm] %>
+  <% tableau.colonne(titre: modele.human_attribute_name(:metacompetence), tri: "metacompetence") do |question| %>
+    <%= question.metacompetence %>
+  <% end %>
+  <% tableau.colonne(titre: modele.human_attribute_name(:type_qcm), tri: "type_qcm") do |question| %>
+    <%= question.type_qcm %>
+  <% end %>
+<% end %>
+<% tableau.colonne(titre: modele.human_attribute_name(:created_at), tri: "created_at") do |question| %>
+  <%= l(question.created_at, format: :sans_heure) %>
+<% end %>

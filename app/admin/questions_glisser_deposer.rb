@@ -1,4 +1,6 @@
 ActiveAdmin.register QuestionGlisserDeposer do
+  liste_dsfr
+
   before_action :set_question, only: %i[update]
 
   permit_params :libelle, :nom_technique, :description, :passable, :illustration,
@@ -24,16 +26,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
     bouton_export_question_xls(resource)
   end
 
-  index download_links: %i[xls], dsfr_table: proc { true } do
-    column :libelle, class: "col-lien-voir" do |q|
-      link_to q.libelle, admin_question_glisser_deposer_path(q)
-    end
-    column :intitule do |question|
-      question.transcription_intitule&.ecrit
-    end
-    column :created_at
-    actions
-  end
+  index download_links: %i[xls]
 
   show do
     render partial: "show"

@@ -98,6 +98,20 @@ a.pas-souligne {
   margin-bottom: 0;
 }
 
+// Fix conflit entre le fil d'Ariane (DSFR) et la règle d'ActiveAdmin : ul, ol { margin; padding-left }
+.fr-breadcrumb__list {
+  margin: 0;
+  padding: 0;
+}
+
+// Fix conflit entre le fil d'Ariane (DSFR), qui hérite du gris de .fr-breadcrumb,
+// et la règle d'ActiveAdmin : a, a:link, a:visited { color }
+.fr-breadcrumb__link,
+.fr-breadcrumb__link:link,
+.fr-breadcrumb__link:visited {
+  color: inherit;
+}
+
 .fr-toggle__label {
   display: flex !important;
   padding-right: 0;
@@ -241,6 +255,19 @@ button.fr-tag {
 
   &:not(.disabled):active {
     background-color: var(--background-action-low-blue-france-active);
+  }
+}
+
+// Bouton « Voir le fil d'Ariane » (mobile) : retire le fond et la bordure du bouton Active Admin,
+// que le DSFR ne redéfinit pas pour .fr-breadcrumb__button.
+button.fr-breadcrumb__button {
+  border: none;
+  background-color: transparent;
+  font-weight: 400;
+
+  &:not(.disabled):hover,
+  &:not(.disabled):active {
+    background-color: transparent;
   }
 }
 

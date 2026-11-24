@@ -1,4 +1,4 @@
-div class: "evaluation" do
+div class: "evaluation evaluation--fiche" do
   div class: "row" do
     div class: "col-8" do
       render "admin/evaluations_eva/details_evaluation"

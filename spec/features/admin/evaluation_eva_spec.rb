@@ -17,6 +17,13 @@ describe 'Admin - Evaluation eva', type: :feature do
   describe '#index' do
     before { connecte(mon_compte) }
 
+    it "garde la barre de titre d'ActiveAdmin, réservée à la fiche pour le DSFR" do
+      visit admin_evaluations_eva_path
+
+      expect(page).to have_css("#title_bar .breadcrumb")
+      expect(page).to have_no_css(".fr-breadcrumb")
+    end
+
     context "évaluation potentiellement en situation d'illettrisme" do
       let!(:evaluation_illettrisme) do
         create(:evaluation, :eva, campagne: ma_campagne,
@@ -239,6 +246,21 @@ describe 'Admin - Evaluation eva', type: :feature do
         visit admin_evaluation_eva_path(evaluation_eva)
 
         expect(page).to have_css(".evaluation__restitution-globale")
+      end
+
+      it "remplace le fil d'Ariane et le titre d'ActiveAdmin par le fil d'Ariane DSFR" do
+        visit admin_evaluation_eva_path(evaluation_eva)
+
+        expect(page).to have_no_css("#title_bar")
+        expect(page).to have_css(".fil-ariane-dsfr .fr-breadcrumb")
+        expect(page).to have_no_css("#main_content .fr-breadcrumb")
+        expect(page).to have_link(I18n.t("active_admin.dashboard"), href: admin_root_path,
+                                                                    class: "fr-breadcrumb__link")
+        expect(page).to have_link(EvaluationEva.model_name.human(count: 2),
+                                  href: admin_evaluations_eva_path,
+                                  class: "fr-breadcrumb__link")
+        expect(page).to have_css(".fr-breadcrumb__link[aria-current]",
+                                 text: evaluation_eva.beneficiaire.nom)
       end
 
       it "affiche les détails de l'évaluation en DSFR, ancrés pour le menu latéral" do

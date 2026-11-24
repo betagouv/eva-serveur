@@ -69,7 +69,13 @@ ActiveAdmin.register EvaluationEva do
     ))
   }, :illettrisme_potentiel
 
-  show do
+  show fil_ariane_dsfr: proc {
+    [
+      [ t("active_admin.dashboard"), admin_root_path ],
+      [ EvaluationEva.model_name.human(count: 2), admin_evaluations_eva_path ],
+      [ resource.beneficiaire.nom ]
+    ]
+  } do
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,
                                                params[:parties_selectionnees])

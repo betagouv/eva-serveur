@@ -271,6 +271,12 @@ button.fr-breadcrumb__button {
   }
 }
 
+// Le bouton de la barre de recherche DSFR n'affiche que sa loupe, pour la même raison
+// que le bouton fermer des alertes ci-dessous.
+.fr-search-bar .fr-btn {
+  min-width: unset;
+}
+
 // Le DSFR masque le libellé du bouton fermer des alertes via max-width + overflow ;
 // min-width: fit-content ci-dessus gagne sur max-width et affiche « Masquer le message » en entier.
 .fr-alert .fr-btn--close {

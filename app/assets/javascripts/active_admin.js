@@ -34,6 +34,8 @@
 //= require modal_fusion
 //= require modal_suivi_groupe
 //= require selection_tableau
+//= require filtre_recherche
+//= require panneau_filtres
 //= require structure_confirmation
 //= require reset_password
 

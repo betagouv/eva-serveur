@@ -1,0 +1,11 @@
+fr:
+  components:
+    filtres:
+      titre: "Filtres"
+      appliquer: "Appliquer"
+      rechercher: "Rechercher"
+      titre_avec_valeur: "%{titre} : %{valeur}"
+      toutes: "Toutes"
+      tag_debut: "%{libelle} : à partir du %{date}"
+      tag_fin: "%{libelle} : jusqu’au %{date}"
+      retirer: "Retirer le filtre %{libelle}"

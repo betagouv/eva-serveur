@@ -1,0 +1,50 @@
+<%= form_with url: @url, method: :get, id: @id,
+              html: { role: "search", aria: { label: t("components.filtres.titre") } } do %>
+  <% @parametres_conserves.each do |nom, valeur| %>
+    <%= hidden_field_tag nom, valeur, id: nil %>
+  <% end %>
+  <div id="<%= @id %>-menus">
+    <ul class="fr-btns-group fr-btns-group--inline-sm fr-mb-n2w">
+      <% filtres.each_with_index do |filtre, index| %>
+        <li class="filtres__menu">
+          <button type="button" aria-expanded="false" aria-controls="<%= id_menu(index) %>"
+                  class="fr-btn <%= filtre.classe_bouton %> fr-btn--icon-right fr-icon-arrow-down-s-line">
+            <%= filtre.titre %>
+            <% if filtre.actif? %>
+              <span class="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon fr-ml-1w"><%= filtre.tags.size %></span>
+            <% end %>
+          </button>
+          <%= tag.div class: "fr-collapse filtres__panneau", id: id_menu(index),
+                      data: { application_immediate: filtre.application_immediate? || nil } do %>
+            <div class="filtres__contenu">
+              <%= filtre %>
+              <% unless filtre.application_immediate? %>
+                <ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--sm fr-mt-2w">
+                  <li><button type="submit" class="fr-btn fr-btn--sm"><%= t("components.filtres.appliquer") %></button></li>
+                </ul>
+              <% end %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="<%= @id %>-tags" data-actualise-a-la-volee>
+    <% if filtres_actifs? %>
+      <ul class="fr-tags-group fr-mt-2w fr-mb-n1w">
+        <% tags.each do |tag| %>
+          <li>
+            <%= link_to tag.libelle, url_sans(tag),
+                        class: "fr-tag fr-tag--sm fr-tag--dismiss",
+                        title: t("components.filtres.retirer", libelle: tag.libelle) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <% if recherche? %>
+    <div id="<%= @id %>-recherche" class="fr-grid-row fr-mt-3w">
+      <div class="fr-col-12 fr-col-md-6 fr-col-lg-4"><%= recherche %></div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,17 @@
+<%# Liste d'un référentiel : la vue de la ressource fournit les colonnes (partial qui reçoit
+    tableau) et, au besoin, des actions propres à chaque ligne. %>
+<% modele = active_admin_config.resource_class %>
+<%= render TableauComponent.new(collection: collection, id: "referentiel", ordre: params[:order]) do |composant| %>
+  <%= render tableau, tableau: composant %>
+  <% composant.colonne(td_class: "col-actions tableau-boutons-action") do |ressource| %>
+    <%= render MenuActionsComponent.new(ressource, *actions_referentiel(modele, *[ local_assigns[:actions_ligne] ].compact)) %>
+  <% end %>
+  <% composant.with_pied do %>
+    <div class="fr-table__footer--start">
+      <p class="fr-table__detail"><%= t(".nombre_resultats", count: collection.total_count) %></p>
+    </div>
+    <div class="fr-table__footer--middle">
+      <%= paginate collection, theme: "dsfr" %>
+    </div>
+  <% end %>
+<% end %>

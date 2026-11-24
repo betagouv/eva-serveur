@@ -1,0 +1,43 @@
+<%= form_with url: renseigner_suivi_groupe_admin_beneficiaires_path, id: "beneficiaires-selection",
+              data: { selection_tableau: true } do %>
+  <%= render TableauComponent.new(collection: collection, id: "beneficiaires",
+                                  selectionnable: actions_groupees,
+                                  champ_selection: "beneficiaire_ids[]",
+                                  ids_selectionnes: Array(params[:selection]),
+                                  ordre: params[:order]) do |tableau| %>
+    <% if actions_groupees %>
+      <% tableau.with_entete do %>
+        <%= render "actions_groupees" %>
+      <% end %>
+    <% end %>
+    <% tableau.colonne(titre: Beneficiaire.human_attribute_name(:nom), tri: "nom",
+                       multiline: true) do |beneficiaire| %>
+      <%= render "nom_beneficiaire", beneficiaire: beneficiaire %>
+    <% end %>
+    <% tableau.colonne(titre: Beneficiaire.human_attribute_name(:code_beneficiaire),
+                       tri: "code_beneficiaire") do |beneficiaire| %>
+      <%= beneficiaire.code_beneficiaire %>
+    <% end %>
+    <% tableau.colonne(titre: Beneficiaire.human_attribute_name(:statut_suivi),
+                       tri: "statut_suivi") do |beneficiaire| %>
+      <%= statut_suivi_beneficiaire(beneficiaire, collection) %>
+    <% end %>
+    <% tableau.colonne(titre: Beneficiaire.human_attribute_name(:created_at),
+                       tri: "created_at") do |beneficiaire| %>
+      <%= tag.span l(beneficiaire.created_at), data: { created_at: beneficiaire.created_at.iso8601(3) } %>
+    <% end %>
+    <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |beneficiaire| %>
+      <%= render MenuActionsComponent.new(beneficiaire, *actions_beneficiaire) %>
+    <% end %>
+    <% tableau.with_pied do %>
+      <div class="fr-table__footer--start">
+        <p class="fr-table__detail">
+          <%= t(".nombre_beneficiaires", count: collection.total_count) %>
+        </p>
+      </div>
+      <div class="fr-table__footer--middle">
+        <%= paginate collection, theme: "dsfr" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -67,8 +67,9 @@ describe 'Admin - Bénéficiaires', type: :feature do
         visit admin_beneficiaires_path
 
         entetes = all("thead th").map(&:text)
-        expect(entetes.index("Suivi")).to eq entetes.index("Code bénéficiaire") + 1
-        expect(entetes.index("Créé le")).to eq entetes.index("Suivi") + 1
+        position = ->(titre) { entetes.index { _1.start_with?(titre) } }
+        expect(position.call("Suivi")).to eq position.call("Code bénéficiaire") + 1
+        expect(position.call("Créé le")).to eq position.call("Suivi") + 1
       end
     end
 
@@ -188,6 +189,11 @@ describe 'Admin - Bénéficiaires', type: :feature do
         )
       end
 
+      it "coche les bénéficiaires de la sélection" do
+        expect(page).to have_checked_field("beneficiaire_ids[]", with: selectionne.id,
+                                                                 visible: :all)
+      end
+
       it "n'affiche pas la restriction dans le panneau Rechercher" do
         expect(find("#filters_sidebar_section")).not_to have_content(selectionne.id)
         expect(page).not_to have_css(".current_filters")
@@ -225,13 +231,15 @@ describe 'Admin - Bénéficiaires', type: :feature do
 
     after { Bullet.enable = true }
 
+    def coche(beneficiaire)
+      find("tr", text: beneficiaire.code_beneficiaire).find("label").click
+    end
+
     it "renvoie sur la sélection, cochée et à jour, après l'enregistrement" do
       visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ] })
-      [ premier, second ].each do |beneficiaire|
-        check "batch_action_item_#{beneficiaire.id}", allow_label_click: true
-      end
-      click_link I18n.t("active_admin.batch_actions.button_label")
-      click_link I18n.t("active_admin.batch_actions.labels.renseigner_suivi_groupe")
+      [ premier, second ].each { |beneficiaire| coche(beneficiaire) }
+      expect(page).to have_content(I18n.t("components.tableau.lignes_selectionnees", count: 2))
+      click_button I18n.t("admin.beneficiaires.actions_groupees.renseigner_suivi")
       click_button I18n.t("admin.beneficiaires.modal_suivi_groupe.oui")
       click_on I18n.t(
         "activerecord.attributes.mise_en_action.remediation.formation_competences_de_base"
@@ -246,15 +254,32 @@ describe 'Admin - Bénéficiaires', type: :feature do
       [ premier, second ].each do |beneficiaire|
         ligne = find("tr", text: beneficiaire.code_beneficiaire)
         expect(ligne).to have_content(I18n.t("statut_suivi.suite_engagee"))
-        expect(ligne).to have_checked_field("batch_action_item_#{beneficiaire.id}",
-                                            visible: :all)
+        expect(ligne).to have_checked_field("beneficiaire_ids[]", with: beneficiaire.id,
+                                                                  visible: :all)
       end
-      expect(page).not_to have_css(".dropdown_menu_button.disabled")
+      expect(page).to have_button(I18n.t("admin.beneficiaires.actions_groupees.renseigner_suivi"),
+                                  disabled: false)
 
       click_link I18n.t("admin.beneficiaires.selection.voir_tous")
       expect(page).to have_content(non_coche.code_beneficiaire)
-      expect(page).not_to have_css("input.batch-actions-resource-selection:checked",
-                                   visible: :all)
+      expect(page).not_to have_checked_field("beneficiaire_ids[]", visible: :all)
+    end
+
+    it "fusionne les bénéficiaires sélectionnés dans le plus ancien" do
+      visit admin_beneficiaires_path
+      expect(page).to have_button(I18n.t("admin.beneficiaires.actions_groupees.fusionner"),
+                                  disabled: true)
+      [ premier, second ].each { |beneficiaire| coche(beneficiaire) }
+      click_button I18n.t("admin.beneficiaires.actions_groupees.fusionner")
+      within("#fr-modal-fusionner") do
+        expect(page).to have_css("li", count: 2)
+        click_button I18n.t("admin.beneficiaires.modal_fusion.confirmer")
+      end
+
+      expect(page).to have_current_path(admin_beneficiaire_path(premier))
+      expect(page).to have_content(
+        I18n.t("admin.beneficiaires.fusion.success.notice", beneficiaire_nom: premier.nom)
+      )
     end
   end
 end

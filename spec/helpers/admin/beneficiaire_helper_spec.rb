@@ -28,4 +28,26 @@ describe Admin::BeneficiaireHelper, type: :helper do
         .to have_css("[aria-hidden='true']", text: "-")
     end
   end
+
+  describe "#actions_beneficiaire" do
+    it "propose de voir, modifier et supprimer le bénéficiaire, avec ses traductions" do
+      actions = helper.actions_beneficiaire
+
+      expect(actions.pluck(:type)).to eq %i[read edit destroy]
+      expect(actions.pluck(:url)).to eq %i[admin_beneficiaire_path edit_admin_beneficiaire_path
+                                           admin_beneficiaire_path]
+      expect(actions.pluck(:label)).to eq [ I18n.t("admin.beneficiaires.index.voir"),
+                                            I18n.t("admin.beneficiaires.index.modifier"),
+                                            I18n.t("admin.beneficiaires.index.supprimer") ]
+    end
+
+    it "demande confirmation avant de supprimer" do
+      suppression = helper.actions_beneficiaire.last
+
+      expect(suppression).to include(
+        method: :delete,
+        data: { confirm: I18n.t("admin.beneficiaires.index.confirmation_suppression") }
+      )
+    end
+  end
 end

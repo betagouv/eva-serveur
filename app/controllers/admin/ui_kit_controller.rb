@@ -19,6 +19,7 @@ module Admin
     def carte_partage_code; end
     def chiffre_cle; end
     def code; end
+    def details_evaluation; end
     def ellipse; end
     def evaluation_incomplete; end
     def header; end

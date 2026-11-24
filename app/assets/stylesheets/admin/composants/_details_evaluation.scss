@@ -1,0 +1,67 @@
+.details-evaluation {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-3w;
+}
+
+.details-evaluation__nom {
+  margin: 0;
+  color: var(--text-title-blue-france);
+}
+
+.details-evaluation__titre {
+  margin: 0;
+  color: var(--text-title-grey);
+}
+
+.details-evaluation__carte {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-3w;
+  padding: $dsfr-spacing-3w $dsfr-spacing-2w;
+  border: 1px solid var(--border-default-grey);
+  background: var(--background-default-grey);
+
+  @media (min-width: $dsfr-breakpoint-md) {
+    padding: $dsfr-spacing-3w $dsfr-spacing-6w;
+  }
+}
+
+.details-evaluation__lignes {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-3v;
+  margin: 0;
+  padding: 0;
+}
+
+.details-evaluation__ligne {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $dsfr-breakpoint-md) {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.details-evaluation__libelle {
+  padding: 0;
+
+  @media (min-width: $dsfr-breakpoint-md) {
+    flex: 0 0 11.25rem;
+  }
+
+  @include corps-de-texte-sm-medium;
+
+  color: var(--text-mention-grey);
+}
+
+.details-evaluation__valeur {
+  margin: 0;
+  padding: 0;
+
+  &.fr-text--sm {
+    margin: 0;
+  }
+}

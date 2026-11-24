@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Démo DetailsEvaluationComponent</h1>
+
+  <p>Bloc en tête de la fiche évaluation. Une alerte avertit quand l’évaluation est incomplète.</p>
+
+  <% {
+    "Évaluation complète" => "complete",
+    "Évaluation incomplète" => "incomplete",
+    "Compétences de base incomplètes" => "competences_de_base_incompletes",
+    "Compétences transversales incomplètes" => "competences_transversales_incompletes"
+  }.each do |titre, completude| %>
+    <h2><%= titre %></h2>
+    <div class="fr-mb-6w">
+      <%= render DetailsEvaluationComponent.new(
+            evaluation: EvaluationEva.new(completude: completude,
+                                          beneficiaire: Beneficiaire.new(id: SecureRandom.uuid,
+                                                                         nom: "marie test enchainement des audios",
+                                                                         code_beneficiaire: "MAR61734"),
+                                          campagne: Campagne.new(id: SecureRandom.uuid, libelle: "positionnement"),
+                                          debutee_le: Time.zone.local(2023, 5, 6, 18, 4))
+          ) %>
+    </div>
+  <% end %>
+</div>

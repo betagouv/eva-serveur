@@ -1,0 +1,31 @@
+<div class="details-evaluation">
+  <h1 class="fr-h1 details-evaluation__nom"><%= render NomAnonymisableComponent.new(@beneficiaire) %></h1>
+  <h2 class="fr-h4 details-evaluation__titre"><%= t(:titre, scope: SCOPE) %></h2>
+  <div class="details-evaluation__carte">
+    <dl class="details-evaluation__lignes">
+      <div class="details-evaluation__ligne">
+        <dt class="details-evaluation__libelle"><%= Beneficiaire.human_attribute_name(:code_beneficiaire) %></dt>
+        <dd class="details-evaluation__valeur">
+          <%= link_to @beneficiaire.code_beneficiaire, helpers.admin_beneficiaire_path(@beneficiaire),
+                      class: "fr-link fr-link--sm" %>
+        </dd>
+      </div>
+      <div class="details-evaluation__ligne">
+        <dt class="details-evaluation__libelle"><%= Evaluation.human_attribute_name(:campagne) %></dt>
+        <dd class="details-evaluation__valeur">
+          <%= link_to @campagne.libelle, helpers.admin_campagne_path(@campagne),
+                      class: "fr-link fr-link--sm" %>
+        </dd>
+      </div>
+      <div class="details-evaluation__ligne">
+        <dt class="details-evaluation__libelle"><%= Evaluation.human_attribute_name(:debutee_le) %></dt>
+        <dd class="details-evaluation__valeur fr-text--sm"><%= l(@evaluation.debutee_le, format: :avec_heure) %></dd>
+      </div>
+    </dl>
+    <% if incomplete? %>
+      <%= helpers.dsfr_alert(type: :warning, title: titre_alerte, header_level: 3) do %>
+        <%= description_alerte %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -169,6 +169,21 @@ fr:
           #### Évaluation incomplète
 
           Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
+        incompletude:
+          competences_de_base_incompletes:
+            titre: Évaluation des compétences de base incomplète
+            description_html: >-
+              Tous les modules permettant <strong>d’évaluer <u>les compétences de base</u> n’ont pas été complétés</strong>. La fiabilité des résultats peut donc être diminuée.<br><br>
+              <strong>Néanmoins, les résultats de l’évaluation des compétences transversales sont bien complets et fiables.</strong>
+          competences_transversales_incompletes:
+            titre: Évaluation des compétences transversales incomplète
+            description_html: >-
+              Certains modules permettant <strong>d’évaluer <u>les compétences transversales</u> n’ont pas été complétés</strong>. La fiabilité des résultats peut donc être diminuée.<br><br>
+              <strong>Néanmoins, les résultats de l’évaluation des compétences de base sont bien complets et fiables.</strong>
+          incomplete:
+            titre: Évaluation incomplète
+            description_html: >-
+              Certains modules <strong>n’ont pas été complétés lors de cette passation</strong>. La fiabilité des résultats peut donc être diminuée.
         illettrisme_potentiel:
           action: Signaler une difficulté
       show:

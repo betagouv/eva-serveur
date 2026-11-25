@@ -1,2 +1,16 @@
-<%= render "admin/scopes" %>
-<%= render "tableau" %>
+<%= render EntetePageComponent.new(
+      titre: active_admin_config.plural_resource_label,
+      fil_ariane: [ { libelle: t(".accueil"), lien: admin_root_path },
+                    { libelle: active_admin_config.plural_resource_label } ]
+    ) do |entete| %>
+  <% entete.with_actions do %>
+    <%= render "admin/bouton_export_xls" %>
+  <% end %>
+  <% entete.with_barre do %>
+    <%= render "filtres" %>
+  <% end %>
+<% end %>
+
+<div id="resultats-evaluations" data-actualise-a-la-volee>
+  <%= render "tableau" %>
+</div>

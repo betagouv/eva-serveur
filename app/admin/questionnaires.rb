@@ -1,19 +1,8 @@
 ActiveAdmin.register Questionnaire do
-  liste_dsfr
+  liste_dsfr { |parametres| Referentiels::FiltresListe.new(parametres) }
 
   permit_params :libelle, :nom_technique,
                 questionnaires_questions_attributes: %i[id question_id _destroy]
-
-  filter :libelle, filters: [ :contains_unaccent, :eq ]
-  filter :questions_id,
-         as: :search_select_filter,
-         label: "Question",
-         url: proc { admin_questions_path },
-         fields: %i[libelle nom_technique],
-         display_name: "display_name",
-         method_model: Question,
-         minimum_input_length: 2,
-         order_by: "libelle_asc"
 
   member_action :export_questions, method: :get
 
@@ -33,11 +22,6 @@ ActiveAdmin.register Questionnaire do
       type: :secondary,
       size: :sm
     ).with_content(t("admin.questionnaires.action_items.exporter_questions"))
-  end
-
-  action_item :import_xls, only: :index do
-    link_to "Importer un questionnaire en XLS",
-            admin_import_xls_path(model: "questionnaire", redirect_to: admin_questionnaires_path)
   end
 
   member_action :export, method: :get do

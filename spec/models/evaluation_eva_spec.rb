@@ -217,4 +217,19 @@ describe EvaluationEva do
       expect(seconde.mise_en_action).to be_nil
     end
   end
+
+  describe "recherche par nom ou code du bénéficiaire" do
+    let!(:jose) { create :evaluation, :eva, beneficiaire: create(:beneficiaire, nom: "José") }
+    let!(:autre) { create :evaluation, :eva, beneficiaire: create(:beneficiaire, nom: "Alice") }
+
+    it "trouve par nom sans tenir compte des accents" do
+      expect(described_class.ransack(recherche: "jose").result).to contain_exactly(jose)
+    end
+
+    it "trouve par code en minuscules" do
+      code = autre.beneficiaire.code_beneficiaire.downcase
+
+      expect(described_class.ransack(recherche: code).result).to contain_exactly(autre)
+    end
+  end
 end

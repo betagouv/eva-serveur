@@ -2,10 +2,16 @@ fr:
   admin:
     structures:
       liste:
+        accueil: Accueil
         voir: Voir
         modifier: Modifier
         supprimer: Supprimer
         confirmation_suppression: "Voulez-vous vraiment supprimer cette structure ?"
+        recherche: Nom, code postal ou SIRET
+        type_structure: Type de structure
+        usage: Usage
+        region: Région
+        activation: Activation de la structure
         nombre_structures:
           one: "1 structure"
           other: "%{count} structures"

@@ -146,4 +146,48 @@ describe 'Admin - Compte', type: :request do
       expect(collegue.valid_password?(nouveau_mot_de_passe)).to be true
     end
   end
+
+  describe "GET index" do
+    let(:superadmin) { create :compte_superadmin, structure: ma_structure }
+    let!(:collegue) do
+      create :compte_conseiller, structure: ma_structure, email: "collegue@structure.fr"
+    end
+
+    before { sign_in superadmin }
+
+    it "affiche la liste dans le cadre de l'administration, sans sa barre de titre" do
+      get admin_comptes_path
+
+      expect(response.body).to include("<title>Comptes | eva</title>")
+      expect(response.body).not_to include('id="title_bar"')
+    end
+
+    it "exporte en XLS la liste filtrée" do
+      get admin_comptes_path(format: :xls, q: { recherche: "collegue" })
+
+      expect(response.media_type).to eq "application/vnd.ms-excel"
+      expect(response.body).to include("collegue@structure.fr")
+      expect(response.body).not_to include(superadmin.email)
+    end
+
+    it "sert toujours la recherche JSON utilisée par les autres filtres" do
+      Bullet.enable = false
+      get admin_comptes_path(format: :json, q: { email_or_nom_or_prenom_i_cont: "collegue" })
+
+      expect(response.parsed_body.pluck("id")).to contain_exactly(collegue.id)
+    ensure
+      Bullet.enable = true
+    end
+
+    context "quand le compte ne gère pas les comptes" do
+      before { sign_in admin }
+
+      it "ignore le statut d'activation des statistiques" do
+        get admin_comptes_path(stats: true, activation: "sans_campagne")
+
+        expect(response.body).to include(admin.email)
+        expect(response.body).not_to include('name="activation"')
+      end
+    end
+  end
 end

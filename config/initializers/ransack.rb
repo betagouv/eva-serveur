@@ -6,6 +6,17 @@ Ransack.configure do |config|
                        type: :string,
                        compounds: false,
                        wants_array: false
+
+  # Bornes d'une période saisie en dates (Filtres::PeriodeComponent) : la journée
+  # de début et la journée de fin comptent en entier.
+  config.add_predicate "gteq_datetime",
+                       arel_predicate: "gteq",
+                       formatter: proc { |date| date.in_time_zone.beginning_of_day },
+                       type: :date
+  config.add_predicate "lteq_datetime",
+                       arel_predicate: "lteq",
+                       formatter: proc { |date| date.in_time_zone.end_of_day },
+                       type: :date
 end
 
 # Monkey patch pour appliquer unaccent dans les prédicats matches

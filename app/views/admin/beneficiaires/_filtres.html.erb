@@ -1,0 +1,34 @@
+<%= render FiltresComponent.new(url: admin_beneficiaires_path, id: "filtres-beneficiaires",
+                                parametres_conserves: { order: params[:order] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t(".recherche"), valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: Beneficiaire.human_attribute_name(:statut_suivi), filtres: [
+       Filtres::CasesACocherComponent.new(champ: :statut_suivi_in,
+                                          libelle: Beneficiaire.human_attribute_name(:statut_suivi),
+                                          options: @filtres.options_statuts,
+                                          valeurs: @filtres.statuts)
+     ]) %>
+  <% filtres.with_filtre(titre: Beneficiaire.human_attribute_name(:created_at), filtres: [
+       Filtres::PeriodeComponent.new(champ: :created_at,
+                                     libelle: Beneficiaire.human_attribute_name(:created_at),
+                                     debut: @filtres.creation.debut,
+                                     fin: @filtres.creation.fin)
+     ]) %>
+  <% filtres.with_filtre(titre: Campagne.model_name.human, application_immediate: true, filtres: [
+       Filtres::RechercheComponent.new(champ: :evaluations_campagne_id_eq,
+                                       libelle: Campagne.model_name.human,
+                                       url: admin_campagnes_path(format: :json, order: "libelle_asc"),
+                                       champs_recherche: %i[libelle code],
+                                       valeur: @filtres.campagne.id,
+                                       libelle_valeur: @filtres.campagne.libelle)
+     ]) %>
+  <% if @filtres.filtre_structure? %>
+    <% filtres.with_filtre(titre: Structure.model_name.human, application_immediate: true, filtres: [
+         Filtres::RechercheComponent.new(champ: :evaluations_campagne_compte_structure_id_eq,
+                                         libelle: Structure.model_name.human,
+                                         url: admin_structures_path(format: :json, order: "lower_nom_asc"),
+                                         champs_recherche: %i[nom code_postal],
+                                         valeur: @filtres.structure.id,
+                                         libelle_valeur: @filtres.structure.libelle)
+       ]) %>
+  <% end %>
+<% end %>

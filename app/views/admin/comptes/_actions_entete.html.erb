@@ -1,0 +1,20 @@
+<ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--icon-left fr-mb-n2w">
+  <% if can?(:manage, Compte) %>
+    <li>
+      <%= render BoutonDsfrComponent.new(statistiques.actif? ? admin_comptes_path : admin_comptes_path(stats: true),
+                                         tag: :a, type: :tertiary) do %>
+        <%= t(statistiques.actif? ? "active_admin.resource.index.sans_stats" : "active_admin.resource.index.stats") %>
+      <% end %>
+    </li>
+  <% end %>
+  <li>
+    <%= render "admin/bouton_export_xls" %>
+  </li>
+  <% if can?(:create, Compte) %>
+    <li>
+      <%= render BoutonDsfrComponent.new(new_admin_compte_path, tag: :a, type: :primary) do %>
+        <%= t("active_admin.resources.compte.new_model") %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

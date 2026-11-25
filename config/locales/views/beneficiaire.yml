@@ -2,6 +2,7 @@ fr:
   admin:
     beneficiaires:
       index:
+        accueil: Accueil
         voir: Voir
         modifier: Modifier
         supprimer: Supprimer
@@ -10,6 +11,8 @@ fr:
         nombre_beneficiaires:
           one: "1 bénéficiaire"
           other: "%{count} bénéficiaires"
+      filtres:
+        recherche: Nom ou code bénéficiaire
       actions_groupees:
         renseigner_suivi: Renseigner le suivi
         fusionner: Fusionner

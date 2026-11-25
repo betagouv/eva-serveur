@@ -59,8 +59,8 @@ class EvaluationEva < Evaluation
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
-  def self.ransackable_scopes(_auth_object = nil)
-    %i[statut_suivi_in]
+  def self.ransackable_scopes(auth_object = nil)
+    super + %i[statut_suivi_in]
   end
 
   def classe_restitution

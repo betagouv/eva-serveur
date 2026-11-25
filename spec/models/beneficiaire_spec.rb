@@ -96,5 +96,29 @@ describe Beneficiaire do
         expect(resultats).to include(beneficiaire_avec_accents)
       end
     end
+
+    describe "recherche par nom ou code" do
+      let!(:beneficiaire_numerique) { create(:beneficiaire, nom: "Anne 1") }
+
+      it "trouve par nom sans tenir compte des accents" do
+        resultats = described_class.ransack(recherche: "jose").result
+
+        expect(resultats).to contain_exactly(beneficiaire_avec_accents)
+      end
+
+      it "trouve par code" do
+        code = beneficiaire_sans_accents.code_beneficiaire
+
+        resultats = described_class.ransack(recherche: code.downcase).result
+
+        expect(resultats).to contain_exactly(beneficiaire_sans_accents)
+      end
+
+      it "cherche un texte qui ressemble à un booléen comme un texte" do
+        resultats = described_class.ransack(recherche: "1").result
+
+        expect(resultats).to include(beneficiaire_numerique)
+      end
+    end
   end
 end

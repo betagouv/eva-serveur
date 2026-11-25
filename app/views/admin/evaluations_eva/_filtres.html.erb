@@ -1,0 +1,56 @@
+<%= render FiltresComponent.new(url: admin_evaluations_eva_path, id: "filtres-evaluations",
+                                parametres_conserves: { order: params[:order] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t(".recherche"), valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: t("components.pastille.illettrisme_potentiel"), filtres: [
+       Filtres::BoutonsRadioComponent.new(nom: "scope", libelle: t(".synthese"),
+                                          options: [ [ t("components.pastille.illettrisme_potentiel"),
+                                          EvaluationsEva::FiltresListe::SCOPE_ILLETTRISME_POTENTIEL ] ],
+                                          valeur: (EvaluationsEva::FiltresListe::SCOPE_ILLETTRISME_POTENTIEL if @filtres.illettrisme_potentiel?))
+     ]) %>
+  <% filtres.with_filtre(titre: EvaluationEva.human_attribute_name(:statut_suivi), filtres: [
+       Filtres::CasesACocherComponent.new(champ: :statut_suivi_in,
+                                          libelle: EvaluationEva.human_attribute_name(:statut_suivi),
+                                          options: @filtres.options_statuts,
+                                          valeurs: @filtres.statuts)
+     ]) %>
+  <% filtres.with_filtre(titre: EvaluationEva.human_attribute_name(:debutee_le), filtres: [
+       Filtres::PeriodeComponent.new(champ: :debutee_le,
+                                     libelle: EvaluationEva.human_attribute_name(:debutee_le),
+                                     debut: @filtres.debut.debut,
+                                     fin: @filtres.debut.fin)
+     ]) %>
+  <% filtres.with_filtre(titre: Campagne.model_name.human, application_immediate: true, filtres: [
+       Filtres::RechercheComponent.new(champ: :campagne_id_eq,
+                                       libelle: Campagne.model_name.human,
+                                       url: admin_campagnes_path(format: :json, order: "libelle_asc"),
+                                       champs_recherche: %i[libelle code],
+                                       valeur: @filtres.campagne.id,
+                                       libelle_valeur: @filtres.campagne.libelle)
+     ]) %>
+  <% if @filtres.filtre_structure? %>
+    <% filtres.with_filtre(titre: StructureLocale.model_name.human, application_immediate: true, filtres: [
+         Filtres::RechercheComponent.new(champ: :campagne_compte_structure_id_eq,
+                                         libelle: StructureLocale.model_name.human,
+                                         url: admin_structures_locales_path(format: :json, order: "nom_asc"),
+                                         champs_recherche: %i[nom code_postal],
+                                         valeur: @filtres.structure.id,
+                                         libelle_valeur: @filtres.structure.libelle)
+       ]) %>
+  <% end %>
+  <% filtres.with_filtre(titre: EvaluationEva.human_attribute_name(:responsable_suivi), application_immediate: true, filtres: [
+       Filtres::RechercheComponent.new(champ: :responsable_suivi_id_eq,
+                                       libelle: EvaluationEva.human_attribute_name(:responsable_suivi),
+                                       url: admin_comptes_path(format: :json, order: "email_asc"),
+                                       champs_recherche: %i[email nom prenom],
+                                       valeur: @filtres.responsable_suivi.id,
+                                       libelle_valeur: @filtres.responsable_suivi.libelle)
+     ]) %>
+  <% if @filtres.filtre_statut? %>
+    <% filtres.with_filtre(titre: EvaluationEva.human_attribute_name(:statut), filtres: [
+         Filtres::BoutonsRadioComponent.new(nom: "q[statut_eq]",
+                                            libelle: EvaluationEva.human_attribute_name(:statut),
+                                            options: @filtres.options_statuts_evaluation,
+                                            valeur: @filtres.statut)
+       ]) %>
+  <% end %>
+<% end %>

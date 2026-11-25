@@ -100,4 +100,18 @@ describe "Ransack initializer", type: :model do
       end
     end
   end
+
+  describe "prédicats de période d'une journée à l'autre" do
+    let!(:veille) { create :beneficiaire, created_at: Time.zone.parse("2025-01-09 23:00") }
+    let!(:debut) { create :beneficiaire, created_at: Time.zone.parse("2025-01-10 08:00") }
+    let!(:fin) { create :beneficiaire, created_at: Time.zone.parse("2025-01-20 22:00") }
+    let!(:lendemain) { create :beneficiaire, created_at: Time.zone.parse("2025-01-21 01:00") }
+
+    it "garde les deux journées bornes en entier" do
+      resultats = Beneficiaire.ransack(created_at_gteq_datetime: "2025-01-10",
+                                       created_at_lteq_datetime: "2025-01-20").result
+
+      expect(resultats).to contain_exactly(debut, fin)
+    end
+  end
 end

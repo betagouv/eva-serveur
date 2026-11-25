@@ -10,10 +10,14 @@ fr:
       telechargement_reponses:
         cta: "Télécharger le détail des réponses"
       index:
+        accueil: Accueil
         confirmation_suppression: "Voulez-vous vraiment supprimer cette évaluation ?"
         supprimer: Supprimer
         modifier: Modifier
         voir: Voir
+      filtres:
+        recherche: Nom ou code du bénéficiaire
+        synthese: Synthèse des compétences de base
       tableau:
         nombre_evaluations:
           one: "1 évaluation"

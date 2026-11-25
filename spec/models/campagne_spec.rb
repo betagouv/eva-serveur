@@ -230,4 +230,21 @@ describe Campagne, type: :model do
       expect(nouvelle_campagne.errors[:libelle]).to include(message_erreur)
     end
   end
+
+  describe "recherche par libellé ou code" do
+    let!(:accentuee) { create :campagne, libelle: "Évaluation à Orléans", code: "ORLE25" }
+    let!(:autre) { create :campagne, libelle: "Paris", code: "PAR25" }
+
+    it "trouve par libellé sans tenir compte des accents ni de la casse" do
+      expect(described_class.ransack(recherche: "orleans").result).to contain_exactly(accentuee)
+    end
+
+    it "trouve par code en minuscules" do
+      expect(described_class.ransack(recherche: "par2").result).to contain_exactly(autre)
+    end
+
+    it "cherche un texte qui ressemble à un booléen comme un texte" do
+      expect(described_class.ransack(recherche: "1").result).to be_empty
+    end
+  end
 end

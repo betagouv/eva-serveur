@@ -1,17 +1,48 @@
-<%# Liste d'un référentiel : la vue de la ressource fournit les colonnes (partial qui reçoit
-    tableau) et, au besoin, des actions propres à chaque ligne. %>
+<%# Liste d'un référentiel : la vue de la ressource fournit la recherche, ses filtres
+    (partial qui reçoit filtres), ses actions d'en-tête et les colonnes (partial qui reçoit tableau). %>
+<% libelle = active_admin_config.plural_resource_label %>
 <% modele = active_admin_config.resource_class %>
-<%= render TableauComponent.new(collection: collection, id: "referentiel", ordre: params[:order]) do |composant| %>
-  <%= render tableau, tableau: composant %>
-  <% composant.colonne(td_class: "col-actions tableau-boutons-action") do |ressource| %>
-    <%= render MenuActionsComponent.new(ressource, *actions_referentiel(modele, *[ local_assigns[:actions_ligne] ].compact)) %>
+<%= render EntetePageComponent.new(
+      titre: libelle,
+      fil_ariane: [ { libelle: t("admin.referentiels.liste.accueil"), lien: admin_root_path },
+                    { libelle: libelle } ]
+    ) do |entete| %>
+  <% entete.with_actions do %>
+    <ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--icon-left fr-mb-n2w">
+      <%= render actions if local_assigns[:actions] %>
+      <% if can?(:create, modele) %>
+        <li>
+          <%= render BoutonDsfrComponent.new(new_resource_path, tag: :a, type: :primary) do %>
+            <%= ActiveAdmin::Localizers.resource(active_admin_config).t(:new_model) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
-  <% composant.with_pied do %>
-    <div class="fr-table__footer--start">
-      <p class="fr-table__detail"><%= t(".nombre_resultats", count: collection.total_count) %></p>
-    </div>
-    <div class="fr-table__footer--middle">
-      <%= paginate collection, theme: "dsfr" %>
-    </div>
+  <% entete.with_barre do %>
+    <%= render FiltresComponent.new(url: collection_path, id: "filtres-referentiel",
+                                    parametres_conserves: { order: params[:order] }) do |composant| %>
+      <% composant.with_recherche(champ: recherche, libelle: t(".recherche_#{modele.model_name.element}",
+                                                               default: t(".recherche")),
+                                  valeur: @filtres.valeur(recherche)) %>
+      <%= render filtres, filtres: composant if local_assigns[:filtres] %>
+    <% end %>
   <% end %>
 <% end %>
+
+<div id="resultats-referentiel" data-actualise-a-la-volee>
+  <%= render TableauComponent.new(collection: collection, id: "referentiel", ordre: params[:order]) do |composant| %>
+    <%= render tableau, tableau: composant %>
+    <% composant.colonne(td_class: "col-actions tableau-boutons-action") do |ressource| %>
+      <%= render MenuActionsComponent.new(ressource, *actions_referentiel(modele, *[ local_assigns[:actions_ligne] ].compact)) %>
+    <% end %>
+    <% composant.with_pied do %>
+      <div class="fr-table__footer--start">
+        <p class="fr-table__detail"><%= t(".nombre_resultats", count: collection.total_count) %></p>
+      </div>
+      <div class="fr-table__footer--middle">
+        <%= paginate collection, theme: "dsfr" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

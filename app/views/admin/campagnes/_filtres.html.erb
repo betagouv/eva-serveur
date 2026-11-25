@@ -1,0 +1,34 @@
+<%= render FiltresComponent.new(url: admin_campagnes_path, id: "filtres-campagnes",
+                                parametres_conserves: { order: params[:order] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t(".recherche"), valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: Situation.model_name.human(count: 2), filtres: [
+       Filtres::CasesACocherComponent.new(champ: :situations_configurations_situation_id_in,
+                                          libelle: Situation.model_name.human(count: 2),
+                                          options: @filtres.options_situations,
+                                          valeurs: @filtres.situations)
+     ]) %>
+  <% filtres.with_filtre(titre: Campagne.human_attribute_name(:created_at), filtres: [
+       Filtres::PeriodeComponent.new(champ: :created_at,
+                                     libelle: Campagne.human_attribute_name(:created_at),
+                                     debut: @filtres.creation.debut,
+                                     fin: @filtres.creation.fin)
+     ]) %>
+  <% filtres.with_filtre(titre: Compte.model_name.human, application_immediate: true, filtres: [
+       Filtres::RechercheComponent.new(champ: :compte_id_eq,
+                                       libelle: Compte.model_name.human,
+                                       url: admin_comptes_path(format: :json, order: "email_asc"),
+                                       champs_recherche: %i[email nom prenom],
+                                       valeur: @filtres.compte_choisi.id,
+                                       libelle_valeur: @filtres.compte_choisi.libelle)
+     ]) %>
+  <% if @filtres.filtre_structure? %>
+    <% filtres.with_filtre(titre: StructureLocale.model_name.human, application_immediate: true, filtres: [
+         Filtres::RechercheComponent.new(champ: :compte_structure_id_eq,
+                                         libelle: StructureLocale.model_name.human,
+                                         url: admin_structures_locales_path(format: :json, order: "nom_asc"),
+                                         champs_recherche: %i[nom code_postal],
+                                         valeur: @filtres.structure.id,
+                                         libelle_valeur: @filtres.structure.libelle)
+       ]) %>
+  <% end %>
+<% end %>

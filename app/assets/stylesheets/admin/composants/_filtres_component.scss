@@ -1,0 +1,47 @@
+// Le menu déroulant du DSFR (Dropdown) est en bêta, sans code : chaque filtre reprend le
+// dépliage (fr-collapse) et l'ombre des menus du DSFR, collé sous son bouton.
+.filtres__menu {
+  position: relative;
+}
+
+// Dans un fr-btns-group, le bouton porte une marge de 0,5rem à gauche et de 1rem
+// en dessous : le menu les compense pour s'aligner sur le bouton.
+.filtres__panneau {
+  position: absolute;
+  top: calc(100% - #{$dsfr-spacing-4v});
+  left: $dsfr-spacing-2v;
+  z-index: 1000;
+  width: 24rem;
+  max-width: calc(100vw - #{$dsfr-spacing-4w});
+
+  // Le collapse du DSFR reste visible 0,3 s en se refermant (et quand il se mesure au
+  // chargement) : posé au-dessus du tableau, il ne doit pas capter les clics.
+  &:not(.fr-collapse--expanded) {
+    pointer-events: none;
+  }
+
+  // Le collapse du DSFR ne masque son contenu que pour l'animation : une fois ouvert, le
+  // menu laisse déborder la liste de suggestions de l'autocomplétion au lieu de la couper.
+  &.fr-collapse--expanded {
+    overflow: visible;
+  }
+
+  // Le collapse du DSFR anime son dépliage en faisant glisser le contenu depuis une marge
+  // négative (::before) et en le gardant visible pendant ce glissement (transition de
+  // visibility) : sur un menu posé en absolu, le contenu traverserait la page depuis le
+  // haut. Le menu s'ouvre et se ferme directement sous son bouton.
+  transition: none;
+
+  &::before {
+    content: none;
+  }
+}
+
+// L'ombre « overlap » du DSFR, très légère, ne suffit pas à détacher un menu blanc posé
+// sur le tableau : la bordure des contenants DSFR le délimite.
+.filtres__contenu {
+  padding: $dsfr-spacing-3w;
+  border: 1px solid var(--border-default-grey);
+  background-color: var(--background-overlap-grey);
+  box-shadow: var(--overlap-shadow);
+}

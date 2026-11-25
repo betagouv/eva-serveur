@@ -2,10 +2,13 @@ fr:
   admin:
     campagnes:
       index:
+        accueil: Accueil
         voir: Voir
         modifier: Modifier
         supprimer: Supprimer
         confirmation_suppression: "Voulez-vous vraiment supprimer cette campagne ?"
+      filtres:
+        recherche: Libellé ou code
       tableau:
         nombre_campagnes:
           one: "1 campagne"

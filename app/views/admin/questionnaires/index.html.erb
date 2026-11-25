@@ -1,1 +1,1 @@
-<%= render "admin/referentiels/liste", tableau: "tableau", actions_ligne: { label: t("admin.referentiels.liste.exporter"), type: :read, url: :export_admin_questionnaire_path } %>
+<%= render "admin/referentiels/liste", recherche: :libelle_or_nom_technique_i_cont, tableau: "tableau", filtres: "filtres", actions: "actions_entete", actions_ligne: { label: t("admin.referentiels.liste.exporter"), type: :read, url: :export_admin_questionnaire_path } %>

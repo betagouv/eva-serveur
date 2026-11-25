@@ -16,7 +16,11 @@ fr:
         formule_cloture: Fait pour servir et valoir ce que de droit.
         delivrance: Délivrée le %{date}.
       index:
+        accueil: Accueil
+        entreprise: "Entreprise : %{nom}"
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
+      filtres:
+        recherche: Nom du bénéficiaire
       tableau:
         colonne_par: Par
         colonne_date: Date

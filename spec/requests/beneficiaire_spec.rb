@@ -15,12 +15,11 @@ describe 'Admin Beneficiaires actions groupées', type: :request do
   end
 
   describe "GET index" do
-    it "affiche la liste dans le cadre de l'administration, avec ses filtres" do
+    it "affiche la liste dans le cadre de l'administration" do
       get admin_beneficiaires_path
 
       expect(response.body).to include("<title>Bénéficiaires | eva</title>")
       expect(response.body).to include("fr-header")
-      expect(response.body).to include("id=\"filters_sidebar_section\"")
       expect(response.body).to include("id=\"beneficiaires-selection\"")
     end
 

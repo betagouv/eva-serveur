@@ -1,0 +1,18 @@
+<ul class="fr-btns-group fr-btns-group--inline-sm fr-btns-group--right fr-btns-group--icon-left fr-mb-n2w">
+  <li>
+    <%= render BoutonDsfrComponent.new(statistiques.actif? ? admin_structures_locales_path : admin_structures_locales_path(stats: true),
+                                       tag: :a, type: :tertiary) do %>
+      <%= t(statistiques.actif? ? "active_admin.resource.index.sans_stats" : "active_admin.resource.index.stats") %>
+    <% end %>
+  </li>
+  <li>
+    <%= render "admin/bouton_export_xls" %>
+  </li>
+  <% if can?(:create, StructureLocale) %>
+    <li>
+      <%= render BoutonDsfrComponent.new(new_admin_structure_locale_path, tag: :a, type: :primary) do %>
+        <%= t("active_admin.resources.structure_locale.new_model") %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

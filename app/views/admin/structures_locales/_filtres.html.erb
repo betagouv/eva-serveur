@@ -1,0 +1,35 @@
+<%= render FiltresComponent.new(url: admin_structures_locales_path, id: "filtres-structures",
+                                parametres_conserves: { order: params[:order], stats: params[:stats] }) do |filtres| %>
+  <% filtres.with_recherche(champ: :recherche, libelle: t("admin.structures.liste.recherche"),
+                            valeur: @filtres.recherche) %>
+  <% filtres.with_filtre(titre: t("admin.structures.liste.type_structure"), filtres: [
+       Filtres::ListeDeroulanteComponent.new(champ: :type_structure_eq,
+                                             libelle: t("admin.structures.liste.type_structure"),
+                                             options: collection_types_structures,
+                                             valeur: @filtres.type_structure)
+     ]) %>
+  <% if @filtres.filtre_usage? %>
+    <% filtres.with_filtre(titre: t("admin.structures.liste.usage"), filtres: [
+         Filtres::ListeDeroulanteComponent.new(champ: :usage_eq, libelle: t("admin.structures.liste.usage"),
+                                               options: collection_usages, valeur: @filtres.usage)
+       ]) %>
+  <% end %>
+  <% filtres.with_filtre(titre: t("admin.structures.liste.region"), filtres: [
+       Filtres::ListeDeroulanteComponent.new(champ: :region_eq, libelle: t("admin.structures.liste.region"),
+                                             options: @filtres.options_regions, valeur: @filtres.region)
+     ]) %>
+  <% filtres.with_filtre(titre: StructureLocale.human_attribute_name(:created_at), filtres: [
+       Filtres::PeriodeComponent.new(champ: :created_at,
+                                     libelle: StructureLocale.human_attribute_name(:created_at),
+                                     debut: @filtres.creation.debut, fin: @filtres.creation.fin)
+     ]) %>
+  <% if statistiques.actif? %>
+    <% filtres.with_filtre(titre: t("admin.structures.liste.activation"), filtres: [
+         Filtres::BoutonsRadioComponent.new(nom: :activation, libelle: t("admin.structures.liste.activation"),
+                                            options: @filtres.options_activation(nombres_activation),
+                                            valeur: @filtres.activation)
+       ]) do %>
+      <%= render "aide_filtres_sidebar" %>
+    <% end %>
+  <% end %>
+<% end %>

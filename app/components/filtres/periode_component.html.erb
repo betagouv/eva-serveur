@@ -1,0 +1,11 @@
+<fieldset class="fr-fieldset">
+  <legend class="fr-fieldset__legend fr-fieldset__legend--regular"><%= @libelle %></legend>
+  <% @bornes.each do |predicat, libelle, valeur, _cle| %>
+    <div class="fr-fieldset__element">
+      <div class="fr-input-group">
+        <%= label_tag "q[#{predicat}]", libelle, class: "fr-label" %>
+        <%= date_field_tag "q[#{predicat}]", valeur, class: "fr-input" %>
+      </div>
+    </div>
+  <% end %>
+</fieldset>

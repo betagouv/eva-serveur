@@ -1,0 +1,6 @@
+<li>
+  <%= render BoutonDsfrComponent.new(admin_import_xls_path(model: "questionnaire", redirect_to: collection_path),
+                                     tag: :a, type: :secondary) do %>
+    <%= t("admin.referentiels.liste.importer_questionnaire") %>
+  <% end %>
+</li>

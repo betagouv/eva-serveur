@@ -1,0 +1,8 @@
+<% filtres.with_filtre(titre: SourceAide.human_attribute_name(:categorie), filtres: [
+     Filtres::BoutonsRadioComponent.new(nom: "q[categorie_eq]",
+                                        libelle: SourceAide.human_attribute_name(:categorie),
+                                        options: SourceAide.categories.map { |categorie, valeur|
+                                        [ t("activerecord.attributes.source_aide.categories.#{categorie}"), valeur ]
+                                        },
+                                        valeur: @filtres.valeur(:categorie_eq))
+   ]) %>

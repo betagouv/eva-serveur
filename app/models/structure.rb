@@ -81,6 +81,9 @@ allow_blank: true
   }
 
   scope :structures_locales, -> { where(type: StructureLocale.name) }
+  scope :recherche, lambda { |texte|
+    ransack(m: "or", nom_cont: texte, code_postal_cont: texte, siret_cont: texte).result
+  }
   alias_attribute :display_name, :nom
 
   def code_commune
@@ -111,6 +114,18 @@ allow_blank: true
 
   def self.ransack_unaccent_attributes
     %w[nom]
+  end
+
+  def self.regions
+    where.not(region: [ nil, "" ]).distinct.order(:region).pluck(:region)
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[recherche]
+  end
+
+  def self.ransackable_scopes_skip_sanitize_args
+    %i[recherche]
   end
 
   ransacker :siret, formatter: proc { |v| v.to_s.gsub(/\s+/, "") } do |parent|

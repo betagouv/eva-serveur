@@ -1,5 +1,5 @@
 ActiveAdmin.register QuestionClicDansImage do
-  liste_dsfr
+  liste_dsfr { |parametres| Referentiels::FiltresListe.new(parametres) }
 
   before_action :set_question, only: %i[update]
 
@@ -13,18 +13,9 @@ ActiveAdmin.register QuestionClicDansImage do
                 :supprimer_image_au_clic,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
-  filter :libelle
-  filter :nom_technique
-
   form partial: "form"
 
   index download_links: %i[xls]
-
-  action_item :importer_question, only: :index do
-    link_to "Importer questions clic dans image",
-            admin_import_xls_path(type: QuestionClicDansImage::QUESTION_TYPE, model: "question",
-                                  redirect_to: admin_questions_clic_dans_image_path)
-  end
 
   action_item :exporter_question, only: :show do
     bouton_export_question_xls(resource)

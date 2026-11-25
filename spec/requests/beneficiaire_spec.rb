@@ -42,7 +42,7 @@ describe 'Admin Beneficiaires actions groupées', type: :request do
   describe "POST renseigner_suivi_groupe" do
     let!(:beneficiaire2) { create :beneficiaire }
 
-    it "renvoie sur la liste restreinte aux bénéficiaires sélectionnés" do
+    it "renvoie sur la liste complète avec les bénéficiaires sélectionnés" do
       post renseigner_suivi_groupe_admin_beneficiaires_path, params: {
         beneficiaire_ids: [ beneficiaire1.id, beneficiaire2.id ],
         effectuee: "true"

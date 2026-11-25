@@ -162,7 +162,7 @@ describe 'Admin - Bénéficiaires', type: :feature do
       end
     end
 
-    context "liste restreinte à une sélection" do
+    context "avec une sélection" do
       let!(:compte_admin) { create :compte_admin }
       let(:campagne) { create :campagne, compte: compte_admin }
       let!(:selectionne) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
@@ -177,34 +177,17 @@ describe 'Admin - Bénéficiaires', type: :feature do
 
       after { Bullet.enable = true }
 
-      it "n'affiche que les bénéficiaires sélectionnés du périmètre du compte" do
+      it "affiche tous les bénéficiaires du périmètre du compte" do
         expect(page).to have_content(selectionne.code_beneficiaire)
-        expect(page).not_to have_content(hors_selection.code_beneficiaire)
+        expect(page).to have_content(hors_selection.code_beneficiaire)
         expect(page).not_to have_content(hors_perimetre.code_beneficiaire)
       end
 
-      it "indique que la liste ne montre que la sélection" do
-        expect(page).to have_content(
-          I18n.t("admin.beneficiaires.selection.titre", count: 1)
-        )
-      end
-
-      it "coche les bénéficiaires de la sélection" do
+      it "coche seulement les bénéficiaires de la sélection" do
         expect(page).to have_checked_field("beneficiaire_ids[]", with: selectionne.id,
                                                                  visible: :all)
-      end
-
-      it "n'affiche pas la restriction dans le panneau Rechercher" do
-        expect(find("#filters_sidebar_section")).not_to have_content(selectionne.id)
-        expect(page).not_to have_css(".current_filters")
-      end
-
-      it "ramène à la liste complète avec « Voir tous les bénéficiaires »" do
-        click_link I18n.t("admin.beneficiaires.selection.voir_tous")
-
-        expect(page).to have_content(hors_selection.code_beneficiaire)
-        expect(page).not_to have_content(I18n.t("admin.beneficiaires.selection.titre",
-                                                count: 1))
+        expect(page).to have_unchecked_field("beneficiaire_ids[]", with: hors_selection.id,
+                                                                   visible: :all)
       end
     end
   end
@@ -235,7 +218,7 @@ describe 'Admin - Bénéficiaires', type: :feature do
       find("tr", text: beneficiaire.code_beneficiaire).find("label").click
     end
 
-    it "renvoie sur la sélection, cochée et à jour, après l'enregistrement" do
+    it "renvoie sur tous les bénéficiaires, la sélection cochée et à jour" do
       visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ] })
       [ premier, second ].each { |beneficiaire| coche(beneficiaire) }
       expect(page).to have_content(I18n.t("components.tableau.lignes_selectionnees", count: 2))
@@ -249,20 +232,18 @@ describe 'Admin - Bénéficiaires', type: :feature do
       expect(page).to have_content(
         I18n.t("admin.beneficiaires.renseigner_suivi_groupe.success.titre", count: 2)
       )
-      expect(page).to have_content(I18n.t("admin.beneficiaires.selection.titre", count: 2))
-      expect(page).not_to have_content(non_coche.code_beneficiaire)
+      expect(page).to have_content(non_coche.code_beneficiaire)
+      expect(page).to have_unchecked_field("beneficiaire_ids[]", with: non_coche.id,
+                                                                 visible: :all)
       [ premier, second ].each do |beneficiaire|
         ligne = find("tr", text: beneficiaire.code_beneficiaire)
         expect(ligne).to have_content(I18n.t("statut_suivi.suite_engagee"))
         expect(ligne).to have_checked_field("beneficiaire_ids[]", with: beneficiaire.id,
                                                                   visible: :all)
       end
+      expect(page).to have_content(I18n.t("components.tableau.lignes_selectionnees", count: 2))
       expect(page).to have_button(I18n.t("admin.beneficiaires.actions_groupees.renseigner_suivi"),
                                   disabled: false)
-
-      click_link I18n.t("admin.beneficiaires.selection.voir_tous")
-      expect(page).to have_content(non_coche.code_beneficiaire)
-      expect(page).not_to have_checked_field("beneficiaire_ids[]", visible: :all)
     end
 
     it "fusionne les bénéficiaires sélectionnés dans le plus ancien" do

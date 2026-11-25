@@ -74,7 +74,8 @@
 .qualification-mise-en-action__precision {
   display: flex;
   flex-direction: column;
-  gap: $dsfr-spacing-2w;
+  gap: $dsfr-spacing-1w;
+  margin-top: -$dsfr-spacing-1w;
 
   .fr-input-group {
     margin-bottom: 0;

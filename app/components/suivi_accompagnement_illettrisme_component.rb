@@ -33,7 +33,7 @@ class SuiviAccompagnementIllettrismeComponent < ViewComponent::Base
 
   def classes
     [ "carte__conteneur", "suivi-accompagnement-illettrisme",
-      ("suivi-accompagnement-illettrisme--compacte" unless @contexte == :evaluation),
+      ("suivi-accompagnement-illettrisme--compacte" if tableau_de_bord?),
       ("suivi-accompagnement-illettrisme--tableau-de-bord" if tableau_de_bord?) ]
       .compact.join(" ")
   end

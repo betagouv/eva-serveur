@@ -63,6 +63,18 @@ describe 'API Collections Evenements', type: :request do
           .exactly(1)
         expect(response).to have_http_status(:created)
       end
+
+      context "quand l'enregistrement synchrone est demandé" do
+        it "enregistre les événements avant de répondre" do
+          expect do
+            post "/api/evaluations/#{evaluation.id}/collections_evenements",
+                 params: { evenements: [ evenement1, evenement2 ], synchrone: true }
+          end.not_to have_enqueued_job(PersisteCollectionEvenementsJob)
+
+          expect(response).to have_http_status(:created)
+          expect(Evenement.where(session_id: evenement1[:session_id]).count).to eq 2
+        end
+      end
     end
   end
 end

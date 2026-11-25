@@ -15,3 +15,17 @@
     fill: currentcolor;
   }
 }
+
+// Dans un lien, le nom s'écrit en ligne : le soulignement du lien (DSFR) suit le texte,
+// même sur plusieurs lignes, au lieu de s'étendre sous toute la boîte flex.
+a > .nom-anonymisable {
+  display: inline;
+
+  span {
+    white-space: normal;
+  }
+
+  .icone-anonyme {
+    vertical-align: -0.125em;
+  }
+}

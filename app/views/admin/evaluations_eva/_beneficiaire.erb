@@ -5,7 +5,11 @@
                  tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
                )) %>
   <% end %>
-  <%= link_to render(NomAnonymisableComponent.new(evaluation.beneficiaire)),
-              admin_evaluation_eva_path(evaluation) %>
+  <%# Dans un span : élément direct de la rangée flex, le lien deviendrait un bloc souligné
+      sur toute sa largeur au lieu de suivre le texte %>
+  <span>
+    <%= link_to render(NomAnonymisableComponent.new(evaluation.beneficiaire)),
+                admin_evaluation_eva_path(evaluation) %>
+  </span>
 </div>
 <p class="fr-text--sm fr-mb-0"><%= evaluation.beneficiaire.code_beneficiaire %></p>

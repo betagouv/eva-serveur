@@ -62,13 +62,16 @@
   </div>
 
   <div id="suivi-groupe-precision-autre" hidden>
-    <div class="fr-input-group">
+    <div class="fr-input-group fr-mt-4v">
       <label class="fr-label" for="suivi-groupe-precision-autre-input">
         <%= t("activerecord.attributes.mise_en_action.precision_autre") %>
         <span class="fr-hint-text"><%= t("admin.beneficiaires.modal_suivi_groupe.precision_autre_description") %></span>
       </label>
-      <textarea class="fr-input" id="suivi-groupe-precision-autre-input"
-                rows="2" maxlength="<%= MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE %>"></textarea>
+      <input class="fr-input" type="text" id="suivi-groupe-precision-autre-input"
+             maxlength="<%= MiseEnAction::LONGUEUR_MAX_PRECISION_AUTRE %>">
     </div>
+    <button type="button" class="fr-btn fr-mt-4v" id="suivi-groupe-enregistrer-precision-autre">
+      <%= t("date_revue_mise_en_action.enregistrer") %>
+    </button>
   </div>
 </div>

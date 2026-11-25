@@ -52,7 +52,8 @@ function creerModalHTML() {
           <button id="suivi-groupe-enregistrer-date">Enregistrer</button>
         </div>
         <div id="suivi-groupe-precision-autre" hidden>
-          <textarea id="suivi-groupe-precision-autre-input"></textarea>
+          <input type="text" id="suivi-groupe-precision-autre-input" />
+          <button id="suivi-groupe-enregistrer-precision-autre">Enregistrer</button>
         </div>
         <button id="suivi-groupe-modifier-reponse">Modifier la réponse</button>
       </div>
@@ -172,6 +173,44 @@ describe("navigation entre les étapes", () => {
     clicBouton("#suivi-groupe-modifier-recap");
 
     expect(document.getElementById("suivi-groupe-etape-qualification").hasAttribute("hidden")).toBe(false);
+  });
+});
+
+describe("réponse « Autre »", () => {
+  test("le tag « Autre » reste sélectionné et les autres tags ne le sont pas", () => {
+    clicBouton('[data-effectuee="true"]');
+    clicBouton('[data-qualification="formation_metier"]');
+    clicBouton("#suivi-groupe-modifier-recap");
+    clicBouton('[data-qualification="autre"]');
+
+    expect(document.querySelector('[data-qualification="autre"]').getAttribute("aria-pressed")).toBe("true");
+    expect(document.querySelector('[data-qualification="formation_metier"]').getAttribute("aria-pressed")).toBe("false");
+  });
+
+  test("affiche le champ de précision sans aller au récap", () => {
+    clicBouton('[data-effectuee="true"]');
+    clicBouton('[data-qualification="autre"]');
+
+    expect(document.getElementById("suivi-groupe-precision-autre").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(true);
+  });
+
+  test("Enregistrer avec une précision affiche le récap avec la précision", () => {
+    clicBouton('[data-effectuee="true"]');
+    clicBouton('[data-qualification="autre"]');
+    document.getElementById("suivi-groupe-precision-autre-input").value = "Atelier numérique";
+    clicBouton("#suivi-groupe-enregistrer-precision-autre");
+
+    expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(false);
+    expect(document.getElementById("suivi-groupe-recap-qualification").textContent).toContain("Atelier numérique");
+  });
+
+  test("Enregistrer sans précision reste sur l'étape qualification", () => {
+    clicBouton('[data-effectuee="true"]');
+    clicBouton('[data-qualification="autre"]');
+    clicBouton("#suivi-groupe-enregistrer-precision-autre");
+
+    expect(document.getElementById("suivi-groupe-etape-recap").hasAttribute("hidden")).toBe(true);
   });
 });
 

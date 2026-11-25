@@ -143,8 +143,8 @@
   }
 
   function reinitialiserTagsSelection(modal) {
-    modal.querySelectorAll(".suivi-groupe-tag--actif").forEach(function(tag) {
-      tag.classList.remove("suivi-groupe-tag--actif");
+    modal.querySelectorAll(".suivi-groupe-tag").forEach(function(tag) {
+      tag.setAttribute("aria-pressed", "false");
     });
     var precisionDiv = modal.querySelector("#suivi-groupe-precision-autre");
     if (precisionDiv) precisionDiv.setAttribute("hidden", "");
@@ -174,7 +174,7 @@
 
   function handleTagClick(modal, tag) {
     reinitialiserTagsSelection(modal);
-    tag.classList.add("suivi-groupe-tag--actif");
+    tag.setAttribute("aria-pressed", "true");
 
     if (tag.dataset.type === "relance") {
       etat.choixDateRevue = tag.dataset.qualification;
@@ -196,13 +196,6 @@
     var precisionDiv = modal.querySelector("#suivi-groupe-precision-autre");
     if (etat.qualification === "autre") {
       if (precisionDiv) precisionDiv.removeAttribute("hidden");
-      var textarea = document.getElementById("suivi-groupe-precision-autre-input");
-      if (textarea) {
-        etat.precisionAutre = textarea.value.trim() || null;
-        textarea.addEventListener("input", function() {
-          etat.precisionAutre = textarea.value.trim() || null;
-        }, { once: false });
-      }
     } else {
       if (precisionDiv) precisionDiv.setAttribute("hidden", "");
       afficherEtapeRecap(modal);
@@ -230,6 +223,17 @@
       var dateInput = document.getElementById("suivi-groupe-date-precise-input");
       if (dateInput && dateInput.value) {
         etat.datePrecise = dateInput.value;
+        afficherEtapeRecap(modal);
+      }
+      return;
+    }
+
+    if (el.closest("#suivi-groupe-enregistrer-precision-autre")) {
+      event.preventDefault();
+      var champPrecision = document.getElementById("suivi-groupe-precision-autre-input");
+      var precision = champPrecision ? champPrecision.value.trim() : "";
+      if (precision) {
+        etat.precisionAutre = precision;
         afficherEtapeRecap(modal);
       }
       return;

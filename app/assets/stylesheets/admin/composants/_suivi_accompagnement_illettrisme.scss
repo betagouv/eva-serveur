@@ -1,3 +1,5 @@
+$hauteur-suivi-tableau-de-bord: 41.875rem;
+
 .suivi-accompagnement-illettrisme {
   display: flex;
   flex-direction: column;
@@ -69,6 +71,7 @@
 
 .suivi-accompagnement-illettrisme--tableau-de-bord {
   flex: 1;
+  min-height: $hauteur-suivi-tableau-de-bord;
 }
 
 .card__banner--illettrisme {
@@ -85,6 +88,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: $hauteur-suivi-tableau-de-bord;
   align-items: center;
   justify-content: center;
   padding: $dsfr-spacing-3w $dsfr-spacing-6w;

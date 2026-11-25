@@ -26,6 +26,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: $dsfr-spacing-1v $dsfr-spacing-2w;
+
+  // Même interligne que la date
+  a {
+    line-height: 1.25rem;
+  }
 }
 
 .entete-mise-en-action__date {

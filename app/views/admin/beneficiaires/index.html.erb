@@ -1,6 +1,5 @@
 <% actions_groupees = can?(:fusionner, Beneficiaire) || can?(:renseigner_suivi_groupe, Beneficiaire) %>
 
-<%= render "selection" if params[:selection].present? %>
 <%= render "tableau", actions_groupees: actions_groupees %>
 
 <% if actions_groupees %>

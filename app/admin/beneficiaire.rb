@@ -120,13 +120,8 @@ ActiveAdmin.register Beneficiaire do
                        .first!
     end
 
-    # La sélection (retour du suivi groupé, EVA-1219) ne fait que restreindre
-    # le périmètre du compte : elle ne peut pas l'élargir
     def scoped_collection
-      beneficiaires = end_of_association_chain.distinct
-      return beneficiaires if params[:selection].blank?
-
-      beneficiaires.where(id: Array(params[:selection]))
+      end_of_association_chain.distinct
     end
 
     def apply_sorting(beneficiaires)

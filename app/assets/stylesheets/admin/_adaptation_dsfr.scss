@@ -284,6 +284,13 @@ button.fr-breadcrumb__button {
     border: none;
     box-shadow: none;
   }
+
+  // Le dégradé gris d'Active Admin au survol passe devant le fond de survol du DSFR
+  &:not(.disabled):hover,
+  &:not(.disabled):active {
+    background-image: none;
+    background-color: var(--hover-tint);
+  }
 }
 
 button *,

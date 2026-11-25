@@ -289,6 +289,20 @@ describe "Admin - Mise en action", :js, type: :feature do
       expect(mise_en_action.reload.remediation).to eq("formation_metier")
     end
 
+    it "ferme le remerciement avec le bouton de l'alerte" do
+      within(".suivi-accompagnement-illettrisme") do
+        click_button "Oui"
+        within(".questions-remediation") { click_button formation_metier }
+      end
+      expect(page).to have_css(".fr-alert--success")
+
+      within(".fr-alert--success") do
+        click_button I18n.t("admin.dashboard.mise_en_action.reponse_enregistree.fermer")
+      end
+
+      expect(page).to have_no_css(".fr-alert--success")
+    end
+
     it "affiche « Tout est à jour » quand plus personne n'attend de réponse" do
       within(".suivi-accompagnement-illettrisme") do
         click_button "Oui"

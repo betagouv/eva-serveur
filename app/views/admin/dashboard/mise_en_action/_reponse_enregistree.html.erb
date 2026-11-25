@@ -1,7 +1,4 @@
-<div class="fr-alert fr-alert--success fr-mb-6v">
-  <h3 class="fr-alert__title">
-    <%= t(".titre", nom: evaluation.beneficiaire.nom) %>
-  </h3>
-  <p><%= t(".description") %></p>
-  <button class="fr-btn--close fr-btn" title="<%= t(".fermer") %>"><%= t(".fermer") %></button>
-</div>
+<%= dsfr_alert(type: :success, title: t(".titre", nom: evaluation.beneficiaire.nom),
+               close_button: true, html_attributes: { class: "fr-mb-6v" }) do %>
+  <%= t(".description") %>
+<% end %>

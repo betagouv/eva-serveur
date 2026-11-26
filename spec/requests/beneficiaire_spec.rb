@@ -42,15 +42,13 @@ describe 'Admin Beneficiaires actions groupées', type: :request do
   describe "POST renseigner_suivi_groupe" do
     let!(:beneficiaire2) { create :beneficiaire }
 
-    it "renvoie sur la liste complète avec les bénéficiaires sélectionnés" do
+    it "renvoie sur la liste complète, sans sélection" do
       post renseigner_suivi_groupe_admin_beneficiaires_path, params: {
         beneficiaire_ids: [ beneficiaire1.id, beneficiaire2.id ],
         effectuee: "true"
       }
 
-      expect(response).to redirect_to(
-        admin_beneficiaires_path(selection: [ beneficiaire1.id, beneficiaire2.id ])
-      )
+      expect(response).to redirect_to(admin_beneficiaires_path)
     end
 
     it "revient sur la liste quand la réponse est invalide" do

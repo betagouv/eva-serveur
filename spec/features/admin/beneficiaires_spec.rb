@@ -161,35 +161,6 @@ describe 'Admin - Bénéficiaires', type: :feature do
         expect(page).not_to have_content(a_renseigner_autre_campagne.code_beneficiaire)
       end
     end
-
-    context "avec une sélection" do
-      let!(:compte_admin) { create :compte_admin }
-      let(:campagne) { create :campagne, compte: compte_admin }
-      let!(:selectionne) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
-      let!(:hors_selection) { create(:evaluation, :eva, campagne: campagne).beneficiaire }
-      let!(:hors_perimetre) { create(:evaluation, :eva).beneficiaire }
-
-      before do
-        Bullet.enable = false
-        connecte(compte_admin)
-        visit admin_beneficiaires_path(selection: [ selectionne.id, hors_perimetre.id ])
-      end
-
-      after { Bullet.enable = true }
-
-      it "affiche tous les bénéficiaires du périmètre du compte" do
-        expect(page).to have_content(selectionne.code_beneficiaire)
-        expect(page).to have_content(hors_selection.code_beneficiaire)
-        expect(page).not_to have_content(hors_perimetre.code_beneficiaire)
-      end
-
-      it "coche seulement les bénéficiaires de la sélection" do
-        expect(page).to have_checked_field("beneficiaire_ids[]", with: selectionne.id,
-                                                                 visible: :all)
-        expect(page).to have_unchecked_field("beneficiaire_ids[]", with: hors_selection.id,
-                                                                   visible: :all)
-      end
-    end
   end
 
   describe "suivi groupé", :js do
@@ -218,7 +189,7 @@ describe 'Admin - Bénéficiaires', type: :feature do
       find("tr", text: beneficiaire.code_beneficiaire).find("label").click
     end
 
-    it "renvoie sur tous les bénéficiaires, la sélection cochée et à jour" do
+    it "renvoie sur tous les bénéficiaires, à jour et sans sélection" do
       visit admin_beneficiaires_path(q: { statut_suivi_in: [ "a_renseigner" ] })
       [ premier, second ].each { |beneficiaire| coche(beneficiaire) }
       expect(page).to have_content(I18n.t("components.tableau.lignes_selectionnees", count: 2))
@@ -238,12 +209,11 @@ describe 'Admin - Bénéficiaires', type: :feature do
       [ premier, second ].each do |beneficiaire|
         ligne = find("tr", text: beneficiaire.code_beneficiaire)
         expect(ligne).to have_content(I18n.t("statut_suivi.suite_engagee"))
-        expect(ligne).to have_checked_field("beneficiaire_ids[]", with: beneficiaire.id,
-                                                                  visible: :all)
+        expect(ligne).to have_unchecked_field("beneficiaire_ids[]", with: beneficiaire.id,
+                                                                    visible: :all)
       end
-      expect(page).to have_content(I18n.t("components.tableau.lignes_selectionnees", count: 2))
       expect(page).to have_button(I18n.t("admin.beneficiaires.actions_groupees.renseigner_suivi"),
-                                  disabled: false)
+                                  disabled: true)
     end
 
     it "fusionne les bénéficiaires sélectionnés dans le plus ancien" do

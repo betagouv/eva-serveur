@@ -3,7 +3,6 @@
   <%= render TableauComponent.new(collection: collection, id: "beneficiaires",
                                   selectionnable: actions_groupees,
                                   champ_selection: "beneficiaire_ids[]",
-                                  ids_selectionnes: Array(params[:selection]),
                                   ordre: params[:order]) do |tableau| %>
     <% if actions_groupees %>
       <% tableau.with_entete do %>

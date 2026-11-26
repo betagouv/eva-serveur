@@ -11,18 +11,18 @@
                                     class_couleur: classe_badge_usage(structure.usage)) %>
     <% end %>
   <% end %>
-  <% tableau.colonne(titre: StructureLocale.human_attribute_name(:code_postal), tri: "code_postal") do |structure| %>
+  <% tableau.colonne(titre: StructureLocale.human_attribute_name(:code_postal), tri: "code_postal", multiline: true) do |structure| %>
     <%= structure.code_postal %>
   <% end %>
   <% tableau.colonne(titre: StructureLocale.human_attribute_name(:created_at), tri: "created_at") do |structure| %>
     <%= l(structure.created_at, format: :sans_heure) %>
   <% end %>
   <% tableau.colonne(titre: StructureLocale.human_attribute_name(:nombre_evaluations),
-                     tri: "nombre_evaluations", td_class: "fr-cell--right") do |structure| %>
+                     tri: "nombre_evaluations", multiline: true, td_class: "fr-cell--right") do |structure| %>
     <%= structure.nombre_evaluations %>
   <% end %>
   <% tableau.colonne(titre: StructureLocale.human_attribute_name(:date_derniere_evaluation),
-                     tri: "date_derniere_evaluation") do |structure| %>
+                     tri: "date_derniere_evaluation", multiline: true) do |structure| %>
     <%= l(structure.date_derniere_evaluation, format: :sans_heure) if structure.date_derniere_evaluation %>
   <% end %>
   <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |structure| %>

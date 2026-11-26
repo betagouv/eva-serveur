@@ -77,7 +77,7 @@ ActiveAdmin.register Beneficiaire do
     if resultat == :effectuee_invalide
       redirect_to collection_path
     else
-      redirect_to collection_path(selection: beneficiaire_ids),
+      redirect_to collection_path,
                   flash: { success: message_suivi_groupe_enregistre(resultat[:succes]) }
     end
   end

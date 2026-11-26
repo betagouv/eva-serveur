@@ -70,7 +70,7 @@ ActiveAdmin.register_page "Dashboard" do
         .non_anonymes
         .order(created_at: :desc)
         .includes(:beneficiaire)
-        .limit(10)
+        .limit(14)
     end
 
     # Une seule personne est proposée à la fois : la passer ou lui répondre fait passer

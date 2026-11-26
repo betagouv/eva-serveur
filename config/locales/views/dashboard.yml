@@ -32,9 +32,11 @@ fr:
           titre: Les actualités sur eva
         bloc_evaluations:
           titre: Vos dernières évaluations
-          voir_tout: "Voir toutes les évaluations"
+          voir_tout: "Voir tout"
           legende_sr: "Légende : Les pastilles oranges indiquent les"
           legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
+          nom: Nom
+          date: Date
         campagnes:
           titre: Vos campagnes
           action: Gérer mes campagnes

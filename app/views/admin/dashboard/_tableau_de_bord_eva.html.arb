@@ -48,10 +48,10 @@ end
 if evaluations.present?
   section class: "section-evaluations" do
     columns do
-      column do
+      column span: 2 do
         render partial: "admin/dashboard/eva/bloc_evaluations", locals: { evaluations: evaluations }
       end
-      column do
+      column span: 3 do
         render "admin/dashboard/mise_en_action/suivi_beneficiaires",
                evaluation: evaluation_a_suivre
       end
